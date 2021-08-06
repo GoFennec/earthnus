@@ -53,18 +53,18 @@
 									<div class="main-menu d-none d-lg-block">
 										<nav>
 											<ul id="navigation">
-												<li><a href="/resources/index.html">지구소식</a>
+												<li><a href="/">지구소식</a>
 													<ul class="submenu">
-														<li><a href="/resources/blog.html">북극곰을 도와줘요!</a></li>
-														<li><a href="/resources/blog_details.html">나무를 심어요!</a></li>
-														<li><a href="/resources/elements.html">플라스틱이 넘쳐요!</a></li>
-														<li><a href="/resources/elements.html">바다가 힘들어요!</a></li>
+														<li><a href="/">북극곰을 도와줘요!</a></li>
+														<li><a href="/">나무를 심어요!</a></li>
+														<li><a href="/">플라스틱이 넘쳐요!</a></li>
+														<li><a href="/">바다가 힘들어요!</a></li>
 													</ul></li>
 												<li><a href="/camBoard/list">캠페인</a></li>
 												<li><a href="/cheBoard/list">응원릴레이</a></li>
 												<li><a href="/goods/list">지구마켓</a></li>
 												<c:if test="${empty auth}">
-												<li><a href="/">로그인 / 회원가입</a>
+												<li><a href="/auth/login">로그인 / 회원가입</a>
 													<ul class="submenu">
 														<li><a href="/auth/login">로그인</a></li>
 														<li><a href="/member/join">회원가입</a></li>
