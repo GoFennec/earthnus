@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+							   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="auth" type="kr.co.earthnus.user.auth.AuthBean"/>
+		<typeAlias alias="member" type="kr.co.earthnus.user.member.MemberBean"/>
+		<typeAlias alias="donation" type="kr.co.earthnus.user.donation.DonationBean"/>
+		<typeAlias alias="pay" type="kr.co.earthnus.user.pay.PayBean"/>
+		<typeAlias alias="goods" type="kr.co.earthnus.user.goods.GoodsBean"/>
+		<typeAlias alias="exGoods" type="kr.co.earthnus.user.goods.ExGoodsBean"/>
+		<typeAlias alias="cheboards" type="kr.co.earthnus.user.cheBoard.CheBoardBean"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappings/auth-mapping.xml"/>
+    	<mapper resource="mappings/member-mapping.xml"/>
+    	<mapper resource="mappings/donation-mapping.xml"/>
+    	<mapper resource="mappings/pay-mapping.xml"/>
+    	<mapper resource="mappings/goods-mapping.xml"/>
+		<mapper resource="mappings/cheBoard-mapper.xml"/>
+	</mappers>
+
+</configuration>

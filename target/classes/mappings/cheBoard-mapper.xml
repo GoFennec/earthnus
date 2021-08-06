@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.earthnus.user.cheBoard.CheBoardMybatis">
+      
+      <resultMap id="CheBoardResult" type="cheboards">
+		<id property="cheb_num" column="CHEB_NUM"/>
+		<result property="cheb_id" column="CHEB_ID"/>
+		<result property="cheb_name" column="CHEB_NAME"/>
+		<result property="cheb_dnum" column="CHEB_DNUM"/>
+		<result property="cheb_content" column="CHEB_CONTENT"/>
+		<result property="cheb_date" column="CHEB_DATE"/>
+	</resultMap>
+      
+      
+      
+      <select id="CheBoardCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM CHEBOARD
+		]]>
+	</select>
+      
+     <select id="CheBoardList" resultMap="CheBoardResult">
+        <![CDATA[
+            SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum}
+        ]]>
+     </select>
+      
+</mapper>
