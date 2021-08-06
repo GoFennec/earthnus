@@ -24,21 +24,21 @@ public class CheBoardService{
         
         List<CheBoardBean> CheBoardList = null;
 
-        pBean.setTotalcount(ChreBoardDAO.CheBoardCount()); // mapper 전체 게시글 개수를 지정한다
+        pBean.setTotalcount(ChreBoardDAO.CheBoardCount()); // mapper �쟾泥� 寃뚯떆湲� 媛쒖닔瑜� 吏��젙�븳�떎
         pBean.setPagenum(cPagenum-1);
-        // 현재 페이지를 페이지 객체에 지정한다 -1 을 해야 쿼리에서 사용할수 있다
-        pBean.setContentnum(cContentnum);// 한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
-        pBean.setCurrentblock(cPagenum); // 현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
-        pBean.setLastblock(pBean.getTotalcount()); // 마지막 블록 번호를 전체 게시글 수를 통해서 정한다.
+        // �쁽�옱 �럹�씠吏�瑜� �럹�씠吏� 媛앹껜�뿉 吏��젙�븳�떎 -1 �쓣 �빐�빞 荑쇰━�뿉�꽌 �궗�슜�븷�닔 �엳�떎
+        pBean.setContentnum(cContentnum);// �븳 �럹�씠吏��뿉 紐뉕컻�뵫 寃뚯떆湲��쓣 蹂댁뿬以꾩� 吏��젙�븳�떎.
+        pBean.setCurrentblock(cPagenum); // �쁽�옱 �럹�씠吏� 釉붾줉�씠 紐뉖쾲�씤吏� �쁽�옱 �럹�씠吏� 踰덊샇瑜� �넻�빐�꽌 吏��젙�븳�떎.
+        pBean.setLastblock(pBean.getTotalcount()); // 留덉�留� 釉붾줉 踰덊샇瑜� �쟾泥� 寃뚯떆湲� �닔瑜� �넻�빐�꽌 �젙�븳�떎.
         
-        pBean.prevnext(cPagenum);//현재 페이지 번호로 화살표를 나타낼지 정한다.
-        pBean.setStartPage(pBean.getCurrentblock()); // 시작 페이지를 페이지 블록번호로 정한다.
+        pBean.prevnext(cPagenum);//�쁽�옱 �럹�씠吏� 踰덊샇濡� �솕�궡�몴瑜� �굹���궪吏� �젙�븳�떎.
+        pBean.setStartPage(pBean.getCurrentblock()); // �떆�옉 �럹�씠吏�瑜� �럹�씠吏� 釉붾줉踰덊샇濡� �젙�븳�떎.
        
         pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
-        //마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+        //留덉�留� �럹�씠吏�瑜� 留덉�留� �럹�씠吏� 釉붾줉怨� �쁽�옱 �럹�씠吏� 釉붾줉 踰덊샇濡� �젙�븳�떎.
         
-        if(cContentnum == 6){//선택 게시글 수
-        	pBean.setPagenum(pBean.getPagenum()*6);
+        if(cContentnum == 10){//�꽑�깮 寃뚯떆湲� �닔
+        	pBean.setPagenum(pBean.getPagenum()*10);
         	CheBoardList = ChreBoardDAO.CheBoardList(pBean);
         }
         System.out.println(CheBoardList);

@@ -13,7 +13,7 @@ public class CheBoardController{
 	
 	@RequestMapping("/cheBoard/list")
 	public String CheBoardLis(@RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, CheBoardBean bean, Model model) {
+			@RequestParam(defaultValue = "10") String contentnum, CheBoardBean bean, Model model) {
 		service.CheBoardList(bean, pagenum, contentnum, model);
 		return "/cheBoard/cheBoardList";
 	}
