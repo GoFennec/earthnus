@@ -24,7 +24,7 @@
 	</resultMap>
 	
 	<select id="selectById" resultType="member" parameterType="string">
-		SELECT * FROM MEMBER WHERE MEM_ID=#{auth_id} AND MEM_PW=#{auth_pw}
+		SELECT * FROM MEMBER WHERE MEM_ID=#{auth_id}
 	</select>
 
 	<!-- 아이디 찾기 -->
