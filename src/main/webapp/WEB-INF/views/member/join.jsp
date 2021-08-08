@@ -39,9 +39,14 @@
       
        .form-control{
   		height:50px;
-  		font-size:30px;
+  		font-size:15px;
 	   }
-      
+	   
+	   .col-12{
+	   	padding-lefh:0px;
+	   	padding-right:0px;
+	   }
+	   
     </style>
 
     
@@ -52,11 +57,10 @@
 
 <jsp:include page="/WEB-INF/views/header.jsp"/>
     
-<div class="container" style="max-width:400px">
+<div class="container" style="max-width:450px">
   <main>
     <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="/resources/assets/img/logo/loder.png" alt="" >
-      <h1>회원가입</h1>
+      <a href="/"><img class="d-block mx-auto mb-4" src="/resources/assets/img/logo/loder.png" alt="" ></a>
     </div>
 
     <div class="row g-5">
@@ -64,13 +68,74 @@
         <form class="needs-validation" action="/member/join" method="post">
           <div class="row g-3">
           
-            <div class="col-12">
+            <div class="col-md-9" style="padding-right:0px">
               <label for="firstName" class="form-label">아이디</label>
-              <input type="text" name="mem_id" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" name="mem_id" class="form-control" id="mem_id" placeholder="중복확인 버튼을 누르세요." disabled>
               <div class="invalid-feedback">
                	 필수 입력사항입니다.
               </div>
             </div>
+            
+            <div class="col-md-3" style="margin-top:30px;">
+              <button class="w-100 btn btn-primary btn-lg" style="padding-left:20px" id="testBtn">중복확인</button>
+            </div>
+            
+            <script>
+				$('#testBtn').click(function(e){
+				e.preventDefault();
+				$('#testModal').modal("show");
+				});
+			</script>
+			
+			<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title" id="exampleModalLabel">아이디 중복확인</h3>
+						</div>
+						<br>
+						<input type="text" name="mem_id" class="form-control" id="mem_idcheck" placeholder="아이디를 입력하세요." >
+						<br>
+						<div class="modal-footer">
+							<button class="w-100 btn btn-primary btn-lg" id="modalY" onclick="idcheck()">중복확인</button>
+							<button class="w-100 btn btn-primary btn-lg" type="button" data-dismiss="modal">닫기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+            
+            <script type="text/javascript">
+				function idcheck(){
+					var idcheck = $("#mem_idcheck").val();
+					if(idcheck === ""){
+						alert("아이디를 입력해주세요.");
+					}
+		
+					$.ajax({
+			   			type: "POST", //요청 메소드 방식
+			  			 url:"/member/idcheck",
+			   			data: {"mem_id":idcheck},
+			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			   			success : function(result){
+				   
+			      			if(result.error === true && idcheck != ""){
+			    	  			var yesno = confirm('사용 가능한 아이디입니다. \n 사용하시겠습니까?');
+			    	  			if(yesno){
+			    	  				$("#mem_id").val(idcheck);
+			    	  				$("#mem_id").attr("disabled",true);
+			    	  				
+			    	  			}
+			      			}else if(result.error === false){
+			    	  			alert('이미 존재하는 아이디입니다.');
+			      			}
+			   			},
+			   		 error:function(request,status,error){
+			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			      			//통신 실패시 발생하는 함수(콜백)
+			   				}
+						});
+				}
+			</script>
 
             <div class="col-12">
               <label for="username" class="form-label">비밀번호</label>
@@ -113,8 +178,8 @@
 					});
 	  			});
 			</script>
-			<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
-			<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+			<div class="col-12"><div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div></div>
+			<div class="col-12"><div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div></div>
             
 
             <div class="col-12">
@@ -135,15 +200,18 @@
             
             <div class="col-12">
             <label for="username" class="form-label">성별 </label>
+            </div>
+            <div class="col-12">
             <select name="mem_gender">
     			<option value="male">남자</option>
     			<option value="female">여자</option>
     			<option value="non">선택 안함</option>
 			</select>
+			</div>
 			<div class="invalid-feedback">
                 	필수 입력사항입니다.
               </div>
-			</div>
+			
 			 
 			
             <div class="col-12">
@@ -173,41 +241,60 @@
           </div>
 
           <div class="row gy-3">
-            <div class="col-md-6">
+          
+            <div class="col-md-9" style="padding-right:0px">
               <label for="cc-name" class="form-label">이메일</label>
-              <input type="text" name="mem_email" class="form-control" id="cc-name" placeholder="" required>
+              <input type="email" name="mem_email" class="form-control" id="mem_email" placeholder="ex)EARTHNUS@email.com" required>
               <div class="invalid-feedback">
                	 필수 입력사항입니다.
               </div>
             </div>
-			<span>@</span>
-            <div class="col-md-4">
-              <label for="cc-number" class="form-label"></label>
-              <input type="text" class="form-control" id="cc-number" placeholder="">
-              <div class="invalid-feedback">
-               	 필수 입력사항입니다.
-              </div>
+            
+            <div class="col-md-3" style="margin-top:30px;">
+              <button class="w-100 btn btn-primary btn-lg" style="padding-left:9px; font-size:13px" onclick="mail()">인증번호 받기</button>
             </div>
-
-            <div class="col-md-4">
-              <label for="cc-expiration" class="form-label">전화번호</label>
+            
+            <script type="text/javascript">
+				function mail(){
+					var mail = $("#mem_email").val();
+					if(mail === ""){
+						alert("이메일을 입력해주세요.");
+					}else if(!mail.includes('@')){
+						alert("올바르지 않은 이메일 형식입니다.")
+					}
+		
+					$.ajax({
+			   			type: "POST", //요청 메소드 방식
+			  			 url:"/member/mail",
+			   			data: {"mem_email":mail},
+			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			   			success : function(result){
+				   
+			      			if(result.error == true){
+			    	  			alert('성공');
+			      			}else if(result.error == false){
+			    	  			alert('실패');
+			      			}
+			   			},
+			   		 error:function(request,status,error){
+			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			      			//통신 실패시 발생하는 함수(콜백)
+			   				}
+						});
+				}
+			</script>
+            
+            <div class="col-md-12">
+              <label for="cc-expiration" class="form-label">인증번호</label>
               <input type="text" name="mem_tel" class="form-control" id="cc-expiration" placeholder="" required>
               <div class="invalid-feedback">
                 	필수 입력사항입니다.
               </div>
             </div>
- 
-            <div class="col-md-4">
-              <label for="cc-cvv" class="form-label"></label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="">
-              <div class="invalid-feedback">
-                	필수 입력사항입니다.
-              </div>
-            </div>
-            
-            <div class="col-md-4">
-              <label for="cc-cvv" class="form-label"></label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="">
+
+            <div class="col-md-12">
+              <label for="cc-expiration" class="form-label">전화번호</label>
+              <input type="text" name="mem_tel" class="form-control" id="cc-expiration" placeholder="" required>
               <div class="invalid-feedback">
                 	필수 입력사항입니다.
               </div>

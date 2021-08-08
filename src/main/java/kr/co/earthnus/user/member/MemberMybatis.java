@@ -6,4 +6,5 @@ public interface MemberMybatis {
 	public MemberBean myInfo(String mem_id);
 	public void updateMyInfo(MemberBean memberBean);
 	public void deleteMember(MemberBean memberBean);
+	public int idCheck(String mem_id);
 }

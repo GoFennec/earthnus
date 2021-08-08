@@ -23,8 +23,7 @@
 		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
 	</insert>
 	
-	
-	    <select id="myInfo" resultType="member">
+	<select id="myInfo" resultType="member">
 			SELECT * FROM MEMBER WHERE MEM_ID=#{mem_id}
 	</select>
 	
@@ -37,5 +36,9 @@
 	<delete id="deleteMember">
 		DELETE FROM MEMBER WHERE MEM_ID=#{mem_id}
 	</delete>
+	
+	<select id="idCheck" parameterType="String" resultType="int">
+		select count(*) from member where mem_id = #{mem_id}
+	</select>
 	
 </mapper>
