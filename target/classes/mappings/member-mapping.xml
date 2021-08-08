@@ -22,4 +22,8 @@
 		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
 		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
 	</insert>
+	
+	<select id="idCheck" parameterType="String" resultType="int">
+		select count(*) from member where mem_id = #{mem_id}
+	</select>
 </mapper>
