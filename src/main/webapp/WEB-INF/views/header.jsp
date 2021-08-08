@@ -28,6 +28,8 @@
 <link rel="stylesheet" href="/resources/assets/css/slick.css">
 <link rel="stylesheet" href="/resources/assets/css/nice-select.css">
 <link rel="stylesheet" href="/resources/assets/css/style.css">
+
+
 </head>
 <body>
 
@@ -74,7 +76,8 @@
 												<c:if test="${!empty auth}">
 													<li>${auth.auth_name}님 환영합니다.
 													<ul class="submenu">
-														<li><a href="/member/mypage">마이페이지</a></li>
+													<li><a href="/member/myInfo">마이페이지</a></li>
+														
 														<li><a href="/logout">로그아웃</a></li>
 													</ul></li>
 												</c:if>

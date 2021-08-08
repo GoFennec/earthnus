@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Card</title>
+  <title>로그인</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
 a {
@@ -121,6 +121,14 @@ label {
     </div>
   </div>
 
+
+
+
+
+<!-- <script type="text/javascript"> function loginWithKakao() { Kakao.Auth.authorize({ redirectUri: 'http://localhost:8080/user/loginpage_kakao_callback' }); } </script>
+ -->
+
+
   <!-- 카카오 스크립트 -->
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -137,17 +145,24 @@ function kakaoLogin() {
     Kakao.Auth.login({
       success: function (response) {
         Kakao.API.request({
+          /* url: '/v1/user/unlink', */
           url: '/v2/user/me',
           success: function (response) {
-        	  console.log(response)
+        	  console.log(response);
+        	  console.log("property_keys:" + response.properties.nickname);
+        	  
+        	  
+        	  location.href="/member/join?nickname=" + nickname;
+        	  
+        	  
           },
           fail: function (error) {
-            console.log(error)
+            console.log(error);
           },
         })
       },
       fail: function (error) {
-        console.log(error)
+        console.log(error);
       },
     })
   }
@@ -171,3 +186,11 @@ function kakaoLogout() {
 </body>
 
 </html>
+
+
+
+
+
+
+
+

@@ -5,7 +5,7 @@
 
 <mapper namespace="kr.co.earthnus.user.member.MemberMybatis">
 
-	<resultMap id="memberResult" type="member">
+	<resultMap id="member" type="member">
 		<id property="mem_id" column="MEM_ID"/>
 		<result property="mem_pw" column="MEM_PW"/>
 		<result property="mem_name" column="MEM_NAME"/>
@@ -22,4 +22,20 @@
 		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
 		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
 	</insert>
+	
+	
+	    <select id="myInfo" resultType="member">
+			SELECT * FROM MEMBER WHERE MEM_ID=#{mem_id}
+	</select>
+	
+	<update id="updateMyInfo" parameterType="member">
+		UPDATE MEMBER SET MEM_ID=#{mem_id}, MEM_PW=#{mem_pw}, MEM_NAME=#{mem_name}, MEM_ADDR=#{mem_addr}, MEM_TEL=#{mem_tel},
+		 MEM_BIRTH=#{mem_birth}, MEM_GENDER=#{mem_gender}, MEM_EMAIL=#{mem_email}, MEM_DATE=#{mem_date}
+			WHERE MEM_ID=#{mem_id}
+	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBER WHERE MEM_ID=#{mem_id}
+	</delete>
+	
 </mapper>
