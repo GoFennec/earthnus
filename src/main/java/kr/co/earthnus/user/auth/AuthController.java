@@ -18,12 +18,12 @@ public class AuthController {
 	public String index() {
 		return "index";
 	}
-	
+
 	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
 	public String login() {
 		return "auth/login";
 	}
-	
+
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 	public String loginch(@RequestParam("auth_pw") String auth_pw,
 			AuthBean aBean, HttpSession session, Model model) {
@@ -36,7 +36,7 @@ public class AuthController {
 			return "auth/login";
 		}
 	}
-	
+
 	@RequestMapping("/logout")
 	public String Logout(HttpSession session) {
 		session.invalidate();

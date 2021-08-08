@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="kr.co.earthnus.user.auth.AuthBean" %>
-<% 
-	int nowPageN = 0;
-	if (request.getParameter("pagenum") != null ) {
-		nowPageN = Integer.parseInt(request.getParameter("pagenum"));	
-	}
-%>
 <!DOCTYPE html>
 <html><head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<head>
+<html><head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Card</title>
@@ -120,6 +120,8 @@ label {
       
     </div>
   </div>
+
+
 
   <!-- 카카오 스크립트 -->
 
