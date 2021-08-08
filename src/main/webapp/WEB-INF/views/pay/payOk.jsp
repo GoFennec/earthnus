@@ -21,6 +21,7 @@ ${pay.pay_name }<br>
 ${pay.pay_dnum }<br>
 ${pay.pay_price }<br>
 ${pay.pay_date }<br>
+<br><br>
 
 <br><br>
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="true"/>
