@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 public class AuthController {
@@ -32,8 +31,6 @@ public class AuthController {
 		aBean = service.login(aBean.getAuth_id(), auth_pw);
 		if(aBean != null) {
 			session.setAttribute("auth", aBean);
-			System.out.println(aBean.getAuth_id());
-			System.out.println(aBean.getAuth_name());
 			return "redirect:/";
 		} else {
 			return "auth/login";
@@ -41,8 +38,8 @@ public class AuthController {
 	}
 	
 	@RequestMapping("/logout")
-	public String Logout(SessionStatus sessionStatus) {
-		sessionStatus.setComplete();
+	public String Logout(HttpSession session) {
+		session.invalidate();
 		return "redirect:/";	
 	}
 }
