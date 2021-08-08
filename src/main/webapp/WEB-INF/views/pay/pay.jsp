@@ -95,7 +95,7 @@ td {
 		<form method="POST">
 		<input type="hidden" name="pay_dnum" value="${pay.pay_dnum}"/>
 		<input type="hidden" name="pay_price" value="${pay.pay_price}"/>
-		<input type="hidden" name="mem_id" value="${member.mem_email}"/>
+		<input type="hidden" name="mem_id" value="${member.mem_id}"/>
 		<input type="hidden" name="mem_name" value="${member.mem_name}"/>
 		<input type="hidden" name="mem_email" value="${member.mem_email}"/>
 		<input type="hidden" name="mem_tel" value="${member.mem_tel}"/>

@@ -1,17 +1,17 @@
 package kr.co.earthnus.user.pay;
 
 public class PayBean {
-	private int pay_num;
+	private String pay_num;
 	private String pay_id;
 	private String pay_name;
 	private String pay_dnum;
 	private int pay_price;
 	private String pay_date;
 	
-	public int getPay_num() {
+	public String getPay_num() {
 		return pay_num;
 	}
-	public void setPay_num(int pay_num) {
+	public void setPay_num(String pay_num) {
 		this.pay_num = pay_num;
 	}
 	public String getPay_id() {
