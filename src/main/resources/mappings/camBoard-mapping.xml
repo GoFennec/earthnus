@@ -29,7 +29,7 @@
 		]]>
 	</select>
 	
-	<select id="camBoardDetail" resultMap="camBoardResult">
+	<select id="getCamBoard" resultMap="camBoardResult">
 		<![CDATA[
 			SELECT * FROM CAMBOARD WHERE CAMB_NUM=#{contentnum}
 		]]>

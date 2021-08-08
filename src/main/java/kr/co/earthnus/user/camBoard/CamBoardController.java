@@ -25,9 +25,7 @@ public class CamBoardController{
 	public String getCamBoardDetail(@RequestParam("CAMB_NUM") String contentnum, Model model) {
 		
 		System.out.println("컨트롤러 : " + contentnum);
-		model.addAttribute("camBoard", camBoardService.getCamBoard(contentnum));
-		
-		
+		model.addAttribute("camBoard", camBoardService.getCamBoard(contentnum));		
 		
 		return "camBoard/camBoardDetail";
 	}
