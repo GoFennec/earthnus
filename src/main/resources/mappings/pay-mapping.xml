@@ -5,27 +5,18 @@
 
 <mapper namespace="kr.co.earthnus.user.pay.PayMybatis">
 	
-<!-- 	<resultMap id="memberResult" type="member">
-		<id property="mem_id" column="MEM_ID"/>
-		<result property="mem_pw" column="MEM_PW"/>
-		<result property="mem_name" column="MEM_NAME"/>
-		<result property="mem_addr" column="MEM_ADDR"/>
-		<result property="mem_tel" column="MEM_TEL"/>
-		<result property="mem_birth" column="MEM_BIRTH"/>
-		<result property="mem_gender" column="MEM_GENDER"/>
-		<result property="mem_email" column="MEM_EMAIL"/>
-		<result property="mem_date" column="MEM_DATE"/>
-		<result property="mem_point" column="MEM_POINT"/>
-	</resultMap> -->
-	
 	<select id="getMemberInfo" parameterType="auth" resultType="member">
 		SELECT * FROM MEMBER WHERE MEM_ID = #{auth_id}
 	</select>
 	
 	<insert id="insertPay" parameterType="pay">
-		INSERT INTO PAY (pay_num, pay_id, pay_name, pay_dnum, pay_price, pay_date)
-		VALUES (#{pay_num},#{pay_id},#{pay_name},#{pay_dnum},#{pay_price},#{pay_date})
+		INSERT INTO PAY (pay_num, pay_id, pay_name, pay_dnum, pay_price, pay_point, pay_date)
+		VALUES (#{pay_num},#{pay_id},#{pay_name},#{pay_dnum},#{pay_price},#{pay_point},#{pay_date})
 	</insert>
+	
+	<update id="updatePoint" parameterType="pay">
+		UPDATE MEMBER SET MEM_POINT = #{pay_point} WHERE MEM_ID = #{pay_id} 
+	</update>
 	
 	<select id="getPayInfo" parameterType="String" resultType="pay">
 		SELECT * FROM PAY WHERE PAY_NUM = #{value}

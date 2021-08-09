@@ -13,6 +13,7 @@
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton{text-align: center;}
+	.goodsInfo {border-top: 1px solid #ccc;}
 </style>
 <title>EARTH & US</title>
 </head>
@@ -30,16 +31,25 @@
 			<tr><td colspan="3" width="25%"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td></tr>
 			<tr><td colspan="3" align="center"><strong>교환은 로그인 후 가능합니다.</strong></td></tr>
 			<tr><th scope="col">선택 상품</th><td>${goods.goods_name}</td></tr>
-			<tr><th scope="col">상품 정보</th><td>${goods.goods_info}</td></tr>
+			<tr><th scope="col">상품 정보</th><td>${goods.goods_desc}</td></tr>
 			<tr><th scope="col">필요 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
+		</table><br>
+		<table class="goodsInfo">
+		<c:set var = "num" value="0"/>
+		<c:forEach items="${goodsInfo}" var="i" step="2">
+			<tr>
+				<th><c:forEach items="${goodsInfo}" var="info" begin="${num}" end="${num}"><c:set var="num" value="${num+1}"/>${info}</c:forEach></th>
+				<td><c:forEach items="${goodsInfo}" var="info" begin="${num}" end="${num}"><c:set var="num" value="${num+1}"/>${info}</c:forEach></td>
+			</tr>
+		</c:forEach>
 		</table>
 	</c:if>
-			
+	
 	<c:if test="${!empty auth}">
 		<table class="exGoods">
 			<tr><td rowspan="3"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td>
 			<th scope="col" colspan="2">선택 상품</th><td colspan="3">${goods.goods_name}</td></tr>
-			<tr><th scope="col" colspan="2">상품 정보</th><td colspan="3">${goods.goods_info}</td></tr>
+			<tr><th scope="col" colspan="2">상품 정보</th><td colspan="3">${goods.goods_desc}</td></tr>
 			<tr><th scope="col" colspan="2">필요 포인트</th><td colspan="3"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
 			<tr><td colspan="6"></td></tr>
 		</table>
@@ -55,6 +65,15 @@
 			<tr><th scope="col">보유 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${member.mem_point}"/> point</td></tr>
 			<tr><th scope="col">필요 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
 			<tr><th scope="col">잔여 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${member.mem_point - goods.goods_point}"/> point</td></tr>
+		</table><br>
+		<table class="goodsInfo">
+		<c:set var = "num" value="0"/>
+		<c:forEach items="${goodsInfo}" var="i" step="2">
+			<tr>
+				<th><c:forEach items="${goodsInfo}" var="info" begin="${num}" end="${num}"><c:set var="num" value="${num+1}"/>${info}</c:forEach></th>
+				<td><c:forEach items="${goodsInfo}" var="info" begin="${num}" end="${num}"><c:set var="num" value="${num+1}"/>${info}</c:forEach></td>
+			</tr>
+		</c:forEach>
 		</table>
 	</c:if>
 	<br>
@@ -64,6 +83,7 @@
 	<input type="hidden" name="exg_id" value="${member.mem_id}">
 	<input type="hidden" name="exg_name" value="${member.mem_name}">
 	<input type="hidden" name="exg_gnum" value="${goods.goods_num}">
+	<input type="hidden" name="exg_gname" value="${goods.goods_name}">
 	<input type="hidden" name="exg_point" value="${goods.goods_point}">
 	<input type="hidden" name="exg_addr" id="exg_addr">
 	<div class="exButton"><button type="button" onclick="location.href='/goods/list'">목록보기</button>
