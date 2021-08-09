@@ -5,6 +5,7 @@ public class GoodsBean {
 	private String goods_name;
 	private int goods_point;
 	private String goods_info;
+	private String goods_desc;
 	private String goods_img;
 	
 	public String getGoods_num() {
@@ -30,6 +31,12 @@ public class GoodsBean {
 	}
 	public void setGoods_info(String goods_info) {
 		this.goods_info = goods_info;
+	}
+	public String getGoods_desc() {
+		return goods_desc;
+	}
+	public void setGoods_desc(String goods_desc) {
+		this.goods_desc = goods_desc;
 	}
 	public String getGoods_img() {
 		return goods_img;

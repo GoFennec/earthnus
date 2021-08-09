@@ -44,9 +44,12 @@ public class GoodsService {
 		model.addAttribute("goodsList", goodsList);
         model.addAttribute("page", pBean);
 	}
-	public GoodsBean getGoods(GoodsBean bean) {
+	public GoodsBean getGoods(GoodsBean bean, Model model) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
-		return goodsDAO.getGoods(bean);
+		GoodsBean goodsBean = goodsDAO.getGoods(bean);
+		String[] goodsInfo = goodsBean.getGoods_info().split(",");
+		model.addAttribute("goodsInfo", goodsInfo);
+		return goodsBean;
 	}
 	public MemberBean getMember(AuthBean aBean) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.earthnus.admin.goods.AdGoodsMybatis">
+
+	<resultMap id="goodsResult" type="goods">
+		<id property="goods_num" column="GOODS_NUM"/>
+		<result property="goods_name" column="GOODS_NAME"/>
+		<result property="goods_point" column="GOODS_POINT"/>
+		<result property="goods_info" column="GOODS_INFO"/>
+		<result property="goods_img" column="GOODS_IMG"/>
+	</resultMap>
+	
+	<select id="adGoodsCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM GOODS
+		]]>
+	</select>
+	
+	<select id="getAdGoodsList" resultMap="goodsResult">
+		<![CDATA[
+			SELECT * FROM GOODS ORDER BY GOODS_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+	
+</mapper>
