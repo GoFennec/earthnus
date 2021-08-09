@@ -22,6 +22,8 @@
     	<mapper resource="mappings/donation-mapping.xml"/>
     	<mapper resource="mappings/pay-mapping.xml"/>
     	<mapper resource="mappings/goods-mapping.xml"/>
+    	<mapper resource="mappings/adGoods-mapping.xml"/>
+    	<mapper resource="mappings/adExGoods-mapping.xml"/>
 		<mapper resource="mappings/cheBoard-mapping.xml"/>
 		<mapper resource="mappings/camBoard-mapping.xml"/>
 	</mappers>
