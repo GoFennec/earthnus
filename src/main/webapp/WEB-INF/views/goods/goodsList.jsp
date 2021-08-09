@@ -10,7 +10,7 @@
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
-	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
+	td .goodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton {text-align: center;}
 	.paging {text-align: center;}
 </style>
@@ -20,7 +20,7 @@
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 
 <div class="container"><br>
-	<table class="exGoods">
+	<table class="goodsTitle">
 		<thead>
 			<tr><th scope="col">지구 마켓</th></tr>
 		</thead>
@@ -31,12 +31,12 @@
 			<form action="/goods/exGoods" name="${goods.goods_num}" method="POST">
 			<table class="goodsTable">
 				<tr>
-					<td class="tdImg"><img src="${goods.goods_img}" width="150" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
+					<td class="goodsImg"><img src="${goods.goods_img}" width="150" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
 					<td>
 						<input type="hidden" name="goods_num" value="${goods.goods_num}">
 						${goods.goods_name}<br/>
 						<fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point<br/>
-						${goods.goods_info}<br/>
+						${goods.goods_desc}<br/>
 						<input type="submit" value="교환하기"/>
 					</td>
 				</tr>
@@ -52,12 +52,12 @@
 			<form action="/goods/exGoods" name="${goods.goods_num}" method="POST">
 			<table class="goodsTable">
 				<tr>
-					<td class="tdImg"><img src="${goods.goods_img}" width="150" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
+					<td class="goodsImg"><img src="${goods.goods_img}" width="150" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
 					<td>
 						<input type="hidden" name="goods_num" value="${goods.goods_num}">
 						${goods.goods_name}<br/>
 						<fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point<br/>
-						${goods.goods_info}<br/>
+						${goods.goods_desc}<br/>
 						<input type="submit" value="교환하기"/>
 					</td>
 				</tr>

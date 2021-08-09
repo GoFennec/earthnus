@@ -9,6 +9,7 @@
 		<result property="goods_name" column="GOODS_NAME"/>
 		<result property="goods_point" column="GOODS_POINT"/>
 		<result property="goods_info" column="GOODS_INFO"/>
+		<result property="goods_desc" column="GOODS_DESC"/>
 		<result property="goods_img" column="GOODS_IMG"/>
 	</resultMap>
 	
@@ -29,9 +30,10 @@
 		<id property="exg_num" column="EXG_NUM"/>
 		<result property="exg_id" column="EXG_ID"/>
 		<result property="exg_name" column="EXG_NAME"/>
-		<result property="exg_gnum" column="EXG_ADDR"/>
-		<result property="exg_point" column="EXG_GNUM"/>
-		<result property="exg_addr" column="EXG_POINT"/>
+		<result property="exg_addr" column="EXG_ADDR"/>
+		<result property="exg_gnum" column="EXG_GNUM"/>
+		<result property="exg_gname" column="EXG_GNAME"/>
+		<result property="exg_point" column="EXG_POINT"/>
 		<result property="exg_date" column="EXG_DATE"/>
 	</resultMap>
 	
@@ -62,8 +64,8 @@
 	
 	<insert id="insertExGoods">
 		<![CDATA[
-			INSERT INTO EXGOODS (EXG_ID,EXG_NAME,EXG_GNUM,EXG_POINT,EXG_ADDR) 
-			VALUES (#{exg_id},#{exg_name},#{exg_gnum},#{exg_point},#{exg_addr})
+			INSERT INTO EXGOODS (EXG_ID,EXG_NAME,EXG_GNUM,EXG_GNAME,EXG_POINT,EXG_ADDR) 
+			VALUES (#{exg_id},#{exg_name},#{exg_gnum},#{exg_gname},#{exg_point},#{exg_addr})
 		]]>
 	</insert>
 	

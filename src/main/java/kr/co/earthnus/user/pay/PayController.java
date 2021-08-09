@@ -43,26 +43,39 @@ public class PayController {
 		return "pay/pay";
 	}
 	
-	@RequestMapping("/pay/kakaoPay")
-	public String getKakaoPay(@ModelAttribute MemberBean mBean, @ModelAttribute PayBean pBean, Model model) {
-		model.addAttribute("member", mBean);
-		model.addAttribute("pay", pBean);
-		return "pay/kakaoPay";
-	}
+//	@RequestMapping("/pay/inicis")
+//	public String getInicis(@ModelAttribute MemberBean mBean, @ModelAttribute PayBean pBean, Model model) {
+//		model.addAttribute("member", mBean);
+//		model.addAttribute("pay", pBean);
+//		return "pay/inicis";
+//	}
+//	
+//	@RequestMapping("/pay/kakaoPay")
+//	public String getKakaoPay(@ModelAttribute MemberBean mBean, @ModelAttribute PayBean pBean, Model model) {
+//		model.addAttribute("member", mBean);
+//		model.addAttribute("pay", pBean);
+//		return "pay/kakaoPay";
+//	}
 	
 	@ResponseBody
 	@RequestMapping("/payments/complete/{imp_uid}")
 	public IamportResponse<Payment> paymentByImpUid(@RequestBody PayBean pBean, Model model, Locale locale, HttpSession session,
 			@PathVariable(value="imp_uid") String imp_uid) throws IamportResponseException, IOException {
 		int n = payService.insertPay(pBean);
+		int m = payService.updatePoint(pBean);
 		System.out.println("n=" + n);
+		System.out.println("m=" + m);
 		return api.paymentByImpUid(imp_uid);
 	}
-			
+
 	@RequestMapping("/pay/payOk/{var}")
 	public String getPayInfo(@PathVariable("var") String var, Model model) {
 		model.addAttribute("pay", payService.getPayInfo(var));
-		System.out.println(var);
 		return "pay/payOk";
+	}
+	
+	@RequestMapping("/member/myPage")
+	public String getMyPage() {
+		return "member/myPage";
 	}
 }

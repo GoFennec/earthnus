@@ -18,10 +18,13 @@
 	<mappers>
 		<mapper resource="mappings/auth-mapping.xml"/>
 		<mapper resource="mappings/adAuth-mapping.xml"/>
+		<mapper resource="mappings/adDonation-mapping.xml"/>
     	<mapper resource="mappings/member-mapping.xml"/>
     	<mapper resource="mappings/donation-mapping.xml"/>
     	<mapper resource="mappings/pay-mapping.xml"/>
     	<mapper resource="mappings/goods-mapping.xml"/>
+    	<mapper resource="mappings/adGoods-mapping.xml"/>
+    	<mapper resource="mappings/adExGoods-mapping.xml"/>
 		<mapper resource="mappings/cheBoard-mapping.xml"/>
 		<mapper resource="mappings/camBoard-mapping.xml"/>
 		<mapper resource="mappings/mail-mapping.xml"/>
