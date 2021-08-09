@@ -1,0 +1,4 @@
+@charset "EUC-KR";
+.content:hover{
+	filter: brightness(30%);
+}

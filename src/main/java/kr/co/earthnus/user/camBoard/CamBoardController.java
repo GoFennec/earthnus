@@ -1,5 +1,50 @@
 package kr.co.earthnus.user.camBoard;
 
-public class CamBoardController {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+@Controller
+public class CamBoardController{	
+	@Autowired
+	private CamBoardService camBoardService;
+	
+	@RequestMapping(value="/camBoard/list")
+	public String getCamBoardList(@RequestParam(defaultValue = "1") String pagenum, 
+			@RequestParam(defaultValue = "6") String contentnum, camBoardBean bean, Model model) {
+		
+		camBoardService.getCamBoardList(bean, pagenum, contentnum, model);
+		
+		System.out.println("CamBoardController");
+		System.out.println("컨트롤러 : " + model.containsAttribute("CamBoardList"));
+		return "camBoard/camBoardList";
+	}
+	
+	@RequestMapping("search")
+	public String searchCamBoard(@RequestParam(defaultValue = "1") String pagenum, 
+			@RequestParam(defaultValue = "6") String contentnum, @RequestParam("search") String search,
+			camBoardBean bean, Model model) {
+		if(search != null) {
+			search = "%" + search + "%";
+		}else if(search == null) {
+			search = "%%";
+		}
+		
+		camBoardService.searchCamBoard(search, bean, pagenum, contentnum, model);
+		
+		System.out.println("CamBoardController");
+		System.out.println("컨트롤러 : " + model.containsAttribute("CamBoardList"));
+		return "camBoard/camBoardList";
+	}
+	
+	@RequestMapping(value="/camBoard/detail")
+	public String getCamBoardDetail(@RequestParam("CAMB_NUM") String contentnum, Model model) {
+		
+		System.out.println("컨트롤러 : " + contentnum);
+		model.addAttribute("camBoard", camBoardService.getCamBoard(contentnum));		
+		
+		return "camBoard/camBoardDetail";
+	}
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.earthnus.user.camBoard.CamBoardMybatis">
+	
+	<resultMap id="camBoardResult" type="camBoard">
+		<id property="CAMB_NUM" column="CAMB_NUM"/>
+		<result property="CAMB_NAME" column="CAMB_NAME"/>
+		<result property="CAMB_SUBJECT" column="CAMB_SUBJECT"/>
+		<result property="CAMB_CONTENT" column="CAMB_CONTENT"/>
+		<result property="CAMB_FILE" column="CAMB_FILE"/>
+		<result property="CAMB_DATE" column="CAMB_DATE"/>
+	</resultMap>
+	
+	<select id="getCamBoardList" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD
+		]]>
+	</select>
+	
+	<select id="searchCamBoardList" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE CAMB_NAME LIKE #{search}
+		]]>
+	</select>
+	
+	<select id="getCamBoard" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE CAMB_NUM=#{contentnum}
+		]]>
+	</select>
+	
+	<select id="camBoardCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM CAMBOARD
+		]]>
+	</select>
+	
+</mapper>
