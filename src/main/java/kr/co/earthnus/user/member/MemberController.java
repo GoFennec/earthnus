@@ -34,15 +34,50 @@ public class MemberController {
 		memberService.insertMember(memberBean);
 		return "redirect:/";
 	}
+	//마이페이지 구현중
+	@RequestMapping(value="/member/myPage")
+	public String myPage(HttpSession session, Model model, AuthBean aBean) {
+		aBean = (AuthBean) session.getAttribute("auth");
+		String mem_id = aBean.getAuth_id();
+		System.out.println("mypagecontroller" + mem_id);
+		MemberBean memberBean = memberService.myInfo(mem_id);
+		//후원금액
+		model.addAttribute("MemberBean",memberBean); 
+		return "member/myPage";
+			 
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value="/member/pwcheck", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> pwCheck(@RequestParam("mem_pw")String mem_pw, HttpSession session, AuthBean aBean
+			) {
+		aBean = (AuthBean) session.getAttribute("auth");
+		String mem_id = aBean.getAuth_id();
+		System.out.println("pwcheck");
+		System.out.println(mem_id);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int n = memberService.pwCheck(mem_id);
+		
+		if(n == 1) {
+			map.put("error", true);
+		}else {
+			map.put("error", false);
+		}
+		return map;
+	}
 	
 	@RequestMapping(value="/member/myInfo")
 	public String myInfo(HttpSession session, Model model, AuthBean aBean) {
 		aBean = (AuthBean) session.getAttribute("auth");
 		String mem_id = aBean.getAuth_id();
-		//String mem_id = aBean.getAuth_id();
 		System.out.println("controller" + mem_id);
 		MemberBean memberBean = memberService.myInfo(mem_id);
-		System.out.println("controller " + memberBean.getMem_date());
 		model.addAttribute("MemberBean",memberBean); 
 		return "member/myInfo";
 			 
@@ -59,17 +94,29 @@ public class MemberController {
 	@RequestMapping(value="/updateMyInfo")
 	public String updateMyInfo(MemberBean memberBean,Model model) {
 		memberService.updateMyInfo(memberBean);
-		System.out.println("이메일수정확인" + memberBean.getMem_email());
 		model.addAttribute("MemberBean", memberBean);
 		System.out.println("update controller");
 		return "redirect:/member/myInfo";
 	}
+	
+	
+	//delete 오류잡는중
+	@RequestMapping(value="/member/myDelete")
+	public String myDelete() {
+		return "member/myDelete";
+	}
 	@RequestMapping(value = "/deleteMember")
-	public String deleteMember(MemberBean memberBean, HttpSession session){
+	public String myDelete(HttpSession session, Model model, 
+			AuthBean aBean, MemberBean memberBean){
+		aBean = (AuthBean) session.getAttribute("auth");
+		String mem_id = aBean.getAuth_id();
+		System.out.println("delete controller" + mem_id);
 		memberService.deleteMember(memberBean);
 		session.invalidate();
-		return "redirect:/index";			
+		return "redirect:/";			
 	}
+	
+	
 	
 	@RequestMapping(value="/member/idcheck", method=RequestMethod.POST)
 	@ResponseBody

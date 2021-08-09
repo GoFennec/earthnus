@@ -9,7 +9,7 @@
 <title>EARTH & US</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="site.webmanifest">
+<link rel="manifest" href="#">
 <link rel="shortcut icon" type="image/x-icon"
 	href="resources/assets/img/favicon.ico">
 
@@ -76,7 +76,7 @@
 												<c:if test="${!empty auth}">
 													<li>${auth.auth_name}님 환영합니다.
 													<ul class="submenu">
-													<li><a href="/member/myInfo">마이페이지</a></li>
+													<li><a href="/member/myPage">마이페이지</a></li>
 														
 														<li><a href="/logout">로그아웃</a></li>
 													</ul></li>

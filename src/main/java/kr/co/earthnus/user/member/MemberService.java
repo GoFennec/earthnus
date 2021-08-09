@@ -31,17 +31,24 @@ public class MemberService {
 		int n = dao.insertMember(memberBean);
 		return n;
 	}
+	
+	public MemberBean myPage(String mem_id) {
+		System.out.println("S : myPage()실행");
+		MemberBean memberBean = null;
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		memberBean = dao.myPage(mem_id);
+		return memberBean;
+	}							
+	public int pwCheck(String mem_id) {
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		int n = dao.pwCheck(mem_id);
+		return n;
+	}
 	public MemberBean myInfo(String mem_id) {
 		System.out.println("S : myInfo()실행");
 		MemberBean memberBean = null;
-									
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		
 		memberBean = dao.myInfo(mem_id);
-		System.out.println(memberBean.getMem_date() + " date check");
-		System.out.println(memberBean);
-		
-		
 		return memberBean;
 	}																			
 		public void updateMyInfo(MemberBean memberBean) {
@@ -50,9 +57,12 @@ public class MemberService {
 			System.out.println("update service");
 		}
 
+	
+		
 		public void deleteMember(MemberBean memberBean) {
 			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);	
 				dao.deleteMember(memberBean);
+				System.out.println("delete service");
 			
 		}
 
