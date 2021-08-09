@@ -22,6 +22,18 @@
 		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
 		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
 	</insert>
+	<!-- mypage 구현 중  -->
+	<select id="myPage" resultType="member">
+			SELECT * FROM MEMBER WHERE MEM_ID=#{mem_id}
+	</select>
+	
+	
+	
+	
+	
+		<select id="pwCheck" parameterType="String" resultType="int">
+		select count(*) from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
+	</select>
 	
 	<select id="myInfo" resultType="member">
 			SELECT * FROM MEMBER WHERE MEM_ID=#{mem_id}
@@ -33,12 +45,14 @@
 			WHERE MEM_ID=#{mem_id}
 	</update>
 	
-	<delete id="deleteMember">
-		DELETE FROM MEMBER WHERE MEM_ID=#{mem_id}
-	</delete>
+	<update id="deleteMember" parameterType="member">
+		UPDATE MEMBER SET MEM_ID="삭제된회원", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원", MEM_TEL="0000-0000",
+		 MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원", MEM_POINT="0" WHERE MEM_ID=#{mem_id}
+	</update>
 	
 	<select id="idCheck" parameterType="String" resultType="int">
 		select count(*) from member where mem_id = #{mem_id}
 	</select>
-	
+		
+		
 </mapper>
