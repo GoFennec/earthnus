@@ -73,9 +73,4 @@ public class PayController {
 		model.addAttribute("pay", payService.getPayInfo(var));
 		return "pay/payOk";
 	}
-	
-	@RequestMapping("/member/myPage")
-	public String getMyPage() {
-		return "member/myPage";
-	}
 }
