@@ -1,6 +1,7 @@
 package kr.co.earthnus.user.member;
 
 import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Properties;
 
@@ -15,48 +16,38 @@ import javax.mail.internet.MimeMessage;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import kr.co.earthnus.util.MailAuth;
+import kr.co.earthnus.util.MailBean;
+import kr.co.earthnus.util.SHA256;
 
 @Service
 public class MemberService {
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	@Autowired
-	private JavaMailSender mailSender;
-
-	public int insertMember(MemberBean memberBean) {
+	
+	public int insertMember(MemberBean memberBean) throws NoSuchAlgorithmException {
 		System.out.println("서비스");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+        SHA256 sha256 = new SHA256();
+        
+        //비밀번호
+        String password = memberBean.getMem_pw();
+        //SHA256으로 암호화된 비밀번호
+        String cryptogram = sha256.encrypt(password);
+        
+        System.out.println(cryptogram);
+        
+        memberBean.setMem_pw(cryptogram);
+        
+        //비밀번호 일치 여부
+        System.out.println(cryptogram.equals(sha256.encrypt(password)));
 		int n = dao.insertMember(memberBean);
 		return n;
 	}
-	public MemberBean myInfo(String mem_id) {
-		System.out.println("S : myInfo()실행");
-		MemberBean memberBean = null;
-									
-		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		
-		memberBean = dao.myInfo(mem_id);
-		System.out.println(memberBean.getMem_date() + " date check");
-		System.out.println(memberBean);
-		
-		
-		return memberBean;
-	}																			
-		public void updateMyInfo(MemberBean memberBean) {
-			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);	
-			dao.updateMyInfo(memberBean);
-			System.out.println("update service");
-		}
-
-		public void deleteMember(MemberBean memberBean) {
-			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);	
-				dao.deleteMember(memberBean);
-			
-		}
-
 	
+	//아이디 중복체크
 	public int idCheck(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		int n = dao.idCheck(mem_id);
@@ -64,11 +55,9 @@ public class MemberService {
 	}
 
 	// 패스워드 찾기 이메일 발송
-	public void mailSendWithPassword(String email) {
-		
+	public int mailSendWithPassword(String email, String name) {
 		
 		char[] num = new char[8];
-
 		for (int i = 0; i < 4; i++) {
 			char y = (char) ((int) ((Math.random() * (122 - 97)) + 97));
 			num[i] = y;
@@ -77,7 +66,6 @@ public class MemberService {
 			char y = Character.forDigit(((int) (Math.random() * 9)), 10);
 			num[i] = y;
 		}
-
 		String newnum = "";
 		for (int i = 0; i < num.length; i++) {
 			newnum = newnum + num[i];
@@ -90,31 +78,57 @@ public class MemberService {
         prop.put("mail.smtp.port", "587");
         
         Authenticator auth = new MailAuth();
-        
         Session session = Session.getDefaultInstance(prop, auth);
-        
         MimeMessage msg = new MimeMessage(session);
-    
+        
+        String title = "EARTH & US 이메일 인증입니다.";
+        String content = "안녕하세요 EARTH & US 입니다. \n"
+      		  + "고객님의 회원가입 이메일 인증 번호는 " + newnum + "입니다. \n"
+      		  + "홈페이지로 가서 인증번호를 입력해주세요.";
+        String password = newnum;
+        String sender = "baltolly@gmail.com";
+        String receiver = email;
+        String customer = name;
+        
+        MailBean mailBean = new MailBean(title, content, password, sender, receiver, customer);
+        MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+        dao.insertMail(mailBean);
+        
+        int i = 0;
         try {
             msg.setSentDate(new Date());
-            
-            msg.setFrom(new InternetAddress("baltolly@gmail.com", "EARTH & US"));
+            msg.setFrom(new InternetAddress(sender, "EARTH & US"));
             InternetAddress to = new InternetAddress(email);         
             msg.setRecipient(Message.RecipientType.TO, to);            
-            msg.setSubject("EARTH & US 이메일 인증입니다.", "UTF-8");            
-            msg.setText("안녕하세요 EARTH & US 입니다. \n"
-            		  + "고객님의 이메일 인증 번호는 " + newnum + "입니다. \n"
-            		  + "홈페이지로 가서 인증번호를 입력해주세요.", "UTF-8");            
+            msg.setSubject(title, "UTF-8");            
+            msg.setText(content, "UTF-8");            
             
             Transport.send(msg);
             
-        } catch(AddressException ae) {            
+        } catch(AddressException ae) {  
+        	i++;
             System.out.println("AddressException : " + ae.getMessage());           
-        } catch(MessagingException me) {            
+        } catch(MessagingException me) {  
+        	i++;
             System.out.println("MessagingException : " + me.getMessage());
         } catch(UnsupportedEncodingException e) {
+        	i++;
             System.out.println("UnsupportedEncodingException : " + e.getMessage());			
+        } catch(Exception ex) {
+        	i++;
+        	System.out.println("Exception : " + ex.getMessage());
         }
+        System.out.println(i + " error service");
+        return i;
+	}
+	
+	public int mailCheck(String mailCheck, String email) {
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		System.out.println(mailCheck + " Service");
+		System.out.println(email + " Service");
+        int n = dao.selectMail(mailCheck, email);
+        
+        return n;
 	}
 
 }

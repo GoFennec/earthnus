@@ -1,5 +1,7 @@
 package kr.co.earthnus.user.auth;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,9 @@ public class AuthController {
 	
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
 	public String loginch(@RequestParam("auth_pw") String auth_pw,
-			AuthBean aBean, HttpSession session, Model model) {
+			AuthBean aBean, HttpSession session, Model model) throws NoSuchAlgorithmException {
 		model.addAttribute("id", aBean.getAuth_id());
+		System.out.println(auth_pw);
 		aBean = service.login(aBean.getAuth_id(), auth_pw);
 		if(aBean != null) {
 			session.setAttribute("auth", aBean);

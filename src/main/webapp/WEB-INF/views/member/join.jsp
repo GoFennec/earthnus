@@ -47,6 +47,25 @@
 	   	padding-right:0px;
 	   }
 	   
+	  .modal {
+        text-align: center;
+	  }
+ 
+		@media screen{ 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+		}
+ 
+	.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+	}	   
+	
     </style>
 
     
@@ -65,7 +84,7 @@
 
     <div class="row g-5">
       <div class="">
-        <form class="needs-validation" action="/member/join" method="post">
+        <form class="needs-validation" action="/member/join" method="post" onsubmit="return check()">
           <div class="row g-3">
           
             <div class="col-md-9" style="padding-right:0px">
@@ -76,7 +95,7 @@
               </div>
             </div>
             
-            <div class="col-md-3" style="margin-top:30px;">
+            <div class="col-md-3" style="margin-top:50px;">
               <button class="w-100 btn btn-primary btn-lg" style="padding-left:20px" id="testBtn">중복확인</button>
             </div>
             
@@ -123,6 +142,7 @@
 			    	  			if(yesno){
 			    	  				$("#mem_id").val(idcheck);
 			    	  				$("#mem_id").attr("disabled",true);
+			    	  				$("#testModal").modal("hide");
 			    	  				
 			    	  			}
 			      			}else if(result.error === false){
@@ -184,7 +204,7 @@
 
             <div class="col-12">
               <label for="username" class="form-label">이름</label>
-              <input type="text" name="mem_name"class="form-control" id="username" placeholder="" required>
+              <input type="text" name="mem_name"class="form-control" id="mem_name" placeholder="" required>
               <div class="invalid-feedback">
                 	필수 입력사항입니다.
               </div>
@@ -214,18 +234,16 @@
 			
 			 
 			
-            <div class="col-12">
-              <label for="address" class="form-label">주소</label>
-              <input type="text" class="form-control" id="postcode" placeholder="우편번호" required onkeyup='call_addr()'>
-              <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-			  <input type="text" class="form-control" id="address" placeholder="주소" onkeyup='call_addr()'>
-			  <input type="text" class="form-control" id="detailAddress" placeholder="상세주소" onkeyup='call_addr()'>
-			  <input type="text" class="form-control" id="extraAddress" placeholder="참고항목" onkeyup='call_addr()'>
+              <div class="col-md-9" style="padding-right:0px"><label for="address" class="form-label">주소</label>
+              <input type="text" class="form-control" id="postcode" placeholder="우편번호" required onkeyup='call_addr()' disabled style="margin-top:2px"></div>
+              <div class="col-md-3" style="margin-top:53px;"><button class="w-100 btn btn-primary btn-lg" onclick="execDaumPostcode()" style="padding-left:9px; font-size:13px">우편번호 찾기</button><br></div>
+			  <div class="col-md-12"><input type="text" class="form-control" id="address" placeholder="주소" onkeyup='call_addr()' disabled></div>
+			  <div class="col-md-12"><input type="text" class="form-control" id="detailAddress" placeholder="상세주소" onkeyup='call_addr()'></div>
+			  <div class="col-md-12"><input type="text" class="form-control" id="extraAddress" placeholder="참고항목" onkeyup='call_addr()'></div>
 			  <input type="hidden" id="address_all" name="mem_addr">
               <div class="invalid-feedback">
                		 필수 입력사항입니다.
               </div>
-            </div>
             
             <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
 			<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
@@ -250,30 +268,40 @@
               </div>
             </div>
             
-            <div class="col-md-3" style="margin-top:30px;">
-              <button class="w-100 btn btn-primary btn-lg" style="padding-left:9px; font-size:13px" onclick="mail()">인증번호 받기</button>
+            <div class="col-md-3" style="margin-top:53px;">
+              <button class="w-100 btn btn-primary btn-lg" style="padding-left:9px; font-size:13px" onclick="mail()" id="testBtn1">인증번호 받기</button>
             </div>
             
             <script type="text/javascript">
 				function mail(){
 					var mail = $("#mem_email").val();
+					var name = $("#mem_name").val();
 					if(mail === ""){
 						alert("이메일을 입력해주세요.");
+						return;
 					}else if(!mail.includes('@')){
-						alert("올바르지 않은 이메일 형식입니다.")
+						alert("올바르지 않은 이메일 형식입니다.");
+						return;
+					}else if(name === ""){
+						alert("이름을 먼저 입력해주세요.");
+						return;
 					}
-		
+					
 					$.ajax({
 			   			type: "POST", //요청 메소드 방식
 			  			 url:"/member/mail",
-			   			data: {"mem_email":mail},
+			   			data: {"mem_email":mail, "mem_name":name},
 			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 			   			success : function(result){
 				   
 			      			if(result.error == true){
-			    	  			alert('성공');
+			    	  			alert('입력하신 이메일로 회원가입 인증번호를 발송했습니다.');
+			    	  			$('#testBtn1').click(function(e){
+									e.preventDefault();
+									$('#testModal1').modal("show");
+								});
 			      			}else if(result.error == false){
-			    	  			alert('실패');
+			    	  			alert('인증번호 발송에 실패했습니다.');
 			      			}
 			   			},
 			   		 error:function(request,status,error){
@@ -285,13 +313,24 @@
 			</script>
             
             <div class="col-md-12">
-              <label for="cc-expiration" class="form-label">인증번호</label>
-              <input type="text" name="mem_tel" class="form-control" id="cc-expiration" placeholder="" required>
+              <label for="cc-expiration" class="form-label">이메일 인증번호</label>
+              <input type="text" name="mailCheck" class="form-control" id="mailCheck" placeholder="" required>
               <div class="invalid-feedback">
                 	필수 입력사항입니다.
               </div>
             </div>
-
+            <!-- 
+            <script type="text/javascript">
+			$(function(){
+				$("input").keyup(function(){
+				if($("#mailCheck").val() == ""){ 
+					$("#email alert-danger").hide(); 
+					}
+				});
+				});
+			</script>
+            <div class="col-12"><div class="alert alert-danger" id="email alert-danger">인증번호가 일치하지 않습니다.</div></div>
+			 -->
             <div class="col-md-12">
               <label for="cc-expiration" class="form-label">전화번호</label>
               <input type="text" name="mem_tel" class="form-control" id="cc-expiration" placeholder="" required>
@@ -305,6 +344,18 @@
           <hr class="my-4">
 
           <button class="w-100 btn btn-primary btn-lg" type="submit">회원가입</button>
+          
+          <script type="text/javascript">
+				function check(){
+					var email = $("#mem_email").val();
+					var mailCheck = $("#mailCheck").val();
+					if($("#Password").val() != $("#PasswordCheck").val()){
+						alert("비밀번호가 일치하지 않습니다.");
+						return false;
+					} 
+				}
+			</script>
+          
         </form>
       </div>
     </div>
