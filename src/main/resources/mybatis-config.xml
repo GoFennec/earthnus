@@ -17,6 +17,7 @@
 	<mappers>
 		<mapper resource="mappings/auth-mapping.xml"/>
 		<mapper resource="mappings/adAuth-mapping.xml"/>
+		<mapper resource="mappings/adDonation-mapping.xml"/>
     	<mapper resource="mappings/member-mapping.xml"/>
     	<mapper resource="mappings/donation-mapping.xml"/>
     	<mapper resource="mappings/pay-mapping.xml"/>
