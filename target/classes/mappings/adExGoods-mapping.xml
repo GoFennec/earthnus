@@ -27,4 +27,34 @@
 		]]>
 	</select>
 	
+	<select id="getExGoodsU" resultType="exGoods" parameterType="int">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_NUM=#{exGoodsNumU}
+		]]>
+	</select>
+	
+	<update id="updateExGoodsOk">
+		<![CDATA[
+			UPDATE EXGOODS SET EXG_ADDR=#{exg_addr} WHERE EXG_NUM=#{exg_num}
+		]]>
+	</update>
+	
+	<select id="getExGoodsD" resultType="exGoods" parameterType="int">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_NUM=#{exGoodsNumD}
+		]]>
+	</select>
+	
+	<delete id="deleteExGoods" parameterType="int">
+		<![CDATA[
+			DELETE FROM EXGOODS WHERE EXG_NUM=#{exGoodsNumD}
+		]]>
+	</delete>
+	
+	<update id="updatePoint" parameterType="hashMap">
+		<![CDATA[
+			UPDATE MEMBER SET MEM_POINT=MEM_POINT+#{point} WHERE MEM_ID=#{id}
+		]]>
+	</update>
+	
 </mapper>

@@ -9,6 +9,7 @@
 		<result property="goods_name" column="GOODS_NAME"/>
 		<result property="goods_point" column="GOODS_POINT"/>
 		<result property="goods_info" column="GOODS_INFO"/>
+		<result property="goods_desc" column="GOODS_DESC"/>
 		<result property="goods_img" column="GOODS_IMG"/>
 	</resultMap>
 	
@@ -23,5 +24,38 @@
 			SELECT * FROM GOODS ORDER BY GOODS_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
 		]]>
 	</select>
+	
+	<select id="newGoodsNum" resultType="string">
+		<![CDATA[
+			SELECT GOODS_NUM FROM GOODS ORDER BY GOODS_NUM DESC LIMIT 1
+		]]>
+	</select>
+	
+	<insert id="isertGoodsOk">
+		<![CDATA[
+			INSERT INTO GOODS (GOODS_NUM,GOODS_NAME,GOODS_POINT,GOODS_INFO,GOODS_DESC,GOODS_IMG) 
+			VALUES (#{goods_num},#{goods_name},#{goods_point},#{goods_info},#{goods_desc},#{goods_img})
+		]]>
+	</insert>
+	
+	<select id="getGoodsU" resultType="goods" parameterType="string">
+		<![CDATA[
+			SELECT * FROM GOODS WHERE GOODS_NUM=#{goodsNumU}
+		]]>
+	</select>
+	
+	<update id="updateGoodsOk">
+		<![CDATA[
+			UPDATE GOODS SET GOODS_NAME=#{goods_name},GOODS_POINT=#{goods_point},
+			GOODS_INFO=#{goods_info},GOODS_DESC=#{goods_desc},GOODS_IMG=#{goods_img} 
+			WHERE GOODS_NUM=#{goods_num}
+		]]>
+	</update>
+	
+	<delete id="deleteGoods" parameterType="string">
+		<![CDATA[
+			DELETE FROM GOODS WHERE GOODS_NUM=#{goodsNumD}
+		]]>
+	</delete>
 	
 </mapper>

@@ -1,11 +1,13 @@
 package kr.co.earthnus.admin.goods;
 
+import java.io.File;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.earthnus.user.goods.GoodsBean;
 import kr.co.earthnus.user.goods.PagingBean;
@@ -15,7 +17,7 @@ public class AdGoodsService {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public void getAdGoodsList(GoodsBean bean, String pagenum, String contentnum, Model model) {
+	public void getAdGoodsList(String pagenum, String contentnum, Model model) {
 		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
 		
 		PagingBean pBean = new PagingBean();
@@ -43,5 +45,56 @@ public class AdGoodsService {
         
 		model.addAttribute("goodsList", goodsList);
         model.addAttribute("page", pBean);
+	}
+	
+	public String newGoodsNum() {
+		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
+		String gNum = goodsDAO.newGoodsNum();
+		String alp = gNum.substring(0, 1);
+		String num = String.valueOf(Integer.parseInt(gNum.substring(1)) + 1);
+		gNum = alp + num;
+		return gNum;
+	}
+	
+	public void isertGoodsOk(GoodsBean gBean) {
+		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
+		MultipartFile uploadFile = gBean.getGoods_uploadFile();
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			try {
+				uploadFile.transferTo(new File("C:/upload/" + fileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			gBean.setGoods_img("C:/upload/" + fileName);
+		} else {
+			gBean.setGoods_img("/resources/goods/imgDefault.png");
+		}
+		goodsDAO.isertGoodsOk(gBean);
+	}
+	
+	public GoodsBean updateGoods(String goodsNumU) {
+		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
+		return goodsDAO.getGoodsU(goodsNumU);
+	}
+	
+	public void updateGoodsOk(GoodsBean gBean) {
+		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
+		MultipartFile uploadFile = gBean.getGoods_uploadFile();
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			try {
+				uploadFile.transferTo(new File("C:/upload/" + fileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			gBean.setGoods_img("C:/upload/" + fileName);
+		}
+		goodsDAO.updateGoodsOk(gBean);
+	}
+	
+	public void deleteGoods(String goodsNumD) {
+		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
+		goodsDAO.deleteGoods(goodsNumD);
 	}
 }

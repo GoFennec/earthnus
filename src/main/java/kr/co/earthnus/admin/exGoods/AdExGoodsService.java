@@ -1,13 +1,19 @@
 package kr.co.earthnus.admin.exGoods;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.earthnus.admin.goods.AdGoodsMybatis;
 import kr.co.earthnus.user.goods.ExGoodsBean;
+import kr.co.earthnus.user.goods.GoodsBean;
 import kr.co.earthnus.user.goods.PagingBean;
 
 @Service("adExGoodsService")
@@ -43,5 +49,25 @@ public class AdExGoodsService {
         
 		model.addAttribute("exGoodsList", exGoodsList);
         model.addAttribute("page", pBean);
+	}
+	
+	public ExGoodsBean updateExGoods(int exGoodsNumU) {
+		AdExGoodsMybatis exGoodsDAO = mybatis.getMapper(AdExGoodsMybatis.class);
+		return exGoodsDAO.getExGoodsU(exGoodsNumU);
+	}
+	
+	public void updateExGoodsOk(ExGoodsBean eBean) {
+		AdExGoodsMybatis exGoodsDAO = mybatis.getMapper(AdExGoodsMybatis.class);
+		exGoodsDAO.updateExGoodsOk(eBean);
+	}
+	
+	public void deleteExGoods(int exGoodsNumD) {
+		AdExGoodsMybatis exGoodsDAO = mybatis.getMapper(AdExGoodsMybatis.class);
+		ExGoodsBean eBean = exGoodsDAO.getExGoodsD(exGoodsNumD);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", eBean.getExg_id());
+		map.put("point", eBean.getExg_point());
+		exGoodsDAO.deleteExGoods(exGoodsNumD);
+		exGoodsDAO.updatePoint(map);
 	}
 }
