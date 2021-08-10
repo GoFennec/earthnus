@@ -27,9 +27,22 @@ public class MemberService {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public int insertMember(MemberBean memberBean) {
+	public int insertMember(MemberBean memberBean) throws NoSuchAlgorithmException {
 		System.out.println("서비스");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+        SHA256 sha256 = new SHA256();
+
+        //비밀번호
+        String password = memberBean.getMem_pw();
+        //SHA256으로 암호화된 비밀번호
+        String cryptogram = sha256.encrypt(password);
+
+        System.out.println(cryptogram);
+
+        memberBean.setMem_pw(cryptogram);
+
+        //비밀번호 일치 여부
+        System.out.println(cryptogram.equals(sha256.encrypt(password)));
 		int n = dao.insertMember(memberBean);
 		return n;
 	}
@@ -77,7 +90,7 @@ public class MemberService {
 	}
 
 	// 패스워드 찾기 이메일 발송
-	public int mailSendWithPassword(String email, String name) {
+	public int mailSendWithPassword(String email, String id) {
 
 		char[] num = new char[8];
 		for (int i = 0; i < 4; i++) {
@@ -109,7 +122,7 @@ public class MemberService {
 		String password = newnum;
 		String sender = "baltolly@gmail.com";
 		String receiver = email;
-		String customer = name;
+		String customer = id;
 
 		MailBean mailBean = new MailBean(title, content, password, sender, receiver, customer);
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
@@ -143,13 +156,17 @@ public class MemberService {
 		return i;
 	}
 
-	public int mailCheck(String mailCheck, String email) {
+	public boolean mailCheck(String mailCheck, String id) {
+		boolean correct = false;
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		System.out.println(mailCheck + " Service");
-		System.out.println(email + " Service");
-		int n = dao.selectMail(mailCheck, email);
-
-		return n;
+		System.out.println(id + " Service");
+		MailBean mailBean = dao.selectMail(id);
+		
+		if(mailBean.getMail_pw().equals(mailCheck)) {
+			correct = true;
+		}
+		return correct;
 	}
 
 }

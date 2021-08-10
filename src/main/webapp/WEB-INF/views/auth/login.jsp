@@ -71,7 +71,7 @@
 				<button class="w-100 btn btn-lg btn-primary" text-align="center" type="submit" >로그인</button>
 			</div>
 			<div>
-				<a href="#" title="아이디/비밀번호찾기">아이디/비밀번호찾기</a> 
+				<a href="/auth/find" title="아이디/비밀번호찾기">아이디/비밀번호찾기</a> 
 				<a href="#" title="회원가입">회원가입</a>
 			</div>
 		</form>
@@ -134,12 +134,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-

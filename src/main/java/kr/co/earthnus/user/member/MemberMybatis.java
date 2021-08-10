@@ -14,5 +14,5 @@ public interface MemberMybatis {
 	public int idCheck(String mem_id);
 	public int pwCheck(String mem_pw);
 	public int insertMail(MailBean MailBean);
-	public int selectMail(@Param("mailCheck") String mailCheck, @Param("email") String email);
+	public MailBean selectMail(@Param("id") String id);
 }

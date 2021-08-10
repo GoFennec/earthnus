@@ -1,5 +1,6 @@
 package kr.co.earthnus.user.member;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,16 +24,13 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/join", method=RequestMethod.GET)
 	public String memberJoin() {
-		System.out.println("컨트롤러 GET");
 		return "/member/join";
 	}
 	
 	//회원가입
 	@RequestMapping(value="/member/join", method=RequestMethod.POST)
-	public String memberJoin2(MemberBean memberBean) {
-		System.out.println("컨트롤러 POST");
-		System.out.println(memberBean.getMem_addr());
-		System.out.println(memberBean.getMem_birth());
+	public String memberJoin2(MemberBean memberBean) throws NoSuchAlgorithmException {
+		System.out.println(memberBean.getMem_email() + " 컨트롤러에서 메일");
 		memberService.insertMember(memberBean);
 		return "redirect:/";
 	}
@@ -136,14 +134,11 @@ public class MemberController {
 	//메일 보내기
 	@RequestMapping(value="/member/mail", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> mail(@RequestParam("mem_email")String mail, @RequestParam("mem_name")String name, HttpServletRequest request) {
-		System.out.println("ajax");
-		System.out.println(mail + " mail");
-		System.out.println(name + " name");
+	public Map<String, Object> mail(@RequestParam("mem_email")String mail, @RequestParam("mem_id")String id, HttpServletRequest request) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int i = memberService.mailSendWithPassword(mail, name);
+		int i = memberService.mailSendWithPassword(mail, id);
 		
 		if(i == 0) {
 			map.put("error", true);
@@ -153,22 +148,22 @@ public class MemberController {
 		return map;
 	}
 	
-//	@RequestMapping(value="/member/mailCheck", method=RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String, Object> mailCheck(@RequestParam("mailCheck")String mailCheck, @RequestParam("email")String email, HttpServletRequest request) {
-//		System.out.println("ajax");
-//		System.out.println(mailCheck);
-//		System.out.println(email);
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		
-//		mail = memberService.mailCheck(mailCheck, email);
-//		
-//		if(mail == 1) {
-//			map.put("error", true);
-//		}else {
-//			map.put("error", false);
-//		}
-//		return map;
-//	}
+	@RequestMapping(value="/member/mailCheck", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> mailCheck(@RequestParam("mailCheck")String mailCheck, @RequestParam("id")String id, HttpServletRequest request) {
+		System.out.println("ajax");
+		System.out.println(mailCheck + " MailCheck");
+		System.out.println(id + " ID");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		boolean correct = memberService.mailCheck(mailCheck, id);
+		
+		if(correct) {
+			map.put("error", true);
+		}else {
+			map.put("error", false);
+		}
+		return map;
+	}
 }
