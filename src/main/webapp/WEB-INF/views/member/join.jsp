@@ -281,7 +281,7 @@
           
             <div class="col-md-9" style="padding-right:0px">
               <label for="cc-name" class="form-label">이메일</label>
-              <input type="email" name="mem_email" class="form-control" id="mem_email" placeholder="ex)EARTHNUS@email.com" required>
+              <input type="email" name="mem_email" class="form-control" id="mem_email" placeholder="ex)EARTHNUS@email.com">
               <div class="invalid-feedback" id="invalid-email">
                	 필수 입력사항입니다.
               </div>
@@ -333,7 +333,7 @@
 			</script>
             
             <div class="col-md-9" style="padding-right:0px">
-              <input type="text" name="mailCheck" class="form-control" id="mailCheck" placeholder="이메일 인증번호" required>
+              <input type="text" name="mailCheck" class="form-control" id="mailCheck" placeholder="이메일 인증번호">
               <div class="invalid-feedback" id="invalid-emailCheck">
                 	필수 입력사항입니다.
               </div>
