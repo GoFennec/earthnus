@@ -115,7 +115,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/idcheck", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> idCheck(@RequestParam("mem_id")String mem_id, HttpServletRequest request) {
+	public Map<String, Object> idCheck(@RequestParam("mem_id") String mem_id, HttpServletRequest request) {
 		System.out.println("idcheck");
 		System.out.println(mem_id);
 		
@@ -131,39 +131,4 @@ public class MemberController {
 		return map;
 	}
 	
-	//메일 보내기
-	@RequestMapping(value="/member/mail", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> mail(@RequestParam("mem_email")String mail, @RequestParam("mem_id")String id, HttpServletRequest request) {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		int i = memberService.mailSendWithPassword(mail, id);
-		
-		if(i == 0) {
-			map.put("error", true);
-		}else {
-			map.put("error", false);
-		}
-		return map;
-	}
-	
-	@RequestMapping(value="/member/mailCheck", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> mailCheck(@RequestParam("mailCheck")String mailCheck, @RequestParam("id")String id, HttpServletRequest request) {
-		System.out.println("ajax");
-		System.out.println(mailCheck + " MailCheck");
-		System.out.println(id + " ID");
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		boolean correct = memberService.mailCheck(mailCheck, id);
-		
-		if(correct) {
-			map.put("error", true);
-		}else {
-			map.put("error", false);
-		}
-		return map;
-	}
 }

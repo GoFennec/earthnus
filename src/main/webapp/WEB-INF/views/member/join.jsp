@@ -101,8 +101,8 @@
             
             <script>
 				$('#testBtn').click(function(e){
-				e.preventDefault();
-				$('#testModal').modal("show");
+					e.preventDefault();
+					$('#testModal').modal("show");
 				});
 			</script>
 			
@@ -139,8 +139,8 @@
 			  			 url:"/member/idcheck",
 			   			data: {"mem_id":idcheck},
 			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			   			
 			   			success : function(result){
-				   
 			      			if(result.error === true && idcheck != ""){
 			    	  			var yesno = confirm('사용 가능한 아이디입니다. \n 사용하시겠습니까?');
 			    	  			if(yesno){
@@ -168,7 +168,7 @@
                 	필수 입력사항입니다.
               </div>
               <div class="invalid-feedback" id="invalid-pw2">
-                	8~20자의 영문 대문자, 소문자와 특수문자[ _ ],[ - ]로 비밀번호를 설정할 수 있습니다.
+                	8~20자의 영문 대문자, 소문자와 특수문자로 비밀번호를 설정할 수 있습니다.
               </div>
             </div>
             
@@ -183,16 +183,20 @@
            <script type="text/javascript">
 				$(function(){
 					$("#invalid-pw2").hide();
-					var match = /^[A-Za-z0-9_-]{5,15}$/;
-					var pwd = $("#Password").val();
+					
 					$("input").keyup(function(){
-						if(!match.test(pwd)){
-							$("#invalid-pw2").show();
+						var match = /^[A-Za-z0-9.;\-]{8,20}$/;
+						var pwd = $("#Password").val();
+						if(pwd != ""){
+							if(!match.test(pwd)){
+								$("#invalid-pw2").show();
+							}else{
+								$("#invalid-pw2").hide();
+							}
 						}else{
 							$("#invalid-pw2").hide();
 						}
 					});
-					
 					
 					$("#alert-success").hide(); 
 					$("#alert-danger").hide(); 
@@ -227,7 +231,30 @@
               <div class="invalid-feedback" id="invalid-name">
                 	필수 입력사항입니다.
               </div>
+              <div class="invalid-feedback" id="invalid-name2">
+                	이름은 한글과 영문 대문자, 소문자만 사용할 수 있습니다.
+              </div>
             </div>
+            
+            <script type="text/javascript">
+            $(function(){
+				$("#invalid-name2").hide();
+				
+				$("input").keyup(function(){
+					var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
+					var name = $("#mem_name").val();
+					if(name != ""){
+						if(!match.test(name)){
+							$("#invalid-name2").show();
+						}else{
+							$("#invalid-name2").hide();
+						}
+					}else if(name == ""){
+						$("#invalid-name2").hide();
+					}
+				});
+            });
+            </script>
             
             <div class="col-12">
               <label for="username" class="form-label">생년월일 </label>
@@ -297,24 +324,23 @@
             	});
 				function mail(){
 					var mail = $("#mem_email").val();
-					var id = $("#mem_id").val();
+					var name = $("#mem_name").val();
 					if(mail === ""){
 						alert("이메일을 입력해주세요.");
 						return;
 					}else if(!mail.includes('@')){
 						alert("올바르지 않은 이메일 형식입니다.");
 						return;
-					}else if(id === ""){
-						alert("아이디를 먼저 입력해주세요.");
+					}else if(name === ""){
+						alert("이름을 먼저 입력해주세요.");
 						return;
 					}else{
 					$.ajax({
 			   			type: "POST", //요청 메소드 방식
 			  			 url:"/member/mail",
-			   			data: {"mem_email":mail, "mem_id":id},
+			   			data: {"mem_email":mail, "mem_name":name},
 			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 			   			success : function(result){
-				   
 			      			if(result.error == true){
 			    	  			alert('입력하신 이메일로 회원가입 인증번호를 발송했습니다. \n 인증번호가 오지 않으면 입력하신 이메일을 다시 확인해주세요.');
 			    	  			$('#testBtn1').hide();
@@ -345,7 +371,7 @@
             <script type="text/javascript">
 			$('#testBtn2').click(function(){
 				var mailCheck = $("#mailCheck").val();
-				var id = $('#mem_id').val();
+				var name = $('#mem_name').val();
 				if(mailCheck === ""){
 					alert("이메일 인증번호를 입력해주세요.");
 					return;
@@ -353,7 +379,7 @@
 				$.ajax({
 		   			type: "POST", //요청 메소드 방식
 		  			 url:"/member/mailCheck",
-		   			data: {"mailCheck":mailCheck, "id":id},
+		   			data: {"mailCheck":mailCheck, "name":name},
 		   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 		   			success : function(result){
 			   
@@ -376,10 +402,34 @@
             <div class="col-md-12">
               <label for="cc-expiration" class="form-label">전화번호</label>
               <input type="text" name="mem_tel" class="form-control" id="mem_tel" placeholder="" required>
-              <div class="invalid-feedback" id="invalid-phone">
+              <div class="invalid-feedback">
                 	필수 입력사항입니다.
               </div>
+              <div class="invalid-feedback" id="invalid-phone">
+                	숫자만 입력해주세요.
+              </div>
             </div>
+            
+            <script>
+            	$(function(){
+					$("#invalid-phone").hide();
+					
+					$("input").keyup(function(){
+						var match = /[^0-9]/g;
+						var tel = $("#mem_tel").val();
+						if(tel != ""){
+							if(match.test(tel)){
+								$("#invalid-phone").show();
+							}else{
+								$("#invalid-phone").hide();
+							}
+						}else if(tel == ""){
+							$("#invalid-phone").hide();
+						}
+						
+					});
+            	});
+            </script>
 
           </div>
 
@@ -391,12 +441,21 @@
           <script type="text/javascript">
 				function check(){
 					var id = $("#mem_id").val();
-					
 					if(id == ""){
 						$('#invalid-id').show();
 						return false;
+					}else if(!$("#mailCheck").attr("disabled")){
+						alert('이메일 인증을 완료해주세요.');
+						return false;
 					}
-				}
+						var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
+						var name = $("#mem_name").val();
+						if(name != ""){
+							if(!match.test(name)){
+								alert('이름을 올바르게 입력해주세요.');
+								return false;
+							}
+						}
 			</script>
           
         </form>
@@ -451,8 +510,8 @@ function execDaumPostcode() {
 </script>
 
 
-    <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
 
-      <script src="/resources/assets/js/form-validation.js"></script>
+<script src="/resources/assets/js/form-validation.js"></script>
   </body>
 </html>
