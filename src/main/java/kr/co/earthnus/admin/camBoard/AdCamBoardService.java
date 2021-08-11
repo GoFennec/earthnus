@@ -1,15 +1,20 @@
-package kr.co.earthnus.user.camBoard;
+package kr.co.earthnus.admin.camBoard;
 
+import java.io.File;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+
+import kr.co.earthnus.user.camBoard.CamBoardMybatis;
+import kr.co.earthnus.user.camBoard.PagingBean;
+import kr.co.earthnus.user.camBoard.camBoardBean;
 
 @Service
-public class CamBoardService {
-
+public class AdCamBoardService {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
@@ -141,6 +146,24 @@ public class CamBoardService {
 		model.addAttribute("CamBoardList", CamBoardList);
         model.addAttribute("page", pBean);
 	}
+	
+	/*public void insertCamBoard(camBoardBean cBean) {
+		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
+		
+		MultipartFile uploadFile = cBean.getCAMB_FILE();
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			try {
+				uploadFile.transferTo(new File("C:/upload/" + fileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			gBean.setGoods_img("C:/upload/" + fileName);
+		} else {
+			gBean.setGoods_img("/resources/goods/imgDefault.png");
+		}
+		goodsDAO.isertGoodsOk(gBean);
+	}*/
 	
 	public camBoardBean getCamBoard(String contentnum) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);

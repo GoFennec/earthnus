@@ -13,12 +13,6 @@
 		<result property="CAMB_DATE" column="CAMB_DATE"/>
 	</resultMap>
 	
-	<select id="camBoardListCount" resultType="int">
-		<![CDATA[
-			SELECT COUNT(*) FROM CAMBOARD
-		]]>
-	</select>
-	
 	<select id="getCamBoardListEntire" resultMap="camBoardResult">
 		<![CDATA[
 			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND (CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
@@ -43,21 +37,21 @@
 		]]>
 	</select>
 	
-	<select id="camBoardEntireCount" resultMap="camBoardResult">
+	<select id="camBoardEntireCount" resultType="int">
 		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND (CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ORDER BY CAMB_NUM DESC
+			SELECT COUNT(*) FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND (CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum}
 		]]>
 	</select>
 	
-	<select id="camBoardDoingCount" resultMap="camBoardResult">
+	<select id="camBoardDoingCount" resultType="int">
 		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE>SYSDATE()) ORDER BY CAMB_NUM DESC
+			SELECT COUNT(*) FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE>SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum}
 		]]>
 	</select>
 	
-	<select id="camBoardEndCount" resultMap="camBoardResult">
+	<select id="camBoardEndCount" resultType="int">
 		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE<SYSDATE()) ORDER BY CAMB_NUM DESC
+			SELECT COUNT(*) FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE<SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum}
 		]]>
 	</select>
 	

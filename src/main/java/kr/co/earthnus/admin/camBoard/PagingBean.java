@@ -1,4 +1,4 @@
-package kr.co.earthnus.user.camBoard;
+package kr.co.earthnus.admin.camBoard;
 
 public class PagingBean {	
 	private int totalcount;
@@ -62,23 +62,17 @@ public class PagingBean {
         return startPage;
     }
     public void setStartPage(int currentblock) {
-    	if(totalcount <= 30) {
-    		this.startPage = 1;
-    	}else this.startPage = (currentblock*5)-4;        
+        this.startPage = (currentblock*5)-4;
     }
     public int getEndPage() {
         return endPage;
     }
     public void setEndPage(int getlastblock, int getcurrentblock) {
-    	if(totalcount <= 30) {
-    		this.endPage = totalcount / 6 + 1;
-    	}else {
-            if(getlastblock == getcurrentblock){
-                this.endPage = calcpage(getTotalcount(),getContentnum());
-            }else{
-                this.endPage = getStartPage()+4;   
-            }
-    	}
+        if(getlastblock == getcurrentblock){
+            this.endPage = calcpage(getTotalcount(),getContentnum());
+        }else{
+            this.endPage = getStartPage()+4;   
+        }
     }
     public boolean isPrev() {
         return prev;
