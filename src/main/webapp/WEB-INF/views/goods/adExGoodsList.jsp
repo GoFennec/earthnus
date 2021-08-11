@@ -30,11 +30,11 @@
 			<input type="hidden" id="exGoodsNumU" name="exGoodsNumU"/>
 			<input type="hidden" id="exGoodsPoint" name="exGoodsPoint"/>
 			<input type="hidden" id="exGoodsDate" name="exGoodsDate"/>
-			<input class="btn-dark" type="submit" value="예약수정"/>
+			<input class="btn-dark" type="submit" value="내역수정"/>
 			</form>
 			<form action="/adExGoods/delete" method="POST" onsubmit="return checkDelete();">
 			<input type="hidden" id="exGoodsNumD" name="exGoodsNumD"/>
-			<input class="btn-dark" type="submit" value="예약삭제"/>
+			<input class="btn-dark" type="submit" value="내역삭제"/>
 			</form></td></tr>
 		</thead>
 	</table><br>

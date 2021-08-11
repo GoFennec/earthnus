@@ -42,7 +42,7 @@
 				<input type="hidden" name="exg_addr" id="exg_addr"></td></tr>
 		</table><br>
 		<div class="sysBtn">
-			<input type="submit" class="btn-dark" value="상품변경"/>
+			<input type="submit" class="btn-dark" value="내역변경"/>
 			<input type="button" class="btn-dark" value="뒤로가기" onclick="location.href='/adExGoods/list'"/>
 		</div>	
 	</form>
