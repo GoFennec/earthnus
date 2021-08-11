@@ -9,15 +9,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <style>
-.top{text-align: center;}
-
+section{text-align: center;}
+section p{font-size: 0.8em; color: gray;}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -28,8 +24,8 @@ thead th {
   padding: 10px;
   font-weight: bold;
   vertical-align: top;
-  color: #369;
-  border-bottom: 3px solid #036;
+  color: #04B4AE;
+  border-bottom: 3px solid #04B4AE;
 }
 tbody th {
   width: 150px;
@@ -45,6 +41,14 @@ td {
   vertical-align: center;
   border-bottom: 1px solid #ccc;
 }
+#pay td{text-align: center;}
+#button {text-align: center;}
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background:transparent;
+}
 </style>
 
 <title>EARTH & US</title>
@@ -56,11 +60,11 @@ td {
 
 <div class="container">
 	
-	<section class="top">
-		<h4><br><br><br>Ocean Img</h4>
-		<h4><br><br><br>copy<br><br><br></h4>
-	</section>
-	<br><br><br><br>
+	<section>
+	<h2>당신의 후원이 지구를 낫게합니다.</h2>
+	<p>EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
+	</section><br>
+	<hr><br><br>
 	
 	<section class="middle">
 	<div id="payInfo">
@@ -69,7 +73,7 @@ td {
 		<tr><th scope="row" colspan="2">후원/결제</th></tr>
 		</thead>
 		<tbody>
-		<tr><th scope="row">성명</th><td>${member.mem_name}</td></tr>
+		<tr><th scope="row">후원자 명</th><td>${member.mem_name}</td></tr>
 		<tr><th scope="row">구매 상품</th><td>${pay.pay_dnum}</td></tr>		
 		<c:set var="total" value="${pay.pay_price}"/>
 		<tr><th scope="row">후원 금액</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${total}"/>원</td></tr>
@@ -99,10 +103,10 @@ td {
 		<tr><th scope="row" colspan="2">결제수단</th></tr>
 		</thead>
 		<tbody>
-		<tr><th scope="row">일반 결제</th>
-			<td><button type="button" id="inicis">일반 결제</button>
-		<tr><th scope="row">간편 결제</th>
-			<td><button type="button" id="kakaoPay">간편 결제</button>
+		<tr><td>일반 결제</td>
+			<td>간편 결제</td></tr>
+		<tr><td><div id="button"><button type="button" class="btm_image" id="inicis"><img src="/resources/pay/inicis.png" title="일반결제" alt="일반결제 버튼"/></button></div></td>
+			<td><div id="button"><button type="button" class="btm_image" id="kakaoPay"><img src="/resources/pay/kakaoPay.png" title="간편결제" alt="카카오페이 간편결제 버튼"/></button></div></td></tr>
 		</tbody>
 		</table>
 	</div>
