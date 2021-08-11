@@ -4,6 +4,7 @@ public class DonationBean {
 	private String d_num;
 	private String d_name;
 	private String d_price;
+	private String d_img;
 	
 	public String getD_num() {
 		return d_num;
@@ -22,5 +23,11 @@ public class DonationBean {
 	}
 	public void setD_price(String d_price) {
 		this.d_price = d_price;
+	}
+	public String getD_img() {
+		return d_img;
+	}
+	public void setD_img(String d_img) {
+		this.d_img = d_img;
 	}
 }

@@ -34,49 +34,9 @@ section p{font-size: 0.8em; color: gray;}
 	<hr><br><br><br>
 	
 	<div class="row">
-	 	<c:forEach items="${forest}" var="donation" begin="0" end="0">
+	 	<c:forEach items="${forest}" var="donation" begin="0" end="2">
 			<div class="item col-3 col-md-3">
-				<img src="/resources/donation/forestItem1.png" title="후원 상품 이미지" alt="금액대별 후원 상품 이미지" width=80%><br><br>
-				<c:set var="price" value="${donation.d_price}"/>
-				<p>${donation.d_name} <fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</p>
-				<form action="/pay/pay" method="POST">
-					<input type="hidden" name="mem_id" value="${auth_id}"/>
-					<input type="hidden" name="pay_dnum" value="${donation.d_name}"/>
-					<input type="hidden" name="pay_price" value="${donation.d_price}"/>
-					
-					<c:if test="${empty auth}">
-						<div id="donationBt"><button type="button" class="btn btn-primary" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">후원하기</button></div>
-					</c:if>
-					<c:if test="${!empty auth}">
-						<div id="donationBt"><input type="submit" class="btn btn-primary" value="후원하기"/></div>
-					</c:if>
-				</form>	
-			</div>
-		</c:forEach>
-		
-		<c:forEach items="${forest}" var="donation" begin="1" end="1">
-			<div class="item col-3 col-md-3">
-				<img src="/resources/donation/forestItem2.png" title="후원 상품 이미지" alt="금액대별 후원 상품 이미지" width=80%><br><br>
-				<c:set var="price" value="${donation.d_price}"/>
-				<p>${donation.d_name} <fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</p>
-				<form action="/pay/pay" method="POST">
-					<input type="hidden" name="mem_id" value="${auth_id}"/>
-					<input type="hidden" name="pay_dnum" value="${donation.d_name}"/>
-					<input type="hidden" name="pay_price" value="${donation.d_price}"/>
-					
-					<c:if test="${empty auth}">
-						<div id="donationBt"><button type="button" class="btn btn-primary" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">후원하기</button></div>
-					</c:if>
-					<c:if test="${!empty auth}">
-						<div id="donationBt"><input type="submit" class="btn btn-primary" value="후원하기"/></div>
-					</c:if>
-				</form>	
-			</div>
-		</c:forEach>
-		
-		<c:forEach items="${forest}" var="donation" begin="2" end="2">
-			<div class="item col-3 col-md-3">
-				<img src="/resources/donation/forestItem3.png" title="후원 상품 이미지" alt="금액대별 후원 상품 이미지" width=80%><br><br>
+				<img src="${donation.d_img}" title="후원 상품 이미지" alt="금액대별 후원 상품 이미지" width=80%><br><br>
 				<c:set var="price" value="${donation.d_price}"/>
 				<p>${donation.d_name} <fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</p>
 				<form action="/pay/pay" method="POST">
@@ -96,7 +56,7 @@ section p{font-size: 0.8em; color: gray;}
 		
 		<c:forEach items="${forest}" var="donation" begin="3" end="3">
 			<div class="item col-4 col-md-3">
-				<img src="/resources/donation/forestItem4.png" title="후원 상품 이미지" alt="금액대별 후원 상품 이미지" width=80%><br><br>
+				<img src="${donation.d_img}" title="후원 상품 이미지" alt="금액대별 후원 상품 이미지" width=80%><br><br>
 				<form action="/pay/pay" method="POST">
 					<input type="hidden" name="mem_id" value="${auth_id}"/>
 					<input type="hidden" name="pay_dnum" value="${donation.d_name}"/>
