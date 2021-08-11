@@ -31,6 +31,8 @@ public class AuthService {
         System.out.println(cryptogram.equals(sha256.encrypt(password)) + " 암호화 한 비밀번호");
 
 		MemberBean mBean = dao.selectById(auth_id);
+		if (mBean == null) {aBean = null;
+		}else {
 		System.out.println(mBean.getMem_pw() + " 디비에 있는 비밀번호");
 		if (mBean.getMem_pw().equals(auth_pw)) {
 			aBean.setAuth_id(mBean.getMem_id());
@@ -38,7 +40,10 @@ public class AuthService {
 			System.out.println(aBean.getAuth_id() + " 서비스");
 		} else {
 			aBean = null;
-		}
+			
+		}}
 		return aBean;
 	}
+
+
 }

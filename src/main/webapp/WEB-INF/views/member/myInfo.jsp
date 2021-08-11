@@ -611,8 +611,8 @@ color: #a2a6af
                     <div class="user-info">
                         <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="개인프로필사진">
                         <ul class="meta list list-unstyled">
-                            <li class="id"><a>${MemberBean.mem_id}</a></li>
-                            <li class="name">${MemberBean.mem_name}님</li>
+                            <li class="id"><a>${auth.auth_id}</a></li>
+                            <li class="name">${auth.auth_name}님</li>
                         </ul>
                     </div>
             		<nav class="side-menu">
@@ -716,13 +716,13 @@ color: #a2a6af
                             <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">성별</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_gender" value=${MemberBean.mem_gender}>
+                                    <input type="text" class="form-control" name ="mem_gender" value=${MemberBean.mem_gender} readonly>
                                 </div>
                             </div>
                               <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">이메일</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="email" class="form-control" name ="mem_email" value=${MemberBean.mem_email}>
+                                 <input type="email" class="form-control" name ="mem_email" value=${MemberBean.mem_email} >
                                 </div>
                             </div>
                         <!-- 

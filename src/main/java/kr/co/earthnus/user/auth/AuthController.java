@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
+import kr.co.earthnus.user.member.MemberBean;
+
 @Controller
 public class AuthController {
 	@Autowired
@@ -30,14 +34,11 @@ public class AuthController {
 	public String loginch(@RequestParam("auth_pw") String auth_pw,
 			AuthBean aBean, HttpSession session, Model model) throws NoSuchAlgorithmException {
 		model.addAttribute("id", aBean.getAuth_id());
-		System.out.println(auth_pw);
+		System.out.println("어쓰빈" + auth_pw);
 		aBean = service.login(aBean.getAuth_id(), auth_pw);
-		if(aBean == null) {
-			System.out.println("에이빈 널");
-		}
-		if(aBean != null) {
+		System.out.println("어쓰빈2" + aBean);
+		if(aBean != null ) {
 			session.setAttribute("auth", aBean);
-			//session.setAttribute("auth_id", auth_id);
 			//session.setAttribute("auth_name", auth_name);
 			System.out.println("로그인쪽 세션"+session);
 			return "redirect:/";
@@ -45,6 +46,22 @@ public class AuthController {
 			return "auth/login";
 		}
 	}
+	
+	/*@RequestMapping(value = "/kakaoLogin")
+	public String kakaologin(AuthBean aBean, HttpSession session, Model model){
+		model.addAttribute("id", aBean.getAuth_id());
+		//System.out.println("어쓰빈" + auth_pw);
+		//aBean = service.login(aBean.getAuth_id());
+		System.out.println("어쓰빈2" + aBean);
+		if(aBean != null ) {
+			session.setAttribute("auth", aBean);
+			//session.setAttribute("auth_name", auth_name);
+			System.out.println("로그인쪽 세션"+session);
+			return "/kakaoLogin";
+		} 
+	}
+	*/
+	
 	
 	@RequestMapping("/logout")
 	public String Logout(HttpSession session) {
@@ -56,13 +73,6 @@ public class AuthController {
 	public String find() {
 		return "/auth/find";	
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

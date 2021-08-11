@@ -35,38 +35,22 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	//마이페이지 구현중
 	@RequestMapping(value="/member/myPage")
-	public String myPage(HttpSession session, Model model, AuthBean aBean) {
+	public String myPoint(HttpSession session, Model model, AuthBean aBean) {
 		aBean = (AuthBean) session.getAttribute("auth");
 		String mem_id = aBean.getAuth_id();
-		System.out.println("mypagecontroller" + mem_id);
-		MemberBean memberBean = memberService.myInfo(mem_id);
-		//후원금액
-		model.addAttribute("MemberBean",memberBean); 
+		System.out.println("mypointcontroller" + mem_id);
+		String myPoint = memberService.myPoint(mem_id);
+		System.out.println("mypoint" + myPoint);
+		String myDonation = memberService.myDonation(mem_id);
+		System.out.println("myDonationcontroller" + mem_id);
+		System.out.println("MYDONATION" + myDonation);
+		System.out.println("mydonation" + myDonation);
+		model.addAttribute("myDonation",myDonation);
+		model.addAttribute("myPoint",myPoint);
 		return "member/myPage";
 	}
 	
-	@RequestMapping(value="/member/pwcheck", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> pwCheck(@RequestParam("mem_pw")String mem_pw, HttpSession session, AuthBean aBean
-			) {
-		aBean = (AuthBean) session.getAttribute("auth");
-		String mem_id = aBean.getAuth_id();
-		System.out.println("pwcheck");
-		System.out.println(mem_id);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		int n = memberService.pwCheck(mem_id);
-		
-		if(n == 1) {
-			map.put("error", true);
-		}else {
-			map.put("error", false);
-		}
-		return map;
-	}
 	
 	@RequestMapping(value="/member/myInfo")
 	public String myInfo(HttpSession session, Model model, AuthBean aBean) {
@@ -78,15 +62,9 @@ public class MemberController {
 		return "member/myInfo";
 			 
 	}
-	/*카카오 로그인
-		@RequestMapping(value="/member/join", method=RequestMethod.POST)
-		public String kakaoMemberJoin(MemberBean memberBean, String nickname) {
-			System.out.println("컨트롤러 카카오 POST");
-			System.out.println(memberBean.getMem_addr());
-			System.out.println(memberBean.getMem_birth());
-			memberService.insertMember(memberBean);
-			return "redirect:/";
-		}*/
+
+	
+	
 	@RequestMapping(value="/updateMyInfo")
 	public String updateMyInfo(MemberBean memberBean,Model model) {
 		memberService.updateMyInfo(memberBean);
@@ -94,24 +72,38 @@ public class MemberController {
 		System.out.println("update controller");
 		return "redirect:/member/myInfo";
 	}
+
+	@RequestMapping(value="/pwCheck", method=RequestMethod.POST)
+	public String pwCheck(HttpSession session, AuthBean aBean, @RequestParam("mem_pw")String pw) {
+		String mem_id = aBean.getAuth_id();
+		System.out.println(mem_id);
+		String mem_pw = memberService.pwCheck(mem_id);
+		System.out.println(mem_pw);
+		if(mem_pw.equals(pw)) {
+		return "/deleteMember";
+		}else {
+		return "member/myDelete";
+		}
+	}
 	
-	
-	//delete 오류잡는중
 	@RequestMapping(value="/member/myDelete")
-	public String myDelete() {
+	public String myDelete(HttpSession session, Model model, 
+			AuthBean aBean) {
+		System.out.println("myDelete");
 		return "member/myDelete";
 	}
 	
 	@RequestMapping(value = "/deleteMember")
 	public String myDelete(HttpSession session, Model model, 
-			AuthBean aBean, MemberBean memberBean){
+			AuthBean aBean, String mem_id){
 		aBean = (AuthBean) session.getAttribute("auth");
-		String mem_id = aBean.getAuth_id();
+		mem_id = aBean.getAuth_id();
 		System.out.println("delete controller" + mem_id);
-		memberService.deleteMember(memberBean);
+		memberService.deleteMember(mem_id);
 		session.invalidate();
 		return "redirect:/";			
 	}
+	
 	
 	@RequestMapping(value="/member/idcheck", method=RequestMethod.POST)
 	@ResponseBody

@@ -6,53 +6,63 @@
 <mapper namespace="kr.co.earthnus.user.member.MemberMybatis">
 
 	<resultMap id="member" type="member">
-		<id property="mem_id" column="MEM_ID"/>
-		<result property="mem_pw" column="MEM_PW"/>
-		<result property="mem_name" column="MEM_NAME"/>
-		<result property="mem_addr" column="MEM_ADDR"/>
-		<result property="mem_tel" column="MEM_TEL"/>
-		<result property="mem_birth" column="MEM_BIRTH"/>
-		<result property="mem_gender" column="MEM_GENDER"/>
-		<result property="mem_email" column="MEM_EMAIL"/>
-		<result property="mem_date" column="MEM_DATE"/>
-		<result property="mem_point" column="MEM_POINT"/>
+		<id property="mem_id" column="MEM_ID" />
+		<result property="mem_pw" column="MEM_PW" />
+		<result property="mem_name" column="MEM_NAME" />
+		<result property="mem_addr" column="MEM_ADDR" />
+		<result property="mem_tel" column="MEM_TEL" />
+		<result property="mem_birth" column="MEM_BIRTH" />
+		<result property="mem_gender" column="MEM_GENDER" />
+		<result property="mem_email" column="MEM_EMAIL" />
+		<result property="mem_date" column="MEM_DATE" />
+		<result property="mem_point" column="MEM_POINT" />
 	</resultMap>
 
 	<insert id="insertMember" parameterType="member">
-		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
+		insert into
+		member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH,
+		MEM_GENDER, MEM_EMAIL, MEM_DATE)
 		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
 	</insert>
-	<!-- mypage 구현 중  -->
-	<select id="myPage" resultType="member">
-			SELECT * FROM MEMBER WHERE MEM_ID=#{mem_id}
+	<select id="myPoint" resultType="String">SELECT MEM_POINT FROM MEMBER
+		WHERE MEM_ID=#{mem_id}
 	</select>
-	
-	
-	
-	
-	
-		<select id="pwCheck" parameterType="String" resultType="int">
-		select count(*) from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
+
+	<select id="myDonation" resultType="String">SELECT SUM(PAY_PRICE) FROM
+		PAY WHERE PAY_ID=#{mem_id}
 	</select>
-	
+
+	<select id="pwCheck" parameterType="String" resultType="String">select
+		mem_pw from member where mem_id = #{mem_id}
+	</select>
+
+
 	<select id="myInfo" resultType="member">
-			SELECT * FROM MEMBER WHERE MEM_ID=#{mem_id}
+		SELECT * FROM MEMBER WHERE
+		MEM_ID=#{mem_id}
 	</select>
-	
+
 	<update id="updateMyInfo" parameterType="member">
-		UPDATE MEMBER SET MEM_ID=#{mem_id}, MEM_PW=#{mem_pw}, MEM_NAME=#{mem_name}, MEM_ADDR=#{mem_addr}, MEM_TEL=#{mem_tel},
-		 MEM_BIRTH=#{mem_birth}, MEM_GENDER=#{mem_gender}, MEM_EMAIL=#{mem_email}, MEM_DATE=#{mem_date}
-			WHERE MEM_ID=#{mem_id}
+		UPDATE MEMBER SET
+		MEM_ID=#{mem_id}, MEM_PW=#{mem_pw}, MEM_NAME=#{mem_name},
+		MEM_ADDR=#{mem_addr}, MEM_TEL=#{mem_tel},
+		MEM_BIRTH=#{mem_birth},
+		MEM_GENDER=#{mem_gender}, MEM_EMAIL=#{mem_email},
+		MEM_DATE=#{mem_date}
+		WHERE MEM_ID=#{mem_id}
 	</update>
-	
-	<update id="deleteMember" parameterType="member">
-		UPDATE MEMBER SET MEM_ID="삭제된회원", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원", MEM_TEL="0000-0000",
-		 MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원", MEM_POINT="0" WHERE MEM_ID=#{mem_id}
+
+	<update id="deleteMember" parameterType="member">UPDATE MEMBER SET
+		MEM_PW="NOTAMEMBER", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원",
+		MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
+		MEM_POINT="0" WHERE MEM_ID=#{mem_id}
 	</update>
-	
+
+
 	<select id="idCheck" parameterType="String" resultType="int">
-		select count(*) from member where mem_id = #{mem_id}
+		select
+		count(*) from member where mem_id = #{mem_id}
 	</select>
-		
-		
+
+
 </mapper>
