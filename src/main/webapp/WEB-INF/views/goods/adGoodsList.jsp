@@ -30,7 +30,7 @@
 			<td><button class="btn-dark" type="button" onClick="location.href='/adGoods/insert'">상품추가</button>
 			<form action="/adGoods/update" method="POST" onsubmit="return checkUpdate();">
 			<input type="hidden" id="goodsNumU" name="goodsNumU"/>
-			<input class="btn-dark" type="submit" value="상품수정"/>
+			<input class="btn-dark" type="submit" value="상품변경"/>
 			</form>
 			<form action="/adGoods/delete" method="POST" onsubmit="return checkDelete();">
 			<input type="hidden" id="goodsNumD" name="goodsNumD"/>
