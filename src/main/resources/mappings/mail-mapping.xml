@@ -22,7 +22,11 @@
 	</insert>
 	
 	<select id="selectMail" parameterType="String" resultType="mail">
-		SELECT * FROM MAILCHECK WHERE MAIL_CUSTOMER = #{id} ORDER BY MAIL_NUM DESC LIMIT 1
+		SELECT * FROM MAILCHECK WHERE MAIL_CUSTOMER = #{name} ORDER BY MAIL_NUM DESC LIMIT 1
+	</select>
+	
+	<select id="findID" parameterType="String" resultType="member">
+		select mem_id, date_format(mem_date, '%Y-%m-%d') from member where mem_name = #{findName}
 	</select>
 	
 </mapper>

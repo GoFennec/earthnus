@@ -32,9 +32,6 @@ public class AuthController {
 		model.addAttribute("id", aBean.getAuth_id());
 		System.out.println(auth_pw);
 		aBean = service.login(aBean.getAuth_id(), auth_pw);
-		if(aBean == null) {
-			System.out.println("에이빈 널");
-		}
 		if(aBean != null) {
 			session.setAttribute("auth", aBean);
 			//session.setAttribute("auth_id", auth_id);
