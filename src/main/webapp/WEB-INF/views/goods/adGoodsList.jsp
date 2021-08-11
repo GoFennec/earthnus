@@ -27,14 +27,14 @@
 	<table class="goodsTitle">
 		<thead>
 			<tr><th scope="col">지구마켓 상품관리</th>
-			<td><button class="btn-dark" type="button" onClick="location.href='/adGoods/insert'">예약추가</button>
+			<td><button class="btn-dark" type="button" onClick="location.href='/adGoods/insert'">상품추가</button>
 			<form action="/adGoods/update" method="POST" onsubmit="return checkUpdate();">
 			<input type="hidden" id="goodsNumU" name="goodsNumU"/>
-			<input class="btn-dark" type="submit" value="예약수정"/>
+			<input class="btn-dark" type="submit" value="상품변경"/>
 			</form>
 			<form action="/adGoods/delete" method="POST" onsubmit="return checkDelete();">
 			<input type="hidden" id="goodsNumD" name="goodsNumD"/>
-			<input class="btn-dark" type="submit" value="예약삭제"/>
+			<input class="btn-dark" type="submit" value="상품삭제"/>
 			</form></td></tr>
 		</thead>
 	</table><br>
