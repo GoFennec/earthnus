@@ -25,7 +25,7 @@
 	</select>
 	
 	<update id="updatePay" parameterType="pay">
-		UPDATE PAY SET PAY_CDATE=#{pay_cdate}, PAY_STATE='결제취소' WHERE PAY_NUM=#{pay_no}
+		UPDATE PAY SET PAY_CDATE=#{pay_cdate} AND PAY_STATE='결제취소' WHERE PAY_NO=#{pay_no}
 	</update>
 
 <!-- 	<update id="updatePoint">
