@@ -1,4 +1,4 @@
-package kr.co.earthnus.user.member;
+package kr.co.earthnus.util;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;

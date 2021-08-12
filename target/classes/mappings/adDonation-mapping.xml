@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.admin.donation.AdDonationMybatis">
+
+	<resultMap id="donationResult" type="pay">
+		<id property="pay_no" column="PAY_NO" />
+		<result property="pay_num" column="PAY_NUM" />
+		<result property="pay_id" column="PAY_ID" />
+		<result property="pay_name" column="PAY_NAME" />
+		<result property="pay_dnum" column="PAY_DNUM" />
+		<result property="pay_price" column="PAY_PRICE" />
+		<result property="pay_point" column="PAY_POINT" />
+		<result property="pay_date" column="PAY_DATE" />
+	</resultMap>
+	
+	<select id="donationCount" resultType="int">
+		SELECT COUNT(*) FROM PAY
+	</select>
+	
+	<select id="getAdDonationList" resultMap="donationResult">
+		SELECT * FROM PAY ORDER BY PAY_NO DESC LIMIT #{contentnum} OFFSET #{pagenum}
+	</select>
+
+</mapper>

@@ -6,9 +6,10 @@ public class ExGoodsBean {
 	private int exg_num;
 	private String exg_id;
 	private String exg_name;
-	private String exg_gnum;
-	private int exg_point;
 	private String exg_addr;
+	private String exg_gnum;
+	private String exg_gname;
+	private int exg_point;
 	private Date exg_date;
 	
 	public int getExg_num() {
@@ -29,23 +30,29 @@ public class ExGoodsBean {
 	public void setExg_name(String exg_name) {
 		this.exg_name = exg_name;
 	}
+	public String getExg_addr() {
+		return exg_addr;
+	}
+	public void setExg_addr(String exg_addr) {
+		this.exg_addr = exg_addr;
+	}
 	public String getExg_gnum() {
 		return exg_gnum;
 	}
 	public void setExg_gnum(String exg_gnum) {
 		this.exg_gnum = exg_gnum;
 	}
+	public String getExg_gname() {
+		return exg_gname;
+	}
+	public void setExg_gname(String exg_gname) {
+		this.exg_gname = exg_gname;
+	}
 	public int getExg_point() {
 		return exg_point;
 	}
 	public void setExg_point(int exg_point) {
 		this.exg_point = exg_point;
-	}
-	public String getExg_addr() {
-		return exg_addr;
-	}
-	public void setExg_addr(String exg_addr) {
-		this.exg_addr = exg_addr;
 	}
 	public Date getExg_date() {
 		return exg_date;
