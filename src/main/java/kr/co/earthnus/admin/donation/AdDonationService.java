@@ -45,4 +45,14 @@ public class AdDonationService {
 		model.addAttribute("adDonationList", adDonationList);
 		model.addAttribute("page", pBean);
 	}
+	
+	public void updatePay(PayBean bean) {
+		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
+		dao.updatePay(bean);
+	}
+	
+//	public void updatePoint(PayBean bean) {
+//		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
+//		dao.updatePoint(bean);
+//	}
 }
