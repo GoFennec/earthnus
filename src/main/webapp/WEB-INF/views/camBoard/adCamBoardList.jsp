@@ -13,6 +13,7 @@
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	thead td {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {padding: 10px; font-weight: bold; text-align: center; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
+	tr:hover {background-color: #FFFFDE}
 	td {width: 350px; padding: 10px; vertical-align: center; text-align: center; border-bottom: 1px solid #ccc;}
 	td .camBoardImg {text-align: center; margin: auto; padding: 1px;}
 	.paging {text-align: center;}
@@ -30,37 +31,6 @@
    function searchUrl(){
 	   location.href="/adCamBoard/list/search?search="+ document.getElementById("search").value
    }
-   
-   $(function() {
-		$('.camBoardInfo').click(function() {
-			$('.camBoardInfo').css("background-color", "transparent");
-			selectTr = $(this);
-			selectTd = selectTr.children();
-			camBoardNum = selectTd.eq(0).text();
-			$('#camBoardNumU').val(camBoardNum);
-			$('#camBoardNumD').val(camBoardNum);
-			$('#'+camBoardNum).css("background-color", "#FFFFDE");
-		});
-	});
-   
-	function checkDelete() {
-		if ($('#camBoardNumD').val() == "") {
-			alert("삭제할 항목을 선택해주세요.");
-			return false;
-		} else if($('#camBoardNumD').val() != "") {
-			if (confirm("정말 삭제하시겠습니까?") == true) {
-			} else {
-				return false;
-	 		}
-		}
-	}
-	
-	function checkUpdate() {
-		if ($('#camBoardNumU').val() == "") {
-			alert("수정할 항목을 선택해주세요.");
-			return false;
-		}
-	}
 	
    $.urlParam = function(name){
 	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -84,28 +54,20 @@
 	<table class="goodsTitle">
 		<thead>
 			<tr><th scope="col">캠페인 관리</th>
-			<td><button class="btn-dark" type="button" onClick="location.href='/adCamBoard/insert'">캠페인 추가</button>
-			<form action="/adCamBoard/update" method="POST" onsubmit="return checkUpdate();">
-			<input type="hidden" id="camBoardNumU" name="camBoardNumU"/>
-			<input class="btn-dark" type="submit" value="캠페인 수정"/>
-			</form>
-			<form action="/adCamBoard/delete" method="POST" onsubmit="return checkDelete();">
-			<input type="hidden" id="camBoardNumD" name="camBoardNumD"/>
-			<input class="btn-dark" type="submit" value="캠페인 삭제"/>
-			</form></td></tr>
+			<td><button class="btn-dark" type="button" onClick="location.href='/adCamBoard/insert'">캠페인 추가</button></td></tr>
 		</thead>
 	</table><br>
 	
 	<div>
 		<ul style="text-align: left;">
 			<c:if test="${empty page.search}">
-			<li><a href="/adCamBoard/list?arr=entire" id="entire">전체</a></li>
-			<li><a href="/adCamBoard/list?arr=doing" id="doing">캠페인 중</a></li>
+			<li><a href="/adCamBoard/list?arr=entire" id="entire">캠페인 전체</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list?arr=doing" id="doing">캠페인 중</a></li>&nbsp;&nbsp;&nbsp;
 			<li><a href="/adCamBoard/list?arr=end" id="end">캠페인 종료</a></li>
 			</c:if>
 			<c:if test="${!empty page.search}">
-			<li><a href="/adCamBoard/list/search?search=${page.search}&arr=entire" id="entire">캠페인 전체</a></li>
-			<li><a href="/adCamBoard/list/search?search=${page.search}&arr=doing" id="doing">캠페인 중</a></li>
+			<li><a href="/adCamBoard/list/search?search=${page.search}&arr=entire" id="entire">캠페인 전체</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list/search?search=${page.search}&arr=doing" id="doing">캠페인 중</a></li>&nbsp;&nbsp;&nbsp;
 			<li><a href="/adCamBoard/list/search?search=${page.search}&arr=end" id="end">캠페인 종료</a></li>
 			</c:if>
 		</ul>
@@ -127,7 +89,7 @@
 				<th scope="col">캠페인내용</th>
 			</tr>	
 			<c:forEach items="${CamBoardList}" var="list">
-					<tr class="camBoardInfo" id="${list.CAMB_NUM}">
+					<tr onclick="location.href='/adCamBoard/detail?CAMB_NUM=${list.CAMB_NUM}'">
 						<td>${list.CAMB_NUM}</td>
 						<td class="camBoardImg"><img src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_NAME} 이미지"/></td>
 						<td>${list.CAMB_NAME}</td>
@@ -165,38 +127,5 @@
 </div>
 	
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
-<script>
-$(function() {
-	$('.camBoardInfo').click(function() {
-		$('.camBoardInfo').css("background-color", "transparent");
-		selectTr = $(this);
-		selectTd = selectTr.children();
-		camBoardNum = selectTd.eq(0).text();
-		$('#camBoardNumU').val(camBoardNum);
-		$('#camBoardNumD').val(camBoardNum);
-		$('#'+camBoardNum).css("background-color", "#FFFFDE");
-	});
-});
-
-function checkDelete() {
-	if ($('#camBoardNumD').val() == "") {
-		alert("삭제할 항목을 선택해주세요.");
-		return false;
-	} else if($('#camBoardNumD').val() != "") {
-		if (confirm("정말 삭제하시겠습니까?") == true) {
-		} else {
-			return false;
- 		}
-	}
-}
-
-function checkUpdate() {
-	if ($('#camBoardNumU').val() == "") {
-		alert("수정할 항목을 선택해주세요.");
-		return false;
-	}
-}
-
-</script>
 </body>
 </html>

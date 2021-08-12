@@ -42,17 +42,16 @@ public class AdCamBoardService {
         int count = CamBoardCount.size();
 		
 		pBean.setTotalcount(count);
-        pBean.setPagenum(cPagenum-1);   // ÇöÀç ÆäÀÌÁö¸¦ ÆäÀÌÁö °´Ã¼¿¡ ÁöÁ¤ÇÑ´Ù -1 À» ÇØ¾ß Äõ¸®¿¡¼­ »ç¿ëÇÒ¼ö ÀÖ´Ù
-        pBean.setContentnum(cContentnum); // ÇÑ ÆäÀÌÁö¿¡ ¸î°³¾¿ °Ô½Ã±ÛÀ» º¸¿©ÁÙÁö ÁöÁ¤ÇÑ´Ù.
-        pBean.setCurrentblock(cPagenum); // ÇöÀç ÆäÀÌÁö ºí·ÏÀÌ ¸î¹øÀÎÁö ÇöÀç ÆäÀÌÁö ¹øÈ£¸¦ ÅëÇØ¼­ ÁöÁ¤ÇÑ´Ù.
-        pBean.setLastblock(pBean.getTotalcount()); // ¸¶Áö¸· ºí·Ï ¹øÈ£¸¦ ÀüÃ¼ °Ô½Ã±Û ¼ö¸¦ ÅëÇØ¼­ Á¤ÇÑ´Ù.
+        pBean.setPagenum(cPagenum-1);
+        pBean.setContentnum(cContentnum);
+        pBean.setCurrentblock(cPagenum);
+        pBean.setLastblock(pBean.getTotalcount());
 
-        pBean.prevnext(cPagenum);//ÇöÀç ÆäÀÌÁö ¹øÈ£·Î È­»ìÇ¥¸¦ ³ªÅ¸³¾Áö Á¤ÇÑ´Ù.
-        pBean.setStartPage(pBean.getCurrentblock()); // ½ÃÀÛ ÆäÀÌÁö¸¦ ÆäÀÌÁö ºí·Ï¹øÈ£·Î Á¤ÇÑ´Ù.
+        pBean.prevnext(cPagenum);
+        pBean.setStartPage(pBean.getCurrentblock());
         pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
-        //¸¶Áö¸· ÆäÀÌÁö¸¦ ¸¶Áö¸· ÆäÀÌÁö ºí·Ï°ú ÇöÀç ÆäÀÌÁö ºí·Ï ¹øÈ£·Î Á¤ÇÑ´Ù.
         
-        if(cContentnum == 6){//¼±ÅÃ °Ô½Ã±Û ¼ö
+        if(cContentnum == 6){
         	pBean.setPagenum(pBean.getPagenum()*6);
         	
         	if(arr.equals("entire")) {
@@ -64,7 +63,6 @@ public class AdCamBoardService {
         	}
         }
         
-        // mapper ÀüÃ¼ °Ô½Ã±Û °³¼ö¸¦ ÁöÁ¤ÇÑ´Ù
         if(arr.equals("entire")) {
         	pBean.setTotalcount(count);
         }else if(arr.equals("doing")) {
@@ -107,17 +105,17 @@ public class AdCamBoardService {
         int count = CamBoardCount.size();
 		
 		pBean.setTotalcount(count);
-        pBean.setPagenum(cPagenum-1);   // ÇöÀç ÆäÀÌÁö¸¦ ÆäÀÌÁö °´Ã¼¿¡ ÁöÁ¤ÇÑ´Ù -1 À» ÇØ¾ß Äõ¸®¿¡¼­ »ç¿ëÇÒ¼ö ÀÖ´Ù
-        pBean.setContentnum(cContentnum); // ÇÑ ÆäÀÌÁö¿¡ ¸î°³¾¿ °Ô½Ã±ÛÀ» º¸¿©ÁÙÁö ÁöÁ¤ÇÑ´Ù.
-        pBean.setCurrentblock(cPagenum); // ÇöÀç ÆäÀÌÁö ºí·ÏÀÌ ¸î¹øÀÎÁö ÇöÀç ÆäÀÌÁö ¹øÈ£¸¦ ÅëÇØ¼­ ÁöÁ¤ÇÑ´Ù.
-        pBean.setLastblock(pBean.getTotalcount()); // ¸¶Áö¸· ºí·Ï ¹øÈ£¸¦ ÀüÃ¼ °Ô½Ã±Û ¼ö¸¦ ÅëÇØ¼­ Á¤ÇÑ´Ù.
+        pBean.setPagenum(cPagenum-1);   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ -1 ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ ï¿½Ö´ï¿½
+        pBean.setContentnum(cContentnum); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½î°³ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+        pBean.setCurrentblock(cPagenum); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+        pBean.setLastblock(pBean.getTotalcount()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 
-        pBean.prevnext(cPagenum);//ÇöÀç ÆäÀÌÁö ¹øÈ£·Î È­»ìÇ¥¸¦ ³ªÅ¸³¾Áö Á¤ÇÑ´Ù.
-        pBean.setStartPage(pBean.getCurrentblock()); // ½ÃÀÛ ÆäÀÌÁö¸¦ ÆäÀÌÁö ºí·Ï¹øÈ£·Î Á¤ÇÑ´Ù.
+        pBean.prevnext(cPagenum);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ È­ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
+        pBean.setStartPage(pBean.getCurrentblock()); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
         pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
-        //¸¶Áö¸· ÆäÀÌÁö¸¦ ¸¶Áö¸· ÆäÀÌÁö ºí·Ï°ú ÇöÀç ÆäÀÌÁö ºí·Ï ¹øÈ£·Î Á¤ÇÑ´Ù.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
         
-        if(cContentnum == 6){//¼±ÅÃ °Ô½Ã±Û ¼ö
+        if(cContentnum == 6){//ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½
         	pBean.setPagenum(pBean.getPagenum()*6);
 
         	if(arr.equals("entire")) {
@@ -132,7 +130,7 @@ public class AdCamBoardService {
         System.out.println("service pBean =======> search = " + pBean.getSearch() + ", contentnum = " + pBean.getContentnum() +
         		", pagenum = " + pBean.getPagenum() + ", totalcount = " + count);
         
-        // mapper ÀüÃ¼ °Ô½Ã±Û °³¼ö¸¦ ÁöÁ¤ÇÑ´Ù
+        // mapper ï¿½ï¿½Ã¼ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
         if(arr.equals("entire")) {
         	pBean.setTotalcount(count);
         }else if(arr.equals("doing")) {
@@ -147,28 +145,66 @@ public class AdCamBoardService {
         model.addAttribute("page", pBean);
 	}
 	
-	/*public void insertCamBoard(camBoardBean cBean) {
+	public void insertCamBoard(String CAMB_NAME, String CAMB_SUBJECT, String CAMB_CONTENT, MultipartFile CAMB_UPLOADFILE) {
 		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		
-		MultipartFile uploadFile = cBean.getCAMB_FILE();
+		camBoardBean cBean = new camBoardBean();
+		cBean.setCAMB_NAME(CAMB_NAME);
+		cBean.setCAMB_SUBJECT(CAMB_SUBJECT);
+		cBean.setCAMB_CONTENT(CAMB_CONTENT);
+		
+		MultipartFile uploadFile = CAMB_UPLOADFILE;
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			try {
+				System.out.println("service filename : " + fileName);
+				System.out.println(uploadFile);
+				uploadFile.transferTo(new File("D:/swork/earthnus/src/main/webapp/resources/camBoard" + fileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			cBean.setCAMB_FILE("/resources/camBoard/" + fileName);
+		} else {
+			cBean.setCAMB_FILE("/resources/camBoard/imgDefault.png");
+		}
+		CamBoardDAO.camBoardInsert(cBean);
+	}
+	
+	public void updateCamBoard(String CAMB_NAME, String CAMB_SUBJECT, String CAMB_CONTENT, MultipartFile CAMB_UPLOADFILE) {
+		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
+		
+		camBoardBean cBean = new camBoardBean();
+		cBean.setCAMB_NAME(CAMB_NAME);
+		cBean.setCAMB_SUBJECT(CAMB_SUBJECT);
+		cBean.setCAMB_CONTENT(CAMB_CONTENT);
+		
+		MultipartFile uploadFile = CAMB_UPLOADFILE;
 		if (!uploadFile.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();
 			try {
 				uploadFile.transferTo(new File("C:/upload/" + fileName));
+				System.out.println("service filename : " + fileName);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			gBean.setGoods_img("C:/upload/" + fileName);
+			System.out.println("service filename : " + fileName);
+			cBean.setCAMB_FILE("/resources/camBoard/" + fileName);
 		} else {
-			gBean.setGoods_img("/resources/goods/imgDefault.png");
+			cBean.setCAMB_FILE("/resources/camBoard/imgDefault.png");
 		}
-		goodsDAO.isertGoodsOk(gBean);
-	}*/
+		CamBoardDAO.camBoardUpdate(cBean);
+	}
+	
+	public void deleteCamBoard(camBoardBean cBean) {
+		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
+		
+		camBoardDAO.camBoardDelete(cBean);
+	}
 	
 	public camBoardBean getCamBoard(String contentnum) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		
-		System.out.println("¼­ºñ½º : " + contentnum);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ : " + contentnum);
 		return camBoardDAO.getCamBoard(Integer.parseInt(contentnum));
 	}
 	/*public MemberBean getMember(MemberBean mBean) {

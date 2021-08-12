@@ -10,4 +10,7 @@ public interface CamBoardMybatis {
 	public List<camBoardBean> camBoardEntireCount(PagingBean pBean);
 	public List<camBoardBean> camBoardDoingCount(PagingBean pBean);
 	public List<camBoardBean> camBoardEndCount(PagingBean pBean);
+	public void camBoardInsert(camBoardBean cBean);
+	public void camBoardUpdate(camBoardBean cBean);
+	public void camBoardDelete(camBoardBean cBean);
 }

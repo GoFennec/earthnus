@@ -2,13 +2,17 @@ package kr.co.earthnus.user.camBoard;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class camBoardBean {
 	private int CAMB_NUM;
 	private String CAMB_NAME;
 	private String CAMB_SUBJECT;
 	private String CAMB_CONTENT;
 	private String CAMB_FILE;
+	private MultipartFile CAMB_UPLOADFILE;
 	private Date CAMB_DATE;
+	
 	public int getCAMB_NUM() {
 		return CAMB_NUM;
 	}
@@ -38,6 +42,13 @@ public class camBoardBean {
 	}
 	public void setCAMB_FILE(String cAMB_FILE) {
 		CAMB_FILE = cAMB_FILE;
+	}
+	
+	public MultipartFile getCAMB_UPLOADFILE() {
+		return CAMB_UPLOADFILE;
+	}
+	public void setCAMB_UPLOADFILE(MultipartFile cAMB_UPLOADFILE) {
+		CAMB_UPLOADFILE = cAMB_UPLOADFILE;
 	}
 	public Date getCAMB_DATE() {
 		return CAMB_DATE;

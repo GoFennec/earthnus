@@ -32,7 +32,7 @@
 			<tr><td class="td_left"><label for="CAMB_CONTENT">캠&nbsp;페&nbsp;인&nbsp;&nbsp;내&nbsp;용&nbsp;</label></td>
 				<td class="td_right"><textarea cols="26" rows="6" style="resize: none;" name="CAMB_CONTENT" id="CAMB_CONTENT" required></textarea></td></tr>
 			<tr><td class="td_left"><label for="CAMB_FILE">캠&nbsp;페&nbsp;인&nbsp;&nbsp;사&nbsp;진&nbsp;</label></td>
-				<td class="td_right"><input type="file" name="CAMB_FILE" id="CAMB_FILE" required></td></tr>
+				<td class="td_right"><input type="file" name="CAMB_UPLOADFILE" id="CAMB_UPLOADFILE" required></td></tr>
 		</table><br>
 		<div class="sysBtn">
 			<input type="submit" class="btn-dark" value="캠페인 추가"/>&nbsp;&nbsp;&nbsp;
