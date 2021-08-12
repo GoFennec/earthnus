@@ -13,6 +13,20 @@
 	</resultMap>
       
       
+		<insert id ="replyInsert" parameterType = "cheBoard">
+			<![CDATA[
+	        INSERT INTO CHEBOARD (CHEB_ID,CHEB_NAME,cheb_dnum,cheb_content)
+	        VALUES
+	        (
+		        #{cheb_id},
+		        #{cheb_name},
+		        #{cheb_dnum},
+		        #{cheb_content}
+	        )
+	        ]]>
+		</insert>
+      
+      
       
       <select id="CheBoardCount" resultType="int">
 		<![CDATA[
@@ -22,8 +36,12 @@
       
      <select id="CheBoardList" resultMap="CheBoardResult">
         <![CDATA[
-            SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum}
+            SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC 
         ]]>
      </select>
       
+      
+      <delete id="replyDelete" parameterType="int">
+      		DELETE FROM CHEBOARD WHERE CHEB_NUM=#{reply_id}
+      </delete>
 </mapper>
