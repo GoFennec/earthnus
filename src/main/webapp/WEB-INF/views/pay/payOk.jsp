@@ -69,7 +69,7 @@ td {
 		<tr><th scope="row">구매 상품</th><td>${pay.pay_dnum}</td></tr>		
 		<c:set var="total" value="${pay.pay_price}"/>
 		<tr><th scope="row">후원 금액</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${total}"/>원</td></tr>
-		<tr><th scope="row">후원 일자</th><td>${pay.pay_date}</td></tr>		
+		<tr><th scope="row">후원 일자</th><td>${pay.pay_pdate}</td></tr>		
 		</tbody>
 		</table>	
 	</div>

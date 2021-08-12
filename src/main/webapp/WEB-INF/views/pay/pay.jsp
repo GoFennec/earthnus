@@ -146,17 +146,13 @@ button {
 						pay_dnum : '${pay.pay_dnum}',
                         pay_price : '${pay.pay_price}',
                         pay_point : '${pay_point}',
-                        pay_date : rsp.paid_at
+                        pay_pdate : rsp.paid_at
                     })
                 }).done(function(data) {
                 	//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
                 	if(rsp.paid_amount == data.response.amount) {
 	                	var imp_id = rsp.imp_uid;
 		                var msg = '결제가 완료되었습니다.';
-		                /* msg += '\n고유ID : ' + rsp.imp_uid;
-		                msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-		                msg += '\n결제 금액 : ' + rsp.paid_amount;
-		                msg += '\n카드 승인번호 : ' + rsp.apply_num; */
 		                alert(msg);
 		 	            location.href='/pay/payOk/'+imp_id;
 		            } else {
@@ -200,17 +196,13 @@ button {
 						pay_dnum : '${pay.pay_dnum}',
                         pay_price : '${pay.pay_price}',
                         pay_point : '${pay_point}',
-                        pay_date : rsp.paid_at
+                        pay_pdate : rsp.paid_at
                     })
                 }).done(function(data) {
                 	//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
                 	if(rsp.paid_amount == data.response.amount) {
 	                	var imp_id = rsp.imp_uid;
 		                var msg = '결제가 완료되었습니다.';
-		                /* msg += '\n고유ID : ' + rsp.imp_uid;
-		                msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-		                msg += '\n결제 금액 : ' + rsp.paid_amount;
-		                msg += '\n카드 승인번호 : ' + rsp.apply_num; */
 		                alert(msg);
 		 	            location.href='/pay/payOk/'+imp_id;
 		            } else {
