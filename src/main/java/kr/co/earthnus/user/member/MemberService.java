@@ -34,18 +34,28 @@ public class MemberService {
 		return n;
 	}
 
-	public MemberBean myPage(String mem_id) {
-		System.out.println("S : myPage()실행");
-		MemberBean memberBean = null;
+	public String myPoint(String mem_id) {
+		System.out.println("S : myPoint()실행");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		memberBean = dao.myPage(mem_id);
-		return memberBean;
+		String myPoint = dao.myPoint(mem_id);
+		System.out.println("mypoint service");
+		return myPoint;
 	}
 
-	public int pwCheck(String mem_id) {
+	public String myDonation(String mem_id) {
+		System.out.println("S : mydonation()실행");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		int n = dao.pwCheck(mem_id);
-		return n;
+		String myDonation = dao.myDonation(mem_id);
+		System.out.println("donation service");
+		if(myDonation == null) {
+		myDonation = "0";
+	}	return myDonation;
+	}
+	
+	public String pwCheck(String mem_id) {
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		String mem_pw = dao.pwCheck(mem_id);
+		return mem_pw;
 	}
 
 	public MemberBean myInfo(String mem_id) {
@@ -62,12 +72,13 @@ public class MemberService {
 		System.out.println("update service");
 	}
 
-	public void deleteMember(MemberBean memberBean) {
+	public void deleteMember(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		dao.deleteMember(memberBean);
+		dao.deleteMember(mem_id);
 		System.out.println("delete service");
 
 	}
+
 
 	// 아이디 중복체크
 	public int idCheck(String mem_id) {

@@ -595,7 +595,25 @@ color: #a2a6af
     width: 40px;
     display: inline-block
 }
-}
+.modal {
+        text-align: center;
+	  }
+ 
+		@media screen{ 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+		}
+ 
+	.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+	}	   
+
 </style>
 
 </head>
@@ -610,53 +628,34 @@ color: #a2a6af
                     <div class="user-info">
                         <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                         <ul class="meta list list-unstyled">
-                            <li class="id"><a>${MemberBean.mem_id}</a></li>
-                            <li class="name">${MemberBean.mem_name}님</li>
+                            <li class="id"><a>${auth.auth_id}</a></li>
+                            <li class="name">${auth.auth_name}님</li>
                         </ul>
                     </div>
             		<nav class="side-menu">
         				<ul class="nav">
         					<li class="active" ><a href="/member/myPage"><span class="fa fa-user"></span>마이페이지</a></li>
-        					
-        					<!--  <li><a href="#" data-toggle="modal" data-target="#pw-check"><span class="fa fa-cog"></span> 내 정보</a></li>
-        					<div class="modal fade" id="pw-check" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h3 class="modal-title" id="exampleModalLabel">비밀번호 확인</h3>
-						</div>
-						<br>
-						<input type="password" name="mem_pw" class="form-control" id="mem_pw" placeholder="비밀번호를 입력하세요." >
-						<br>
-						<div class="modal-footer">
-							<button class="w-100 btn btn-primary btn-lg" id="pwch" onclick="pwcheck()">확인</button>
-							<button class="w-100 btn btn-primary btn-lg" type="button" data-dismiss="modal">취소</button>
-						</div>
-					</div>
-				</div>
-			</div>
-        				        
-          -->
-        					
-        					<li><a href="/member/myInfo"><span class="fa fa-cog"></span> 내 정보</a></li> 
+        					<li><a href="/member/myInfoPwCh"><span class="fa fa-cog"></span> 내 정보</a></li> 
         					<li><a href="#"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li><a href="#"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
-        					
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
-        					<li><a href="#"><span class="fa fa-clock-o"></span> Reminders</a></li>
+        					<li><a href="#"><span class="fa fa-clock-oz"></span> Reminders</a></li>
         				</ul>
         			</nav>
                 </div>
+             
                 <div class="content-panel">
                     <h2 class="title">마이페이지</h2>
 					<hr>
-                    <form class="form-horizontal" method="post" action="/updateMyInfo" >
+                    <form class="form-horizontal" method="post" action="/myPage" >
                         <fieldset class="fieldset">
                         
                             <div class="form-group">
                                 <label class="col-md-2 col-sm-3 col-xs-12 control-label">나의 후원금액</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="d_price" value=${DonationBean.d_price} readonly>
+                                   
+                                    <input type="text" class="form-control" name ="pay_price" readonly value=${myDonation} >
+                               
                                 </div>
                             </div>
         
@@ -664,7 +663,7 @@ color: #a2a6af
                               <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">포인트</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_point" value=${MemberBean.mem_point} readonly>
+                                    <input type="text" class="form-control" name ="mem_point" value=${myPoint} readonly>
                                 </div>
                             </div>
                         </fieldset>
@@ -676,34 +675,7 @@ color: #a2a6af
     </div>
 </div>
 
-   <script type="text/javascript">
-				function pwcheck(){
-					var pwcheck = $("#mem_pwcheck").val();
-					if(pwcheck === ""){
-						alert("비밀번호를 입력해주세요.");
-					}
-		
-					$.ajax({
-			   			type: "POST", //요청 메소드 방식
-			  			 url:"/member/pwCheck",
-			   			data: {"mem_pw":pwcheck},
-			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-			   			success : function(result){
-				   
-			      			if(result.error === false && pwcheck != ""){
-			    	  			alert('비밀번호가 틀렸습니다.');
-			      			}else{
-			   				location.href="/member/myInfo";
-			   			}},
-			   		 error:function(request,status,error){
-			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			      			//통신 실패시 발생하는 함수(콜백)
-			   				}
-						});
-				}
-			</script>	
-
-
+  
 
 </body>
 </html>
