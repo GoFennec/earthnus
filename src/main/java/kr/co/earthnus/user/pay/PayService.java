@@ -24,8 +24,8 @@ public class PayService {
 	
 	public int insertPay(PayBean pBean) {
 		PayMybatis dao = mybatis.getMapper(PayMybatis.class);
-		String pay_date = getTimestampToDate(pBean.getPay_date());
-		pBean.setPay_date(pay_date);
+		String pay_pdate = getTimestampToDate(pBean.getPay_pdate());
+		pBean.setPay_pdate(pay_pdate);
 		int n = dao.insertPay(pBean);
 		return n;
 	}
