@@ -10,9 +10,14 @@
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
+	tr {max-width: 700px}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton{text-align: center;}
+	input {border: none;}
+	textarea {border: none; min-width: 300px}
+	.sysBtn {text-align: center;}
+	#max{max-width: 600px}
 </style>
 
 <meta charset="EUC-KR">
@@ -21,16 +26,82 @@
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 
-	<div class="col-sm-12 col-lg-4">
-		<table class="goodsTable">
-			<tr>
-				<td class="tdImg"><img src="${camBoard.CAMB_FILE}" width="600" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/></td>
-				<td>${camBoard.CAMB_NAME}</td>
-				<td>${camBoard.CAMB_CONTENT}</td>
-			</tr>
-		</table>
+	<div class="container col-sm-12 col-lg-4">
+		<form action="/adCamBoard/updateOk" method="POST">
+			<table class="goodsTable">
+			
+				<tr>
+					<td colspan = "2">
+						<div id="max" class="file-wrapper flie-wrapper-area">
+								<input type="file" name="file" id="file" class="upload-box upload-plus" accept="image/*" style="display: none;">
+									<div id="preview"></div>
+								<div style="text-align: center;" class="file-edit-icon">
+									<a href="#" class="preview-edit">수정</a>
+									<a href="#" class="preview-de">삭제</a>
+								</div>
+						</div>
+											
+						<input type="file" id="CAMB_FILE" name="CAMB_FILE" style="display:none;">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>캠페인 이름&nbsp;&nbsp;&nbsp;</td><td><input type="text" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
+				</tr>	
+				<tr>
+					<td>캠페인 주제</td><!-- <input type="text" name="CAMB_SUBJECT" value="${camBoard.CAMB_SUBJECT}"> --> 
+					<td>
+						<select id="CAMB_SUBJECT" name="CAMB_SUBJECT" onchange="showUpdateButton()" required>
+						<option id="해양" value="해양">해양</option>
+						<option id="플라스틱" value="플라스틱">플라스틱</option>
+						<option id="산림" value="산림">산림</option>
+						<option id="극지방" value="극지방">극지방</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>캠페인 내용&nbsp;&nbsp;&nbsp;</td><td><textarea name="CAMB_CONTENT" onchange="showUpdateButton()" required>${camBoard.CAMB_CONTENT}</textarea></td>
+				</tr>
+			</table>
+			<div class="sysBtn">
+				<input type="submit" class="btn-dark" value="수정">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" class="btn-dark" value="삭제" onclick="location.href='/adCamBoard/delete'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" class="btn-dark" value="목록" onclick="location.href='/adCamBoard/list'"/>
+			</div>
+		</form>
 	</div>
-	
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
+
+<script type="text/javascript">
+	window.onload = function(){
+		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="IMG" width="600" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_SUBJECT}"/>'].join(''))
+		
+		$('#CAMB_SUBJECT').val('플라스틱').prop("selected", true);
+	}
+	
+	function showUpdateButton(){
+	}
+
+	function handleFileSelect(event) {
+	    var input = this;
+	    console.log(input.files)
+	    if (input.files && input.files.length) {
+	        var reader = new FileReader();
+	        this.enabled = false
+	        reader.onload = (function (e) {
+	            $("#preview").html(['<img src="', e.target.result, '" id="IMG" width="600" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
+	        });
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	$('#file').change(handleFileSelect);
+	$('.file-edit-icon').on('click', '.preview-de', function () {
+	    //$("#preview").html(['<img src="/resorces/camBoard/imgDefault.png" id="IMG" width="600" alt="캠페인" title="', escape(e.name), '"/>'].join(''))
+	    $("#file").val("");
+	});
+	$('.preview-edit').click( function() {
+	  $("#file").click();
+	} );
+</script>
 </body>
 </html>

@@ -116,7 +116,7 @@
 									<img src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_SUBJECT}"/>
 								</a>
 							</td>
-							<td>${list.CAMB_NAME}</td>
+							<td><a href="detail?CAMB_NUM=${list.CAMB_NUM}">${list.CAMB_NAME}</a></td>
 						</tr>
 					</table>
 				</div>
