@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.earthnus.user.auth.AuthBean;
+import kr.co.earthnus.util.SHA256;
 
 @Controller
 public class MemberController {
@@ -35,83 +36,106 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	//마이페이지 구현중
-	@RequestMapping(value="/member/myPage")
-	public String myPage(HttpSession session, Model model, AuthBean aBean) {
-		aBean = (AuthBean) session.getAttribute("auth");
-		String mem_id = aBean.getAuth_id();
-		System.out.println("mypagecontroller" + mem_id);
-		MemberBean memberBean = memberService.myInfo(mem_id);
-		//후원금액
-		model.addAttribute("MemberBean",memberBean); 
-		return "member/myPage";
-	}
-	
-	@RequestMapping(value="/member/pwcheck", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> pwCheck(@RequestParam("mem_pw")String mem_pw, HttpSession session, AuthBean aBean
-			) {
-		aBean = (AuthBean) session.getAttribute("auth");
-		String mem_id = aBean.getAuth_id();
-		System.out.println("pwcheck");
-		System.out.println(mem_id);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		int n = memberService.pwCheck(mem_id);
-		
-		if(n == 1) {
-			map.put("error", true);
-		}else {
-			map.put("error", false);
+	//마이페이지
+		@RequestMapping(value="/member/myPage")
+		public String myPoint(HttpSession session, Model model, AuthBean aBean) {
+			aBean = (AuthBean) session.getAttribute("auth");
+			String mem_id = aBean.getAuth_id();
+			System.out.println("mypointcontroller" + mem_id);
+			String myPoint = memberService.myPoint(mem_id);
+			System.out.println("mypoint" + myPoint);
+			String myDonation = memberService.myDonation(mem_id);
+			System.out.println("myDonationcontroller" + mem_id);
+			System.out.println("MYDONATION" + myDonation);
+			System.out.println("mydonation" + myDonation);
+			model.addAttribute("myDonation",myDonation);
+			model.addAttribute("myPoint",myPoint);
+			return "member/myPage";
 		}
-		return map;
-	}
-	
-	@RequestMapping(value="/member/myInfo")
-	public String myInfo(HttpSession session, Model model, AuthBean aBean) {
-		aBean = (AuthBean) session.getAttribute("auth");
-		String mem_id = aBean.getAuth_id();
-		System.out.println("controller" + mem_id);
-		MemberBean memberBean = memberService.myInfo(mem_id);
-		model.addAttribute("MemberBean",memberBean); 
-		return "member/myInfo";
-			 
-	}
-	/*카카오 로그인
-		@RequestMapping(value="/member/join", method=RequestMethod.POST)
-		public String kakaoMemberJoin(MemberBean memberBean, String nickname) {
-			System.out.println("컨트롤러 카카오 POST");
-			System.out.println(memberBean.getMem_addr());
-			System.out.println(memberBean.getMem_birth());
-			memberService.insertMember(memberBean);
-			return "redirect:/";
-		}*/
-	@RequestMapping(value="/updateMyInfo")
-	public String updateMyInfo(MemberBean memberBean,Model model) {
-		memberService.updateMyInfo(memberBean);
-		model.addAttribute("MemberBean", memberBean);
-		System.out.println("update controller");
-		return "redirect:/member/myInfo";
-	}
-	
-	
-	//delete 오류잡는중
-	@RequestMapping(value="/member/myDelete")
-	public String myDelete() {
-		return "member/myDelete";
-	}
-	
-	@RequestMapping(value = "/deleteMember")
-	public String myDelete(HttpSession session, Model model, 
-			AuthBean aBean, MemberBean memberBean){
-		aBean = (AuthBean) session.getAttribute("auth");
-		String mem_id = aBean.getAuth_id();
-		System.out.println("delete controller" + mem_id);
-		memberService.deleteMember(memberBean);
-		session.invalidate();
-		return "redirect:/";			
-	}
+		
+
+		@RequestMapping(value="/member/myInfoPwCh", method=RequestMethod.GET)
+		public String myInfoPwCh1() {
+			return "member/myInfoPwCh";
+		}
+		@RequestMapping(value="/member/myInfoPwCh", method=RequestMethod.POST)
+		public String myInfoPwCh2(HttpSession session, AuthBean aBean, @RequestParam("mem_pw")String pw, Model model) throws NoSuchAlgorithmException {
+			aBean = (AuthBean) session.getAttribute("auth");
+			String mem_id = aBean.getAuth_id();
+			System.out.println(mem_id);
+			String mem_pw = memberService.pwCheck(mem_id);
+			System.out.println(mem_pw);
+			String mem_shapw = memberService.pwCheck(mem_id);
+			SHA256 sha = new SHA256();
+			String smem_pw = sha.encrypt(pw);
+			if(mem_shapw.equals(smem_pw)) {
+			return "redirect:/member/myInfo";
+			}else {
+			return "member/myInfoPwCh"; 
+			}
+		}
+		
+		@RequestMapping(value="/member/myInfo")
+		public String myInfo(HttpSession session, Model model, AuthBean aBean) {
+			aBean = (AuthBean) session.getAttribute("auth");
+			String mem_id = aBean.getAuth_id();
+			System.out.println("controller" + mem_id);
+			MemberBean memberBean = memberService.myInfo(mem_id);
+			model.addAttribute("MemberBean",memberBean); 
+			return "member/myInfo";
+				 
+		}
+		@RequestMapping(value="/updateMyInfo")
+		public String updateMyInfo(MemberBean memberBean,Model model) throws NoSuchAlgorithmException {
+			SHA256 sha = new SHA256();
+			String smem_pw = sha.encrypt(memberBean.getMem_pw());
+			memberBean.setMem_pw(smem_pw);
+			memberService.updateMyInfo(memberBean);
+			model.addAttribute("MemberBean", memberBean);
+			System.out.println("update controller");
+			return "redirect:/member/myInfo";
+		}
+	//탈퇴하기 비밀번호 체크, 탈퇴
+
+		
+		@RequestMapping(value="/member/myDelete")
+		public String myDelete(HttpSession session, Model model, 
+				AuthBean aBean) {
+			System.out.println("myDelete");
+			return "member/myDelete";
+		}
+		
+		@RequestMapping(value="/pwCheck", method=RequestMethod.POST)
+		public String pwCheck(HttpSession session, AuthBean aBean, @RequestParam("mem_pw")String pw) throws NoSuchAlgorithmException {
+			aBean = (AuthBean) session.getAttribute("auth");
+			String mem_id = aBean.getAuth_id();
+			System.out.println(mem_id);
+			String mem_pw = memberService.pwCheck(mem_id);
+			System.out.println(mem_pw);
+			String mem_shapw = memberService.pwCheck(mem_id);
+			SHA256 sha = new SHA256();
+			String smem_pw = sha.encrypt(pw);
+			if(mem_shapw.equals(smem_pw)) {
+				System.out.println(mem_shapw);
+				System.out.println(smem_pw);
+			return "redirect:/deleteMember";
+			}else {
+			return "member/myDelete";
+			}
+		}
+		
+		@RequestMapping(value = "/deleteMember")
+		public String myDelete(HttpSession session, Model model, 
+				AuthBean aBean, String mem_id){
+			aBean = (AuthBean) session.getAttribute("auth");
+			mem_id = aBean.getAuth_id();
+			System.out.println("delete controller" + mem_id);
+			memberService.deleteMember(mem_id);
+			session.invalidate();
+			return "redirect:/";			
+		}
+		
+		
 	
 	@RequestMapping(value="/member/idcheck", method=RequestMethod.POST)
 	@ResponseBody

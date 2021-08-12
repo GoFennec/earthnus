@@ -596,7 +596,7 @@ color: #a2a6af
     width: 40px;
     display: inline-block
 }
-}
+
 </style>
 
 </head>
@@ -611,14 +611,14 @@ color: #a2a6af
                     <div class="user-info">
                         <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="개인프로필사진">
                         <ul class="meta list list-unstyled">
-                            <li class="id"><a>${auth.auth_id}</a></li>
+                               <li class="id"><a>${auth.auth_id}</a></li>
                             <li class="name">${auth.auth_name}님</li>
                         </ul>
                     </div>
             		<nav class="side-menu">
         				<ul class="nav">
         					<li><a href="/member/myPage"><span class="fa fa-user"></span> 마이페이지</a></li>
-        					<li class="active"><a href="/member/myInfo"><span class="fa fa-cog"></span> 내 정보</a></li>
+        					<li class="active"><a href="/member/myInfoPwCh"><span class="fa fa-cog"></span> 내 정보</a></li>
         					<li><a href="#"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li><a href="#"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					
@@ -629,125 +629,18 @@ color: #a2a6af
                 </div>
                 <div class="content-panel">
                     <h2 class="title">내 정보</h2>
-                    <form class="form-horizontal" method="post" action="/updateMyInfo" >
-                        <fieldset class="fieldset">
-                            <div class="form-group avatar">
-                                <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                                    <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="개인프로필사진">
-                                </figure>
-                                <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                                    <input type="file" class="file-uploader pull-left">
-                                    <button type="submit" class="btn btn-sm btn-default-alt pull-left">사진 업데이트</button>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">아이디</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_id" value=${MemberBean.mem_id} readonly>
-                                </div>
-                            </div>
-        
-                            <div class="form-group">
-                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">이름</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_name" value=${MemberBean.mem_name} readonly>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">변경할 비밀번호</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input id="Password" type="password" class="form-control" name ="mem_pw" value=${MemberBean.mem_pw}>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">비밀번호 확인</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input id="PasswordCheck" type="password" class="form-control" value=${MemberBean.mem_pw}>
-                                </div>
-                            </div>
-                           <script type="text/javascript">
-            $(function(){ 
-               $("#alert-success").hide(); 
-               $("#alert-danger").hide(); 
-               $("input").keyup(function(){ 
-                  var pwd1=$("#Password").val(); 
-                  var pwd2=$("#PasswordCheck").val(); 
-               if(pwd1 != "" && pwd2 != ""){ 
-                     if(pwd1 == pwd2){ 
-                        $("#alert-success").show(); 
-                        $("#alert-danger").hide(); 
-                        $("#submit").removeAttr("disabled"); 
-                     }else{ 
-                        $("#alert-success").hide(); 
-                        $("#alert-danger").show();
-                        $("#submit").attr("disabled", "disabled"); 
-                  }
-                 } 
-                  if(pwd1 == "" && pwd2 == ""){ 
-                     $("#alert-success").hide(); 
-                     $("#alert-danger").hide(); 
-                  } 
-               });
-              });
-         </script>
-                          <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
-         <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
-                            
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">주소</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_addr" value=${MemberBean.mem_addr}>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">전화번호</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_tel" value=${MemberBean.mem_tel}>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">생년월일</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_birth" value=${MemberBean.mem_birth}>
-                                 <!-- <p class="help-block">Your twitter username</p> -->  
-                                </div>
-                            </div>
-                          
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">성별</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_gender" value=${MemberBean.mem_gender} readonly>
-                                </div>
-                            </div>
-                              <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">이메일</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                 <input type="email" class="form-control" name ="mem_email" value=${MemberBean.mem_email} >
-                                </div>
-                            </div>
-                        <!-- 
-                          <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">가입일자</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                <input type="date" class="form-control" fmt:formatDate value=${MemberBean.mem_date} pattern="yyyy-MM-dd" 
-                                  readonly>
-                                </div>
-                            </div>  -->
-                              <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">포인트</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_point" value=${MemberBean.mem_point} readonly>
-                                </div>
-                            </div>
-                        </fieldset>
-                       
-                        <div class="form-group">
-                            <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-                                <button class="btn btn-sm btn-default-alt pull-left" type="submit">회원정보수정</button>
-                       
-                            </div>
-                        </div>
-                    </form>
+                 <hr>
+                 <div class="col-md-6 col-sm-8 col-xs-12">    
+    <form method="post" class="form" action="/member/myInfoPwCh">
+		 <a href="/"><img  src="/resources/assets/img/logo/loder.png" 
+   alt="EARTH&US로고" title="loader.png" width="80" height="65"  ></a>
+       <h4>본인 확인을 위한 비밀번호를 입력해주세요</h4>
+        <div class="form-group">
+            <input type="password" class="form-control" id="mem_pw" name="mem_pw" placeholder="비밀번호" required="required">
+             </div> 
+              <input type="submit" class="btn btn-primary btn-block btn-lg" value="비밀번호 확인"> 
+    </form>			
+</div>
                 </div>
             </div>
         </section>
