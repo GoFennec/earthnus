@@ -17,23 +17,25 @@ public class AuthService {
 	public AuthBean login(String auth_id, String auth_pw) throws NoSuchAlgorithmException{
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
 		AuthBean aBean = new AuthBean();
-		
+
 		SHA256 sha256 = new SHA256();
 		//비밀번호
         String password = auth_pw;
         //SHA256으로 암호화된 비밀번호
         String cryptogram = sha256.encrypt(password);
-        
+
         System.out.println(cryptogram);
-        
+
         auth_pw = cryptogram;
         //비밀번호 일치 여부
-        System.out.println(cryptogram.equals(sha256.encrypt(password)));
-		
+        System.out.println(cryptogram.equals(sha256.encrypt(password)) + " 암호화 한 비밀번호");
+
 		MemberBean mBean = dao.selectById(auth_id);
+		System.out.println(mBean.getMem_pw() + " 디비에 있는 비밀번호");
 		if (mBean.getMem_pw().equals(auth_pw)) {
 			aBean.setAuth_id(mBean.getMem_id());
 			aBean.setAuth_name(mBean.getMem_name());
+			System.out.println(aBean.getAuth_id() + " 서비스");
 		} else {
 			aBean = null;
 		}

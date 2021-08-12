@@ -3,8 +3,11 @@ package kr.co.earthnus.user.camBoard;
 import java.util.List;
 
 public interface CamBoardMybatis {
-	public List<camBoardBean> getCamBoardList(PagingBean pBean);
-	public List<camBoardBean> searchCamBoardList(PagingBean pBean);
+	public List<camBoardBean> getCamBoardListEntire(PagingBean pBean);
+	public List<camBoardBean> getCamBoardListDoing(PagingBean pBean);
+	public List<camBoardBean> getCamBoardListEnd(PagingBean pBean);
 	public camBoardBean getCamBoard(int contentnum);
-	public int camBoardCount();
+	public List<camBoardBean> camBoardEntireCount(PagingBean pBean);
+	public List<camBoardBean> camBoardDoingCount(PagingBean pBean);
+	public List<camBoardBean> camBoardEndCount(PagingBean pBean);
 }

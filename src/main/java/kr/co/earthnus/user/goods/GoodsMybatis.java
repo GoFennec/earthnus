@@ -6,10 +6,10 @@ import kr.co.earthnus.user.auth.AuthBean;
 import kr.co.earthnus.user.member.MemberBean;
 
 public interface GoodsMybatis {
+	public int goodsCount();
 	public List<GoodsBean> getGoodsList(PagingBean pBean);
 	public GoodsBean getGoods(GoodsBean bean);
 	public MemberBean getMember(AuthBean abean);
-	public int goodsCount();
 	public int insertExGoods(ExGoodsBean exBean);
 	public int newExGoods(ExGoodsBean exBean);
 	public int updateMemberPoint(ExGoodsBean exBean);

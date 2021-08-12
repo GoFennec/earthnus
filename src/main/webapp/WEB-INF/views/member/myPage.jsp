@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
     <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>Update user profile - Bootdey.com</title>
+    <title>마이페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -599,288 +599,111 @@ color: #a2a6af
 </style>
 
 </head>
-<body>
-<div class="container bootstrap snippets bootdey">
-    <div class="row">
-        <div class="col-sm-10">
-            <h1>User name</h1></div>
-        <div class="col-sm-2">
-            <a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <!--left col-->
+<jsp:include page="/WEB-INF/views/header.jsp"/> 
+<body oncontextmenu='return false' onselectstart='return false' ondragstart='return false' >
 
-            <ul class="list-group">
-                <li class="list-group-item text-muted">Profile</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> 2.13.2014</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Last seen</strong></span> Yesterday</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Real name</strong></span> Joseph Doe</li>
-
-            </ul>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-                <div class="panel-body"><a href="https://bootdey.com">https://bootdey.com</a></div>
-            </div>
-
-            <ul class="list-group">
-                <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
-            </ul>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Social Media</div>
-                <div class="panel-body">
-                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
-                </div>
-            </div>
-
-        </div>
-        <!--/col-3-->
-        <div class="col-sm-9">
-
-            <ul class="nav nav-tabs" id="myTab">
-                <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-                <li><a href="#messages" data-toggle="tab">Messages</a></li>
-                <li><a href="#settings" data-toggle="tab">Settings</a></li>
-            </ul>
-
-            <div class="tab-content">
-                <div class="tab-pane active" id="home">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Label 1</th>
-                                    <th>Label 2</th>
-                                    <th>Label 3</th>
-                                    <th>Label </th>
-                                    <th>Label </th>
-                                    <th>Label </th>
-                                </tr>
-                            </thead>
-                            <tbody id="items">
-                                <tr>
-                                    <td>1</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                    <td>Table cell</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-4 text-center">
-                                <ul class="pagination" id="myPager"></ul>
-                            </div>
-                        </div>
+<div class="container">
+    <div class="view-account">
+        <section class="module">
+            <div class="module-inner">
+                <div class="side-bar">
+                    <div class="user-info">
+                        <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                        <ul class="meta list list-unstyled">
+                            <li class="id"><a>${MemberBean.mem_id}</a></li>
+                            <li class="name">${MemberBean.mem_name}님</li>
+                        </ul>
                     </div>
-                    <!--/table-resp-->
-
-                    <hr>
-
+            		<nav class="side-menu">
+        				<ul class="nav">
+        					<li class="active" ><a href="/member/myPage"><span class="fa fa-user"></span>마이페이지</a></li>
+        					
+        					<!--  <li><a href="#" data-toggle="modal" data-target="#pw-check"><span class="fa fa-cog"></span> 내 정보</a></li>
+        					<div class="modal fade" id="pw-check" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3 class="modal-title" id="exampleModalLabel">비밀번호 확인</h3>
+						</div>
+						<br>
+						<input type="password" name="mem_pw" class="form-control" id="mem_pw" placeholder="비밀번호를 입력하세요." >
+						<br>
+						<div class="modal-footer">
+							<button class="w-100 btn btn-primary btn-lg" id="pwch" onclick="pwcheck()">확인</button>
+							<button class="w-100 btn btn-primary btn-lg" type="button" data-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+        				        
+          -->
+        					
+        					<li><a href="/member/myInfo"><span class="fa fa-cog"></span> 내 정보</a></li> 
+        					<li><a href="#"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
+        					<li><a href="#"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
+        					
+        					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
+        					<li><a href="#"><span class="fa fa-clock-o"></span> Reminders</a></li>
+        				</ul>
+        			</nav>
                 </div>
-                <!--/tab-pane-->
-                <div class="tab-pane" id="messages">
-
-                    <h2></h2>
-
-                    <ul class="list-group">
-                        <li class="list-group-item text-muted">Inbox</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Hi Joe, There has been a request on your account since that was..</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Nullam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Thllam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-                        <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
-
-                    </ul>
-
-                </div>
-                <!--/tab-pane-->
-                <div class="tab-pane" id="settings">
-
-                    <hr>
-                    <form class="form" action="##" method="post" id="registrationForm">
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="first_name">
-                                    <h4>First name</h4></label>
-                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                <div class="content-panel">
+                    <h2 class="title">마이페이지</h2>
+					<hr>
+                    <form class="form-horizontal" method="post" action="/updateMyInfo" >
+                        <fieldset class="fieldset">
+                        
+                            <div class="form-group">
+                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">나의 후원금액</label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" name ="d_price" value=${DonationBean.d_price} readonly>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="last_name">
-                                    <h4>Last name</h4></label>
-                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+        
+                       
+                              <div class="form-group">
+                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">포인트</label>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" name ="mem_point" value=${MemberBean.mem_point} readonly>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="phone">
-                                    <h4>Phone</h4></label>
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="mobile">
-                                    <h4>Mobile</h4></label>
-                                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Email</h4></label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email">
-                                    <h4>Location</h4></label>
-                                <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password">
-                                    <h4>Password</h4></label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password2">
-                                    <h4>Verify</h4></label>
-                                <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
-                            </div>
-                        </div>
+                        </fieldset>
+                        
                     </form>
                 </div>
-
             </div>
-            <!--/tab-pane-->
-        </div>
-        <!--/tab-content-->
-
+        </section>
     </div>
-    <!--/col-9-->
 </div>
-<!--/row-->
 
-<script type="text/javascript">
+   <script type="text/javascript">
+				function pwcheck(){
+					var pwcheck = $("#mem_pwcheck").val();
+					if(pwcheck === ""){
+						alert("비밀번호를 입력해주세요.");
+					}
+		
+					$.ajax({
+			   			type: "POST", //요청 메소드 방식
+			  			 url:"/member/pwCheck",
+			   			data: {"mem_pw":pwcheck},
+			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			   			success : function(result){
+				   
+			      			if(result.error === false && pwcheck != ""){
+			    	  			alert('비밀번호가 틀렸습니다.');
+			      			}else{
+			   				location.href="/member/myInfo";
+			   			}},
+			   		 error:function(request,status,error){
+			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			      			//통신 실패시 발생하는 함수(콜백)
+			   				}
+						});
+				}
+			</script>	
 
-</script>
+
+
 </body>
 </html>

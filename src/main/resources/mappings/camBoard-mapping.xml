@@ -13,28 +13,69 @@
 		<result property="CAMB_DATE" column="CAMB_DATE"/>
 	</resultMap>
 	
-	<select id="getCamBoardList" resultMap="camBoardResult">
+	<select id="camBoardListCount" resultType="int">
 		<![CDATA[
-			SELECT * FROM CAMBOARD
+			SELECT COUNT(*) FROM CAMBOARD
 		]]>
 	</select>
 	
-	<select id="searchCamBoardList" resultMap="camBoardResult">
+	<select id="getCamBoardListEntire" resultMap="camBoardResult">
 		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE CAMB_NAME LIKE #{search}
+			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND (CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
 		]]>
 	</select>
 	
+	<select id="getCamBoardListDoing" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE>SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+	
+	<select id="getCamBoardListEnd" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE<SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+		
 	<select id="getCamBoard" resultMap="camBoardResult">
 		<![CDATA[
 			SELECT * FROM CAMBOARD WHERE CAMB_NUM=#{contentnum}
 		]]>
 	</select>
 	
-	<select id="camBoardCount" resultType="int">
+	<select id="camBoardEntireCount" resultMap="camBoardResult">
 		<![CDATA[
-			SELECT COUNT(*) FROM CAMBOARD
+			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND (CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ORDER BY CAMB_NUM DESC
 		]]>
 	</select>
 	
+	<select id="camBoardDoingCount" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE>SYSDATE()) ORDER BY CAMB_NUM DESC
+		]]>
+	</select>
+	
+	<select id="camBoardEndCount" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE<SYSDATE()) ORDER BY CAMB_NUM DESC
+		]]>
+	</select>
+	
+	<update id="camBoardUpdate">
+		<![CDATA[
+			UPDATE CAMBOARD SET CAMB_NAME = #{CAMB_NAME}, CAMB_SUBJECT = #{CAMB_SUBJECT}, CAMB_CONTENT = #{CAMB_CONTENT}, CAMB_FILE = #{CAMB_FILE}
+		]]>
+	</update>
+	
+	<insert id="camBoardInsert">
+		<![CDATA[
+			INSERT INTO CAMBOARD (CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_FILE) VALUES(#{CAMB_NAME}, #{CAMB_SUBJECT}, #{CAMB_CONTENT}, #{CAMB_FILE})
+		]]>
+	</insert>
+	
+	<delete id="camBoardDelete">
+		<![CDATA[
+			DELETE FROM CAMBOARD WHERE CAMB_NUM = #{CAMB_NUM}
+		]]>
+	</delete>
 </mapper>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> 
 <!DOCTYPE html>
 <html><head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,10 +10,13 @@
 <style>
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
+	thead td {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {padding: 10px; font-weight: bold; text-align: center; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
 	td {width: 350px; padding: 10px; vertical-align: center; text-align: center; border-bottom: 1px solid #ccc;}
 	td .goodsImg {text-align: center; margin: auto; padding: 1px;}
 	.paging {text-align: center;}
+	.goodsInfo {cursor: pointer;}
+	.btn-dark {float: right; margin-left: 10px;}
 </style>
 <title>EARTH & US</title>
 </head>
@@ -22,7 +26,16 @@
 
 	<table class="goodsTitle">
 		<thead>
-			<tr><th scope="col">지구마켓 상품관리</th></tr>
+			<tr><th scope="col">지구마켓 상품관리</th>
+			<td><button class="btn-dark" type="button" onClick="location.href='/adGoods/insert'">상품추가</button>
+			<form action="/adGoods/update" method="POST" onsubmit="return checkUpdate();">
+			<input type="hidden" id="goodsNumU" name="goodsNumU"/>
+			<input class="btn-dark" type="submit" value="상품변경"/>
+			</form>
+			<form action="/adGoods/delete" method="POST" onsubmit="return checkDelete();">
+			<input type="hidden" id="goodsNumD" name="goodsNumD"/>
+			<input class="btn-dark" type="submit" value="상품삭제"/>
+			</form></td></tr>
 		</thead>
 	</table><br>
 	<div class="row">
@@ -37,7 +50,7 @@
 				<th scope="col" width="30%">상품설명</th>
 			</tr>	
 			<c:forEach items="${goodsList}" var="goods">
-					<tr>
+					<tr class="goodsInfo" id="${goods.goods_num}">
 						<td>${goods.goods_num}</td>
 						<td class="goodsImg"><img src="${goods.goods_img}" width="150" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
 						<td>${goods.goods_name}</td>
@@ -77,5 +90,35 @@
 
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
+<script>
+$(function() {
+	$('.goodsInfo').click(function() {
+		$('.goodsInfo').css("background-color", "transparent");
+		selectTr = $(this);
+		selectTd = selectTr.children();
+		goodsNum = selectTd.eq(0).text();
+		$('#goodsNumU').val(goodsNum);
+		$('#goodsNumD').val(goodsNum);
+		$('#'+goodsNum).css("background-color", "#FFFFDE");
+	});
+});
+function checkDelete() {
+	if ($('#goodsNumD').val() == "") {
+		alert("삭제할 항목을 선택해주세요.");
+		return false;
+	} else if($('#goodsNumD').val() != "") {
+		if (confirm("정말 삭제하시겠습니까?") == true) {
+		} else {
+			return false;
+ 		}
+	}
+}
+function checkUpdate() {
+	if ($('#goodsNumU').val() == "") {
+		alert("수정할 항목을 선택해주세요.");
+		return false;
+	}
+  }
+</script>
 </body>
 </html>

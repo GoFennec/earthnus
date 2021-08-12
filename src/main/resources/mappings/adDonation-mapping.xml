@@ -23,5 +23,14 @@
 	<select id="getAdDonationList" resultMap="donationResult">
 		SELECT * FROM PAY ORDER BY PAY_NO DESC LIMIT #{contentnum} OFFSET #{pagenum}
 	</select>
+	
+	<update id="updatePay" parameterType="pay">
+		UPDATE PAY SET PAY_CDATE=#{pay_cdate}, PAY_STATE='결제취소' WHERE PAY_NUM=#{pay_no}
+	</update>
+
+<!-- 	<update id="updatePoint">
+		UPDATE MEMBER SET MEM_POINT= PAY_CDATE=#{pay_cdate}, PAY_STATE='결제취소'
+		WHERE PAY_NUM=#{pay_num}
+	</update> -->
 
 </mapper>

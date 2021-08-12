@@ -1,7 +1,7 @@
 package kr.co.earthnus.user.camBoard;
 
 public class PagingBean {	
-    private int totalcount;
+	private int totalcount;
     private int pagenum;
     private int contentnum;
     private int startPage = 1;
@@ -10,6 +10,7 @@ public class PagingBean {
     private boolean next;
     private int currentblock;
     private int lastblock;
+    private String search;
     
     public void prevnext(int pagenum) {
         if(calcpage(totalcount,contentnum)<6) {
@@ -33,7 +34,13 @@ public class PagingBean {
         }
         return totalpage;
     }
-    public int getTotalcount() {
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	public int getTotalcount() {
         return totalcount;
     }
     public void setTotalcount(int totalcount) {
@@ -55,17 +62,23 @@ public class PagingBean {
         return startPage;
     }
     public void setStartPage(int currentblock) {
-        this.startPage = (currentblock*5)-4;
+    	if(totalcount <= 30) {
+    		this.startPage = 1;
+    	}else this.startPage = (currentblock*5)-4;        
     }
     public int getEndPage() {
         return endPage;
     }
     public void setEndPage(int getlastblock, int getcurrentblock) {
-        if(getlastblock == getcurrentblock){
-            this.endPage = calcpage(getTotalcount(),getContentnum());
-        }else{
-            this.endPage = getStartPage()+4;   
-        }
+    	if(totalcount <= 30) {
+    		this.endPage = totalcount / 6 + 1;
+    	}else {
+            if(getlastblock == getcurrentblock){
+                this.endPage = calcpage(getTotalcount(),getContentnum());
+            }else{
+                this.endPage = getStartPage()+4;   
+            }
+    	}
     }
     public boolean isPrev() {
         return prev;

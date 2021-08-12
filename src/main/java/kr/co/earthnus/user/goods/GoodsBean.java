@@ -1,5 +1,7 @@
 package kr.co.earthnus.user.goods;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class GoodsBean {
 	private String goods_num;
 	private String goods_name;
@@ -7,6 +9,7 @@ public class GoodsBean {
 	private String goods_info;
 	private String goods_desc;
 	private String goods_img;
+	private MultipartFile goods_uploadFile;
 	
 	public String getGoods_num() {
 		return goods_num;
@@ -44,4 +47,11 @@ public class GoodsBean {
 	public void setGoods_img(String goods_img) {
 		this.goods_img = goods_img;
 	}
+	public MultipartFile getGoods_uploadFile() {
+		return goods_uploadFile;
+	}
+	public void setGoods_uploadFile(MultipartFile goods_uploadFile) {
+		this.goods_uploadFile = goods_uploadFile;
+	}
+	
 }

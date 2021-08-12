@@ -12,30 +12,33 @@ public class CamBoardController{
 	private CamBoardService camBoardService;
 	
 	@RequestMapping(value="/camBoard/list")
-	public String getCamBoardList(@RequestParam(defaultValue = "1") String pagenum, 
+	public String getCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
 			@RequestParam(defaultValue = "6") String contentnum, camBoardBean bean, Model model) {
 		
-		camBoardService.getCamBoardList(bean, pagenum, contentnum, model);
+		String search = "%%";
+		
+		camBoardService.getCamBoardList(search, arr, bean, pagenum, contentnum, model);
 		
 		System.out.println("CamBoardController");
-		System.out.println("컨트롤러 : " + model.containsAttribute("CamBoardList"));
 		return "camBoard/camBoardList";
 	}
 	
-	@RequestMapping("search")
-	public String searchCamBoard(@RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam("search") String search,
+	@RequestMapping("/camBoard/list/search")
+	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
+			@RequestParam(defaultValue = "6") String contentnum, @RequestParam( value = "search", required=false) String search ,
 			camBoardBean bean, Model model) {
+		
+		System.out.println("컨트롤러 검색어 : " + search);
+		
 		if(search != null) {
 			search = "%" + search + "%";
-		}else if(search == null) {
+		}else if(search == null || search.equals("")) {
 			search = "%%";
 		}
 		
-		camBoardService.searchCamBoard(search, bean, pagenum, contentnum, model);
+		camBoardService.searchCamBoard(arr, search, bean, pagenum, contentnum, model);
 		
 		System.out.println("CamBoardController");
-		System.out.println("컨트롤러 : " + model.containsAttribute("CamBoardList"));
 		return "camBoard/camBoardList";
 	}
 	

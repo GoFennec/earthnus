@@ -21,8 +21,12 @@
 		values(#{mail_title},#{mail_content},#{mail_pw},now(),#{mail_sender},#{mail_receiver},#{mail_customer})
 	</insert>
 	
-	<select id="selectMail" parameterType="String" resultType="int">
-		select count(*) from MAILCHECK where mail_pw = #{mailCheck} and mail_receiver = #{email}
+	<select id="selectMail" parameterType="String" resultType="mail">
+		SELECT * FROM MAILCHECK WHERE MAIL_CUSTOMER = #{name} ORDER BY MAIL_NUM DESC LIMIT 1
+	</select>
+	
+	<select id="findID" parameterType="String" resultType="member">
+		select mem_id, date_format(mem_date, '%Y-%m-%d') from member where mem_name = #{findName}
 	</select>
 	
 </mapper>

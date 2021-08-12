@@ -49,7 +49,10 @@ public class AuthController {
 		return "redirect:/";	
 	}
 	
-	
+	@RequestMapping("/auth/find")
+	public String find() {
+		return "/auth/find";	
+	}
 	
 	
 	

@@ -1,82 +1,115 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <style>
+#button{text-align: right;}
 table {
   width: 100%;
   border-collapse: collapse;
-  text-align: center;
+  text-align: left;
   line-height: 1.5;
 }
-th {
+thead th {
   padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #04B4AE;
+  border-bottom: 3px solid #04B4AE;
+  background: none;
+}
+thead td {
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #04B4AE;
+  border-bottom: 3px solid #04B4AE;
+}
+th {
+  width: 150px;
+  padding: 10px;
+  text-align: center;
   font-weight: bold;
   vertical-align: center;
   border-bottom: 1px solid #ccc;
   background: #f3f6f7;
 }
-td {
+ td {
   padding: 9px;
+  text-align: center;
   vertical-align: center;
   border-bottom: 1px solid #ccc;
 }
 .paging {text-align: center;}
+.donationInfo {cursor: pointer;}
 </style>
 
 <title>EARTH & US</title>
 </head>
 
 <body>
+<br><br>
 
 <div class="container">
 	
-		<div class="row">
-			<div class="col-sm-12">
-			<table class="donationList">
-				<thead>
-				<tr>
-					<th>No.</th>
-					<th>결제 번호</th>
-					<th>후원자</th>
-					<th>아이디</th>
-					<th>결제 상품</th>
-					<th>후원 금액</th>
-					<th>적립 포인트</th>
-					<th>후원 일자</th>
-				</tr>
-				</thead>
-				
-				<c:forEach items="${adDonationList}" var="donation">
-				<tbody>
-				<tr>
-					<td>${donation.pay_no}</td>
-					<td>${donation.pay_num}</td>
-					<td>${donation.pay_name}</td>
-					<td>${donation.pay_id}</td>
-					<td>${donation.pay_dnum}</td>
-					<td>${donation.pay_price}</td>
-					<td>${donation.pay_point}</td>
-					<td>${donation.pay_date}</td>
-				</tr>
-				</tbody>
-				</c:forEach>
-			</table>
-			</div>
-		</div><br>
+	<div class="row">
+	<table class="goodsTitle">
+		<thead>
+			<tr><th scope="col">후원 내역 관리</th>
+			<td><div id="button"><button type="button" id="cancel">결제 취소</button></div></td></tr>
+		</thead>
+	</table>
+	</div><br>
+	
+	<div class="row">
+		<div class="col-12">
+		<table class="donationList">
+			<tr>
+				<th scope="col">No.</th>
+				<th scope="col">결제 번호</th>
+				<th scope="col">후원자</th>
+				<th scope="col">아이디</th>
+				<th scope="col">결제 상품</th>
+				<th scope="col">후원 금액</th>
+				<th scope="col">적립 포인트</th>
+				<th scope="col">후원 일자</th>
+				<th scope="col">후원 취소일자</th>
+				<th scope="col">결제 상태</th>
+			</tr>
+			
+			<c:forEach items="${adDonationList}" var="donation">
+			<tr class="donationInfo" id="${donation.pay_no}">
+				<td>${donation.pay_no}</td>
+				<td>${donation.pay_num}</td>
+				<td>${donation.pay_name}</td>
+				<td>${donation.pay_id}</td>
+				<td>${donation.pay_dnum}</td>
+				<c:set var="price" value="${donation.pay_price}"/>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</td>
+				<c:set var="point" value="${donation.pay_point}"/>
+				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${point}"/>p</td>
+				<td>${donation.pay_pdate}</td>
+				<td>${donation.pay_cdate}</td>
+				<td>${donation.pay_state}</td>
+			</tr>
+			</c:forEach>
+		</table>
+		</div>
+	</div><br>
 		
-		<div class="row">
-		<div class="col-sm-12">
+	<div class="row">
+		<div class="col-12">
 		<table class="paging">
 			<tr>
 				<td style="background-color: #0ed145;">
@@ -96,6 +129,55 @@ td {
 	</div>
 </div>
 
+<script>
+var cancelNo = 0;
+var cancelNum = "";
 
+var today = new Date();
+var year = today.getFullYear();
+var month = ('0' + (today.getMonth() + 1)).slice(-2);
+var day = ('0' + today.getDate()).slice(-2);
+var dateString = year + '-' + month  + '-' + day;
+
+$(function() {
+	$('.donationInfo').click(function() {
+		$('.donationInfo').css("background-color", "transparent");
+		selectTr = $(this);
+		selectTd = selectTr.children();
+		donationNo = selectTd.eq(0).text();
+		donationNum = selectTd.eq(1).text();
+		cancelNo = donationNo;
+		cancelNum = donationNum;
+		$('#'+donationNo).css("background-color", "#FFFFDE");
+	});
+});
+$("#cancel").click(function(){
+	if (cancelNum == "") {
+		alert("결제를 취소할 항목을 선택해주세요.");
+		return false;
+	} else if(cancelNum != "") {
+		if (confirm("정말 결제를 취소하시겠습니까?") == true) {
+			cancelPay();
+		} else {
+			return false;
+ 		}
+	}
+});
+function cancelPay() {
+    jQuery.ajax({
+      url : "/payments/cancel/" + cancelNum,
+      method : "POST",
+      headers : { "Content-Type": "application/json" },
+      data : JSON.stringify ({
+        pay_num : cancelNum,
+        pay_cdate : dateString
+      })
+    }).done(function(result) { // 환불 성공시 로직 
+        alert("결제가 취소되었습니다.");
+    }).fail(function(error) { // 환불 실패시 로직
+      alert("결제취소를 실패하였습니다.");
+    });
+ };
+</script>
 </body>
 </html>

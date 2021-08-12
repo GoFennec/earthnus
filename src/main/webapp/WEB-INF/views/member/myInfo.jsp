@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
     <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>Update user profile - Bootdey.com</title>
+    <title>내 정보</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -599,6 +600,7 @@ color: #a2a6af
 </style>
 
 </head>
+<jsp:include page="/WEB-INF/views/header.jsp"/> 
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false' >
 
 <div class="container">
@@ -607,7 +609,7 @@ color: #a2a6af
             <div class="module-inner">
                 <div class="side-bar">
                     <div class="user-info">
-                        <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                        <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="개인프로필사진">
                         <ul class="meta list list-unstyled">
                             <li class="id"><a>${MemberBean.mem_id}</a></li>
                             <li class="name">${MemberBean.mem_name}님</li>
@@ -615,12 +617,12 @@ color: #a2a6af
                     </div>
             		<nav class="side-menu">
         				<ul class="nav">
-        					<li ><a href="#"><span class="fa fa-user"></span> 내 정보</a></li>
-        					<li class="active"><a href="/member/myInfo"><span class="fa fa-cog"></span> 내 정보 수정</a></li>
+        					<li><a href="/member/myPage"><span class="fa fa-user"></span> 마이페이지</a></li>
+        					<li class="active"><a href="/member/myInfo"><span class="fa fa-cog"></span> 내 정보</a></li>
         					<li><a href="#"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li><a href="#"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					
-        					<li><a href="user-drive.html"><span class="fa fa-th"></span> Drive</a></li>
+        					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
         					<li><a href="#"><span class="fa fa-clock-o"></span> Reminders</a></li>
         				</ul>
         			</nav>
@@ -631,7 +633,7 @@ color: #a2a6af
                         <fieldset class="fieldset">
                             <div class="form-group avatar">
                                 <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                                    <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                    <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="개인프로필사진">
                                 </figure>
                                 <div class="form-inline col-md-10 col-sm-9 col-xs-12">
                                     <input type="file" class="file-uploader pull-left">
@@ -723,12 +725,14 @@ color: #a2a6af
                                     <input type="email" class="form-control" name ="mem_email" value=${MemberBean.mem_email}>
                                 </div>
                             </div>
-                            <!-- <div class="form-group">
+                        <!-- 
+                          <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">가입일자</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" value=${MemberBean.mem_date } readonly>
+                                <input type="date" class="form-control" fmt:formatDate value=${MemberBean.mem_date} pattern="yyyy-MM-dd" 
+                                  readonly>
                                 </div>
-                            </div> --> 
+                            </div>  -->
                               <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">포인트</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
@@ -755,6 +759,5 @@ color: #a2a6af
 
 
 
-</script>
 </body>
 </html>
