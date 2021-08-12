@@ -84,6 +84,8 @@ th {
 				<th scope="col">후원 금액</th>
 				<th scope="col">적립 포인트</th>
 				<th scope="col">후원 일자</th>
+				<th scope="col">후원 취소일자</th>
+				<th scope="col">결제 상태</th>
 			</tr>
 			
 			<c:forEach items="${adDonationList}" var="donation">
@@ -97,7 +99,9 @@ th {
 				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</td>
 				<c:set var="point" value="${donation.pay_point}"/>
 				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${point}"/>p</td>
-				<td>${donation.pay_date}</td>
+				<td>${donation.pay_pdate}</td>
+				<td>${donation.pay_cdate}</td>
+				<td>${donation.pay_state}</td>
 			</tr>
 			</c:forEach>
 		</table>
@@ -126,32 +130,54 @@ th {
 </div>
 
 <script>
-var cancleInfo = "";
+var cancelNo = 0;
+var cancelNum = "";
+
+var today = new Date();
+var year = today.getFullYear();
+var month = ('0' + (today.getMonth() + 1)).slice(-2);
+var day = ('0' + today.getDate()).slice(-2);
+var dateString = year + '-' + month  + '-' + day;
+
 $(function() {
 	$('.donationInfo').click(function() {
 		$('.donationInfo').css("background-color", "transparent");
 		selectTr = $(this);
 		selectTd = selectTr.children();
 		donationNo = selectTd.eq(0).text();
-		cancleInfo = donationNo;
+		donationNum = selectTd.eq(1).text();
+		cancelNo = donationNo;
+		cancelNum = donationNum;
 		$('#'+donationNo).css("background-color", "#FFFFDE");
 	});
 });
 $("#cancel").click(function(){
-	if (cancleInfo == "") {
+	if (cancelNum == "") {
 		alert("결제를 취소할 항목을 선택해주세요.");
 		return false;
-	} else if(cancleInfo != "") {
+	} else if(cancelNum != "") {
 		if (confirm("정말 결제를 취소하시겠습니까?") == true) {
-			
-			
-			
+			cancelPay();
 		} else {
 			return false;
  		}
 	}
 });
-
+function cancelPay() {
+    jQuery.ajax({
+      url : "/payments/cancel/" + cancelNum,
+      method : "POST",
+      headers : { "Content-Type": "application/json" },
+      data : JSON.stringify ({
+        pay_num : cancelNum,
+        pay_cdate : dateString
+      })
+    }).done(function(result) { // 환불 성공시 로직 
+        alert("결제가 취소되었습니다.");
+    }).fail(function(error) { // 환불 실패시 로직
+      alert("결제취소를 실패하였습니다.");
+    });
+ };
 </script>
 </body>
 </html>

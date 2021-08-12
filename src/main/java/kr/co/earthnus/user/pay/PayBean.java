@@ -8,7 +8,9 @@ public class PayBean {
 	private String pay_dnum;
 	private int pay_price;
 	private int pay_point;
-	private String pay_date;
+	private String pay_pdate;
+	private String pay_cdate;
+	private String pay_state;
 	
 	public int getPay_no() {
 		return pay_no;
@@ -52,10 +54,23 @@ public class PayBean {
 	public void setPay_point(int pay_point) {
 		this.pay_point = pay_point;
 	}
-	public String getPay_date() {
-		return pay_date;
+	public String getPay_pdate() {
+		return pay_pdate;
 	}
-	public void setPay_date(String pay_date) {
-		this.pay_date = pay_date;
+	public void setPay_pdate(String pay_pdate) {
+		this.pay_pdate = pay_pdate;
 	}
+	public String getPay_cdate() {
+		return pay_cdate;
+	}
+	public void setPay_cdate(String pay_cdate) {
+		this.pay_cdate = pay_cdate;
+	}
+	public String getPay_state() {
+		return pay_state;
+	}
+	public void setPay_state(String pay_state) {
+		this.pay_state = pay_state;
+	}
+	
 }

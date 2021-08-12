@@ -10,8 +10,8 @@
 	</select>
 	
 	<insert id="insertPay" parameterType="pay">
-		INSERT INTO PAY (pay_num, pay_id, pay_name, pay_dnum, pay_price, pay_point, pay_date)
-		VALUES (#{pay_num},#{pay_id},#{pay_name},#{pay_dnum},#{pay_price},#{pay_point},#{pay_date})
+		INSERT INTO PAY (pay_num, pay_id, pay_name, pay_dnum, pay_price, pay_point, pay_pdate)
+		VALUES (#{pay_num},#{pay_id},#{pay_name},#{pay_dnum},#{pay_price},#{pay_point},#{pay_pdate})
 	</insert>
 	
 	<update id="updatePoint" parameterType="pay">

@@ -20,7 +20,6 @@ import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
 import kr.co.earthnus.user.auth.AuthBean;
-import kr.co.earthnus.user.member.MemberBean;
 
 @Controller
 public class PayController {
@@ -43,28 +42,12 @@ public class PayController {
 		return "pay/pay";
 	}
 	
-//	@RequestMapping("/pay/inicis")
-//	public String getInicis(@ModelAttribute MemberBean mBean, @ModelAttribute PayBean pBean, Model model) {
-//		model.addAttribute("member", mBean);
-//		model.addAttribute("pay", pBean);
-//		return "pay/inicis";
-//	}
-//	
-//	@RequestMapping("/pay/kakaoPay")
-//	public String getKakaoPay(@ModelAttribute MemberBean mBean, @ModelAttribute PayBean pBean, Model model) {
-//		model.addAttribute("member", mBean);
-//		model.addAttribute("pay", pBean);
-//		return "pay/kakaoPay";
-//	}
-	
 	@ResponseBody
 	@RequestMapping("/payments/complete/{imp_uid}")
 	public IamportResponse<Payment> paymentByImpUid(@RequestBody PayBean pBean, Model model, Locale locale, HttpSession session,
 			@PathVariable(value="imp_uid") String imp_uid) throws IamportResponseException, IOException {
 		int n = payService.insertPay(pBean);
 		int m = payService.updatePoint(pBean);
-		System.out.println("n=" + n);
-		System.out.println("m=" + m);
 		return api.paymentByImpUid(imp_uid);
 	}
 
