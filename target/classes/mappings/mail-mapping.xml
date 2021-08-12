@@ -25,8 +25,8 @@
 		SELECT * FROM MAILCHECK WHERE MAIL_CUSTOMER = #{name} ORDER BY MAIL_NUM DESC LIMIT 1
 	</select>
 	
-	<select id="findID" parameterType="String" resultType="member">
-		select mem_id, date_format(mem_date, '%Y-%m-%d') from member where mem_name = #{findName}
+	<select id="findID" resultMap="member">
+		select mem_id, mem_date from member where mem_name = #{findName} and mem_email = #{mail_receiver}
 	</select>
 	
 </mapper>

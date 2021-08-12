@@ -31,6 +31,10 @@
 		SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail}
 	</select>
 	
+	<select id="findpw" parameterType="String" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail} AND MEM_ID = #{mem_id}
+	</select>
+	
 	<select id="pwCheck" parameterType="String" resultType="int">
 		select count(*) from member where mem_id = #{mem_id} and mem_pw = #{mem_pw}
 	</select>

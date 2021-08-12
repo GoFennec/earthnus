@@ -137,10 +137,10 @@
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-xs-6">
-								<a href="" class="active" id="login-form-link">아이디 찾기</a>
+								<a href="/auth/find" id="login-form-link">아이디 찾기</a>
 							</div>
 							<div class="col-xs-6">
-								<a href="/auth/findPW" id="register-form-link">비밀번호 찾기</a>
+								<a href="" class="active" id="register-form-link">비밀번호 찾기</a>
 							</div>
 						</div>
 						<hr>
@@ -150,6 +150,13 @@
 							<div class="col-lg-12">
 							<c:if test="${empty findID}">
 								<form id="login-form" action="/auth/findID" method="post" style="display: block;" novalidate>
+									<div class="col-12">
+              							<label for="username" class="form-label">아이디</label>
+              							<input type="text" class="form-control" id="mem_id" name="mem_id" placeholder="" required>
+              							<div class="invalid-feedback">
+               								 필수 입력사항입니다.
+              							</div>
+            						</div>
 									<div class="col-12">
               							<label for="username" class="form-label">이름</label>
               							<input type="text" class="form-control" id="mail_customer" name="mail_customer" placeholder="" required>
@@ -167,14 +174,15 @@
             						<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3" id="button">
-												<button type="button" name="login-submit" id="login-submit" tabindex="4" onclick="find()" class="w-100 btn btn-primary btn-lg">인증번호 전송</button>
+												<button type="button" name="login-submit" id="login-submit" tabindex="4" onclick="findpw()" class="w-100 btn btn-primary btn-lg">인증번호 전송</button>
 											</div>
 										</div>
 									</div>
 									
 									<script type="text/javascript">
 									
-									function find(){
+									function findpw(){
+										var mem_id = $("#mem_id").val();
 										var mail_customer = $("#mail_customer").val();
 										var mail_receiver = $("#mail_receiver").val();
 										
@@ -188,8 +196,8 @@
 							
 										$.ajax({
 								   			type: "POST", //요청 메소드 방식
-								  			 url:"/auth/find",
-								   			data: {"findName":mail_customer, "findEmail":mail_receiver},
+								  			 url:"/auth/findpw",
+								   			data: {"mem_id":mem_id, "findName":mail_customer, "findEmail":mail_receiver},
 								   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 								   			success : function(result){
 									   
@@ -199,7 +207,7 @@
 								      				$("#emailCheck").show();
 													$("#login-submit2").show();
 								      			}else if(result.error === false){
-								    	  			alert('이름과 이메일을 다시 확인해주세요.');
+								    	  			alert('입력하신 정보를 다시 확인해주세요.');
 								      			}
 								   			},
 								   		 error:function(request,status,error){

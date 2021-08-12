@@ -54,7 +54,10 @@ public class AuthController {
 		return "/auth/find";	
 	}
 	
-	
+	@RequestMapping("/auth/findPW")
+	public String findPW() {
+		return "/auth/findPW";	
+	}
 	
 	
 	

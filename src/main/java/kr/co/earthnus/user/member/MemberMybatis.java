@@ -1,6 +1,6 @@
 package kr.co.earthnus.user.member;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -18,5 +18,6 @@ public interface MemberMybatis {
 	public int insertMail(MailBean MailBean);
 	public MailBean selectMail(@Param("name") String name);
 	public int find(@Param("findName") String findName, @Param("findEmail") String findEmail);
-	public ArrayList<MemberBean> findID(@Param("findName") String findName);
+	public int findpw(@Param("findName") String findName, @Param("findEmail") String findEmail, @Param("mem_id") String mem_id);
+	public List<MemberBean> findID(@Param("findName") String findName, @Param("mail_receiver") String mail_receiver);
 }
