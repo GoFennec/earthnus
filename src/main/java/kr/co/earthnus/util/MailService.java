@@ -1,8 +1,8 @@
 package kr.co.earthnus.util;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -122,11 +122,29 @@ public class MailService {
 		return correct;
 	}
 	
-	//아이디 찾기에서 인증번호 일치 확인
-	public ArrayList<MemberBean> findID(String findName) {
+	public boolean findpw(String findName, String findEmail, String mem_id) {
+		boolean correct = false;
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		System.out.println(findName + " Service");
-		ArrayList<MemberBean> findID = dao.findID(findName);
+		System.out.println(findEmail + " Service");
+		int find = dao.findpw(findName, findEmail, mem_id);
+		
+		if(find > 0) {
+			correct = true;
+		}
+		return correct;
+	}
+	
+	//아이디 찾기에서 인증번호 일치 확인
+	public List<MemberBean> findID(String findName, String mail_receiver) {
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		System.out.println(findName + " Service");
+		List<MemberBean> findID = dao.findID(findName, mail_receiver);
+		
+		for(int i = 0; i < findID.size(); i++) {
+			System.out.println(findID.get(i).getMem_id());
+			System.out.println(findID.get(i).getMem_date());
+		}
 		
 		return findID;
 	}

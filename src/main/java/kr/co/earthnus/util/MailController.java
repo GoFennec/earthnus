@@ -1,7 +1,7 @@
 package kr.co.earthnus.util;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,7 +58,7 @@ public class MailController {
 		return map;
 	}
 	
-	//아이디 비번 찾기
+	//아이디 찾기
 	@RequestMapping(value="/auth/find", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> find(@RequestParam("findName")String findName, @RequestParam("findEmail")String findEmail, HttpServletRequest request) {
@@ -83,23 +83,48 @@ public class MailController {
 		return map;
 	}
 	
-	//아이디 찾기에서 인증번호 확인
-	@RequestMapping(value="/auth/findID", method=RequestMethod.POST)
+	//비번 찾기
+	@RequestMapping(value="/auth/findpw", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> findID(@RequestParam("emailPwCheck")String emailPwCheck, @RequestParam("findName")String findName, HttpServletRequest request, Model model) {
-		System.out.println(findName + " findID");
-		System.out.println(emailPwCheck + " findID");
+	public Map<String, Object> findpw(@RequestParam("findName")String findName, @RequestParam("findEmail")String findEmail, 
+			@RequestParam("mem_id")String mem_id, HttpServletRequest request) {
+		
+		boolean correct = mailService.findpw(findName, findEmail, mem_id);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		boolean correct = mailService.mailCheck(emailPwCheck, findName);
-		
 		if(correct) {
-			ArrayList<MemberBean> findID = mailService.findID(findName);
-			model.addAttribute("findID",findID);
-			map.put("error", true);
+			int i = mailService.mailSendWithPassword(findEmail, findName);
+			if(i == 0) {
+				map.put("error", true);
+			}else {
+				map.put("error", false);
+			}
 		}else {
 			map.put("error", false);
 		}
 		return map;
+	}
+	
+	//아이디 찾기에서 인증번호 확인
+	@RequestMapping(value="/auth/findID", method=RequestMethod.POST)
+	public String findID(MailBean mailBean, HttpServletRequest request, Model model) {
+		
+		String mail_customer = mailBean.getMail_customer();
+		String mail_receiver = mailBean.getMail_receiver();
+		String mail_pw = mailBean.getMail_pw();
+		System.out.println(mail_customer + " 이름");
+		System.out.println(mail_receiver + " 이메일");
+		System.out.println(mail_pw + " 인증번호");
+		
+		boolean correct = mailService.mailCheck(mail_pw, mail_customer);
+		
+		if(correct) {
+			List<MemberBean> findID = mailService.findID(mail_customer, mail_receiver);
+			model.addAttribute("findID",findID);
+			return "/auth/find";
+		}else {
+			return null;
+		}
 	}
 }

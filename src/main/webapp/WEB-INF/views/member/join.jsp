@@ -401,7 +401,7 @@
 			 
             <div class="col-md-12">
               <label for="cc-expiration" class="form-label">전화번호</label>
-              <input type="text" name="mem_tel" class="form-control" id="mem_tel" placeholder="" required>
+              <input type="text" name="mem_tel" class="form-control" id="mem_tel" placeholder="" maxlength='11' required>
               <div class="invalid-feedback">
                 	필수 입력사항입니다.
               </div>
