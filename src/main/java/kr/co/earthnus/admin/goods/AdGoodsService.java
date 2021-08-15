@@ -66,7 +66,7 @@ public class AdGoodsService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			gBean.setGoods_img("C:/upload/" + fileName);
+			gBean.setGoods_img("/upload/" + fileName);
 		} else {
 			gBean.setGoods_img("/resources/goods/imgDefault.png");
 		}
@@ -88,7 +88,7 @@ public class AdGoodsService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			gBean.setGoods_img("C:/upload/" + fileName);
+			gBean.setGoods_img("/upload/" + fileName);
 		}
 		goodsDAO.updateGoodsOk(gBean);
 	}
