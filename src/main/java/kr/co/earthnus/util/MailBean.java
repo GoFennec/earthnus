@@ -8,6 +8,7 @@ public class MailBean {
 	private String mail_sender;
 	private String mail_receiver;
 	private String mail_customer;
+	private String mem_id;
 	
 	public MailBean() {}
 	
@@ -56,6 +57,11 @@ public class MailBean {
 	public void setMail_customer(String mail_customer) {
 		this.mail_customer = mail_customer;
 	}
-	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
 	
 }

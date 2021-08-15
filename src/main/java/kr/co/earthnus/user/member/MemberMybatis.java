@@ -16,9 +16,12 @@ public interface MemberMybatis {
 	public void deleteMember(String mem_id);
 	public int idCheck(String mem_id);
 	public String pwCheck(String mem_id);
+	
 	public int insertMail(MailBean MailBean);
-	public MailBean selectMail(@Param("name") String name);
+	public MailBean selectMail(@Param("name") String name, @Param("email") String email);
+	public String selectMailPW(@Param("email") String email, @Param("mem_id") String mem_id);
 	public int find(@Param("findName") String findName, @Param("findEmail") String findEmail);
 	public int findpw(@Param("findName") String findName, @Param("findEmail") String findEmail, @Param("mem_id") String mem_id);
 	public List<MemberBean> findID(@Param("findName") String findName, @Param("mail_receiver") String mail_receiver);
+	public int changePW(@Param("changePW") String changePW, @Param("mem_id") String mem_id, @Param("mail_customer") String mail_customer);
 }

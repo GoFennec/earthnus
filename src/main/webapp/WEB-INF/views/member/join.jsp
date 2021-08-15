@@ -372,6 +372,7 @@
 			$('#testBtn2').click(function(){
 				var mailCheck = $("#mailCheck").val();
 				var name = $('#mem_name').val();
+				var email = $('#mem_email').val();
 				if(mailCheck === ""){
 					alert("이메일 인증번호를 입력해주세요.");
 					return;
@@ -379,7 +380,7 @@
 				$.ajax({
 		   			type: "POST", //요청 메소드 방식
 		  			 url:"/member/mailCheck",
-		   			data: {"mailCheck":mailCheck, "name":name},
+		   			data: {"mailCheck":mailCheck, "name":name, "email":email},
 		   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 		   			success : function(result){
 			   
