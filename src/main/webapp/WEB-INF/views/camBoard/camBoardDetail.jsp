@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="sysBtn" style="text-align: center;">
-					<input type="button" class="btn-dark" value="목록" onclick="location.href="document.referrer/>
+					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>
 				</td>
 			</tr>
 		</table>
@@ -76,7 +76,7 @@
 				type:"GET",
 				dataType:"json",
 				"success" : function(CamBoardList){
-					alert("AJAX통신 성공");
+					console.log("AJAX통신 성공");
 					
 					$.each(CamBoardList, function(index, item){
 						listHead += '<tr>';
@@ -90,7 +90,7 @@
 					$('#camBoardList').html(listHead);
 				},
 				"error" : function(CamBoardList){
-					alert("AJAX통신 실패");
+					console.log("AJAX통신 실패");
 			    }
 			});
 		} 
@@ -104,7 +104,7 @@
 		
 		if(preUrl.substring(21,36) === "/camBoard/list"){
 			
-			alert("제대로된 경로 : " + preUrl.substring(37));
+			console.log("제대로된 경로 : " + preUrl.substring(37));
 			
 			$.ajax({
 				
@@ -112,15 +112,15 @@
 				type:"GET",
 				dataType:"json",
 				"success" : function(CamBoardList){
-					alert("AJAX통신 성공");
+					console.log("AJAX통신 성공");
 				    
 				},
 				"error" : function(CamBoardList){
-					alert("AJAX통신 실패");
+					console.log("AJAX통신 실패");
 			    }
 			});
 		}else{
-			alert("옳지 않은 경로" + preUrl.substring(21));
+			console.log("옳지 않은 경로" + preUrl.substring(21));
 			
 			$.ajax({
 				
