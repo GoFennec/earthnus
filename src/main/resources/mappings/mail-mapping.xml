@@ -22,11 +22,20 @@
 	</insert>
 	
 	<select id="selectMail" parameterType="String" resultType="mail">
-		SELECT * FROM MAILCHECK WHERE MAIL_CUSTOMER = #{name} ORDER BY MAIL_NUM DESC LIMIT 1
+		SELECT * FROM MAILCHECK WHERE MAIL_CUSTOMER = #{name} AND MAIL_RECEIVER = #{email} ORDER BY MAIL_NUM DESC LIMIT 1
 	</select>
 	
 	<select id="findID" resultMap="member">
 		select mem_id, mem_date from member where mem_name = #{findName} and mem_email = #{mail_receiver}
 	</select>
+	
+	<select id="selectMailPW" resultType="String">
+		SELECT MAIL_PW FROM MAILCHECK WHERE MAIL_CUSTOMER = (SELECT MEM_NAME FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_EMAIL = #{email})
+		ORDER BY MAIL_NUM DESC LIMIT 1
+	</select>
+	
+	<update id="changePW" parameterType="String">
+		UPDATE MEMBER SET MEM_PW = #{changePW} WHERE MEM_NAME = #{mail_customer} AND MEM_ID = #{mem_id}
+	</update>
 	
 </mapper>

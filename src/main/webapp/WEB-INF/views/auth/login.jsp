@@ -134,7 +134,7 @@ body {
        <input type="submit" class="btn btn-primary btn-block btn-lg" value="로그인"> 
          
         <a href="/member/join" class="forgot-link" title="회원가입">회원가입</a>             
-         <a href="#" class="forgot-link" title="아이디/비밀번호찾기">아이디/비밀번호찾기&nbsp;&nbsp;</a> 
+         <a href="/auth/find" class="forgot-link" title="아이디/비밀번호찾기">아이디/비밀번호찾기&nbsp;&nbsp;</a> 
 				
     </form>			
    <!--  <div class="text-center small">Don't have an account? <a href="#">Sign up</a></div> -->

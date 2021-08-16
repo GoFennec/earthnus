@@ -41,14 +41,11 @@ public class MailController {
 	
 	@RequestMapping(value="/member/mailCheck", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> mailCheck(@RequestParam("mailCheck")String mailCheck, @RequestParam("name")String name, HttpServletRequest request) {
-		System.out.println("ajax");
-		System.out.println(mailCheck + " MailCheck");
-		System.out.println(name + " name");
+	public Map<String, Object> mailCheck(@RequestParam("mailCheck")String mailCheck, @RequestParam("name")String name,  @RequestParam("email")String email, HttpServletRequest request) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		boolean correct = mailService.mailCheck(mailCheck, name);
+		boolean correct = mailService.mailCheck(mailCheck, name, email);
 		
 		if(correct) {
 			map.put("error", true);
@@ -113,11 +110,8 @@ public class MailController {
 		String mail_customer = mailBean.getMail_customer();
 		String mail_receiver = mailBean.getMail_receiver();
 		String mail_pw = mailBean.getMail_pw();
-		System.out.println(mail_customer + " 이름");
-		System.out.println(mail_receiver + " 이메일");
-		System.out.println(mail_pw + " 인증번호");
 		
-		boolean correct = mailService.mailCheck(mail_pw, mail_customer);
+		boolean correct = mailService.mailCheck(mail_pw, mail_customer, mail_receiver);
 		
 		if(correct) {
 			List<MemberBean> findID = mailService.findID(mail_customer, mail_receiver);
@@ -126,5 +120,39 @@ public class MailController {
 		}else {
 			return null;
 		}
+	}
+	
+	//비번 찾기에서 인증번호 확인
+	@RequestMapping(value="/auth/findPass", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> findPass(@RequestParam("mem_id")String mem_id, @RequestParam("findName")String findName,
+			@RequestParam("findEmail")String findEmail, @RequestParam("mail_pw")String mail_pw, HttpServletRequest request) {
+		
+		boolean correct = mailService.mailCheckPW(mail_pw, findName, findEmail, mem_id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(correct) {
+			map.put("error", true);
+		}else {
+			map.put("error", false);
+		}
+		return map;
+	}
+	
+	//비번 찾기에서 인증번호 확인
+	@RequestMapping(value="/auth/changePW", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> changePW(@RequestParam("changePW")String changePW, @RequestParam("mem_id")String mem_id,
+			@RequestParam("mail_customer")String mail_customer, HttpServletRequest request) {
+		
+		int changePass = mailService.changePW(changePW, mem_id, mail_customer);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(changePass > 0) {
+			map.put("error", true);
+		}else {
+			map.put("error", false);
+		}
+		return map;
 	}
 }
