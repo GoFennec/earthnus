@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
     <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>마이페이지</title>
+    <title>굿즈교환현황</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -634,9 +635,9 @@ color: #a2a6af
                     </div>
             		<nav class="side-menu">
         				<ul class="nav">
-        					<li class="active" ><a href="/member/myPage"><span class="fa fa-user"></span>마이페이지</a></li>
+        					<li><a href="/member/myPage"><span class="fa fa-user"></span>마이페이지</a></li>
         					<li><a href="/member/myInfoPwCh"><span class="fa fa-cog"></span> 내 정보</a></li> 
-        					<li><a href="/member/myOrder"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
+        					<li class="active"><a href="/member/myOrder"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
         					<li><a href="#"><span class="fa fa-clock-oz"></span> Reminders</a></li>
@@ -645,157 +646,29 @@ color: #a2a6af
                 </div>
              
                 <div class="content-panel">
-                    <h2 class="title">마이페이지</h2>
+                    <h2 class="title">굿즈 교환 현황</h2>
 					<hr>
-                    <form class="form-horizontal" method="post" action="/myPage" >
-                        <fieldset class="fieldset">
-                        
-                            <div class="form-group">
-                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">나의 후원금액</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                   
-                                    <input type="text" class="form-control" name ="pay_price" readonly value=${myDonation } >
-                               
-                                </div>
-                            </div>
-        
-                       
-                              <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">포인트</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" readonly class="form-control" name ="mem_point" value=${myPoint } >
-                                </div>
-                            </div>
-                        </fieldset>
-                        
-                        
-                        
-                         
-                        
-                        
-                       
-                        <h2>내가 구한 지구</h2>
-                         <hr>
-                        
-	
-
-		<div class="col-md-3 col-sm-3 col-xs-12">
-			<div class="card">
-
-				<img class="card-img-top" src="/resources/donation/forestItem4.png" alt="forestItem4" title="나무이미지">
-
-				<div class="card-header px-4 pt-4">
-					<h3></h3>
-				</div>
-				<div class="card-body px-4 pt-2">
-					<p>내가 심은 나무</p>
-
-					<img src="/resources/donation/forestItem1.png" class="rounded-circle mr-1" alt="forestItem1" title="나무이미지" width="28" height="28">
-					<img src="/resources/donation/forestItem2.png" class="rounded-circle mr-1" alt="forestItem2" title="나무이미지" width="28" height="28">
-					<img src="/resources/donation/forestItem3.png" class="rounded-circle mr-1" alt="forestItem3" title="나무이미지" width="28" height="28">
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item px-4 pb-4">
-					 <input type="hidden" id=myDonation_f name="pay_price" value=${myDonation_f }>
-						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_f}</span></p>
-						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		
-		
-	
-				<div class="col-md-3 col-sm-3 col-xs-12">
-			<div class="card">
-
-				<img class="card-img-top" src="/resources/donation/oceanItem4.png" alt="oceanItem4" title="해양사진">
-
-				<div class="card-header px-4 pt-4">
-					<h3></h3>
-				</div>
-				<div class="card-body px-4 pt-2">
-					<p>내가 살린 바다 친구들</p>
-
-					<img src="/resources/donation/oceanItem1.png" class="rounded-circle mr-1" alt="oceanItem1" title="해양사진" width="28" height="28">
-					<img src="/resources/donation/oceanItem2.png" class="rounded-circle mr-1" alt="oceanItem2" title="해양사진" width="28" height="28">
-					<img src="/resources/donation/oceanItem3.png" class="rounded-circle mr-1" alt="oceanItem3" title="해양사진" width="28" height="28">
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item px-4 pb-4">
-									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_o}</span></p>
-						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		
-		
-		
-		<div class="col-md-3 col-sm-3 col-xs-12">
-			<div class="card">
-
-				<img class="card-img-top" src="/resources/donation/iceItem4.png" alt="iceItem4" title="북극곰사진">
-
-				<div class="card-header px-4 pt-4">
-					<h3></h3>
-				</div>
-				<div class="card-body px-4 pt-2">
-					<p>내가 살린 북극곰</p>
-
-					<img src="/resources/donation/iceItem1.png" class="rounded-circle mr-1" alt="iceItem1" title="북극곰사진" width="28" height="28">
-					<img src="/resources/donation/iceItem2.png" class="rounded-circle mr-1" alt="iceItem2" title="북극곰사진" width="28" height="28">
-					<img src="/resources/donation/iceItem3.png" class="rounded-circle mr-1" alt="iceItem3" title="북극곰사진" width="28" height="28">
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item px-4 pb-4">
-						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_i}</span></p>
-						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		
-		<div class="col-md-3 col-sm-3 col-xs-12">
-			<div class="card">
-
-				<img class="card-img-top" src="/resources/donation/plasticItem4.png" alt="plasticItem4" title="플라스틱사진">
-
-				<div class="card-header px-4 pt-4">
-					<h3></h3>
-				</div>
-				<div class="card-body px-4 pt-2">
-					<p>내가 줄인 플라스틱</p>
-
-					<img src="/resources/donation/plasticItem1.png" class="rounded-circle mr-1" alt="plasticItem1" title="플라스틱사진" width="28" height="28">
-					<img src="/resources/donation/plasticItem2.png" class="rounded-circle mr-1" alt="plasticItem2" title="플라스틱사진" width="28" height="28">
-					<img src="/resources/donation/plasticItem3.png" class="rounded-circle mr-1" alt="plasticItem3" title="플라스틱사진" width="28" height="28">
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item px-4 pb-4">
-									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_p}</span></p>
-						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		
-                       
-                        
-                        
-                        
+                    <form class="form-horizontal" method="post" action="/member/myOrder" >
+                         <table class="table table-hover table-xl mb-0">
+                <thead>
+                  <tr>
+                    <th>굿즈 번호</th>
+                    <th>굿즈 이름</th>
+                    <th>사용한 포인트</th>
+                    <th>교환한 날짜</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${myOrder}" var="exGoods">
+                  <tr>
+                    <td class="text-truncate">${exGoods.exg_gnum}</td>
+                    <td class="text-truncate">${exGoods.exg_gname}</td>
+                    <td class="text-truncate">${exGoods.exg_point}</td>
+                    <td class="text-truncate">${exGoods.exg_date}</td>
+         		 </tr>
+         		 </c:forEach>
+                </tbody>
+              </table>
                         
                     </form>
                 </div>

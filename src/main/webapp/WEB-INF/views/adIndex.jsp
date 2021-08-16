@@ -31,7 +31,7 @@
 $(function() {
 	if ("${auth.auth_id}" != "admin") {
 		alert("접근권한이 없습니다.");
-		location.href="/adAuth/login/123test123";
+		location.href="/adAuth/adLogin";
 	}
 });
 </script>
