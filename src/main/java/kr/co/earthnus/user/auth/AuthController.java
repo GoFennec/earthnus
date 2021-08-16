@@ -1,6 +1,7 @@
 package kr.co.earthnus.user.auth;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.earthnus.user.member.MemberBean;
+
 @Controller
 public class AuthController {
 	@Autowired
 	private AuthService service;
+	@Autowired
+	private KakaoAPI kakao;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
@@ -60,7 +65,52 @@ public class AuthController {
 	}
 	
 	
-	
+	// 카카오로그인
+
+	@RequestMapping(value = "/kakaoLogin")
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, Model model, AuthBean aBean, MemberBean mBean) {
+
+		System.out.println("code : " + code);
+		String access_Token = kakao.getAccessToken(code);
+		System.out.println("controller access_token : " + access_Token);
+		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+		System.out.println("login Controller : " + userInfo);
+		if (userInfo.get("email") != null) {
+			System.out.println("email not null");
+			session.setAttribute("auth_id", userInfo.get("email"));
+			session.setAttribute("auth_name", userInfo.get("nickname"));
+			String auth_id = (String) session.getAttribute("auth_id");
+			System.out.println("어쓰아이디" + auth_id);
+			if (userInfo.get("gender").toString().equals("male")) {
+				session.setAttribute("userGender", "male");
+			} else if (userInfo.get("gender").toString().equals("female")) {
+				session.setAttribute("userGender", "female");
+			}
+			/*
+			 * else { session.setAttribute("userGender", "선택안함"); }
+			 */
+			session.setAttribute("access_Token", access_Token);
+			aBean = service.kakaoLogin(auth_id);
+			model.addAttribute("aBean", aBean);
+			if (aBean == null) {
+				return "redirect:member/join_kakao";
+			} else {
+				session.setAttribute("auth", aBean);
+				return "redirect:/";
+			}
+		} else {
+			return "/auth/login";
+		}
+	}
+
+//카카오 로그아웃
+	@RequestMapping(value = "/kakaoLogout")
+	public String logout(HttpSession session) {
+		kakao.kakaoLogout((String) session.getAttribute("access_Token"));
+		session.removeAttribute("access_Token");
+		session.removeAttribute("auth_id");
+		return "index";
+	}
 	
 	
 	

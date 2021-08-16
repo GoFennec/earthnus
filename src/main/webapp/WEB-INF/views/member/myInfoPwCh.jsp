@@ -619,8 +619,8 @@ color: #a2a6af
         				<ul class="nav">
         					<li><a href="/member/myPage"><span class="fa fa-user"></span> 마이페이지</a></li>
         					<li class="active"><a href="/member/myInfoPwCh"><span class="fa fa-cog"></span> 내 정보</a></li>
-        					<li><a href="#"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
-        					<li><a href="#"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
+        					<li><a href="/member/myOrder"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
+        					<li><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
         					<li><a href="#"><span class="fa fa-clock-o"></span> Reminders</a></li>
