@@ -169,6 +169,7 @@ function cancelPay() {
       method : "POST",
       headers : { "Content-Type": "application/json" },
       data : JSON.stringify ({
+    	pay_no : cancelNo,
         pay_num : cancelNum,
         pay_cdate : dateString
       })
