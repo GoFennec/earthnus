@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%> 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html><head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -52,7 +52,7 @@
 			<c:forEach items="${goodsList}" var="goods">
 					<tr class="goodsInfo" id="${goods.goods_num}">
 						<td>${goods.goods_num}</td>
-						<td class="goodsImg"><img src="${goods.goods_img}" width="150" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
+						<td class="goodsImg"><img src="<spring:url value='${goods.goods_img}'/>" height="120" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
 						<td>${goods.goods_name}</td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point<br/></td>
 						<td><c:set var = "num" value="0"/>
