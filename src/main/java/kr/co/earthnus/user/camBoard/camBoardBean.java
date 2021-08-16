@@ -56,6 +56,7 @@ public class camBoardBean {
 	public void setCAMB_DATE(Date cAMB_DATE) {
 		CAMB_DATE = cAMB_DATE;
 	}
+	
 	@Override
 	public String toString() {
 		return "CamBoardBean [CAMB_NUM=" + CAMB_NUM + ", CAMB_NAME=" + CAMB_NAME + ", CAMB_SUBJECT=" + CAMB_SUBJECT

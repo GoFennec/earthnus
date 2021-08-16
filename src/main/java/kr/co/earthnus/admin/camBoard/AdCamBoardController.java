@@ -1,10 +1,9 @@
 package kr.co.earthnus.admin.camBoard;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,32 +18,36 @@ public class AdCamBoardController {
 			
 	@RequestMapping(value="/adCamBoard/list")
 	public String getCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, camBoardBean cBean, Model model) {
+			@RequestParam(defaultValue = "6") String contentnum, @RequestParam(defaultValue = "desc") String order,
+			camBoardBean cBean, Model model) {
 		
 		String search = "%%";
+		String search_type = "CAMB_ENTIRE";
+		String orderBy = "CAMB_NUM";
 		
-		adCamBoardService.getCamBoardList(search, arr, cBean, pagenum, contentnum, model);
-		
-		System.out.println("Controller pagenum : ");
+		//adCamBoardService.getCamBoardList(search, arr, cBean, pagenum, contentnum, model);
+		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
 		
 		System.out.println("CamBoardController");
 		return "camBoard/adCamBoardList";
 	}
 	
-	@RequestMapping("/adCamBoard/list/search")
+	@RequestMapping(value = "/adCamBoard/list/search")
 	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam( value = "search", required=false) String search ,
-			camBoardBean cBean, Model model) {
-		
-		System.out.println("Controller : " + search);
+			@RequestParam(defaultValue = "6") String contentnum, @RequestParam("search") String search, @RequestParam("search_type") String search_type,
+			@RequestParam(defaultValue = "desc") String order, camBoardBean cBean, Model model) {
 		
 		if(search != null) {
 			search = "%" + search + "%";
 		}else if(search == null || search.equals("")) {
 			search = "%%";
 		}
+		if(search_type == null) {
+			search_type = "CAMB_ENTIRE";
+		}
+		String orderBy = "CAMB_NUM";
 		
-		adCamBoardService.searchCamBoard(arr, search, cBean, pagenum, contentnum, model);
+		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
 		
 		System.out.println("CamBoardController");
 		return "camBoard/adCamBoardList";
@@ -54,6 +57,7 @@ public class AdCamBoardController {
 	public String getCamBoardDetail(@RequestParam("CAMB_NUM") String contentnum, Model model) {
 		
 		System.out.println("Controller contentnum : " + contentnum);
+		System.out.println("Controller CAMB_SUBJECT : " + adCamBoardService.getCamBoard(contentnum).getCAMB_SUBJECT());
 		model.addAttribute("camBoard", adCamBoardService.getCamBoard(contentnum));
 				
 		return "camBoard/adCamBoardDetail";
@@ -74,29 +78,29 @@ public class AdCamBoardController {
 		System.out.println("insertCamBoardOk");
 		
 		adCamBoardService.insertCamBoard(CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
-		return "camBoard/adCamBoardList";
+		return "redirect:/adCamBoard/list";
 	}
 	
 	@RequestMapping(value="/adCamBoard/update")
-	public String updateCamBoard() {
+	public String updateCamBoard(@ModelAttribute camBoardBean cBean, Model model) {
 		
-		System.out.println("updateCamBoard");
+		model.addAttribute("camBoard", cBean);
+		System.out.println("updateCamBoard CAMB_SUBJECT : " + cBean.getCAMB_SUBJECT());
 		
 		return "camBoard/adCamBoardUpdate";
 	}
 	
-	/*@RequestMapping(value="/adCamBoard/updateOk", method = RequestMethod.POST)
-	public String updateCamBoardOk(HttpServletRequest httpServletRequest, Model model) {
-		String CAMB_NAME = httpServletRequest.getParameter("CAMB_NAME");
-		String CAMB_SUBJECT = httpServletRequest.getParameter("CAMB_SUBJECT");
-		String CAMB_CONTENT = httpServletRequest.getParameter("CAMB_CONTENT");
-		MultipartFile CAMB_UPLOADFILE = httpServletRequest.getParameter("CAMB_UPLOADFILE");
+	@RequestMapping(value="/adCamBoard/updateOk", method=RequestMethod.POST)
+	public String updateCamBoardOk(@RequestParam(value="CAMB_NAME") String CAMB_NAME, @RequestParam(value="CAMB_SUBJECT") String CAMB_SUBJECT, 
+			@RequestParam(value="CAMB_CONTENT") String CAMB_CONTENT, @RequestParam(value="CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE, Model model) {
 		
-		System.out.println("updateCamBoardOk");
+		System.out.println("update 내용 =======> 이름 : " + CAMB_NAME + ", 주제 : " + CAMB_SUBJECT + 
+				", 내용 : " + CAMB_CONTENT);
 		adCamBoardService.updateCamBoard(CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
+		System.out.println("updateCamBoardOk");
 		
-		return "camBoard/adCamBoardUpdate";
-	}*/
+		return "redirect:/adCamBoard/list";
+	}
 	
 	@RequestMapping(value="/adCamBoard/delete")
 	public String deleteCamBoard(camBoardBean cBean, Model model) {
@@ -104,6 +108,6 @@ public class AdCamBoardController {
 		System.out.println("deleteCamBoard");
 		adCamBoardService.deleteCamBoard(cBean);
 		
-		return "camBoard/adCamBoardList";
+		return "redirect:/adCamBoard/list";
 	}
 }

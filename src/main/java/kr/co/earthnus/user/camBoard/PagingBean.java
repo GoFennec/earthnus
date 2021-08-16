@@ -10,7 +10,11 @@ public class PagingBean {
     private boolean next;
     private int currentblock;
     private int lastblock;
+    private String arr;
     private String search;
+    private String order;						// 오름차순 내림차순
+    private String orderBy;						// 오름차순 내림차순 기준점
+	private String search_type;
     
     public void prevnext(int pagenum) {
         if(calcpage(totalcount,contentnum)<6) {
@@ -34,6 +38,34 @@ public class PagingBean {
         }
         return totalpage;
     }
+    
+	public String getSearch_type() {
+		return search_type;
+	}
+	public void setSearch_type(String search_type) {
+		this.search_type = search_type;
+	}
+	public String getArr() {
+		return arr;
+	}
+	public void setArr(String arr) {
+		this.arr = arr;
+	}
+	public String getOrderBy() {
+		return orderBy;
+	}
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+	public String getOrder() {
+		return order;
+	}
+	public void setOrder(String order) {
+		this.order = order;
+	}
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
 	public String getSearch() {
 		return search;
 	}

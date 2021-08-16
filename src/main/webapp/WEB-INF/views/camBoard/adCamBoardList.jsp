@@ -21,28 +21,9 @@
 	.btn-dark {float: right; margin-left: 10px;}
 	ul {list-style: none; margine: 0; padding: 0;}
 	li {margine: 0 0 0 0; padding: 0 0 0 0; border: 0; float: left;}
+	li:hover {background-color: #FFFFDE}
 	a:visited{ color: #086121;}
 </style>
-<script type="text/javascript">
-   function changepage(){
-       location.href="file:///Users/gimjeongbin/Desktop/finalproject/camBoardDetail.html";
-   }
-   
-   function searchUrl(){
-	   location.href="/adCamBoard/list/search?search="+ document.getElementById("search").value
-   }
-	
-   $.urlParam = function(name){
-	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-	    if (results==null){
-	       return null;
-	    }
-	    else{
-	       return results[1] || 0;
-	    }
-	}
-
-</script>
 
 <title>EARTH & US</title>
 </head>
@@ -53,7 +34,7 @@
 
 	<table class="goodsTitle">
 		<thead>
-			<tr><th scope="col">캠페인 관리</th>
+			<tr><th scope="col">캠페인 관리 ${page.search_type}</th>
 			<td><button class="btn-dark" type="button" onClick="location.href='/adCamBoard/insert'">캠페인 추가</button></td></tr>
 		</thead>
 	</table><br>
@@ -63,16 +44,24 @@
 			<c:if test="${empty page.search}">
 			<li><a href="/adCamBoard/list?arr=entire" id="entire">캠페인 전체</a></li>&nbsp;&nbsp;&nbsp;
 			<li><a href="/adCamBoard/list?arr=doing" id="doing">캠페인 중</a></li>&nbsp;&nbsp;&nbsp;
-			<li><a href="/adCamBoard/list?arr=end" id="end">캠페인 종료</a></li>
+			<li><a href="/adCamBoard/list?arr=end" id="end">캠페인 종료</a></li><br>
+			<li><a href="/adCamBoard/list?arr=${page.arr}&order=desc" id="desc">최신순</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list?arr=${page.arr}&order=asc" id="asc">오래된순</a></li>
 			</c:if>
 			<c:if test="${!empty page.search}">
-			<li><a href="/adCamBoard/list/search?search=${page.search}&arr=entire" id="entire">캠페인 전체</a></li>&nbsp;&nbsp;&nbsp;
-			<li><a href="/adCamBoard/list/search?search=${page.search}&arr=doing" id="doing">캠페인 중</a></li>&nbsp;&nbsp;&nbsp;
-			<li><a href="/adCamBoard/list/search?search=${page.search}&arr=end" id="end">캠페인 종료</a></li>
+			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=entire" id="entire">캠페인 전체</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=doing" id="doing">캠페인 중</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=end" id="end">캠페인 종료</a></li><br>
+			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=${page.arr}&order=desc" id="desc">최신순</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=${page.arr}&order=asc" id="asc">오래된순</a></li>
 			</c:if>
 		</ul>
 	
 		<form  style="text-align: right;">
+			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_ENTIRE" checked>전체</label>&nbsp;&nbsp;&nbsp;
+			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_NAME">제목</label>&nbsp;&nbsp;&nbsp;
+			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_SUBJECT">주제</label>&nbsp;&nbsp;&nbsp;
+			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_CONTENT">내용</label>&nbsp;&nbsp;&nbsp;
 			<input type="text" id="search" placeholder="캠페인 검색" value="${page.search}">
 			<input type="button" value="검색" onclick="searchUrl()">
 		</form>
@@ -80,6 +69,7 @@
 		
 	<div class="row">
 		<div class="col-sm-12">
+			<c:if test="${page.totalcount ne 0}">
 			<table class="goodsTable">
 			<tr>
 				<th scope="col">캠페인번호</th>
@@ -87,8 +77,9 @@
 				<th scope="col">캠페인이름</th>
 				<th scope="col">캠페인주제</th>
 				<th scope="col">캠페인내용</th>
-			</tr>	
-			<c:forEach items="${CamBoardList}" var="list">
+			</tr>
+			
+				<c:forEach items="${CamBoardList}" var="list">
 					<tr onclick="location.href='/adCamBoard/detail?CAMB_NUM=${list.CAMB_NUM}'">
 						<td>${list.CAMB_NUM}</td>
 						<td class="camBoardImg"><img src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_NAME} 이미지"/></td>
@@ -99,11 +90,15 @@
 						${liat.CAMB_CONTENT}
 						</td>
 					</tr>
-			</c:forEach>
+				</c:forEach>
 			</table>
+			</c:if>
+			<c:if test="${page.totalcount eq 0}">
+				<div><h2 style="text-align: center;">'${page.search}'에 대한 검색 결과가 없습니다.</h2></div>
+			</c:if>	
 		</div>
 	</div>
-	
+	<c:if test="${page.totalcount ne 0}">
 	<div class="row">
 	<div class="col-sm-12">
 		<table class="paging">
@@ -123,9 +118,66 @@
 		</table><br/>
 	</div>
 	</div>
-
+	</c:if>
+	<c:if test="${page.totalcount eq 0}">
+		<table class="paging">
+			<tr>
+				<td style="background-color: #0ed145;"></td>
+			</tr>
+		</table><br/>
+	</c:if>
 </div>
 	
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
+<script type="text/javascript">
+	window.onload = function(){
+		const search_type = $("input:checkbox[name='search_type']:checked").val();
+		
+		$("input:checkbox[id='id값']").prop("checked", true);
+		
+		var obj = document.getElementsByName("search_type");
+	    for(var i=0; i<obj.length; i++){
+	        if(obj[i] !== search_type){
+	            obj[i].checked = false;
+	        }else if(obj[i] === search_type){
+	        	obj[i].checked = true;
+	        }
+	    }
+	}
+	$(function(){
+		
+	});
+	
+	function doOpenCheck(chk){
+	    var obj = document.getElementsByName("search_type");
+	    for(var i=0; i<obj.length; i++){
+	        if(obj[i] != chk){
+	            obj[i].checked = false;
+	        }
+	    }
+	}	
+   function changepage(){
+       location.href="file:///Users/gimjeongbin/Desktop/finalproject/camBoardDetail.html";
+   }
+   
+   function searchUrl(){
+	   
+	   var search = document.getElementById("search").value;
+	   var search_type = $("input:checkbox[name='search_type']:checked").val();
+	   
+	   location.href="/adCamBoard/list/search?search="+ search + "&search_type=" + search_type;
+   }
+	
+   $.urlParam = function(name){
+	   const results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	    if (results==null){
+	       return null;
+	    }
+	    else{
+	       return results[1] || 0;
+	    }
+	}
+   
+</script>
 </body>
 </html>

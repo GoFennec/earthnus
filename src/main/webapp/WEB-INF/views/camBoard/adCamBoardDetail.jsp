@@ -27,14 +27,19 @@
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 
 	<div class="container col-sm-12 col-lg-4">
-		<form action="/adCamBoard/updateOk" method="POST">
+		<form action="/adCamBoard/updateOk" method="POST" enctype="multipart/form-data">
 			<table class="goodsTable">
-			
+				<tr>
+					<td colspan = "2">
+						<h1 style="text-align: center"><b>캠페인 정보</b></h1>
+					</td>
+				</tr>
 				<tr>
 					<td colspan = "2">
 						<div id="max" class="file-wrapper flie-wrapper-area">
-								<input type="file" name="file" id="file" class="upload-box upload-plus" accept="image/*" style="display: none;">
+								<input type="file" name="CAMB_UPLOADFILE" id="file" class="upload-box upload-plus" accept="image/*" style="display: none;">
 									<div id="preview"></div>
+									<input type="hidden" name="goods_img" value="${goods.goods_img}">
 								<div style="text-align: center;" class="file-edit-icon">
 									<a href="#" class="preview-edit">수정</a>
 									<a href="#" class="preview-de">삭제</a>
@@ -52,10 +57,10 @@
 					<td>캠페인 주제</td><!-- <input type="text" name="CAMB_SUBJECT" value="${camBoard.CAMB_SUBJECT}"> --> 
 					<td>
 						<select id="CAMB_SUBJECT" name="CAMB_SUBJECT" onchange="showUpdateButton()" required>
-						<option id="해양" value="해양">해양</option>
-						<option id="플라스틱" value="플라스틱">플라스틱</option>
-						<option id="산림" value="산림">산림</option>
-						<option id="극지방" value="극지방">극지방</option>
+						<option value="해양">해양</option>
+						<option value="플라스틱">플라스틱</option>
+						<option value="산림">산림</option>
+						<option value="극지방">극지방</option>
 					</select>
 					</td>
 				</tr>
@@ -65,16 +70,22 @@
 			</table>
 			<div class="sysBtn">
 				<input type="submit" class="btn-dark" value="수정">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="button" class="btn-dark" value="삭제" onclick="location.href='/adCamBoard/delete'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="button" class="btn-dark" value="목록" onclick="location.href='/adCamBoard/list'"/>
+				
+				<input type="button" class="btn-dark" value="삭제" 
+				onclick="location.href='/adCamBoard/delete?CAMB_NUM=${camBoard.CAMB_NUM}'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				<input type="button" class="btn-dark" value="목록" 
+				onclick="location.href='/adCamBoard/list'"/>
 			</div>
 		</form>
+			
 	</div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 
 <script type="text/javascript">
 	window.onload = function(){
-		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="IMG" width="600" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_SUBJECT}"/>'].join(''))
+
+		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_SUBJECT}"/>'].join(''))
 		
 		$('#CAMB_SUBJECT').val('플라스틱').prop("selected", true);
 	}
@@ -89,7 +100,7 @@
 	        var reader = new FileReader();
 	        this.enabled = false
 	        reader.onload = (function (e) {
-	            $("#preview").html(['<img src="', e.target.result, '" id="IMG" width="600" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
+	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
 	        });
 	        reader.readAsDataURL(input.files[0]);
 	    }

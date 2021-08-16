@@ -21,20 +21,6 @@
 	textarea {border: none; min-width: 300px}
 </style>
 
-<script type="text/javascript">
-	window.onload = function(){
-		$.ajax({
-			
-			type:"POST",
-			url:"/camBoard/list/search?search=&pagenum=",
-			dataa:params,
-			dataType:"json",
-			success:function(args){
-				var str = "";
-			}
-		})
-	}
-</script>
 
 <meta charset="EUC-KR">
 <title>Detail</title>
@@ -60,13 +46,94 @@
 			<tr>
 				<td>캠페인 내용&nbsp;&nbsp;&nbsp;</td><td><textarea name="CAMB_CONTENT" readonly>${camBoard.CAMB_CONTENT}</textarea></td>
 			</tr>
+			<tr>
+				<td colspan="2" class="sysBtn" style="text-align: center;">
+					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>
+				</td>
+			</tr>
 		</table>
-		<div class="sysBtn">
-			<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>
-		</div>	
+		
+		<div id="camBoardList"></div>
 	</div>
-	
-	<div></div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var preUrl = document.referrer;
+		var listHead = '<table>';
+		listHead += '<tr>';
+		listHead += '<th scope="col">캠페인 번호</th>';
+		listHead += '<th scope="col">캠페인 제목</th>';
+		listHead += '<th scope="col">캠페인 주제</th>';
+		listHead += '<th scope="col">캠페인 내용</th>';
+		listHead += '</tr>';
+		
+		if(preUrl.indexOf("search") > -1){
+			console.log("search" + preUrl.substring(42));
+			
+			$.ajax({
+				
+				url:"/getList" + preUrl.substring(42),
+				type:"GET",
+				dataType:"json",
+				"success" : function(CamBoardList){
+					console.log("AJAX통신 성공");
+					
+					$.each(CamBoardList, function(index, item){
+						listHead += '<tr>';
+						listHead += '<td>' + item.CAMB_NUM + '</td>';
+						listHead += '<td>' + item.CAMB_NAME + '</td>';
+						listHead += '<td>' + item.CAMB_SUBJECT + '</td>';
+						listHead += '<td>' + item.CAMB_CONTENT + '</td>';
+						listHead += '</tr>';
+					})
+					
+					$('#camBoardList').html(listHead);
+				},
+				"error" : function(CamBoardList){
+					console.log("AJAX통신 실패");
+			    }
+			});
+		} 
+		if(preUrl.indexOf("search") === -1){
+			if(preUrl.indexOf("/camBoard/list") > -1){
+				console.log("list");
+			}else if(preUrl.indexOf("/camBoard/list") === -1){
+				console.log("nothing");
+			}			
+		} 
+		
+		if(preUrl.substring(21,36) === "/camBoard/list"){
+			
+			console.log("제대로된 경로 : " + preUrl.substring(37));
+			
+			$.ajax({
+				
+				url:preUrl.substring(21),
+				type:"GET",
+				dataType:"json",
+				"success" : function(CamBoardList){
+					console.log("AJAX통신 성공");
+				    
+				},
+				"error" : function(CamBoardList){
+					console.log("AJAX통신 실패");
+			    }
+			});
+		}else{
+			console.log("옳지 않은 경로" + preUrl.substring(21));
+			
+			$.ajax({
+				
+				url:"/camBoard/list",
+				type:"GET",
+				dataType:"json",
+				success:function(args){
+					var str = "";
+				}
+			});
+		}
+		listHead += '';
+	})
+</script>
 </body>
 </html>

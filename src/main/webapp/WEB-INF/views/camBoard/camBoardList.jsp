@@ -19,11 +19,13 @@
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
+	tr:hover {background-color: #FFFFDE}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	ul {list-style: none; margine: 0; padding: 0;}
 	li {margine: 0 0 0 0; padding: 0 0 0 0; border: 0; float: left;}
 	a:visited{ color: #086121;}
+	.camBoardInfo {cursor: pointer;}
 	.exButton {text-align: center;}
 	.paging {text-align: center;}
 	.option{
@@ -37,26 +39,6 @@
 
 <link rel="stylesheet" type="text/css" href="css/camBoard.css">
 
-<script type="text/javascript">
-   function changepage(){
-       location.href="file:///Users/gimjeongbin/Desktop/finalproject/camBoardDetail.html";
-   }
-   
-   function searchUrl(){
-	   location.href="/camBoard/list/search?search="+ document.getElementById("search").value
-   }
-   
-   $.urlParam = function(name){
-	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-	    if (results==null){
-	       return null;
-	    }
-	    else{
-	       return results[1] || 0;
-	    }
-	}
-
-</script>
 <title>Campaign</title>
 </head>
 <body>
@@ -83,8 +65,9 @@
 		</ul>
 		
 		<form  style="text-align: right;">
-			<input type="text" id="search" placeholder="캠페인 검색" value="${page.search}">
-			<input type="button" value="검색" onclick="searchUrl()">
+			<input type="text" id="search" placeholder="캠페인 검색" value="${page.search}" onkeyup="search(this)">
+			<button id="btn_search" onclick="searchUrl()">검색</button>
+			<ul id="schoolList"></ul>
 		</form>	
 	</div>
 	<c:if test="${page.totalcount ne 0}">
@@ -92,13 +75,18 @@
 		<c:forEach items="${CamBoardList}" var="list" begin="0" end="2">
 			<div class="col-sm-12 col-lg-4">
 				<table class="goodsTable">
-					<tr class="content">
+					<tr class="content" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}'">
 						<td class="tdImg">
-							<a href="/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}">
 								<img class="content" src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_SUBJECT}"/>
-							</a>
 						</td>
-						<td><a href="detail?CAMB_NUM=${list.CAMB_NUM}">${list.CAMB_NAME}</a></td>
+						<td>${list.CAMB_NAME}</td>
+						<td>
+							<table>
+								<tr>
+									<td><h1>캠페인</h1></td>
+								</tr>
+							</table>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -127,42 +115,72 @@
 		<div><h2 style="text-align: center;">'${page.search}'에 대한 검색 결과가 없습니다.</h2></div>
 	</c:if>
 	
-	
+	<c:if test="${page.totalcount ne 0}">
 	<div class="row">
 	<div class="col-sm-12">
 		<table class="paging">
 			<tr>
 				<td style="background-color: #0ed145;">
-				<c:if test="${empty page.search}">				
-						<c:if test="${page.prev}">
-							<a href="?pagenum=${page.getStartPage()-1}" id="pagingPre">&lt;</a>
-						</c:if>&nbsp;
-						<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">
-							<a href="?pagenum=${idx}" id="paging">${idx}&nbsp;</a>
-						</c:forEach>
-						<c:if test="${page.next}">
-							<a href="?pagenum=${page.getEndPage()+1}" id="pagingNext">&gt;</a>
-						</c:if>
-				</c:if>
-				<c:if test="${!empty page.search}">
 					<c:if test="${page.prev}">
-						<a href="?search=${page.search}&pagenum=${page.getStartPage()-1}" id="pagingPre">&lt;</a>
+						<a href="?pagenum=${page.getStartPage()-1}">&lt;</a>
 					</c:if>&nbsp;
 					<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">
-						<a href="?search=${page.search}&pagenum=${idx}" id="paging">${idx}&nbsp;</a>
+						<a href="?pagenum=${idx}">${idx}&nbsp;</a>
 					</c:forEach>
 					<c:if test="${page.next}">
-						<a href="?search=${page.search}&pagenum=${page.getEndPage()+1}">&gt;</a>
-					</c:if>				
-				</c:if>
+						<a href="?pagenum=${page.getEndPage()+1}">&gt;</a>
+					</c:if>
 				</td>
 			</tr>
 		</table><br/>
 	</div>
 	</div>
+	</c:if>
+	<c:if test="${page.totalcount eq 0}">
+		<table class="paging">
+			<tr>
+				<td style="background-color: #0ed145;"></td>
+			</tr>
+		</table><br/>
+	</c:if>
 	
 </div>
-	
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
+
+<script type="text/javascript">
+	function search(target){
+		
+		var word = target.value;
+		var encodeWord = encodeURI(word);
+		console.log(word);
+		console.log(encodeWord);
+		
+		$.ajax({
+			type : 'GET',
+			dataType : 'json',
+			url : ""
+		});
+	}
+
+	function changepage(){
+		location.href="file:///Users/gimjeongbin/Desktop/finalproject/camBoardDetail.html";
+	}
+ 
+	function searchUrl(){
+		location.href="/camBoard/list/search?search="+ document.getElementById("search").value
+	}
+  
+	$.urlParam = function(name){
+    	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    	
+    	if (results==null){
+       		return null;
+    	}
+    	else{
+       		return results[1] || 0;
+    	}
+}
+
+</script>
 </body>
 </html>

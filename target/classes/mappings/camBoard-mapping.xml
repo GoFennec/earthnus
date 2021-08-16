@@ -13,51 +13,50 @@
 		<result property="CAMB_DATE" column="CAMB_DATE"/>
 	</resultMap>
 	
-	<select id="camBoardListCount" resultType="int">
-		<![CDATA[
-			SELECT COUNT(*) FROM CAMBOARD
-		]]>
+	<select id="getBoardList" resultMap="camBoardResult">
+			SELECT * 
+			FROM CAMBOARD 
+			WHERE (
+			<choose>
+				<when test='search_type.equals("CAMB_ENTIRE")'>
+				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+				</when>
+				<when test='search_type.equals("CAMB_NAME")'>CAMB_NAME LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_SUBJECT")'>CAMB_SUBJECT LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_CONTENT")'>CAMB_CONTENT LIKE #{search} </when>
+			</choose>
+			AND 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[CAMB_DATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_DATE<SYSDATE()) ]]></when>
+			</choose>
+			ORDER BY ${orderBy} ${order} LIMIT #{contentnum} OFFSET #{pagenum}
 	</select>
 	
-	<select id="getCamBoardListEntire" resultMap="camBoardResult">
-		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND (CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
-		]]>
+	<select id="getBoardListCount" resultType="int">
+			SELECT COUNT(*) 
+			FROM CAMBOARD 
+			WHERE (
+			<choose>
+				<when test='search_type.equals("CAMB_ENTIRE")'>
+				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+				</when>
+				<when test='search_type.equals("CAMB_NAME")'>CAMB_NAME LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_SUBJECT")'>CAMB_SUBJECT LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_CONTENT")'>CAMB_CONTENT LIKE #{search} </when>
+			</choose>
+			AND 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[CAMB_DATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_DATE<SYSDATE()) ]]></when>
+			</choose>
 	</select>
 	
-	<select id="getCamBoardListDoing" resultMap="camBoardResult">
-		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE>SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
-		]]>
-	</select>
-	
-	<select id="getCamBoardListEnd" resultMap="camBoardResult">
-		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE<SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
-		]]>
-	</select>
-		
 	<select id="getCamBoard" resultMap="camBoardResult">
 		<![CDATA[
 			SELECT * FROM CAMBOARD WHERE CAMB_NUM=#{contentnum}
-		]]>
-	</select>
-	
-	<select id="camBoardEntireCount" resultMap="camBoardResult">
-		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND (CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ORDER BY CAMB_NUM DESC
-		]]>
-	</select>
-	
-	<select id="camBoardDoingCount" resultMap="camBoardResult">
-		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE>SYSDATE()) ORDER BY CAMB_NUM DESC
-		]]>
-	</select>
-	
-	<select id="camBoardEndCount" resultMap="camBoardResult">
-		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE<SYSDATE()) ORDER BY CAMB_NUM DESC
 		]]>
 	</select>
 	
