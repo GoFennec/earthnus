@@ -79,7 +79,7 @@ public class AdCamBoardService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			cBean.setCAMB_FILE("C:/upload/" + fileName);
+			cBean.setCAMB_FILE("/upload/" + fileName);
 		} else {
 			cBean.setCAMB_FILE("/resources/camBoard/imgDefault.png");
 		}
@@ -89,10 +89,14 @@ public class AdCamBoardService {
 	public void updateCamBoard(String CAMB_NAME, String CAMB_SUBJECT, String CAMB_CONTENT, MultipartFile CAMB_UPLOADFILE) {
 		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		camBoardBean cBean = new camBoardBean();
+		
 		cBean.setCAMB_NAME(CAMB_NAME);
 		cBean.setCAMB_CONTENT(CAMB_CONTENT);
-		cBean.setCAMB_SUBJECT(CAMB_SUBJECT);		
+		cBean.setCAMB_SUBJECT(CAMB_SUBJECT);	
+		cBean.setCAMB_UPLOADFILE(CAMB_UPLOADFILE);
 		
+		System.out.println("updateOk 서비스 =======> 제목 : " + cBean.getCAMB_NAME() + ", 주제 : " + cBean.getCAMB_SUBJECT() + 
+				", 내용 : " + cBean.getCAMB_CONTENT() + ", 파일 : " + cBean.getCAMB_UPLOADFILE());
 		MultipartFile uploadFile = cBean.getCAMB_UPLOADFILE();
 		if (!uploadFile.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();

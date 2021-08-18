@@ -98,7 +98,7 @@
 				<h2>로그인</h2>
 				<div class="underline-title"></div>
 			</div>
-			<form method="post" class="form" action="/adAuth/login/123test123">
+			<form method="post" class="form" action="/adAuth/adLogin">
 				<label for="auth_id" style="padding-top:13px">&nbsp;아이디</label>
 				<input id="auth_id" class="form-content" type="text" name="auth_id" autocomplete="on" required />
 				<div class="form-border"></div>

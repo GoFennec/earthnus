@@ -1,5 +1,7 @@
 package kr.co.earthnus.admin.auth;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +23,14 @@ public class AdAuthController {
 		return "adIndex";
 	}
 	
-	@RequestMapping(value = "/adAuth/login/123test123", method = RequestMethod.GET)
+	@RequestMapping(value = "/adAuth/adLogin", method = RequestMethod.GET)
 	public String adLogin() {
 		return "auth/adLogin";
 	}
 	
-	@RequestMapping(value = "/adAuth/login/123test123", method = RequestMethod.POST)
+	@RequestMapping(value = "/adAuth/adLogin", method = RequestMethod.POST)
 	public String adLoginch(@RequestParam("auth_pw") String auth_pw,
-			AuthBean aBean, HttpSession session, Model model) {
+			AuthBean aBean, HttpSession session, Model model) throws NoSuchAlgorithmException {
 		aBean = Service.adLogin(aBean.getAuth_id(), auth_pw);
 		if(aBean != null && aBean.getAuth_id().equals("admin")) {
 			session.setAttribute("auth", aBean);

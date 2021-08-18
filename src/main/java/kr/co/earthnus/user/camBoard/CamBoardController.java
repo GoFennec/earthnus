@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 @Controller
 public class CamBoardController{	
 	@Autowired
@@ -20,13 +22,13 @@ public class CamBoardController{
 			@RequestParam(defaultValue = "6") String contentnum, camBoardBean bean, Model model) {
 		
 		String search = "%%";
-		String search_type = "CAMB_ENTIRE";
+		String search_type = "CAMB_NAME";
 		String orderBy = "CAMB_NUM";
 		String order = "DESC";
 		
 		camBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
 		
-		System.out.println("CamBoardController");
+		System.out.println("CamBoardController pagenum : " + pagenum);
 		return "camBoard/camBoardList";
 	}
 	
@@ -42,7 +44,7 @@ public class CamBoardController{
 		}else if(search == null || search.equals("")) {
 			search = "%%";
 		}
-		String search_type = "CAMB_ENTIRE";
+		String search_type = "CAMB_NAME";
 		String orderBy = "CAMB_NUM";
 		
 		camBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
@@ -52,21 +54,25 @@ public class CamBoardController{
 	}
 	
 	@RequestMapping(value="/camBoard/detail")
-	public String getCamBoardDetail(@RequestParam("CAMB_NUM") String contentnum, Model model) {
+	public String getCamBoardDetail(@RequestParam("CAMB_NUM") String contentnum, @RequestParam(defaultValue = "1") String p, 
+			Model model) {
 		
 		System.out.println("컨트롤러 : " + contentnum);
-		model.addAttribute("camBoard", camBoardService.getCamBoard(contentnum));		
+		model.addAttribute("camBoard", camBoardService.getCamBoard(contentnum));
+		model.addAttribute("page", Integer.parseInt(p));
 		
 		return "camBoard/camBoardDetail";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/getList", method=RequestMethod.GET)
-	public List<camBoardBean> list(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
+	public String list(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
 			@RequestParam(defaultValue = "6") String contentnum, @RequestParam( value = "search", required=false) String search ,
 			@RequestParam(defaultValue = "desc") String order, camBoardBean bean, Model model){
 		List<camBoardBean> CamBoardList = null;
+		List<PagingBean> PageList = null;
 		
+		System.out.println("getList pagenum : " + pagenum);
 		if(search != null) {
 			search = "%" + search + "%";
 		}else if(search == null || search.equals("")) {
@@ -76,7 +82,12 @@ public class CamBoardController{
 		String orderBy = "CAMB_NUM";
 		
 		CamBoardList = camBoardService.getList(search, search_type, arr, orderBy, order, contentnum, pagenum, CamBoardList, model);
+		//PageList = camBoardService.getPage(search, search_type, arr, orderBy, order, contentnum, pagenum, PageList, model);
+		String json = new Gson().toJson(CamBoardList);
+		//json += new Gson().toJson(PageList);
 		
-		return CamBoardList;
+		System.out.println("controller json : " + json);
+		
+		return json;
 	}
 }

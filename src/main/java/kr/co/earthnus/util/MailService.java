@@ -95,12 +95,10 @@ public class MailService {
 	}
 	
 	//인증번호 확인
-	public boolean mailCheck(String mailCheck, String name) {
+	public boolean mailCheck(String mailCheck, String name, String email) {
 		boolean correct = false;
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		System.out.println(mailCheck + " Service");
-		System.out.println(name + " Service");
-		MailBean mailBean = dao.selectMail(name);
+		MailBean mailBean = dao.selectMail(name, email);
 		
 		if(mailBean.getMail_pw().equals(mailCheck)) {
 			correct = true;
@@ -108,12 +106,22 @@ public class MailService {
 		return correct;
 	}
 	
-	//아이디 일치 여부 확인
+	//비번찾기 인증번호 확인
+	public boolean mailCheckPW(String mailCheck, String name, String email, String mem_id) {
+		boolean correct = false;
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		String mail_pw = dao.selectMailPW(email, mem_id);
+		
+		if(mail_pw.equals(mailCheck)) {
+			correct = true;
+		}
+		return correct;
+	}
+	
+	//아이디 일치 여부
 	public boolean find(String findName, String findEmail) {
 		boolean correct = false;
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		System.out.println(findName + " Service");
-		System.out.println(findEmail + " Service");
 		int find = dao.find(findName, findEmail);
 		
 		if(find > 0) {
@@ -122,11 +130,10 @@ public class MailService {
 		return correct;
 	}
 	
+	//비밀번호 찾기 일치 여부
 	public boolean findpw(String findName, String findEmail, String mem_id) {
 		boolean correct = false;
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		System.out.println(findName + " Service");
-		System.out.println(findEmail + " Service");
 		int find = dao.findpw(findName, findEmail, mem_id);
 		
 		if(find > 0) {
@@ -138,14 +145,16 @@ public class MailService {
 	//아이디 찾기에서 인증번호 일치 확인
 	public List<MemberBean> findID(String findName, String mail_receiver) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		System.out.println(findName + " Service");
 		List<MemberBean> findID = dao.findID(findName, mail_receiver);
 		
-		for(int i = 0; i < findID.size(); i++) {
-			System.out.println(findID.get(i).getMem_id());
-			System.out.println(findID.get(i).getMem_date());
-		}
-		
 		return findID;
+	}
+	
+	//아이디 찾기에서 인증번호 일치 확인
+	public int changePW(String changePW, String mem_id, String mail_customer) {
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		int changePass = dao.changePW(changePW, mem_id, mail_customer);
+		
+		return changePass;
 	}
 }
