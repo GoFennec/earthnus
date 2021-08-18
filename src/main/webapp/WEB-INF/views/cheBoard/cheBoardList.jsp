@@ -92,8 +92,137 @@
         	 });
           });
         
+<<<<<<< HEAD
 
   });
+=======
+        
+        
+        $("input:radio[name=chk_info]").click(function() {
+        	var str = "";
+        	
+        	var element = document.getElementById("slider");
+        	
+        	
+        	if($("input[name=chk_info]:checked").val() == '해양') {
+        		 
+        		str ='<li><img alt="사진" class=item src="/resources/cheBoard/oceanItem1.png"></li>';
+        		str +='<li><img alt="사진" class=item src="/resources/cheBoard/oceanItem2.png"></li>';
+        		str +='<li><img alt="사진" class=item src="/resources/cheBoard/oceanItem3.png"></li>';
+        		str +='<li><img alt="사진" class=item src="/resources/cheBoard/oceanItem4.png"></li>';
+        		}
+        	else if($("input[name=chk_info]:checked").val() == '플라스틱') {
+        		
+    		  	str ='<li><img alt="사진" class=item src="/resources/cheBoard/plasticItem1.png"></li>';
+	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/plasticItem2.png"></li>';
+	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/plasticItem3.png"></li>';
+	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/plasticItem4.png"></li>';	    	
+        	}
+        	else if($("input[name=chk_info]:checked").val() == '나무 살리기') {
+	   			
+	    		 str ='<li><img alt="사진" class=item src="/resources/cheBoard/forestItem1.png"></li>';
+	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/forestItem2.png"></li>';
+	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/forestItem3.png"></li>';
+	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/forestItem4.png"></li>';
+	    	}
+        	else if($("input[name=chk_info]:checked").val() == '북극 곰살리기') {
+      			
+    			str ='<li><img alt="사진" class=item src="/resources/cheBoard/iceItem1.png"></li>';
+	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/iceItem2.png"></li>';
+	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/iceItem3.png"></li>';
+	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/iceItem4.png"></li>';
+      	}
+        	element.innerHTML = str;
+    		slider();
+        });        
+       
+  });
+ 
+  function slider() {
+      var slideWrapper = document.getElementById('slider-wrap');
+    var count = 0;
+    var slideIndex = 0;
+    
+    var slides = document.querySelectorAll('#slider-wrap ul li');
+    
+    var totalSlides = slides.length;
+    
+    var sliderWidth = slideWrapper.clientWidth;
+   
+    slides.forEach(function (element) {
+        element.style.width = sliderWidth + 'px';
+    })
+    
+    var slider = document.querySelector('#slider-wrap ul#slider');
+    slider.style.width = sliderWidth * totalSlides + 'px';
+
+   
+    var nextBtn = document.getElementById('next');
+    var prevBtn = document.getElementById('previous');
+    nextBtn.addEventListener('click', function () {
+        plusSlides(1);
+    });
+    prevBtn.addEventListener('click', function () {
+        plusSlides(-1);
+    });
+
+   
+    slideWrapper.addEventListener('mouseover', function () {
+        this.classList.add('active');
+        clearInterval(autoSlider);
+    });
+    slideWrapper.addEventListener('mouseleave', function () {
+        this.classList.remove('active');
+        autoSlider = setInterval(function () {
+            plusSlides(1);
+        }, 3000);
+    });
+
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlides(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        slideIndex = n;
+        if (slideIndex == -1) {
+            slideIndex = totalSlides - 1;
+        } else if (slideIndex === totalSlides) {
+            slideIndex = 0;
+        }
+
+        slider.style.left = -(sliderWidth * slideIndex) + 'px';
+        pagination();
+    }
+
+    
+    function pagination() {
+        var dots = document.querySelectorAll('#slider-pagination-wrap ul li');
+        dots.forEach(function (element) {
+            element.classList.remove('active');
+        });
+        dots[slideIndex].classList.add('active');
+    }
+
+    pagination();
+    var autoSlider = setInterval(function () {
+        plusSlides(1);
+    }, 1000); 
+    }
+
+
+  
+  
+  
+  
+  
+  
+  //list
+>>>>>>> 4333041 (jsp슬라이드 url관리자추가)
   	function init(){
     
     $.ajax({

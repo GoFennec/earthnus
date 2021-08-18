@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: GO
 Build-Jdk: 1.8.0_281
+=======
+Built-By: fkskf
+Build-Jdk: 1.8.0_291
+>>>>>>> 4333041 (jsp슬라이드 url관리자추가)
 Created-By: Maven Integration for Eclipse
 
