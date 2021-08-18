@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -640,7 +642,6 @@ color: #a2a6af
         					<li class="active"><a href="/member/myOrder"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
-        					<li><a href="#"><span class="fa fa-clock-oz"></span> Reminders</a></li>
         				</ul>
         			</nav>
                 </div>
@@ -652,7 +653,7 @@ color: #a2a6af
                          <table class="table table-hover table-xl mb-0">
                 <thead>
                   <tr>
-                    <th>굿즈 번호</th>
+                    <th></th>
                     <th>굿즈 이름</th>
                     <th>사용한 포인트</th>
                     <th>교환한 날짜</th>
@@ -661,10 +662,10 @@ color: #a2a6af
                 <tbody>
                 <c:forEach items="${myOrder}" var="exGoods">
                   <tr>
-                    <td class="text-truncate">${exGoods.exg_gnum}</td>
+                    <td class="text-truncate">${exGoods.exg_img}</td>
                     <td class="text-truncate">${exGoods.exg_gname}</td>
                     <td class="text-truncate">${exGoods.exg_point}</td>
-                    <td class="text-truncate">${exGoods.exg_date}</td>
+                    <td class="text-truncate"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_date}" /></td>
          		 </tr>
          		 </c:forEach>
                 </tbody>

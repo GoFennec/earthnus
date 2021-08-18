@@ -85,8 +85,10 @@
 										</nav>
 									</div>
 									<!-- Header-btn -->
+								
 									<div class="header-right-btn d-none d-lg-block ml-20">
 										<a href="/donation/list" class="btn header-btn">후원하기</a>
+									
 									</div>
 								</div>
 							</div>

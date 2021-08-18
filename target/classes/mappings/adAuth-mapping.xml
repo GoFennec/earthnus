@@ -5,26 +5,26 @@
 
 <mapper namespace="kr.co.earthnus.admin.auth.AdAuthMybatis">
 
-	<resultMap id="authResult" type="auth">
+	<resultMap id="adAuthResult" type="adAuth">
 		<id property="auth_id" column="AUTH_ID"/>
 		<result property="auth_name" column="AUTH_NAME"/>
 	</resultMap>
 
-	<resultMap id="memberResult" type="member">
-		<id property="mem_id" column="MEM_ID"/>
-		<result property="mem_pw" column="MEM_PW"/>
-		<result property="mem_name" column="MEM_NAME"/>
-		<result property="mem_addr" column="MEM_ADDR"/>
-		<result property="mem_tel" column="MEM_TEL"/>
-		<result property="mem_birth" column="MEM_BIRTH"/>
-		<result property="mem_gender" column="MEM_GENDER"/>
-		<result property="mem_email" column="MEM_EMAIL"/>
-		<result property="mem_date" column="MEM_DATE"/>
-		<result property="mem_point" column="MEM_POINT"/>
+	<resultMap id="adMemberResult" type="adMember">
+		<id property="ad_id" column="AD_ID"/>
+		<result property="ad_pw" column="AD_PW"/>
+		<result property="ad_name" column="AD_NAME"/>
+		<result property="ad_addr" column="AD_ADDR"/>
+		<result property="ad_tel" column="AD_TEL"/>
+		<result property="ad_birth" column="AD_BIRTH"/>
+		<result property="ad_gender" column="AD_GENDER"/>
+		<result property="ad_email" column="AD_EMAIL"/>
+		<result property="ad_date" column="AD_DATE"/>
+		<result property="ad_role" column="AD_ROLE"/>
 	</resultMap>
 	
-	<select id="selectByAdId" resultType="member" parameterType="string">
-		SELECT * FROM MEMBER WHERE MEM_ID=#{auth_id}
+	<select id="selectByAdId" resultType="adMember" parameterType="String">
+		SELECT * FROM ADMEMBER WHERE AD_ID=#{auth_id}
 	</select>
 	
 </mapper>

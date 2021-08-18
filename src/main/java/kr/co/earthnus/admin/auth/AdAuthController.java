@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.co.earthnus.user.auth.AuthBean;
 
 @Controller
 public class AdAuthController {
@@ -23,16 +22,17 @@ public class AdAuthController {
 		return "adIndex";
 	}
 	
-	@RequestMapping(value = "/adAuth/adLogin", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/adLogin", method = RequestMethod.GET)
 	public String adLogin() {
 		return "auth/adLogin";
 	}
 	
-	@RequestMapping(value = "/adAuth/adLogin", method = RequestMethod.POST)
+	@RequestMapping(value = "/auth/adLogin", method = RequestMethod.POST)
 	public String adLoginch(@RequestParam("auth_pw") String auth_pw,
-			AuthBean aBean, HttpSession session, Model model) throws NoSuchAlgorithmException {
+			AdAuthBean aBean, HttpSession session, Model model) throws NoSuchAlgorithmException {
 		aBean = Service.adLogin(aBean.getAuth_id(), auth_pw);
-		if(aBean != null && aBean.getAuth_id().equals("admin")) {
+		
+		if(aBean != null) {
 			session.setAttribute("auth", aBean);
 			return "redirect:/adIndex";
 		} else {

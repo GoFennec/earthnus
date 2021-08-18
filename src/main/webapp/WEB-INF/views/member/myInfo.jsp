@@ -13,6 +13,17 @@
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	
+	<!-- 모달창 관련 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
 <style type="text/css">
 body{
 background:#f9f9fb;    
@@ -602,6 +613,7 @@ color: #a2a6af
 </head>
 <jsp:include page="/WEB-INF/views/header.jsp"/> 
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false' >
+<br><br><br><br>
 
 <div class="container">
     <div class="view-account">
@@ -609,7 +621,7 @@ color: #a2a6af
             <div class="module-inner">
                 <div class="side-bar">
                     <div class="user-info">
-                        <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="개인프로필사진">
+                        <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="개인프로필사진">
                         <ul class="meta list list-unstyled">
                             <li class="id"><a>${auth.auth_id}</a></li>
                             <li class="name">${auth.auth_name}님</li>
@@ -623,7 +635,6 @@ color: #a2a6af
         					<li><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
-        					<li><a href="#"><span class="fa fa-clock-o"></span> Reminders</a></li>
         				</ul>
         			</nav>
                 </div>
@@ -633,7 +644,7 @@ color: #a2a6af
                         <fieldset class="fieldset">
                             <div class="form-group avatar">
                                 <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                                    <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="개인프로필사진">
+                                    <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="개인프로필사진">
                                 </figure>
                                 <div class="form-inline col-md-10 col-sm-9 col-xs-12">
                                     <input type="file" class="file-uploader pull-left">
@@ -643,72 +654,96 @@ color: #a2a6af
                             <div class="form-group">
                                 <label class="col-md-2 col-sm-3 col-xs-12 control-label">아이디</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_id" value=${MemberBean.mem_id} readonly>
+                                    <input type="text" class="form-control" name ="mem_id" value="${MemberBean.mem_id}" readonly>
                                 </div>
                             </div>
         
                             <div class="form-group">
                                 <label class="col-md-2 col-sm-3 col-xs-12 control-label">이름</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_name" value=${MemberBean.mem_name} readonly>
+                                    <input type="text" class="form-control" name ="mem_name" value="${MemberBean.mem_name}" readonly>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">변경할 비밀번호</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input id="Password" type="password" class="form-control" name ="mem_pw" value=${MemberBean.mem_pw}>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">비밀번호 확인</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input id="PasswordCheck" type="password" class="form-control" value=${MemberBean.mem_pw}>
-                                </div>
-                            </div>
-                           <script type="text/javascript">
-            $(function(){ 
-               $("#alert-success").hide(); 
-               $("#alert-danger").hide(); 
-               $("input").keyup(function(){ 
-                  var pwd1=$("#Password").val(); 
-                  var pwd2=$("#PasswordCheck").val(); 
-               if(pwd1 != "" && pwd2 != ""){ 
-                     if(pwd1 == pwd2){ 
-                        $("#alert-success").show(); 
-                        $("#alert-danger").hide(); 
-                        $("#submit").removeAttr("disabled"); 
-                     }else{ 
-                        $("#alert-success").hide(); 
-                        $("#alert-danger").show();
-                        $("#submit").attr("disabled", "disabled"); 
-                  }
-                 } 
-                  if(pwd1 == "" && pwd2 == ""){ 
-                     $("#alert-success").hide(); 
-                     $("#alert-danger").hide(); 
-                  } 
-               });
-              });
-         </script>
-                          <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
-         <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
                             
+                            
+                            <div class="form-group">
+                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">비밀번호</label>
+                                    <div class="col-md-3 col-sm-4 col-xs-12">
+                           			<button class="btn btn-sm btn-default-alt pull-left" data-toggle="modal" data-target="#myModal">비밀번호 변경</button>
+                           			
+                            </div>
+                            </div>
+                            
+                            <!-- Modal HTML -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-login" role="document">
+		<div class="modal-content">
+			<div class="modal-header">				
+				<h4 class="modal-title">비밀번호 변경</h4>
+				<button type="button" class="close"  >&times;</button>
+			</div>
+			<div class="modal-body">
+					
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="변경할 비밀번호" required id="mem_cpw1">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="비밀번호 확인" required id="mem_cpw2">
+					</div>
+					<div class="form-group">
+						<button type="button" class="btn btn-primary btn-block btn-lg" onclick="updatePw()">확인</button>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+			<script type="text/javascript">
+				function updatePw(){
+					var cpw1 = $("#mem_cpw1").val();
+					var cpw2 = $("#mem_cpw2").val();
+				if(cpw1 == cpw2){
+					$.ajax({
+			   			type: "POST", //요청 메소드 방식
+			  			 url:"/updatePw",
+			   			data: {"mem_pw":cpw1},
+			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			   			success : function(result){
+			   				if(result.error){
+			   					alert("비밀번호 변경이 완료되었습니다.");
+			   				<!--	$('#myModal').modal('close');-->
+			   				window.location='/member/myInfo';
+			   				}else{
+			   					location.href=result.url;
+			   				}
+			   			},
+			   		 error:function(request,status,error){
+			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			      			//통신 실패시 발생하는 함수(콜백)
+			   				}
+						});
+				}else{
+					alert("비밀번호가 일치하지 않습니다.")
+				}
+				}
+			</script>     
+                   
                             <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">주소</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_addr" value=${MemberBean.mem_addr}>
+                                    <input type="text" maxlength='100' class="form-control" name ="mem_addr" value="${MemberBean.mem_addr}" >
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">전화번호</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_tel" value=${MemberBean.mem_tel}>
+                                    <input type="text" class="form-control" name ="mem_tel" value="${MemberBean.mem_tel}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">생년월일</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_birth" value=${MemberBean.mem_birth}>
+                                    <input type="text" class="form-control" name ="mem_birth" value="${MemberBean.mem_birth}">
                                  <!-- <p class="help-block">Your twitter username</p> -->  
                                 </div>
                             </div>
@@ -716,13 +751,13 @@ color: #a2a6af
                             <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">성별</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_gender" value=${MemberBean.mem_gender} readonly>
+                                    <input type="text" class="form-control" name ="mem_gender" value="${MemberBean.mem_gender}" readonly>
                                 </div>
                             </div>
                               <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">이메일</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                 <input type="email" class="form-control" name ="mem_email" value=${MemberBean.mem_email} >
+                                 <input type="email" class="form-control" name ="mem_email" value="${MemberBean.mem_email}" >
                                 </div>
                             </div>
                         <!-- 
@@ -736,7 +771,7 @@ color: #a2a6af
                               <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">포인트</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name ="mem_point" value=${MemberBean.mem_point} readonly>
+                                    <input type="text" class="form-control" name ="mem_point" value="${MemberBean.mem_point}" readonly>
                                 </div>
                             </div>
                         </fieldset>
@@ -754,7 +789,14 @@ color: #a2a6af
     </div>
 </div>
 
-
+<script>
+$(document).keypress(
+		  function(event){
+		    if (event.which == '13') {
+		      event.preventDefault();
+		    }
+		});
+</script>
 
 
 

@@ -37,5 +37,5 @@
 			<beans:bean id="twoInter" class="kr.co.earthnus.interceptor.Interceptor" />
 		</interceptor>
 	</interceptors> -->
-	
+	<beans:bean id="naverLoginBO" class="kr.co.earthnus.user.auth.NaverLoginBO" />
 </beans:beans>
