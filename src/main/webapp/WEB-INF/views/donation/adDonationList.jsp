@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -59,7 +59,7 @@ th {
 </head>
 
 <body>
-<br><br>
+<br><br><br><br>
 
 <div class="container">
 	
@@ -82,10 +82,11 @@ th {
 				<th scope="col">아이디</th>
 				<th scope="col">결제 상품</th>
 				<th scope="col">후원 금액</th>
-				<th scope="col">적립 포인트</th>
-				<th scope="col">후원 일자</th>
-				<th scope="col">후원 취소일자</th>
+				<th scope="col">발생 포인트</th>
+				<th scope="col">후원일</th>
+				<th scope="col">후원 취소일</th>
 				<th scope="col">결제 상태</th>
+				<th scope="col">포인트 적립</th>
 			</tr>
 			
 			<c:forEach items="${adDonationList}" var="donation">
@@ -94,7 +95,7 @@ th {
 				<td>${donation.pay_num}</td>
 				<td>${donation.pay_name}</td>
 				<td>${donation.pay_id}</td>
-				<td>${donation.pay_dnum}</td>
+				<td>${donation.pay_dname}</td>
 				<c:set var="price" value="${donation.pay_price}"/>
 				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</td>
 				<c:set var="point" value="${donation.pay_point}"/>
@@ -102,6 +103,17 @@ th {
 				<td>${donation.pay_pdate}</td>
 				<td>${donation.pay_cdate}</td>
 				<td>${donation.pay_state}</td>
+				<c:if test="${donation.pay_state eq '결제승인' and donation.pay_pstate eq '적립예정'}">
+				<td><form action="/adDonation/pointUpdate" method="POST">
+					<input type="hidden" name="pay_id" value="${donation.pay_id}"/>
+					<input type="hidden" name="pay_no" value="${donation.pay_no}"/>
+					<input type="hidden" name="pay_point" value="${donation.pay_point}"/>
+					<input type="submit" value="승인"/></form></td>
+				</c:if>
+				
+				<c:if test="${donation.pay_pstate eq '적립완료' or donation.pay_state eq '결제취소'}">
+				<td>${donation.pay_pstate}</td>
+				</c:if>
 			</tr>
 			</c:forEach>
 		</table>
@@ -146,8 +158,12 @@ $(function() {
 		selectTd = selectTr.children();
 		donationNo = selectTd.eq(0).text();
 		donationNum = selectTd.eq(1).text();
+		donationState = selectTd.eq(9).text();
+		donationPointState = selectTd.eq(10).text();
 		cancelNo = donationNo;
 		cancelNum = donationNum;
+		payState = donationState;
+		pointState = donationPointState;
 		$('#'+donationNo).css("background-color", "#FFFFDE");
 	});
 });
@@ -164,20 +180,27 @@ $("#cancel").click(function(){
 	}
 });
 function cancelPay() {
-    jQuery.ajax({
-      url : "/payments/cancel/" + cancelNum,
-      method : "POST",
-      headers : { "Content-Type": "application/json" },
-      data : JSON.stringify ({
-    	pay_no : cancelNo,
-        pay_num : cancelNum,
-        pay_cdate : dateString
-      })
-    }).done(function(result) { // 환불 성공시 로직 
-        alert("결제가 취소되었습니다.");
-    }).fail(function(error) { // 환불 실패시 로직
-      alert("결제취소를 실패하였습니다.");
-    });
+	if (payState == '결제취소') {
+		alert("이미 취소 된 결제입니다.")
+	} else if (pointState == '적립완료') {
+		alert("포인트 적립이 완료 된 결제는 취소 할 수 없습니다.")
+	} else {
+	    jQuery.ajax({
+	      url : "/payments/cancel/" + cancelNum,
+	      method : "POST",
+	      headers : { "Content-Type": "application/json" },
+	      data : JSON.stringify ({
+	    	pay_no : cancelNo,
+	        pay_num : cancelNum,
+	        pay_cdate : dateString
+	      })
+	    }).done(function(result) {
+	        alert("결제가 취소되었습니다.");
+	        location.replace(location.href);
+	    }).fail(function(error) {
+	      alert("결제취소를 실패하였습니다.");
+	    });
+	}
  };
 </script>
 </body>

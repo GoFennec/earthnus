@@ -22,12 +22,11 @@ public class PayService {
 		return member;
 	}
 	
-	public int insertPay(PayBean pBean) {
+	public void insertPay(PayBean pBean) {
 		PayMybatis dao = mybatis.getMapper(PayMybatis.class);
 		String pay_pdate = getTimestampToDate(pBean.getPay_pdate());
 		pBean.setPay_pdate(pay_pdate);
-		int n = dao.insertPay(pBean);
-		return n;
+		dao.insertPay(pBean);
 	}
 	
 	public String getTimestampToDate(String timestampStr){
@@ -37,12 +36,6 @@ public class PayService {
 	    sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+9")); 
 	    String formattedDate = sdf.format(date);
 	    return formattedDate;
-	}
-	
-	public int updatePoint(PayBean pBean) {
-		PayMybatis dao = mybatis.getMapper(PayMybatis.class);
-		int m = dao.updatePoint(pBean);
-		return m;
 	}
 	
 	public PayBean getPayInfo(String var) {

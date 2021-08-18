@@ -3,6 +3,7 @@
 <html><head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <style>
 	table {margin: auto;}
 	.td_left {text-align: center; vertical-align: middle;}
@@ -10,6 +11,8 @@
 	.sysBtn {text-align: center;}
 </style>
 <title>EARTH & US</title>
+<link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
+<link rel="icon" href="/resources/assets/img/favicon.ico">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -29,11 +32,11 @@
 						<option>극지방</option>
 					</select>
 				</td></tr>
-			<tr><td class="td_left"><label for="CAMB_CONTENT">캠&nbsp;페&nbsp;인&nbsp;&nbsp;내&nbsp;용&nbsp;</label></td>
-				<td class="td_right"><textarea cols="26" rows="6" style="resize: none;" name="CAMB_CONTENT" id="CAMB_CONTENT" required></textarea></td></tr>
+			<tr><td colspan = "2" class="td_center"><label for="CAMB_CONTENT">캠&nbsp;페&nbsp;인&nbsp;&nbsp;내&nbsp;용&nbsp;</label></td></tr>
+			<tr><td colspan = "2" class="td_center"><textarea name="CAMB_CONTENT" id="CAMB_CONTENT" placeholder="캠페인 설명" required></textarea></td></tr>
 			<tr><td class="td_left"><label for="CAMB_FILE">캠&nbsp;페&nbsp;인&nbsp;&nbsp;사&nbsp;진&nbsp;</label></td>
 				<td class="td_right"><input type="file" name="CAMB_UPLOADFILE" id="CAMB_UPLOADFILE" required></td></tr>
-		</table><br>
+		</table><script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script><br>
 		<div class="sysBtn">
 			<input type="submit" class="btn-dark" value="캠페인 추가"/>&nbsp;&nbsp;&nbsp;
 			<input type="button" class="btn-dark" value="뒤로가기" onclick="window.history.back();"/>

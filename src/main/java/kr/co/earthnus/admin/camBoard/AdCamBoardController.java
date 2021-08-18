@@ -34,7 +34,7 @@ public class AdCamBoardController {
 	
 	@RequestMapping(value = "/adCamBoard/list/search")
 	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam("search") String search, @RequestParam("search_type") String search_type,
+			@RequestParam(defaultValue = "6") String contentnum, @RequestParam(value="search", required=false) String search, @RequestParam("search_type") String search_type,
 			@RequestParam(defaultValue = "desc") String order, camBoardBean cBean, Model model) {
 		
 		if(search != null) {
@@ -94,8 +94,8 @@ public class AdCamBoardController {
 	public String updateCamBoardOk(@RequestParam(value="CAMB_NAME") String CAMB_NAME, @RequestParam(value="CAMB_SUBJECT") String CAMB_SUBJECT, 
 			@RequestParam(value="CAMB_CONTENT") String CAMB_CONTENT, @RequestParam(value="CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE, Model model) {
 		
-		System.out.println("update Ё╩©К =======> юл╦╖ : " + CAMB_NAME + ", ажа╕ : " + CAMB_SUBJECT + 
-				", Ё╩©К : " + CAMB_CONTENT);
+		System.out.println("updateOk Л╩╗М┼╦К║╓К÷╛ =======> Л═°К╙╘ : " + CAMB_NAME + ", Лё╪Л═° : " + CAMB_SUBJECT + 
+				", К┌╢Л ╘ : " + CAMB_CONTENT + ", М▄▄Л²╪ : " + CAMB_UPLOADFILE);
 		adCamBoardService.updateCamBoard(CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
 		System.out.println("updateCamBoardOk");
 		

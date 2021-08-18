@@ -25,13 +25,15 @@
 	</select>
 	
 	<update id="updatePay" parameterType="pay">
-		UPDATE PAY SET PAY_CDATE = #{pay_cdate}, PAY_STATE = '결제취소'
+		UPDATE PAY SET PAY_CDATE = #{pay_cdate}, PAY_STATE = '결제취소', PAY_PSTATE = '-'
 		WHERE PAY_NO = #{pay_no}
 	</update>
 
-<!-- 	<update id="updatePoint">
-		UPDATE MEMBER SET MEM_POINT= PAY_CDATE=#{pay_cdate}, PAY_STATE='결제취소'
-		WHERE PAY_NUM=#{pay_num}
-	</update> -->
+ 	<update id="updatePoint">
+ 		UPDATE MEMBER A INNER JOIN PAY B
+ 		ON A.MEM_ID = B.PAY_ID
+ 		SET A.MEM_POINT = MEM_POINT + #{pay_point}, B.PAY_PSTATE = '적립완료'
+ 		WHERE B.PAY_NO = #{pay_no}
+	</update>
 
 </mapper>

@@ -5,12 +5,13 @@ public class PayBean {
 	private String pay_num;
 	private String pay_id;
 	private String pay_name;
-	private String pay_dnum;
+	private String pay_dname;
 	private int pay_price;
 	private int pay_point;
 	private String pay_pdate;
 	private String pay_cdate;
 	private String pay_state;
+	private String pay_pstate;
 	
 	public int getPay_no() {
 		return pay_no;
@@ -36,11 +37,11 @@ public class PayBean {
 	public void setPay_name(String pay_name) {
 		this.pay_name = pay_name;
 	}
-	public String getPay_dnum() {
-		return pay_dnum;
+	public String getPay_dname() {
+		return pay_dname;
 	}
-	public void setPay_dnum(String pay_dnum) {
-		this.pay_dnum = pay_dnum;
+	public void setPay_dname(String pay_dname) {
+		this.pay_dname = pay_dname;
 	}
 	public int getPay_price() {
 		return pay_price;
@@ -72,5 +73,10 @@ public class PayBean {
 	public void setPay_state(String pay_state) {
 		this.pay_state = pay_state;
 	}
-	
+	public String getPay_pstate() {
+		return pay_pstate;
+	}
+	public void setPay_pstate(String pay_pstate) {
+		this.pay_pstate = pay_pstate;
+	}
 }

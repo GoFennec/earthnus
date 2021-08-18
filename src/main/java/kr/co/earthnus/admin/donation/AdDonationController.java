@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,5 +47,11 @@ public class AdDonationController {
 			@PathVariable(value="imp_uid") String imp_uid) throws IamportResponseException, IOException {
 		adDonationService.updatePay(pBean);
 		return api.cancelPaymentByImpUid(new CancelData(imp_uid, true));
+	}
+	
+	@RequestMapping("/adDonation/pointUpdate")
+	public String updatePoint(@ModelAttribute PayBean pBean) {
+		adDonationService.updatePoint(pBean);
+		return "redirect:/adDonation/list";
 	}
 }
