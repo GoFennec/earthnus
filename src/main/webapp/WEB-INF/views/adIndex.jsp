@@ -22,6 +22,7 @@
 				<li><a href="/adDonation/list">기부관리</a></li>
 				<li><a href="/adGoods/list">지구마켓상품관리</a></li>
 				<li><a href="/adExGoods/list">지구마켓내역관리</a></li>
+				<li><a href="/adcheBoard/list">지구마켓내역관리</a></li>
 			</ul>
 		</nav>
 	</div>								

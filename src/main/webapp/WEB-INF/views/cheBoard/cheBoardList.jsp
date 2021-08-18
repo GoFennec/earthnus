@@ -11,14 +11,138 @@
 
 <head>
 <style>
-	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
+table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton {text-align: center;}
 	.paging {text-align: center;}
+
+
+	* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#slider-wrap {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+#slider-wrap ul#slider {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#slider-wrap ul#slider li {
+    float: left;
+    position: relative;
+    width: 600px;
+    height: 400px;
+}
+#slider-wrap ul#slider li img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/*btns*/
+.slider-btns {
+    position: absolute;
+    width: 50px;
+    height: 60px;
+    top: 50%;
+    margin-top: -25px;
+    line-height: 57px;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    -webkit-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.slider-btns:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#next {
+    right: -50px;
+    border-radius: 7px 0px 0px 7px;
+    color: #eee;
+}
+
+#previous {
+    left: -50px;
+    border-radius: 0px 7px 7px 7px;
+    color: #eee;
+}
+
+#slider-wrap.active #next {
+    right: 0px;
+}
+
+#slider-wrap.active #previous {
+    left: 0px;
+}
+
+/*bar*/
+#slider-pagination-wrap {
+    min-width: 20px;
+    margin-top: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 15px;
+    position: relative;
+    text-align: center;
+}
+
+#slider-pagination-wrap ul {
+    width: 100%;
+}
+
+#slider-pagination-wrap ul li {
+    margin: 0 4px;
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0.5;
+    position: relative;
+    top: 0;
+}
+
+#slider-pagination-wrap ul li.active {
+    width: 12px;
+    height: 12px;
+    top: 3px;
+    opacity: 1;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
+}
+
+/*ANIMATION*/
+#slider-wrap ul,
+#slider-pagination-wrap ul li {
+    -webkit-transition: all 0.3s cubic-bezier(1, .01, .32, 1);
+    -o-transition: all 0.3s cubic-bezier(1, .01, .32, 1);
+    transition: all 0.3s cubic-bezier(1, .01, .32, 1);
+}
 </style>
+
+
 <title>EARTH & US</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -28,40 +152,76 @@
 	
 	
 	
-	<img alt="사진" src="/resources/cheBoard/images1.jpg">
-	
-	빨리 병이 나으면 좋겠어요	
+		
 	
 	
 	
-	<h2>응원 게시판</h2>
-	 <div id="formDiv">
+	
+	<div class="container"><br>
+	<table class="exGoods" style="margin-bottom: 10px">
+		<thead>
+			<tr><th scope="col">응원 게시판</th></tr>
+		</thead>
+	</table>
+	
+        <div id="slider-wrap">
+       
+            <ul id="slider">
+          	 </ul>
+         
+     <div class="slider-btns" id="next"><span>▶</span></div>
+    <div class="slider-btns" id="previous"><span>◀</span></div>
+	
+    <div id="slider-pagination-wrap">
+        <ul>
+        <li></li>
+         <li></li>
+          <li></li>
+           <li></li>
+        </ul>
+    </div>
+    </div>     
     
-        <form id="writeForm">
+	
+	<div>
+	<input type="radio" name="chk_info" value="해양"> 해양 살리기 응원
+	<input type="radio" name="chk_info" value="플라스틱"> 플라스틱 줄이기 응원
+	<input type="radio" name="chk_info" value="나무 살리기">나무 응원
+	<input type="radio" name="chk_info" value="북극 곰살리기">북극곰 응원
+	</div>
+	<div id="formDiv">
+    
+       
         <c:if test="${auth.auth_id == null}">
-         <textarea style="width:500px" id="text" disabled></textarea>
+         <textarea style="width:90%" id="text" disabled></textarea>
          <input type="button" id="replyInsert" value="응원하기">
         </c:if>
-        </form>
     
-    	<form id="writeForm">
+    	
 	    	<c:if test="${auth.auth_id != null}">
-	         <textarea style="width:500px" id="text"></textarea>
+	         <textarea style="width:90%" id="text"></textarea>
 	         <input type="button" id="replyInsert" value="응원하기">
 	        </c:if>
-        </form>
+        
     </div>
     
+	
     
-        
     
     <div id="listDiv">
     </div>
-    
+    </div>
+
+
+
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
+
+
 
 <script type="text/javascript">
 
   $(document).ready(function (){
+	  //list불러오고 insert 버튼 클릭시 ajax
         init();
         $('#replyInsert').on('click',function() {
           	
@@ -92,10 +252,6 @@
         	 });
           });
         
-<<<<<<< HEAD
-
-  });
-=======
         
         
         $("input:radio[name=chk_info]").click(function() {
@@ -143,7 +299,7 @@
     var count = 0;
     var slideIndex = 0;
     
-    var slides = document.querySelectorAll('#slider-wrap ul li');
+    var slides = document.querySelectorAll('#slider-wrap #slider li');
     
     var totalSlides = slides.length;
     
@@ -222,7 +378,6 @@
   
   
   //list
->>>>>>> 4333041 (jsp슬라이드 url관리자추가)
   	function init(){
     
     $.ajax({
@@ -230,6 +385,7 @@
         type : "GET",
         dataType : "json",
         success :function(obj){
+        	var auth_id = "${auth.auth_id}";
             var str = '<table>';
             str += '<tr>'
             str += '<th scope="col">글번호</th>'
@@ -237,36 +393,33 @@
             str += '<th scope="col">작성자</th>'
             str += '<th scope="col">글번호</th>'
             str += '</tr>'
-            if(${auth.auth_id == 'admin'}) {
-            $.each(obj ,function(index, item){
-            	str += '<tr>';
-				 str += '<td>'+item.cheb_num+'</td>';
-				 str += '<td>'+item.cheb_content+'</td>'
-				 str += '<td>'+item.cheb_name+'</td>';
-				 str += '<td>'+item.cheb_date+'</td>';
-				 str += '<td><input type="button" value="삭제" class="deleteComment" data_num="'+item.cheb_num+'"></td>'; 
-				 str += '</tr>';	
-                 
-             })
-            }
-            else {
             	 $.each(obj ,function(index, item){
-                 	str += '<tr>';
-     				 str += '<td>'+item.cheb_num+'</td>';
-     				 str += '<td>'+item.cheb_content+'</td>'
-     				 str += '<td>'+item.cheb_name+'</td>';
-     				 str += '<td>'+item.cheb_date+'</td>';
-     				 str += '</tr>';	
-                      
+            		 var item_id = item.cheb_id;
+            		 str += '<tr>';
+            		 
+            		 if(auth_id == item_id) {
+            			 
+         				 str += '<td>'+item.cheb_num+'</td>';
+         				 str += '<td>'+item.cheb_content+'</td>'
+         				 str += '<td>'+item.cheb_name+'</td>';
+         				 str += '<td>'+item.cheb_date+'</td>';
+         				 str += '<td><input type="button" value="수정"/></td>';
+         				 str += '<td><input type="button" value="삭제" class="deleteComment" data_num="'+item.cheb_num+'"/></td>';
+            		 }
+            		 else {
+	     				 str += '<td>'+item.cheb_num+'</td>';
+	     				 str += '<td>'+item.cheb_content+'</td>'
+	     				 str += '<td>'+item.cheb_name+'</td>';
+	     				 str += '<td>'+item.cheb_date+'</td>';
+	     				 
+            		 }
                   })
-            }
              
-             
+            str += '</tr>';	
             str += '</table>';
             $('#listDiv').html(str);
             
 
-            //Div가 화면에 다 보여지고 이벤트를 걸어야한다.
             $('.deleteComment').on('click', function(){        
                 var reply_id = $(this).attr('data_num'); 
                 $.ajax({
@@ -290,9 +443,6 @@
     }
 	});
 	}
- 
 </script>
-
-<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

@@ -152,7 +152,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	<div class="container"><br>
 	<table class="exGoods" style="margin-bottom: 10px">
 		<thead>
-			<tr><th scope="col">관리자 응원 게시판</th></tr>
+			<tr><th scope="col">관리자응원 게시판</th></tr>
 		</thead>
 	</table>
 
@@ -205,7 +205,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                 var reply_id = $(this).attr('data_num'); 
                 $.ajax({
                     
-                    url : "	Cheboard_delete",
+                    url : "adCheboard_delete",
                     type : "POST",
                         
                     data :{
