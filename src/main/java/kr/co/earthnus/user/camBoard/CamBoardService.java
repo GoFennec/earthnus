@@ -47,7 +47,7 @@ public class CamBoardService {
         
         System.out.println("service pBean =======> search = " + pBean.getSearch() + ", contentnum = " + pBean.getContentnum() +
         		", pagenum = " + pBean.getPagenum() + ", totalcount = " + CamBoardDAO.getBoardListCount(pBean) + 
-        		", CamBoardList ±æÀÌ = " + CamBoardList.size());
+        		", CamBoardList ï¿½ï¿½ï¿½ï¿½ = " + CamBoardList.size());
         
         pBean.setSearch(search.substring(1, search.length()-1));
         
@@ -88,7 +88,7 @@ public class CamBoardService {
         
         System.out.println("service pBean =======> search = " + pBean.getSearch() + ", contentnum = " + pBean.getContentnum() +
         		", pagenum = " + pBean.getPagenum() + ", totalcount = " + CamBoardDAO.getBoardListCount(pBean) + 
-        		", CamBoardList ±æÀÌ = " + CamBoardList.size());
+        		", CamBoardList ï¿½ï¿½ï¿½ï¿½ = " + CamBoardList.size());
         
         pBean.setSearch(search.substring(1, search.length()-1));
         
@@ -98,7 +98,7 @@ public class CamBoardService {
 	public camBoardBean getCamBoard(String contentnum) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		
-		System.out.println("¼­ºñ½º : " + contentnum);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ : " + contentnum);
 		return camBoardDAO.getCamBoard(Integer.parseInt(contentnum));
 	}
 	/*public MemberBean getMember(MemberBean mBean) {

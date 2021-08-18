@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.earthnus.user.camBoard.CamBoardMybatis">
+<mapper namespace="kr.co.earthnus.admin.camBoard.AdCamBoardMybatis">
 	
 	<resultMap id="camBoardResult" type="camBoard">
 		<id property="CAMB_NUM" column="CAMB_NUM"/>
@@ -13,63 +13,14 @@
 		<result property="CAMB_DATE" column="CAMB_DATE"/>
 	</resultMap>
 	
-	<select id="getCamBoardListEntire" resultMap="camBoardResult">
-		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND (CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
-		]]>
+	<select id="getAdBoardList" resultMap="camBoardResult">
+			SELECT * FROM CAMBOARD 
 	</select>
 	
-	<select id="getCamBoardListDoing" resultMap="camBoardResult">
+	<select id="getAdBoardIngList" resultMap="camBoardResult">
 		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE>SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM CAMBOARD WHERE CAMB_STARTDATE <= now() and now() <= CAMB_FINDATE
 		]]>
 	</select>
-	
-	<select id="getCamBoardListEnd" resultMap="camBoardResult">
-		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE<SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
-		]]>
-	</select>
-		
-	<select id="getCamBoard" resultMap="camBoardResult">
-		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE CAMB_NUM=#{contentnum}
-		]]>
-	</select>
-	
-	<select id="camBoardEntireCount" resultType="int">
-		<![CDATA[
-			SELECT COUNT(*) FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND (CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum}
-		]]>
-	</select>
-	
-	<select id="camBoardDoingCount" resultType="int">
-		<![CDATA[
-			SELECT COUNT(*) FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE>SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum}
-		]]>
-	</select>
-	
-	<select id="camBoardEndCount" resultType="int">
-		<![CDATA[
-			SELECT COUNT(*) FROM CAMBOARD WHERE (CAMB_NAME LIKE #{search} AND CAMB_DATE<SYSDATE()) ORDER BY CAMB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum}
-		]]>
-	</select>
-	
-	<update id="camBoardUpdate">
-		<![CDATA[
-			UPDATE CAMBOARD SET CAMB_NAME = #{CAMB_NAME}, CAMB_SUBJECT = #{CAMB_SUBJECT}, CAMB_CONTENT = #{CAMB_CONTENT}, CAMB_FILE = #{CAMB_FILE}
-		]]>
-	</update>
-	
-	<insert id="camBoardInsert">
-		<![CDATA[
-			INSERT INTO CAMBOARD (CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_FILE) VALUES(#{CAMB_NAME}, #{CAMB_SUBJECT}, #{CAMB_CONTENT}, #{CAMB_FILE})
-		]]>
-	</insert>
-	
-	<delete id="camBoardDelete">
-		<![CDATA[
-			DELETE FROM CAMBOARD WHERE CAMB_NUM = #{CAMB_NUM}
-		]]>
-	</delete>
+
 </mapper>

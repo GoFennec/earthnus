@@ -170,16 +170,22 @@
                								 필수 입력사항입니다.
               							</div>
             						</div>
-            						<div class="form-group">
+            						<div class="form-group" id="login-submit-div">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3" id="button">
 												<button type="button" name="login-submit" id="login-submit" tabindex="4" onclick="findpw()" class="w-100 btn btn-primary btn-lg">인증번호 전송</button>
 											</div>
 										</div>
 									</div>
+									<div class="form-group" id="login-div">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3" id="button">
+												<button type="button" name="login-submit" id="login" onclick="location.href='/auth/login'" tabindex="4" class="w-100 btn btn-primary btn-lg">로그인</button>
+											</div>
+										</div>
+									</div>
 									
 									<script type="text/javascript">
-									
 									function findpw(){
 										var mem_id = $("#mem_id").val();
 										var mail_customer = $("#mail_customer").val();
@@ -203,10 +209,9 @@
 								   			success : function(result){
 									   
 								      			if(result.error === true){
-								      				alert('입력하신 이메일로 회원가입 인증번호를 발송했습니다. \n인증번호가 오지 않으면 입력하신 이메일을 다시 확인해주세요.');
-								      				$("#login-submit").hide();
-								      				$("#emailCheck").show();
-													$("#login-submit2").show();
+								      				alert('입력하신 이메일로 회원가입 임시 비밀번호를 발송했습니다. \n임시 비밀번호로 로그인을 하신 후 비밀번호를 변경해 주세요. \n임시 비밀번호가 오지 않으면 입력하신 이메일을 다시 확인해주세요.');
+								      				$("#login-submit-div").hide();
+								      				$("#login-div").show();
 								      			}else if(result.error === false){
 								    	  			alert('입력하신 정보를 다시 확인해주세요.');
 								      			}
@@ -223,170 +228,10 @@
 										$("#emailCheck").hide();
 										$("#login-submit2").hide();
 										$("#change").hide();
+										$("#login-div").hide();
 									});
     								</script>
-									
-            						<div class="col-12" id="emailCheck">
-              							<label for="username" class="form-label">이메일 인증번호</label>
-              							<input type="text" class="form-control" id="mail_pw" name="mail_pw" placeholder="" required>
-              							<div class="invalid-feedback">
-               								 필수 입력사항입니다.
-              							</div>
-            						</div>
-            						<div class="form-group" id="findID">
-										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3" id="button">
-												<button type="button" name="login-submit" id="login-submit2" onclick="findpwCheck()" tabindex="4" class="w-100 btn btn-primary btn-lg">인증번호 확인</button>
-											</div>
-										</div>
-									</div>
-									
-									<script type="text/javascript">
-									function findpwCheck(){
-										var mem_id = $("#mem_id").val();
-										var mail_customer = $("#mail_customer").val();
-										var mail_receiver = $("#mail_receiver").val();
-										var mail_pw = $("#mail_pw").val();
-										
-										if(mail_customer == ""){
-											alert("이름를 입력해주세요.");
-											return;
-										}else if(mail_receiver == ""){
-											alert("인증번호를 전송할 이메일 주소를 입력해주세요.");
-											return;
-										}else if(mem_id == ""){
-											alert("아이디를 입력해주세요.");
-											return;
-										}else if(mail_pw == ""){
-											alert("인증번호를 입력해주세요.");
-											return;
-										}
-										$.ajax({
-								   			type: "POST", //요청 메소드 방식
-								  			 url:"/auth/findPass",
-								   			data: {"mem_id":mem_id, "findName":mail_customer, "findEmail":mail_receiver, "mail_pw":mail_pw},
-								   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-								   			success : function(result){
-									   
-								      			if(result.error === true){
-								      				alert('인증번호 일치');
-								      				$("#change").show();
-								      				$("#emailCheck").hide();
-													$("#login-submit2").hide();
-													$("#login-form").hide();
-								      			}else if(result.error === false){
-								    	  			alert('입력하신 정보를 다시 확인해주세요.');
-								      			}
-								   			},
-								   		 error:function(request,status,error){
-								   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-								   	        alert("통신 오류");
-								      			//통신 실패시 발생하는 함수(콜백)
-								   				}
-											});
-									}
-    								</script>
 								</form>
-								<div id="change">
-									<div class="col-12">
-              							<label for="username" class="form-label">변경할 비밀번호</label>
-              							<input type="password" class="form-control" id="changePW" name="mail_customer" placeholder="" required>
-              							<div class="invalid-feedback" id="invalid-pw2">
-                							8~20자의 영문 대문자, 소문자와 특수문자로 비밀번호를 설정할 수 있습니다.
-              							</div>
-            						</div>
-            						<div class="col-12">
-              							<label for="username" class="form-label">변경할 비밀번호 확인</label>
-              							<input type="password" class="form-control" id="changePWCheck" name="mail_receiver" placeholder="" required>
-              							<div class="invalid-feedback">
-               								 필수 입력사항입니다.
-              							</div>
-            						</div>
-            						<div class="col-12"><div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div></div>
-									<div class="col-12"><div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div></div>
-            						
-            						<div class="form-group">
-										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3" id="button">
-												<button type="button" name="login-submit" id="" onclick="changePW()" tabindex="4" class="w-100 btn btn-primary btn-lg">비밀번호 변경</button>
-											</div>
-										</div>
-									</div>
-									
-									<script type="text/javascript">
-									function changePW(){
-										var changePW = $("#changePW").val();
-										var mem_id = $("#mem_id").val();
-										var mail_customer = $("#mail_customer").val();
-										
-										if(changePW == ""){
-											alert("이름를 입력해주세요.");
-											return;
-										}else if(changePWCheck == ""){
-											alert("인증번호를 전송할 이메일 주소를 입력해주세요.");
-											return;
-										}
-										$.ajax({
-								   			type: "POST", //요청 메소드 방식
-								  			 url:"/auth/changePW",
-								   			data: {"changePW":changePW, "mem_id":mem_id, "mail_customer":mail_customer},
-								   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-								   			success : function(result){
-									   
-								      			if(result.error === true){
-								      				alert('비밀번호 변경 완료');
-								      			}else if(result.error === false){
-								    	  			alert('입력하신 정보를 다시 확인해주세요.');
-								      			}
-								   			},
-								   		 error:function(request,status,error){
-								   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-								   	        alert("통신 오류");
-								      			//통신 실패시 발생하는 함수(콜백)
-								   				}
-											});
-									}
-									
-									$(function(){
-										$("#invalid-pw2").hide();
-										var pwd=$("#changePW").val();
-										$("input").keyup(function(){
-											var match = /^[A-Za-z0-9.;\-]{8,20}$/;
-											if(pwd != ""){
-												if(!match.test(pwd)){
-													$("#invalid-pw2").show();
-												}else{
-													$("#invalid-pw2").hide();
-												}
-											}else{
-												$("#invalid-pw2").hide();
-											}
-										});
-										
-										$("#alert-success").hide(); 
-										$("#alert-danger").hide(); 
-										$("input").keyup(function(){ 
-											var pwd1=$("#changePW").val(); 
-											var pwd2=$("#changePWCheck").val(); 
-										if(pwd1 != "" && pwd2 != ""){ 
-												if(pwd1 == pwd2){ 
-													$("#alert-success").show(); 
-													$("#alert-danger").hide(); 
-													$("#submit").removeAttr("disabled"); 
-												}else{ 
-													$("#alert-success").hide(); 
-													$("#alert-danger").show();
-													$("#submit").attr("disabled", "disabled"); 
-											}
-						 	 			} 
-						 	  			if(pwd1 == "" && pwd2 == ""){ 
-												$("#alert-success").hide(); 
-												$("#alert-danger").hide(); 
-											} 
-										});
-						  			});
-    								</script>
-								</div>
 							</div>
 						</div>
 					</div>

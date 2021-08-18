@@ -1,5 +1,7 @@
 package kr.co.earthnus.admin.camBoard;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,39 +19,26 @@ public class AdCamBoardController {
 	private AdCamBoardService adCamBoardService;
 			
 	@RequestMapping(value="/adCamBoard/list")
-	public String getCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam(defaultValue = "desc") String order,
-			camBoardBean cBean, Model model) {
+	public String getCamBoardList(Model model) {
 		
-		String search = "%%";
-		String search_type = "CAMB_ENTIRE";
-		String orderBy = "CAMB_NUM";
-		
-		//adCamBoardService.getCamBoardList(search, arr, cBean, pagenum, contentnum, model);
-		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
-		
-		System.out.println("CamBoardController");
+		List<camBoardBean> list = adCamBoardService.getBoardList();
+		model.addAttribute("CamBoardList", list);
 		return "camBoard/adCamBoardList";
 	}
 	
-	@RequestMapping(value = "/adCamBoard/list/search")
-	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam("search") String search, @RequestParam("search_type") String search_type,
-			@RequestParam(defaultValue = "desc") String order, camBoardBean cBean, Model model) {
+//	@RequestMapping(value="/adCamBoard/ing")
+//	public String getCamBoardIngList(Model model) {
+//		
+//		List<camBoardBean> list = adCamBoardService.getBoardIngList();
+//		model.addAttribute("CamBoardIngList", list);
+//		return "camBoard/adCamBoardList";
+//	}
+	
+	@RequestMapping(value="/adCamBoard/finish")
+	public String getCamBoardFinishList(Model model) {
 		
-		if(search != null) {
-			search = "%" + search + "%";
-		}else if(search == null || search.equals("")) {
-			search = "%%";
-		}
-		if(search_type == null) {
-			search_type = "CAMB_ENTIRE";
-		}
-		String orderBy = "CAMB_NUM";
-		
-		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
-		
-		System.out.println("CamBoardController");
+		List<camBoardBean> list = adCamBoardService.getBoardList();
+		model.addAttribute("CamBoardList", list);
 		return "camBoard/adCamBoardList";
 	}
 	
@@ -94,8 +83,8 @@ public class AdCamBoardController {
 	public String updateCamBoardOk(@RequestParam(value="CAMB_NAME") String CAMB_NAME, @RequestParam(value="CAMB_SUBJECT") String CAMB_SUBJECT, 
 			@RequestParam(value="CAMB_CONTENT") String CAMB_CONTENT, @RequestParam(value="CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE, Model model) {
 		
-		System.out.println("update ³»¿ë =======> ÀÌ¸§ : " + CAMB_NAME + ", ÁÖÁ¦ : " + CAMB_SUBJECT + 
-				", ³»¿ë : " + CAMB_CONTENT);
+		System.out.println("update ï¿½ï¿½ï¿½ï¿½ =======> ï¿½Ì¸ï¿½ : " + CAMB_NAME + ", ï¿½ï¿½ï¿½ï¿½ : " + CAMB_SUBJECT + 
+				", ï¿½ï¿½ï¿½ï¿½ : " + CAMB_CONTENT);
 		adCamBoardService.updateCamBoard(CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
 		System.out.println("updateCamBoardOk");
 		

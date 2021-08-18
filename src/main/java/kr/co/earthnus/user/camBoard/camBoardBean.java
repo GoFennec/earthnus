@@ -1,5 +1,6 @@
 package kr.co.earthnus.user.camBoard;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +12,8 @@ public class camBoardBean {
 	private String CAMB_CONTENT;
 	private String CAMB_FILE;
 	private MultipartFile CAMB_UPLOADFILE;
+	private Date CAMB_STARTDATE;
+	private Date CAMB_FINDATE;
 	private Date CAMB_DATE;
 	
 	public int getCAMB_NUM() {
@@ -50,18 +53,27 @@ public class camBoardBean {
 	public void setCAMB_UPLOADFILE(MultipartFile cAMB_UPLOADFILE) {
 		CAMB_UPLOADFILE = cAMB_UPLOADFILE;
 	}
+	public Date getCAMB_STARTDATE() {
+		return CAMB_STARTDATE;
+	}
+	public void setCAMB_STARTDATE(Date cAMB_STARTDATE) {
+		CAMB_STARTDATE = cAMB_STARTDATE;
+	}
+	public Date getCAMB_FINDATE() {
+		return CAMB_FINDATE;
+	}
+	public void setCAMB_FINDATE(Date cAMB_FINDATE) {
+		CAMB_FINDATE = cAMB_FINDATE;
+	}
 	public Date getCAMB_DATE() {
 		return CAMB_DATE;
 	}
 	public void setCAMB_DATE(Date cAMB_DATE) {
 		CAMB_DATE = cAMB_DATE;
 	}
-	
 	@Override
 	public String toString() {
 		return "CamBoardBean [CAMB_NUM=" + CAMB_NUM + ", CAMB_NAME=" + CAMB_NAME + ", CAMB_SUBJECT=" + CAMB_SUBJECT
 				+ ", CAMB_CONTENT=" + CAMB_CONTENT + ", CAMB_FILE=" + CAMB_FILE + ", CAMB_DATE=" + CAMB_DATE + "]";
 	}
-	
-	
 }

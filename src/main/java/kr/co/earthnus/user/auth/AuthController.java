@@ -112,7 +112,12 @@ public class AuthController {
 		return "index";
 	}
 	
-	
+	   //네이버
+	   @RequestMapping(value="/callback", method=RequestMethod.GET)
+	   public String callback(HttpSession session) {
+	      
+	      return "/auth/callback";
+	   }
 	
 	
 	

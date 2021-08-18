@@ -89,7 +89,7 @@
           
             <div class="col-md-9" style="padding-right:0px">
               <label for="firstName" class="form-label">아이디</label>
-              <input type="text" name="mem_id" class="form-control" id="mem_id" placeholder="중복확인 버튼을 누르세요." disabled required>
+              <input type="text" name="mem_id" class="form-control" id="mem_id" placeholder="중복확인 버튼을 누르세요." readonly>
               <div class="invalid-feedback" id="invalid-id">
                	 필수 입력사항입니다.
               </div>
@@ -113,7 +113,7 @@
 							<h3 class="modal-title" id="exampleModalLabel">아이디 중복확인</h3>
 						</div>
 						<br>
-						<input type="text" name="mem_id" class="form-control" id="mem_idcheck" placeholder="아이디를 입력하세요." >
+						<input type="text" class="form-control" id="mem_idcheck" placeholder="아이디를 입력하세요." >
 						<br>
 						<div class="modal-footer">
 							<button type="button" class="w-100 btn btn-primary btn-lg" id="modalY" onclick="idcheck()">중복확인</button>
@@ -125,6 +125,7 @@
             
             <script type="text/javascript">
 				function idcheck(){
+					var id = $("#mem_id").val();
 					var idcheck = $("#mem_idcheck").val();
 					var match = /^[A-Za-z0-9_-]{5,15}$/;
 					if(idcheck === ""){
@@ -137,7 +138,7 @@
 					$.ajax({
 			   			type: "POST", //요청 메소드 방식
 			  			 url:"/member/idcheck",
-			   			data: {"mem_id":idcheck},
+			   			data: {"mem_id":id},
 			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 			   			
 			   			success : function(result){
@@ -145,7 +146,7 @@
 			    	  			var yesno = confirm('사용 가능한 아이디입니다. \n 사용하시겠습니까?');
 			    	  			if(yesno){
 			    	  				$("#mem_id").val(idcheck);
-			    	  				$("#mem_id").attr("disabled",true);
+			    	  				$("#mem_id").attr("readonly",true);
 			    	  				$("#testModal").modal("hide");
 			    	  				
 			    	  			}
@@ -359,7 +360,7 @@
 			</script>
             
             <div class="col-md-9" style="padding-right:0px">
-              <input type="text" name="mailCheck" class="form-control" id="mailCheck" placeholder="이메일 인증번호">
+              <input type="text" name="mailCheck" class="form-control" id="mailCheck" placeholder="이메일 인증번호" required>
               <div class="invalid-feedback" id="invalid-emailCheck">
                 	필수 입력사항입니다.
               </div>
@@ -386,7 +387,7 @@
 			   
 		      			if(result.error == true){
 		    	  			alert('회원가입 이메일 인증이 완료되었습니다.');
-		    	  			$("#mem_email").attr("disabled",true);
+		    	  			$("#mem_email").attr("readonly",true);
 		    	  			$("#mailCheck").attr("disabled",true);
 		      			}else if(result.error == false){
 		    	  			alert('이메일 인증번호가 일치하지 않습니다. \n 이메일을 다시 한 번 확인해주세요.');
@@ -457,6 +458,7 @@
 								return false;
 							}
 						}
+				}
 			</script>
           
         </form>

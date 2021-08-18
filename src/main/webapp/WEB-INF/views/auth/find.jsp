@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -238,7 +239,7 @@
 											<c:forEach var="findID1" items="${findID}">
 												<tr>
 													<td>아이디 : ${findID1.mem_id}</td>
-													<td>가입 날짜 : ${findID1.mem_date}</td>
+													<td>가입 날짜 : <fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${findID1.mem_date}" /></td>
 												</tr>
 											</c:forEach>
 										</table>

@@ -1,6 +1,8 @@
 package kr.co.earthnus.util;
 
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -94,6 +96,90 @@ public class MailService {
 		return i;
 	}
 	
+	// 임시 비밀번호 발송
+	public int mailSendWithPassword2(String email, String name) throws MalformedURLException, NoSuchAlgorithmException {
+
+		char[] num = new char[10];
+		for (int i = 0; i < 5; i++) {
+			char y = (char) ((int) ((Math.random() * (122 - 97)) + 97));
+			num[i] = y;
+		}
+		for (int i = 5; i < 10; i++) {
+			char y = Character.forDigit(((int) (Math.random() * 9)), 10);
+			num[i] = y;
+		}
+		String newnum = "";
+		for (int i = 0; i < num.length; i++) {
+			newnum = newnum + num[i];
+		}
+
+		Properties prop = System.getProperties();
+		prop.put("mail.smtp.starttls.enable", "true");
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.port", "587");
+
+		Authenticator auth = new MailAuth();
+		Session session = Session.getDefaultInstance(prop, auth);
+		MimeMessage msg = new MimeMessage(session);
+
+		String title = "EARTH & US 임시 비밀번호입니다.";
+		String content = "안녕하세요 EARTH & US 입니다. \n" + "고객님의 임시 비밀번호는 " + newnum + " 입니다. \n"
+				+ "임시 비밀번호로 로그인을 하신 후 마이페이지에서 비밀번호를 변경해 주세요.";
+		String password = newnum;
+		String sender = "baltolly@gmail.com";
+		String receiver = email;
+		String customer = name;
+
+		MailBean mailBean = new MailBean(title, content, password, sender, receiver, customer);
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		dao.insertMail(mailBean);
+		changePW(newnum, email, name);
+
+		int i = 0;
+		try {
+			msg.setSentDate(new Date());
+			msg.setFrom(new InternetAddress(sender, "EARTH & US"));
+			InternetAddress to = new InternetAddress(email);
+			msg.setRecipient(Message.RecipientType.TO, to);
+			msg.setSubject(title, "UTF-8");
+			msg.setText(content, "UTF-8");
+
+			Transport.send(msg);
+
+		} catch (AddressException ae) {
+			i++;
+			System.out.println("AddressException : " + ae.getMessage());
+		} catch (MessagingException me) {
+			i++;
+			System.out.println("MessagingException : " + me.getMessage());
+		} catch (UnsupportedEncodingException e) {
+			i++;
+			System.out.println("UnsupportedEncodingException : " + e.getMessage());
+		} catch (Exception ex) {
+			i++;
+			System.out.println("Exception : " + ex.getMessage());
+		}
+		System.out.println(i + " error service");
+		return i;
+	}
+	
+	
+	public int changePW(String newnum, String email, String name) throws NoSuchAlgorithmException {
+		
+		SHA256 sha256 = new SHA256();
+
+        //SHA256으로 암호화된 비밀번호
+        String changeNum = sha256.encrypt(newnum);
+
+        //비밀번호 일치 여부
+        System.out.println(changeNum.equals(sha256.encrypt(newnum)));
+
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		int n = dao.changePW(changeNum, email, name);
+		return n;
+	}
+	
 	//인증번호 확인
 	public boolean mailCheck(String mailCheck, String name, String email) {
 		boolean correct = false;
@@ -101,18 +187,6 @@ public class MailService {
 		MailBean mailBean = dao.selectMail(name, email);
 		
 		if(mailBean.getMail_pw().equals(mailCheck)) {
-			correct = true;
-		}
-		return correct;
-	}
-	
-	//비번찾기 인증번호 확인
-	public boolean mailCheckPW(String mailCheck, String name, String email, String mem_id) {
-		boolean correct = false;
-		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		String mail_pw = dao.selectMailPW(email, mem_id);
-		
-		if(mail_pw.equals(mailCheck)) {
 			correct = true;
 		}
 		return correct;
@@ -148,13 +222,5 @@ public class MailService {
 		List<MemberBean> findID = dao.findID(findName, mail_receiver);
 		
 		return findID;
-	}
-	
-	//아이디 찾기에서 인증번호 일치 확인
-	public int changePW(String changePW, String mem_id, String mail_customer) {
-		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		int changePass = dao.changePW(changePW, mem_id, mail_customer);
-		
-		return changePass;
 	}
 }

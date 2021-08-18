@@ -6,67 +6,29 @@
 <mapper namespace="kr.co.earthnus.user.member.MemberMybatis">
 
 	<resultMap id="member" type="member">
-		<id property="mem_id" column="MEM_ID" />
-		<result property="mem_pw" column="MEM_PW" />
-		<result property="mem_name" column="MEM_NAME" />
-		<result property="mem_addr" column="MEM_ADDR" />
-		<result property="mem_tel" column="MEM_TEL" />
-		<result property="mem_birth" column="MEM_BIRTH" />
-		<result property="mem_gender" column="MEM_GENDER" />
-		<result property="mem_email" column="MEM_EMAIL" />
-		<result property="mem_date" column="MEM_DATE" />
-		<result property="mem_point" column="MEM_POINT" />
+		<id property="mem_id" column="MEM_ID"/>
+		<result property="mem_pw" column="MEM_PW"/>
+		<result property="mem_name" column="MEM_NAME"/>
+		<result property="mem_addr" column="MEM_ADDR"/>
+		<result property="mem_tel" column="MEM_TEL"/>
+		<result property="mem_birth" column="MEM_BIRTH"/>
+		<result property="mem_gender" column="MEM_GENDER"/>
+		<result property="mem_email" column="MEM_EMAIL"/>
+		<result property="mem_date" column="MEM_DATE"/>
+		<result property="mem_point" column="MEM_POINT"/>
 	</resultMap>
-	<resultMap id="exGoodsResult" type="exGoods">
-		<id property="exg_num" column="EXG_NUM" />
-		<result property="exg_id" column="EXG_ID" />
-		<result property="exg_name" column="EXG_NAME" />
-		<result property="exg_addr" column="EXG_ADDR" />
-		<result property="exg_gnum" column="EXG_GNUM" />
-		<result property="exg_gname" column="EXG_GNAME" />
-		<result property="exg_point" column="EXG_POINT" />
-		<result property="exg_date" column="EXG_DATE" />
-	</resultMap>
-	<resultMap id="CheBoardResult" type="cheBoard">
-		<id property="cheb_num" column="CHEB_NUM" />
-		<result property="cheb_id" column="CHEB_ID" />
-		<result property="cheb_name" column="CHEB_NAME" />
-		<result property="cheb_dnum" column="CHEB_DNUM" />
-		<result property="cheb_content" column="CHEB_CONTENT" />
-		<result property="cheb_date" column="CHEB_DATE" />
-	</resultMap>
-	
+
 	<insert id="insertMember" parameterType="member">
-		insert into
-		member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH,
-		MEM_GENDER, MEM_EMAIL, MEM_DATE)
-		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
-	</insert>
-	<insert id="insertMember_kakao" parameterType="member">
 		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
 		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
 	</insert>
-<select id="myPoint" resultType="String" parameterType="String">SELECT MEM_POINT FROM MEMBER
+	<select id="myPoint" resultType="String">SELECT MEM_POINT FROM MEMBER
 		WHERE MEM_ID=#{mem_id}
 	</select>
 
-	<select id="myDonation" resultType="String" parameterType="String">SELECT SUM(PAY_PRICE) FROM
+	<select id="myDonation" resultType="String">SELECT SUM(PAY_PRICE) FROM
 		PAY WHERE PAY_ID=#{mem_id}
 	</select>
-
-<select id="myDonation_f" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND (PAY_DNUM LIKE 'F%');
-	</select>
-	<select id="myDonation_o" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND (PAY_DNUM LIKE 'O%');
-	</select>
-	<select id="myDonation_i" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND (PAY_DNUM LIKE 'I%');
-	</select>
-	<select id="myDonation_p" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND (PAY_DNUM LIKE 'P%');
-	</select>
-	
 
 	<select id="pwCheck" parameterType="String" resultType="String">select
 		mem_pw from member where mem_id = #{mem_id}
@@ -75,7 +37,7 @@
 		UPDATE MEMBER SET MEM_PW=#{mem_cpw1} WHERE MEM_ID=${mem_id}
 	</update>
 
-	<select id="myInfo" resultType="member" parameterType="String">
+	<select id="myInfo" resultType="member">
 		SELECT * FROM MEMBER WHERE
 		MEM_ID=#{mem_id}
 	</select>
@@ -89,37 +51,22 @@
 		WHERE MEM_ID=#{mem_id}
 	</update>
 
-<select id="myOrder"  parameterType="String" resultType="exGoods">
-	SELECT EXG_GNUM, EXG_GNAME, EXG_POINT, EXG_DATE FROM EXGOODS WHERE EXG_ID=#{mem_id}
-	</select>
-	
-<select id="myMessage"  parameterType="String" resultType="cheBoard">
-	SELECT CHEB_NUM, CHEB_DNUM, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id}
-	</select>
-
 	<update id="deleteMember" parameterType="member">UPDATE MEMBER SET
 		MEM_PW="NOTAMEMBER", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원",
 		MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
 		MEM_POINT="0" WHERE MEM_ID=#{mem_id}
 	</update>
 	<select id="find" parameterType="String" resultType="int">
-		SELECT
-		count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL =
-		#{findEmail}
+		SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail}
 	</select>
-
+	
 	<select id="findpw" parameterType="String" resultType="int">
-		SELECT
-		count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL =
-		#{findEmail} AND MEM_ID = #{mem_id}
+		SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail} AND MEM_ID = #{mem_id}
 	</select>
-
-
-
+	
 	<select id="idCheck" parameterType="String" resultType="int">
-		select
-		count(*) from member where mem_id = #{mem_id}
+		select count(*) from member where mem_id = #{mem_id}
 	</select>
-
-
+		
+		
 </mapper>
