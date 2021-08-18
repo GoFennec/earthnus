@@ -25,6 +25,7 @@
 		<result property="exg_gnum" column="EXG_GNUM" />
 		<result property="exg_gname" column="EXG_GNAME" />
 		<result property="exg_point" column="EXG_POINT" />
+		<result property="exg_img" column="EXG_IMG" />
 		<result property="exg_date" column="EXG_DATE" />
 	</resultMap>
 	<resultMap id="CheBoardResult" type="cheBoard">
@@ -55,25 +56,24 @@
 	</select>
 
 <select id="myDonation_f" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND (PAY_DNUM LIKE 'F%');
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND pay_dname in ('묘목','새싹','나무','씨앗');
 	</select>
 	<select id="myDonation_o" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND (PAY_DNUM LIKE 'O%');
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND pay_dname in ('조개','새우','문어','바다');
 	</select>
 	<select id="myDonation_i" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND (PAY_DNUM LIKE 'I%');
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND pay_dname in ('플라스틱 줄이기','해양 청소','대지 청소','친환경');
 	</select>
 	<select id="myDonation_p" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND (PAY_DNUM LIKE 'P%');
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND pay_dname in ('작은 얼음','큰 얼음','빙하 조각','빙하');
 	</select>
 	
 
-	<select id="pwCheck" parameterType="String" resultType="String">select
+	<select id="pwCheck" parameterType="String" resultType="String">
+	select
 		mem_pw from member where mem_id = #{mem_id}
 	</select>
-	<update id="pwUpdate" parameterType="String" >
-		UPDATE MEMBER SET MEM_PW=#{mem_cpw1} WHERE MEM_ID=${mem_id}
-	</update>
+	
 
 	<select id="myInfo" resultType="member" parameterType="String">
 		SELECT * FROM MEMBER WHERE
@@ -82,15 +82,20 @@
 
 	<update id="updateMyInfo" parameterType="member">
 		UPDATE MEMBER SET
-		MEM_PW=#{mem_pw},
 		MEM_ADDR=#{mem_addr}, MEM_TEL=#{mem_tel},
 		MEM_BIRTH=#{mem_birth},
 		MEM_EMAIL=#{mem_email}
 		WHERE MEM_ID=#{mem_id}
 	</update>
+	
+		<update id="updatePw" parameterType="hashmap">
+		UPDATE MEMBER SET
+		MEM_PW=#{mem_pw}
+		WHERE MEM_ID=#{mem_id}
+	</update>
 
 <select id="myOrder"  parameterType="String" resultType="exGoods">
-	SELECT EXG_GNUM, EXG_GNAME, EXG_POINT, EXG_DATE FROM EXGOODS WHERE EXG_ID=#{mem_id}
+	SELECT EXG_IMG, EXG_GNAME, EXG_POINT, EXG_DATE FROM EXGOODS WHERE EXG_ID=#{mem_id}
 	</select>
 	
 <select id="myMessage"  parameterType="String" resultType="cheBoard">

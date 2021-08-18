@@ -623,7 +623,6 @@ color: #a2a6af
         					<li><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
-        					<li><a href="#"><span class="fa fa-clock-o"></span> Reminders</a></li>
         				</ul>
         			</nav>
                 </div>
