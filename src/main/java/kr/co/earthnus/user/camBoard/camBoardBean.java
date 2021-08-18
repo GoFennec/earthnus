@@ -53,12 +53,10 @@ public class camBoardBean {
 	public void setCAMB_UPLOADFILE(MultipartFile cAMB_UPLOADFILE) {
 		CAMB_UPLOADFILE = cAMB_UPLOADFILE;
 	}
-	
 	public String getCAMB_STARTDATE() {
 		return CAMB_STARTDATE;
 	}
 	public void setCAMB_STARTDATE(Date cAMB_STARTDATE) {
-		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
 		String strStartDate = simpleDateFormat.format(cAMB_STARTDATE);
 		
@@ -68,7 +66,6 @@ public class camBoardBean {
 		return CAMB_FINDATE;
 	}
 	public void setCAMB_FINDATE(Date cAMB_FINDATE) {
-		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
 		String strFinDate = simpleDateFormat.format(cAMB_FINDATE);
 		
@@ -78,18 +75,14 @@ public class camBoardBean {
 		return CAMB_DATE;
 	}
 	public void setCAMB_DATE(Date cAMB_DATE) {					// 원하는 날짜 형태로 변환
-		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
 		String strNowDate = simpleDateFormat.format(cAMB_DATE);
 		
 		CAMB_DATE = strNowDate;
 	}
-	
 	@Override
 	public String toString() {
 		return "CamBoardBean [CAMB_NUM=" + CAMB_NUM + ", CAMB_NAME=" + CAMB_NAME + ", CAMB_SUBJECT=" + CAMB_SUBJECT
 				+ ", CAMB_CONTENT=" + CAMB_CONTENT + ", CAMB_FILE=" + CAMB_FILE + ", CAMB_DATE=" + CAMB_DATE + "]";
 	}
-	
-	
 }

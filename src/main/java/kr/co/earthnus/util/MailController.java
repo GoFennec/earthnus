@@ -1,5 +1,7 @@
 package kr.co.earthnus.util;
 
+import java.net.MalformedURLException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,14 +86,14 @@ public class MailController {
 	@RequestMapping(value="/auth/findpw", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> findpw(@RequestParam("findName")String findName, @RequestParam("findEmail")String findEmail, 
-			@RequestParam("mem_id")String mem_id, HttpServletRequest request) {
+			@RequestParam("mem_id")String mem_id, HttpServletRequest request) throws MalformedURLException, NoSuchAlgorithmException {
 		
 		boolean correct = mailService.findpw(findName, findEmail, mem_id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if(correct) {
-			int i = mailService.mailSendWithPassword(findEmail, findName);
+			int i = mailService.mailSendWithPassword2(findEmail, findName);
 			if(i == 0) {
 				map.put("error", true);
 			}else {
@@ -121,38 +123,5 @@ public class MailController {
 			return null;
 		}
 	}
-	
-	//비번 찾기에서 인증번호 확인
-	@RequestMapping(value="/auth/findPass", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> findPass(@RequestParam("mem_id")String mem_id, @RequestParam("findName")String findName,
-			@RequestParam("findEmail")String findEmail, @RequestParam("mail_pw")String mail_pw, HttpServletRequest request) {
-		
-		boolean correct = mailService.mailCheckPW(mail_pw, findName, findEmail, mem_id);
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		if(correct) {
-			map.put("error", true);
-		}else {
-			map.put("error", false);
-		}
-		return map;
-	}
-	
-	//비번 찾기에서 인증번호 확인
-	@RequestMapping(value="/auth/changePW", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> changePW(@RequestParam("changePW")String changePW, @RequestParam("mem_id")String mem_id,
-			@RequestParam("mail_customer")String mail_customer, HttpServletRequest request) {
-		
-		int changePass = mailService.changePW(changePW, mem_id, mail_customer);
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		if(changePass > 0) {
-			map.put("error", true);
-		}else {
-			map.put("error", false);
-		}
-		return map;
-	}
+
 }

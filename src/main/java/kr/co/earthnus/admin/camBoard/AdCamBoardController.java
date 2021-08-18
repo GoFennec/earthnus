@@ -1,5 +1,7 @@
 package kr.co.earthnus.admin.camBoard;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,18 +19,10 @@ public class AdCamBoardController {
 	private AdCamBoardService adCamBoardService;
 			
 	@RequestMapping(value="/adCamBoard/list")
-	public String getCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam(defaultValue = "desc") String order,
-			camBoardBean cBean, Model model) {
+	public String getCamBoardList(Model model) {
 		
-		String search = "%%";
-		String search_type = "CAMB_ENTIRE";
-		String orderBy = "CAMB_NUM";
-		
-		//adCamBoardService.getCamBoardList(search, arr, cBean, pagenum, contentnum, model);
-		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
-		
-		System.out.println("CamBoardController");
+		List<camBoardBean> list = adCamBoardService.getBoardList();
+		model.addAttribute("CamBoardList", list);
 		return "camBoard/adCamBoardList";
 	}
 	
@@ -46,10 +40,16 @@ public class AdCamBoardController {
 			search_type = "CAMB_ENTIRE";
 		}
 		String orderBy = "CAMB_NUM";
+		List<camBoardBean> list = adCamBoardService.getBoardIngList();
+		model.addAttribute("CamBoardIngList", list);
+		return "camBoard/adCamBoardList";
+	}
+	
+	@RequestMapping(value="/adCamBoard/finish")
+	public String getCamBoardFinishList(Model model) {
 		
-		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
-		
-		System.out.println("CamBoardController");
+		List<camBoardBean> list = adCamBoardService.getBoardFinishList();
+		model.addAttribute("CamBoardFinishList", list);
 		return "camBoard/adCamBoardList";
 	}
 	
