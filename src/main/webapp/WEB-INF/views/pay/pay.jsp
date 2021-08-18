@@ -56,7 +56,7 @@ button {
 
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
-<br><br>
+<br><br><br><br>
 
 <div class="container">
 	
@@ -74,7 +74,7 @@ button {
 		</thead>
 		<tbody>
 		<tr><th scope="row">후원자 명</th><td>${member.mem_name}</td></tr>
-		<tr><th scope="row">구매 상품</th><td>${pay.pay_dnum}</td></tr>		
+		<tr><th scope="row">구매 상품</th><td>${pay.pay_dname}</td></tr>		
 		<c:set var="total" value="${pay.pay_price}"/>
 		<tr><th scope="row">후원 금액</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${total}"/>원</td></tr>
 		</tbody>
@@ -125,7 +125,7 @@ button {
             pg : 'html5_inicis',
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
-            name : '후원 상품(${pay.pay_dnum}) 결제',
+            name : '후원 상품(${pay.pay_dname}) 결제',
             amount : '${pay.pay_price}',
             buyer_email : '${member.mem_email}',
             buyer_name : '${member.mem_name}',
@@ -143,7 +143,7 @@ button {
                         pay_num : rsp.imp_uid,
                         pay_id : '${member.mem_id}',
                         pay_name : '${member.mem_name}',
-						pay_dnum : '${pay.pay_dnum}',
+						pay_dname : '${pay.pay_dname}',
                         pay_price : '${pay.pay_price}',
                         pay_point : '${pay_point}',
                         pay_pdate : rsp.paid_at
@@ -175,7 +175,7 @@ button {
             pg : 'kakaopay',
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
-            name : '후원 상품(${pay.pay_dnum}) 결제',
+            name : '후원 상품(${pay.pay_dname}) 결제',
             amount : '${pay.pay_price}',
             buyer_email : '${member.mem_email}',
             buyer_name : '${member.mem_name}',
@@ -193,7 +193,7 @@ button {
                         pay_num : rsp.imp_uid,
                         pay_id : '${member.mem_id}',
                         pay_name : '${member.mem_name}',
-						pay_dnum : '${pay.pay_dnum}',
+						pay_dname : '${pay.pay_dname}',
                         pay_price : '${pay.pay_price}',
                         pay_point : '${pay_point}',
                         pay_pdate : rsp.paid_at
@@ -216,7 +216,6 @@ button {
     });
 </script>
 
-<br><br>
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="true"/>
 </body>
 </html>

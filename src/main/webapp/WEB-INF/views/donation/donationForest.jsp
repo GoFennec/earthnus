@@ -23,7 +23,7 @@ section p{font-size: 0.8em; color: gray;}
 
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
-<br><br>
+<br><br><br><br>
 	
 <div class="container">
 	
@@ -35,13 +35,13 @@ section p{font-size: 0.8em; color: gray;}
 	
 	<div class="row">
 	 	<c:forEach items="${forest}" var="donation" begin="0" end="2">
-			<div class="item col-3 col-md-3">
+			<div class="item col-6 col-md-3">
 				<img src="${donation.d_img}" title="후원 상품 이미지" alt="금액대별 후원 상품 이미지" width=80%><br><br>
 				<c:set var="price" value="${donation.d_price}"/>
 				<p>${donation.d_name} <fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</p>
 				<form action="/pay/pay" method="POST">
 					<input type="hidden" name="mem_id" value="${auth_id}"/>
-					<input type="hidden" name="pay_dnum" value="${donation.d_name}"/>
+					<input type="hidden" name="pay_dname" value="${donation.d_name}"/>
 					<input type="hidden" name="pay_price" value="${donation.d_price}"/>
 					
 					<c:if test="${empty auth}">
@@ -55,11 +55,11 @@ section p{font-size: 0.8em; color: gray;}
 		</c:forEach>
 		
 		<c:forEach items="${forest}" var="donation" begin="3" end="3">
-			<div class="item col-4 col-md-3">
+			<div class="item col-6 col-md-3">
 				<img src="${donation.d_img}" title="후원 상품 이미지" alt="금액대별 후원 상품 이미지" width=80%><br><br>
 				<form action="/pay/pay" method="POST">
 					<input type="hidden" name="mem_id" value="${auth_id}"/>
-					<input type="hidden" name="pay_dnum" value="${donation.d_name}"/>
+					<input type="hidden" name="pay_dname" value="${donation.d_name}"/>
 					<input type="text" size=10 height=20 name="pay_price"/>&nbsp;원
 					
 					<c:if test="${empty auth}">
@@ -74,7 +74,6 @@ section p{font-size: 0.8em; color: gray;}
 	</div>
 </div>
 
-<br><br>
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="true"/>
 </body>
 </html>
