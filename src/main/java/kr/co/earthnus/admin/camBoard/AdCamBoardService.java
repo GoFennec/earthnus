@@ -22,11 +22,16 @@ public class AdCamBoardService {
         return CamBoardList;
 	}
 	
-//	public List<camBoardBean> getBoardIngList() {
-//		AdCamBoardMybatis CamBoardDAO = mybatis.getMapper(AdCamBoardMybatis.class);
-//        List<camBoardBean> CamBoardList = CamBoardDAO.getAdBoardIngList();
-//        return CamBoardList;
-//	}
+	public List<camBoardBean> getBoardIngList() {
+		AdCamBoardMybatis CamBoardDAO = mybatis.getMapper(AdCamBoardMybatis.class);
+        List<camBoardBean> CamBoardList = CamBoardDAO.getAdBoardIngList();
+        return CamBoardList;
+	}
+	public List<camBoardBean> getBoardFinishList() {
+		AdCamBoardMybatis CamBoardDAO = mybatis.getMapper(AdCamBoardMybatis.class);
+        List<camBoardBean> CamBoardList = CamBoardDAO.getAdBoardFinishList();
+        return CamBoardList;
+	}
 	
 	public void insertCamBoard(String CAMB_NAME, String CAMB_SUBJECT, String CAMB_CONTENT, MultipartFile CAMB_UPLOADFILE) {
 		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);

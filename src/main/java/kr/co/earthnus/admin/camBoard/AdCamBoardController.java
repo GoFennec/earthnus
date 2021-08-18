@@ -26,19 +26,19 @@ public class AdCamBoardController {
 		return "camBoard/adCamBoardList";
 	}
 	
-//	@RequestMapping(value="/adCamBoard/ing")
-//	public String getCamBoardIngList(Model model) {
-//		
-//		List<camBoardBean> list = adCamBoardService.getBoardIngList();
-//		model.addAttribute("CamBoardIngList", list);
-//		return "camBoard/adCamBoardList";
-//	}
+	@RequestMapping(value="/adCamBoard/ing")
+	public String getCamBoardIngList(Model model) {
+		
+		List<camBoardBean> list = adCamBoardService.getBoardIngList();
+		model.addAttribute("CamBoardIngList", list);
+		return "camBoard/adCamBoardList";
+	}
 	
 	@RequestMapping(value="/adCamBoard/finish")
 	public String getCamBoardFinishList(Model model) {
 		
-		List<camBoardBean> list = adCamBoardService.getBoardList();
-		model.addAttribute("CamBoardList", list);
+		List<camBoardBean> list = adCamBoardService.getBoardFinishList();
+		model.addAttribute("CamBoardFinishList", list);
 		return "camBoard/adCamBoardList";
 	}
 	

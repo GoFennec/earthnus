@@ -291,7 +291,7 @@
                 <div class="table-responsive p-3">
                   <a href="/adCamBoard/list" class="btn btn-sm btn-primary">전체 보기</a>
                   <a href="/adCamBoard/ing" class="btn btn-sm btn-primary">진행 중인 캠페인</a>
-                  <a href="#" class="btn btn-sm btn-primary">종료한 캠페인</a>
+                  <a href="/adCamBoard/finish" class="btn btn-sm btn-primary">종료한 캠페인</a>
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
@@ -304,6 +304,7 @@
                       </tr>
                     </thead>
 					<tbody>
+					<c:if test="${not empty CamBoardList}">
                     	<c:forEach items="${CamBoardList}" var="list">
                       	<tr onclick="location.href='/adCamBoard/detail?CAMB_NUM=${list.CAMB_NUM}'">
                         	<td>${list.CAMB_NUM}</td>
@@ -314,6 +315,31 @@
                         	<td><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${list.CAMB_FINDATE}" /></td>
                       	</tr>
                      	</c:forEach>
+                     </c:if>
+                     <c:if test="${not empty CamBoardIngList}">
+                    	<c:forEach items="${CamBoardIngList}" var="list">
+                      	<tr onclick="location.href='/adCamBoard/detail?CAMB_NUM=${list.CAMB_NUM}'">
+                        	<td>${list.CAMB_NUM}</td>
+                        	<td>${list.CAMB_NAME}</td>
+                        	<td>${list.CAMB_SUBJECT}</td>
+                        	<td><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${list.CAMB_DATE}" /></td>
+                        	<td><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${list.CAMB_STARTDATE}" /></td>
+                        	<td><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${list.CAMB_FINDATE}" /></td>
+                      	</tr>
+                     	</c:forEach>
+                     </c:if>
+                     <c:if test="${not empty CamBoardFinishList}">
+                    	<c:forEach items="${CamBoardFinishList}" var="list">
+                      	<tr onclick="location.href='/adCamBoard/detail?CAMB_NUM=${list.CAMB_NUM}'">
+                        	<td>${list.CAMB_NUM}</td>
+                        	<td>${list.CAMB_NAME}</td>
+                        	<td>${list.CAMB_SUBJECT}</td>
+                        	<td><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${list.CAMB_DATE}" /></td>
+                        	<td><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${list.CAMB_STARTDATE}" /></td>
+                        	<td><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${list.CAMB_FINDATE}" /></td>
+                      	</tr>
+                     	</c:forEach>
+                     </c:if>
                     </tbody>
                   </table>
                 </div>

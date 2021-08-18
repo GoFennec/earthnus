@@ -7,4 +7,5 @@ import kr.co.earthnus.user.camBoard.camBoardBean;
 public interface AdCamBoardMybatis {
 	public List<camBoardBean> getAdBoardList();
 	public List<camBoardBean> getAdBoardIngList();
+	public List<camBoardBean> getAdBoardFinishList();
 }
