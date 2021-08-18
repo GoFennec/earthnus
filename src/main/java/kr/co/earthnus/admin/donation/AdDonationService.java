@@ -51,8 +51,8 @@ public class AdDonationService {
 		dao.updatePay(bean);
 	}
 	
-//	public void updatePoint(PayBean bean) {
-//		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
-//		dao.updatePoint(bean);
-//	}
+	public void updatePoint(PayBean bean) {
+		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
+		dao.updatePoint(bean);
+	}
 }

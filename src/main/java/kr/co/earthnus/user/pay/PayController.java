@@ -46,8 +46,7 @@ public class PayController {
 	@RequestMapping("/payments/complete/{imp_uid}")
 	public IamportResponse<Payment> paymentByImpUid(@RequestBody PayBean pBean, Model model, Locale locale, HttpSession session,
 			@PathVariable(value="imp_uid") String imp_uid) throws IamportResponseException, IOException {
-		int n = payService.insertPay(pBean);
-		int m = payService.updatePoint(pBean);
+		payService.insertPay(pBean);
 		return api.paymentByImpUid(imp_uid);
 	}
 
