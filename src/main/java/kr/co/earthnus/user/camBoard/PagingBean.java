@@ -3,6 +3,7 @@ package kr.co.earthnus.user.camBoard;
 public class PagingBean {	
 	private int totalcount;
     private int pagenum;
+    private int currentPage;
     private int contentnum;
     private int startPage = 1;
     private int endPage = 5;
@@ -39,6 +40,12 @@ public class PagingBean {
         return totalpage;
     }
     
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
 	public String getSearch_type() {
 		return search_type;
 	}

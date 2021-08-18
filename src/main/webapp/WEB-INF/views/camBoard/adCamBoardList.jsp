@@ -26,6 +26,8 @@
 </style>
 
 <title>EARTH & US</title>
+<link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
+<link rel="icon" href="/resources/assets/img/favicon.ico">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -57,14 +59,17 @@
 			</c:if>
 		</ul>
 	
-		<form  style="text-align: right;">
-			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_ENTIRE" checked>전체</label>&nbsp;&nbsp;&nbsp;
-			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_NAME">제목</label>&nbsp;&nbsp;&nbsp;
-			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_SUBJECT">주제</label>&nbsp;&nbsp;&nbsp;
-			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_CONTENT">내용</label>&nbsp;&nbsp;&nbsp;
-			<input type="text" id="search" placeholder="캠페인 검색" value="${page.search}">
+		<div style="text-align: right;">		
+			<select id="search_type">
+				<option value="CAMB_ENTIRE">전체검색</option>
+				<option value="CAMB_NAME">제목검색</option>
+				<option value="CAMB_SUBJECT">주제검색</option>
+				<option value="CAMB_CONTENT">내용검색</option>
+			</select>
+			<input type="text" id="search" placeholder="캠페인 검색"  value="${page.search}">
 			<input type="button" value="검색" onclick="searchUrl()">
-		</form>
+		</div>
+
 	</div>
 		
 	<div class="row">
@@ -131,9 +136,9 @@
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 <script type="text/javascript">
 	window.onload = function(){
-		const search_type = $("input:checkbox[name='search_type']:checked").val();
+		var search_type = "${page.search_type}";
 		
-		$("input:checkbox[id='id값']").prop("checked", true);
+		$('select[id="search_type"]').find('option:contains(search_type)').attr("selected",true);
 		
 		var obj = document.getElementsByName("search_type");
 	    for(var i=0; i<obj.length; i++){
@@ -144,18 +149,7 @@
 	        }
 	    }
 	}
-	$(function(){
-		
-	});
 	
-	function doOpenCheck(chk){
-	    var obj = document.getElementsByName("search_type");
-	    for(var i=0; i<obj.length; i++){
-	        if(obj[i] != chk){
-	            obj[i].checked = false;
-	        }
-	    }
-	}	
    function changepage(){
        location.href="file:///Users/gimjeongbin/Desktop/finalproject/camBoardDetail.html";
    }
@@ -163,9 +157,10 @@
    function searchUrl(){
 	   
 	   var search = document.getElementById("search").value;
-	   var search_type = $("input:checkbox[name='search_type']:checked").val();
+	   var search_type = document.getElementById("search_type");
+	   search_type = search_type.options[search_type.selectedIndex].value;
 	   
-	   location.href="/adCamBoard/list/search?search="+ search + "&search_type=" + search_type;
+	   location.href="/adCamBoard/list/search?search=" + search + "&search_type=" + search_type;
    }
 	
    $.urlParam = function(name){
