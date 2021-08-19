@@ -19,7 +19,9 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<div class="container"><br>
+<br><br><br><br>
+<div class="container">
+
 <form action="/goods/exGoodsOk" method="POST" onsubmit="return exCheck()">
 	<table class="exGoods">
 		<thead>
@@ -59,9 +61,10 @@
 			<tr><th scope="col">배송지 정보</th>
 			<td><input type="text" id="postcode" required placeholder="우편번호" style="width:160px;">
 			<input type="button" onclick="execDaumPostcode()" value="주소수정"><br>
-			<input type="text" id="address" required placeholder="주소" style="width:610px; margin:5px 0px"><br>
-			<input type="text" id="detailAddress" required placeholder="상세주소" style="width:301px;">
+			<input type="text" id="address" required placeholder="주소" style="width:604px; margin:5px 0px"><br>
+			<input type="text" id="detailAddress" required placeholder="상세주소" style="width:300px;">
 			<input type="text" id="extraAddress" placeholder="참고항목" style="width:300px;"></td></tr>
+			<tr><th scope="col">요청사항</th><td><textarea id="message" rows="2" cols="66" placeholder="요청사항이 있으시면 입력해주세요."></textarea></td></tr>
 			<tr><th scope="col">보유 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${member.mem_point}"/> point</td></tr>
 			<tr><th scope="col">필요 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
 			<tr><th scope="col">잔여 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${member.mem_point - goods.goods_point}"/> point</td></tr>
@@ -82,10 +85,12 @@
 	<input type="hidden" name="goods_img" value="${goods.goods_img}">
 	<input type="hidden" name="exg_id" value="${member.mem_id}">
 	<input type="hidden" name="exg_name" value="${member.mem_name}">
+	<input type="hidden" name="exg_addr" id="exg_addr">
+	<input type="hidden" name="exg_message" id="exg_message">
 	<input type="hidden" name="exg_gnum" value="${goods.goods_num}">
 	<input type="hidden" name="exg_gname" value="${goods.goods_name}">
 	<input type="hidden" name="exg_point" value="${goods.goods_point}">
-	<input type="hidden" name="exg_addr" id="exg_addr">
+	<input type="hidden" name="exg_img" value="${goods.goods_img}">
 	<div class="exButton"><button type="button" onclick="location.href='/goods/list'">목록보기</button>
 	<c:if test="${empty auth}">
 		<button type="button" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">교환하기</button>
@@ -129,7 +134,7 @@ function execDaumPostcode() {
                     extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                 }
                 if(extraAddr !== ''){
-                    extraAddr = ' (' + extraAddr + ')';
+                    extraAddr = '(' + extraAddr + ')';
                 }
                 document.getElementById("extraAddress").value = extraAddr;
             
@@ -148,6 +153,7 @@ function execDaumPostcode() {
 function exCheck() {
 	var addAddressStr = $('#postcode').val() + "&" + $('#address').val() + "&" + $('#detailAddress').val() + "&" + $('#extraAddress').val()
 	$('#exg_addr').val(addAddressStr);
+	$('#exg_message').val($('#message').val());
 	if ("${member.mem_point}" - "${goods.goods_point}" < 0) {
 		alert("보유 포인트가 부족합니다.");
 		return false;

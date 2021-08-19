@@ -14,31 +14,55 @@ public class AdExGoodsController {
 	@Autowired
 	private AdExGoodsService adExGoodsService;
 	
-	@RequestMapping("/adExGoods/list")
-	public String getGoodsList(@RequestParam(defaultValue = "1") String pagenum, 
+	@RequestMapping("/adExGoods/oList")
+	public String getAdExGoodsOrderList(@RequestParam(defaultValue = "1") String pagenum, 
 			@RequestParam(defaultValue = "10") String contentnum, Model model) {
-		adExGoodsService.getAdExGoodsList(pagenum, contentnum, model);
-		return "goods/adExGoodsList";
+		String category = "Order";
+		adExGoodsService.getAdExGoodsList(pagenum, contentnum, category, model);
+		return "goods/adExGoodsOrderList";
 	}
 	
-	@RequestMapping("/adExGoods/update")
-	public String updateGoods(@RequestParam int exGoodsNumU, @RequestParam String exGoodsPoint, 
-			@RequestParam String exGoodsDate, Model model) {
-		model.addAttribute("exGoodsPoint", exGoodsPoint);
-		model.addAttribute("exGoodsDate", exGoodsDate);
-		model.addAttribute("exGoods", adExGoodsService.updateExGoods(exGoodsNumU));
-		return "goods/adExGoodsUpdate";
+	@RequestMapping("/adExGoods/dList")
+	public String getAdExGoodsDeliveryList(@RequestParam(defaultValue = "1") String pagenum, 
+			@RequestParam(defaultValue = "10") String contentnum, Model model) {
+		String category = "Delivery";
+		adExGoodsService.getAdExGoodsList(pagenum, contentnum, category, model);
+		return "goods/adExGoodsDeliveryList";
 	}
 	
-	@RequestMapping("/adExGoods/updateOk")
+	@RequestMapping("/adExGoods/aList")
+	public String getAdExGoodsApproveList(@RequestParam(defaultValue = "1") String pagenum, 
+			@RequestParam(defaultValue = "10") String contentnum, Model model) {
+		String category = "Approve";
+		adExGoodsService.getAdExGoodsList(pagenum, contentnum, category, model);
+		return "goods/adExGoodsApproveList";
+	}
+	
+	@RequestMapping("/adExGoods/cList")
+	public String getAdExGoodsCancleList(@RequestParam(defaultValue = "1") String pagenum, 
+			@RequestParam(defaultValue = "10") String contentnum, Model model) {
+		String category = "Cancle";
+		adExGoodsService.getAdExGoodsList(pagenum, contentnum, category, model);
+		return "goods/adExGoodsCancleList";
+	}
+	
+	@RequestMapping("/adExGoods/detail")
+	public String updateGoods(@RequestParam int exGoodsNum, Model model) {
+		model.addAttribute("exGoods", adExGoodsService.getExGoods(exGoodsNum));
+		return "goods/adExGoodsDetail";
+	}
+	
+	@RequestMapping("/adExGoods/deliveryOk")
 	public String updateGoodsOk(@ModelAttribute ExGoodsBean eBean, Model model) {
-		adExGoodsService.updateExGoodsOk(eBean);
-		return "redirect:/adExGoods/list";
+		System.out.println("111");
+		adExGoodsService.updateDeliveryOk(eBean);
+		System.out.println("222");
+		return "redirect:/adExGoods/oList";
 	}
 	
-	@RequestMapping("/adExGoods/delete")
-	public String deleteGoods(@RequestParam int exGoodsNumD) {
-		adExGoodsService.deleteExGoods(exGoodsNumD);
-		return "redirect:/adExGoods/list";
+	@RequestMapping("/adExGoods/cancle")
+	public String cancleGoods(@ModelAttribute ExGoodsBean eBean) {
+		adExGoodsService.cancleExGoods(eBean);
+		return "redirect:/adExGoods/oList";
 	}
 }

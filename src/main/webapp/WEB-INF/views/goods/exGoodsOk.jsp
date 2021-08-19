@@ -19,7 +19,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<div class="container"><br>
+<br><br><br><br>
+<div class="container">
 
 	<table class="exGoods">
 		<thead>
@@ -42,12 +43,13 @@
 		</thead>
 		<tr><th scope="col">수령인</th><td>${exGoods.exg_name}</td></tr>
 		<tr><th scope="col">연락처</th><td>${member.mem_tel}</td></tr>
-		<tr><th scope="col">배송지 정보</th><td id="addr"></td></tr>
+		<tr><th scope="col">배송지</th><td id="addr"></td></tr>
+		<tr><th scope="col">요청사항</th><td>${exGoods.exg_message}</td></tr>
 	</table><br/>
 	
 	<div class="exButton">
 	<button type="button" onclick="location.href='/'">메인으로</button>
-	<button type="button" onclick="location.href='/member/myPage'">교환정보확인</button></div><br/>
+	<button type="button" onclick="location.href='/member/myOrder'">교환정보확인</button></div><br/>
 	
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>

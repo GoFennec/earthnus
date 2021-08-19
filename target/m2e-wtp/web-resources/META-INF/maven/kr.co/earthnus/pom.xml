@@ -180,6 +180,13 @@
 			<version>2.4</version>
 		</dependency>
 		
+		<!-- Tika -->
+		<dependency>
+		    <groupId>org.apache.tika</groupId>
+		    <artifactId>tika-core</artifactId>
+		    <version>1.14</version>
+		</dependency>
+				
 		<!-- 메일 전송 -->
 		<dependency>
     		<groupId>org.springframework</groupId>

@@ -9,51 +9,86 @@
 		<result property="exg_id" column="EXG_ID"/>
 		<result property="exg_name" column="EXG_NAME"/>
 		<result property="exg_addr" column="EXG_ADDR"/>
+		<result property="exg_message" column="EXG_MESSAGE"/>
+		<result property="exg_state" column="EXG_STATE"/>
+		<result property="exg_cc" column="EXG_CC"/>
+		<result property="exg_waybill" column="EXG_WAYBILL"/>
 		<result property="exg_gnum" column="EXG_GNUM"/>
 		<result property="exg_gname" column="EXG_GNAME"/>
 		<result property="exg_point" column="EXG_POINT"/>
+		<result property="exg_img" column="EXG_IMG"/>
 		<result property="exg_date" column="EXG_DATE"/>
 	</resultMap>
 	
-	<select id="adExGoodsCount" resultType="int">
+	<select id="adExGoodsOrderCount" resultType="int">
 		<![CDATA[
-			SELECT COUNT(*) FROM EXGOODS
+			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="결제완료"
 		]]>
 	</select>
 	
-	<select id="getAdExGoodsList" resultMap="exGoodsResult">
+	<select id="adExGoodsDeliveryCount" resultType="int">
 		<![CDATA[
-			SELECT * FROM EXGOODS ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="배송처리"
 		]]>
 	</select>
 	
-	<select id="getExGoodsU" resultType="exGoods" parameterType="int">
+	<select id="adExGoodsApproveCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE NOT EXG_STATE="결제취소"
+		]]>
+	</select>
+	
+	<select id="adExGoodsCancleCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="결제취소"
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsOrderList" resultMap="exGoodsResult">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_STATE="결제완료" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsDeliveryList" resultMap="exGoodsResult">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_STATE="배송처리" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsApproveList" resultMap="exGoodsResult">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE NOT EXG_STATE="결제취소" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsCancleList" resultMap="exGoodsResult">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_STATE="결제취소" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+	
+	<select id="getExGoods" resultType="exGoods" parameterType="int">
 		<![CDATA[
 			SELECT * FROM EXGOODS WHERE EXG_NUM=#{exGoodsNumU}
 		]]>
 	</select>
 	
-	<update id="updateExGoodsOk">
+	<update id="updateDeliveryOk">
 		<![CDATA[
-			UPDATE EXGOODS SET EXG_ADDR=#{exg_addr} WHERE EXG_NUM=#{exg_num}
+			UPDATE EXGOODS SET EXG_STATE="배송처리",EXG_CC=#{exg_cc},EXG_WAYBILL=#{exg_waybill} WHERE EXG_NUM=#{exg_num}
 		]]>
 	</update>
 	
-	<select id="getExGoodsD" resultType="exGoods" parameterType="int">
+	<delete id="cancleExGoods">
 		<![CDATA[
-			SELECT * FROM EXGOODS WHERE EXG_NUM=#{exGoodsNumD}
-		]]>
-	</select>
-	
-	<delete id="deleteExGoods" parameterType="int">
-		<![CDATA[
-			DELETE FROM EXGOODS WHERE EXG_NUM=#{exGoodsNumD}
+			UPDATE EXGOODS SET EXG_STATE="결제취소" WHERE EXG_NUM=#{exg_num}
 		]]>
 	</delete>
 	
-	<update id="updatePoint" parameterType="hashMap">
+	<update id="updatePoint">
 		<![CDATA[
-			UPDATE MEMBER SET MEM_POINT=MEM_POINT+#{point} WHERE MEM_ID=#{id}
+			UPDATE MEMBER SET MEM_POINT=MEM_POINT+#{exg_point} WHERE MEM_ID=#{exg_id}
 		]]>
 	</update>
 	

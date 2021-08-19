@@ -21,7 +21,10 @@
 				<li><a href="/adCamBoard/list">캠페인관리</a></li>
 				<li><a href="/adDonation/list">기부관리</a></li>
 				<li><a href="/adGoods/list">지구마켓상품관리</a></li>
-				<li><a href="/adExGoods/list">지구마켓내역관리</a></li>
+				<li><a href="/adExGoods/oList">지구마켓주문목록</a></li>
+				<li><a href="/adExGoods/dList">지구마켓배송처리목록</a></li>
+				<li><a href="/adExGoods/aList">지구마켓주문승인내역</a></li>
+				<li><a href="/adExGoods/cList">지구마켓주문취소내역</a></li>
 			</ul>
 		</nav>
 	</div>								
@@ -29,7 +32,7 @@
 
 <!-- <script>
 $(function() {
-	if ("${auth.auth_id}" != "admin") {
+	if ("${auth.auth_name}" != "관리자") {
 		alert("접근권한이 없습니다.");
 		location.href="/adAuth/adLogin";
 	}

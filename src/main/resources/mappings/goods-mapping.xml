@@ -31,9 +31,14 @@
 		<result property="exg_id" column="EXG_ID"/>
 		<result property="exg_name" column="EXG_NAME"/>
 		<result property="exg_addr" column="EXG_ADDR"/>
+		<result property="exg_message" column="EXG_MESSAGE"/>
+		<result property="exg_state" column="EXG_STATE"/>
+		<result property="exg_cc" column="EXG_CC"/>
+		<result property="exg_waybill" column="EXG_WAYBILL"/>
 		<result property="exg_gnum" column="EXG_GNUM"/>
 		<result property="exg_gname" column="EXG_GNAME"/>
 		<result property="exg_point" column="EXG_POINT"/>
+		<result property="exg_img" column="EXG_IMG"/>
 		<result property="exg_date" column="EXG_DATE"/>
 	</resultMap>
 	
@@ -64,8 +69,8 @@
 	
 	<insert id="insertExGoods">
 		<![CDATA[
-			INSERT INTO EXGOODS (EXG_ID,EXG_NAME,EXG_GNUM,EXG_GNAME,EXG_POINT,EXG_ADDR) 
-			VALUES (#{exg_id},#{exg_name},#{exg_gnum},#{exg_gname},#{exg_point},#{exg_addr})
+			INSERT INTO EXGOODS (EXG_ID,EXG_NAME,EXG_ADDR,EXG_MESSAGE,EXG_GNUM,EXG_GNAME,EXG_POINT,EXG_IMG) 
+			VALUES (#{exg_id},#{exg_name},#{exg_addr},#{exg_message},#{exg_gnum},#{exg_gname},#{exg_point},#{exg_img})
 		]]>
 	</insert>
 	
@@ -75,7 +80,7 @@
 		]]>
 	</select>
 	
-	<update id="updateMemberPoint">
+	<update id="updatePoint">
 		<![CDATA[
 			UPDATE MEMBER SET MEM_POINT=MEM_POINT-#{exg_point} WHERE MEM_ID=#{exg_id}
 		]]>

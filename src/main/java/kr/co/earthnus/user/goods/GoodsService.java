@@ -15,7 +15,7 @@ public class GoodsService {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public void getGoodsList(GoodsBean bean, String pagenum, String contentnum, Model model) {
+	public void getGoodsList(GoodsBean gBean, String pagenum, String contentnum, Model model) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
 		
 		PagingBean pBean = new PagingBean();
@@ -36,17 +36,16 @@ public class GoodsService {
         pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
         //마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
 
-        if(cContentnum == 6){//선택 게시글 수
-        	pBean.setPagenum(pBean.getPagenum()*6);
+        if(cContentnum == 8){//선택 게시글 수
+        	pBean.setPagenum(pBean.getPagenum()*8);
         	goodsList = goodsDAO.getGoodsList(pBean);
         }
-        
 		model.addAttribute("goodsList", goodsList);
         model.addAttribute("page", pBean);
 	}
-	public GoodsBean getGoods(GoodsBean bean, Model model) {
+	public GoodsBean getGoods(GoodsBean gBean, Model model) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
-		GoodsBean goodsBean = goodsDAO.getGoods(bean);
+		GoodsBean goodsBean = goodsDAO.getGoods(gBean);
 		String[] goodsInfo = goodsBean.getGoods_info().split(",");
 		model.addAttribute("goodsInfo", goodsInfo);
 		return goodsBean;
@@ -55,16 +54,16 @@ public class GoodsService {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
 		return goodsDAO.getMember(aBean);
 	}
-	public int insertExGoods(ExGoodsBean exBean) {
+	public int insertExGoods(ExGoodsBean eBean) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
-		goodsDAO.insertExGoods(exBean);
-		int exNum = goodsDAO.newExGoods(exBean);
+		goodsDAO.insertExGoods(eBean);
+		int exNum = goodsDAO.newExGoods(eBean);
 		return exNum;
 	}
-	public MemberBean updateMemberPoint(ExGoodsBean exBean) {
+	public MemberBean updateMemberPoint(ExGoodsBean eBean) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
-		goodsDAO.updateMemberPoint(exBean);
-		return goodsDAO.exMemberPoint(exBean);
+		goodsDAO.updatePoint(eBean);
+		return goodsDAO.exMemberPoint(eBean);
 	}
 	public ExGoodsBean getExGoods(int exNum) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);

@@ -8,61 +8,63 @@
 <style>
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
-	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
-	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
-	td .goodsImg {text-align: center; margin: auto; padding: 1px;}
-	.exButton {text-align: center;}
+	
+	.goodsBox {padding: 10px;}
+	.goodsImg {text-align: center; margin: auto; padding: 1px; width: 100%;}
+	.goodsImg img {width: 200px; height: 200px; background-size: contain;}
+	.goodsInfo {width: 70%; margin: 5px auto;}
+	.goodsNP {font-weight: 700; color: #444; margin: 10px auto; line-height: 1.5em;}
+	.goodsDesc {margin: 0px auto; line-height: 1.5em;}
 	.paging {text-align: center;}
 </style>
 <title>EARTH & US</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-
+<br><br><br><br>
 <div class="container"><br>
+
 	<table class="goodsTitle">
 		<thead>
 			<tr><th scope="col">지구 마켓</th></tr>
 		</thead>
 	</table><br>
 	<div class="row">
-		<c:forEach items="${goodsList}" var="goods" begin="0" end="2">
-			<div class="col-sm-12 col-lg-4">
-			<form action="/goods/exGoods" name="${goods.goods_num}" method="POST">
-			<table class="goodsTable">
-				<tr>
-					<td class="goodsImg"><img src="${goods.goods_img}" width="150" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
-					<td>
-						<input type="hidden" name="goods_num" value="${goods.goods_num}">
-						${goods.goods_name}<br/>
-						<fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point<br/>
-						${goods.goods_desc}<br/>
-						<input type="submit" value="교환하기"/>
-					</td>
-				</tr>
-			</table>
-			</form>
+		<c:forEach items="${goodsList}" var="goods" begin="0" end="3">
+			<div class="col-12 col-sm-6 col-md-3 goodsBox">
+				<form action="/goods/exGoods" method="POST" id="GF_${goods.goods_num}">
+					<div class="selectGoods" style="cursor: pointer;" id="${goods.goods_num}">
+						<input type="hidden" name="goods_num" value="${goods.goods_num}" />
+						<div class="goodsImg">
+							<img src="${goods.goods_img}" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품" />
+						</div>
+						<div class="goodsInfo">
+							<p class="goodsNP">${goods.goods_name}<br>
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</p>
+							<p class="goodsDesc">${goods.goods_desc}</p>
+						</div>
+					</div>
+				</form>
 			</div>
 		</c:forEach>
 	</div>
 	<div class="clearfix"></div><br>
 	<div class="row">
-		<c:forEach items="${goodsList}" var="goods" begin="3" end="5">
-			<div class="col-sm-12 col-lg-4">
-			<form action="/goods/exGoods" name="${goods.goods_num}" method="POST">
-			<table class="goodsTable">
-				<tr>
-					<td class="goodsImg"><img src="${goods.goods_img}" width="150" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
-					<td>
-						<input type="hidden" name="goods_num" value="${goods.goods_num}">
-						${goods.goods_name}<br/>
-						<fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point<br/>
-						${goods.goods_desc}<br/>
-						<input type="submit" value="교환하기"/>
-					</td>
-				</tr>
-			</table>
-			</form>
+		<c:forEach items="${goodsList}" var="goods" begin="4" end="7">
+			<div class="col-12 col-sm-6 col-md-3 goodsBox">
+				<form action="/goods/exGoods" method="POST" id="GF_${goods.goods_num}">
+					<div class="selectGoods" style="cursor: pointer;" id="${goods.goods_num}">
+						<input type="hidden" name="goods_num" value="${goods.goods_num}" />
+						<div class="goodsImg">
+							<img src="${goods.goods_img}" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품" />
+						</div>
+						<div class="goodsInfo">
+							<p class="goodsNP">${goods.goods_name}<br>
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</p>
+							<p class="goodsDesc">${goods.goods_desc}</p>
+						</div>
+					</div>
+				</form>
 			</div>
 		</c:forEach>
 	</div><br/>
@@ -89,5 +91,13 @@
 	
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
+<script type="text/javascript">
+$(function() {
+	$('.selectGoods').click(function() {
+		var formName = "GF_" + $(this).attr('id');
+		document.getElementById(formName).submit();
+	});
+});
+</script>
 </body>
 </html>
