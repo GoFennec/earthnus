@@ -213,7 +213,7 @@
           
             <div class="col-md-9" style="padding-right:0px">
               <label for="cc-name" class="form-label">이메일</label>
-              <input type="email" name="mem_email" class="form-control" id="mem_email" placeholder="ex)EARTHNUS@email.com">
+              <input type="email" name="mem_email" class="form-control" id="mem_email" placeholder="ex)EARTHNUS@email.com" required>
               <div class="invalid-feedback" id="invalid-email">
                	 필수 입력사항입니다.
               </div>
@@ -291,7 +291,7 @@
 			   
 		      			if(result.error == true){
 		    	  			alert('회원가입 이메일 인증이 완료되었습니다.');
-		    	  			$("#mem_email").attr("disabled",true);
+		    	  			$("#mem_email").attr("readonly",true);
 		    	  			$("#mailCheck").attr("disabled",true);
 		      			}else if(result.error == false){
 		    	  			alert('이메일 인증번호가 일치하지 않습니다. \n 이메일을 다시 한 번 확인해주세요.');
@@ -369,7 +369,7 @@
 
 <script>
 $(function() {
-	var addrStr = "${member.MEM_ADDR}";
+	var addrStr = "${mem_addr}";
 	var addArr = addrStr.split("&");
 	$('#postcode').val(addArr[0]);
 	$('#address').val(addArr[1]);
