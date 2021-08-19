@@ -1,6 +1,6 @@
 package kr.co.earthnus.admin.camBoard;
 
-import java.util.List;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +19,18 @@ public class AdCamBoardController {
 	private AdCamBoardService adCamBoardService;
 			
 	@RequestMapping(value="/adCamBoard/list")
-	public String getCamBoardList(Model model) {
+	public String getCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
+			@RequestParam(defaultValue = "6") String contentnum, @RequestParam(defaultValue = "desc") String order,
+			camBoardBean cBean, Model model) {
 		
-		List<camBoardBean> list = adCamBoardService.getBoardList();
-		model.addAttribute("CamBoardList", list);
+		String search = "%%";
+		String search_type = "CAMB_ENTIRE";
+		String orderBy = "CAMB_NUM";
+		
+		//adCamBoardService.getCamBoardList(search, arr, cBean, pagenum, contentnum, model);
+		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
+		
+		System.out.println("CamBoardController");
 		return "camBoard/adCamBoardList";
 	}
 	
@@ -40,16 +48,10 @@ public class AdCamBoardController {
 			search_type = "CAMB_ENTIRE";
 		}
 		String orderBy = "CAMB_NUM";
-		List<camBoardBean> list = adCamBoardService.getBoardIngList();
-		model.addAttribute("CamBoardIngList", list);
-		return "camBoard/adCamBoardList";
-	}
-	
-	@RequestMapping(value="/adCamBoard/finish")
-	public String getCamBoardFinishList(Model model) {
 		
-		List<camBoardBean> list = adCamBoardService.getBoardFinishList();
-		model.addAttribute("CamBoardFinishList", list);
+		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
+		
+		System.out.println("CamBoardController");
 		return "camBoard/adCamBoardList";
 	}
 	
@@ -73,7 +75,8 @@ public class AdCamBoardController {
 	
 	@RequestMapping(value="/adCamBoard/insertOk")
 	public String insertCamBoardOk(@RequestParam("CAMB_NAME") String CAMB_NAME , @RequestParam("CAMB_SUBJECT") String CAMB_SUBJECT , 
-			@RequestParam("CAMB_CONTENT") String CAMB_CONTENT , @RequestParam("CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE , Model model) {
+			@RequestParam("CAMB_CONTENT") String CAMB_CONTENT , @RequestParam("CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE , 
+			@RequestParam("CAMB_STARTDATE") Date CAMB_STARTDATE, @RequestParam("CAMB_FINDATE") Date CAMB_FINDATE, Model model) {
 		
 		System.out.println("insertCamBoardOk");
 		
@@ -92,11 +95,12 @@ public class AdCamBoardController {
 	
 	@RequestMapping(value="/adCamBoard/updateOk", method=RequestMethod.POST)
 	public String updateCamBoardOk(@RequestParam(value="CAMB_NAME") String CAMB_NAME, @RequestParam(value="CAMB_SUBJECT") String CAMB_SUBJECT, 
-			@RequestParam(value="CAMB_CONTENT") String CAMB_CONTENT, @RequestParam(value="CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE, Model model) {
+			@RequestParam(value="CAMB_CONTENT") String CAMB_CONTENT, @RequestParam(value="CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE, 
+			@RequestParam(value="CAMB_NUM") int CAMB_NUM, Model model) {
 		
-		System.out.println("updateOk 컨트롤러 =======> 제목 : " + CAMB_NAME + ", 주제 : " + CAMB_SUBJECT + 
-				", 내용 : " + CAMB_CONTENT + ", 파일 : " + CAMB_UPLOADFILE);
-		adCamBoardService.updateCamBoard(CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
+		System.out.println("updateOk 而⑦듃濡ㅻ윭 =======> �젣紐� : " + CAMB_NAME + ", 二쇱젣 : " + CAMB_SUBJECT + 
+				", �궡�슜 : " + CAMB_CONTENT + ", �뙆�씪 : " + CAMB_UPLOADFILE);
+		adCamBoardService.updateCamBoard(CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
 		System.out.println("updateCamBoardOk");
 		
 		return "redirect:/adCamBoard/list";

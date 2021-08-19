@@ -61,22 +61,23 @@
 	<div>
 		<ul style="text-align: left;">
 			<c:if test="${empty page.search}">
-			<li><a href="/camBoard/list?arr=entire" id="entire">전체</a></li>
-			<li><a href="/camBoard/list?arr=doing" id="doing">캠페인 중</a></li>
-			<li><a href="/camBoard/list?arr=end" id="end">캠페인 종료</a></li>
+			<li><a href="/camBoard/list?arr=entire" id="entire">전체 캠페인</a></li>
+			<li><a href="/camBoard/list?arr=doing" id="doing">진행 캠페인</a></li>
+			<li><a href="/camBoard/list?arr=exp" id="exp">에쩡 캠페인</a></li>
+			<li><a href="/camBoard/list?arr=end" id="end">종료 캠페인</a></li>
 			</c:if>
 			<c:if test="${!empty page.search}">
-			<li><a href="/camBoard/list/search?search=${page.search}&arr=entire" id="entire">캠페인 전체</a></li>
-			<li><a href="/camBoard/list/search?search=${page.search}&arr=doing" id="doing">캠페인 중</a></li>
-			<li><a href="/camBoard/list/search?search=${page.search}&arr=end" id="end">캠페인 종료</a></li>
+			<li><a href="/camBoard/list/search?search=${page.search}&arr=entire" id="entire">전체 캠페인</a></li>
+			<li><a href="/camBoard/list/search?search=${page.search}&arr=doing" id="doing">진행 캠페인</a></li>
+			<li><a href="/camBoard/list/search?search=${page.search}&arr=exp" id="exp">예정 캠페인</a></li>
+			<li><a href="/camBoard/list/search?search=${page.search}&arr=end" id="end">종료 캠페인</a></li>
 			</c:if>
 		</ul>
 		
-		<form  style="text-align: right;">
+		<div  style="text-align: right;">
 			<input type="text" id="search" placeholder="캠페인 검색" value="${page.search}" onkeydown="search(this)" autocomplete="off">
 			<button id="btn_search" onclick="searchUrl()">검색</button>
-			<ul id="schoolList"></ul>
-		</form>	
+		</div>	
 	</div>
 	<c:if test="${page.totalcount ne 0}">
 		<div class="row">
@@ -146,33 +147,13 @@
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 
 <script type="text/javascript">
-	
-	function search(target){
-		
-		var word = target.value;
-		var encodeWord = encodeURI(word);
-		console.log(word);
-		console.log(encodeWord);
-		
-		$.ajax({
-			url:"/getList?search=" + word,
-			type:"GET",
-			dataType:"json",
-			"success" : function(CamBoardList){
-				console.log("AJAX통신 성공");
-			},
-			"error" : function(CamBoardList){
-				console.log("AJAX통신 실패");
-		    }
-		});
-	}
 
 	function changepage(){
 		location.href="file:///Users/gimjeongbin/Desktop/finalproject/camBoardDetail.html";
 	}
  
 	function searchUrl(){
-		location.href="/camBoard/list/search?search="+ document.getElementById("search").value
+		location.href="/camBoard/list/search?search="+ document.getElementById("search").value;
 	}
   
 	$.urlParam = function(name){
