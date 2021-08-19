@@ -35,11 +35,18 @@
 	padding-left: 0px;
 	padding-bottom: 8px;
 	}
+	#searchBlock{width: 0px; height: 0px;}
+	#searchBlock:hover {
+	min-width: 
+}
 </style>
 
 <link rel="stylesheet" type="text/css" href="css/camBoard.css">
 
 <title>Campaign</title>
+<link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
+<link rel="icon" href="/resources/assets/img/favicon.ico">
+
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -48,6 +55,7 @@
 	<table class="exGoods">
 		<thead>
 			<tr><th scope="col">캠페인 게시판</th></tr>
+			<tr><td><h1></h1><td></tr>
 		</thead>
 	</table>
 	<div>
@@ -65,7 +73,7 @@
 		</ul>
 		
 		<form  style="text-align: right;">
-			<input type="text" id="search" placeholder="캠페인 검색" value="${page.search}" onkeyup="search(this)">
+			<input type="text" id="search" placeholder="캠페인 검색" value="${page.search}" onkeydown="search(this)" autocomplete="off">
 			<button id="btn_search" onclick="searchUrl()">검색</button>
 			<ul id="schoolList"></ul>
 		</form>	
@@ -75,18 +83,11 @@
 		<c:forEach items="${CamBoardList}" var="list" begin="0" end="2">
 			<div class="col-sm-12 col-lg-4">
 				<table class="goodsTable">
-					<tr class="content" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}'">
+					<tr class="content" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
 						<td class="tdImg">
 								<img class="content" src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_SUBJECT}"/>
 						</td>
 						<td>${list.CAMB_NAME}</td>
-						<td>
-							<table>
-								<tr>
-									<td><h1>캠페인</h1></td>
-								</tr>
-							</table>
-						</td>
 					</tr>
 				</table>
 			</div>
@@ -98,13 +99,11 @@
 			<c:forEach items="${CamBoardList}" var="list" begin="3" end="5">
 				<div class="col-sm-12 col-lg-4">
 					<table class="goodsTable">
-						<tr class="content">
+						<tr class="content" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
 							<td class="tdImg">
-								<a href="/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}">
-									<img src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_SUBJECT}"/>
-								</a>
+								<img src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_SUBJECT}"/>
 							</td>
-							<td><a href="detail?CAMB_NUM=${list.CAMB_NUM}">${list.CAMB_NAME}</a></td>
+							<td>${list.CAMB_NAME}</td>
 						</tr>
 					</table>
 				</div>
@@ -143,11 +142,11 @@
 			</tr>
 		</table><br/>
 	</c:if>
-	
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 
 <script type="text/javascript">
+	
 	function search(target){
 		
 		var word = target.value;
@@ -156,9 +155,15 @@
 		console.log(encodeWord);
 		
 		$.ajax({
-			type : 'GET',
-			dataType : 'json',
-			url : ""
+			url:"/getList?search=" + word,
+			type:"GET",
+			dataType:"json",
+			"success" : function(CamBoardList){
+				console.log("AJAX통신 성공");
+			},
+			"error" : function(CamBoardList){
+				console.log("AJAX통신 실패");
+		    }
 		});
 	}
 
