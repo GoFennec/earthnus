@@ -17,7 +17,10 @@
 		<result property="exg_gname" column="EXG_GNAME"/>
 		<result property="exg_point" column="EXG_POINT"/>
 		<result property="exg_img" column="EXG_IMG"/>
-		<result property="exg_date" column="EXG_DATE"/>
+		<result property="exg_pdate" column="EXG_PDATE"/>
+		<result property="exg_ddate" column="EXG_DDATE"/>
+		<result property="exg_cdate" column="EXG_CDATE"/>
+		<result property="exg_cancle" column="EXG_CANCLE"/>
 	</resultMap>
 	
 	<select id="adExGoodsOrderCount" resultType="int">
@@ -76,13 +79,13 @@
 	
 	<update id="updateDeliveryOk">
 		<![CDATA[
-			UPDATE EXGOODS SET EXG_STATE="배송처리",EXG_CC=#{exg_cc},EXG_WAYBILL=#{exg_waybill} WHERE EXG_NUM=#{exg_num}
+			UPDATE EXGOODS SET EXG_STATE="배송처리",EXG_CC=#{exg_cc},EXG_WAYBILL=#{exg_waybill},EXG_DDATE=NOW() WHERE EXG_NUM=#{exg_num}
 		]]>
 	</update>
 	
 	<delete id="cancleExGoods">
 		<![CDATA[
-			UPDATE EXGOODS SET EXG_STATE="결제취소" WHERE EXG_NUM=#{exg_num}
+			UPDATE EXGOODS SET EXG_STATE="결제취소",EXG_CDATE=NOW(),EXG_CANCLE=#{exg_cancle} WHERE EXG_NUM=#{exg_num}
 		]]>
 	</delete>
 	

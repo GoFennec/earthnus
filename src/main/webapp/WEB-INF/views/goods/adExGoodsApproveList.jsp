@@ -14,7 +14,6 @@
 	td {width: 350px; padding: 10px; vertical-align: center; text-align: center; border-bottom: 1px solid #ccc;}
 	td .goodsImg {text-align: center; margin: auto; padding: 1px;}
 	.paging {text-align: center;}
-	.exGoodsInfo {cursor: pointer;}
 	.btn-dark {float: right; margin-left: 10px;}
 </style>
 <title>EARTH & US</title>
@@ -26,23 +25,19 @@
 
 	<table class="exGoodsTitle">
 		<thead>
-			<tr><th scope="col">지구마켓 주문승인내역</th>
-			<td><form action="/adExGoods/detail" id="detail" method="POST">
-			<input type="hidden" id="exGoodsNum" name="exGoodsNum"/>
-			</form></tr>
+			<tr><th scope="col">지구마켓 주문승인내역</th></tr>
 		</thead>
 	</table><br>
 	<div class="row">
 		<div class="col-sm-12">
 			<table class="exGoodsTable">
 			<tr>
-				<th scope="col">교환번호</th>
+				<th scope="col">결제번호</th>
 				<th scope="col">아이디</th>
 				<th scope="col">주문상태</th>
 				<th scope="col">상품정보</th>
 				<th scope="col">사용한포인트</th>
-				<th scope="col" width="13%">교환날짜</th>
-				<th scope="col">배송메세지</th>
+				<th scope="col" width="13%">결제날짜</th>
 			</tr>	
 			<c:forEach items="${exGoodsList}" var="exGoods">
 					<tr class="exGoodsInfo" id="${exGoods.exg_num}">
@@ -51,8 +46,7 @@
 						<td>${exGoods.exg_state}</td>
 						<td>${exGoods.exg_gnum}(${exGoods.exg_gname})</td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
-						<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_date}"/></td>
-						<td>${exGoods.exg_message}</td>
+						<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td>
 					</tr>
 			</c:forEach>
 			</table>
@@ -81,16 +75,5 @@
 
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
-<script>
-$(function() {
-	$('.exGoodsInfo').click(function() {
-		selectTr = $(this);
-		selectTd = selectTr.children();
-		exGoodsNum = selectTd.eq(0).text();
-		$('#exGoodsNum').val(exGoodsNum);
-		$('#detail').submit();
-	});
-});
-</script>
 </body>
 </html>
