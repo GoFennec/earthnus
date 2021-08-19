@@ -2,6 +2,8 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -45,7 +47,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 	
-	<div class="container col-sm-12 col-lg-4">
+	<div class="col-sm-12 col-lg-4">
 		<table class="goodsTable" id="detail" style="border-collapse: separate;">
 			<tr>
 				<td colspan = "4">
@@ -56,14 +58,14 @@
 			<tr>
 				<td colspan = "3" style="text-align: left; color: black; font-size: 45px;"><b>${camBoard.CAMB_NAME}</b></td>
 				<td style="text-align: right; color: gray; font-size: 10px;">
-				시작일 : ${camBoard.CAMB_STARTDATE}<br>
-				종료일 : ${camBoard.CAMB_FINDATE}
+				시작일 : <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${camBoard.CAMB_STARTDATE}" /><br>
+				종료일 : <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${camBoard.CAMB_FINDATE}" />
 				</td>
 			</tr>
 			
 			<tr>
 				<td colspan = "4">
-					<img src="${camBoard.CAMB_FILE}" id="IMG" width="600" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/>
+					<img src="${camBoard.CAMB_FILE}" id="IMG" width="800" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/>
 					<input type="file" id="CAMB_FILE" name="CAMB_FILE" style="display:none;">
 				</td>
 			</tr>
@@ -73,22 +75,20 @@
 			</tr>
 			<tr>
 				<td colspan="4" class="sysBtn" style="text-align: center;">
-					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>
-					<div style="text-align: center;">					
-						<ul style="list-style-type: none; float: left;">
-							<li style="list-style-type: none; float: left;"><i class="fas fa-share-alt"></i>공유하기</li>
-							<li style="list-style-type: none; float: left;"><a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();">트위터</a></li>
-							<li style="list-style-type: none; float: left;"><a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();">페이스북</a></li>
-							<li style="list-style-type: none; float: left;"><a id="btnKakao" class="link-icon kakao" href="javascript:sendLink()">카카오톡</a></li>
-							<li style="list-style-type: none; float: left;">
-								<a id="kakao-link-btn" href="javascript:sendLink()">
-									<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-								</a>
-							</li>
-						</ul>
+					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>					
+					
+					<div class="nav-bar">
+						<div class="more">
+							<div class="social-links">
+								<a href=""><i class="fab fa-instagram"></i></a>
+								<a href=""><i class="fab fa-facebook"></i></a>
+								<a href=""><i class="fab fa-kakaotalk"></i></a>
+							</div>
+							<i class="fas fa-plus"></i>
+						</div>
 					</div>
-
-					<!-- <div class="share-button">
+					
+					<div class="share-button">
 						<span><i class="fas fa-share-alt"></i>공유하기</span>
 						<a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();">트위터</a>
 						<a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();">페이스북</a>    
@@ -96,12 +96,11 @@
 						<a id="kakao-link-btn" href="javascript:sendLink()">
 							<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
 						</a>
-					</div> -->
+					</div>
 				</td>
 			</tr>
 		</table>
-		
-	</div>
+	</div>		
 		<div id="camBoardList"></div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 <script type="text/javascript">
@@ -141,11 +140,11 @@
 						listHead += '<td width: "50%">' + item.CAMB_CONTENT + '...</td>';
 						listHead += '</tr>';
 					})
+						listHead += '<tr colspan = "5"><td>';
 					$.each(CamBoardList, function(index, item){
-						listHead += '<tr colspan = "5">';
-						listHead += '<td><h2>여기는 페이징 하는곳</h2></td>';
-						listHead += '</tr>';
+						listHead += '1&nbsp;&nbsp;2&nbsp;&nbsp;';
 					})
+						listHead += '</td></tr>';
 					
 					$('#camBoardList').html(listHead);
 				},
@@ -175,9 +174,11 @@
 							listHead += '<td>' + item.CAMB_CONTENT + '</td>';
 							listHead += '</tr>';
 						})
+						$.each(CamBoardList, function(index, item){
 						listHead += '<tr colspan = "5">';
-						listHead += '<td><h2>여기는 페이징 하는곳</h2></td>';
+						listHead += '<td><h2>1&nbsp;&nbsp;2</h2></td>';
 						listHead += '</tr>';
+					})
 						$('#camBoardList').html(listHead);
 					},
 					"error" : function(CamBoardList){
@@ -207,9 +208,11 @@
 						$.each(CamBoardList, function(index, item){
 							
 						})
-						listHead += '<div>';
-						listHead += '<h2 style="text-align: center;">여기는 페이징 하는곳</h2>';
-						listHead += '</div>';
+						$.each(CamBoardList, function(index, item){
+						listHead += '<tr colspan = "5">';
+						listHead += '<td><h2>1&nbsp;&nbsp;2</h2></td>';
+						listHead += '</tr>';
+					})
 						$('#camBoardList').html(listHead);
 					},
 					"error" : function(CamBoardList){
@@ -273,7 +276,7 @@
     Kakao.init('3b1b5dd541e88935221a7fb05cd01dad');
     // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
     Kakao.Link.createDefaultButton({
-      container: '#kakao-link-btn',
+      container: '#btnKakao',
       objectType: 'feed',
       content: {
         title: title,

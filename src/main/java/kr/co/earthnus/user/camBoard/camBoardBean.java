@@ -1,6 +1,5 @@
 package kr.co.earthnus.user.camBoard;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -12,9 +11,9 @@ public class camBoardBean {
 	private String CAMB_CONTENT;
 	private String CAMB_FILE;
 	private MultipartFile CAMB_UPLOADFILE;
-	private String CAMB_STARTDATE;
-	private String CAMB_FINDATE;
-	private String CAMB_DATE;
+	private Date CAMB_STARTDATE;
+	private Date CAMB_FINDATE;
+	private Date CAMB_DATE;
 	
 	public int getCAMB_NUM() {
 		return CAMB_NUM;
@@ -54,35 +53,26 @@ public class camBoardBean {
 		CAMB_UPLOADFILE = cAMB_UPLOADFILE;
 	}
 	
-	public String getCAMB_STARTDATE() {
+	public Date getCAMB_STARTDATE() {
 		return CAMB_STARTDATE;
 	}
 	public void setCAMB_STARTDATE(Date cAMB_STARTDATE) {
 		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
-		String strStartDate = simpleDateFormat.format(cAMB_STARTDATE);
-		
-		CAMB_STARTDATE = strStartDate;
+		CAMB_STARTDATE = cAMB_STARTDATE;
 	}
-	public String getCAMB_FINDATE() {
+	public Date getCAMB_FINDATE() {
 		return CAMB_FINDATE;
 	}
 	public void setCAMB_FINDATE(Date cAMB_FINDATE) {
 		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
-		String strFinDate = simpleDateFormat.format(cAMB_FINDATE);
-		
-		CAMB_FINDATE = strFinDate;
+		CAMB_FINDATE = cAMB_FINDATE;
 	}
-	public String getCAMB_DATE() {
+	public Date getCAMB_DATE() {
 		return CAMB_DATE;
 	}
-	public void setCAMB_DATE(Date cAMB_DATE) {					// 원하는 날짜 형태로 변환
+	public void setCAMB_DATE(Date cAMB_DATE) {
 		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
-		String strNowDate = simpleDateFormat.format(cAMB_DATE);
-		
-		CAMB_DATE = strNowDate;
+		CAMB_DATE = cAMB_DATE;
 	}
 	
 	@Override

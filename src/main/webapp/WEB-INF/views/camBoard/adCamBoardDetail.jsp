@@ -16,11 +16,13 @@
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton{text-align: center;}
-	input {border: none;}
-	textarea {border: none; width: 100%;}
+	input {border: none; background: transparent;}
+	textarea {border: none; width: 100%; background: transparent;}
+	select {border: none; background: transparent;}
 	.sysBtn {text-align: center;}
 	#max{max-width: 600px}
-	
+	.update{background-color: #FFFAFA;}
+	input[type=date]::-webkit-calendar-picker-indicator {margin-left: 100px; background: none;}
 	
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,30 +36,11 @@
 
 	<div class="container col-sm-12 col-lg-4">
 		<form action="/adCamBoard/updateOk" method="POST" enctype="multipart/form-data">
-			<input type="hidden" id="hidden" value="${camBoard.CAMB_SUBJECT}">
-			<table class="post-hand" cellspacing="0">
-				<tbody>
-					<tr>
-						<td>
-							<div>
-								<div style="padding-left: 5%; padding-right: 5%;">
-									<p style="color: gray;"><a href="/adCamBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT">${camBoard.CAMB_SUBJECT}</a></p>
-									<div>
-										<span style="text-align: left; size:20px; color: black;">${camBoard.CAMB_NAME}</span>
-										<span style="text-align: right; size:10px; color: #d3d3d3;">${camBoard.CAMB_DATE}</span>
-									</div>
-								</div>
-							</div>
-							<div></div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		
 			<table class="goodsTable">
 				<tr>
 					<td colspan = "4">
-						<h1 style="text-align: center"><b>캠페인 정보</b></h1>
+						<h1 style="text-align: center"><b>캠페인 정보</b>&nbsp;&nbsp;&nbsp;<b>#${camBoard.CAMB_NUM}</b></h1>
+						<input type="hidden" name="CAMB_NUM" value="CAMB_NUM">
 					</td>
 				</tr>
 				<tr>
@@ -77,10 +60,10 @@
 				</tr>
 				
 				<tr>
-					<td><b>캠페인 이름</b></td>
-					<td><input type="text" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
-					<td><b>캠페인 주제</b></td><!-- <input type="text" name="CAMB_SUBJECT" value="${camBoard.CAMB_SUBJECT}"> --> 
-					<td>
+					<td><b>제목</b></td>
+					<td class="update"><input type="text" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
+					<td><b>주제</b></td><!-- <input type="text" name="CAMB_SUBJECT" value="${camBoard.CAMB_SUBJECT}"> --> 
+					<td class="update">
 						<select id="CAMB_SUBJECT" name="CAMB_SUBJECT" onchange="showUpdateButton()" required>
 						<option value="해양">해양</option>
 						<option value="플라스틱">플라스틱</option>
@@ -89,11 +72,23 @@
 					</select>
 					</td>
 				</tr>
+				
+				<tr>
+					<td><b>시작일</b></td>
+					<td class="update">
+					<input type="date" id="CAMB_STARTDATE">
+					</td>
+					<td><b>종료일</b></td>
+					<td class="update">
+						<input type="date" id="CAMB_FINDATE">
+					</td>
+				</tr>
+				
 				<tr style="text-align: center;">
 					<td colspan="4"><b>캠페인 내용</b></td>
 				</tr>
-				<tr style="text-align: center;">
-					<td colspan="4"><textarea name="CAMB_CONTENT" onchange="showUpdateButton()" required>${camBoard.CAMB_CONTENT}</textarea></td>
+				<tr class="update" style="text-align: center;">
+					<td colspan="4"><textarea id="CAMB_CONTENT" name="CAMB_CONTENT" onchange="showUpdateButton()" required>${camBoard.CAMB_CONTENT}</textarea></td>
 				</tr>
 			</table>
 			<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
@@ -115,6 +110,12 @@
 	window.onload = function(){
 		
 		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_SUBJECT}"/>'].join(''))
+		
+		var startdate = <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_STARTDATE}" />;
+		var findate = <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_FINDATE}" />;
+		
+		document.getElementById("CAMB_STARTDATE").value=startdate;
+		document.getElementById("CAMB_FINDATE").value=findate;
 		
 		$('#CAMB_SUBJECT').val('플라스틱').prop("selected", true);
 	}
