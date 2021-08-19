@@ -565,8 +565,7 @@
   <script src="/resources/assets/js/Chart.min.js"></script>
   <script src="/resources/assets/js/chart-area-demo.js"></script>
   <script src="/resources/assets/js/chart-pie-demo.js"></script>
-  <script src="/resources/assets/js/chart-bar-demo.js"></script>  
->>>>>>> c53bd3ed1de3c4e73657ca7cabc8560f1eb1f0e9
+  <script src="/resources/assets/js/chart-bar-demo.js"></script>
 </body>
 
 </html>

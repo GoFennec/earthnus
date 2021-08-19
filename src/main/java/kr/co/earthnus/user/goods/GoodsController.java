@@ -18,8 +18,10 @@ public class GoodsController {
 	
 	@RequestMapping("/goods/list")
 	public String getGoodsList(@RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "8") String contentnum, GoodsBean gBean, Model model) {
-		goodsService.getGoodsList(gBean, pagenum, contentnum, model);
+			@RequestParam(defaultValue = "8") String contentnum, 
+			@RequestParam(defaultValue = "") String goodsKinds, GoodsBean gBean, Model model) {
+		model.addAttribute("goodsKinds", goodsKinds);
+		goodsService.getGoodsList(gBean, pagenum, contentnum, goodsKinds, model);
 		return "goods/goodsList";
 	}
 	@RequestMapping("/goods/exGoods")

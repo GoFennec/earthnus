@@ -10,6 +10,7 @@ public class PagingBean {
     private boolean next;
     private int currentblock;
     private int lastblock;
+    private String goodsKinds;
     
     public void prevnext(int pagenum) {
         if(calcpage(totalcount,contentnum)<6) {
@@ -97,4 +98,10 @@ public class PagingBean {
             this.lastblock++;
         }
     }
+	public String getGoodsKinds() {
+		return goodsKinds;
+	}
+	public void setGoodsKinds(String goodsKinds) {
+		this.goodsKinds = goodsKinds;
+	}
 }

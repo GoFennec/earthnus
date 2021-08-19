@@ -27,8 +27,9 @@
 		<input type="hidden" name="exg_num" value="${exGoods.exg_num}">
 		<input type="hidden" name="exg_id" value="${exGoods.exg_id}"/>
 		<input type="hidden" name="exg_point" value="${exGoods.exg_point}"/>
+		<input type="hidden" name="exg_cancle" id="exg_cancle"/>
 	</form>
-	<form action="/adExGoods/deliveryOk" method="POST">
+	<form action="/adExGoods/deliveryOk" method="POST" onsubmit="return checkDelivery();">
 		<table class="insertFormTable">
 			<thead>
 				<tr><th scope="col" colspan="2">결제상세내역</th></tr>
@@ -47,9 +48,9 @@
 				<tr><td class="td_left">주 문 자 주 소&nbsp;&nbsp;&nbsp;</td>
 					<td id="addr"></td></tr>
 				<tr><td class="td_left">교&nbsp;&nbsp;환&nbsp;&nbsp;&nbsp;날&nbsp;&nbsp;짜&nbsp;&nbsp;&nbsp;</td>
-					<td class="td_right"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_date}"/></td></tr>
+					<td class="td_right"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td></tr>
 				<tr><td class="td_left">택&nbsp;&nbsp;배&nbsp;&nbsp;&nbsp;회&nbsp;&nbsp;사&nbsp;&nbsp;&nbsp;</td>
-					<td class="td_right"><select name="exg_cc" id="exg_cc">
+					<td class="td_right"><select name="exg_cc" id="selectBox">
 					    <option value="">직접입력</option>
 					    <option value="CJ대한통운">CJ대한통운</option>
 					    <option value="롯데택배">롯데택배</option>
@@ -118,9 +119,23 @@ function execDaumPostcode() {
         }
     }).open();
 }
+function checkDelivery() {
+	if ($("#selectBox").val() == "") {
+		alert("택배회사를 선택해주세요.");
+		return false;
+	} else {
+		return true;
+	}
+}
 function cancle() {
 	if (confirm("정말 결제내역을 취소하시겠습니까?") == true) {
-		$('#adExGoodsCancle').submit();
+		var cancleReason = prompt("결제취소 사유를 적어주세요.");
+		if (cancleReason != null) {
+			$("#exg_cancle").val(cancleReason);
+			$('#adExGoodsCancle').submit();
+		} else {
+			return false;
+		}
 	} else {
 		return false;
 	}

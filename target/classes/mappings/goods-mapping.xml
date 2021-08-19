@@ -39,7 +39,10 @@
 		<result property="exg_gname" column="EXG_GNAME"/>
 		<result property="exg_point" column="EXG_POINT"/>
 		<result property="exg_img" column="EXG_IMG"/>
-		<result property="exg_date" column="EXG_DATE"/>
+		<result property="exg_pdate" column="EXG_PDATE"/>
+		<result property="exg_ddate" column="EXG_DDATE"/>
+		<result property="exg_cdate" column="EXG_CDATE"/>
+		<result property="exg_cancle" column="EXG_CANCLE"/>
 	</resultMap>
 	
 	
@@ -49,9 +52,21 @@
 		]]>
 	</select>
 	
+	<select id="goodsKindsCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM GOODS WHERE GOODS_NAME LIKE CONCAT('%',#{goodsKinds},'%')
+		]]>
+	</select>
+	
 	<select id="getGoodsList" resultMap="goodsResult">
 		<![CDATA[
 			SELECT * FROM GOODS ORDER BY GOODS_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+	
+	<select id="getGoodsKindsList" resultMap="goodsResult">
+		<![CDATA[
+			SELECT * FROM GOODS WHERE GOODS_NAME LIKE CONCAT('%',#{goodsKinds},'%') ORDER BY GOODS_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
 		]]>
 	</select>
 	
@@ -76,7 +91,7 @@
 	
 	<select id="newExGoods" resultType="int">
 		<![CDATA[
-			SELECT EXG_NUM FROM EXGOODS WHERE EXG_ID=#{exg_id} ORDER BY EXG_DATE DESC LIMIT 1
+			SELECT EXG_NUM FROM EXGOODS WHERE EXG_ID=#{exg_id} ORDER BY EXG_PDATE DESC LIMIT 1
 		]]>
 	</select>
 	

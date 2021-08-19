@@ -15,7 +15,10 @@ public class ExGoodsBean {
 	private String exg_gname;
 	private String exg_point;
 	private String exg_img;
-	private Date exg_date;
+	private Date exg_pdate;
+	private Date exg_ddate;
+	private Date exg_cdate;
+	private String exg_cancle;
 	
 	public int getExg_num() {
 		return exg_num;
@@ -89,10 +92,28 @@ public class ExGoodsBean {
 	public void setExg_img(String exg_img) {
 		this.exg_img = exg_img;
 	}
-	public Date getExg_date() {
-		return exg_date;
+	public Date getExg_pdate() {
+		return exg_pdate;
 	}
-	public void setExg_date(Date exg_date) {
-		this.exg_date = exg_date;
+	public void setExg_pdate(Date exg_pdate) {
+		this.exg_pdate = exg_pdate;
+	}
+	public Date getExg_ddate() {
+		return exg_ddate;
+	}
+	public void setExg_ddate(Date exg_ddate) {
+		this.exg_ddate = exg_ddate;
+	}
+	public Date getExg_cdate() {
+		return exg_cdate;
+	}
+	public void setExg_cdate(Date exg_cdate) {
+		this.exg_cdate = exg_cdate;
+	}
+	public String getExg_cancle() {
+		return exg_cancle;
+	}
+	public void setExg_cancle(String exg_cancle) {
+		this.exg_cancle = exg_cancle;
 	}
 }
