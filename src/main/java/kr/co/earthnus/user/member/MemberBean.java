@@ -13,7 +13,6 @@ public class MemberBean {
 	private String mem_email;
 	private Date mem_date;
 	private int mem_point;
-	
 	public String getMem_id() {
 		return mem_id;
 	}

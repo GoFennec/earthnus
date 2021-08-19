@@ -653,7 +653,7 @@ color: #a2a6af
                          <table class="table table-hover table-xl mb-0">
                 <thead>
                   <tr>
-                    <th></th>
+                    <th>굿즈 사진</th>
                     <th>굿즈 이름</th>
                     <th>사용한 포인트</th>
                     <th>교환한 날짜</th>
@@ -662,7 +662,7 @@ color: #a2a6af
                 <tbody>
                 <c:forEach items="${myOrder}" var="exGoods">
                   <tr>
-                    <td class="text-truncate">${exGoods.exg_img}</td>
+                    <td class="text-truncate"><img src="${exGoods.exg_img}" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"  width="30%"/></td>
                     <td class="text-truncate">${exGoods.exg_gname}</td>
                     <td class="text-truncate">${exGoods.exg_point}</td>
                     <td class="text-truncate"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_date}" /></td>

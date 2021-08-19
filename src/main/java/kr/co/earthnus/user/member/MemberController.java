@@ -48,9 +48,6 @@ public class MemberController {
 			
 			@RequestMapping(value="/member/join_kakao", method=RequestMethod.POST)
 			public String memberJoin_kakao(MemberBean memberBean) throws NoSuchAlgorithmException {
-				/*SHA256 sha = new SHA256();
-				String smem_pw = sha.encrypt(memberBean.getMem_pw());
-				memberBean.setMem_pw(smem_pw);*/
 				memberService.insertMember_kakao(memberBean);
 				return "redirect:/";
 			}

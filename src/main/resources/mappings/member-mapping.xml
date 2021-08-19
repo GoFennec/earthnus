@@ -18,16 +18,21 @@
 		<result property="mem_point" column="MEM_POINT"/>
 	</resultMap>
 	<resultMap id="exGoodsResult" type="exGoods">
-		<id property="exg_num" column="EXG_NUM" />
-		<result property="exg_id" column="EXG_ID" />
-		<result property="exg_name" column="EXG_NAME" />
-		<result property="exg_addr" column="EXG_ADDR" />
-		<result property="exg_gnum" column="EXG_GNUM" />
-		<result property="exg_gname" column="EXG_GNAME" />
-		<result property="exg_point" column="EXG_POINT" />
-		<result property="exg_img" column="EXG_IMG" />
-		<result property="exg_date" column="EXG_DATE" />
+		<id property="exg_num" column="EXG_NUM"/>
+		<result property="exg_id" column="EXG_ID"/>
+		<result property="exg_name" column="EXG_NAME"/>
+		<result property="exg_addr" column="EXG_ADDR"/>
+		<result property="exg_message" column="EXG_MESSAGE"/>
+		<result property="exg_state" column="EXG_STATE"/>
+		<result property="exg_cc" column="EXG_CC"/>
+		<result property="exg_waybill" column="EXG_WAYBILL"/>
+		<result property="exg_gnum" column="EXG_GNUM"/>
+		<result property="exg_gname" column="EXG_GNAME"/>
+		<result property="exg_point" column="EXG_POINT"/>
+		<result property="exg_img" column="EXG_IMG"/>
+		<result property="exg_date" column="EXG_DATE"/>
 	</resultMap>
+	
 	<resultMap id="CheBoardResult" type="cheBoard">
 		<id property="cheb_num" column="CHEB_NUM" />
 		<result property="cheb_id" column="CHEB_ID" />
@@ -41,6 +46,13 @@
 		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
 		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
 	</insert>
+	
+	<insert id="insertMember_kakao" parameterType="member">
+		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
+		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
+	</insert>
+	
+	
 	<select id="myPoint" resultType="String">SELECT MEM_POINT FROM MEMBER
 		WHERE MEM_ID=#{mem_id}
 	</select>
