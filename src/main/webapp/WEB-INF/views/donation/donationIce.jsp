@@ -10,8 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-section{text-align: center;}
-section p{font-size: 0.8em; color: gray;}
+.image {
+ background-image: url('/resources/donation/iceSub.jpg');
+ background-repeat: no-repeat;
+ background-size: cover;
+ }
 .item {text-align: center;}
 .item p{text-align: center;}
 #donationBt{text-align: center;}
@@ -23,16 +26,24 @@ section p{font-size: 0.8em; color: gray;}
 
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
-<br><br><br><br>
+
+
+<div class="image">
+	<div class="slider-height2 d-flex align-items-center">
+		<div class="container">
+			<div class="row">
+			<div class="col-xl-12">
+            	<div class="hero-cap hero-cap2 pt-70">
+                	<h1 style="font-size: 2em; color: white;">북극곰을 도와줘요!</h1>
+                    <p style="font-size: 0.8em; color: white;">EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
+            	</div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div><br><br><br><br>
 	
 <div class="container">
-	
-	<section>
-	<h2>북극곰을 도와줘요!</h2>
-	<p>EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
-	</section><br>
-	<hr><br><br><br>
-	
 	<div class="row">
 	 	<c:forEach items="${ice}" var="donation" begin="0" end="2">
 			<div class="item col-3 col-md-3">
