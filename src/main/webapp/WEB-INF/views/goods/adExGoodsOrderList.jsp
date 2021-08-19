@@ -36,12 +36,12 @@
 		<div class="col-sm-12">
 			<table class="exGoodsTable">
 			<tr>
-				<th scope="col">교환번호</th>
+				<th scope="col">결제번호</th>
 				<th scope="col">아이디</th>
 				<th scope="col">주문상태</th>
 				<th scope="col">상품정보</th>
 				<th scope="col">사용한포인트</th>
-				<th scope="col" width="13%">교환날짜</th>
+				<th scope="col" width="13%">결제날짜</th>
 				<th scope="col">배송메세지</th>
 			</tr>	
 			<c:forEach items="${exGoodsList}" var="exGoods">
@@ -51,7 +51,7 @@
 						<td>${exGoods.exg_state}</td>
 						<td>${exGoods.exg_gnum}(${exGoods.exg_gname})</td>
 						<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
-						<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_date}"/></td>
+						<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td>
 						<td>${exGoods.exg_message}</td>
 					</tr>
 			</c:forEach>

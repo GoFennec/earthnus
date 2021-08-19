@@ -27,7 +27,7 @@
 			<tr><th scope="col" colspan="3">교환 상세 정보</th></tr>
 		</thead>
 		<tr><td colspan="2"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td></tr>
-		<tr><th scope="col">교환 날짜</th><td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_date}"/></td></tr>
+		<tr><th scope="col">교환 날짜</th><td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td></tr>
 		<tr><th scope="col">선택 상품</th><td>${goods.goods_name}</td></tr>
 	</table><br/>
 	<table class="exGoods">

@@ -54,9 +54,7 @@ public class AdExGoodsController {
 	
 	@RequestMapping("/adExGoods/deliveryOk")
 	public String updateGoodsOk(@ModelAttribute ExGoodsBean eBean, Model model) {
-		System.out.println("111");
 		adExGoodsService.updateDeliveryOk(eBean);
-		System.out.println("222");
 		return "redirect:/adExGoods/oList";
 	}
 	

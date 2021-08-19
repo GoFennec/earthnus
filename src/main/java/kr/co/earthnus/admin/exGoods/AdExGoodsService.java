@@ -65,9 +65,6 @@ public class AdExGoodsService {
 	
 	public void updateDeliveryOk(ExGoodsBean eBean) {
 		AdExGoodsMybatis exGoodsDAO = mybatis.getMapper(AdExGoodsMybatis.class);
-		System.out.println(eBean.getExg_num());
-		System.out.println(eBean.getExg_cc());
-		System.out.println(eBean.getExg_waybill());
 		exGoodsDAO.updateDeliveryOk(eBean);
 	}
 	
