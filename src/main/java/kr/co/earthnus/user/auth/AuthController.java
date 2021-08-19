@@ -40,14 +40,18 @@ public class AuthController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
-	public String login(Model model, HttpSession session) {
-		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		System.out.println("네이버:" + naverAuthUrl);
-		model.addAttribute("url",naverAuthUrl);
-		return "auth/login";
-	}
+//	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
+//	public String login(Model model, HttpSession session) {
+//		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+//		System.out.println("네이버:" + naverAuthUrl);
+//		model.addAttribute("url",naverAuthUrl);
+//		return "auth/login";
+//	}
 	
+	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
+	   public String login() {
+	      return "auth/login";
+	   }
 	
 
 	//네이버 로그인
