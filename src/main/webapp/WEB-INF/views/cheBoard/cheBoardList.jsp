@@ -140,6 +140,11 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     -o-transition: all 0.3s cubic-bezier(1, .01, .32, 1);
     transition: all 0.3s cubic-bezier(1, .01, .32, 1);
 }
+
+#COMMENT_LIKE img {
+	width:50px;
+	height:50px;
+}
 </style>
 
 
@@ -211,13 +216,14 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     	<table id="addList" border="1">
         <thead>
             <tr>
-                <th>No</th>
-                <th>제  목</th>
-                <th>내    용</th>
-                <th>날 짜 </th>
+            	<th>환경을 위해 한마디</th>
             </tr>
         </thead>	
         <tbody id="listDiv">
+        
+        
+        
+        
         </tbody>
     </table>  
     	
@@ -414,7 +420,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
   		if(insert_commet > 0) {
     		$('#listDiv').empty();
     			insert_commet = 0;
-    			 startNum = 1;
+    			 startNum = 0;
     			 step = 10;
   		}
   		
@@ -432,25 +438,16 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	        	
 	        	 for(var i=0; i<obj.length;i++) {
             		var str = '<tr>';
+
+            		 str += '<td><div>'+obj[i].cheb_name;
+            		 str += '<span id="COMMENT_LIKE"><img alt="사진" class=like_comment src="/resources/cheBoard/NOT_like.png"></span></div>';
+            		 str += '<div>'+obj[i].cheb_content+'</div>'
+     				 str += '<div>'+obj[i].cheb_date+'</div>';
             		
-            		 if(auth_id == obj[i].cheb_id) {
-            			
-         				 str += '<td>'+obj[i].cheb_num+'</td>';
-         				 str += '<td>'+obj[i].cheb_content+'</td>'
-         				 str += '<td>'+obj[i].cheb_name+'</td>';
-         				 str += '<td>'+obj[i].cheb_date+'</td>';
-         				 str += '<td><input type="button" value="수정"/></td>';
-         				 str += '<td><input type="button" value="삭제" class="deleteComment" data_num="'+obj[i].cheb_num+'"/></td>';
+            		 if(auth_id == obj[i].cheb_id) { 
+         				 str +='<span><input type="button" value="삭제" class="deleteComment" data_num="'+obj[i].cheb_num+'"/></span>';
             		 }
-            		 else {
-	     				 str += '<td>'+obj[i].cheb_num+'</td>';
-	     				 str += '<td>'+obj[i].cheb_content+'</td>'
-         				 str += '<td>'+obj[i].cheb_name+'</td>';
-         				 str += '<td>'+obj[i].cheb_date+'</td>';
-	     				 
-            		 }
-                      
-            		 
+            		 	 str += '</td>'
 	            		 str += '</tr>';
 	            		 $('#listDiv').append(str);
                       }

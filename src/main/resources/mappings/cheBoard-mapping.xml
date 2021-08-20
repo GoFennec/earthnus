@@ -3,6 +3,11 @@
   
 <mapper namespace="kr.co.earthnus.user.cheBoard.CheBoardMybatis">
       
+      
+      
+      
+      
+      
       <resultMap id="CheBoardResult" type="cheBoard">
 		<id property="cheb_num" column="CHEB_NUM"/>
 		<result property="cheb_id" column="CHEB_ID"/>

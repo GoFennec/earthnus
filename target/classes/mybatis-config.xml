@@ -13,6 +13,7 @@
 		<typeAlias alias="camBoard" type="kr.co.earthnus.user.camBoard.camBoardBean"/>
 		<typeAlias alias="cheBoard" type="kr.co.earthnus.user.cheBoard.CheBoardBean"/>
 		<typeAlias alias="mail" type="kr.co.earthnus.util.MailBean"/>
+		
 	</typeAliases>
 	
 	<mappers>
