@@ -48,7 +48,7 @@ public class GoodsService {
             	goodsList = goodsDAO.getGoodsKindsList(pBean);
             }
         }
-        String gOptions = "텀블러,에코백,실리콘빨대";
+        String gOptions = "텀블러,에코백,빨대";
         model.addAttribute("gOptions", gOptions);
 		model.addAttribute("goodsList", goodsList);
         model.addAttribute("page", pBean);
