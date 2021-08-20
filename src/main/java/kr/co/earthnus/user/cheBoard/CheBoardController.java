@@ -2,8 +2,6 @@ package kr.co.earthnus.user.cheBoard;
 
 import java.util.List;
 
-import javax.xml.stream.events.Comment;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,11 +36,10 @@ public class CheBoardController{
     
     @ResponseBody
     @RequestMapping("/cheBoard/comment_list")
-    public List<CheBoardBean> selectAllComment(CheBoardBean bean, Model model){
+    public List<CheBoardBean> selectAllComment(String startnum, String comment_step){
+    
     	List<CheBoardBean> CheBoardList = null;
-		CheBoardList =service.selectAllComment(bean,model);		
+		CheBoardList =service.selectAllComment(startnum,comment_step);
 		return CheBoardList;
-        
-        
     }
 }

@@ -9,5 +9,5 @@ public interface AdCheBoardMybatis {
 	
 	
 	public List<CheBoardBean> AdCheBoardList();
-	public void replyDelete(int reply_id);
+	public void AdreplyDelete(int reply_id);
 }

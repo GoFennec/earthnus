@@ -48,7 +48,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 }
 #slider-wrap ul#slider li img {
     display: block;
-    width: 100%;
+    width: 50%;
     height: 100%;
 }
 
@@ -202,15 +202,30 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	         <textarea style="width:90%" id="text"></textarea>
 	         <input type="button" id="replyInsert" value="응원하기">
 	        </c:if>
-        
     </div>
     
 	
     
     
-    <div id="listDiv">
+    <div>
+    	<table id="addList" border="1">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>제  목</th>
+                <th>내    용</th>
+                <th>날 짜 </th>
+            </tr>
+        </thead>	
+        <tbody id="listDiv">
+        </tbody>
+    </table>  
+    	
     </div>
-    </div>
+    <div>  
+        <button id="addBtn">더보기</button>
+	</div>
+  </div>
 
 
 
@@ -219,7 +234,10 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 
 
 <script type="text/javascript">
-
+	var startNum = 1;
+	var step = 10;
+	var insert_commet = 0;
+	var slider_count = 0;
   $(document).ready(function (){
 	  //list불러오고 insert 버튼 클릭시 ajax
         init();
@@ -227,7 +245,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
           	
         	  var text = $('#text').val();
         	  var id = "${auth.auth_id}";
-        	  var name = "${auth.auth_name}";
+  	      	  var name = "${auth.auth_name}";
         	  var dnum = "123";
         	  var senData = {"cheb_id":id, "cheb_name":name, "cheb_dnum":dnum, "cheb_content": text}
         	  if(text.trim().length==0) {
@@ -243,6 +261,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
         		 contentType : "application/json; charset=utf-8",
         		 success : function(){
         			 $('#text').val("");
+        			 insert_commet++;
                      init();
                  },
                  error : function(error){
@@ -250,7 +269,13 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                  }
         		
         	 });
+        	 
           });
+        
+        $('#addBtn').on('click',function() {
+        	startNum += step;
+        	init();
+        });
         
         
         
@@ -289,19 +314,22 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/iceItem4.png"></li>';
       	}
         	element.innerHTML = str;
+        	
+        	slider_count++;
     		slider();
         });        
        
   });
  
   function slider() {
-      var slideWrapper = document.getElementById('slider-wrap');
+    var slideWrapper = document.getElementById('slider-wrap');
     var count = 0;
     var slideIndex = 0;
     
     var slides = document.querySelectorAll('#slider-wrap #slider li');
     
     var totalSlides = slides.length;
+    
     
     var sliderWidth = slideWrapper.clientWidth;
    
@@ -310,6 +338,9 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     })
     
     var slider = document.querySelector('#slider-wrap ul#slider');
+    
+    clearInterval(autoSlider);
+    slider.style.left = 0 + 'px';
     slider.style.width = sliderWidth * totalSlides + 'px';
 
    
@@ -329,9 +360,9 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     });
     slideWrapper.addEventListener('mouseleave', function () {
         this.classList.remove('active');
-        autoSlider = setInterval(function () {
+        autoSlider =setInterval(function () {
             plusSlides(1);
-        }, 3000);
+        }, 1000);
     });
 
 
@@ -364,7 +395,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
         dots[slideIndex].classList.add('active');
     }
 
-    pagination();
+    pagination();	
     var autoSlider = setInterval(function () {
         plusSlides(1);
     }, 1000); 
@@ -379,49 +410,55 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
   
   //list
   	function init(){
-    
-    $.ajax({
-        url : "comment_list",
-        type : "GET",
-        dataType : "json",
-        success :function(obj){
-        	var auth_id = "${auth.auth_id}";
-            var str = '<table>';
-            str += '<tr>'
-            str += '<th scope="col">글번호</th>'
-            str += '<th scope="col">내용</th>'
-            str += '<th scope="col">작성자</th>'
-            str += '<th scope="col">글번호</th>'
-            str += '</tr>'
-            	 $.each(obj ,function(index, item){
-            		 var item_id = item.cheb_id;
-            		 str += '<tr>';
-            		 
-            		 if(auth_id == item_id) {
-            			 
-         				 str += '<td>'+item.cheb_num+'</td>';
-         				 str += '<td>'+item.cheb_content+'</td>'
-         				 str += '<td>'+item.cheb_name+'</td>';
-         				 str += '<td>'+item.cheb_date+'</td>';
+  	
+  		if(insert_commet > 0) {
+    		$('#listDiv').empty();
+    			insert_commet = 0;
+    			 startNum = 1;
+    			 step = 10;
+  		}
+  		
+  		$.ajax({
+	        url : "comment_list",
+	        type : "GET",
+	        data :{
+	        	"startnum" : startNum,
+	        	"comment_step" : step
+            }, 
+	        success :function(obj){
+	        	var auth_id = "${auth.auth_id}";
+	        	
+	        	// $('#listDiv').empty();
+	        	
+	        	 for(var i=0; i<obj.length;i++) {
+            		var str = '<tr>';
+            		
+            		 if(auth_id == obj[i].cheb_id) {
+            			
+         				 str += '<td>'+obj[i].cheb_num+'</td>';
+         				 str += '<td>'+obj[i].cheb_content+'</td>'
+         				 str += '<td>'+obj[i].cheb_name+'</td>';
+         				 str += '<td>'+obj[i].cheb_date+'</td>';
          				 str += '<td><input type="button" value="수정"/></td>';
-         				 str += '<td><input type="button" value="삭제" class="deleteComment" data_num="'+item.cheb_num+'"/></td>';
+         				 str += '<td><input type="button" value="삭제" class="deleteComment" data_num="'+obj[i].cheb_num+'"/></td>';
             		 }
             		 else {
-	     				 str += '<td>'+item.cheb_num+'</td>';
-	     				 str += '<td>'+item.cheb_content+'</td>'
-	     				 str += '<td>'+item.cheb_name+'</td>';
-	     				 str += '<td>'+item.cheb_date+'</td>';
+	     				 str += '<td>'+obj[i].cheb_num+'</td>';
+	     				 str += '<td>'+obj[i].cheb_content+'</td>'
+         				 str += '<td>'+obj[i].cheb_name+'</td>';
+         				 str += '<td>'+obj[i].cheb_date+'</td>';
 	     				 
             		 }
-                  })
-             
-            str += '</tr>';	
-            str += '</table>';
-            $('#listDiv').html(str);
-            
-
+                      
+            		 
+	            		 str += '</tr>';
+	            		 $('#listDiv').append(str);
+                      }
+                  
+                     
             $('.deleteComment').on('click', function(){        
                 var reply_id = $(this).attr('data_num'); 
+                //console.log(reply_id);
                 $.ajax({
                     
                     url : "Cheboard_delete",
@@ -431,6 +468,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                     	reply_id : reply_id
                     },
                     success : function(){
+                    	insert_commet++;
                         init();
                     },
                     error : function(error){
@@ -440,7 +478,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                 });
             
             });
-    }
+    	}
 	});
 	}
 </script>

@@ -10,6 +10,7 @@
 		<result property="cheb_dnum" column="CHEB_DNUM"/>
 		<result property="cheb_content" column="CHEB_CONTENT"/>
 		<result property="cheb_date" column="CHEB_DATE"/>
+	
 	</resultMap>
       
       
@@ -36,7 +37,7 @@
       
      <select id="CheBoardList" resultMap="CheBoardResult">
         <![CDATA[
-            SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC 
+            SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC LIMIT #{comment_step} OFFSET #{startnum}
         ]]>
      </select>
       

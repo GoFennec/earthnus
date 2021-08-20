@@ -12,20 +12,15 @@
 		<result property="cheb_date" column="CHEB_DATE"/>
 	</resultMap>
       
-      <select id="CheBoardCount" resultType="int">
-		<![CDATA[
-			SELECT COUNT(*) FROM CHEBOARD
-		]]>
-	</select>
       
-     <select id="CheBoardList" resultMap="CheBoardResult">
+     <select id="AdCheBoardList" resultMap="CheBoardResult">
         <![CDATA[
             SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC 
         ]]>
      </select>
       
       
-      <delete id="replyDelete" parameterType="int">
+      <delete id="AdreplyDelete" parameterType="int">
       		DELETE FROM CHEBOARD WHERE CHEB_NUM=#{reply_id}
       </delete>
 </mapper>

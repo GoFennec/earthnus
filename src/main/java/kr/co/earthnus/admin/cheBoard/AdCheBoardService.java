@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import kr.co.earthnus.user.cheBoard.CheBoardBean;
-import kr.co.earthnus.user.cheBoard.CheBoardMybatis;
 
 @Service
 public class AdCheBoardService{
@@ -21,8 +20,8 @@ public class AdCheBoardService{
 
 	public void deleteReply(int reply_id) {
 		
-		CheBoardMybatis ChreBoardDAO = mybatis.getMapper(CheBoardMybatis.class);
-		ChreBoardDAO.replyDelete(reply_id);
+		AdCheBoardMybatis ChreBoardDAO = mybatis.getMapper(AdCheBoardMybatis.class);
+		ChreBoardDAO.AdreplyDelete(reply_id);
 	}
 
 
@@ -30,9 +29,9 @@ public class AdCheBoardService{
 
 
 	public List<CheBoardBean> selectAllComment(Model model) {
-		CheBoardMybatis ChreBoardDAO = mybatis.getMapper(CheBoardMybatis.class);
+		AdCheBoardMybatis ChreBoardDAO = mybatis.getMapper(AdCheBoardMybatis.class);
 		List<CheBoardBean> CheBoardList = null;
-		CheBoardList = ChreBoardDAO.CheBoardList();
+		CheBoardList = ChreBoardDAO.AdCheBoardList();
 		
 		 model.addAttribute("list",CheBoardList);
 		  return CheBoardList;
