@@ -48,8 +48,8 @@
 				<th scope="col">상품사진</th>
 				<th scope="col">상품이름</th>
 				<th scope="col">상품포인트</th>
-				<th scope="col">상품정보</th>
-				<th scope="col" width="30%">상품설명</th>
+				<th scope="col" width="20%">상품정보</th>
+				<th scope="col" width="20%">상품설명</th>
 			</tr>	
 			<c:forEach items="${goodsList}" var="goods">
 					<tr class="goodsInfo" id="${goods.goods_num}">
