@@ -2,6 +2,7 @@ package kr.co.earthnus.admin.camBoard;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,39 +21,26 @@ public class AdCamBoardController {
 	private AdCamBoardService adCamBoardService;
 			
 	@RequestMapping(value="/adCamBoard/list")
-	public String getCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam(defaultValue = "desc") String order,
-			camBoardBean cBean, Model model) {
+	public String getCamBoardList(Model model) {
 		
-		String search = "%%";
-		String search_type = "CAMB_ENTIRE";
-		String orderBy = "CAMB_NUM";
-		
-		//adCamBoardService.getCamBoardList(search, arr, cBean, pagenum, contentnum, model);
-		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
-		
-		System.out.println("CamBoardController");
+		List<camBoardBean> list = adCamBoardService.getBoardList();
+		model.addAttribute("CamBoardList", list);
 		return "camBoard/adCamBoardList";
 	}
 	
-	@RequestMapping(value = "/adCamBoard/list/search")
-	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam(value="search", required=false) String search, @RequestParam("search_type") String search_type,
-			@RequestParam(defaultValue = "desc") String order, camBoardBean cBean, Model model) {
+	@RequestMapping(value="/adCamBoard/ing")
+	public String getCamBoardIngList(Model model) {
 		
-		if(search != null) {
-			search = "%" + search + "%";
-		}else if(search == null || search.equals("")) {
-			search = "%%";
-		}
-		if(search_type == null) {
-			search_type = "CAMB_ENTIRE";
-		}
-		String orderBy = "CAMB_NUM";
+		List<camBoardBean> list = adCamBoardService.getBoardIngList();
+		model.addAttribute("CamBoardIngList", list);
+		return "camBoard/adCamBoardList";
+	}
+	
+	@RequestMapping(value="/adCamBoard/finish")
+	public String getCamBoardFinishList(Model model) {
 		
-		adCamBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
-		
-		System.out.println("CamBoardController");
+		List<camBoardBean> list = adCamBoardService.getBoardFinishList();
+		model.addAttribute("CamBoardFinishList", list);
 		return "camBoard/adCamBoardList";
 	}
 	

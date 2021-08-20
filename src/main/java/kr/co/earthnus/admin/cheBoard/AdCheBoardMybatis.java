@@ -5,9 +5,5 @@ import java.util.List;
 import kr.co.earthnus.user.cheBoard.CheBoardBean;
 
 public interface AdCheBoardMybatis {
-
-	
-	
-	public List<CheBoardBean> AdCheBoardList();
-	public void AdreplyDelete(int reply_id);
+	public List<CheBoardBean> getAdCheBoardList();
 }

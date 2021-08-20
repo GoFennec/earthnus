@@ -2,145 +2,458 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
-<style>
-#button{text-align: right;}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  line-height: 1.5;
-}
-thead th {
-  padding: 10px;
-  font-weight: bold;
-  vertical-align: top;
-  color: #04B4AE;
-  border-bottom: 3px solid #04B4AE;
-  background: none;
-}
-thead td {
-  padding: 10px;
-  font-weight: bold;
-  vertical-align: top;
-  color: #04B4AE;
-  border-bottom: 3px solid #04B4AE;
-}
-th {
-  width: 150px;
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
-  vertical-align: center;
-  border-bottom: 1px solid #ccc;
-  background: #f3f6f7;
-}
- td {
-  padding: 9px;
-  text-align: center;
-  vertical-align: center;
-  border-bottom: 1px solid #ccc;
-}
-.paging {text-align: center;}
-.donationInfo {cursor: pointer;}
-</style>
-
-<title>EARTH & US</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>EARTH & US ADMIN</title>
+  <link href="/resources/assets/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/resources/assets/css/ruang-admin.min.css" rel="stylesheet">
+  <link href="/resources/assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+	
+	<style type="text/css">
+  		th,td{
+  			text-align:center;
+  		}
+  		label{
+  		margin-top:1rem;
+  	}
+  	</style>
 </head>
 
-<body>
-<br><br><br><br>
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adIndex">
+        <div class="sidebar-brand-icon">
+          <img src="/resources/assets/img/logo/logo2_footer.png">
+        </div>
+      </a>
+      <hr class="sidebar-divider my-0">
+      <li class="nav-item">
+        <a class="nav-link" href="/adIndex">
+        <i class="fas fa-fw fa-chart-area"></i>
+          <span>관리자 메인</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/adMember/list">
+        <i class="fas fa-user"></i>
+          <span>회원 관리</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/adCamBoard/list">
+        <i class="fas fa-peace"></i>
+          <span>캠페인 관리</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/adDonation/list">
+        <i class="fas fa-hand-holding-heart"></i>
+          <span>기부 관리</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/adCheBoard/list">
+        <i class="fas fa-comments"></i>
+          <span>응원릴레이 관리</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/adGoods/list">
+        <i class="fas fa-gift"></i>
+          <span>지구마켓 상품 관리</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/adExGoods/oList">
+        <i class="fas fa-shopping-cart"></i>
+          <span>지구마켓 주문목록</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/adExGoods/dList">
+        <i class="fas fa-shopping-cart"></i>
+          <span>지구마켓 배송처리목록</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/adExGoods/aList">
+        <i class="fas fa-shopping-cart"></i>
+          <span>지구마켓 주문승인내역</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/adExGoods/cList">
+        <i class="fas fa-shopping-cart"></i>
+          <span>지구마켓 주문취소내역</span>
+        </a>
+      </li>
+    </ul>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+          <ul class="navbar-nav ml-auto">
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+				<i class="fas fa-address-card"></i>
+                <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <!-- Topbar -->
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">기부 관리</h1>
+          </div>
 
-<div class="container">
-	
-	<div class="row">
-	<table class="goodsTitle">
-		<thead>
-			<tr><th scope="col">후원 내역 관리</th>
-			<td><div id="button"><button type="button" id="cancel">결제 취소</button></div></td></tr>
-		</thead>
-	</table>
-	</div><br>
-	
-	<div class="row">
-		<div class="col-12">
-		<table class="donationList">
-			<tr>
-				<th scope="col">No.</th>
-				<th scope="col">결제 번호</th>
-				<th scope="col">후원자</th>
-				<th scope="col">아이디</th>
-				<th scope="col">결제 상품</th>
-				<th scope="col">후원 금액</th>
-				<th scope="col">발생 포인트</th>
-				<th scope="col">후원일</th>
-				<th scope="col">후원 취소일</th>
-				<th scope="col">결제 상태</th>
-				<th scope="col">포인트 적립</th>
-			</tr>
-			
-			<c:forEach items="${adDonationList}" var="donation">
-			<tr class="donationInfo" id="${donation.pay_no}">
-				<td>${donation.pay_no}</td>
-				<td>${donation.pay_num}</td>
-				<td>${donation.pay_name}</td>
-				<td>${donation.pay_id}</td>
-				<td>${donation.pay_dname}</td>
-				<c:set var="price" value="${donation.pay_price}"/>
-				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</td>
-				<c:set var="point" value="${donation.pay_point}"/>
-				<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${point}"/>p</td>
-				<td>${donation.pay_pdate}</td>
-				<td>${donation.pay_cdate}</td>
-				<td>${donation.pay_state}</td>
-				<c:if test="${donation.pay_state eq '결제승인' and donation.pay_pstate eq '적립예정'}">
-				<td><form action="/adDonation/pointUpdate" method="POST">
-					<input type="hidden" name="pay_id" value="${donation.pay_id}"/>
-					<input type="hidden" name="pay_no" value="${donation.pay_no}"/>
-					<input type="hidden" name="pay_point" value="${donation.pay_point}"/>
-					<input type="submit" value="승인"/></form></td>
-				</c:if>
+          <!-- Row -->
+          <div class="row">
+          
+             <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Earnings (Monthly)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                        <span>Since last month</span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Earnings (Annual) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Sales</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                        <span>Since last years</span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- New User Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">New User</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
+                        <span>Since last month</span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-users fa-2x text-info"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Pending Requests</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                        <span>Since yesterday</span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-warning"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- DataTable with Hover -->
+            <div class="col-lg-12">
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary"></h6>
+                </div>
+                <div class="table-responsive p-3">
+                <div class="row">
+                <div class="col-sm-12 col-md-6">
+                <a href="/adDonation/list" class="btn btn-sm btn-primary">전체 보기</a>
+                <a href="/adDonation/waiting" class="btn btn-sm btn-primary">포인트 승인 대기</a>
+                <a href="/adDonation/canceled" class="btn btn-sm btn-primary">취소된 후원</a>
+                </div>
+                <div class="col-sm-12 col-md-6" style="text-align:right;">
+                <a href="" class="btn btn-sm btn-primary" id="cancel" style="background-color:#fc544b;border-color:#fc544b;">결제 취소</a>
+                </div>
+                </div>  
+                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>기부 번호</th>
+                        <th>결제 번호</th>
+                        <th>후원자</th>
+                        <th>아이디</th>
+                        <th>결제 상품</th>
+                        <th>후원 금액</th>
+                        <th>발생 포인트</th>
+                        <th>후원일</th>
+                        <th>후원 취소일</th>
+                        <th>결제 상태</th>
+                        <th>포인트 적립</th>
+                      </tr>
+                    </thead>
+					<tbody>
+					<c:if test="${not empty adDonationList}">
+						<c:forEach items="${adDonationList}" var="donation">
+						<tr class="donationInfo" id="${donation.pay_no}">
+							<td>${donation.pay_no}</td>
+							<td>${donation.pay_num}</td>
+							<td>${donation.pay_name}</td>
+							<td>${donation.pay_id}</td>
+							<td>${donation.pay_dname}</td>
+							<c:set var="price" value="${donation.pay_price}"/>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</td>
+							<c:set var="point" value="${donation.pay_point}"/>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${point}"/>p</td>
+							<td>${donation.pay_pdate}</td>
+							<td>${donation.pay_cdate}</td>
+							<td>${donation.pay_state}</td>
+							<c:if test="${donation.pay_state eq '결제승인' and donation.pay_pstate eq '적립예정'}">
+							<td><form action="/adDonation/pointUpdate" method="POST">
+								<input type="hidden" name="pay_id" value="${donation.pay_id}"/>
+								<input type="hidden" name="pay_no" value="${donation.pay_no}"/>
+								<input type="hidden" name="pay_point" value="${donation.pay_point}"/>
+								<input type="submit" class="btn btn-sm btn-primary" value="승인"/></form></td>
+							</c:if>
 				
-				<c:if test="${donation.pay_pstate eq '적립완료' or donation.pay_state eq '결제취소'}">
-				<td>${donation.pay_pstate}</td>
-				</c:if>
-			</tr>
-			</c:forEach>
-		</table>
-		</div>
-	</div><br>
-		
-	<div class="row">
-		<div class="col-12">
-		<table class="paging">
-			<tr>
-				<td style="background-color: #0ed145;">
-					<c:if test="${page.prev}">
-						<a href="?pagenum=${page.getStartPage()-1}">&lt;</a>
-					</c:if>&nbsp;
-					<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">
-						<a href="?pagenum=${idx}">${idx}&nbsp;</a>
-					</c:forEach>
-					<c:if test="${page.next}">
-						<a href="?pagenum=${page.getEndPage()+1}">&gt;</a>
+							<c:if test="${donation.pay_pstate eq '적립완료' or donation.pay_state eq '결제취소'}">
+							<td>${donation.pay_pstate}</td>
+							</c:if>
+						</tr>
+						</c:forEach>
 					</c:if>
-				</td>
-			</tr>
-		</table><br/>
-	</div>
-	</div>
-</div>
+					<c:if test="${not empty waitingList}">
+						<c:forEach items="${waitingList}" var="donation">
+						<tr class="donationInfo" id="${donation.pay_no}">
+							<td>${donation.pay_no}</td>
+							<td>${donation.pay_num}</td>
+							<td>${donation.pay_name}</td>
+							<td>${donation.pay_id}</td>
+							<td>${donation.pay_dname}</td>
+							<c:set var="price" value="${donation.pay_price}"/>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</td>
+							<c:set var="point" value="${donation.pay_point}"/>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${point}"/>p</td>
+							<td>${donation.pay_pdate}</td>
+							<td>${donation.pay_cdate}</td>
+							<td>${donation.pay_state}</td>
+							<c:if test="${donation.pay_state eq '결제승인' and donation.pay_pstate eq '적립예정'}">
+							<td><form action="/adDonation/pointUpdate" method="POST">
+								<input type="hidden" name="pay_id" value="${donation.pay_id}"/>
+								<input type="hidden" name="pay_no" value="${donation.pay_no}"/>
+								<input type="hidden" name="pay_point" value="${donation.pay_point}"/>
+								<input type="submit" class="btn btn-sm btn-primary" value="승인"/></form></td>
+							</c:if>
+				
+							<c:if test="${donation.pay_pstate eq '적립완료' or donation.pay_state eq '결제취소'}">
+							<td>${donation.pay_pstate}</td>
+							</c:if>
+						</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${not empty cancelList}">
+						<c:forEach items="${cancelList}" var="donation">
+						<tr class="donationInfo" id="${donation.pay_no}">
+							<td>${donation.pay_no}</td>
+							<td>${donation.pay_num}</td>
+							<td>${donation.pay_name}</td>
+							<td>${donation.pay_id}</td>
+							<td>${donation.pay_dname}</td>
+							<c:set var="price" value="${donation.pay_price}"/>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${price}"/>원</td>
+							<c:set var="point" value="${donation.pay_point}"/>
+							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${point}"/>p</td>
+							<td>${donation.pay_pdate}</td>
+							<td>${donation.pay_cdate}</td>
+							<td>${donation.pay_state}</td>
+							<c:if test="${donation.pay_state eq '결제승인' and donation.pay_pstate eq '적립예정'}">
+							<td><form action="/adDonation/pointUpdate" method="POST">
+								<input type="hidden" name="pay_id" value="${donation.pay_id}"/>
+								<input type="hidden" name="pay_no" value="${donation.pay_no}"/>
+								<input type="hidden" name="pay_point" value="${donation.pay_point}"/>
+								<input type="submit" value="승인"/></form></td>
+							</c:if>
+				
+							<c:if test="${donation.pay_pstate eq '적립완료' or donation.pay_state eq '결제취소'}">
+							<td>${donation.pay_pstate}</td>
+							</c:if>
+						</tr>
+						</c:forEach>
+					</c:if>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Row-->
 
+          <!-- Modal Logout -->
+          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to logout?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                  <a href="login.html" class="btn btn-primary">Logout</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">후원 결제를 취소합니다.</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>관리자 비밀번호를 입력하세요.</p>
+                  <input type="password" id="deletePW">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="memberDelete()">삭제</button>
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소</button>
+                </div>
+              </div>
+            </div>
+          </div>
+              <script type="text/javascript">
+				function memberDelete(){
+					var deletePW = $("#deletePW").val();
+					var deleteMember = $("#mem_id").val();
+					if(deletePW == ""){
+						alert("관리자 비밀번호를 입력해주세요.");
+						return;
+					}
+		
+					$.ajax({
+			   			type: "POST", //요청 메소드 방식
+			  			 url:"/adMember/delete",
+			   			data: {"deletePW":deletePW, "deleteMember":deleteMember},
+			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			   			
+			   			success : function(result){
+			      			if(result.error === true){
+			    	  			alert('삭제되었습니다.');
+			      			}else if(result.error === false){
+			    	  			alert('관리자 비밀번호를 확인해 주세요.');
+			    	  			return;
+			      			}
+			   			},
+			   		 error:function(request,status,error){
+			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			      			//통신 실패시 발생하는 함수(콜백)
+			   				}
+						});
+				}
+			</script>
+
+        </div>
+        <!---Container Fluid-->
+      </div>
+
+      <!-- Footer -->
+      <!-- Footer -->
+    </div>
+  </div>
+
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <script src="/resources/assets/js/jquery.min.js"></script>
+  <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="/resources/assets/js/jquery.easing.min.js"></script>
+  <script src="/resources/assets/js/ruang-admin.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="/resources/assets/js/jquery.dataTables.min.js"></script>
+  <script src="/resources/assets/js/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
 <script>
 var cancelNo = 0;
 var cancelNum = "";
@@ -164,27 +477,31 @@ $(function() {
 		cancelNum = donationNum;
 		payState = donationState;
 		pointState = donationPointState;
-		$('#'+donationNo).css("background-color", "#FFFFDE");
+		$('#'+donationNo).css("background-color", "#C8E6C9");
 	});
 });
-$("#cancel").click(function(){
+$("#cancel").click(function(e){
 	if (cancelNum == "") {
 		alert("결제를 취소할 항목을 선택해주세요.");
 		return false;
 	} else if(cancelNum != "") {
 		if (confirm("정말 결제를 취소하시겠습니까?") == true) {
-			cancelPay();
+			cancelPay(e);
 		} else {
 			return false;
  		}
 	}
 });
-function cancelPay() {
+function cancelPay(e) {
 	if (payState == '결제취소') {
-		alert("이미 취소 된 결제입니다.")
+		alert("이미 취소 된 결제입니다.");
+		return;
 	} else if (pointState == '적립완료') {
-		alert("포인트 적립이 완료 된 결제는 취소 할 수 없습니다.")
+		alert("포인트 적립이 완료 된 결제는 취소 할 수 없습니다.");
+		return;
 	} else {
+		e.preventDefault();
+		$('#cancelModal').modal("show");
 	    jQuery.ajax({
 	      url : "/payments/cancel/" + cancelNum,
 	      method : "POST",
@@ -203,5 +520,7 @@ function cancelPay() {
 	}
  };
 </script>
+
 </body>
+
 </html>

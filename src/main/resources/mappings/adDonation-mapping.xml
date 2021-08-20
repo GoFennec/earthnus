@@ -21,7 +21,15 @@
 	</select>
 	
 	<select id="getAdDonationList" resultMap="donationResult">
-		SELECT * FROM PAY ORDER BY PAY_NO DESC LIMIT #{contentnum} OFFSET #{pagenum}
+		SELECT * FROM PAY ORDER BY PAY_NO DESC
+	</select>
+	
+	<select id="waiting" resultMap="donationResult">
+		select * from pay where pay_pstate = '적립예정'
+	</select>
+	
+	<select id="cancel" resultMap="donationResult">
+		select * from pay where pay_state = '결제취소'
 	</select>
 	
 	<update id="updatePay" parameterType="pay">
