@@ -2,7 +2,6 @@ package kr.co.earthnus.admin.goods;
 
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,8 @@ public class AdGoodsController {
 	private AdGoodsService adGoodsService;
 	
 	@RequestMapping("/adGoods/list")
-	public String getGoodsList(@RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "10") String contentnum, Model model) {
-		adGoodsService.getAdGoodsList(pagenum, contentnum, model);
+	public String getGoodsList(Model model) {
+		adGoodsService.getAdGoodsList(model);
 		return "goods/adGoodsList";
 	}
 	

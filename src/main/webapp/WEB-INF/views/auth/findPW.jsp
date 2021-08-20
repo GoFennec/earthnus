@@ -173,7 +173,7 @@
             						<div class="form-group" id="login-submit-div">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3" id="button">
-												<button type="button" name="login-submit" id="login-submit" tabindex="4" onclick="findpw()" class="w-100 btn btn-primary btn-lg">인증번호 전송</button>
+												<button type="button" name="login-submit" id="login-submit" tabindex="4" onclick="findpw()" class="w-100 btn btn-primary btn-lg">임시 비밀번호 전송</button>
 											</div>
 										</div>
 									</div>

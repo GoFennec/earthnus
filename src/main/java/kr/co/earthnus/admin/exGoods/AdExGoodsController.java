@@ -47,7 +47,7 @@ public class AdExGoodsController {
 	}
 	
 	@RequestMapping("/adExGoods/detail")
-	public String updateGoods(@RequestParam int exGoodsNum, Model model) {
+	public String updateGoods(@RequestParam("exg_num") int exGoodsNum, Model model) {
 		model.addAttribute("exGoods", adExGoodsService.getExGoods(exGoodsNum));
 		return "goods/adExGoodsDetail";
 	}

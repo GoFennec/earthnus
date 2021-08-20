@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,25 +11,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>EARTH & US ADMIN</title>
+  <title>RuangAdmin - Form Basics</title>
   <link href="/resources/assets/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="/resources/assets/css/ruang-admin.min.css" rel="stylesheet">
-  <link href="/resources/assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
   
-  <style type="text/css">
-  	label{
-  		margin-top:1rem;
-  	}
-  	
-  	th,td{
-  		text-align:center;
-  	}
-  	.btn btn-sm btn-primary{
-  		font-color:#6777EF;
-  	}
-  </style>
 </head>
 
 <body id="page-top">
@@ -40,7 +28,6 @@
           <img src="/resources/assets/img/logo/logo2_footer.png">
         </div>
       </a>
-      <hr class="sidebar-divider my-0">
       <li class="nav-item">
         <a class="nav-link" href="/adIndex">
         <i class="fas fa-fw fa-chart-area"></i>
@@ -137,125 +124,74 @@
           </ul>
         </nav>
         <!-- Topbar -->
+
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">회원 관리</h1>
+            <button type="button" class="btn btn-primary" style="margin:0px;background-color:#fc544b;border-color:#fc544b;" data-toggle="modal" data-target="#deleteModal">회원 삭제</button>
           </div>
 
-          <!-- Row -->
           <div class="row">
-          
-                      <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                        <span>Since last month</span>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-primary"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Earnings (Annual) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Sales</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                        <span>Since last years</span>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- New User Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">New User</div>
-                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
-                        <span>Since last month</span>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-info"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                        <span>Since yesterday</span>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-warning"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- DataTable with Hover -->
-            <div class="col-lg-12">
+            <div class="col-lg-6">
               <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary"></h6>
+                <div class="card-body">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">아이디</label>
+                      <input type="text" class="form-control" id="mem_id" value="${memberListDetail[0].mem_id}" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">이메일</label>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail[0].mem_email}" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">전화번호</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail[0].mem_tel}" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">주소</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail[0].mem_addr}" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">성별</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail[0].mem_gender}" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">생일</label>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail[0].mem_birth}" readonly>
+                    </div>
                 </div>
-                <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                    <thead class="thead-light">
-                      <tr>
-                        <th>아이디</th>
-                        <th>이름</th>
-                        <th>전화번호</th>
-                        <th>이메일</th>
-                        <th>성별</th>
-                        <th>생년월일</th>
-                      </tr>
-                    </thead>
-					<tbody>
-                    	<c:forEach items="${memberList}" var="memberList">
-                      	<tr onclick="location.href='/adMember/detail?mem_id=${memberList.mem_id}'">
-                        	<td>${memberList.mem_id}</td>
-                        	<td>${memberList.mem_name}</td>
-                        	<td>${memberList.mem_tel}</td>
-                        	<td>${memberList.mem_email}</td>
-                        	<td>${memberList.mem_gender}</td>
-                        	<td>${memberList.mem_birth}</td>
-                      	</tr>
-                     	</c:forEach>
-                    </tbody>
-                  </table>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card mb-4">
+                <div class="card-body">
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">이름</label>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail[0].mem_name}" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">가입 날짜</label>
+                      <fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${memberListDetail[0].mem_date}" var="formatdate"/>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${formatdate}" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">기부 횟수</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" value="${payCount}" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">기부 금액</label>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${payTotal}" readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">작성한 응원릴레이</label>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${cheerCount}"readonly>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">포인트</label>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail[0].mem_point}" readonly>
+                    </div>
                 </div>
               </div>
             </div>
@@ -283,16 +219,63 @@
               </div>
             </div>
           </div>
-
+          
+          
+          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">${memberListDetail[0].mem_id} 회원을 삭제합니다.</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>관리자 비밀번호를 입력하세요.</p>
+                  <input type="password" id="deletePW">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="memberDelete()">삭제</button>
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!---Container Fluid-->
       </div>
-
-      <!-- Footer -->
-      <!-- Footer -->
     </div>
   </div>
-
+            <script type="text/javascript">
+				function memberDelete(){
+					var deletePW = $("#deletePW").val();
+					var deleteMember = $("#mem_id").val();
+					if(deletePW == ""){
+						alert("관리자 비밀번호를 입력해주세요.");
+						return;
+					}
+		
+					$.ajax({
+			   			type: "POST", //요청 메소드 방식
+			  			 url:"/adMember/delete",
+			   			data: {"deletePW":deletePW, "deleteMember":deleteMember},
+			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			   			
+			   			success : function(result){
+			      			if(result.error === true){
+			    	  			alert('삭제되었습니다.');
+			      			}else if(result.error === false){
+			    	  			alert('관리자 비밀번호를 확인해 주세요.');
+			    	  			return;
+			      			}
+			   			},
+			   		 error:function(request,status,error){
+			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			      			//통신 실패시 발생하는 함수(콜백)
+			   				}
+						});
+				}
+			</script>
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
@@ -302,17 +285,6 @@
   <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
   <script src="/resources/assets/js/jquery.easing.min.js"></script>
   <script src="/resources/assets/js/ruang-admin.min.js"></script>
-  <!-- Page level plugins -->
-  <script src="/resources/assets/js/jquery.dataTables.min.js"></script>
-  <script src="/resources/assets/js/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script>
-    $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
-  </script>
 
 </body>
 

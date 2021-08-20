@@ -32,6 +32,7 @@
 		<mapper resource="mappings/adCamBoard-mapping.xml"/>
 		<mapper resource="mappings/mail-mapping.xml"/>
 		<mapper resource="mappings/adMember-mapping.xml"/>
+		<mapper resource="mappings/adCheBoard-mapping.xml"/>
 	</mappers>
 
 </configuration>

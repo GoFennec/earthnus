@@ -33,7 +33,7 @@ public interface MemberMybatis {
 	public int find(@Param("findName") String findName, @Param("findEmail") String findEmail);
 	public int findpw(@Param("findName") String findName, @Param("findEmail") String findEmail, @Param("mem_id") String mem_id);
 	public List<MemberBean> findID(@Param("findName") String findName, @Param("mail_receiver") String mail_receiver);
-	public int changePW(@Param("changePW") String changePW, @Param("mem_id") String mem_id, @Param("mail_customer") String mail_customer);
+	public int changePW(@Param("changeNum") String changeNum, @Param("email") String email, @Param("name") String name);
 	public List<ExGoodsBean> myOrder(String mem_id);
 	public List<CheBoardBean> myMessage(String mem_id);
 }

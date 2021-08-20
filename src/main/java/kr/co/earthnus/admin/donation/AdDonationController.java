@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.siot.IamportRestClient.IamportClient;
@@ -35,9 +34,20 @@ public class AdDonationController {
 	}
 	
 	@RequestMapping("/adDonation/list")
-	public String getAdDonationList(@RequestParam(defaultValue = "1") String pagenum,
-			@RequestParam(defaultValue = "3") String contentnum, PayBean Bean, Model model) {
-		adDonationService.getAdDonationList(Bean, pagenum, contentnum, model);
+	public String getAdDonationList(Model model) {
+		adDonationService.getAdDonationList(model);
+		return "donation/adDonationList";
+	}
+	
+	@RequestMapping("/adDonation/waiting")
+	public String waiting(Model model) {
+		adDonationService.waiting(model);
+		return "donation/adDonationList";
+	}
+	
+	@RequestMapping("/adDonation/canceled")
+	public String cancel(Model model) {
+		adDonationService.cancel(model);
 		return "donation/adDonationList";
 	}
 	
@@ -45,6 +55,7 @@ public class AdDonationController {
 	@RequestMapping("/payments/cancel/{imp_uid}")
 	public IamportResponse<Payment> cancelPaymentByImpUid(@RequestBody PayBean pBean, Model model, Locale locale, HttpSession session,
 			@PathVariable(value="imp_uid") String imp_uid) throws IamportResponseException, IOException {
+		
 		adDonationService.updatePay(pBean);
 		return api.cancelPaymentByImpUid(new CancelData(imp_uid, true));
 	}
@@ -54,4 +65,5 @@ public class AdDonationController {
 		adDonationService.updatePoint(pBean);
 		return "redirect:/adDonation/list";
 	}
+	
 }

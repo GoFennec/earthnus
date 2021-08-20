@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +48,7 @@
         <i class="fas fa-fw fa-chart-area"></i>
           <span>관리자 메인</span></a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="/adMember/list">
         <i class="fas fa-user"></i>
           <span>회원 관리</span>
@@ -64,7 +66,7 @@
           <span>기부 관리</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="/adCheBoard/list">
         <i class="fas fa-comments"></i>
           <span>응원릴레이 관리</span>
@@ -140,7 +142,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">회원 관리</h1>
+            <h1 class="h3 mb-0 text-gray-800">응원릴레이 관리</h1>
           </div>
 
           <!-- Row -->
@@ -232,26 +234,30 @@
                   <h6 class="m-0 font-weight-bold text-primary"></h6>
                 </div>
                 <div class="table-responsive p-3">
+                <div class="row">
+                <div class="col-sm-12 col-md-6"></div>
+                <div class="col-sm-12 col-md-6" style="text-align:right;">
+                  <a href="" class="btn btn-sm btn-primary" id="cancel" style="background-color:#fc544b;border-color:#fc544b;">응원 삭제</a>
+                </div>
+                </div>
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>아이디</th>
-                        <th>이름</th>
-                        <th>전화번호</th>
-                        <th>이메일</th>
-                        <th>성별</th>
-                        <th>생년월일</th>
+                        <th>응원 번호</th>
+                        <th>응원 내용</th>
+                        <th>작성자 ID</th>
+                        <th>작성자 이름</th>
+                        <th>작성 날짜</th>
                       </tr>
                     </thead>
 					<tbody>
-                    	<c:forEach items="${memberList}" var="memberList">
-                      	<tr onclick="location.href='/adMember/detail?mem_id=${memberList.mem_id}'">
-                        	<td>${memberList.mem_id}</td>
-                        	<td>${memberList.mem_name}</td>
-                        	<td>${memberList.mem_tel}</td>
-                        	<td>${memberList.mem_email}</td>
-                        	<td>${memberList.mem_gender}</td>
-                        	<td>${memberList.mem_birth}</td>
+                    	<c:forEach items="${CheBoard}" var="list">
+                      	<tr class="cheInfo" id="${list.cheb_num}">
+                      		<td>${list.cheb_num}</td>
+                        	<td>${list.cheb_content}</td>
+                        	<td>${list.cheb_id}</td>
+                        	<td>${list.cheb_name}</td>
+                        	<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${list.cheb_date}" /></td>
                       	</tr>
                      	</c:forEach>
                     </tbody>
@@ -311,6 +317,26 @@
     $(document).ready(function () {
       $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+    
+    var cancelNo = 0;
+    var cancelNum = "";
+    
+    $(function() {
+    	$('.cheInfo').click(function() {
+    		$('.cheInfo').css("background-color", "transparent");
+    		selectTr = $(this);
+    		selectTd = selectTr.children();
+    		donationNo = selectTd.eq(0).text();
+    		donationNum = selectTd.eq(1).text();
+    		donationState = selectTd.eq(9).text();
+    		donationPointState = selectTd.eq(10).text();
+    		cancelNo = donationNo;
+    		cancelNum = donationNum;
+    		payState = donationState;
+    		pointState = donationPointState;
+    		$('#'+donationNo).css("background-color", "#C8E6C9");
+    	});
     });
   </script>
 
