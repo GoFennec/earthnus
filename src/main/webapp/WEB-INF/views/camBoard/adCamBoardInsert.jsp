@@ -55,8 +55,10 @@
 				<td class="td_left"><label for="CAMB_NAME"><b>종료날짜</b></label></td>
 				<td class="td_right"><input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" required></td></tr>
 			<tr><td colspan="4" class="td_center"><label for="CAMB_CONTENT"><b>캠&nbsp;페&nbsp;인&nbsp;&nbsp;내&nbsp;용&nbsp;</b></label></td></tr>
-			<tr><td colspan="4" class="td_center"><textarea name="CAMB_CONTENT" id="CAMB_CONTENT" placeholder="캠페인 설명" required></textarea></td></tr>
-		</table><script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script><br>
+			<tr class="update" style="text-align: center;">
+				<td colspan="4"><textarea id="CAMB_CONTENT" name="CAMB_CONTENT"></textarea></td>
+			</tr>
+		</table><br>
 		<div class="sysBtn">
 			<input type="submit" class="btn-dark" value="캠페인 추가"/>&nbsp;&nbsp;&nbsp;
 			<input type="button" class="btn-dark" value="뒤로가기" onclick="window.history.back();"/>
@@ -66,7 +68,7 @@
 
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
-
+<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
 <script type="text/javascript">
 	window.onload = function(){		
 		$("#preview").html(['<img src="/resources/camBoard/imgDefault.png" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="기본 이미지" onchange="showUpdateButton()" title="기본 이미지"/>'].join(''))

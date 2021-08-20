@@ -40,7 +40,7 @@
 				<tr>
 					<td colspan = "4">
 						<h1 style="text-align: center"><b>캠페인 정보</b>&nbsp;&nbsp;&nbsp;<b>#${camBoard.CAMB_NUM}</b></h1>
-						<input type="hidden" name="CAMB_NUM" value="CAMB_NUM">
+						<input type="hidden" name="CAMB_NUM" value="${camBoard.CAMB_NUM}">
 					</td>
 				</tr>
 				<tr>
@@ -76,11 +76,11 @@
 				<tr>
 					<td><b>시작일</b></td>
 					<td class="update">
-					<input type="date" id="CAMB_STARTDATE">
+					<input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE">
 					</td>
 					<td><b>종료일</b></td>
 					<td class="update">
-						<input type="date" id="CAMB_FINDATE">
+						<input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE">
 					</td>
 				</tr>
 				

@@ -19,7 +19,7 @@
 	}
 </script>
 <style>
-	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
+	table {max-width: 90%; margin:auto; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
 	.list {background-color: #FFFFDE}
@@ -29,6 +29,99 @@
 	input {border: none;}
 	textarea {border: none; width: 100%; height: auto; overflow:visible;}
 	#subject:hover {color: #2962FF;}
+	.main{margin-right: 30px;}
+
+
+	i {
+	    opacity: 0;
+	    font-size: 28px;
+	    color: #1F1E1E;
+	    will-change: transform;
+	    -webkit-transform: scale(.1);
+	            transform: scale(.1);
+	    -webkit-transition: all .3s ease;
+	    transition: all .3s ease;
+	}
+
+	.btn_wrap {
+	    position: relative;
+	    display: -webkit-box;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	            justify-content: center;
+	    -webkit-box-align: center;
+	        -ms-flex-align: center;
+	            align-items: center;
+	    overflow: hidden;
+	    cursor: pointer;
+	    width: 240px;
+	    height: 72px;
+	    background-color: #EEEEED;
+	    border-radius: 80px;
+	    padding: 0 18px;
+	    will-change: transform;
+	    -webkit-transition: all .2s ease-in-out;
+	    transition: all .2s ease-in-out;
+	}
+
+	.btn_wrap:hover {
+	    /* transition-delay: .4s; */
+	    -webkit-transform: scale(1.1);
+	            transform: scale(1.1)
+	}
+	
+	span {
+	    position: absolute;
+	    z-index: 99;
+	    width: 240px;
+	    height: 72px;
+	    border-radius: 80px;
+	    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	    font-size: 20px;
+	    text-align: center;
+	    line-height: 70px;
+	    letter-spacing: 2px;
+	    color: #EEEEED;
+	    background-color: #1F1E1E;
+	    padding: 0 18px;
+	    -webkit-transition: all 1.2s ease;
+	    transition: all 1.2s ease;
+	}
+	
+	.container {
+	    display: -webkit-box;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -ms-flex-pack: distribute;
+	        justify-content: space-around;
+	    -webkit-box-align: center;
+	        -ms-flex-align: center;
+	            align-items: center;
+	    width: 240px;
+	    height: 64px;
+	    border-radius: 80px;
+	}
+	
+	.container i:nth-of-type(1) {-webkit-transition-delay: 1.1s; transition-delay: 1.1s;}
+	
+	.container i:nth-of-type(2) {-webkit-transition-delay: .9s; transition-delay: .9s;}
+	
+	.container i:nth-of-type(3) {-webkit-transition-delay: .7s; transition-delay: .7s;}
+	
+	.container i:nth-of-type(4) {-webkit-transition-delay: .4s; transition-delay: .4s;}
+	
+	.btn_wrap:hover span {
+	    -webkit-transition-delay: .25s;
+	            transition-delay: .25s;
+	    -webkit-transform: translateX(-280px);
+	            transform: translateX(-280px)
+	}
+	
+	.btn_wrap:hover i {opacity: 1; -webkit-transform: scale(1); transform: scale(1);}
+	
+	.dr {position: absolute; bottom: 16px; right: 16px; width:100px;}
 	
 	.link-icon { position: relative; display: inline-block; width: auto;    font-size: 14px; font-weight: 500; color: #333; margin-right: 10px; padding-top: 50px; }
 	.link-icon.twitter { background-image: url(./images/icon-twitter.png); background-repeat: no-repeat; }
@@ -45,10 +138,9 @@
 
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"/>
-	
-	<div class="col-sm-12 col-lg-4">
-		<table class="goodsTable" id="detail" style="border-collapse: separate;">
+<jsp:include page="/WEB-INF/views/header.jsp"/>	
+	<div class="main col-sm-12 col-lg-12">
+		<table class="mainlist goodsTable" id="detail" style="border-collapse: separate;">
 			<tr>
 				<td colspan = "4">
 					<a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT">${camBoard.CAMB_SUBJECT}</a>
@@ -75,28 +167,15 @@
 			</tr>
 			<tr>
 				<td colspan="4" class="sysBtn" style="text-align: center;">
-					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>					
-					
-					<div class="nav-bar">
-						<div class="more">
-							<div class="social-links">
-								<a href=""><i class="fab fa-instagram"></i></a>
-								<a href=""><i class="fab fa-facebook"></i></a>
-								<a href=""><i class="fab fa-kakaotalk"></i></a>
-							</div>
-							<i class="fas fa-plus"></i>
-						</div>
-					</div>
-					
-					<div class="share-button">
-						<span><i class="fas fa-share-alt"></i>공유하기</span>
-						<a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();">트위터</a>
-						<a id="btnFacebook" class="link-icon facebook" href="javascript:shareFacebook();">페이스북</a>    
-						<a id="btnKakao" class="link-icon kakao" href="javascript:sendLink()">카카오톡</a>    
-						<a id="kakao-link-btn" href="javascript:sendLink()">
-							<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-						</a>
-					</div>
+					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>	<br><br><br><br>
+					    <div class="btn_wrap">
+					        <span>Share</span>
+					        <div class="container">
+					            <a href="/"><img src="/resources/camBoard/facebook.png" alt="페이스북 공유" title="" width="40px" onclick="shareFacebook()"></a>&nbsp;&nbsp;&nbsp;
+								<a href="/"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" title="" width="40px" onclick="shareTwitter()"></a>&nbsp;&nbsp;&nbsp;
+								<a href="/"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" title="" width="40px" onclick="shareKakaotalk()"></a>
+					        </div>
+					    </div>
 				</td>
 			</tr>
 		</table>
@@ -108,15 +187,15 @@
 		var preUrl = document.referrer;
 		var pagingUrl = "/getList" + preUrl.substring(42) + "&pagenum=";
 		var page = ${page};
-		var url1 = "'/camBoard/detail?CAMB_NUM=";
-		var url2 = "'";
-		var listHead = '<table>';
+		var url1 = "'/camBoard/detail?CAMB_NUM=";		var url2 = "'";
+		
+		var listHead = '<table classs="sublist">';
 		listHead += '<tr>';
-		listHead += '<th width: "10%" scope="col">캠페인 번호</th>';
-		listHead += '<th width: "10%" scope="col">캠페인 사진</th>'
-		listHead += '<th width: "20%" scope="col">캠페인 제목</th>';
-		listHead += '<th width: "10%" scope="col">캠페인 주제</th>';
-		listHead += '<th width: "50%" scope="col">캠페인 내용</th>';
+		listHead += '<th scope="col">캠페인 번호</th>';
+		listHead += '<th scope="col">캠페인 사진</th>'
+		listHead += '<th scope="col">캠페인 제목</th>';
+		listHead += '<th scope="col">캠페인 주제</th>';
+		listHead += '<th scope="col">캠페인 내용</th>';
 		listHead += '</tr>';
 	
 	console.log("search : " + preUrl);
@@ -133,16 +212,16 @@
 					
 					$.each(CamBoardList, function(index, item){
 						listHead += '<tr clas="list" onclick="location.href=' + url1 + item.CAMB_NUM + '&p=' + page + url2 + '">';
-						listHead += '<td width: "10%">' + item.CAMB_NUM + '</td>';
-						listHead += '<td width: "10%"><img src="'+ item.CAMB_FILE +'" id="IMG" width="100" alt="캠페인" title="' + item.CAMB_SUBJECT + '"/></td>';
-						listHead += '<td width: "20%">' + item.CAMB_NAME + '</td>';
-						listHead += '<td width: "10%">' + item.CAMB_SUBJECT + '</td>';
-						listHead += '<td width: "50%">' + item.CAMB_CONTENT + '...</td>';
+						listHead += '<td>' + item.CAMB_NUM + '</td>';
+						listHead += '<td><img src="'+ item.CAMB_FILE +'" id="IMG" width="100" alt="캠페인" title="' + item.CAMB_SUBJECT + '"/></td>';
+						listHead += '<td>' + item.CAMB_NAME + '</td>';
+						listHead += '<td>' + item.CAMB_SUBJECT + '</td>';
+						listHead += '<td>' + item.CAMB_CONTENT + '...</td>';
 						listHead += '</tr>';
 					})
 						listHead += '<tr colspan = "5"><td>';
 					$.each(CamBoardList, function(index, item){
-						listHead += '1&nbsp;&nbsp;2&nbsp;&nbsp;';
+						listHead += '1';
 					})
 						listHead += '</td></tr>';
 					
@@ -174,11 +253,11 @@
 							listHead += '<td>' + item.CAMB_CONTENT + '</td>';
 							listHead += '</tr>';
 						})
+					listHead += '<tr colspan = "5"><td>';
 						$.each(CamBoardList, function(index, item){
-						listHead += '<tr colspan = "5">';
-						listHead += '<td><h2>1&nbsp;&nbsp;2</h2></td>';
-						listHead += '</tr>';
+							listHead += '1';
 					})
+						listHead += '</td></tr>';
 						$('#camBoardList').html(listHead);
 					},
 					"error" : function(CamBoardList){
@@ -208,10 +287,9 @@
 						$.each(CamBoardList, function(index, item){
 							
 						})
+						listHead += '<tr colspan = "5"><td>';
 						$.each(CamBoardList, function(index, item){
-						listHead += '<tr colspan = "5">';
-						listHead += '<td><h2>1&nbsp;&nbsp;2</h2></td>';
-						listHead += '</tr>';
+							listHead += '1';
 					})
 						$('#camBoardList').html(listHead);
 					},
@@ -272,43 +350,44 @@
 	    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
 	}
 	
-    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('3b1b5dd541e88935221a7fb05cd01dad');
-    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
-    Kakao.Link.createDefaultButton({
-      container: '#btnKakao',
-      objectType: 'feed',
-      content: {
-        title: title,
-        description: '지구의 웃음을 찾아서',
-        imageUrl: img,
-        link: {
-          mobileWebUrl: url,
-          webUrl: url
-        }
-      },
-      social: {
-        likeCount: 286,
-        commentCount: 45,
-        sharedCount: 845
-      },
-      buttons: [
-        {
-          title: '웹으로 보기',
-          link: {
-            mobileWebUrl: url,
-            webUrl: url
-          }
-        },
-        {
-          title: '앱으로 보기',
-          link: {
-            mobileWebUrl: url,
-            webUrl: url
-          }
-        }
-      ]
-    });
+	function shareKakaotalk() {
+	    Kakao.init('3b1b5dd541e88935221a7fb05cd01dad')
+	    Kakao.Link.sendDefault({
+	      objectType: 'feed',
+	      content: {
+	    	  title: title,
+		        description: '지구의 웃음을 찾아서',
+		        imageUrl: img,
+		        link: {
+			          mobileWebUrl: url,
+			          webUrl: url
+			        }
+	      },
+	      social: {
+	        likeCount: 286,
+	        commentCount: 45,
+	        sharedCount: 845,
+	      },
+	      buttons: [
+		        {
+		          title: '웹으로 보기',
+		          link: {
+		            mobileWebUrl: url,
+		            webUrl: url
+		          }
+		        },
+		        {
+		          title: '앱으로 보기',
+		          link: {
+		            mobileWebUrl: url,
+		            webUrl: url
+		          }
+		        }
+		      ]
+	    })
+	  }
+	;
+    
   //]]>
 </script>
 </body>
