@@ -639,7 +639,6 @@ color: #a2a6af
         					<li><a href="/member/myOrder"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
-        					<li><a href="#"><span class="fa fa-clock-oz"></span> Reminders</a></li>
         				</ul>
         			</nav>
                 </div>
@@ -698,10 +697,6 @@ color: #a2a6af
 					<li class="list-group-item px-4 pb-4">
 					 <input type="hidden" id=myDonation_f name="pay_price" value=${myDonation_f }>
 						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_f}</span></p>
-						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-							</div>
-						</div>
 					</li>
 				</ul>
 			</div>
@@ -727,10 +722,6 @@ color: #a2a6af
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
 									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_o}</span></p>
-						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-							</div>
-						</div>
 					</li>
 				</ul>
 			</div>
@@ -756,10 +747,6 @@ color: #a2a6af
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
 						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_i}</span></p>
-						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-							</div>
-						</div>
 					</li>
 				</ul>
 			</div>
@@ -783,10 +770,6 @@ color: #a2a6af
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
 									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_p}</span></p>
-						<div class="progress progress-sm">
-							<div class="progress-bar" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
-							</div>
-						</div>
 					</li>
 				</ul>
 			</div>

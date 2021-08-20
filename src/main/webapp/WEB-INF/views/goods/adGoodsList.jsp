@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<% String pagenum = request.getParameter("pagenum");%>
 <!DOCTYPE html>
 <html><head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,7 +23,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<div class="container"><br>
+<br><br><br><br>
+<div class="container">
 
 	<table class="goodsTitle">
 		<thead>
@@ -46,8 +48,8 @@
 				<th scope="col">상품사진</th>
 				<th scope="col">상품이름</th>
 				<th scope="col">상품포인트</th>
-				<th scope="col">상품정보</th>
-				<th scope="col" width="30%">상품설명</th>
+				<th scope="col" width="20%">상품정보</th>
+				<th scope="col" width="20%">상품설명</th>
 			</tr>	
 			<c:forEach items="${goodsList}" var="goods">
 					<tr class="goodsInfo" id="${goods.goods_num}">
@@ -118,7 +120,7 @@ function checkUpdate() {
 		alert("수정할 항목을 선택해주세요.");
 		return false;
 	}
-  }
+}
 </script>
 </body>
 </html>

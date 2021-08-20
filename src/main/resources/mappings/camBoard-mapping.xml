@@ -27,11 +27,33 @@
 			</choose>
 			AND 
 			<choose>
-				<when test='arr.equals("entire")'><![CDATA[(CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ]]></when>
-				<when test='arr.equals("doing")'><![CDATA[CAMB_DATE>SYSDATE()) ]]></when>
-				<when test='arr.equals("end")'><![CDATA[CAMB_DATE<SYSDATE()) ]]></when>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE())) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE())) ]]></when>
+				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
 			</choose>
 			ORDER BY ${orderBy} ${order} LIMIT #{contentnum} OFFSET #{pagenum}
+	</select>
+	
+		<select id="getAdBoardList" resultMap="camBoardResult">
+			SELECT * 
+			FROM CAMBOARD 
+			WHERE (
+			<choose>
+				<when test='search_type.equals("CAMB_ENTIRE")'>
+				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+				</when>
+				<when test='search_type.equals("CAMB_NAME")'>CAMB_NAME LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_SUBJECT")'>CAMB_SUBJECT LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_CONTENT")'>CAMB_CONTENT LIKE #{search} </when>
+			</choose>
+			AND 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE())) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE())) ]]></when>
+				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
+			</choose>
 	</select>
 	
 	<select id="getBoardListCount" resultType="int">
@@ -48,9 +70,10 @@
 			</choose>
 			AND 
 			<choose>
-				<when test='arr.equals("entire")'><![CDATA[(CAMB_DATE>SYSDATE() OR CAMB_DATE<SYSDATE())) ]]></when>
-				<when test='arr.equals("doing")'><![CDATA[CAMB_DATE>SYSDATE()) ]]></when>
-				<when test='arr.equals("end")'><![CDATA[CAMB_DATE<SYSDATE()) ]]></when>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE())) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE())) ]]></when>
+				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
 			</choose>
 	</select>
 	
@@ -62,13 +85,14 @@
 	
 	<update id="camBoardUpdate">
 		<![CDATA[
-			UPDATE CAMBOARD SET CAMB_NAME = #{CAMB_NAME}, CAMB_SUBJECT = #{CAMB_SUBJECT}, CAMB_CONTENT = #{CAMB_CONTENT}, CAMB_FILE = #{CAMB_FILE}
+			UPDATE CAMBOARD SET CAMB_NAME = #{CAMB_NAME}, CAMB_SUBJECT = #{CAMB_SUBJECT}, CAMB_CONTENT = #{CAMB_CONTENT}, CAMB_FILE = #{CAMB_FILE} WHERE CAMB_NUM = #{CAMB_NUM}
 		]]>
 	</update>
 	
 	<insert id="camBoardInsert">
 		<![CDATA[
-			INSERT INTO CAMBOARD (CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_FILE) VALUES(#{CAMB_NAME}, #{CAMB_SUBJECT}, #{CAMB_CONTENT}, #{CAMB_FILE})
+			INSERT INTO CAMBOARD (CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_FILE, CAMB_STARTDATE, CAMB_FINDATE) 
+			VALUES(#{CAMB_NAME}, #{CAMB_SUBJECT}, #{CAMB_CONTENT}, #{CAMB_FILE}, #{CAMB_STARTDATE}, #{CAMB_FINDATE})
 		]]>
 	</insert>
 	

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -640,7 +642,6 @@ color: #a2a6af
         					<li><a href="/member/myOrder"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li class="active"><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
-        					<li><a href="#"><span class="fa fa-clock-oz"></span> Reminders</a></li>
         				</ul>
         			</nav>
                 </div>
@@ -664,7 +665,7 @@ color: #a2a6af
                     <td class="text-truncate">${message.cheb_num}</td>
                     <td class="text-truncate">${message.cheb_dnum}</td>
                     <td class="text-truncate">${message.cheb_content}</td>
-                    <td class="text-truncate">${message.cheb_date}</td>
+                    <td class="text-truncate"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${message.cheb_date}"/></td>
          		 </tr>
          		 </c:forEach>
                 </tbody>

@@ -14,51 +14,41 @@
 	td {width: 350px; padding: 10px; vertical-align: center; text-align: center; border-bottom: 1px solid #ccc;}
 	td .goodsImg {text-align: center; margin: auto; padding: 1px;}
 	.paging {text-align: center;}
-	.exGoodsInfo {cursor: pointer;}
 	.btn-dark {float: right; margin-left: 10px;}
 </style>
 <title>EARTH & US</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<div class="container"><br>
+<br><br><br><br>
+<div class="container">
 
 	<table class="exGoodsTitle">
 		<thead>
-			<tr><th scope="col">지구마켓 교환내역관리</th>
-			<td><form action="/adExGoods/update" method="POST" onsubmit="return checkUpdate();">
-			<input type="hidden" id="exGoodsNumU" name="exGoodsNumU"/>
-			<input type="hidden" id="exGoodsPoint" name="exGoodsPoint"/>
-			<input type="hidden" id="exGoodsDate" name="exGoodsDate"/>
-			<input class="btn-dark" type="submit" value="교환내역변경"/>
-			</form>
-			<form action="/adExGoods/delete" method="POST" onsubmit="return checkDelete();">
-			<input type="hidden" id="exGoodsNumD" name="exGoodsNumD"/>
-			<input class="btn-dark" type="submit" value="교환내역삭제"/>
-			</form></td></tr>
+			<tr><th scope="col">지구마켓 주문취소내역</th></tr>
 		</thead>
 	</table><br>
 	<div class="row">
 		<div class="col-sm-12">
 			<table class="exGoodsTable">
 			<tr>
-				<th scope="col">교환번호</th>
-				<th scope="col">주문자아이디</th>
-				<th scope="col">주문자이름</th>
-				<th scope="col" width="30%">주문자주소</th>
+				<th scope="col">결제번호</th>
+				<th scope="col">아이디</th>
+				<th scope="col">주문상태</th>
 				<th scope="col">상품정보</th>
-				<th scope="col">상품포인트</th>
-				<th scope="col" width="13%">교환날짜</th>
+				<th scope="col" width="13%">결제날짜</th>
+				<th scope="col" width="13%">취소날짜</th>
+				<th scope="col">취소사유</th>
 			</tr>	
 			<c:forEach items="${exGoodsList}" var="exGoods">
 					<tr class="exGoodsInfo" id="${exGoods.exg_num}">
 						<td>${exGoods.exg_num}</td>
 						<td>${exGoods.exg_id}</td>
-						<td>${exGoods.exg_name}</td>
-						<td><c:forTokens  var="addr" items="${exGoods.exg_addr}" delims="&">${addr} </c:forTokens></td>
+						<td>${exGoods.exg_state}</td>
 						<td>${exGoods.exg_gnum}(${exGoods.exg_gname})</td>
-						<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
-						<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_date}"/></td>
+						<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td>
+						<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_cdate}"/></td>
+						<td>${exGoods.exg_cancle}</td>
 					</tr>
 			</c:forEach>
 			</table>
@@ -87,39 +77,5 @@
 
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
-<script>
-$(function() {
-	$('.exGoodsInfo').click(function() {
-		$('.exGoodsInfo').css("background-color", "transparent");
-		selectTr = $(this);
-		selectTd = selectTr.children();
-		exGoodsNum = selectTd.eq(0).text();
-		exGoodsPoint = selectTd.eq(5).text();
-		exGoodsDate = selectTd.eq(6).text();
-		$('#exGoodsNumU').val(exGoodsNum);
-		$('#exGoodsNumD').val(exGoodsNum);
-		$('#exGoodsPoint').val(exGoodsPoint);
-		$('#exGoodsDate').val(exGoodsDate);
-		$('#'+exGoodsNum).css("background-color", "#FFFFDE");
-	});
-});
-function checkDelete() {
-	if ($('#exGoodsNumD').val() == "") {
-		alert("삭제할 항목을 선택해주세요.");
-		return false;
-	} else if($('#exGoodsNumD').val() != "") {
-		if (confirm("정말 삭제하시겠습니까?") == true) {
-		} else {
-			return false;
- 		}
-	}
-}
-function checkUpdate() {
-	if ($('#exGoodsNumU').val() == "") {
-		alert("수정할 항목을 선택해주세요.");
-		return false;
-	}
-}
-</script>
 </body>
 </html>

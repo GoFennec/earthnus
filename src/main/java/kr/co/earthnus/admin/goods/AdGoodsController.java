@@ -1,5 +1,10 @@
 package kr.co.earthnus.admin.goods;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,21 +33,21 @@ public class AdGoodsController {
 	}
 	
 	@RequestMapping("/adGoods/insertOk")
-	public String insertGoodsOk(GoodsBean gBean, Model model) {
-		adGoodsService.isertGoodsOk(gBean);
-		return "redirect:/adGoods/list";
+	public String insertGoodsOk(@RequestParam String total, @RequestParam HashMap<String, String> paramMap, 
+			GoodsBean gBean, Model model, HttpServletResponse res) {
+		return adGoodsService.isertGoodsOk(total, paramMap, gBean, res);
 	}
 	
 	@RequestMapping("/adGoods/update")
 	public String updateGoods(@RequestParam String goodsNumU, Model model) {
-		model.addAttribute("goods", adGoodsService.updateGoods(goodsNumU));
+		adGoodsService.updateGoods(goodsNumU, model);
 		return "goods/adGoodsUpdate";
 	}
 	
 	@RequestMapping("/adGoods/updateOk")
-	public String updateGoodsOk(@ModelAttribute GoodsBean gBean, Model model) {
-		adGoodsService.updateGoodsOk(gBean);
-		return "redirect:/adGoods/list";
+	public String updateGoodsOk(@RequestParam String total, @RequestParam HashMap<String, String> paramMap, 
+			@ModelAttribute GoodsBean gBean, Model model, HttpServletResponse res) {
+		return adGoodsService.updateGoodsOk(total, paramMap, gBean, res);
 	}
 	
 	@RequestMapping("/adGoods/delete")

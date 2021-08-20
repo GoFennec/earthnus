@@ -1,8 +1,16 @@
 package kr.co.earthnus.admin.goods;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tika.Tika;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +50,6 @@ public class AdGoodsService {
         	pBean.setPagenum(pBean.getPagenum()*10);
         	goodsList = goodsDAO.getAdGoodsList(pBean);
         }
-        
 		model.addAttribute("goodsList", goodsList);
         model.addAttribute("page", pBean);
 	}
@@ -56,41 +63,127 @@ public class AdGoodsService {
 		return gNum;
 	}
 	
-	public void isertGoodsOk(GoodsBean gBean) {
+	public String isertGoodsOk(String total,  HashMap<String, String> paramMap, GoodsBean gBean, HttpServletResponse res) {
 		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
 		MultipartFile uploadFile = gBean.getGoods_uploadFile();
+		UUID uuid = UUID.randomUUID();
+		String fileName = uploadFile.getOriginalFilename();
+		String savedName = uuid.toString() + "_" + fileName;
+		String returnStr = "";
+		String path = "C:\\upload";
+		File Folder = new File(path);
+		String goodsInfo = "";
+		StringTokenizer st = new StringTokenizer(total, ",");
+		
+		while (st.hasMoreTokens()) {
+			goodsInfo += paramMap.get("goods_info_"+st.nextToken()) + ",";
+		}
+		goodsInfo = goodsInfo.substring(0, goodsInfo.length()-1);
+		gBean.setGoods_info(goodsInfo);
+		
+		if (!Folder.exists()) {
+			try{		
+				Folder.mkdir();
+			} catch(Exception e){
+				e.getStackTrace();
+			}
+		}
 		if (!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
 			try {
-				uploadFile.transferTo(new File("C:/upload/" + fileName));
+				InputStream inputStream = uploadFile.getInputStream();
+				Tika tika = new Tika();
+				String mimeType = tika.detect(inputStream);
+				
+				if (mimeType.startsWith("image")) {
+					uploadFile.transferTo(new File("C:/upload/" + savedName));
+					gBean.setGoods_img("/upload/" + savedName);
+					goodsDAO.isertGoodsOk(gBean);
+					returnStr = "redirect:/adGoods/list";
+				} else {
+					res.setContentType("text/html;charset=UTF-8");
+					PrintWriter out = res.getWriter();
+					out.println("<script>");
+					out.println("alert('정상적인 이미지 파일이 아닙니다. 이미지파일 확인 후 추가해주세요.');");
+					out.println("history.back();");
+					out.println("</script>");
+					out.flush();
+					returnStr = "forward:/adGoods/insert";
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			gBean.setGoods_img("/upload/" + fileName);
 		} else {
 			gBean.setGoods_img("/resources/goods/imgDefault.png");
+			goodsDAO.isertGoodsOk(gBean);
+			returnStr = "redirect:/adGoods/list";
 		}
-		goodsDAO.isertGoodsOk(gBean);
+		return returnStr;
 	}
 	
-	public GoodsBean updateGoods(String goodsNumU) {
+	public void updateGoods(String goodsNumU, Model model) {
 		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
-		return goodsDAO.getGoodsU(goodsNumU);
+		GoodsBean goodsBean = goodsDAO.getGoodsU(goodsNumU);
+		String fullGoodsInfo = goodsBean.getGoods_info();
+		String[] goodsInfo = fullGoodsInfo.split(",");
+		
+		model.addAttribute("goods", goodsBean);
+		model.addAttribute("goodsInfo", goodsInfo);
 	}
 	
-	public void updateGoodsOk(GoodsBean gBean) {
+	public String updateGoodsOk(String total,  HashMap<String, String> paramMap, GoodsBean gBean, HttpServletResponse res) {
 		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
 		MultipartFile uploadFile = gBean.getGoods_uploadFile();
+		UUID uuid = UUID.randomUUID();
+		String fileName = uploadFile.getOriginalFilename();
+		String savedName = uuid.toString() + "_" + fileName;
+		String returnStr = "";
+		String path = "C:\\upload";
+		File Folder = new File(path);
+		String goodsInfo = "";
+		StringTokenizer st = new StringTokenizer(total, ",");
+		
+		while (st.hasMoreTokens()) {
+			goodsInfo += paramMap.get("goods_info_"+st.nextToken()) + ",";
+		}
+		goodsInfo = goodsInfo.substring(0, goodsInfo.length()-1);
+		gBean.setGoods_info(goodsInfo);
+		
+		if (!Folder.exists()) {
+			try{		
+				Folder.mkdir();
+			} catch(Exception e){
+				e.getStackTrace();
+			}
+		}
 		if (!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
 			try {
-				uploadFile.transferTo(new File("C:/upload/" + fileName));
+				InputStream inputStream = uploadFile.getInputStream();
+				Tika tika = new Tika();
+				String mimeType = tika.detect(inputStream);
+				
+				if (mimeType.startsWith("image")) {
+					uploadFile.transferTo(new File("C:/upload/" + savedName));
+					gBean.setGoods_img("/upload/" + savedName);
+					goodsDAO.updateGoodsOk(gBean);
+					returnStr = "redirect:/adGoods/list";
+				} else {
+					res.setContentType("text/html;charset=UTF-8");
+					PrintWriter out = res.getWriter();
+					out.println("<script>");
+					out.println("alert('정상적인 이미지 파일이 아닙니다. 이미지파일 확인 후 추가해주세요.');");
+					out.println("history.back();");
+					out.println("</script>");
+					out.flush();
+					returnStr = "forward:/adGoods/update";
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			gBean.setGoods_img("/upload/" + fileName);
+		} else {
+			goodsDAO.updateGoodsOk(gBean);
+			returnStr = "redirect:/adGoods/list";
 		}
-		goodsDAO.updateGoodsOk(gBean);
+		return returnStr;
 	}
 	
 	public void deleteGoods(String goodsNumD) {

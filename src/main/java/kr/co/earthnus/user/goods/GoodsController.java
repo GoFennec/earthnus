@@ -18,14 +18,15 @@ public class GoodsController {
 	
 	@RequestMapping("/goods/list")
 	public String getGoodsList(@RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, GoodsBean bean, Model model) {
-		goodsService.getGoodsList(bean, pagenum, contentnum, model);
+			@RequestParam(defaultValue = "8") String contentnum, 
+			@RequestParam(defaultValue = "") String goodsKinds, GoodsBean gBean, Model model) {
+		model.addAttribute("goodsKinds", goodsKinds);
+		goodsService.getGoodsList(gBean, pagenum, contentnum, goodsKinds, model);
 		return "goods/goodsList";
 	}
 	@RequestMapping("/goods/exGoods")
-	public String getGoodsAndMemOne(@ModelAttribute GoodsBean bean, 
-			HttpSession session, Model model) {
-		model.addAttribute("goods", goodsService.getGoods(bean, model));
+	public String getGoodsAndMemOne(@ModelAttribute GoodsBean gBean, HttpSession session, Model model) {
+		model.addAttribute("goods", goodsService.getGoods(gBean, model));
 		AuthBean auth = (AuthBean)session.getAttribute("auth");
 		if (auth != null) {
 			model.addAttribute("member", goodsService.getMember(auth));
@@ -33,11 +34,10 @@ public class GoodsController {
 		return "goods/exGoods";
 	}
 	@RequestMapping("/goods/exGoodsOk")
-	public String getExGoodsOk(@ModelAttribute ExGoodsBean exBean, 
-			@ModelAttribute GoodsBean bean, Model model) {
-		int exNum = goodsService.insertExGoods(exBean);
-		model.addAttribute("member", goodsService.updateMemberPoint(exBean));
-		model.addAttribute("goods", bean);
+	public String getExGoodsOk(@ModelAttribute ExGoodsBean eBean, @ModelAttribute GoodsBean gBean, Model model) {
+		int exNum = goodsService.insertExGoods(eBean);
+		model.addAttribute("member", goodsService.updateMemberPoint(eBean));
+		model.addAttribute("goods", gBean);
 		model.addAttribute("exGoods", goodsService.getExGoods(exNum));
 		return "goods/exGoodsOk";
 	}

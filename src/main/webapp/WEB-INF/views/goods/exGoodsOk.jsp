@@ -19,14 +19,15 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<div class="container"><br>
+<br><br><br><br>
+<div class="container">
 
 	<table class="exGoods">
 		<thead>
 			<tr><th scope="col" colspan="3">교환 상세 정보</th></tr>
 		</thead>
 		<tr><td colspan="2"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td></tr>
-		<tr><th scope="col">교환 날짜</th><td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_date}"/></td></tr>
+		<tr><th scope="col">교환 날짜</th><td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td></tr>
 		<tr><th scope="col">선택 상품</th><td>${goods.goods_name}</td></tr>
 	</table><br/>
 	<table class="exGoods">
@@ -42,12 +43,13 @@
 		</thead>
 		<tr><th scope="col">수령인</th><td>${exGoods.exg_name}</td></tr>
 		<tr><th scope="col">연락처</th><td>${member.mem_tel}</td></tr>
-		<tr><th scope="col">배송지 정보</th><td id="addr"></td></tr>
+		<tr><th scope="col">배송지</th><td id="addr"></td></tr>
+		<tr><th scope="col">요청사항</th><td>${exGoods.exg_message}</td></tr>
 	</table><br/>
 	
 	<div class="exButton">
 	<button type="button" onclick="location.href='/'">메인으로</button>
-	<button type="button" onclick="location.href='/member/myPage'">교환정보확인</button></div><br/>
+	<button type="button" onclick="location.href='/member/myOrder'">교환정보확인</button></div><br/>
 	
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>

@@ -2,6 +2,7 @@ package kr.co.earthnus.user.member;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,9 @@ public class MemberService {
 	public int insertMember_kakao(MemberBean memberBean) throws NoSuchAlgorithmException {
 		System.out.println("kakao 서비스");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-       
+		SHA256 sha = new SHA256();
+		String smem_pw = sha.encrypt(memberBean.getMem_pw());
+		memberBean.setMem_pw(smem_pw);
 		int n = dao.insertMember_kakao(memberBean);
 		return n;
 	}
@@ -130,6 +133,14 @@ public class MemberService {
 		dao.updateMyInfo(memberBean);
 		System.out.println("update service");
 	}
+	//비번수정
+	public void updatePw(Map<String, Object> map) {
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		dao.updatePw(map);
+		System.out.println("update pw service");
+	}
+	
+	
 	
 	//마이오더
 	public List<ExGoodsBean> myOrder(String mem_id) {

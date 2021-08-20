@@ -1,27 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+
 <style>
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
-	tr {max-width: 700px}
+	tr {max-width: 900px}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton{text-align: center;}
-	input {border: none;}
-	textarea {border: none; min-width: 300px}
+	input {border: none; background: transparent;}
+	textarea {border: none; width: 100%; background: transparent;}
+	select {border: none; background: transparent;}
 	.sysBtn {text-align: center;}
 	#max{max-width: 600px}
+	.update{background-color: #FFFAFA;}
+	input[type=date]::-webkit-calendar-picker-indicator {margin-left: 100px; background: none;}
+	
 </style>
-
-<meta charset="EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Detail</title>
+<link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
+<link rel="icon" href="/resources/assets/img/favicon.ico">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -30,19 +38,20 @@
 		<form action="/adCamBoard/updateOk" method="POST" enctype="multipart/form-data">
 			<table class="goodsTable">
 				<tr>
-					<td colspan = "2">
-						<h1 style="text-align: center"><b>Ä·ÆäÀÎ Á¤º¸</b></h1>
+					<td colspan = "4">
+						<h1 style="text-align: center"><b>ìº í˜ì¸ ì •ë³´</b>&nbsp;&nbsp;&nbsp;<b>#${camBoard.CAMB_NUM}</b></h1>
+						<input type="hidden" name="CAMB_NUM" value="CAMB_NUM">
 					</td>
 				</tr>
 				<tr>
-					<td colspan = "2">
+					<td colspan = "4">
 						<div id="max" class="file-wrapper flie-wrapper-area">
 								<input type="file" name="CAMB_UPLOADFILE" id="file" class="upload-box upload-plus" accept="image/*" style="display: none;">
 									<div id="preview"></div>
 									<input type="hidden" name="goods_img" value="${goods.goods_img}">
 								<div style="text-align: center;" class="file-edit-icon">
-									<a href="#" class="preview-edit">¼öÁ¤</a>
-									<a href="#" class="preview-de">»èÁ¦</a>
+									<a href="#" class="preview-edit">ìˆ˜ì •</a>
+									<a href="#" class="preview-de">ì‚­ì œ</a>
 								</div>
 						</div>
 											
@@ -51,43 +60,64 @@
 				</tr>
 				
 				<tr>
-					<td>Ä·ÆäÀÎ ÀÌ¸§&nbsp;&nbsp;&nbsp;</td><td><input type="text" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
-				</tr>	
-				<tr>
-					<td>Ä·ÆäÀÎ ÁÖÁ¦</td><!-- <input type="text" name="CAMB_SUBJECT" value="${camBoard.CAMB_SUBJECT}"> --> 
-					<td>
+					<td><b>ì œëª©</b></td>
+					<td class="update"><input type="text" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
+					<td><b>ì£¼ì œ</b></td><!-- <input type="text" name="CAMB_SUBJECT" value="${camBoard.CAMB_SUBJECT}"> --> 
+					<td class="update">
 						<select id="CAMB_SUBJECT" name="CAMB_SUBJECT" onchange="showUpdateButton()" required>
-						<option value="ÇØ¾ç">ÇØ¾ç</option>
-						<option value="ÇÃ¶ó½ºÆ½">ÇÃ¶ó½ºÆ½</option>
-						<option value="»ê¸²">»ê¸²</option>
-						<option value="±ØÁö¹æ">±ØÁö¹æ</option>
+						<option value="í•´ì–‘">í•´ì–‘</option>
+						<option value="í”Œë¼ìŠ¤í‹±">í”Œë¼ìŠ¤í‹±</option>
+						<option value="ì‚°ë¦¼">ì‚°ë¦¼</option>
+						<option value="ê·¹ì§€ë°©">ê·¹ì§€ë°©</option>
 					</select>
 					</td>
 				</tr>
+				
 				<tr>
-					<td>Ä·ÆäÀÎ ³»¿ë&nbsp;&nbsp;&nbsp;</td><td><textarea name="CAMB_CONTENT" onchange="showUpdateButton()" required>${camBoard.CAMB_CONTENT}</textarea></td>
+					<td><b>ì‹œì‘ì¼</b></td>
+					<td class="update">
+					<input type="date" id="CAMB_STARTDATE">
+					</td>
+					<td><b>ì¢…ë£Œì¼</b></td>
+					<td class="update">
+						<input type="date" id="CAMB_FINDATE">
+					</td>
+				</tr>
+				
+				<tr style="text-align: center;">
+					<td colspan="4"><b>ìº í˜ì¸ ë‚´ìš©</b></td>
+				</tr>
+				<tr class="update" style="text-align: center;">
+					<td colspan="4"><textarea id="CAMB_CONTENT" name="CAMB_CONTENT" onchange="showUpdateButton()" required>${camBoard.CAMB_CONTENT}</textarea></td>
 				</tr>
 			</table>
+			<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
+			
 			<div class="sysBtn">
-				<input type="submit" class="btn-dark" value="¼öÁ¤">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" class="btn-dark" value="ìˆ˜ì •">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
-				<input type="button" class="btn-dark" value="»èÁ¦" 
+				<input type="button" class="btn-dark" value="ì‚­ì œ" 
 				onclick="location.href='/adCamBoard/delete?CAMB_NUM=${camBoard.CAMB_NUM}'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
-				<input type="button" class="btn-dark" value="¸ñ·Ï" 
+				<input type="button" class="btn-dark" value="ëª©ë¡" 
 				onclick="location.href='/adCamBoard/list'"/>
 			</div>
 		</form>
-			
 	</div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 
 <script type="text/javascript">
 	window.onload = function(){
-
-		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="Ä·ÆäÀÎ" onchange="showUpdateButton()" title="${camBoard.CAMB_SUBJECT}"/>'].join(''))
 		
-		$('#CAMB_SUBJECT').val('ÇÃ¶ó½ºÆ½').prop("selected", true);
+		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="ìº í˜ì¸" onchange="showUpdateButton()" title="${camBoard.CAMB_SUBJECT}"/>'].join(''))
+		
+		var startdate = <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_STARTDATE}" />;
+		var findate = <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_FINDATE}" />;
+		
+		document.getElementById("CAMB_STARTDATE").value=startdate;
+		document.getElementById("CAMB_FINDATE").value=findate;
+		
+		$('#CAMB_SUBJECT').val('í”Œë¼ìŠ¤í‹±').prop("selected", true);
 	}
 	
 	function showUpdateButton(){
@@ -100,14 +130,14 @@
 	        var reader = new FileReader();
 	        this.enabled = false
 	        reader.onload = (function (e) {
-	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="Ä·ÆäÀÎ" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
+	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="ìº í˜ì¸" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
 	        });
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
 	$('#file').change(handleFileSelect);
 	$('.file-edit-icon').on('click', '.preview-de', function () {
-	    //$("#preview").html(['<img src="/resorces/camBoard/imgDefault.png" id="IMG" width="600" alt="Ä·ÆäÀÎ" title="', escape(e.name), '"/>'].join(''))
+	    //$("#preview").html(['<img src="/resorces/camBoard/imgDefault.png" id="IMG" width="600" alt="ìº í˜ì¸" title="', escape(e.name), '"/>'].join(''))
 	    $("#file").val("");
 	});
 	$('.preview-edit').click( function() {

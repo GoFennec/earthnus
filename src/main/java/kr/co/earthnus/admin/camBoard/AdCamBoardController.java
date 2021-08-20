@@ -1,5 +1,7 @@
 package kr.co.earthnus.admin.camBoard;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,7 @@ public class AdCamBoardController {
 	
 	@RequestMapping(value = "/adCamBoard/list/search")
 	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam("search") String search, @RequestParam("search_type") String search_type,
+			@RequestParam(defaultValue = "6") String contentnum, @RequestParam(value="search", required=false) String search, @RequestParam("search_type") String search_type,
 			@RequestParam(defaultValue = "desc") String order, camBoardBean cBean, Model model) {
 		
 		if(search != null) {
@@ -73,7 +75,8 @@ public class AdCamBoardController {
 	
 	@RequestMapping(value="/adCamBoard/insertOk")
 	public String insertCamBoardOk(@RequestParam("CAMB_NAME") String CAMB_NAME , @RequestParam("CAMB_SUBJECT") String CAMB_SUBJECT , 
-			@RequestParam("CAMB_CONTENT") String CAMB_CONTENT , @RequestParam("CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE , Model model) {
+			@RequestParam("CAMB_CONTENT") String CAMB_CONTENT , @RequestParam("CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE , 
+			@RequestParam("CAMB_STARTDATE") Date CAMB_STARTDATE, @RequestParam("CAMB_FINDATE") Date CAMB_FINDATE, Model model) {
 		
 		System.out.println("insertCamBoardOk");
 		
@@ -92,11 +95,12 @@ public class AdCamBoardController {
 	
 	@RequestMapping(value="/adCamBoard/updateOk", method=RequestMethod.POST)
 	public String updateCamBoardOk(@RequestParam(value="CAMB_NAME") String CAMB_NAME, @RequestParam(value="CAMB_SUBJECT") String CAMB_SUBJECT, 
-			@RequestParam(value="CAMB_CONTENT") String CAMB_CONTENT, @RequestParam(value="CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE, Model model) {
+			@RequestParam(value="CAMB_CONTENT") String CAMB_CONTENT, @RequestParam(value="CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE, 
+			@RequestParam(value="CAMB_NUM") int CAMB_NUM, Model model) {
 		
-		System.out.println("update Ё╩©К =======> юл╦╖ : " + CAMB_NAME + ", ажа╕ : " + CAMB_SUBJECT + 
-				", Ё╩©К : " + CAMB_CONTENT);
-		adCamBoardService.updateCamBoard(CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
+		System.out.println("updateOk Х─▄Б▒╕К⌠┐Ф©║Ц┘╩Л°╜ =======> О©╫Л═ёО╖▐О©╫ : " + CAMB_NAME + ", Д╨▄Л┤╠Л═ё : " + CAMB_SUBJECT + 
+				", О©╫Й╤║О©╫Л┼° : " + CAMB_CONTENT + ", О©╫К≥├О©╫Л■╙ : " + CAMB_UPLOADFILE);
+		adCamBoardService.updateCamBoard(CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
 		System.out.println("updateCamBoardOk");
 		
 		return "redirect:/adCamBoard/list";

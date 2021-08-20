@@ -47,7 +47,7 @@ td {
 
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
-<br><br>
+<br><br><br><br>
 
 <div class="container">
 	
@@ -66,7 +66,7 @@ td {
 		</thead>
 		<tbody>
 		<tr><th scope="row">후원자 명</th><td>${pay.pay_name}</td></tr>
-		<tr><th scope="row">구매 상품</th><td>${pay.pay_dnum}</td></tr>		
+		<tr><th scope="row">구매 상품</th><td>${pay.pay_dname}</td></tr>		
 		<c:set var="total" value="${pay.pay_price}"/>
 		<tr><th scope="row">후원 금액</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${total}"/>원</td></tr>
 		<tr><th scope="row">후원 일자</th><td>${pay.pay_pdate}</td></tr>		
@@ -83,7 +83,6 @@ td {
 
 </div>
 
-<br><br>
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="true"/>
 </body>
 </html>

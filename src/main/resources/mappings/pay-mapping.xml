@@ -10,13 +10,9 @@
 	</select>
 	
 	<insert id="insertPay" parameterType="pay">
-		INSERT INTO PAY (pay_num, pay_id, pay_name, pay_dnum, pay_price, pay_point, pay_pdate)
-		VALUES (#{pay_num},#{pay_id},#{pay_name},#{pay_dnum},#{pay_price},#{pay_point},#{pay_pdate})
+		INSERT INTO PAY (pay_num, pay_id, pay_name, pay_dname, pay_price, pay_point, pay_pdate)
+		VALUES (#{pay_num},#{pay_id},#{pay_name},#{pay_dname},#{pay_price},#{pay_point},#{pay_pdate})
 	</insert>
-	
-	<update id="updatePoint" parameterType="pay">
-		UPDATE MEMBER SET MEM_POINT = #{pay_point} WHERE MEM_ID = #{pay_id} 
-	</update>
 	
 	<select id="getPayInfo" parameterType="String" resultType="pay">
 		SELECT * FROM PAY WHERE PAY_NUM = #{value}

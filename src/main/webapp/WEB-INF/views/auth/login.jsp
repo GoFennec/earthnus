@@ -14,6 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<!-- naver -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
 body {
 	color: #999;
@@ -102,11 +106,10 @@ body {
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
+<br><br><br><br>
 <div class="login-form">    
     <form method="post" class="form" action="/auth/login">
 		<!-- <div class="avatar"><i class="material-icons">&#xE7FF;</i></div> -->
-		 <a href="/"><img  src="/resources/assets/img/logo/loder.png" 
-   alt="EARTH&US로고" title="loader.png" width="80" height="65" ></a>
     	<h4 class="modal-title">로그인</h4>
         <div class="form-group">
             <input type="text" class="form-control" id="auth_id" name="auth_id" placeholder="아이디" required="required">
@@ -114,9 +117,6 @@ body {
         <div class="form-group">
             <input type="password" class="form-control" id="auth_pw" name="auth_pw" placeholder="비밀번호" required="required">
        
-      <!--   <div class="form-group small clearfix">
-            <label class="form-check-label"><input type="checkbox"> 아이디 기억하기 </label>
-             </div> -->
              </div> 
              <div>
             <c:if test="${userId eq null}">
@@ -128,7 +128,18 @@ body {
         <h1>로그인 성공입니다</h1>
     </c:if>
         </div><br>
-        
+         <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+  <div id="naver_id_login"></div>
+  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+  <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("vDkmCgxDt2L_BtosPOoP", "http://localhost:8090/callback");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 3,40);
+  	naver_id_login.setDomain("http://localhost:8090/auth/login");
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+  </script>
          
       
        <input type="submit" class="btn btn-primary btn-block btn-lg" value="로그인"> 
@@ -137,7 +148,6 @@ body {
          <a href="/auth/find" class="forgot-link" title="아이디/비밀번호찾기">아이디/비밀번호찾기&nbsp;&nbsp;</a> 
 				
     </form>			
-   <!--  <div class="text-center small">Don't have an account? <a href="#">Sign up</a></div> -->
 </div>
 </body>
 </html>

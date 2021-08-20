@@ -1,7 +1,7 @@
 package kr.co.earthnus.admin.auth;
 
-import kr.co.earthnus.user.member.MemberBean;
+import kr.co.earthnus.admin.member.AdMemberBean;
 
 public interface AdAuthMybatis {
-	public MemberBean selectByAdId(String auth_id);
+	public AdMemberBean selectByAdId(String auth_id);
 }

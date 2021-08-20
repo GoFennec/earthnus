@@ -26,6 +26,8 @@
 </style>
 
 <title>EARTH & US</title>
+<link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
+<link rel="icon" href="/resources/assets/img/favicon.ico">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -42,29 +44,34 @@
 	<div>
 		<ul style="text-align: left;">
 			<c:if test="${empty page.search}">
-			<li><a href="/adCamBoard/list?arr=entire" id="entire">캠페인 전체</a></li>&nbsp;&nbsp;&nbsp;
-			<li><a href="/adCamBoard/list?arr=doing" id="doing">캠페인 중</a></li>&nbsp;&nbsp;&nbsp;
-			<li><a href="/adCamBoard/list?arr=end" id="end">캠페인 종료</a></li><br>
+			<li><a href="/adCamBoard/list?arr=entire" id="entire">전체 캠페인</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list?arr=doing" id="doing">진행 캠페인</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list?arr=exp" id="exp">예정 캠페인</a></li><br>
+			<li><a href="/adCamBoard/list?arr=end" id="end">종료 캠페인</a></li><br>
 			<li><a href="/adCamBoard/list?arr=${page.arr}&order=desc" id="desc">최신순</a></li>&nbsp;&nbsp;&nbsp;
 			<li><a href="/adCamBoard/list?arr=${page.arr}&order=asc" id="asc">오래된순</a></li>
 			</c:if>
 			<c:if test="${!empty page.search}">
-			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=entire" id="entire">캠페인 전체</a></li>&nbsp;&nbsp;&nbsp;
-			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=doing" id="doing">캠페인 중</a></li>&nbsp;&nbsp;&nbsp;
-			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=end" id="end">캠페인 종료</a></li><br>
+			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=entire" id="entire">전체 캠페인</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=doing" id="doing">진행 캠페인</a></li>&nbsp;&nbsp;&nbsp;
+			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=exp" id="exp">예정 캠페인</a></li><br>
+			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=end" id="end">종료 캠페인</a></li><br>
 			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=${page.arr}&order=desc" id="desc">최신순</a></li>&nbsp;&nbsp;&nbsp;
 			<li><a href="/adCamBoard/list/search?search=${page.search}&search_type=${page.search_type}&arr=${page.arr}&order=asc" id="asc">오래된순</a></li>
 			</c:if>
 		</ul>
 	
-		<form  style="text-align: right;">
-			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_ENTIRE" checked>전체</label>&nbsp;&nbsp;&nbsp;
-			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_NAME">제목</label>&nbsp;&nbsp;&nbsp;
-			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_SUBJECT">주제</label>&nbsp;&nbsp;&nbsp;
-			<label><input type="checkbox" id="search_type" name="search_type" value="CAMB_CONTENT">내용</label>&nbsp;&nbsp;&nbsp;
-			<input type="text" id="search" placeholder="캠페인 검색" value="${page.search}">
+		<div style="text-align: right;">		
+			<select id="search_type">
+				<option value="CAMB_ENTIRE">전체검색</option>
+				<option value="CAMB_NAME">제목검색</option>
+				<option value="CAMB_SUBJECT">주제검색</option>
+				<option value="CAMB_CONTENT">내용검색</option>
+			</select>
+			<input type="text" id="search" placeholder="캠페인 검색"  value="${page.search}">
 			<input type="button" value="검색" onclick="searchUrl()">
-		</form>
+		</div>
+
 	</div>
 		
 	<div class="row">
@@ -73,22 +80,21 @@
 			<table class="goodsTable">
 			<tr>
 				<th scope="col">캠페인번호</th>
-				<th scope="col">캠페인사진</th>
 				<th scope="col">캠페인이름</th>
 				<th scope="col">캠페인주제</th>
-				<th scope="col">캠페인내용</th>
+				<th scope="col">캠페인 시작일</th>
+				<th scope="col">캠페인 종료일</th>
+				<th scope="col">캠페인 등록일</th>
 			</tr>
 			
 				<c:forEach items="${CamBoardList}" var="list">
 					<tr onclick="location.href='/adCamBoard/detail?CAMB_NUM=${list.CAMB_NUM}'">
 						<td>${list.CAMB_NUM}</td>
-						<td class="camBoardImg"><img src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_NAME} 이미지"/></td>
 						<td>${list.CAMB_NAME}</td>
 						<td>${list.CAMB_SUBJECT}</td>
-						<td><c:set var = "CAMB_CONTENT" value="${list.CAMB_CONTENT}"/>
-						${fn.substring(CAMB_CONTENT,0,20)}
-						${liat.CAMB_CONTENT}
-						</td>
+						<td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${list.CAMB_STARTDATE}" /></td>
+						<td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${list.CAMB_FINDATE}" /></td>
+						<td><fmt:formatDate pattern="yyyy년 MM월 dd일" value="${list.CAMB_DATE}" /></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -131,9 +137,9 @@
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 <script type="text/javascript">
 	window.onload = function(){
-		const search_type = $("input:checkbox[name='search_type']:checked").val();
+		var search_type = "${page.search_type}";
 		
-		$("input:checkbox[id='id값']").prop("checked", true);
+		$('select[id="search_type"]').find('option:contains(search_type)').attr("selected",true);
 		
 		var obj = document.getElementsByName("search_type");
 	    for(var i=0; i<obj.length; i++){
@@ -144,28 +150,18 @@
 	        }
 	    }
 	}
-	$(function(){
-		
-	});
 	
-	function doOpenCheck(chk){
-	    var obj = document.getElementsByName("search_type");
-	    for(var i=0; i<obj.length; i++){
-	        if(obj[i] != chk){
-	            obj[i].checked = false;
-	        }
-	    }
-	}	
    function changepage(){
        location.href="file:///Users/gimjeongbin/Desktop/finalproject/camBoardDetail.html";
    }
    
    function searchUrl(){
-	   
+
 	   var search = document.getElementById("search").value;
-	   var search_type = $("input:checkbox[name='search_type']:checked").val();
+	   var search_type = document.getElementById("search_type");
+	   search_type = search_type.options[search_type.selectedIndex].value;
 	   
-	   location.href="/adCamBoard/list/search?search="+ search + "&search_type=" + search_type;
+	   location.href="/adCamBoard/list/search?search=" + search + "&search_type=" + search_type;
    }
 	
    $.urlParam = function(name){
