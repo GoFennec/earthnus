@@ -17,7 +17,7 @@
 		<result property="mem_date" column="MEM_DATE"/>
 		<result property="mem_point" column="MEM_POINT"/>
 	</resultMap>
-	<resultMap id="exGoodsResult" type="exGoods">
+<resultMap id="exGoodsResult" type="exGoods">
 		<id property="exg_num" column="EXG_NUM"/>
 		<result property="exg_id" column="EXG_ID"/>
 		<result property="exg_name" column="EXG_NAME"/>
@@ -30,7 +30,10 @@
 		<result property="exg_gname" column="EXG_GNAME"/>
 		<result property="exg_point" column="EXG_POINT"/>
 		<result property="exg_img" column="EXG_IMG"/>
-		<result property="exg_date" column="EXG_DATE"/>
+		<result property="exg_pdate" column="EXG_PDATE"/>
+		<result property="exg_ddate" column="EXG_DDATE"/>
+		<result property="exg_cdate" column="EXG_CDATE"/>
+		<result property="exg_cancle" column="EXG_CANCLE"/>
 	</resultMap>
 	
 	<resultMap id="CheBoardResult" type="cheBoard">
@@ -89,8 +92,7 @@
 	<update id="updateMyInfo" parameterType="member">
 		UPDATE MEMBER SET
 		MEM_ADDR=#{mem_addr}, MEM_TEL=#{mem_tel},
-		MEM_BIRTH=#{mem_birth},
-		MEM_EMAIL=#{mem_email}
+		MEM_BIRTH=#{mem_birth}
 		WHERE MEM_ID=#{mem_id}
 	</update>
 	
@@ -99,9 +101,15 @@
 		MEM_PW=#{mem_pw}
 		WHERE MEM_ID=#{mem_id}
 	</update>
+	
+	<update id="updateEmail" parameterType="hashmap">
+		UPDATE MEMBER SET
+		MEM_EMAIL=#{mem_email}
+		WHERE MEM_ID=#{mem_id}
+	</update>
 
 <select id="myOrder"  parameterType="String" resultType="exGoods">
-	SELECT EXG_IMG, EXG_GNAME, EXG_POINT, EXG_DATE FROM EXGOODS WHERE EXG_ID=#{mem_id}
+	SELECT * FROM EXGOODS WHERE EXG_ID=#{mem_id}
 	</select>
 	
 <select id="myMessage"  parameterType="String" resultType="cheBoard">

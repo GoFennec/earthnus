@@ -140,6 +140,11 @@ public class MemberService {
 		System.out.println("update pw service");
 	}
 	
+	//이메일 변경
+	public void updateEmail(Map<String, Object> map) {
+	MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+	dao.updateEmail(map);
+}
 	
 	
 	//마이오더

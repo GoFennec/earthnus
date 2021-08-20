@@ -125,7 +125,7 @@ public class MemberController {
 				System.out.println("update controller");
 				return "redirect:/member/myInfo";
 			}
-			
+			//비밀번호 변경
 			@RequestMapping(value="/updatePw")
 			@ResponseBody
 			public Map<String, Object> updatePw( @RequestParam("mem_pw")String mem_pw, Model model, HttpSession session, AuthBean aBean) throws NoSuchAlgorithmException {
@@ -149,6 +149,33 @@ public class MemberController {
 				
 				return map;
 			}
+			
+			
+			
+			//이메일 변경
+			@RequestMapping(value="/updateEmail")
+			@ResponseBody
+			public Map<String, Object> updateEmail( @RequestParam("mem_email")String mem_email, Model model, HttpSession session, AuthBean aBean) throws NoSuchAlgorithmException {
+				aBean = (AuthBean) session.getAttribute("auth");
+				Map<String, Object> map = new HashMap<String, Object>();
+				if(aBean == null) {
+					map.put("error", false);
+					map.put("url", "/auth/login");
+					return map;
+				}
+				
+
+				map.put("error", true);
+				
+				map.put("mem_email", mem_email);
+				String mem_id = aBean.getAuth_id();
+				map.put("mem_id", mem_id);
+				memberService.updateEmail(map);
+				return map;
+			}
+			
+			
+			
 			
 			
 			

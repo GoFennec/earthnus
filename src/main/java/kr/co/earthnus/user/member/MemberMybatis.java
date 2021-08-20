@@ -23,6 +23,7 @@ public interface MemberMybatis {
 	public MemberBean myInfo(String mem_id);
 	public void updateMyInfo(MemberBean memberBean);
 	public void updatePw(Map<String, Object> map);
+	public void updateEmail(Map<String, Object> map);
 	public void deleteMember(String mem_id);
 	public int idCheck(String mem_id);
 	public String pwCheck(String mem_id);

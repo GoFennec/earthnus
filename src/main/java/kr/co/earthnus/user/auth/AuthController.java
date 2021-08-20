@@ -29,6 +29,7 @@ public class AuthController {
 
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
+	
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
@@ -40,13 +41,16 @@ public class AuthController {
 		return "index";
 	}
 
-//	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
-//	public String login(Model model, HttpSession session) {
-//		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-//		System.out.println("네이버:" + naverAuthUrl);
-//		model.addAttribute("url",naverAuthUrl);
-//		return "auth/login";
-//	}
+	/*
+	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
+	public String login(Model model, HttpSession session) {
+		System.out.println("여기는 login session : " + session);
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+	System.out.println("여기는 login url : " + naverAuthUrl);
+		model.addAttribute("url",naverAuthUrl);
+		return "auth/login";
+	}
+	*/
 	
 	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
 	   public String login() {
@@ -55,12 +59,16 @@ public class AuthController {
 	
 
 	//네이버 로그인
-		@RequestMapping(value = "/callback")
+		@RequestMapping(value = "/auth/callback", method = RequestMethod.GET)
 		public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException{
-			System.out.println("여기는 callback");
+			System.out.println("여기는 callback session : " + session);
+			System.out.println("여기는 callback state : " + state);
+			System.out.println("여기는 callback code : " + code);
+			
 			OAuth2AccessToken oauthToken;
+			
 	        oauthToken = naverLoginBO.getAccessToken(session, code, state);
-
+	        System.out.println("oauthToken쪽 : " + oauthToken);
 	        //1. 로그인 사용자 정보를 읽어온다.
 			apiResult = naverLoginBO.getUserProfile(oauthToken);  //String형식의 json데이터
 			
@@ -83,9 +91,9 @@ public class AuthController {
 			String name = (String) response_obj.get("name");
 			String email = (String) response_obj.get("email");
 
-			System.out.println(id);
-			System.out.println(name);
-			System.out.println(email);
+			System.out.println("네이버 ID : " + id);
+			System.out.println("이름 : " + name);
+			System.out.println("eMail : " + email);
 			
 			
 			
@@ -94,7 +102,7 @@ public class AuthController {
 			
 			model.addAttribute("result", apiResult);
 		     
-			return "/";
+			return "index";
 		}
 		
 		//로그아웃
