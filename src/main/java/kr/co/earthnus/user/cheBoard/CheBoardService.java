@@ -14,7 +14,7 @@ public class CheBoardService{
 
 	@Autowired
 	private SqlSessionTemplate mybatis;
-
+	
 	
 	
 
@@ -31,12 +31,16 @@ public class CheBoardService{
 	}
 
 
-	public List<CheBoardBean> selectAllComment(CheBoardBean bean, Model model) {
+	public List<CheBoardBean> selectAllComment(String startnum,String comment_step) {
 		CheBoardMybatis ChreBoardDAO = mybatis.getMapper(CheBoardMybatis.class);
+		PageBean bean = new PageBean();
 		List<CheBoardBean> CheBoardList = null;
-		CheBoardList = ChreBoardDAO.CheBoardList();
+		int start_num = Integer.parseInt(startnum);
+		int step_num = Integer.parseInt(comment_step);
 		
-		 model.addAttribute("list",CheBoardList);
+		bean.setComment_step(step_num);
+		bean.setStartNum(start_num);
+		CheBoardList = ChreBoardDAO.CheBoardList(bean);
 		  return CheBoardList;
 	}
 }

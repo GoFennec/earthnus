@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public interface CheBoardMybatis {
-	public List<CheBoardBean> CheBoardList();
+	public List<CheBoardBean> CheBoardList(PageBean bean);
 	public void replyDelete(int reply_id);
 	public void replyInsert(CheBoardBean boardBean);
 	

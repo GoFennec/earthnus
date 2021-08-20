@@ -3,6 +3,11 @@
   
 <mapper namespace="kr.co.earthnus.user.cheBoard.CheBoardMybatis">
       
+      
+      
+      
+      
+      
       <resultMap id="CheBoardResult" type="cheBoard">
 		<id property="cheb_num" column="CHEB_NUM"/>
 		<result property="cheb_id" column="CHEB_ID"/>
@@ -10,6 +15,7 @@
 		<result property="cheb_dnum" column="CHEB_DNUM"/>
 		<result property="cheb_content" column="CHEB_CONTENT"/>
 		<result property="cheb_date" column="CHEB_DATE"/>
+	
 	</resultMap>
       
       
@@ -36,7 +42,7 @@
       
      <select id="CheBoardList" resultMap="CheBoardResult">
         <![CDATA[
-            SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC 
+            SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC LIMIT #{comment_step} OFFSET #{startnum}
         ]]>
      </select>
       

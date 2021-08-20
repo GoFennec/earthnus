@@ -28,6 +28,7 @@
     	<mapper resource="mappings/adGoods-mapping.xml"/>
     	<mapper resource="mappings/adExGoods-mapping.xml"/>
 		<mapper resource="mappings/cheBoard-mapping.xml"/>
+		<mapper resource="mappings/adCheBoard-mapping.xml"/>
 		<mapper resource="mappings/camBoard-mapping.xml"/>
 		<mapper resource="mappings/adCamBoard-mapping.xml"/>
 		<mapper resource="mappings/mail-mapping.xml"/>
