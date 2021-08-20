@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+
 <!doctype html>
 <html>
   <head>
@@ -15,9 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-<!-- naver -->
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <style>
 body {
 	color: #999;
@@ -128,18 +130,18 @@ body {
         <h1>로그인 성공입니다</h1>
     </c:if>
         </div><br>
-         <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-  <div id="naver_id_login"></div>
-  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
-  <script type="text/javascript">
-  	var naver_id_login = new naver_id_login("vDkmCgxDt2L_BtosPOoP", "http://localhost:8090/callback");
-  	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 3,40);
-  	naver_id_login.setDomain("http://localhost:8090/auth/login");
-  	naver_id_login.setState(state);
-  	naver_id_login.setPopup();
-  	naver_id_login.init_naver_id_login();
-  </script>
+         <%
+    String clientId = "vDkmCgxDt2L_BtosPOoP";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8090/auth/callback", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
          
       
        <input type="submit" class="btn btn-primary btn-block btn-lg" value="로그인"> 
