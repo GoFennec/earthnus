@@ -1,6 +1,7 @@
 package kr.co.earthnus.admin.camBoard;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,14 +74,14 @@ public class AdCamBoardController {
 		return "camBoard/adCamBoardInsert";
 	}
 	
-	@RequestMapping(value="/adCamBoard/insertOk")
+	@RequestMapping(value="/adCamBoard/insertOk", method=RequestMethod.POST)
 	public String insertCamBoardOk(@RequestParam("CAMB_NAME") String CAMB_NAME , @RequestParam("CAMB_SUBJECT") String CAMB_SUBJECT , 
 			@RequestParam("CAMB_CONTENT") String CAMB_CONTENT , @RequestParam("CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE , 
 			@RequestParam("CAMB_STARTDATE") Date CAMB_STARTDATE, @RequestParam("CAMB_FINDATE") Date CAMB_FINDATE, Model model) {
 		
 		System.out.println("insertCamBoardOk");
 		
-		adCamBoardService.insertCamBoard(CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
+		adCamBoardService.insertCamBoard(CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE, CAMB_STARTDATE, CAMB_FINDATE);
 		return "redirect:/adCamBoard/list";
 	}
 	
@@ -96,11 +97,12 @@ public class AdCamBoardController {
 	@RequestMapping(value="/adCamBoard/updateOk", method=RequestMethod.POST)
 	public String updateCamBoardOk(@RequestParam(value="CAMB_NAME") String CAMB_NAME, @RequestParam(value="CAMB_SUBJECT") String CAMB_SUBJECT, 
 			@RequestParam(value="CAMB_CONTENT") String CAMB_CONTENT, @RequestParam(value="CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE, 
-			@RequestParam(value="CAMB_NUM") int CAMB_NUM, Model model) {
+			@RequestParam(value="CAMB_NUM") String CAMB_NUM, @RequestParam("CAMB_STARTDATE") Date CAMB_STARTDATE, 
+			@RequestParam("CAMB_FINDATE") Date CAMB_FINDATE, Model model) {
 		
 		System.out.println("updateOk 而⑦듃濡ㅻ윭 =======> �젣紐� : " + CAMB_NAME + ", 二쇱젣 : " + CAMB_SUBJECT + 
-				", �궡�슜 : " + CAMB_CONTENT + ", �뙆�씪 : " + CAMB_UPLOADFILE);
-		adCamBoardService.updateCamBoard(CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE);
+				", �궡�슜 : " + CAMB_CONTENT + ", �뙆�씪 : " + CAMB_UPLOADFILE + ", 번호 : " + CAMB_NUM);
+		adCamBoardService.updateCamBoard(CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE, CAMB_STARTDATE, CAMB_FINDATE);
 		System.out.println("updateCamBoardOk");
 		
 		return "redirect:/adCamBoard/list";
