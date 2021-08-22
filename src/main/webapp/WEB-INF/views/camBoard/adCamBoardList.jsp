@@ -234,6 +234,7 @@
                   <a href="/adCamBoard/list" class="btn btn-sm btn-primary">전체 보기</a>
                   <a href="/adCamBoard/ing" class="btn btn-sm btn-primary">진행 중인 캠페인</a>
                   <a href="/adCamBoard/finish" class="btn btn-sm btn-primary">종료한 캠페인</a>
+                  <a href="/adCamBoard/insert" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>&nbsp;&nbsp;캠페인 추가</a>
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>

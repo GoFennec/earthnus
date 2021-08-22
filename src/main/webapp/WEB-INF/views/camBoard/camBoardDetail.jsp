@@ -12,30 +12,27 @@
 <html>
 <head>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script>
-	function resize(obj) {
-	  obj.style.height = "1px";
-	  obj.style.height = (12+obj.scrollHeight)+"px";
-	}
-</script>
+<script type="text/javascript" src="http://jsgetip.appspot.com"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
 	table {max-width: 90%; margin:auto; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
-	.list {background-color: #FFFFDE}
+	.list:hover {background-color: #FFFFDE; cursor: pointer;}
 	td {width: 350px; padding: 10px; vertical-align: center;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton{text-align: center;}
 	input {border: none;}
 	textarea {border: none; width: 100%; height: auto; overflow:visible;}
-	#subject:hover {color: #2962FF;}
+	#subject:hover {color: #2962FF; }
 	.main{margin-right: 30px;}
-
-
+	.paging {text-align: center;}
+	.facebook:hover, .twitter:hover, .naverblog:hover, .kakaotalk:hover, .clipboard:hover {transform: scale( 1.2 )}
 	i {
+		border-radius: 80px;
 	    opacity: 0;
 	    font-size: 28px;
-	    color: #1F1E1E;
+	    color: #31b528;
 	    will-change: transform;
 	    -webkit-transform: scale(.1);
 	            transform: scale(.1);
@@ -56,9 +53,9 @@
 	            align-items: center;
 	    overflow: hidden;
 	    cursor: pointer;
-	    width: 240px;
-	    height: 72px;
-	    background-color: #EEEEED;
+	    width: 180px;
+	    height: 60px;
+	    background-color: #EEEEED;   // 내부색
 	    border-radius: 80px;
 	    padding: 0 18px;
 	    will-change: transform;
@@ -68,23 +65,23 @@
 
 	.btn_wrap:hover {
 	    /* transition-delay: .4s; */
-	    -webkit-transform: scale(1.1);
-	            transform: scale(1.1)
+	    -webkit-transform: scale(1);
+	            transform: scale(1)
 	}
 	
-	span {
+	.shareButton {
 	    position: absolute;
 	    z-index: 99;
-	    width: 240px;
-	    height: 72px;
+	    width: 180px;
+	    height: 60px;
 	    border-radius: 80px;
 	    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	    font-size: 20px;
 	    text-align: center;
 	    line-height: 70px;
 	    letter-spacing: 2px;
-	    color: #EEEEED;
-	    background-color: #1F1E1E;
+	    color: #EEEEED;				
+	    background-color: #35c718;	
 	    padding: 0 18px;
 	    -webkit-transition: all 1.2s ease;
 	    transition: all 1.2s ease;
@@ -99,8 +96,8 @@
 	    -webkit-box-align: center;
 	        -ms-flex-align: center;
 	            align-items: center;
-	    width: 240px;
-	    height: 64px;
+	    width: 180x;
+	    height: 60px;
 	    border-radius: 80px;
 	}
 	
@@ -112,12 +109,12 @@
 	
 	.container i:nth-of-type(4) {-webkit-transition-delay: .4s; transition-delay: .4s;}
 	
-	.btn_wrap:hover span {
+	.btn_wrap:hover .shareButton {
 	    -webkit-transition-delay: .25s;
 	            transition-delay: .25s;
 	    -webkit-transform: translateX(-280px);
 	            transform: translateX(-280px)
-	}
+	}	
 	
 	.btn_wrap:hover i {opacity: 1; -webkit-transform: scale(1); transform: scale(1);}
 	
@@ -128,13 +125,13 @@
 	.link-icon.facebook { background-image: url(./images/icon-facebook.png); background-repeat: no-repeat; } 
 	.link-icon.kakao { background-image: url(./images/icon-kakao.png); background-repeat: no-repeat; }
 </style>
+<title>${camBoard.CAMB_NAME}에 대하여..</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${camBoard.CAMB_NAME}에 대하여..</title>
 <link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
 <link rel="icon" href="/resources/assets/img/favicon.ico">
-<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
 
 </head>
 <body>
@@ -157,30 +154,48 @@
 			
 			<tr>
 				<td colspan = "4">
-					<img src="${camBoard.CAMB_FILE}" id="IMG" width="800" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/>
-					<input type="file" id="CAMB_FILE" name="CAMB_FILE" style="display:none;">
+					<img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/>
 				</td>
 			</tr>
 			
-			<tr style="text-align: center; border-bottom: 1px solid #ccc;">
-				<td colspan="4"><textarea name="CAMB_CONTENT" readonly>${camBoard.CAMB_CONTENT}</textarea></td>
+			<tr style="text-align: left;">
+				<td colspan="4" style=" border-bottom: 1px solid #ccc;">${camBoard.CAMB_CONTENT}</td>
 			</tr>
 			<tr>
 				<td colspan="4" class="sysBtn" style="text-align: center;">
-					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>	<br><br><br><br>
-					    <div class="btn_wrap">
-					        <span>Share</span>
-					        <div class="container">
-					            <a href="/"><img src="/resources/camBoard/facebook.png" alt="페이스북 공유" title="" width="40px" onclick="shareFacebook()"></a>&nbsp;&nbsp;&nbsp;
-								<a href="/"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" title="" width="40px" onclick="shareTwitter()"></a>&nbsp;&nbsp;&nbsp;
-								<a href="/"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" title="" width="40px" onclick="shareKakaotalk()"></a>
-					        </div>
-					    </div>
+					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>	
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="margin: auto;">
+					<div class="btn_wrap" style="border-radius: 80px; background-color: #f3f6f7">
+				        <span class="shareButton"><i class="fas fa-share-alt" style="margin-right: 15px"></i>공유하기</span>
+				        <div class="container">
+			        		<a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
+			        			<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="20px">
+			        		</a>
+							<img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="20px" class="twitter" onclick="shareTwitter()">
+							<img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="20px" class="naverblog" onclick="shareNaverBlog()">
+							<img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="20px" class="kakaotalk" onclick="shareKakaotalk()">
+			        		<i class="clipboard far fa-clipboard" style="font-size: 20px" onclick="shareURL()"></i>
+				        </div>
+				    </div>
+				</td>
+				<td colspan="2" style="margin: auto;">
+					<div class="btn_wrap" style="border-radius: 80px; background-color: #f3f6f7"  onclick="donate()">
+				        <span class="shareButton"><i class="fas fa-donate" style="margin-right: 15px"></i>후원하기</span>
+				        <div class="container">
+			        		<span>
+			        			<b>${camBoard.CAMB_SUBJECT}</b>
+			        		</span>
+				        </div>
+				    </div>
 				</td>
 			</tr>
 		</table>
-	</div>		
+	</div>
 		<div id="camBoardList"></div>
+		
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -330,24 +345,56 @@
 				}
 			});
 		}
-
 		
 	})
 </script>
 <script type='text/javascript'>
-	var url = document.location.href;
-	var title = ${camBoard.CAMB_NAME};
-	var img = ${camBoard.CAMB_FILE};
+	var linkUrl = window.location.href;
 	
-	function shareTwitter() {
-	    var sendText = "지구살리기"; // 전달할 텍스트
-	    var sendUrl = url; // 전달할 URL
-	    window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+	function resize(obj) {
+	  obj.style.height = "1px";
+	  obj.style.height = (12+obj.scrollHeight)+"px";
 	}
 	
-	function shareFacebook() {
-	    var sendUrl = url; // 전달할 URL
-	    window.open("http://www.facebook.com/sharer/sharer.php?u=" + sendUrl);
+	function donate(){
+		var type = "${camBoard.CAMB_SUBJECT}";
+		
+		if(type === "해양"){
+			location.href="/donation/ocean";
+		}else if(type === "플라스틱"){
+			location.href="/donation/plastic";
+		}else if(type === "산림"){
+			location.href="/donation/forest";
+		}else if(type === "극지방"){
+			location.href="/donation/ice";
+		}
+	}
+	
+	function shareURL() {
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
+	}
+	
+	function shareTwitter() {
+		//var linkUrl = "https://www.naver.com/"; 
+		window.open( "https://twitter.com/intent/tweet?text=save earth&url=" + encodeURIComponent(linkUrl) );
+	}
+	
+	function shareFacebook() {		
+		window.open( 'http://www.facebook.com/sharer.php?u=' + encodeURIComponent(linkUrl) );
+	}
+	
+	function shareNaverBlog() { 
+		var url = encodeURI(encodeURIComponent(linkUrl)); 
+		var title = encodeURI("${camBoard.CAMB_NAME}"); 
+		var shareURL = "https://blog.naver.com/openapi/share?serviceCode=share&url=" + url + "&title=" + title; document.location = shareURL; 
 	}
 	
 	function shareKakaotalk() {
@@ -355,12 +402,12 @@
 	    Kakao.Link.sendDefault({
 	      objectType: 'feed',
 	      content: {
-	    	  title: title,
+	    	  title: "${camBoard.CAMB_NAME}",
 		        description: '지구의 웃음을 찾아서',
-		        imageUrl: img,
+		        imageUrl: "${camBoard.CAMB_FILE}",
 		        link: {
-			          mobileWebUrl: url,
-			          webUrl: url
+			          mobileWebUrl: linkUrl,
+			          webUrl: linkUrl
 			        }
 	      },
 	      social: {
@@ -372,15 +419,15 @@
 		        {
 		          title: '웹으로 보기',
 		          link: {
-		            mobileWebUrl: url,
-		            webUrl: url
+		            mobileWebUrl: linkUrl,
+		            webUrl: linkUrl
 		          }
 		        },
 		        {
 		          title: '앱으로 보기',
 		          link: {
-		            mobileWebUrl: url,
-		            webUrl: url
+		            mobileWebUrl: linkUrl,
+		            webUrl: linkUrl
 		          }
 		        }
 		      ]

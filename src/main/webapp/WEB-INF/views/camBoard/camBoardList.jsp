@@ -19,7 +19,7 @@
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
-	tr:hover {background-color: #FFFFDE}
+	.trbg:hover {background-color: #FFFFDE; cursor: pointer;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	ul {list-style: none; margine: 0; padding: 0;}
@@ -79,12 +79,13 @@
 			<button id="btn_search" onclick="searchUrl()">검색</button>
 		</div>	
 	</div>
+	<div id="camBoardListDiv">
 	<c:if test="${page.totalcount ne 0}">
 		<div class="row">
 		<c:forEach items="${CamBoardList}" var="list" begin="0" end="2">
 			<div class="col-sm-12 col-lg-4">
 				<table class="goodsTable">
-					<tr class="content" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+					<tr class="content trbg" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
 						<td class="tdImg">
 								<img class="content" src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_SUBJECT}"/>
 						</td>
@@ -100,7 +101,7 @@
 			<c:forEach items="${CamBoardList}" var="list" begin="3" end="5">
 				<div class="col-sm-12 col-lg-4">
 					<table class="goodsTable">
-						<tr class="content" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+						<tr class="content trbg" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
 							<td class="tdImg">
 								<img src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_SUBJECT}"/>
 							</td>
@@ -111,10 +112,13 @@
 			</c:forEach>
 		</div><br/>	
 	</c:if>
+	
 	<c:if test="${page.totalcount eq 0}">
 		<div><h2 style="text-align: center;">'${page.search}'에 대한 검색 결과가 없습니다.</h2></div>
 	</c:if>
+	</div>
 	
+	<div id="pagingDiv">
 	<c:if test="${page.totalcount ne 0}">
 	<div class="row">
 	<div class="col-sm-12">
@@ -143,6 +147,7 @@
 			</tr>
 		</table><br/>
 	</c:if>
+	</div>
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 
