@@ -250,11 +250,15 @@
                 <div class="table-responsive p-3">
                 <div class="row">
                 <div class="col-sm-12 col-md-6">
-                <button class="btn btn-sm btn-primary" type="button" id="change" onclick="checkUpdate()">상품 변경</button>
-                <input class="btn btn-sm btn-primary" type="button" onclick="location.href='/adGoods/insert'" value="상품 추가"/>
+                <form action="/adGoods/update" method="post" onsubmit="return checkUpdate()">
+                	<input class="btn btn-sm btn-primary" type="submit" value="상품 변경">
+                	<input type="hidden" id="update" name="goodsNumU">
+                	<input class="btn btn-sm btn-primary" type="button" onclick="location.href='/adGoods/insert'" value="상품 추가"/>
+                </form>
+                
                 </div>
                 <div class="col-sm-12 col-md-6" style="text-align:right;">
-				<input class="btn btn-sm btn-primary" style="background-color:#fc544b;border-color:#fc544b;" type="button" value="상품 삭제"/>
+				<button class="btn btn-sm btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="checkDelete()">상품 삭제</button>
                 </div>
                 </div>  
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
@@ -294,17 +298,38 @@
 			
 			
 			<script type="text/javascript">
-			$('#change').click(function(){
-	var checkArr = [];     // 배열 초기화
-	$("input[id='test_check']:checked").each(function(i) {
-        checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
-    }
-	alert(checkArr[0]);
-	if(checkArr.length == 0){
-		alert('체크해주세요.');
-	}
-});
-</script>
+			function checkUpdate(){
+				var checkArr = [];     // 배열 초기화
+				$("input[id='test_check']:checked").each(function(i) {
+        			checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+    			});
+				if(checkArr.length == 0){
+					alert('변경할 상품을 체크해주세요.');
+					return false;
+				}else if(checkArr.length > 1){
+					alert('변경할 상품을 한 개만 선택해주세요.');
+					return false;
+				}else{
+					$("#update").val(checkArr[0]);
+				}
+			}
+			</script>
+			
+			<script type="text/javascript">
+			function checkDelete(){
+				var checkArr = [];     // 배열 초기화
+				$("input[id='test_check']:checked").each(function(i) {
+        			checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+    			});
+				if(checkArr.length == 0){
+					alert('삭제할 상품을 체크해주세요.');
+					return;
+				}else{
+					$("#cancelModal").modal('show');
+					$("#item").text(checkArr + " 상품을 삭제합니다.");
+				}
+			}
+			</script>
 			
           <!-- Modal Logout -->
           <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
@@ -333,40 +358,50 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">후원 결제를 취소합니다.</h5>
+                  <h5 class="modal-title" id="exampleModalLabelLogout">지구마켓 상품 삭제</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>관리자 비밀번호를 입력하세요.</p>
-                  <input type="password" id="deletePW">
+                	<input type="checkbox" id="itemCheck"> &nbsp &nbsp <span id="item"></span>
+                	<hr>
+                  	<p>관리자 비밀번호를 입력하세요.</p>
+                  	<input type="password" id="deletePW">
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="memberDelete()">삭제</button>
+                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="goodsDelete()">삭제</button>
                   <button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소</button>
                 </div>
               </div>
             </div>
           </div>
               <script type="text/javascript">
-				function memberDelete(){
+				function goodsDelete(){
+					var checkArr = [];     // 배열 초기화
+					$("input[id='test_check']:checked").each(function(i) {
+	        			checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+	    			});
 					var deletePW = $("#deletePW").val();
-					var deleteMember = $("#mem_id").val();
 					if(deletePW == ""){
 						alert("관리자 비밀번호를 입력해주세요.");
+						return;
+					}
+					if($("input:checkbox[id=itemCheck]").is(":checked") == false) {
+						alert('확인 체크를 해주세요.');
 						return;
 					}
 		
 					$.ajax({
 			   			type: "POST", //요청 메소드 방식
-			  			 url:"/adMember/delete",
-			   			data: {"deletePW":deletePW, "deleteMember":deleteMember},
+			  			 url:"/adGoods/delete",
+			   			data: {"checkArr":checkArr, "deletePW": deletePW},
 			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 			   			
 			   			success : function(result){
 			      			if(result.error === true){
 			    	  			alert('삭제되었습니다.');
+			    	  			location.href="/adGoods/list";
 			      			}else if(result.error === false){
 			    	  			alert('관리자 비밀번호를 확인해 주세요.');
 			    	  			return;
@@ -409,19 +444,6 @@
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
   </script>
-<script>
-function checkDelete() {
-	if ($('#goodsNumD').val() == "") {
-		alert("삭제할 항목을 선택해주세요.");
-		return false;
-	} else if($('#goodsNumD').val() != "") {
-		if (confirm("정말 삭제하시겠습니까?") == true) {
-		} else {
-			return false;
- 		}
-	}
-}
-</script>
 
 
 </body>

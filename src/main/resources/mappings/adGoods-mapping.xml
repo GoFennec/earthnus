@@ -52,10 +52,13 @@
 		]]>
 	</update>
 	
-	<delete id="deleteGoods" parameterType="string">
-		<![CDATA[
-			DELETE FROM GOODS WHERE GOODS_NUM=#{goodsNumD}
-		]]>
+	<delete id="deleteGoods" parameterType="List">
+		DELETE FROM GOODS
+		WHERE
+		GOODS_NUM IN
+    	<foreach collection="list" item="checkArr" index="i" open="(" separator="," close=")">
+      		#{checkArr}
+    	</foreach>
 	</delete>
 	
 </mapper>
