@@ -242,17 +242,17 @@
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>기부 번호</th>
-                        <th>결제 번호</th>
-                        <th>후원자</th>
-                        <th>아이디</th>
-                        <th>결제 상품</th>
-                        <th>후원 금액</th>
-                        <th>발생 포인트</th>
-                        <th>후원일</th>
-                        <th>후원 취소일</th>
-                        <th>결제 상태</th>
-                        <th>포인트 적립</th>
+                        <th>기부 <br> 번호</th>
+                        <th>결제 <br> 번호</th>
+                        <th>후원자 <br> 이름</th>
+                        <th>후원자 <br>아이디</th>
+                        <th>결제 <br> 상품</th>
+                        <th>후원 <br> 금액</th>
+                        <th>발생 <br> 포인트</th>
+                        <th>후원 <br> 날짜</th>
+                        <th>후원 <br> 취소일</th>
+                        <th>결제 <br> 상태</th>
+                        <th>포인트 <br> 적립</th>
                       </tr>
                     </thead>
 					<tbody>

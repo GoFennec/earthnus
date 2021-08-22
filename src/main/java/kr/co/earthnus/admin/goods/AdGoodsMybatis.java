@@ -11,5 +11,5 @@ public interface AdGoodsMybatis {
 	public void isertGoodsOk(GoodsBean gBean);
 	public GoodsBean getGoodsU(String goodsNumU);
 	public void updateGoodsOk(GoodsBean gBean);
-	public void deleteGoods(String goodsNumD);
+	public void deleteGoods(List<String> checkArr);
 }

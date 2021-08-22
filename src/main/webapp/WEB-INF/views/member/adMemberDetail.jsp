@@ -264,6 +264,7 @@
 			   			success : function(result){
 			      			if(result.error === true){
 			    	  			alert('삭제되었습니다.');
+			    	  			location.href="/adMember/list";
 			      			}else if(result.error === false){
 			    	  			alert('관리자 비밀번호를 확인해 주세요.');
 			    	  			return;

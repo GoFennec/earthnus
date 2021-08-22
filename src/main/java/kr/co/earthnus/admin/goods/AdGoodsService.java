@@ -164,8 +164,8 @@ public class AdGoodsService {
 		return returnStr;
 	}
 	
-	public void deleteGoods(String goodsNumD) {
+	public void deleteGoods(List<String> checkArr) {
 		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
-		goodsDAO.deleteGoods(goodsNumD);
+		goodsDAO.deleteGoods(checkArr);
 	}
 }
