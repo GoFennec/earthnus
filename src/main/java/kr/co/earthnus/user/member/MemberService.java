@@ -49,6 +49,16 @@ public class MemberService {
 		int n = dao.insertMember_kakao(memberBean);
 		return n;
 	}
+	//네이버 회원가입
+		public int insertMember_naver(MemberBean memberBean) throws NoSuchAlgorithmException {
+			System.out.println("naver 서비스");
+			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+			SHA256 sha = new SHA256();
+			String smem_pw = sha.encrypt(memberBean.getMem_pw());
+			memberBean.setMem_pw(smem_pw);
+			int n = dao.insertMember_naver(memberBean);
+			return n;
+		}
 	
 	
 	//마이페이지 포인트조회

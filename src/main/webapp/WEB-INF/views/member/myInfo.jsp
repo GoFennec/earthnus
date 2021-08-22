@@ -16,6 +16,7 @@
 	rel="stylesheet">
 <script
 	src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
 	rel="stylesheet">
@@ -654,10 +655,10 @@ body {
 					<div class="side-bar">
 						<div class="user-info">
 							<img class="img-profile img-circle img-responsive center-block"
-								src="https://bootdey.com/img/Content/avatar/avatar2.png"
-								alt="개인프로필사진">
+								src="/resources/Auth/account_1.png"
+								title="account" alt="계정사진">
 							<ul class="meta list list-unstyled">
-								<li class="id"><a>${auth.auth_id}</a></li>
+								<!-- <li class="id"><a>${auth.auth_id}</a></li> -->
 								<li class="name">${auth.auth_name}님</li>
 							</ul>
 						</div>
@@ -674,75 +675,76 @@ body {
 
 								<li><a href="/member/myDelete"><span class="fa fa-th"></span>
 										탈퇴하기</a></li>
+								<li><a href="#"><span class="fa fa-clock-o"></span>
+										Reminders</a></li>
 							</ul>
 						</nav>
 					</div>
-				</div>
-			</section>
-			<div class="content-panel">
-				<h2 class="title">내 정보</h2>
-				<form class="form-horizontal" method="post"
-					enctype="multipart/form-data" action="/updateMyInfo">
-					<fieldset class="fieldset">
-						<!-- <div class="form-group avatar">
-									<figure class="figure col-md-2 col-sm-3 col-xs-12">
-										<img class="img-rounded img-responsive"
-											src="https://bootdey.com/img/Content/avatar/avatar3.png"
-											alt="개인프로필사진">
-									</figure>
-									<div class="form-inline col-md-10 col-sm-9 col-xs-12">
-										<input type="file" class="file-uploader pull-left">
-										<button type="submit"
-											class="btn btn-sm btn-default-alt pull-left">사진 업데이트</button>
-									</div>
-								</div> -->
-						<div class="col-12">
-							<label for="username" class="form-label">아이디</label> <input
-								type="text" name="mem_id" class="form-control" id="mem_id"
-								value="${MemberBean.mem_id }" readonly>
-						</div>
-						<div class="col-12">
-							<label for="username" class="form-label">이름</label> <input
-								type="text" name="mem_name" class="form-control" id="mem_name"
-								value="${MemberBean.mem_name  }" readonly>
-						</div>
-						<div class="col-12">
-							<label for="username" class="form-label">비밀번호</label>
-						</div>
-						<div class="col-md-3">
-							<button class="btn btn-sm btn-default-alt pull-left"
-								data-toggle="modal" data-target="#myModal">비밀번호 변경</button>
-						</div>
+					<div class="content-panel">
+						<h2 class="title">내 정보</h2>
+						<form class="form-horizontal" method="post" action="/updateMyInfo">
+							<fieldset class="fieldset">
+								<!--  <div class="form-group avatar">
+                                <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                                    <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="개인프로필사진">
+                                </figure>
+                                <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                                    <input type="file" class="file-uploader pull-left">
+                                    <button type="submit" class="btn btn-sm btn-default-alt pull-left">사진 업데이트</button>
+                                </div>
+                            </div> -->
+								<div class="col-12">
+									<label for="username" class="form-label">아이디</label> <input
+										type="text" name="mem_id" class="form-control" id="mem_id"
+										value="${MemberBean.mem_id }" readonly>
+								</div>
+								<div class="col-12">
+									<label for="username" class="form-label">이름</label> <input
+										type="text" name="mem_name" class="form-control" id="mem_name"
+										value="${MemberBean.mem_name  }" readonly>
+								</div>
+								<div class="col-12">
+									<label for="username" class="form-label">비밀번호</label>
+								</div>
+								<div class="col-md-3">
+									<button class="btn btn-sm btn-default-alt pull-left"
+										data-toggle="modal" data-target="#myModal">비밀번호 변경</button>
+								</div>
 
-						<!-- Modal HTML -->
-						<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog modal-login" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title">비밀번호 변경</h4>
-									</div>
-									<div class="modal-body">
 
-										<div class="form-group">
-											<input type="password" class="form-control"
-												placeholder="변경할 비밀번호" required id="mem_cpw1">
-										</div>
-										<div class="form-group">
-											<input type="password" class="form-control"
-												placeholder="비밀번호 확인" required id="mem_cpw2">
-										</div>
-										<div class="form-group">
-											<button type="button"
-												class="btn btn-primary btn-block btn-lg"
-												onclick="updatePw()">확인</button>
+
+
+
+								<!-- Modal HTML -->
+								<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-login" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title">비밀번호 변경</h4>
+											</div>
+											<div class="modal-body">
+
+												<div class="form-group">
+													<input type="password" class="form-control"
+														placeholder="변경할 비밀번호" required id="mem_cpw1">
+												</div>
+												<div class="form-group">
+													<input type="password" class="form-control"
+														placeholder="비밀번호 확인" required id="mem_cpw2">
+												</div>
+												<div class="form-group">
+													<button type="button"
+														class="btn btn-primary btn-block btn-lg"
+														onclick="updatePw()">확인</button>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
 
-						<script type="text/javascript">
+
+								<script type="text/javascript">
 									function updatePw() {
 										var cpw1 = $("#mem_cpw1").val();
 										var cpw2 = $("#mem_cpw2").val();
@@ -759,7 +761,7 @@ body {
 																result) {
 															if (result.error) {
 																alert("비밀번호 변경이 완료되었습니다.");
-																
+
 																window.location = '/member/myInfo';
 															} else {
 																location.href = result.url;
@@ -782,254 +784,338 @@ body {
 										}
 									}
 								</script>
-						<br> <br>
-						<div class="col-12">
-							<label for="username" class="form-label">생년월일 </label> <input
-								type="date" name="mem_birth" class="form-control" id="birth"
-								value="${MemberBean.mem_birth }" required>
-							<div class="invalid-feedback" id="invalid-birth">필수
-								입력사항입니다.</div>
-						</div>
+								<br> <br>
+								<div class="col-12">
+									<label for="username" class="form-label">생년월일 </label> <input
+										type="date" name="mem_birth" class="form-control" id="birth"
+										value="${MemberBean.mem_birth }" required>
+									<div class="invalid-feedback" id="invalid-birth">필수
+										입력사항입니다.</div>
+								</div>
 
-						<div class="col-12">
-							<label for="username" class="form-label">성별 </label>
-						</div>
-						<div class="col-12">
-							<input type="text" class="form-control" name="mem_gender"
-								value="${MemberBean.mem_gender}" readonly>
-						</div>
+								<div class="col-12">
+									<label for="username" class="form-label">성별 </label>
+								</div>
+								<div class="col-12">
+									<input type="text" class="form-control" name="mem_gender"
+										value="${MemberBean.mem_gender}" readonly>
+								</div>
 
-
-
-
-
-
-						<div class="col-12">
-							<label for="username" class="form-label">전화번호</label> <input
-								type="text" name="mem_tel" class="form-control" id="mem_tel"
-								value="${MemberBean.mem_tel}" maxlength='11' required>
-							<div class="invalid-feedback">필수 입력사항입니다.</div>
-							<div class="invalid-feedback" id="invalid-phone">숫자만
-								입력해주세요.</div>
-						</div>
-
-						<script>
-            	$(function(){
-					$("#invalid-phone").hide();
-					
-					$("input").keyup(function(){
-						var match = /[^0-9]/g;
-						var tel = $("#mem_tel").val();
-						if(tel != ""){
-							if(match.test(tel)){
-								$("#invalid-phone").show();
-							}else{
-								$("#invalid-phone").hide();
-							}
-						}else if(tel == ""){
-							$("#invalid-phone").hide();
-						}
-						
-					});
-            	});
-            </script>
-
-						<div class="col-md-9" style="padding-right: 0px">
-							<label for="address" class="form-label">주소</label> <input
-								type="text" class="form-control" id="postcode"
-								placeholder="우편번호" onkeyup='call_addr()' style="margin-top: 2px"
-								required>
-						</div>
-						<div class="col-md-3" style="margin-top: 53px;">
-							<button type="button" class="w-100 btn btn-primary btn-lg"
-								onclick="execDaumPostcode()" id="findPC"
-								style="padding-left: 9px; font-size: 13px">우편번호 찾기</button>
-						</div>
-						<div class="col-md-12">
-							<input type="text" class="form-control" id="address"
-								placeholder="주소" onkeyup='call_addr()' required >
-						</div>
-						<div class="col-md-12">
-							<input type="text" class="form-control" id="detailAddress"
-								placeholder="상세주소" onkeyup='call_addr()' required >
-						</div>
-						<div class="col-md-12">
-							<input type="text" class="form-control" id="extraAddress"
-								placeholder="참고항목" onkeyup='call_addr()'>
-						</div>
-						<input type="hidden" id="address_all" name="MemberBean.mem_addr">
-						<div class="invalid-feedback">필수 입력사항입니다.</div>
-					
-    <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
-			<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-			</div>
-			
-			<script>
-				function call_addr(){
- 					if(document.getElementById("postcode").value && document.getElementById("address").value && document.getElementById("detailAddress").value){
-  					document.getElementById('address_all').value = document.getElementById('postcode').value + '&' + document.getElementById('address').value + '&' + document.getElementById('detailAddress').value;
- 					}
-				}
-			</script>
+								<div class="col-12">
+									<label for="username" class="form-label">전화번호</label> <input
+										type="text" name="mem_tel" class="form-control" id="mem_tel"
+										value="${MemberBean.mem_tel}" maxlength='11' required>
+									<div class="invalid-feedback">필수 입력사항입니다.</div>
+									<div class="invalid-feedback" id="invalid-phone">숫자만
+										입력해주세요.</div>
+								</div>
 
 
-						<div class="col-md-12">
-							<label for="username" class="form-label">포인트 </label>
-						</div>
-						<div class="col-md-12">
-							<input type="text" class="form-control" name="mem_point"
-								value="${MemberBean.mem_point}" readonly>
-						</div>
-
-
-
-
-
-
-
-						<div class="col-md-9" style="padding-right: 0px">
-							<label for="address" class="form-label">이메일</label> <input
-								type="text" class="form-control" id="mem_email"
-								value="${MemberBean.mem_email}" readonly>
-						</div>
-						<div class="col-md-3" style="margin-top: 53px;">
-							<button class="btn btn-sm btn-default-alt pull-left"
-								data-toggle="modal" data-target="#myModal2">이메일 변경</button>
-
-						</div>
-
-
-
-
-
-
-						<!-- Modal HTML -->
-						<div id="myModal2" class="modal fade" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog modal-login" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title">이메일 변경</h4>
-									</div>
-									<div class="modal-body">
-
-										<div class="col-md-12">
-											<input type="email" name="mem_email2" class="form-control"
-												id="mem_email2" placeholder="변경할 이메일" required>
-										</div>
-
-										<div class="col-md-12">
-											<button type="button" class="w-100 btn btn-primary btn-lg"
-												style="padding-left: 9px; font-size: 13px; margin-top:10px; margin-bottom: 10px;" onclick="mail()"
-												id="testBtn1">인증번호 받기</button>
-										</div>
-
-										<div class="col-md-12">
-											<input type="text" name="mailCheck" class="form-control"
-												id="mailCheck" placeholder="이메일 인증번호"><br>
-											<div class="invalid-feedback" id="invalid-emailCheck">필수
-												입력사항입니다.</div>
-										</div>
-										<div class="col-md-12">
-											<button type="button" class="w-100 btn btn-primary btn-lg"
-												style="padding-left: 9px; font-size: 13px"
-												onclick="mailCheck()" id="testBtn2">인증번호 확인</button>
-											</div>
-											<div class="col-md-12">
-											<button type="button" class="w-100 btn btn-primary btn-lg"
-												style="padding-left: 9px; font-size: 13px"
-												onclick="updateEmail()" id="testBtn3">이메일 변경</button>
-										</div>
-
-										<script type="text/javascript">
+								<script>
 									$(function() {
-										$('#testBtn2').hide();
-										$('#testBtn3').hide();
+										$("#invalid-phone").hide();
+
+										$("input").keyup(function() {
+											var match = /[^0-9]/g;
+											var tel = $("#mem_tel").val();
+											if (tel != "") {
+												if (match.test(tel)) {
+													$("#invalid-phone").show();
+												} else {
+													$("#invalid-phone").hide();
+												}
+											} else if (tel == "") {
+												$("#invalid-phone").hide();
+											}
+
+										});
 									});
-									function mail() {
-										var mail = $("#mem_email2").val();
-										var name = $("#mem_name").val();
-										if (mail === "") {
-											alert("이메일을 입력해주세요.");
-											return;
-										} else if (!mail.includes('@')) {
-											alert("올바르지 않은 이메일 형식입니다.");
-											return;
-										} else if (name === "") {
-											alert("이름을 먼저 입력해주세요.");
-											return;
-										} else {
-											$
-													.ajax({
-														type : "POST", //요청 메소드 방식
-														url : "/member/mail",
-														data : {
-															"mem_email" : mail,
-															"mem_name" : name
-														},
-														dataType : 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-														success : function(
-																result) {
-															if (result.error == true) {
-																alert('입력하신 이메일로 인증번호를 발송했습니다. \n 인증번호가 오지 않으면 입력하신 이메일을 다시 확인해주세요.');
-																$('#testBtn1')
-																		.hide();
-																$('#testBtn2')
-																		.show();
-															
-															} else if (result.error == false) {
-																alert('인증번호 발송에 실패했습니다.');
-															}
-														},
-														error : function(
-																request,
-																status, error) {
-															alert("code = "
-																	+ request.status
-																	+ " message = "
-																	+ request.responseText
-																	+ " error = "
-																	+ error);
-															//통신 실패시 발생하는 함수(콜백)
-														}
-													});
+								</script>
+
+								<div class="col-md-9" style="padding-right: 0px">
+									<label for="address" class="form-label">주소</label> <input
+										type="text" class="form-control" id="postcode"
+										placeholder="우편번호" onkeyup='call_addr()'
+										style="margin-top: 2px" required>
+								</div>
+								<div class="col-md-3" style="margin-top: 53px;">
+									<button type="button" class="w-100 btn btn-primary btn-lg"
+										onclick="execDaumPostcode()" id="findPC"
+										style="padding-left: 9px; font-size: 13px">우편번호 찾기</button>
+								</div>
+								<div class="col-md-12">
+									<input type="text" class="form-control" id="address"
+										placeholder="주소" onkeyup='call_addr()' required>
+								</div>
+								<div class="col-md-12">
+									<input type="text" class="form-control" id="detailAddress"
+										placeholder="상세주소" onkeyup='call_addr()' required>
+								</div>
+								<div class="col-md-12">
+									<input type="text" class="form-control" id="extraAddress"
+										placeholder="참고항목" onkeyup='call_addr()'>
+								</div>
+								<input type="hidden" id="address_all" name="MemberBean.mem_addr">
+								<div class="invalid-feedback">필수 입력사항입니다.</div>
+
+								<div id="wrap"
+									style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
+									<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+										id="btnFoldWrap"
+										style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+										onclick="foldDaumPostcode()" alt="접기 버튼">
+								</div>
+
+								<script>
+									function call_addr() {
+										if (document.getElementById("postcode").value
+												&& document
+														.getElementById("address").value
+												&& document
+														.getElementById("detailAddress").value) {
+											document
+													.getElementById('address_all').value = document
+													.getElementById('postcode').value
+													+ '&'
+													+ document
+															.getElementById('address').value
+													+ '&'
+													+ document
+															.getElementById('detailAddress').value;
 										}
 									}
-									</script>
+								</script>
 
 
-										<script type="text/javascript">
-									$('#testBtn2')
+								<div class="col-md-12">
+									<label for="username" class="form-label">포인트 </label>
+								</div>
+								<div class="col-md-12">
+									<input type="text" class="form-control" name="mem_point"
+										value="${MemberBean.mem_point}" readonly>
+								</div>
+
+
+
+
+
+
+
+								<div class="col-md-9" style="padding-right: 0px">
+									<label for="address" class="form-label">이메일</label> <input
+										type="text" class="form-control" id="mem_email"
+										value="${MemberBean.mem_email}" readonly>
+								</div>
+								<div class="col-md-3" style="margin-top: 53px;">
+									<button class="btn btn-sm btn-default-alt pull-left"
+										data-toggle="modal" data-target="#myModal2">이메일 변경</button>
+
+								</div>
+
+
+
+								<!-- Modal HTML -->
+								<div id="myModal2" class="modal fade" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog modal-login" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title">이메일 변경</h4>
+											</div>
+											<div class="modal-body">
+
+												<div class="col-md-12">
+													<input type="email" name="mem_email2" class="form-control"
+														id="mem_email2" placeholder="변경할 이메일" required>
+												</div>
+
+												<div class="col-md-12">
+													<button type="button" class="w-100 btn btn-primary btn-lg"
+														style="padding-left: 9px; font-size: 13px; margin-top: 10px; margin-bottom: 10px;"
+														onclick="mail()" id="testBtn1">인증번호 받기</button>
+												</div>
+
+												<div class="col-md-12">
+													<input type="text" name="mailCheck" class="form-control"
+														id="mailCheck" placeholder="이메일 인증번호"><br>
+													<div class="invalid-feedback" id="invalid-emailCheck">필수
+														입력사항입니다.</div>
+												</div>
+												<div class="col-md-12">
+													<button type="button" class="w-100 btn btn-primary btn-lg"
+														style="padding-left: 9px; font-size: 13px"
+														onclick="mailCheck()" id="testBtn2">인증번호 확인</button>
+												</div>
+												<div class="col-md-12">
+													<button type="button" class="w-100 btn btn-primary btn-lg"
+														style="padding-left: 9px; font-size: 13px"
+														onclick="updateEmail()" id="testBtn3">이메일 변경</button>
+												</div>
+
+												<script type="text/javascript">
+													$(function() {
+														$('#testBtn2').hide();
+														$('#testBtn3').hide();
+													});
+													function mail() {
+														var mail = $(
+																"#mem_email2")
+																.val();
+														var name = $(
+																"#mem_name")
+																.val();
+														if (mail === "") {
+															alert("이메일을 입력해주세요.");
+															return;
+														} else if (!mail
+																.includes('@')) {
+															alert("올바르지 않은 이메일 형식입니다.");
+															return;
+														} else if (name === "") {
+															alert("이름을 먼저 입력해주세요.");
+															return;
+														} else {
+															$
+																	.ajax({
+																		type : "POST", //요청 메소드 방식
+																		url : "/member/mail",
+																		data : {
+																			"mem_email" : mail,
+																			"mem_name" : name
+																		},
+																		dataType : 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+																		success : function(
+																				result) {
+																			if (result.error == true) {
+																				alert('입력하신 이메일로 인증번호를 발송했습니다. \n 인증번호가 오지 않으면 입력하신 이메일을 다시 확인해주세요.');
+																				$(
+																						'#testBtn1')
+																						.hide();
+																				$(
+																						'#testBtn2')
+																						.show();
+
+																			} else if (result.error == false) {
+																				alert('인증번호 발송에 실패했습니다.');
+																			}
+																		},
+																		error : function(
+																				request,
+																				status,
+																				error) {
+																			alert("code = "
+																					+ request.status
+																					+ " message = "
+																					+ request.responseText
+																					+ " error = "
+																					+ error);
+																			//통신 실패시 발생하는 함수(콜백)
+																		}
+																	});
+														}
+													}
+												</script>
+
+												<script type="text/javascript">
+													$('#testBtn2')
+															.click(
+																	function() {
+																		var mailCheck = $(
+																				"#mailCheck")
+																				.val();
+																		var name = $(
+																				'#mem_name')
+																				.val();
+																		var email0 = $(
+																				'#mem_email')
+																				.val();
+																		var email = $(
+																				'#mem_email2')
+																				.val();
+																		if (mailCheck === "") {
+																			alert("이메일 인증번호를 입력해주세요.");
+																			return;
+																		}
+																		$
+																				.ajax({
+																					type : "POST", //요청 메소드 방식
+																					url : "/member/mailCheck",
+																					data : {
+																						"mailCheck" : mailCheck,
+																						"name" : name,
+																						"email" : email
+																					},
+																					dataType : 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+																					success : function(
+																							result) {
+
+																						if (result.error == true) {
+																							alert('이메일 인증이 완료되었습니다.');
+																							$(
+																									"#mem_email")
+																									.val(
+																											email);
+																							$(
+																									'#testBtn3')
+																									.show();
+																							$(
+																									'#testBtn2')
+																									.hide();
+																						} else if (result.error == false) {
+																							alert('이메일 인증번호가 일치하지 않습니다. \n 이메일을 다시 한 번 확인해주세요.');
+																						}
+																					},
+																					error : function(
+																							request,
+																							status,
+																							error) {
+																						alert("code = "
+																								+ request.status
+																								+ " message = "
+																								+ request.responseText
+																								+ " error = "
+																								+ error);
+																						//통신 실패시 발생하는 함수(콜백)
+																					}
+																				});
+																	});
+												</script>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+
+
+								<script type="text/javascript">
+									$('#testBtn3')
 											.click(
 													function() {
-														var mailCheck = $("#mailCheck").val();
-														var name = $('#mem_name').val();
-														var email0 = $('#mem_email').val();
-														var email = $('#mem_email2').val();
-														if (mailCheck === "") {
-															alert("이메일 인증번호를 입력해주세요.");
-															return;
-														}
+														var email0 = $(
+																'#mem_email')
+																.val();
+														var email = $(
+																'#mem_email2')
+																.val();
+
 														$
 																.ajax({
 																	type : "POST", //요청 메소드 방식
-																	url : "/member/mailCheck",
+																	url : "/updateEmail",
 																	data : {
-																		"mailCheck" : mailCheck,
-																		"name" : name,
-																		"email" : email
+																		"mem_email" : email
 																	},
 																	dataType : 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 																	success : function(
 																			result) {
-
-																		if (result.error == true) {
-																			alert('이메일 인증이 완료되었습니다.');
-																			$("#mem_email").val(email);
-																			$('#testBtn3').show();
-																			$('#testBtn2').hide();
-																		} else if (result.error == false) {
-																			alert('이메일 인증번호가 일치하지 않습니다. \n 이메일을 다시 한 번 확인해주세요.');
+																		if (result.error) {
+																			alert("이메일 변경이 완료되었습니다.")
+																			window.location = '/member/myInfo';
+																		} else {
+																			location.href = result.url;
 																		}
 																	},
 																	error : function(
@@ -1047,82 +1133,21 @@ body {
 																});
 													});
 								</script>
-									</div>
+
+								<div class="col-6">
+									<button class="btn btn-sm btn-default-alt pull-left"
+										type="submit" style="margin-top: 10px">회원정보수정</button>
+
 								</div>
-							</div>
-						</div>
 
-
-
-
-
-						<script type="text/javascript">
-						$('#testBtn3').click(function() {
-										var email0 = $('#mem_email').val();
-										var email = $('#mem_email2').val();
-										
-										$.ajax({
-													type : "POST", //요청 메소드 방식
-													url : "/updateEmail",
-													data : {
-														"mem_email" : email
-													},
-													dataType : 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-													success : function(
-															result) {
-														if (result.error) {
-															alert("이메일 변경이 완료되었습니다.")
-															window.location = '/member/myInfo';
-														} else {
-															location.href = result.url;
-														}
-													},
-													error : function(
-															request,
-															status, error) {
-														alert("code = "
-																+ request.status
-																+ " message = "
-																+ request.responseText
-																+ " error = "
-																+ error);
-														//통신 실패시 발생하는 함수(콜백)
-													}
-												});
-									}  );
-			
-									
-								</script>
-
-
-
-
-
-
-
-
-
-
-<div class="col-6">
-							<button class="btn btn-sm btn-default-alt pull-left"
-								type="submit" style="margin-top:10px">회원정보수정</button>
-
-</div>
-
-
-
-
-					</fieldset>
-				</form>
-			</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</section>
 		</div>
 	</div>
-
-	<jsp:include page="/WEB-INF/views/footer.jsp" />
-
-	<script>
-	
-
+<jsp:include page="/WEB-INF/views/footer.jsp" />
 	<script type="text/javascript">
 function check() {
 	var id = $("#mem_id").val();
@@ -1136,6 +1161,7 @@ function check() {
 
 }
 	</script>
+
 <script>	
 		$(function() {
 			
@@ -1148,7 +1174,7 @@ function check() {
 		});
 		</script>
 		 <script type="text/javascript">
-			$('#findPC').click(function(){
+		 function execDaumPostcode() {
 		    new daum.Postcode({
 		        oncomplete: function(data) {
 		        	var addr = '';
@@ -1179,7 +1205,7 @@ function check() {
 		            document.getElementById("detailAddress").focus();
 		        }
 		    }).open();
-			});
+			}
 		</script>
 
 </body>

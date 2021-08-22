@@ -41,16 +41,6 @@ public class AuthController {
 		return "index";
 	}
 
-	/*
-	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
-	public String login(Model model, HttpSession session) {
-		System.out.println("여기는 login session : " + session);
-		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-	System.out.println("여기는 login url : " + naverAuthUrl);
-		model.addAttribute("url",naverAuthUrl);
-		return "auth/login";
-	}
-	*/
 	
 	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
 	   public String login() {
@@ -60,7 +50,8 @@ public class AuthController {
 
 	//네이버 로그인
 		@RequestMapping(value = "/auth/callback", method = RequestMethod.GET)
-		public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException{
+		public String callback(Model model, @RequestParam String code, @RequestParam String state, 
+				HttpSession session, AuthBean aBean) throws IOException, ParseException{
 			System.out.println("여기는 callback session : " + session);
 			System.out.println("여기는 callback state : " + state);
 			System.out.println("여기는 callback code : " + code);
@@ -90,25 +81,50 @@ public class AuthController {
 			String id = (String)response_obj.get("id");
 			String name = (String) response_obj.get("name");
 			String email = (String) response_obj.get("email");
-
+			String mobile = (String) response_obj.get("mobile");
+			
 			System.out.println("네이버 ID : " + id);
 			System.out.println("이름 : " + name);
 			System.out.println("eMail : " + email);
+			System.out.println("모바일" + mobile);
 			
 			
 			
+			if(response_obj.get("id") != null) {
 			//4.파싱 닉네임 세션으로 저장
-			session.setAttribute("sessionId",id); //세션 생성
-			
+			session.setAttribute("mem_id",id); //세션 생성
+			session.setAttribute("mem_name", name);
+			session.setAttribute("mem_email", email);
+			session.setAttribute("mem_tel", mobile);
+			/*
+			if(response_obj.get("id") != null) {
+				session.setAttribute("mem_id", response_obj.get("id"));
+				session.setAttribute("mem_name", response_obj.get("name"));
+				session.setAttribute("mem_email", response_obj.get("email"));
+				session.setAttribute("mem_tel", response_obj.get("tel"));
+			System.out.println("세션 test" + session.getAttribute("mem_name"));*/
 			model.addAttribute("result", apiResult);
-		     
-			return "index";
+			String auth_id = (String) session.getAttribute("mem_id");
+			System.out.println("id test" + auth_id);
+			aBean = service.naverLogin(auth_id);
+		
+			model.addAttribute("aBean", aBean);
+	if(aBean == null) {
+				return "redirect:/member/join_naver";
+			}else {
+				session.setAttribute("auth", aBean);
+				return "redirect:/";
+			}
+		} else {
+			return "/auth/login";
 		}
+}
 		
 		//로그아웃
-		@RequestMapping(value = "/naverLogout", method = { RequestMethod.GET, RequestMethod.POST })
+		@RequestMapping(value = "/naverLogout")
 		public String naverLogout(HttpSession session)throws IOException {
 				System.out.println("여기는 logout");
+				session.removeAttribute(apiResult);
 				session.invalidate();
 
 		        
@@ -116,18 +132,6 @@ public class AuthController {
 			}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
 	
 	
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
@@ -164,8 +168,7 @@ public class AuthController {
 	// 카카오로그인
 
 	@RequestMapping(value = "/kakaoLogin")
-	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, Model model, AuthBean aBean,
-			MemberBean mBean) {
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, Model model, AuthBean aBean) {
 
 		System.out.println("code : " + code);
 		String access_Token = kakao.getAccessToken(code);

@@ -120,16 +120,9 @@ body {
             <input type="password" class="form-control" id="auth_pw" name="auth_pw" placeholder="비밀번호" required="required">
        
              </div> 
-             <div>
-            <c:if test="${userId eq null}">
-        <a href="https://kauth.kakao.com/oauth/authorize?client_id=1f09c57d8241952a7a44833618d75b13&redirect_uri=http://localhost:8090/kakaoLogin&response_type=code">
-            <img src="/resources/Auth/kakao_login_medium_narrow.png" width=50%>
-        </a>
-    </c:if>
-    <c:if test="${userId ne null}">
-        <h1>로그인 성공입니다</h1>
-    </c:if>
-        </div><br>
+             <input type="submit" class="btn btn-primary btn-block btn-lg" value="로그인"> 
+       <p>----------------------or----------------------</p>
+          
          <%
     String clientId = "vDkmCgxDt2L_BtosPOoP";//애플리케이션 클라이언트 아이디값";
     String redirectURI = URLEncoder.encode("http://localhost:8090/auth/callback", "UTF-8");
@@ -141,10 +134,19 @@ body {
     apiURL += "&state=" + state;
     session.setAttribute("state", state);
  %>
-  <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-         
+  <a href="<%=apiURL%>"><img width="288" height="46" src="/resources/Auth/btnG.png" alt="네이버로그인버튼" title="btnG"/></a>
+            <div>
+            <c:if test="${userId eq null}">
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=1f09c57d8241952a7a44833618d75b13&redirect_uri=http://localhost:8090/kakaoLogin&response_type=code">
+            <img src="/resources/Auth/kakao_login_medium_narrow.png" width="288" height="46" alt="카카오로그인버튼" title="kakao_login_medium_narrow">
+        </a>
+    </c:if>
+    <c:if test="${userId ne null}">
+        <h1>로그인 성공입니다</h1>
+    </c:if>
+        </div>
       
-       <input type="submit" class="btn btn-primary btn-block btn-lg" value="로그인"> 
+       
          
         <a href="/member/join" class="forgot-link" title="회원가입">회원가입</a>             
          <a href="/auth/find" class="forgot-link" title="아이디/비밀번호찾기">아이디/비밀번호찾기&nbsp;&nbsp;</a> 

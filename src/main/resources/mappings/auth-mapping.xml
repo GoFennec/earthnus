@@ -27,9 +27,6 @@
 		parameterType="string">
 		SELECT * FROM MEMBER WHERE MEM_ID=#{auth_id}
 	</select>
-	<select id="kakaoLogin" resultType="auth" parameterType="String">
-		SELECT * FROM MEMBER WHERE MEM_ID=#{auth_id}
-	</select>
 	<!-- 아이디 찾기 -->
 	<!-- <select id="find_id" parameterType="String" resultType="String"> select 
 		mem_id from member where mem_email = #{mem_email} </select> -->

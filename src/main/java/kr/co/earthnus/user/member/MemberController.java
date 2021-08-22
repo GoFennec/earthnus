@@ -51,7 +51,17 @@ public class MemberController {
 				memberService.insertMember_kakao(memberBean);
 				return "redirect:/";
 			}
+			//네이버 회원가입
+			@RequestMapping(value="/member/join_naver", method=RequestMethod.GET)
+			public String memberJoin_naver() {
+				return "/member/join_naver";
+			}
 			
+			@RequestMapping(value="/member/join_naver", method=RequestMethod.POST)
+			public String memberJoin_naver(MemberBean memberBean) throws NoSuchAlgorithmException {
+				memberService.insertMember_naver(memberBean);
+				return "redirect:/";
+			}			
 			
 	
 	
