@@ -70,7 +70,6 @@ public class CamBoardController{
 			@RequestParam(defaultValue = "6") String contentnum, @RequestParam( value = "search", required=false) String search ,
 			@RequestParam(defaultValue = "desc") String order, camBoardBean bean, Model model){
 		List<camBoardBean> CamBoardList = null;
-		List<PagingBean> PageList = null;
 		
 		System.out.println("getList pagenum : " + pagenum);
 		if(search != null) {
@@ -82,9 +81,7 @@ public class CamBoardController{
 		String orderBy = "CAMB_NUM";
 		
 		CamBoardList = camBoardService.getList(search, search_type, arr, orderBy, order, contentnum, pagenum, CamBoardList, model);
-		//PageList = camBoardService.getPage(search, search_type, arr, orderBy, order, contentnum, pagenum, PageList, model);
 		String json = new Gson().toJson(CamBoardList);
-		//json += new Gson().toJson(PageList);
 		
 		System.out.println("controller json : " + json);
 		

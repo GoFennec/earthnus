@@ -45,7 +45,7 @@
 				</tr>
 				<tr>
 					<td colspan = "4">
-						<div id="max" class="file-wrapper flie-wrapper-area">
+						<div id="max" class="file-wrapper flie-wrapper-area" style="padding-top: 30px;">
 								<input type="file" name="CAMB_UPLOADFILE" id="file" class="upload-box upload-plus" accept="image/*" style="display: none;">
 									<div id="preview"></div>
 									<input type="hidden" name="goods_img" value="${goods.goods_img}">
@@ -62,7 +62,7 @@
 				<tr>
 					<td><b>제목</b></td>
 					<td class="update"><input type="text" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
-					<td><b>주제</b></td><!-- <input type="text" name="CAMB_SUBJECT" value="${camBoard.CAMB_SUBJECT}"> --> 
+					<td><b>주제</b></td> 
 					<td class="update">
 						<select id="CAMB_SUBJECT" name="CAMB_SUBJECT" onchange="showUpdateButton()" required>
 						<option value="해양">해양</option>
@@ -88,7 +88,7 @@
 					<td colspan="4"><b>캠페인 내용</b></td>
 				</tr>
 				<tr class="update" style="text-align: center;">
-					<td colspan="4"><textarea id="CAMB_CONTENT" name="CAMB_CONTENT" onchange="showUpdateButton()" required>${camBoard.CAMB_CONTENT}</textarea></td>
+					<td colspan="4"><textarea id="CAMB_CONTENT" name="CAMB_CONTENT" required>${camBoard.CAMB_CONTENT}</textarea></td>
 				</tr>
 			</table>
 			<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
@@ -130,7 +130,7 @@
 	        var reader = new FileReader();
 	        this.enabled = false
 	        reader.onload = (function (e) {
-	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
+	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="80%" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
 	        });
 	        reader.readAsDataURL(input.files[0]);
 	    }

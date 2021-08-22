@@ -13,6 +13,8 @@
 <title>EARTH & US</title>
 <link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
 <link rel="icon" href="/resources/assets/img/favicon.ico">
+
+<script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -56,7 +58,18 @@
 				<td class="td_right"><input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" required></td></tr>
 			<tr><td colspan="4" class="td_center"><label for="CAMB_CONTENT"><b>캠&nbsp;페&nbsp;인&nbsp;&nbsp;내&nbsp;용&nbsp;</b></label></td></tr>
 			<tr class="update" style="text-align: center;">
-				<td colspan="4"><textarea id="CAMB_CONTENT" name="CAMB_CONTENT"></textarea></td>
+				<td colspan="4">
+					<textarea id="CAMB_CONTENT" name="CAMB_CONTENT" cols="80" rows="10">
+						This is my textarea to be replaced with CKEditor 4.
+					</textarea>
+					<script>
+		                // Replace the <textarea id="editor1"> with a CKEditor 4
+		                // instance, using default configuration.
+		                CKEDITOR.replace( "CAMB_CONTENT", {
+		                	filebrowserUploadUrl:'/mine/imageUpload.do'
+		                });
+		            </script>
+				</td>
 			</tr>
 		</table><br>
 		<div class="sysBtn">
