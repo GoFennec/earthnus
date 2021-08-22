@@ -36,13 +36,14 @@
 		<result property="exg_cancle" column="EXG_CANCLE"/>
 	</resultMap>
 	
-	<resultMap id="CheBoardResult" type="cheBoard">
-		<id property="cheb_num" column="CHEB_NUM" />
-		<result property="cheb_id" column="CHEB_ID" />
-		<result property="cheb_name" column="CHEB_NAME" />
-		<result property="cheb_dnum" column="CHEB_DNUM" />
-		<result property="cheb_content" column="CHEB_CONTENT" />
-		<result property="cheb_date" column="CHEB_DATE" />
+	 <resultMap id="CheBoardResult" type="cheBoard">
+		<id property="cheb_num" column="CHEB_NUM"/>
+		<result property="cheb_id" column="CHEB_ID"/>
+		<result property="cheb_name" column="CHEB_NAME"/>
+		<result property="cheb_dnum" column="CHEB_DNUM"/>
+		<result property="cheb_content" column="CHEB_CONTENT"/>
+		<result property="cheb_date" column="CHEB_DATE"/>
+	
 	</resultMap>
 	
 	<insert id="insertMember" parameterType="member">
@@ -51,6 +52,10 @@
 	</insert>
 	
 	<insert id="insertMember_kakao" parameterType="member">
+		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
+		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
+	</insert>
+	<insert id="insertMember_naver" parameterType="member">
 		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
 		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
 	</insert>

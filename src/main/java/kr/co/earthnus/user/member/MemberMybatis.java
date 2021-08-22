@@ -13,6 +13,7 @@ public interface MemberMybatis {
 	
 	public int insertMember(MemberBean memberBean);
 	public int insertMember_kakao(MemberBean memberBean);
+	public int insertMember_naver(MemberBean memberBean);
 	public String myPoint(String mem_id);
 	public String myDonation(String mem_id);
 	public String myDonation_f(String mem_id);

@@ -61,4 +61,18 @@ public class AuthService {
 			aBean.setAuth_name(mBean.getMem_name());
 		} return aBean;
 }
+	
+	public AuthBean naverLogin(String auth_id) {
+		System.out.println("naver 서비스 auth_id" + auth_id);
+		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
+		AuthBean aBean = new AuthBean();
+		MemberBean mBean = dao.selectById(auth_id);
+			System.out.println("abean? " + aBean);
+			if (mBean == null) {
+				aBean = null;
+			} else {	
+			aBean.setAuth_id(mBean.getMem_id());
+			aBean.setAuth_name(mBean.getMem_name());
+		} return aBean;
+}
 }

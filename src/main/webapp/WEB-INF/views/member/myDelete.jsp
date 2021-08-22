@@ -608,12 +608,14 @@ color: #a2a6af
             <div class="module-inner">
                 <div class="side-bar">
                     <div class="user-info">
-                        <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="개인프로필사진">
-                        <ul class="meta list list-unstyled">
-                            <li class="id"><a>${auth.auth_id}</a></li>
-                            <li class="name">${auth.auth_name}님</li>
-                        </ul>
-                    </div>
+							<img class="img-profile img-circle img-responsive center-block"
+								src="/resources/Auth/account_1.png"
+								title="account" alt="계정사진">
+							<ul class="meta list list-unstyled">
+								<!-- <li class="id"><a>${auth.auth_id}</a></li> -->
+								<li class="name">${auth.auth_name}님</li>
+							</ul>
+						</div>
             		<nav class="side-menu">
         				<ul class="nav">
         					<li><a href="/member/myPage"><span class="fa fa-user"></span> 마이페이지</a></li>
