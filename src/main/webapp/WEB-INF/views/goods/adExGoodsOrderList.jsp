@@ -30,6 +30,9 @@
   	.btn btn-sm btn-primary{
   		font-color:#6777EF;
   	}
+  	.exGoodsTr {
+  		cursor: pointer;
+  	} 
   </style>
 </head>
 
@@ -248,7 +251,7 @@
                     </thead>
 					<tbody>
                     	<c:forEach items="${exGoodsList}" var="exGoods">
-							<tr onclick="location.href='/adExGoods/detail?exg_num=${exGoods.exg_num}'">
+							<tr class="exGoodsTr" onclick="location.href='/adExGoods/detail?exg_num=${exGoods.exg_num}'">
 								<td>${exGoods.exg_num}</td>
 								<td>${exGoods.exg_id}</td>
 								<td>${exGoods.exg_state}</td>

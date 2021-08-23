@@ -297,6 +297,9 @@
           <!--Row-->
 			
 			
+			
+			
+			
 			<script type="text/javascript">
 			function checkUpdate(){
 				var checkArr = [];     // 배열 초기화
@@ -442,6 +445,7 @@
     $(document).ready(function () {
       $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+      
     });
   </script>
 

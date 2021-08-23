@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <style>
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
-	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
+	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #388E3C; border-bottom: 3px solid #388E3C;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
@@ -48,8 +48,8 @@
 	</table><br/>
 	
 	<div class="exButton">
-	<button type="button" onclick="location.href='/'">메인으로</button>
-	<button type="button" onclick="location.href='/member/myOrder'">교환정보확인</button></div><br/>
+	<button type="button" class="btn" onclick="location.href='/'">메인으로</button>&nbsp;&nbsp;&nbsp;
+	<button type="button" class="btn" onclick="location.href='/member/myOrder'">교환정보확인</button></div><br/>
 	
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
