@@ -8,7 +8,7 @@
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
-	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
+	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #388E3C; border-bottom: 3px solid #388E3C;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
@@ -30,21 +30,12 @@
 	</table>
 	<c:if test="${empty auth}">
 		<table class="exGoods">
-			<tr><td colspan="3" width="25%"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td></tr>
-			<tr><td colspan="3" align="center"><strong>교환은 로그인 후 가능합니다.</strong></td></tr>
-			<tr><th scope="col">선택 상품</th><td>${goods.goods_name}</td></tr>
-			<tr><th scope="col">상품 정보</th><td>${goods.goods_desc}</td></tr>
-			<tr><th scope="col">필요 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
+			<tr><td rowspan="3"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td>
+			<th scope="col" colspan="2">선택 상품</th><td colspan="3">${goods.goods_name}</td></tr>
+			<tr><th scope="col" colspan="2">상품 정보</th><td colspan="3">${goods.goods_desc}</td></tr>
+			<tr><th scope="col" colspan="2">필요 포인트</th><td colspan="3"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
+			<tr><td colspan="5" align="center"><strong>교환은 로그인 후 가능합니다.</strong></td></tr>
 		</table><br>
-		<table class="goodsInfo">
-		<c:set var = "num" value="0"/>
-		<c:forEach items="${goodsInfo}" var="i" step="2">
-			<tr>
-				<th><c:forEach items="${goodsInfo}" var="info" begin="${num}" end="${num}"><c:set var="num" value="${num+1}"/>${info}</c:forEach></th>
-				<td><c:forEach items="${goodsInfo}" var="info" begin="${num}" end="${num}"><c:set var="num" value="${num+1}"/>${info}</c:forEach></td>
-			</tr>
-		</c:forEach>
-		</table>
 	</c:if>
 	
 	<c:if test="${!empty auth}">
@@ -91,12 +82,12 @@
 	<input type="hidden" name="exg_gname" value="${goods.goods_name}">
 	<input type="hidden" name="exg_point" value="${goods.goods_point}">
 	<input type="hidden" name="exg_img" value="${goods.goods_img}">
-	<div class="exButton"><button type="button" onclick="location.href='/goods/list'">목록보기</button>
+	<div class="exButton"><button type="button" class="btn" onclick="location.href='/goods/list'">목록보기</button>&nbsp;&nbsp;&nbsp;
 	<c:if test="${empty auth}">
-		<button type="button" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">교환하기</button>
+		<button type="button" class="btn" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">교환하기</button>
 	</c:if>	
 	<c:if test="${!empty auth}">
-		<input type="submit" value="교환하기 "/>
+		<input type="submit" class="btn" value="교환하기 "/>
 	</c:if>
 	</div>
 	</form><br/>

@@ -7,8 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
-	thead th {padding: 10px; font-size: 1.5em; font-weight: bold; vertical-align: middle; color: #086121; border-bottom: 3px solid #0ed145;}
-	thead td {padding: 3px; vertical-align: middle; color: #086121; border-bottom: 3px solid #0ed145;}
+	thead th {padding: 10px; font-size: 1.5em; font-weight: bold; vertical-align: middle; color: #388E3C; border-bottom: 3px solid #388E3C;}
+	thead td {padding: 3px; vertical-align: middle; color: #444; border-bottom: 3px solid #388E3C;}
 	#selectTd {width: 30%}
 	.goodsBox {padding: 10px;}
 	.goodsImg {text-align: center; margin: auto; padding: 1px; width: 100%;}
@@ -86,28 +86,31 @@
 				</form>
 			</div>
 		</c:forEach>
-	</div><br/>
-	
-	<div class="row">
-	<div class="col-sm-12">
-		<table class="paging">
-			<tr>
-				<td style="background-color: #0ed145;">
-					<c:if test="${page.prev}">
-						<a href="?pagenum=${page.getStartPage()-1}">&lt;</a>
-					</c:if>&nbsp;
-					<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">
-						<a href="?pagenum=${idx}">${idx}&nbsp;</a>
-					</c:forEach>
-					<c:if test="${page.next}">
-						<a href="?pagenum=${page.getEndPage()+1}">&gt;</a>
-					</c:if>
-				</td>
-			</tr>
-		</table><br/>
-	</div>
 	</div>
 	
+	<nav class="blog-pagination justify-content-center d-flex">
+		<ul class="pagination">
+			<c:if test="${page.prev}">
+	    		<li class="page-item">
+					<a href="?pagenum=${page.getStartPage()-1}" class="page-link" aria-label="Previous">
+						<i class="ti-angle-left"></i>
+					</a>
+				</li>
+			</c:if>
+			<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">	
+				<li class="page-item">
+					<a href="?pagenum=${idx}" class="page-link">${idx}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${page.next}">
+				<li class="page-item">
+					<a href="?pagenum=${page.getEndPage()+1}" class="page-link" aria-label="Next">
+						<i class="ti-angle-right"></i>
+					</a>
+				</li>
+			</c:if>
+		</ul>
+	</nav>
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 <script type="text/javascript">
