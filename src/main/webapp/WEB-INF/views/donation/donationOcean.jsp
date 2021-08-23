@@ -13,7 +13,7 @@
 .image {
  background-image: url('/resources/donation/oceanThema.jpg');
  background-repeat: no-repeat;
- background-size: auto;
+ background-size: cover;
  }
 .item {text-align: center;}
 .item p{text-align: center;}
@@ -26,15 +26,38 @@
 
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
+<!-- 
+				<div
+					class="single-slider hero-overly slider-height slider-bg1 d-flex align-items-center">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
+								<div class="hero__caption">
+									<h1 data-animation="fadeInUp" data-delay=".2s">Environment</h1>
+									<P data-animation="fadeInUp" data-delay=".4s">
+										Provide us a green and healthy life<br> we need to
+										protect
+									</P>
+									Hero-btn
+									<div class="hero__btn">
+										<a href="resources/industries.html" class="hero-btn mb-10"
+											data-animation="fadeInUp" data-delay=".8s">Join Us Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+ -->
 
 <div class="image">
 	<div class="slider-height2 d-flex align-items-center">
 		<div class="container">
 			<div class="row">
-			<div class="col-xl-12">
+			<div class="col-xl-8 col-lg-8 col-md-8 col-12">
             	<div class="hero-cap hero-cap2 pt-10">
-                	<h1 style="font-size: 2em; color: white;">바다가 힘들어요!</h1>
-                    <p style="font-size: 0.8em; color: white;">EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
+                	<h1 data-animation="fadeInUp" data-delay=".2s" style="font-size: 2em; color: white;">바다가 힘들어요!</h1>
+                    <p data-animation="fadeInUp" data-delay=".4s" style="font-size: 0.8em; color: white;">EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
             	</div>
             </div>
             </div>

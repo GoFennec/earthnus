@@ -12,6 +12,7 @@ public class PayBean {
 	private String pay_cdate;
 	private String pay_state;
 	private String pay_pstate;
+	private String pay_comment;
 	
 	public int getPay_no() {
 		return pay_no;
@@ -78,5 +79,11 @@ public class PayBean {
 	}
 	public void setPay_pstate(String pay_pstate) {
 		this.pay_pstate = pay_pstate;
+	}
+	public String getPay_comment() {
+		return pay_comment;
+	}
+	public void setPay_comment(String pay_comment) {
+		this.pay_comment = pay_comment;
 	}
 }
