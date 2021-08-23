@@ -131,7 +131,17 @@
 <link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
 <link rel="icon" href="/resources/assets/img/favicon.ico">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="assets/css/slicknav.css">
+<link rel="stylesheet" href="assets/css/animate.min.css">
+<link rel="stylesheet" href="assets/css/hamburgers.min.css">
+<link rel="stylesheet" href="assets/css/magnific-popup.css">
+<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="assets/css/themify-icons.css">
+<link rel="stylesheet" href="assets/css/slick.css">
+<link rel="stylesheet" href="assets/css/nice-select.css">
+<link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body>
@@ -194,160 +204,12 @@
 			</tr>
 		</table>
 	</div>
-		<div id="camBoardList"></div>
+	
+	<div>
+	
+	</div>
 		
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
-<script type="text/javascript">
-	$(document).ready(function(){
-		var preUrl = document.referrer;
-		var pagingUrl = "/getList" + preUrl.substring(42) + "&pagenum=";
-		var page = ${page};
-		var url1 = "'/camBoard/detail?CAMB_NUM=";		var url2 = "'";
-		
-		var listHead = '<table classs="sublist">';
-		listHead += '<tr>';
-		listHead += '<th scope="col">캠페인 번호</th>';
-		listHead += '<th scope="col">캠페인 사진</th>'
-		listHead += '<th scope="col">캠페인 제목</th>';
-		listHead += '<th scope="col">캠페인 주제</th>';
-		listHead += '<th scope="col">캠페인 내용</th>';
-		listHead += '</tr>';
-	
-	console.log("search : " + preUrl);
-		
-		if(preUrl.indexOf("search") > -1){
-			
-			$.ajax({
-				
-				url:"/getList" + preUrl.substring(42) + "&pagenum=" + page,
-				type:"GET",
-				dataType:"json",
-				"success" : function(CamBoardList){
-					console.log("AJAX통신 성공 + page : " + page);
-					
-					$.each(CamBoardList, function(index, item){
-						listHead += '<tr clas="list" onclick="location.href=' + url1 + item.CAMB_NUM + '&p=' + page + url2 + '">';
-						listHead += '<td>' + item.CAMB_NUM + '</td>';
-						listHead += '<td><img src="'+ item.CAMB_FILE +'" id="IMG" width="100" alt="캠페인" title="' + item.CAMB_SUBJECT + '"/></td>';
-						listHead += '<td>' + item.CAMB_NAME + '</td>';
-						listHead += '<td>' + item.CAMB_SUBJECT + '</td>';
-						listHead += '<td>' + item.CAMB_CONTENT + '...</td>';
-						listHead += '</tr>';
-					})
-						listHead += '<tr colspan = "5"><td>';
-					$.each(CamBoardList, function(index, item){
-						listHead += '1';
-					})
-						listHead += '</td></tr>';
-					
-					$('#camBoardList').html(listHead);
-				},
-				"error" : function(CamBoardList){
-					console.log("AJAX통신 실패");
-			    }
-			});
-		} 
-		if(preUrl.indexOf("search") === -1){
-			if(preUrl.indexOf("/camBoard/list") > -1){
-				console.log("list");
-				
-				$.ajax({
-					
-					url:"/getList?search=&pagenum=" + page,
-					type:"GET",
-					dataType:"json",
-					"success" : function(CamBoardList){
-						console.log("AJAX통신 성공 + page : " + page);
-						
-						$.each(CamBoardList, function(index, item){
-							listHead += '<tr clas="list" onclick="location.href=' + url1 + item.CAMB_NUM + '&p=' + page + url2 + '">';
-							listHead += '<td>' + item.CAMB_NUM + '</td>';
-							listHead += '<td><img src="'+ item.CAMB_FILE +'" id="IMG" width="100" alt="캠페인" title="' + item.CAMB_SUBJECT + '"/></td>';
-							listHead += '<td>' + item.CAMB_NAME + '</td>';
-							listHead += '<td>' + item.CAMB_SUBJECT + '</td>';
-							listHead += '<td>' + item.CAMB_CONTENT + '</td>';
-							listHead += '</tr>';
-						})
-					listHead += '<tr colspan = "5"><td>';
-						$.each(CamBoardList, function(index, item){
-							listHead += '1';
-					})
-						listHead += '</td></tr>';
-						$('#camBoardList').html(listHead);
-					},
-					"error" : function(CamBoardList){
-						console.log("AJAX통신 실패");
-				    }
-				});
-			}else if(preUrl.indexOf("/camBoard/list") === -1){
-				console.log("nothing");
-				
-				$.ajax({
-					
-					url:"/getList?search=&pagenum=" + page,
-					type:"GET",
-					dataType:"json",
-					"success" : function(CamBoardList){
-						console.log("AJAX통신 성공 + page : " + page);
-						
-						$.each(CamBoardList, function(index, item){
-							listHead += '<tr clas="list" onclick="location.href=' + url1 + item.CAMB_NUM + '&p=' + page + url2 + '">';
-							listHead += '<td>' + item.CAMB_NUM + '</td>';
-							listHead += '<td><img src="'+ item.CAMB_FILE +'" id="IMG" width="100" alt="캠페인" title="' + item.CAMB_SUBJECT + '"/></td>';
-							listHead += '<td>' + item.CAMB_NAME + '</td>';
-							listHead += '<td>' + item.CAMB_SUBJECT + '</td>';
-							listHead += '<td>' + item.CAMB_CONTENT + '</td>';
-							listHead += '</tr>';
-						})
-						$.each(CamBoardList, function(index, item){
-							
-						})
-						listHead += '<tr colspan = "5"><td>';
-						$.each(CamBoardList, function(index, item){
-							listHead += '1';
-					})
-						$('#camBoardList').html(listHead);
-					},
-					"error" : function(CamBoardList){
-						console.log("AJAX통신 실패");
-				    }
-				});
-			}			
-		} 
-		
-		if(preUrl.substring(21,36) === "/camBoard/list"){
-			
-			console.log("제대로된 경로 : " + preUrl.substring(37));
-			
-			$.ajax({
-				
-				url:preUrl.substring(21),
-				type:"GET",
-				dataType:"json",
-				"success" : function(CamBoardList){
-					console.log("AJAX통신 성공");
-				    
-				},
-				"error" : function(CamBoardList){
-					console.log("AJAX통신 실패");
-			    }
-			});
-		}else{
-			console.log("옳지 않은 경로" + preUrl.substring(21));
-			
-			$.ajax({
-				
-				url:"/camBoard/list",
-				type:"GET",
-				dataType:"json",
-				success:function(args){
-					var str = "";
-				}
-			});
-		}
-		
-	})
-</script>
 <script type='text/javascript'>
 	var linkUrl = window.location.href;
 	

@@ -20,8 +20,6 @@
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
 	.trbg:hover {background-color: #FFFFDE; cursor: pointer;}
-	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
-	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	ul {list-style: none; margine: 0; padding: 0;}
 	li {margine: 0 0 0 0; padding: 0 0 0 0; border: 0; float: left;}
 	a:visited{ color: #086121;}
@@ -39,6 +37,53 @@
 	#searchBlock:hover {
 	min-width: 
 }
+	.cambTD{}
+
+	.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #388E3C;
+    border-radius: 30px;
+    padding: 10px;
+    }
+
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_input{
+    width: 600px;
+    caret-color:red;
+    animation-direction: reverse;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_icon{
+    background: white;
+    color: #e74c3c;
+    }
+
+    .search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    text-decoration:none;
+    }
+    
+    .floating { position: fixed; right: 5%; bottom: 10%; text-align:center; width: 120px; }
 </style>
 
 <link rel="stylesheet" type="text/css" href="css/camBoard.css">
@@ -46,24 +91,46 @@
 <title>Campaign</title>
 <link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
 <link rel="icon" href="/resources/assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="assets/css/slicknav.css">
+<link rel="stylesheet" href="assets/css/animate.min.css">
+<link rel="stylesheet" href="assets/css/hamburgers.min.css">
+<link rel="stylesheet" href="assets/css/magnific-popup.css">
+<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="assets/css/themify-icons.css">
+<link rel="stylesheet" href="assets/css/slick.css">
+<link rel="stylesheet" href="assets/css/nice-select.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-	
+
+	<div class="floating">
+		<div class="container h-100">
+		    <div class="d-flex justify-content-center h-100">
+		      <div class="searchbar">
+		        <input class="search_input" type="text" id="search" placeholder="캠페인 검색" value="${page.search}"autocomplete="off">
+		        <a class="search_icon"><i class="fas fa-search" onclick="searchUrl()"></i></a>
+		      </div>
+		    </div>
+		</div>
+	</div>
 	<div class="container"><br>
-	<table class="exGoods">
-		<thead>
-			<tr><th scope="col">캠페인 게시판</th></tr>
-			<tr><td><h1></h1><td></tr>
-		</thead>
-	</table>
 	<div>
 		<ul style="text-align: left;">
 			<c:if test="${empty page.search}">
 			<li><a href="/camBoard/list?arr=entire" id="entire">전체 캠페인</a></li>
 			<li><a href="/camBoard/list?arr=doing" id="doing">진행 캠페인</a></li>
-			<li><a href="/camBoard/list?arr=exp" id="exp">에쩡 캠페인</a></li>
+			<li><a href="/camBoard/list?arr=exp" id="exp">에쩡 캠페인</a></li>	
 			<li><a href="/camBoard/list?arr=end" id="end">종료 캠페인</a></li>
 			</c:if>
 			<c:if test="${!empty page.search}">
@@ -73,44 +140,94 @@
 			<li><a href="/camBoard/list/search?search=${page.search}&arr=end" id="end">종료 캠페인</a></li>
 			</c:if>
 		</ul>
-		
-		<div  style="text-align: right;">
-			<input type="text" id="search" placeholder="캠페인 검색" value="${page.search}" onkeydown="search(this)" autocomplete="off">
-			<button id="btn_search" onclick="searchUrl()">검색</button>
-		</div>	
 	</div>
 	<div id="camBoardListDiv">
 	<c:if test="${page.totalcount ne 0}">
-		<div class="row">
-		<c:forEach items="${CamBoardList}" var="list" begin="0" end="2">
-			<div class="col-sm-12 col-lg-4">
-				<table class="goodsTable">
-					<tr class="content trbg" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
-						<td class="tdImg">
-								<img class="content" src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_SUBJECT}"/>
-						</td>
-						<td>${list.CAMB_NAME}</td>
-					</tr>
-				</table>
-			</div>
-		</c:forEach>
-		</div>
-		
-		<div class="clearfix"></div><br>
-		<div class="row">
-			<c:forEach items="${CamBoardList}" var="list" begin="3" end="5">
-				<div class="col-sm-12 col-lg-4">
-					<table class="goodsTable">
-						<tr class="content trbg" onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
-							<td class="tdImg">
-								<img src="${list.CAMB_FILE}" width="150" alt="캠페인" title="${list.CAMB_SUBJECT}"/>
-							</td>
-							<td>${list.CAMB_NAME}</td>
-						</tr>
-					</table>
-				</div>
-			</c:forEach>
-		</div><br/>	
+		<section class="blog_area section-padding">
+        	<div class="container">
+        		<div class="row">
+        			<c:forEach items="${CamBoardList}" var="list" begin="0" end="1">
+						<div class="col-lg-6 col-sm-12">
+        				<article class="blog_item">
+	                        <table>
+	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+	                          <td>
+	                           <div class="blog_item_img">
+	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="">
+	                               <span class="blog_item_date">
+	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
+	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
+	                               </span>
+	                           </div>
+	                          	<div class="blog_details">
+	                               <a class="d-inline-block" href="blog_details.html">
+	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
+	                               </a>
+	                               <p>여긴 캠페인 내용</p>
+	                           </div>
+	                          </td>
+	                         </tr>
+	                        </table>
+                        </article>
+        				</div>
+					</c:forEach>
+      			</div>
+       			<div class="row">
+        			<c:forEach items="${CamBoardList}" var="list" begin="2" end="3">
+						<div class="col-lg-6 col-sm-12">
+        				<article class="blog_item">
+	                        <table>
+	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+	                          <td>
+	                           <div class="blog_item_img">
+	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt=""  style="max-height: 80%">
+	                               <span class="blog_item_date">
+	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
+	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
+	                               </span>
+	                           </div>
+	                          	<div class="blog_details">
+	                               <a class="d-inline-block" href="blog_details.html">
+	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
+	                               </a>
+	                               <p>여긴 캠페인 내용</p>
+	                           </div>
+	                          </td>
+	                         </tr>
+	                        </table>
+                        </article>
+        				</div>
+					</c:forEach>
+   				</div>
+       			<div class="row">
+       				<c:forEach items="${CamBoardList}" var="list" begin="4" end="5">
+						<div class="col-lg-6 col-sm-12">
+        				<article class="blog_item">
+	                        <table>
+	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+	                          <td>
+	                           <div class="blog_item_img">
+	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt=""  style="max-height: px">
+	                               <span class="blog_item_date">
+	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
+	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
+	                               </span>
+	                           </div>
+	                          	<div class="blog_details">
+	                               <a class="d-inline-block" href="blog_details.html">
+	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
+	                               </a>
+	                               <p>여긴 캠페인 내용</p>
+	                           </div>
+	                          </td>
+	                         </tr>
+	                        </table>
+                        </article>
+        				</div>
+					</c:forEach>
+     			</div>
+        	</div>
+        </section>
 	</c:if>
 	
 	<c:if test="${page.totalcount eq 0}">
