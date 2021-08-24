@@ -18,7 +18,19 @@ public class AdAuthController {
 	private AdAuthService Service;
 	
 	@RequestMapping(value = "/adIndex", method = RequestMethod.GET)
-	public String index() {
+	public String index(Model model) {
+		int selectPlastic = Service.selectPlastic();
+		model.addAttribute("selectPlastic", selectPlastic);
+		
+		int selectOcean = Service.selectOcean();
+		model.addAttribute("selectOcean", selectOcean);
+		
+		int selectIce = Service.selectIce();
+		model.addAttribute("selectIce", selectIce);
+		
+		int selectForest = Service.selectForest();
+		model.addAttribute("selectForest", selectForest);
+		
 		return "adIndex";
 	}
 	

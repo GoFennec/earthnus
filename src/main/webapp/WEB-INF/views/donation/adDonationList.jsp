@@ -24,7 +24,25 @@
   		}
   		label{
   		margin-top:1rem;
-  	}
+  		}
+  		  /*radio 버튼 색상변경 */
+  		input[type='checkbox'] {
+    		-webkit-appearance:none;
+    		width:16px;
+    		height:16px;
+    		outline:none;
+    		background:#e6e6e6;
+  		}
+  		input[type='checkbox']:before {
+    		content:'';
+    		display:block;
+    		width:60%;
+    		height:60%;
+    		margin: 20% auto;  
+  		}
+  		input[type='checkbox']:checked:before {
+  			background:#66BB6A;
+  		}
   	</style>
 </head>
 
@@ -74,28 +92,19 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/oList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 주문목록</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
+          aria-controls="collapseForm">
+          <i class="fas fa-shopping-cart"></i>
+          <span>지구마켓 주문 관리</span>
         </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/dList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 배송처리목록</span>
-        </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/aList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 주문승인내역</span>
-        </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/cList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 주문취소내역</span>
-        </a>
+        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/adExGoods/oList">주문 목록</a>
+            <a class="collapse-item" href="/adExGoods/dList">배송 처리 목록</a>
+            <a class="collapse-item" href="/adExGoods/aList">주문 승인 내역</a>
+            <a class="collapse-item" href="/adExGoods/cList">주문취소내역</a>
+          </div>
+        </div>
       </li>
     </ul>
     <!-- Sidebar -->
@@ -236,7 +245,7 @@
                 <a href="/adDonation/canceled" class="btn btn-sm btn-primary">취소된 후원</a>
                 </div>
                 <div class="col-sm-12 col-md-6" style="text-align:right;">
-                <a href="" class="btn btn-sm btn-primary" id="cancel" style="background-color:#fc544b;border-color:#fc544b;">결제 취소</a>
+                <button class="btn btn-sm btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="checkDelete()">결제 취소</button>
                 </div>
                 </div>  
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
@@ -258,8 +267,8 @@
 					<tbody>
 					<c:if test="${not empty adDonationList}">
 						<c:forEach items="${adDonationList}" var="donation">
-						<tr class="donationInfo" id="${donation.pay_no}">
-							<td>${donation.pay_no}</td>
+						<tr>
+							<td>${donation.pay_no} <br> <input type="checkbox" name="test_check" value="${donation.pay_num}"></td>
 							<td>${donation.pay_num}</td>
 							<td>${donation.pay_name}</td>
 							<td>${donation.pay_id}</td>
@@ -287,8 +296,8 @@
 					</c:if>
 					<c:if test="${not empty waitingList}">
 						<c:forEach items="${waitingList}" var="donation">
-						<tr class="donationInfo" id="${donation.pay_no}">
-							<td>${donation.pay_no}</td>
+						<tr>
+							<td>${donation.pay_no} <br> <input type="checkbox" name="test_check" value="${donation.pay_num}"></td>
 							<td>${donation.pay_num}</td>
 							<td>${donation.pay_name}</td>
 							<td>${donation.pay_id}</td>
@@ -350,6 +359,24 @@
             </div>
           </div>
           <!--Row-->
+          <script type="text/javascript">
+			function checkDelete(){
+				var checkArr = [];     // 배열 초기화
+				$("input[name='test_check']:checked").each(function(i) {
+        			checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+    			});
+				if(checkArr.length == 0){
+					alert('취소할 후원을 체크해주세요.');
+					return;
+				}else if(checkArr.length > 1){
+					alert('취소할 후원을 한 개만 선택해주세요.');
+					return;
+				}else{
+					$("#cancelModal").modal('show');
+					$("#item").text(checkArr + " 후원을 삭제합니다.");
+				}
+			}
+			</script>
 
           <!-- Modal Logout -->
           <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
@@ -378,17 +405,19 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">후원 결제를 취소합니다.</h5>
+                  <h5 class="modal-title" id="exampleModalLabelLogout">후원 결제 취소</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <p>관리자 비밀번호를 입력하세요.</p>
-                  <input type="password" id="deletePW">
+                	<input type="checkbox" id="itemCheck"> &nbsp &nbsp <span id="item"></span>
+                	<hr>
+                  	<p>관리자 비밀번호를 입력하세요.</p>
+                  	<input type="password" id="deletePW">
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="memberDelete()">삭제</button>
+                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="donationDelete()">삭제</button>
                   <button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소</button>
                 </div>
               </div>
@@ -396,6 +425,8 @@
           </div>
               <script type="text/javascript">
 				function memberDelete(){
+					var cancelNo = 0;
+					var cancelNum = "";
 					var deletePW = $("#deletePW").val();
 					var deleteMember = $("#mem_id").val();
 					if(deletePW == ""){
@@ -455,8 +486,12 @@
     });
   </script>
 <script>
-var cancelNo = 0;
+var cancelNo = "";
 var cancelNum = "";
+var selectTr = "";
+var selectTd = "";
+var payState = "";
+var pointState = "";
 
 var today = new Date();
 var year = today.getFullYear();
@@ -464,44 +499,57 @@ var month = ('0' + (today.getMonth() + 1)).slice(-2);
 var day = ('0' + today.getDate()).slice(-2);
 var dateString = year + '-' + month  + '-' + day;
 
-$(function() {
-	$('.donationInfo').click(function() {
-		$('.donationInfo').css("background-color", "transparent");
-		selectTr = $(this);
+function donationDelete(){
+	var checkBox = $("input:checkbox[name=test_check]:checked");
+	checkBox.each(function(i){
+		selectTr = checkBox.parent().parent().eq(i);
 		selectTd = selectTr.children();
-		donationNo = selectTd.eq(0).text();
-		donationNum = selectTd.eq(1).text();
-		donationState = selectTd.eq(9).text();
-		donationPointState = selectTd.eq(10).text();
-		cancelNo = donationNo;
-		cancelNum = donationNum;
-		payState = donationState;
-		pointState = donationPointState;
-		$('#'+donationNo).css("background-color", "#C8E6C9");
+		cancelNo = selectTd.eq(0).text();
+	    cancelNum = selectTd.eq(1).text();
+	    payState = selectTd.eq(9).text();
+	    pointState = selectTd.eq(10).text();
 	});
-});
-$("#cancel").click(function(e){
-	if (cancelNum == "") {
-		alert("결제를 취소할 항목을 선택해주세요.");
-		return false;
-	} else if(cancelNum != "") {
-		if (confirm("정말 결제를 취소하시겠습니까?") == true) {
-			cancelPay(e);
-		} else {
-			return false;
- 		}
+	var deletePW = $("#deletePW").val();
+	if(deletePW == ""){
+		alert("관리자 비밀번호를 입력해주세요.");
+		return;
+	}else if($("input:checkbox[id=itemCheck]").is(":checked") == false) {
+		alert('확인 체크를 해주세요.');
+		return;
 	}
-});
-function cancelPay(e) {
+
+	$.ajax({
+			type: "POST", //요청 메소드 방식
+			 url:"/adDonation/delete",
+			data: {"deletePW":deletePW},
+			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			
+			success : function(result){
+  			if(result.error === true){
+  				cancelPay();
+  			}else if(result.error === false){
+	  			alert('관리자 비밀번호를 확인해 주세요.');
+	  			return;
+  			}
+			},
+		 error:function(request,status,error){
+	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+  			//통신 실패시 발생하는 함수(콜백)
+		 }
+		});
+}
+
+
+function cancelPay() {
 	if (payState == '결제취소') {
 		alert("이미 취소 된 결제입니다.");
+		location.href="/adDonation/list";
 		return;
 	} else if (pointState == '적립완료') {
 		alert("포인트 적립이 완료 된 결제는 취소 할 수 없습니다.");
+		location.href="/adDonation/list";
 		return;
 	} else {
-		e.preventDefault();
-		$('#cancelModal').modal("show");
 	    jQuery.ajax({
 	      url : "/payments/cancel/" + cancelNum,
 	      method : "POST",
@@ -513,7 +561,7 @@ function cancelPay(e) {
 	      })
 	    }).done(function(result) {
 	        alert("결제가 취소되었습니다.");
-	        location.replace(location.href);
+	        location.href="/adDonation/list";
 	    }).fail(function(error) {
 	      alert("결제취소를 실패하였습니다.");
 	    });
