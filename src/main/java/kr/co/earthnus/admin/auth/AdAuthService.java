@@ -36,8 +36,28 @@ public class AdAuthService {
 			} else {
 				aBean = null;
 			}
-
 		}
 		return aBean;
+	}
+	
+	public int selectPlastic() {
+		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
+		int selectPlastic = dao.selectPlastic();
+		return selectPlastic;
+	}
+	public int selectOcean() {
+		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
+		int selectOcean = dao.selectOcean();
+		return selectOcean;
+	}
+	public int selectIce() {
+		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
+		int selectIce = dao.selectIce();
+		return selectIce;
+	}
+	public int selectForest() {
+		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
+		int selectForest = dao.selectForest();
+		return selectForest;
 	}
 }

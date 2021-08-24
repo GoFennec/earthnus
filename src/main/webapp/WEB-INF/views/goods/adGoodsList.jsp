@@ -93,28 +93,19 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/oList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 주문목록</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
+          aria-controls="collapseForm">
+          <i class="fas fa-shopping-cart"></i>
+          <span>지구마켓 주문 관리</span>
         </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/dList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 배송처리목록</span>
-        </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/aList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 주문승인내역</span>
-        </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/cList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 주문취소내역</span>
-        </a>
+        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/adExGoods/oList">주문 목록</a>
+            <a class="collapse-item" href="/adExGoods/dList">배송 처리 목록</a>
+            <a class="collapse-item" href="/adExGoods/aList">주문 승인 내역</a>
+            <a class="collapse-item" href="/adExGoods/cList">주문취소내역</a>
+          </div>
+        </div>
       </li>
     </ul>
     <!-- Sidebar -->
@@ -297,9 +288,6 @@
           <!--Row-->
 			
 			
-			
-			
-			
 			<script type="text/javascript">
 			function checkUpdate(){
 				var checkArr = [];     // 배열 초기화
@@ -329,7 +317,7 @@
 					return;
 				}else{
 					$("#cancelModal").modal('show');
-					$("#item").text(checkArr + " 상품을 삭제합니다.");
+					$("#item").text("정말 " + checkArr + " 상품을 삭제하시겠습니까?");
 				}
 			}
 			</script>
@@ -445,7 +433,6 @@
     $(document).ready(function () {
       $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-      
     });
   </script>
 

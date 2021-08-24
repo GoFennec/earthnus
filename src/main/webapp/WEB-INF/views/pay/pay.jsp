@@ -13,19 +13,20 @@
 
 <style>
 section{text-align: center;}
-section p{font-size: 0.8em; color: gray;}
+section p{color: gray;}
 table {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
   text-align: left;
   line-height: 1.5;
+  margin: auto;
 }
 thead th {
   padding: 10px;
   font-weight: bold;
   vertical-align: top;
-  color: #04B4AE;
-  border-bottom: 3px solid #04B4AE;
+  color: #388E3C;
+  border-bottom: 3px solid #388E3C;
 }
 tbody th {
   width: 150px;
@@ -61,7 +62,7 @@ button {
 <div class="container">
 	
 	<section>
-	<h2>당신의 후원이 지구를 낫게합니다.</h2>
+	<h1>당신의 후원이 지구를 낫게합니다.</h1>
 	<p>EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
 	</section><br>
 	<hr><br><br>

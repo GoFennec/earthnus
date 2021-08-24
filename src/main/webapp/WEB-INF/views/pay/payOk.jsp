@@ -11,19 +11,20 @@
 
 <style>
 section{text-align: center;}
-section p{font-size: 0.8em; color: gray;}
+section p{color: gray;}
 table {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
   text-align: left;
   line-height: 1.5;
+  margin: auto;
 }
 thead th {
   padding: 10px;
   font-weight: bold;
   vertical-align: top;
-  color: #04B4AE;
-  border-bottom: 3px solid #04B4AE;
+  color: #388E3C;
+  border-bottom: 3px solid #388E3C;
 }
 tbody th {
   width: 150px;
@@ -53,7 +54,7 @@ td {
 	
 	<section>
 	<img src="/resources/pay/earth.png" title="지구사진" alt="밝아진 지구사진" />
-	<h2>따뜻한 마음으로 후원에 참여해주셔서 감사합니다.</h2>
+	<h1>따뜻한 마음으로 후원에 참여해주셔서 감사합니다.</h1>
 	<p>지금 응원 릴레이에 참여하여 다른분들의 후원을 응원해주세요!</p>
 	</section><br>
 	<hr><br><br>
@@ -73,11 +74,11 @@ td {
 		</tbody>
 		</table>	
 	</div>
-	</section><br><br>
+	</section><br><br><br>
 
 	<div id="button">
 		<button type="button" class="btn btn-dark" onclick="location.href='/'">메인으로</button>&nbsp;&nbsp;
-		<button type="button" class="btn btn-dark" onclick="location.href='/member/myPage'">후원내역 조회</button>&nbsp;&nbsp;
+		<button type="button" class="btn btn-dark" onclick="location.href='/member/myPage'">나의 후원내역</button>&nbsp;&nbsp;
 		<button type="button" class="btn btn-dark" onclick="location.href='/cheBoard/list'">응원 릴레이</button>
 	</div>
 
