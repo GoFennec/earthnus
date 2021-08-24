@@ -27,4 +27,36 @@
 		SELECT * FROM ADMEMBER WHERE AD_ID=#{auth_id}
 	</select>
 	
+	<select id="selectPlastic" resultType="int">
+		SELECT COUNT(*) FROM PAY WHERE PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경'
+	</select>
+	
+	<select id="selectOcean" resultType="int">
+		SELECT COUNT(*) FROM PAY WHERE PAY_DNAME='조개' OR PAY_DNAME='새우' OR PAY_DNAME='문어' OR PAY_DNAME='바다'
+	</select>
+	
+	<select id="selectIce" resultType="int">
+		SELECT COUNT(*) FROM PAY WHERE PAY_DNAME='작은 얼음' OR PAY_DNAME='큰 얼음' OR PAY_DNAME='빙하 조각' OR PAY_DNAME='빙하'
+	</select>
+	
+	<select id="selectForest" resultType="int">
+		SELECT COUNT(*) FROM PAY WHERE PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲'
+	</select>
+	
+	<insert id="insertVisitor" parameterType="visit">
+            INSERT
+            INTO VISITOR
+            (
+                VISIT_IP,
+                VISIT_TIME,
+                VISIT_AGENT
+            )
+            VALUES
+            (
+                #{visit_ip},
+                now(),
+                #{visit_agent}
+            )
+     </insert>
+	
 </mapper>

@@ -15,6 +15,7 @@
 		<typeAlias alias="mail" type="kr.co.earthnus.util.MailBean"/>
 		<typeAlias alias="adAuth" type="kr.co.earthnus.admin.auth.AdAuthBean"/>
 		<typeAlias alias="adMember" type="kr.co.earthnus.admin.member.AdMemberBean"/>
+		<typeAlias alias="visit" type="kr.co.earthnus.admin.auth.VisitCountBean"/>
 	</typeAliases>
 	
 	<mappers>
