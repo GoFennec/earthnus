@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,8 +130,8 @@ body {
 }
 
 .view-account .side-bar .side-menu .nav>li.active a {
-	color: #40babd;
-	border-bottom: 2px solid #40babd;
+	color: #388E3C;
+	border-bottom: 2px solid #388E3C;
 	background: none;
 	border-right: none
 }
@@ -397,7 +399,7 @@ body {
 }
 
 .drive-wrapper .drive-item-title a:hover {
-	color: #40babd
+	color: #388E3C
 }
 
 .theme-2 .drive-wrapper .drive-item-title a:hover {
@@ -473,7 +475,7 @@ body {
 }
 
 .drive-list-view a:hover {
-	color: #40babd
+	color: #388E3C
 }
 
 .theme-2 .drive-list-view a:hover {
@@ -617,7 +619,7 @@ body {
 	}
 	.view-account .side-bar .side-menu .nav>li.active a {
 		background: #f9f9fb;
-		border-right: 4px solid #40babd;
+		border-right: 4px solid #388E3C;
 		border-bottom: none
 	}
 	.theme-2 .view-account .side-bar .side-menu .nav>li.active a {
@@ -666,7 +668,7 @@ body {
 							<ul class="nav">
 								<li><a href="/member/myPage"><span class="fa fa-user"></span>
 										마이페이지</a></li>
-								<li class="active"><a href="/member/myInfoPwCh"><span
+								<li class="active"><a href="/member/myInfo"><span
 										class="fa fa-cog"></span> 내 정보</a></li>
 								<li><a href="/member/myOrder"><span
 										class="fa fa-credit-card"></span>내 주문 내역</a></li>
@@ -675,24 +677,14 @@ body {
 
 								<li><a href="/member/myDelete"><span class="fa fa-th"></span>
 										탈퇴하기</a></li>
-								<li><a href="#"><span class="fa fa-clock-o"></span>
-										Reminders</a></li>
 							</ul>
 						</nav>
 					</div>
 					<div class="content-panel">
-						<h2 class="title">내 정보</h2>
+						<h2 class="title">&nbsp;&nbsp;&nbsp;내 정보</h2>
 						<form class="form-horizontal" method="post" action="/updateMyInfo">
 							<fieldset class="fieldset">
-								<!--  <div class="form-group avatar">
-                                <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                                    <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="개인프로필사진">
-                                </figure>
-                                <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                                    <input type="file" class="file-uploader pull-left">
-                                    <button type="submit" class="btn btn-sm btn-default-alt pull-left">사진 업데이트</button>
-                                </div>
-                            </div> -->
+			
 								<div class="col-12">
 									<label for="username" class="form-label">아이디</label> <input
 										type="text" name="mem_id" class="form-control" id="mem_id"
@@ -703,6 +695,8 @@ body {
 										type="text" name="mem_name" class="form-control" id="mem_name"
 										value="${MemberBean.mem_name  }" readonly>
 								</div>
+								
+									<c:if test="${MemberBean.mem_api eq null}" >
 								<div class="col-12">
 									<label for="username" class="form-label">비밀번호</label>
 								</div>
@@ -710,7 +704,8 @@ body {
 									<button class="btn btn-sm btn-default-alt pull-left"
 										data-toggle="modal" data-target="#myModal">비밀번호 변경</button>
 								</div>
-
+								<br><br> <br>
+							</c:if>
 
 
 
@@ -761,8 +756,9 @@ body {
 																result) {
 															if (result.error) {
 																alert("비밀번호 변경이 완료되었습니다.");
-
-																window.location = '/member/myInfo';
+																 $("#myModal").removeClass("in");
+				                                                  $(".modal-backdrop").remove();
+				                                                  $("#myModal").hide();
 															} else {
 																location.href = result.url;
 															}
@@ -784,7 +780,7 @@ body {
 										}
 									}
 								</script>
-								<br> <br>
+								
 								<div class="col-12">
 									<label for="username" class="form-label">생년월일 </label> <input
 										type="date" name="mem_birth" class="form-control" id="birth"
@@ -1113,7 +1109,9 @@ body {
 																			result) {
 																		if (result.error) {
 																			alert("이메일 변경이 완료되었습니다.")
-																			window.location = '/member/myInfo';
+																			 $("#myModal2").removeClass("in");
+							                                                  $(".modal-backdrop").remove();
+							                                                  $("#myModal2").hide();
 																		} else {
 																			location.href = result.url;
 																		}
@@ -1135,8 +1133,8 @@ body {
 								</script>
 
 								<div class="col-6">
-									<button class="btn btn-sm btn-default-alt pull-left"
-										type="submit" style="margin-top: 10px">회원정보수정</button>
+									<input type="submit" class="btn btn-sm btn-default-alt pull-left"
+									 style="margin-top: 10px" value="회원정보수정">
 
 								</div>
 
@@ -1147,20 +1145,7 @@ body {
 			</section>
 		</div>
 	</div>
-<jsp:include page="/WEB-INF/views/footer.jsp" />
-	<script type="text/javascript">
-function check() {
-	var id = $("#mem_id").val();
-	if (id == "") {
-		$('#invalid-id').show();
-		return false;
-	} else if (!$("#mailCheck").attr("disabled")) {
-		alert('이메일 인증을 완료해주세요.');
-		return false;
-	}
 
-}
-	</script>
 
 <script>	
 		$(function() {
@@ -1207,6 +1192,10 @@ function check() {
 		    }).open();
 			}
 		</script>
-
+<script>
+         $(document).keypress(function(e) { 
+            if (e.keyCode == 13) e.preventDefault(); 
+         });
+      </script>
 </body>
 </html>

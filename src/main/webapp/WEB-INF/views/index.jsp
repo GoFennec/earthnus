@@ -62,15 +62,14 @@
 						<div class="row">
 							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
 								<div class="hero__caption">
-									<h1 data-animation="fadeInUp" data-delay=".2s">Environment</h1>
+									<h1 data-animation="fadeInUp" data-delay=".2s">EARTH & US</h1>
 									<P data-animation="fadeInUp" data-delay=".4s">
-										Provide us a green and healthy life<br> we need to
-										protect
+										하나뿐인 우리 지구<br> EARTH & US와 함께 지켜주세요
 									</P>
 									<!-- Hero-btn -->
 									<div class="hero__btn">
-										<a href="resources/industries.html" class="hero-btn mb-10"
-											data-animation="fadeInUp" data-delay=".8s">Join Us Now</a>
+										<a href="/member/join" class="hero-btn mb-10"
+											data-animation="fadeInUp" data-delay=".8s">함께하기</a>
 									</div>
 								</div>
 							</div>
@@ -123,15 +122,6 @@
 				</div>
 			</div>
 
-			<!--? video_start 
-            <div class="video-area d-flex align-items-center justify-content-center">
-                <div class="video-wrap position-relative">
-                    <div class="video-icon" >
-                        <a class="popup-video btn-icon" href="https://www.youtube.com/watch?v=up68UAfH0d0"><i class="fas fa-play"></i></a>
-                    </div>
-                </div>
-            </div>
-             video_end -->
 
 		</div>
 		<!-- slider Area End-->
@@ -148,10 +138,11 @@
 					</div>
 					<div class="support-caption">
 						<p class="pera-top">지구는 동시다발적인 환경문제로 심각한 위기에 처해있습니다. 하지만 우리에게는
-							아직 기회가 있습니다. 45년이 넘는 세월동안 그린피스는 기후변화, 해양 생태계 파괴와 산림 파괴, 유해
+							아직 기회가 있습니다. 지구를 지키는 가장 쉬운 방법 EARTH & US와 함께 하세요!
+							EARTH & US는 기후변화, 해양 생태계 파괴와 산림 파괴, 유해
 							화학물질로부터 우리의 소중한 지구를 지키기 위해 쉼없이 달려왔습니다. 환경문제 해결을 위해서는 한시라도 빨리 행동해야
-							합니다. 여러분의 후원으로 그린피스는 환경 문제를 조사하고, 경각심을 불러 일으키는 보고서를 발표하고, 창의적인
-							캠페인과 직접 행동을 펼칠 수 있습니다. 미래 세대가 깨끗한 세상에서 살 수 있도록, 지구를 위한 변화를 그린피스와
+							합니다. 여러분의 후원으로 EARTH & US는 환경 문제를 조사하고, 경각심을 불러 일으키는 보고서를 발표하고, 창의적인
+							캠페인과 직접 행동을 펼칠 수 있습니다. 미래 세대가 깨끗한 세상에서 살 수 있도록, 지구를 위한 변화를 EARTH & US와
 							함께 만들어주세요!</p>
 						<a href="/donation/list" class="border-btn">후원하기</a>
 					</div>
@@ -183,10 +174,9 @@
 					<div class="col-xl-10 col-lg-10 ">
 						<!-- Section Tittle -->
 						<div class="section-tittle text-center mb-80">
-							<h2>Every day 6,000 beavers perished</h2>
-							<p class="pl-20 pr-20">Interdum nulla, ut commodo diam libero
-								vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem
-								imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+							<h2>지구를 위한 우리의 손길</h2>
+							<p class="pl-20 pr-20">전 세계 많은 사람들이 푸르른 지구와 우리의 미래를 위해 힘을 모으고 있습니다. 
+							여러분도 동참해 주세요!</p>
 						</div>
 					</div>
 				</div>
@@ -194,14 +184,15 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases mb-40">
 							<div class="cases-img">
-								<img src="resources/assets/img/gallery/case1.png" alt="">
+								<img src="/resources/donation/ocean.jpg" height="250px"  title="바다가 힘들어요!" alt="해양오염 사진" >
 							</div>
 							<div class="cases-caption">
 								<h3>
-									<a href="#">Wildlife in Danger</a>
+									<a href="/donation/ocean">바다가 힘들어요!</a>
 								</h3>
-								<p>Interdum nulla, ut commodo diam libero vitae erat. Aenean
-									faucibus nibh et justo cursus rutrum.</p>
+								<p>바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.
+								그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.
+								우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.</p>
 								<!-- Progress Bar -->
 								<div class="single-skill mb-15">
 									<div class="bar-progress">
@@ -225,14 +216,15 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases mb-40">
 							<div class="cases-img">
-								<img src="resources/assets/img/gallery/case2.png" alt="">
+								<img src="resources/donation/forest.jpg" height="250px" title="나무를 심어요!" alt="사막화가 진행되고있는 토양 사진">
 							</div>
 							<div class="cases-caption">
 								<h3>
-									<a href="#">Our Green Projects</a>
+									<a href="/donation/forest">나무를 심어요!</a>
 								</h3>
-								<p>Interdum nulla, ut commodo diam libero vitae erat. Aenean
-									faucibus nibh et justo cursus rutrum.</p>
+								<p>숲은 육지에 서식하는 많은 동식물들의 집입니다.
+									인간의 욕심으로 인해 전 세계 산림의 절반이 사라졌습니다.
+									숲을 터전으로 살아가고있는 생물들은 멸종위기에 처했으며, 온실가스는 흡수되지않고 대기로 방출되고있습니다.</p>
 								<!-- Progress Bar -->
 								<div class="single-skill mb-15">
 									<div class="bar-progress">
@@ -255,14 +247,15 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases">
 							<div class="cases-img">
-								<img src="resources/assets/img/gallery/case3.png" alt="">
+								<img src="/resources/donation/plastic.jpg" height="250px" title="플라스틱이 넘쳐요!" alt="방대한 양의 플라스틱 사진" >
 							</div>
 							<div class="cases-caption">
 								<h3>
-									<a href="#">Wildlife in Danger</a>
+									<a href="/donation/plastic">플라스틱이 넘쳐요!</a>
 								</h3>
-								<p>Interdum nulla, ut commodo diam libero vitae erat. Aenean
-									faucibus nibh et justo cursus rutrum.</p>
+								<p>플라스틱은 미세 플라스틱으로 분해됩니다.
+								수많은 해양 동물들은 이를 먹이로 착각하고 섭취하여 폐사에 이르고 있으며, 
+								결국 미세 플라스틱은 해양 먹이사슬을 타고 우리의 식탁으로 돌아옵니다.<br><br></p>
 								<!-- Progress Bar -->
 								<div class="single-skill mb-15">
 									<div class="bar-progress">
@@ -285,14 +278,15 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases">
 							<div class="cases-img">
-								<img src="resources/assets/img/gallery/case3.png" alt="">
+								<img  src="/resources/donation/ice.jpg" height="250px" title="북극곰을 도와줘요!" alt="삶의 터전을 잃어가는 북극곰 사진" >
 							</div>
 							<div class="cases-caption">
 								<h3>
-									<a href="#">Wildlife in Danger</a>
+									<a href="/donation/ice">북극곰을 도와줘요!</a>
 								</h3>
-								<p>Interdum nulla, ut commodo diam libero vitae erat. Aenean
-									faucibus nibh et justo cursus rutrum.</p>
+								<p>지구 온난화로 북극 기온이 상승하여 빙하가 녹고있습니다.
+								북극을 해양보호구역으로 만들어 파괴적인 어업과 석유 시추의 중단이 시급합니다.
+								빠르게 녹고있는 북극을 지켜요.<br><br><br></p>
 								<!-- Progress Bar -->
 								<div class="single-skill mb-15">
 									<div class="bar-progress">
@@ -365,6 +359,8 @@
         </div>
        Services Area End -->
 
+
+
 		<!--? Visit Our Tailor Start -->
 		<div class="visit-tailor-area fix">
 			<!--Right Contents  -->
@@ -390,59 +386,7 @@
 		<!-- Visit Our Tailor End -->
 
 
-		<!--? Blog Area Start -->
-		<section class="home-blog-area pb-padding">
-			<div class="container">
-				<!-- Section Tittle -->
-				<div class="row justify-content-center">
-					<div class="col-xl-8 col-lg-9 col-md-11">
-						<div class="section-tittle text-center mb-90">
-							<h2>Latest news</h2>
-							<p>Interdum nulla, ut commodo diam libero vitae erat. Aenean
-								faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut
-								sem vitae risus tristique posuere.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xl-6 col-lg-6 col-md-6">
-						<div class="home-blog-single mb-30">
-							<div class="blog-img-cap">
-								<div class="blog-img">
-									<img src="resources/assets/img/gallery/home-blog1.png" alt="">
-								</div>
-								<div class="blog-cap">
-									<h3>
-										<a href="blog_details.html">Leverage agile frameworks to
-											provide a robust synopsis</a>
-									</h3>
-									<p>The automated process starts as soon as your clothes go
-										into the machine. Duis cursus, mi quis viverra ornare.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6 col-lg-6 col-md-6">
-						<div class="home-blog-single mb-30">
-							<div class="blog-img-cap">
-								<div class="blog-img">
-									<img src="resources/assets/img/gallery/home-blog2.png" alt="">
-								</div>
-								<div class="blog-cap">
-									<h3>
-										<a href="blog_details.html">Leverage agile frameworks to
-											provide a robust synopsis</a>
-									</h3>
-									<p>The automated process starts as soon as your clothes go
-										into the machine. Duis cursus, mi quis viverra ornare.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- Blog Area End -->
+	
 
 	</main>
 	<jsp:include page="footer.jsp" />

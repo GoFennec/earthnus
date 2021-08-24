@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.co.earthnus.user.cheBoard.CheBoardBean;
 import kr.co.earthnus.user.goods.ExGoodsBean;
+import kr.co.earthnus.user.pay.PayBean;
 import kr.co.earthnus.util.MailBean;
 
 public interface MemberMybatis {
@@ -38,4 +39,5 @@ public interface MemberMybatis {
 	public int changePW(@Param("changeNum") String changeNum, @Param("email") String email, @Param("name") String name);
 	public List<ExGoodsBean> myOrder(String mem_id);
 	public List<CheBoardBean> myMessage(String mem_id);
+	public List<PayBean> myPay(String mem_id);
 }

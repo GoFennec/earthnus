@@ -63,11 +63,7 @@ public class AuthController {
 	        //1. 로그인 사용자 정보를 읽어온다.
 			apiResult = naverLoginBO.getUserProfile(oauthToken);  //String형식의 json데이터
 			
-			/** apiResult json 구조
-			{"resultcode":"00",
-			 "message":"success",
-			 "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
-			**/
+		
 			
 			//2. String형식인 apiResult를 json형태로 바꿈
 			JSONParser parser = new JSONParser();
@@ -82,35 +78,36 @@ public class AuthController {
 			String name = (String) response_obj.get("name");
 			String email = (String) response_obj.get("email");
 			String mobile = (String) response_obj.get("mobile");
-			
-			System.out.println("네이버 ID : " + id);
-			System.out.println("이름 : " + name);
-			System.out.println("eMail : " + email);
-			System.out.println("모바일" + mobile);
-			
-			
-			
+			String birthday = (String) response_obj.get("birthday");
+			String birthyear = (String) response_obj.get("birthyear");
+			String gender = (String) response_obj.get("gender");
+			String mem_birth = birthyear + '-' + birthday;
+		
 			if(response_obj.get("id") != null) {
 			//4.파싱 닉네임 세션으로 저장
 			session.setAttribute("mem_id",id); //세션 생성
 			session.setAttribute("mem_name", name);
 			session.setAttribute("mem_email", email);
 			session.setAttribute("mem_tel", mobile);
-			/*
-			if(response_obj.get("id") != null) {
-				session.setAttribute("mem_id", response_obj.get("id"));
-				session.setAttribute("mem_name", response_obj.get("name"));
-				session.setAttribute("mem_email", response_obj.get("email"));
-				session.setAttribute("mem_tel", response_obj.get("tel"));
-			System.out.println("세션 test" + session.getAttribute("mem_name"));*/
+			session.setAttribute("mem_birth", mem_birth);
+			session.setAttribute("mem_gender", gender);
+			if (gender.equals("M")) {
+				session.setAttribute("mem_gender", "남자");
+			} else if (gender.equals("F")) {
+				session.setAttribute("mem_gender", "여자");
+			} else {
+				session.setAttribute("mem_gender", "선택안함");
+			}
+	
+			
 			model.addAttribute("result", apiResult);
 			String auth_id = (String) session.getAttribute("mem_id");
 			System.out.println("id test" + auth_id);
 			aBean = service.naverLogin(auth_id);
-		
 			model.addAttribute("aBean", aBean);
-	if(aBean == null) {
-				return "redirect:/member/join_naver";
+			
+			if(aBean == null) {
+				return "redirect:/join_naver";
 			}else {
 				session.setAttribute("auth", aBean);
 				return "redirect:/";
@@ -179,14 +176,26 @@ public class AuthController {
 			System.out.println("email not null");
 			session.setAttribute("auth_id", userInfo.get("email"));
 			session.setAttribute("auth_name", userInfo.get("nickname"));
+			session.setAttribute("mem_email", userInfo.get("email"));
+			
+			
 			String auth_id = (String) session.getAttribute("auth_id");
+			
 			System.out.println("어쓰아이디" + auth_id);
-
+			if (userInfo.get("gender").toString().equals("male")) {
+				session.setAttribute("mem_gender", "남자");
+			} else if (userInfo.get("gender").toString().equals("female")) {
+				session.setAttribute("mem_gender", "여자");
+			} else {
+				session.setAttribute("mem_gender", "선택안함");
+			}
+			
+		
 			session.setAttribute("access_Token", access_Token);
 			aBean = service.kakaoLogin(auth_id);
 			model.addAttribute("aBean", aBean);
 			if (aBean == null) {
-				return "redirect:member/join_kakao";
+				return "redirect:/join_kakao";
 			} else {
 				session.setAttribute("auth", aBean);
 				return "redirect:/";

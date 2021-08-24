@@ -16,6 +16,7 @@
 		<result property="mem_email" column="MEM_EMAIL"/>
 		<result property="mem_date" column="MEM_DATE"/>
 		<result property="mem_point" column="MEM_POINT"/>
+		<result property="mem_api" column="MEM_API"/>
 	</resultMap>
 <resultMap id="exGoodsResult" type="exGoods">
 		<id property="exg_num" column="EXG_NUM"/>
@@ -52,12 +53,12 @@
 	</insert>
 	
 	<insert id="insertMember_kakao" parameterType="member">
-		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
-		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
+		insert into member(MEM_ID, MEM_NAME, MEM_GENDER, MEM_EMAIL, MEM_API)
+		values(#{mem_id},#{mem_name},#{mem_gender},#{mem_email},"KAKAO")
 	</insert>
 	<insert id="insertMember_naver" parameterType="member">
-		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
-		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
+		insert into member(MEM_ID, MEM_NAME, MEM_TEL, MEM_GENDER, MEM_EMAIL, MEM_BIRTH, MEM_API)
+		values(#{mem_id},#{mem_name},#{mem_tel},#{mem_gender},#{mem_email}, #{mem_birth}, "NAVER")
 	</insert>
 	
 	
@@ -81,7 +82,9 @@
 	<select id="myDonation_p" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND pay_dname in ('작은 얼음','큰 얼음','빙하 조각','빙하');
 	</select>
-	
+	<select id="myPay"  parameterType="String" resultType="pay">
+	SELECT PAY_DNAME, PAY_PRICE, PAY_PDATE, PAY_STATE, PAY_COMMENT FROM PAY WHERE PAY_ID=#{mem_id} ORDER BY PAY_PDATE DESC
+	</select>
 
 	<select id="pwCheck" parameterType="String" resultType="String">
 	select
