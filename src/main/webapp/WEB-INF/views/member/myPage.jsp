@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,7 @@
 <style type="text/css">
 body{
 background:#f9f9fb;    
+
 }
 .view-account{
 background:#FFFFFF; 
@@ -102,8 +104,8 @@ background: none
 }
 
 .view-account .side-bar .side-menu .nav>li.active a {
-color: #40babd;
-border-bottom: 2px solid #40babd;
+color: #388E3C;
+border-bottom: 2px solid ##388E3C;
 background: none;
 border-right: none
 }
@@ -355,7 +357,7 @@ color: #494d55
 }
 
 .drive-wrapper .drive-item-title a:hover {
-color: #40babd
+color: #388E3C
 }
 
 .theme-2 .drive-wrapper .drive-item-title a:hover {
@@ -432,7 +434,7 @@ color: #494d55
 }
 
 .drive-list-view a:hover {
-color: #40babd
+color: #388E3C
 }
 
 .theme-2 .drive-list-view a:hover {
@@ -576,7 +578,7 @@ color: #a2a6af
 }
 .view-account .side-bar .side-menu .nav>li.active a {
     background: #f9f9fb;
-    border-right: 4px solid #40babd;
+    border-right: 4px solid #388E3C;
     border-bottom: none
 }
 .theme-2 .view-account .side-bar .side-menu .nav>li.active a {
@@ -595,24 +597,24 @@ color: #a2a6af
     width: 40px;
     display: inline-block
 }
-.modal {
-        text-align: center;
-	  }
- 
-		@media screen{ 
-        .modal:before {
-                display: inline-block;
-                vertical-align: middle;
-                content: " ";
-                height: 100%;
-        }
-		}
- 
-	.modal-dialog {
-        display: inline-block;
-        text-align: left;
-        vertical-align: middle;
-	}	   
+.btn_comment{
+background-position: left;
+    text-decoration: none;
+border: none;
+text-transform: capitalize;
+    border-radius: 30px;
+display: inline-block;
+    font-size: 15px;
+    transition: 0.6s;
+    box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);
+    background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
+background-size: 200%;
+margin-bottom: 5px;
+}
+table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
+	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
+	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
+
 
 </style>
 
@@ -637,7 +639,7 @@ color: #a2a6af
             		<nav class="side-menu">
         				<ul class="nav">
         					<li class="active" ><a href="/member/myPage"><span class="fa fa-user"></span>마이페이지</a></li>
-        					<li><a href="/member/myInfoPwCh"><span class="fa fa-cog"></span> 내 정보</a></li> 
+        					<li><a href="/member/myInfo"><span class="fa fa-cog"></span> 내 정보</a></li> 
         					<li><a href="/member/myOrder"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
@@ -646,9 +648,10 @@ color: #a2a6af
                 </div>
              
                 <div class="content-panel">
+                <form class="form-horizontal" method="post" action="/myPage" >
                     <h2 class="title">마이페이지</h2>
 					<hr>
-                    <form class="form-horizontal" method="post" action="/myPage" >
+                    
                         <fieldset class="fieldset">
                         
                             <div class="form-group">
@@ -668,26 +671,16 @@ color: #a2a6af
                                 </div>
                             </div>
                         </fieldset>
-                        
-                        
-                        
-                         
-                        
-                        
-                       
-                        <h2>내가 구한 지구</h2>
+                        <div>
+                        <br><br>
+                        <h3>내가 구한 지구</h3>
                          <hr>
-                        
-	
 
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="card">
 
 				<img class="card-img-top" src="/resources/donation/forestItem4.png" alt="forestItem4" title="나무이미지">
 
-				<div class="card-header px-4 pt-4">
-					<h3></h3>
-				</div>
 				<div class="card-body px-4 pt-2">
 					<p>내가 심은 나무</p>
 
@@ -705,15 +698,11 @@ color: #a2a6af
 		</div>
 		
 		
-	
 				<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="card">
 
 				<img class="card-img-top" src="/resources/donation/oceanItem4.png" alt="oceanItem4" title="해양사진">
 
-				<div class="card-header px-4 pt-4">
-					<h3></h3>
-				</div>
 				<div class="card-body px-4 pt-2">
 					<p>내가 살린 바다 친구들</p>
 
@@ -735,10 +724,6 @@ color: #a2a6af
 			<div class="card">
 
 				<img class="card-img-top" src="/resources/donation/iceItem4.png" alt="iceItem4" title="북극곰사진">
-
-				<div class="card-header px-4 pt-4">
-					<h3></h3>
-				</div>
 				<div class="card-body px-4 pt-2">
 					<p>내가 살린 북극곰</p>
 
@@ -759,9 +744,6 @@ color: #a2a6af
 
 				<img class="card-img-top" src="/resources/donation/plasticItem4.png" alt="plasticItem4" title="플라스틱사진">
 
-				<div class="card-header px-4 pt-4">
-					<h3></h3>
-				</div>
 				<div class="card-body px-4 pt-2">
 					<p>내가 줄인 플라스틱</p>
 
@@ -776,20 +758,53 @@ color: #a2a6af
 				</ul>
 			</div>
 		</div>
-		
-                       
-                        
-                        
-                        
-                        
-                    </form>
-                </div>
+</div>
+	
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <br><br>
+					<h3>내가 구한 지구 상세 내역</h3>
+					<hr>
+                <table class="table">
+                <thead>
+                  <tr>
+                    <th>기부 상품</th>
+                    <th>기부 금액</th>
+                    <th>기부 날짜</th>
+                    <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${myPay}" var="pay">
+                  <tr>
+                    <td class="text-truncate">${pay.pay_dname}</td>
+                    <td class="text-truncate">${pay.pay_price}</td>
+                    <td class="text-truncate">${pay.pay_pdate}</td>
+                 	<c:if test="${pay.pay_comment eq 'N'}" >
+                    <td class="text-truncate"><button type="button" 
+                    class="btn_comment" onclick="comment()">응원글 작성</button></td>
+         		 </c:if>
+         		 <c:if test="${pay.pay_comment eq 'Y'}" >
+                    <td class="text-truncate"></td>
+         		 </c:if>
+         		 </tr>
+         		 </c:forEach>
+                </tbody>
+              </table>
+<br><br><br><br>
+               </div>
+                   
+                 </form>
+            </div>
             </div>
         </section>
     </div>
 </div>
+	<script type="text/javascript">
+	function comment() {
+		location.href = "/cheBoard/list";
+	}
+</script>
 
-  
 
 </body>
 </html>

@@ -13,6 +13,13 @@ public class MemberBean {
 	private String mem_email;
 	private Date mem_date;
 	private int mem_point;
+	private String mem_api;
+	public String getMem_api() {
+		return mem_api;
+	}
+	public void setMem_api(String mem_api) {
+		this.mem_api = mem_api;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}

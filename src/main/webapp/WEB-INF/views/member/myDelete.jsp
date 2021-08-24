@@ -102,8 +102,8 @@ background: none
 }
 
 .view-account .side-bar .side-menu .nav>li.active a {
-color: #40babd;
-border-bottom: 2px solid #40babd;
+color: #388E3C;
+border-bottom: 2px solid #388E3C;
 background: none;
 border-right: none
 }
@@ -355,7 +355,7 @@ color: #494d55
 }
 
 .drive-wrapper .drive-item-title a:hover {
-color: #40babd
+color: #388E3C
 }
 
 .theme-2 .drive-wrapper .drive-item-title a:hover {
@@ -432,7 +432,7 @@ color: #494d55
 }
 
 .drive-list-view a:hover {
-color: #40babd
+color: #388E3C
 }
 
 .theme-2 .drive-list-view a:hover {
@@ -576,7 +576,7 @@ color: #a2a6af
 }
 .view-account .side-bar .side-menu .nav>li.active a {
     background: #f9f9fb;
-    border-right: 4px solid #40babd;
+    border-right: 4px solid #388E3C;
     border-bottom: none
 }
 .theme-2 .view-account .side-bar .side-menu .nav>li.active a {
@@ -595,7 +595,13 @@ color: #a2a6af
     width: 40px;
     display: inline-block
 }
-}
+col-md-6 col-sm-8 col-xs-12 pwlabel{
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+margin-top: 13px;}
+
+
 </style>
 
 </head>
@@ -619,7 +625,7 @@ color: #a2a6af
             		<nav class="side-menu">
         				<ul class="nav">
         					<li><a href="/member/myPage"><span class="fa fa-user"></span> 마이페이지</a></li>
-        					<li><a href="/member/myInfoPwCh"><span class="fa fa-cog"></span> 내 정보</a></li>
+        					<li><a href="/member/myInfo"><span class="fa fa-cog"></span> 내 정보</a></li>
         					<li><a href="/member/myOrder"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					
@@ -656,7 +662,9 @@ color: #a2a6af
             <p>게시판형 서비스에 등록한 게시글 삭제 불가 안내<br>
             	삭제를 원하는 게시글이 있다면 반드시 회원탈퇴 전 비공개 처리하거나 삭제하시기 바랍니다.<br>
             	탈퇴 후에는 회원정보가 삭제되어 본인 여부를 확인할 수 있는 방법이 없어, 게시글을 임의로 삭제해드릴 수 없습니다.<br>
-			</p>  
+			</p><br>
+			<p>포인트의 경우 회원 탈퇴 후 사용 또는 갱신이 불가능 합니다. 포인트를 이용하고 싶으 신 경우 탈퇴 전 사용 부탁드리며, 탈퇴 후 포인트 소멸에 대한 책임은 지지 않으니 신중한 선택 부탁드립니다. 
+			
         </div>
         <br/>
        
@@ -665,7 +673,7 @@ color: #a2a6af
                     <input type="checkbox" name="agreement" value="true">동의합니다.
                 </label>
             </div>
-           <label class="col-md-6 col-sm-8 col-xs-12 control-label">비밀번호</label>
+           <label class="col-md-6 col-sm-8 col-xs-12 control-label" >비밀번호</label>
               <div class="col-md-4 col-sm-4 col-xs-12">
               <input id="Password" type="password" class="form-control" name ="mem_pw" required>
               </div>

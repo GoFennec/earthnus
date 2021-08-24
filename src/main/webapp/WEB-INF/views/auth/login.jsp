@@ -81,7 +81,7 @@ body {
 	right: 15px;
 }
 .login-form .btn, .login-form .btn:active {
-	background: #4aba70 !important;
+	background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
 	border: none;
 	line-height: normal;
 }
@@ -102,7 +102,7 @@ body {
 	font-size: 13px;
 }
 .login-form a {
-	color: #4aba70;
+	color: #388E3C;
 }
 </style>
 </head>
@@ -120,7 +120,7 @@ body {
             <input type="password" class="form-control" id="auth_pw" name="auth_pw" placeholder="비밀번호" required="required">
        
              </div> 
-             <input type="submit" class="btn btn-primary btn-block btn-lg" value="로그인"> 
+             <input type="submit" class="w-100 btn btn-primary btn-lg" value="로그인"> 
        <p>----------------------or----------------------</p>
           
          <%
@@ -138,7 +138,7 @@ body {
             <div>
             <c:if test="${userId eq null}">
         <a href="https://kauth.kakao.com/oauth/authorize?client_id=1f09c57d8241952a7a44833618d75b13&redirect_uri=http://localhost:8090/kakaoLogin&response_type=code">
-            <img src="/resources/Auth/kakao_login_medium_narrow.png" width="288" height="46" alt="카카오로그인버튼" title="kakao_login_medium_narrow">
+            <img src="/resources/Auth/kakao_login_large_narrow.png" width="288" height="46" alt="카카오로그인버튼" title="kakao_login_medium_narrow">
         </a>
     </c:if>
     <c:if test="${userId ne null}">
@@ -153,5 +153,6 @@ body {
 				
     </form>			
 </div>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

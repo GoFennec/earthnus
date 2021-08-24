@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.earthnus.user.auth.AuthBean;
 import kr.co.earthnus.user.cheBoard.CheBoardBean;
 import kr.co.earthnus.user.goods.ExGoodsBean;
+import kr.co.earthnus.user.pay.PayBean;
 import kr.co.earthnus.util.SHA256;
 
 @Controller
@@ -40,28 +41,34 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	//카카오 회원가입
-			@RequestMapping(value="/member/join_kakao", method=RequestMethod.GET)
-			public String memberJoin_kakao() {
-				return "/member/join_kakao";
-			}
 			
-			@RequestMapping(value="/member/join_kakao", method=RequestMethod.POST)
-			public String memberJoin_kakao(MemberBean memberBean) throws NoSuchAlgorithmException {
+	
+			@RequestMapping(value="/join_kakao", method = RequestMethod.GET)
+			public String memberJoin_kakao(AuthBean aBean, MemberBean memberBean, Model model, HttpSession session) throws NoSuchAlgorithmException {
+				memberBean.setMem_id((String) session.getAttribute("auth_id"));
+				memberBean.setMem_name((String) session.getAttribute("auth_name"));
+				memberBean.setMem_email((String) session.getAttribute("mem_email"));
+				memberBean.setMem_gender((String) session.getAttribute("mem_gender"));
 				memberService.insertMember_kakao(memberBean);
-				return "redirect:/";
+				model.addAttribute("MemberBean", memberBean);
+				System.out.println("join kakao controller");
+				return "redirect:/kakaoLogin";
 			}
 			//네이버 회원가입
-			@RequestMapping(value="/member/join_naver", method=RequestMethod.GET)
-			public String memberJoin_naver() {
-				return "/member/join_naver";
-			}
-			
-			@RequestMapping(value="/member/join_naver", method=RequestMethod.POST)
-			public String memberJoin_naver(MemberBean memberBean) throws NoSuchAlgorithmException {
+			@RequestMapping(value="/join_naver", method=RequestMethod.GET)
+			public String memberJoin_naver(AuthBean aBean, MemberBean memberBean, 
+					Model model, HttpSession session) throws NoSuchAlgorithmException {
+				memberBean.setMem_id((String) session.getAttribute("mem_id"));
+				System.out.println("memid test naver" + (String) session.getAttribute("auth_id"));
+				memberBean.setMem_name((String) session.getAttribute("mem_name"));
+				memberBean.setMem_email((String) session.getAttribute("mem_email"));
+				memberBean.setMem_gender((String) session.getAttribute("mem_gender"));
+				memberBean.setMem_birth((String) session.getAttribute("mem_birth"));
 				memberService.insertMember_naver(memberBean);
-				return "redirect:/";
-			}			
+				model.addAttribute("MemberBean", memberBean);
+				System.out.println("join naver controller");
+				return "redirect:/auth/callback";
+			}
 			
 	
 	
@@ -73,6 +80,7 @@ public class MemberController {
 					return "/auth/login";
 				}
 				String mem_id = aBean.getAuth_id();
+				List<PayBean> list = memberService.myPay(mem_id);
 				String myPoint = memberService.myPoint(mem_id);
 				String myDonation = memberService.myDonation(mem_id);
 				String myDonation_f = memberService.myDonation_f(mem_id);
@@ -81,38 +89,18 @@ public class MemberController {
 				String myDonation_o = memberService.myDonation_o(mem_id);
 				String myDonation_i = memberService.myDonation_i(mem_id);
 				String myDonation_p = memberService.myDonation_p(mem_id);
+				
 				model.addAttribute("myDonation",myDonation);
 				model.addAttribute("myPoint",myPoint);
 				model.addAttribute("myDonation_f",myDonation_f);
 				model.addAttribute("myDonation_o",myDonation_o);
 				model.addAttribute("myDonation_i",myDonation_i);
 				model.addAttribute("myDonation_p",myDonation_p);
+				model.addAttribute("myPay", list);
 				return "member/myPage";
 			}
 			
-	//내정보 비번체크,조회,수정
-			@RequestMapping(value="/member/myInfoPwCh", method=RequestMethod.GET)
-			public String myInfoPwCh1() {
-				return "member/myInfoPwCh";
-			}
-			
-			@RequestMapping(value="/member/myInfoPwCh", method=RequestMethod.POST)
-			public String myInfoPwCh2(HttpSession session, AuthBean aBean, @RequestParam("mem_pw")String pw, Model model) throws NoSuchAlgorithmException {
-				aBean = (AuthBean) session.getAttribute("auth");
-				String mem_id = aBean.getAuth_id();
-				System.out.println("myInfoPwCh" + mem_id);
-				String mem_pw = memberService.pwCheck(mem_id);
-				System.out.println(mem_pw);
-				String mem_shapw = memberService.pwCheck(mem_id);
-				SHA256 sha = new SHA256();
-				String smem_pw = sha.encrypt(pw);
-				if(mem_shapw.equals(smem_pw)) {
-				return "redirect:/member/myInfo";
-				}else {
-				return "member/myInfoPwCh"; 
-				}
-			}
-			
+	//내정보 조회,수정
 			@RequestMapping(value="/member/myInfo")
 			public String myInfo(HttpSession session, Model model, AuthBean aBean) {
 				aBean = (AuthBean) session.getAttribute("auth");
@@ -156,6 +144,7 @@ public class MemberController {
 				String mem_id = aBean.getAuth_id();
 				map.put("mem_id", mem_id);
 				memberService.updatePw(map);
+				System.out.println("비번변경 컨트롤러");
 				
 				return map;
 			}

@@ -105,8 +105,8 @@ background: none
 }
 
 .view-account .side-bar .side-menu .nav>li.active a {
-color: #40babd;
-border-bottom: 2px solid #40babd;
+color: #388E3C;
+border-bottom: 2px solid #388E3C;
 background: none;
 border-right: none
 }
@@ -358,7 +358,7 @@ color: #494d55
 }
 
 .drive-wrapper .drive-item-title a:hover {
-color: #40babd
+color: #388E3C
 }
 
 .theme-2 .drive-wrapper .drive-item-title a:hover {
@@ -435,7 +435,7 @@ color: #494d55
 }
 
 .drive-list-view a:hover {
-color: #40babd
+color: #388E3C
 }
 
 .theme-2 .drive-list-view a:hover {
@@ -579,7 +579,7 @@ color: #a2a6af
 }
 .view-account .side-bar .side-menu .nav>li.active a {
     background: #f9f9fb;
-    border-right: 4px solid #40babd;
+    border-right: 4px solid #388E3C;
     border-bottom: none
 }
 .theme-2 .view-account .side-bar .side-menu .nav>li.active a {
@@ -598,24 +598,6 @@ color: #a2a6af
     width: 40px;
     display: inline-block
 }
-.modal {
-        text-align: center;
-	  }
- 
-		@media screen{ 
-        .modal:before {
-                display: inline-block;
-                vertical-align: middle;
-                content: " ";
-                height: 100%;
-        }
-		}
- 
-	.modal-dialog {
-        display: inline-block;
-        text-align: left;
-        vertical-align: middle;
-	}	   
 
 </style>
 
@@ -639,8 +621,8 @@ color: #a2a6af
 						</div>
             		<nav class="side-menu">
         				<ul class="nav">
-        					<li><a href="/member/myPage"><span class="fa fa-user"></span>마이페이지</a></li>
-        					<li><a href="/member/myInfoPwCh"><span class="fa fa-cog"></span> 내 정보</a></li> 
+        					<li  ><a href="/member/myPage"><span class="fa fa-user"></span>마이페이지</a></li>
+        					<li><a href="/member/myInfo"><span class="fa fa-cog"></span> 내 정보</a></li> 
         					<li class="active"><a href="/member/myOrder"><span class="fa fa-credit-card"></span>내 주문 내역</a></li>
         					<li><a href="/member/myMessage"><span class="fa fa-envelope"></span>내가 작성한 글</a></li>
         					<li><a href="/member/myDelete"><span class="fa fa-th"></span> 탈퇴하기</a></li>
