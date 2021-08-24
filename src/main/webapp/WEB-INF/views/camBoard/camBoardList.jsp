@@ -146,12 +146,13 @@
 		<section class="blog_area section-padding">
         	<div class="container">
         		<div class="row">
-        			<c:forEach items="${CamBoardList}" var="list" begin="0" end="1">
+        			<c:forEach items="${CamBoardList}" var="list" begin="0" end="0">
 						<div class="col-lg-6 col-sm-12">
         				<article class="blog_item">
 	                        <table>
 	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
-	                          <td>
+	                          <td style="padding-bottom: 20%;">
+	                          <div style="height: 520px;">
 	                           <div class="blog_item_img">
 	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="">
 	                               <span class="blog_item_date">
@@ -165,6 +166,142 @@
 	                               </a>
 	                               <p>여긴 캠페인 내용</p>
 	                           </div>
+	                          </div>
+	                          </td>
+	                         </tr>
+	                        </table>
+                        </article>
+        				</div>
+					</c:forEach>
+					<c:forEach items="${CamBoardList}" var="list" begin="1" end="1">
+						<div class="col-lg-6 col-sm-12">
+        				<article class="blog_item">
+	                        <table>
+	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+	                          <td style="padding-top: 20%;">
+	                          <div style="height: 520px;">
+	                           <div class="blog_item_img">
+	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="">
+	                               <span class="blog_item_date">
+	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
+	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
+	                               </span>
+	                           </div>
+	                          	<div class="blog_details">
+	                               <a class="d-inline-block" href="blog_details.html">
+	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
+	                               </a>
+	                               <p>여긴 캠페인 내용</p>
+	                           </div>
+	                          </div>
+	                          </td>
+	                         </tr>
+	                        </table>
+                        </article>
+        				</div>
+					</c:forEach>
+					<c:forEach items="${CamBoardList}" var="list" begin="2" end="2">
+						<div class="col-lg-6 col-sm-12">
+        				<article class="blog_item">
+	                        <table>
+	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+	                          <td style="padding-bottom: 20%;">
+	                          <div style="height: 520px;">
+	                           <div class="blog_item_img">
+	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="">
+	                               <span class="blog_item_date">
+	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
+	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
+	                               </span>
+	                           </div>
+	                          	<div class="blog_details">
+	                               <a class="d-inline-block" href="blog_details.html">
+	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
+	                               </a>
+	                               <p>여긴 캠페인 내용</p>
+	                           </div>
+	                          </div>
+	                          </td>
+	                         </tr>
+	                        </table>
+                        </article>
+        				</div>
+					</c:forEach>
+        			<c:forEach items="${CamBoardList}" var="list" begin="3" end="3">
+						<div class="col-lg-6 col-sm-12">
+        				<article class="blog_item">
+	                        <table>
+	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+	                          <td style="padding-top: 20%;">
+	                          <div style="height: 520px;">
+	                           <div class="blog_item_img">
+	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="">
+	                               <span class="blog_item_date">
+	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
+	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
+	                               </span>
+	                           </div>
+	                          	<div class="blog_details">
+	                               <a class="d-inline-block" href="blog_details.html">
+	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
+	                               </a>
+	                               <p>여긴 캠페인 내용</p>
+	                           </div>
+	                          </div>
+	                          </td>
+	                         </tr>
+	                        </table>
+                        </article>
+        				</div>
+					</c:forEach>
+					<c:forEach items="${CamBoardList}" var="list" begin="4" end="4">
+						<div class="col-lg-6 col-sm-12">
+        				<article class="blog_item">
+	                        <table>
+	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+	                          <td style="padding-bottom: 20%;">
+	                          <div style="height: 520px;">
+	                           <div class="blog_item_img">
+	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="">
+	                               <span class="blog_item_date">
+	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
+	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
+	                               </span>
+	                           </div>
+	                          	<div class="blog_details">
+	                               <a class="d-inline-block" href="blog_details.html">
+	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
+	                               </a>
+	                               <p>여긴 캠페인 내용</p>
+	                           </div>
+	                          </div>
+	                          </td>
+	                         </tr>
+	                        </table>
+                        </article>
+        				</div>
+					</c:forEach>
+					<c:forEach items="${CamBoardList}" var="list" begin="5" end="5">
+						<div class="col-lg-6 col-sm-12">
+        				<article class="blog_item">
+	                        <table>
+	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
+	                          <td style="padding-top: 20%;">
+	                          <div style="height: 520px;">
+	                           <div class="blog_item_img">
+	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="">
+	                               <span class="blog_item_date">
+	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
+	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
+	                               </span>
+	                           </div>
+	                          	<div class="blog_details">
+	                               <a class="d-inline-block" href="blog_details.html">
+	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
+	                               </a>
+	                               <p>여긴 캠페인 내용</p>
+	                           </div>
+	                          </div>
 	                          </td>
 	                         </tr>
 	                        </table>
@@ -172,60 +309,6 @@
         				</div>
 					</c:forEach>
       			</div>
-       			<div class="row">
-        			<c:forEach items="${CamBoardList}" var="list" begin="2" end="3">
-						<div class="col-lg-6 col-sm-12">
-        				<article class="blog_item">
-	                        <table>
-	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
-	                          <td>
-	                           <div class="blog_item_img">
-	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt=""  style="max-height: 80%">
-	                               <span class="blog_item_date">
-	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
-	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
-	                               </span>
-	                           </div>
-	                          	<div class="blog_details">
-	                               <a class="d-inline-block" href="blog_details.html">
-	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
-	                               </a>
-	                               <p>여긴 캠페인 내용</p>
-	                           </div>
-	                          </td>
-	                         </tr>
-	                        </table>
-                        </article>
-        				</div>
-					</c:forEach>
-   				</div>
-       			<div class="row">
-       				<c:forEach items="${CamBoardList}" var="list" begin="4" end="5">
-						<div class="col-lg-6 col-sm-12">
-        				<article class="blog_item">
-	                        <table>
-	                         <tr onclick="location.href='/camBoard/detail?CAMB_NUM=${list.CAMB_NUM}&p=${page.currentPage}'">
-	                          <td>
-	                           <div class="blog_item_img">
-	                               <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt=""  style="max-height: px">
-	                               <span class="blog_item_date">
-	                                   <h3><fmt:formatDate pattern="dd" value="${list.CAMB_STARTDATE}" /></h3>
-	                                   <p><fmt:formatDate pattern="MMM" value="${list.CAMB_STARTDATE}" /></p>
-	                               </span>
-	                           </div>
-	                          	<div class="blog_details">
-	                               <a class="d-inline-block" href="blog_details.html">
-	                                   <h2 class="blog-head" style="color: #2d2d2d;">${list.CAMB_NAME}</h2>
-	                               </a>
-	                               <p>여긴 캠페인 내용</p>
-	                           </div>
-	                          </td>
-	                         </tr>
-	                        </table>
-                        </article>
-        				</div>
-					</c:forEach>
-     			</div>
         	</div>
         </section>
 	</c:if>
@@ -266,6 +349,10 @@
 	</c:if>
 	</div>
 </div>
+<!-- Scroll Up -->
+      <div id="back-top" >
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 
 <script type="text/javascript">
