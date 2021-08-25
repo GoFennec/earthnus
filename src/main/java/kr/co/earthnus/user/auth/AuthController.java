@@ -82,13 +82,16 @@ public class AuthController {
 			String birthyear = (String) response_obj.get("birthyear");
 			String gender = (String) response_obj.get("gender");
 			String mem_birth = birthyear + '-' + birthday;
-		
+			
+			mobile = mobile.replace("-","");
+			System.out.println(mobile);
 			if(response_obj.get("id") != null) {
 			//4.파싱 닉네임 세션으로 저장
 			session.setAttribute("mem_id",id); //세션 생성
 			session.setAttribute("mem_name", name);
 			session.setAttribute("mem_email", email);
 			session.setAttribute("mem_tel", mobile);
+	
 			session.setAttribute("mem_birth", mem_birth);
 			session.setAttribute("mem_gender", gender);
 			if (gender.equals("M")) {
