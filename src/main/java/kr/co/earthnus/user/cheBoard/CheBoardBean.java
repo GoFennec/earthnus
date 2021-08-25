@@ -6,9 +6,11 @@ public class CheBoardBean {
 	private int cheb_num;
 	private String cheb_id;
 	private String cheb_name;
-	private String cheb_dnum;
+	private String cheb_dname;
 	private String cheb_content;
 	private Date cheb_date;
+	private int Like_comment_number;
+	private String Like_click_user;
 	
 	public int getCheb_num() {
 		return cheb_num;
@@ -28,11 +30,11 @@ public class CheBoardBean {
 	public void setCheb_name(String cheb_name) {
 		this.cheb_name = cheb_name;
 	}
-	public String getCheb_dnum() {
-		return cheb_dnum;
+	public String getCheb_dname() {
+		return cheb_dname;
 	}
-	public void setCheb_dnum(String cheb_dnum) {
-		this.cheb_dnum = cheb_dnum;
+	public void setCheb_dname(String cheb_dname) {
+		this.cheb_dname = cheb_dname;
 	}
 	public String getCheb_content() {
 		return cheb_content;
@@ -46,4 +48,17 @@ public class CheBoardBean {
 	public void setCheb_date(Date cheb_date) {
 		this.cheb_date = cheb_date;
 	}
+	public int getLike_comment_number() {
+		return Like_comment_number;
+	}
+	public void setLike_comment_number(int like_comment_number) {
+		Like_comment_number = like_comment_number;
+	}
+	public String getLike_click_user() {
+		return Like_click_user;
+	}
+	public void setLike_click_user(String like_click_user) {
+		Like_click_user = like_click_user;
+	}
+	
 }

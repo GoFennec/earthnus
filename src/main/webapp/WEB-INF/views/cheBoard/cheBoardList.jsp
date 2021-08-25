@@ -50,6 +50,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     display: block;
     width: 50%;
     height: 100%;
+    margin:auto;
 }
 
 /*btns*/
@@ -142,8 +143,41 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 }
 
 #COMMENT_LIKE img {
-	width:50px;
-	height:50px;
+	width:30px;
+	height:30px;
+	position: absolute;
+	bottom: 0;
+	right : 0;
+}
+.delete {
+	margin-top: 10px;
+	position: absolute;
+	top: 0;
+	right : 0;
+}
+
+#replyInsert {
+	border: none;
+    padding: 13px 33px;
+    text-transform: capitalize;
+    border-radius: 30px;
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);
+    background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
+    background-position: right;
+    background-size: 200%;
+    position: absolute;
+    top: 25%;
+    margin-left: 10px;
+}
+#insert_div {
+	position: relative;
+}
+#text {
+	width:85%;
+	height:80px;
 }
 </style>
 
@@ -172,6 +206,10 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
         <div id="slider-wrap">
        
             <ul id="slider">
+             <li><img alt="사진" class=item src="/resources/cheBoard/oceanItem1.png"></li>
+		     <li><img alt="사진" class=item src="/resources/cheBoard/oceanItem2.png"></li>
+		     <li><img alt="사진" class=item src="/resources/cheBoard/oceanItem3.png"></li>
+		     <li><img alt="사진" class=item src="/resources/cheBoard/oceanItem4.png"></li>
           	 </ul>
          
      <div class="slider-btns" id="next"><span>▶</span></div>
@@ -180,34 +218,49 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     <div id="slider-pagination-wrap">
         <ul>
         <li></li>
-         <li></li>
-          <li></li>
-           <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
         </ul>
     </div>
     </div>     
     
 	
-	<div>
-	<input type="radio" name="chk_info" value="해양"> 해양 살리기 응원
-	<input type="radio" name="chk_info" value="플라스틱"> 플라스틱 줄이기 응원
-	<input type="radio" name="chk_info" value="나무 살리기">나무 응원
-	<input type="radio" name="chk_info" value="북극 곰살리기">북극곰 응원
-	</div>
-	<div id="formDiv">
+	
+	
+	
+	
+	 	<c:if test="${auth.auth_id != null}">
+    	<c:choose>
+    		
+    		<c:when test="${payCheck eq null}">
+    		
+    			 <select disabled>
+	       			<option>응원 카테고리</option>
+	       		</select>
+	       	
+    		</c:when>
+    		
+    		<c:when test="${payCheck != null }">
+    		
+    			<div id="select_dname">
+    			</div>
+    				
+    		
+    	
+    		</c:when>
+    	</c:choose>
+    	</c:if>
+	   
     
-       
-        <c:if test="${auth.auth_id == null}">
-         <textarea style="width:90%" id="text" disabled></textarea>
-         <input type="button" id="replyInsert" value="응원하기">
-        </c:if>
     
     	
 	    	<c:if test="${auth.auth_id != null}">
-	         <textarea style="width:90%" id="text"></textarea>
-	         <input type="button" id="replyInsert" value="응원하기">
+	    	<div id="insert_div">
+	         <textarea id="text"></textarea>
+	         <input type="button" id="replyInsert" value="응원하기">	
+	         </div>
 	        </c:if>
-    </div>
     
 	
     
@@ -230,6 +283,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     </div>
     <div>  
         <button id="addBtn">더보기</button>
+      
 	</div>
   </div>
 
@@ -243,17 +297,63 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	var startNum = 1;
 	var step = 10;
 	var insert_commet = 0;
-	var slider_count = 0;
+	var All_dname = [];
+	
   $(document).ready(function (){
-	  //list불러오고 insert 버튼 클릭시 ajax
-        init();
+	 
+	  <c:forEach items="${payCheck}" var="row">
+	    All_dname.push("${row.pay_dname}")
+	  </c:forEach>
+	
+	    if(All_dname != null) {
+	    	select_dname();
+	    }
+	  	slider();
+	  
+	  	 init();
+	  	function select_dname() {
+	  			  		var str = '<select id="dname_select">'
+	  		for(var i=0; i < All_dname.length; i++) {
+	  			var count_tree = count_tree;
+		  		var count_sea = count_sea;
+		  		var count_pla = count_pla;
+		  		var count_bear = count_bear;
+		  		
+	  			if(count_tree <= 0 && All_dname[i] == "나무" || All_dname[i] == "숲" || All_dname[i] == "묘목" || All_dname[i] == "새싹" ) {
+	  				str += '<option>나무 응원</option>';
+	  				count_tree += 1;
+	  				console.log(count_tree);
+	  			}
+	  			else if(count_sea <= 0 && All_dname[i] == "조개" || All_dname[i] == "새우" || All_dname[i] == "문어" || All_dname[i] == "바다" ) {
+	  				str += '<option>바다 응원</option>';
+	  				count_sea++;
+	  			}
+	  			else if(count_pla == 0 && All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경") {
+	  				str += '<option>플라스틱 응원</option>';
+	  				count_pla++;
+	  			}
+	  			else if( count_bear == 0 && All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "빙하" ) {
+	  				str += '<option>북극곰 응원</option>';
+	  				count_bear++;
+	  			}
+	  		}	
+	  		str += '</select>';
+	  		$('#select_dname').append(str);
+	  	}
+	  
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
         $('#replyInsert').on('click',function() {
           	
         	  var text = $('#text').val();
         	  var id = "${auth.auth_id}";
   	      	  var name = "${auth.auth_name}";
-        	  var dnum = "123";
-        	  var senData = {"cheb_id":id, "cheb_name":name, "cheb_dnum":dnum, "cheb_content": text}
+        	  var dnum = $("#dname_select option:selected").val();
+        	  var senData = {"cheb_id":id, "cheb_name":name, "cheb_dname":dnum, "cheb_content": text}
         	  if(text.trim().length==0) {
         		  alert("내용을 작성해주세요");
         		  $('#replyInsert').focus();
@@ -282,48 +382,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
         	startNum += step;
         	init();
         });
-        
-        
-        
-        $("input:radio[name=chk_info]").click(function() {
-        	var str = "";
-        	
-        	var element = document.getElementById("slider");
-        	
-        	
-        	if($("input[name=chk_info]:checked").val() == '해양') {
-        		 
-        		str ='<li><img alt="사진" class=item src="/resources/cheBoard/oceanItem1.png"></li>';
-        		str +='<li><img alt="사진" class=item src="/resources/cheBoard/oceanItem2.png"></li>';
-        		str +='<li><img alt="사진" class=item src="/resources/cheBoard/oceanItem3.png"></li>';
-        		str +='<li><img alt="사진" class=item src="/resources/cheBoard/oceanItem4.png"></li>';
-        		}
-        	else if($("input[name=chk_info]:checked").val() == '플라스틱') {
-        		
-    		  	str ='<li><img alt="사진" class=item src="/resources/cheBoard/plasticItem1.png"></li>';
-	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/plasticItem2.png"></li>';
-	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/plasticItem3.png"></li>';
-	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/plasticItem4.png"></li>';	    	
-        	}
-        	else if($("input[name=chk_info]:checked").val() == '나무 살리기') {
-	   			
-	    		 str ='<li><img alt="사진" class=item src="/resources/cheBoard/forestItem1.png"></li>';
-	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/forestItem2.png"></li>';
-	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/forestItem3.png"></li>';
-	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/forestItem4.png"></li>';
-	    	}
-        	else if($("input[name=chk_info]:checked").val() == '북극 곰살리기') {
-      			
-    			str ='<li><img alt="사진" class=item src="/resources/cheBoard/iceItem1.png"></li>';
-	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/iceItem2.png"></li>';
-	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/iceItem3.png"></li>';
-	    		str +='<li><img alt="사진" class=item src="/resources/cheBoard/iceItem4.png"></li>';
-      	}
-        	element.innerHTML = str;
-        	
-        	slider_count++;
-    		slider();
-        });        
        
   });
  
@@ -404,7 +462,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     pagination();	
     var autoSlider = setInterval(function () {
         plusSlides(1);
-    }, 1000); 
+    }, 3000); 
     }
 
 
@@ -435,18 +493,18 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	        	var auth_id = "${auth.auth_id}";
 	        	
 	        	// $('#listDiv').empty();
-	        	
+
 	        	 for(var i=0; i<obj.length;i++) {
             		var str = '<tr>';
+            		 str += '<td style="position:relative"><div>'+obj[i].cheb_name;
+            		 if(auth_id == obj[i].cheb_id) { 
+         				 str +='<span class="delete"><input type="button" value="삭제" class="deleteComment"  data_num="'+obj[i].cheb_num+'"/></span></div>';
 
-            		 str += '<td><div>'+obj[i].cheb_name;
-            		 str += '<span id="COMMENT_LIKE"><img alt="사진" class=like_comment src="/resources/cheBoard/NOT_like.png"></span></div>';
+            		 }
             		 str += '<div>'+obj[i].cheb_content+'</div>'
      				 str += '<div>'+obj[i].cheb_date+'</div>';
-            		
-            		 if(auth_id == obj[i].cheb_id) { 
-         				 str +='<span><input type="button" value="삭제" class="deleteComment" data_num="'+obj[i].cheb_num+'"/></span>';
-            		 }
+     				 str += '<div id="COMMENT_LIKE"><a href="javascript:void(0);" class="comment_like" data_num="'+obj[i].cheb_num+'"><img alt="사진" class=like_comment src="/resources/cheBoard/NOT_like.png"><a></div>';
+            		 
             		 	 str += '</td>'
 	            		 str += '</tr>';
 	            		 $('#listDiv').append(str);
@@ -454,7 +512,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                   
                      
             $('.deleteComment').on('click', function(){        
-                var reply_id = $(this).attr('data_num'); 
+                var reply_num = $(this).attr('data_num'); 
                 //console.log(reply_id);
                 $.ajax({
                     
@@ -462,7 +520,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                     type : "POST",
                         
                     data :{
-                    	reply_id : reply_id
+                    	"reply_id" : reply_num
                     },
                     success : function(){
                     	insert_commet++;
@@ -475,6 +533,27 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                 });
             
             });
+            
+            $('.comment_like').on('click', function(){
+            	var reply_num = $(this).attr('data_num');
+            	
+            	var senData = {"comment_user_id":auth_id, "comment_num": reply_num}
+      	    if(auth_id == null) {
+        		  alert("로그인 을 해주세요");
+        		  return;
+        	  }
+            	$.ajax({
+            	 
+            		url: "Cheboard_comment_like",
+            		type : "POST",
+            		data :	JSON.stringify(senData),
+           		 	contentType : "application/json; charset=utf-8",
+           			success : function() {
+           				init();
+           			}
+            	})
+            });
+            
     	}
 	});
 	}

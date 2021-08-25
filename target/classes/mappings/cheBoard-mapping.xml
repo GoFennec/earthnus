@@ -12,7 +12,7 @@
 		<id property="cheb_num" column="CHEB_NUM"/>
 		<result property="cheb_id" column="CHEB_ID"/>
 		<result property="cheb_name" column="CHEB_NAME"/>
-		<result property="cheb_dnum" column="CHEB_DNUM"/>
+		<result property="cheb_dname" column="CHEB_DNUM"/>
 		<result property="cheb_content" column="CHEB_CONTENT"/>
 		<result property="cheb_date" column="CHEB_DATE"/>
 	
@@ -21,24 +21,32 @@
       
 		<insert id ="replyInsert" parameterType = "cheBoard">
 			<![CDATA[
-	        INSERT INTO CHEBOARD (CHEB_ID,CHEB_NAME,cheb_dnum,cheb_content)
+	        INSERT INTO CHEBOARD (CHEB_ID,CHEB_NAME,cheb_dname,cheb_content)
 	        VALUES
 	        (
 		        #{cheb_id},
 		        #{cheb_name},
-		        #{cheb_dnum},
+		        #{cheb_dname},
 		        #{cheb_content}
 	        )
 	        ]]>
 		</insert>
       
+      <insert id ="Comment_like" parameterType ="like_bean">
+			<![CDATA[
+	       		 INSERT INTO COMMENT_LIKE VALUES( #{comment_num}, #{comment_user_id});
+	        ]]>
+		</insert>
       
       
-      <select id="CheBoardCount" resultType="int">
-		<![CDATA[
-			SELECT COUNT(*) FROM CHEBOARD
+      
+      
+      
+      <select id="select_dname"  parameterType="String" resultType="pay">
+      	<![CDATA[
+			select * from pay where PAY_COMMENT='N' and pay_id=#{user_id}
 		]]>
-	</select>
+      </select>
       
      <select id="CheBoardList" resultMap="CheBoardResult">
         <![CDATA[
