@@ -357,6 +357,7 @@
 
 <script type="text/javascript">
 
+	
 	function changepage(){
 		location.href="file:///Users/gimjeongbin/Desktop/finalproject/camBoardDetail.html";
 	}
