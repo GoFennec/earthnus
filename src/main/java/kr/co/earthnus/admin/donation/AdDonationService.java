@@ -17,7 +17,6 @@ public class AdDonationService {
 
 	public void getAdDonationList(Model model) {
 		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
-
 		List<PayBean> adDonationList = dao.getAdDonationList();
 		model.addAttribute("adDonationList", adDonationList);
 	}

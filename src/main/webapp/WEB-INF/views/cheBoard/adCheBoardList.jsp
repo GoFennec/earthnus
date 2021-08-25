@@ -93,6 +93,13 @@
           </div>
         </div>
       </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="/adDonation/list">
+        <i class="fas fa-fw fa-chart-area"></i>
+          <span>통계</span>
+        </a>
+      </li>
     </ul>
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -308,26 +315,6 @@
     $(document).ready(function () {
       $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
-    
-    var cancelNo = 0;
-    var cancelNum = "";
-    
-    $(function() {
-    	$('.cheInfo').click(function() {
-    		$('.cheInfo').css("background-color", "transparent");
-    		selectTr = $(this);
-    		selectTd = selectTr.children();
-    		donationNo = selectTd.eq(0).text();
-    		donationNum = selectTd.eq(1).text();
-    		donationState = selectTd.eq(9).text();
-    		donationPointState = selectTd.eq(10).text();
-    		cancelNo = donationNo;
-    		cancelNum = donationNum;
-    		payState = donationState;
-    		pointState = donationPointState;
-    		$('#'+donationNo).css("background-color", "#C8E6C9");
-    	});
     });
   </script>
 

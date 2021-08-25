@@ -106,6 +106,13 @@
           </div>
         </div>
       </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="/adDonation/list">
+        <i class="fas fa-fw fa-chart-area"></i>
+          <span>통계</span>
+        </a>
+      </li>
     </ul>
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -478,6 +485,7 @@
   <script src="/resources/assets/js/jquery.dataTables.min.js"></script>
   <script src="/resources/assets/js/dataTables.bootstrap4.min.js"></script>
 
+
   <!-- Page level custom scripts -->
   <script>
     $(document).ready(function () {
@@ -485,7 +493,7 @@
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
   </script>
-<script>
+  <script>
 var cancelNo = "";
 var cancelNum = "";
 var selectTr = "";
@@ -500,72 +508,72 @@ var day = ('0' + today.getDate()).slice(-2);
 var dateString = year + '-' + month  + '-' + day;
 
 function donationDelete(){
-	var checkBox = $("input:checkbox[name=test_check]:checked");
-	checkBox.each(function(i){
-		selectTr = checkBox.parent().parent().eq(i);
-		selectTd = selectTr.children();
-		cancelNo = selectTd.eq(0).text();
-	    cancelNum = selectTd.eq(1).text();
-	    payState = selectTd.eq(9).text();
-	    pointState = selectTd.eq(10).text();
-	});
-	var deletePW = $("#deletePW").val();
-	if(deletePW == ""){
-		alert("관리자 비밀번호를 입력해주세요.");
-		return;
-	}else if($("input:checkbox[id=itemCheck]").is(":checked") == false) {
-		alert('확인 체크를 해주세요.');
-		return;
-	}
+   var checkBox = $("input:checkbox[name=test_check]:checked");
+   checkBox.each(function(i){
+      selectTr = checkBox.parent().parent().eq(i);
+      selectTd = selectTr.children();
+      cancelNo = selectTd.eq(0).text();
+       cancelNum = selectTd.eq(1).text();
+       payState = selectTd.eq(9).text();
+       pointState = selectTd.eq(10).text();
+   });
+   var deletePW = $("#deletePW").val();
+   if(deletePW == ""){
+      alert("관리자 비밀번호를 입력해주세요.");
+      return;
+   }else if($("input:checkbox[id=itemCheck]").is(":checked") == false) {
+      alert('확인 체크를 해주세요.');
+      return;
+   }
 
-	$.ajax({
-			type: "POST", //요청 메소드 방식
-			 url:"/adDonation/delete",
-			data: {"deletePW":deletePW},
-			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-			
-			success : function(result){
-  			if(result.error === true){
-  				cancelPay();
-  			}else if(result.error === false){
-	  			alert('관리자 비밀번호를 확인해 주세요.');
-	  			return;
-  			}
-			},
-		 error:function(request,status,error){
-	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-  			//통신 실패시 발생하는 함수(콜백)
-		 }
-		});
+   $.ajax({
+         type: "POST", //요청 메소드 방식
+          url:"/adDonation/delete",
+         data: {"deletePW":deletePW},
+         dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+         
+         success : function(result){
+           if(result.error === true){
+              cancelPay();
+           }else if(result.error === false){
+              alert('관리자 비밀번호를 확인해 주세요.');
+              return;
+           }
+         },
+       error:function(request,status,error){
+           alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+           //통신 실패시 발생하는 함수(콜백)
+       }
+      });
 }
 
 
 function cancelPay() {
-	if (payState == '결제취소') {
-		alert("이미 취소 된 결제입니다.");
-		location.href="/adDonation/list";
-		return;
-	} else if (pointState == '적립완료') {
-		alert("포인트 적립이 완료 된 결제는 취소 할 수 없습니다.");
-		location.href="/adDonation/list";
-		return;
-	} else {
-	    jQuery.ajax({
-	      url : "/payments/cancel/" + cancelNum,
-	      method : "POST",
-	      headers : { "Content-Type": "application/json" },
-	      data : JSON.stringify ({
-	    	pay_no : cancelNo,
-	        pay_num : cancelNum,
-	        pay_cdate : dateString
-	      })
-	    }).done(function(result) {
-	        alert("결제가 취소되었습니다.");
-	        location.href="/adDonation/list";
-	    }).fail(function(error) {
-	      alert("결제취소를 실패하였습니다.");
-	    });
-	}
+   if (payState == '결제취소') {
+      alert("이미 취소 된 결제입니다.");
+      location.href="/adDonation/list";
+      return;
+   } else if (pointState == '적립완료') {
+      alert("포인트 적립이 완료 된 결제는 취소 할 수 없습니다.");
+      location.href="/adDonation/list";
+      return;
+   } else {
+       jQuery.ajax({
+         url : "/payments/cancel/" + cancelNum,
+         method : "POST",
+         headers : { "Content-Type": "application/json" },
+         data : JSON.stringify ({
+          pay_no : cancelNo,
+           pay_num : cancelNum,
+           pay_cdate : dateString
+         })
+       }).done(function(result) {
+           alert("결제가 취소되었습니다.");
+           location.href="/adDonation/list";
+       }).fail(function(error) {
+         alert("결제취소를 실패하였습니다.");
+       });
+   }
  };
 </script>
 

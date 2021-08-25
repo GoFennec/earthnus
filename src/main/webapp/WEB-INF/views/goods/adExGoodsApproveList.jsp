@@ -92,6 +92,13 @@
           </div>
         </div>
       </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="/adDonation/list">
+        <i class="fas fa-fw fa-chart-area"></i>
+          <span>통계</span>
+        </a>
+      </li>
     </ul>
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
