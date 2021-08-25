@@ -146,13 +146,16 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>	
+
 	<div class="main col-sm-12 col-lg-12">
 		<table class="mainlist goodsTable" id="detail" style="border-collapse: separate;">
+			
 			<tr>
 				<td colspan = "4">
-					<a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT">${camBoard.CAMB_SUBJECT}</a>
+					<img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/>
 				</td>
 			</tr>
+			
 			
 			<tr>
 				<td colspan = "3" style="text-align: left; color: black; font-size: 45px;"><b>${camBoard.CAMB_NAME}</b></td>
@@ -161,10 +164,9 @@
 				종료일 : <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${camBoard.CAMB_FINDATE}" />
 				</td>
 			</tr>
-			
 			<tr>
-				<td colspan = "4">
-					<img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/>
+				<td colspan = "4" id="subject_icon">
+					<a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT">${camBoard.CAMB_SUBJECT}</a>
 				</td>
 			</tr>
 			
@@ -174,6 +176,71 @@
 			<tr>
 				<td colspan="4" class="sysBtn" style="text-align: center;">
 					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>	
+				</td>
+			</tr>
+			<tr>
+				<td colspan = "4">
+					<div class="navigation-top">
+					   <div class="d-sm-flex justify-content-between text-center">
+					    <div class="col-sm-4 text-center my-2 my-sm-0">
+					     <span class="align-middle" onclick="donate()"><i class="fas fa-donate" style="margin-right: 15px"></i>후원하기</span>
+					   </div>
+					   <ul class="social-icons" style="float: left">
+					     <li style="float: left"><a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
+			        			<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="20px">
+			        		</a></li>
+					     <li style="float: left"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="20px" class="twitter" onclick="shareTwitter()"></li>
+					     <li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="20px" class="naverblog" onclick="shareNaverBlog()"></li>
+					     <li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="20px" class="kakaotalk" onclick="shareKakaotalk()"></li>
+					   	<li style="float: left;"><i class="clipboard far fa-clipboard" style="font-size: 20px" onclick="shareURL()"></i></li>
+					   </ul>
+					 </div>
+					 <div class="navigation-area">
+					  <div class="row"  style="text-align: center;">
+					   <div
+					   class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+					   <div class="thumb">
+					     <a href="#">
+					      <img class="img-fluid" src="assets/img/post/preview.png" alt="">
+					    </a>
+					  </div>
+					  <div class="arrow">
+					   <a href="#">
+					    <span class="lnr text-white ti-arrow-left"></span>
+					  </a>
+					</div>
+					<div class="detials">
+					 <p>Prev Post</p>
+					 <a href="#">
+					  <h4 style="color: #2d2d2d;">Space The Final Frontier</h4>
+					</a>
+					</div>
+					</div>
+					<div class="col-lg-4 col-md-4 col-12 flex-row align-items-center">
+					<br><i class="fas fa-list-ul"></i>&nbsp;&nbsp;&nbsp;목록
+					</div>
+					<div
+					class="col-lg-4 col-md-4 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+					<div class="detials">
+					 <p>Next Post</p>
+					 <a href="#">
+					  <h4 style="color: #2d2d2d;">Telescopes 101</h4>
+					</a>
+					</div>
+					<div class="arrow">
+					 <a href="#">
+					  <span class="lnr text-white ti-arrow-right"></span>
+					</a>
+					</div>
+					<div class="thumb">
+					 <a href="#">
+					  <img class="img-fluid" src="assets/img/post/next.png" alt="">
+					</a>
+					</div>
+					</div>
+					</div>
+					</div>
+					</div>
 				</td>
 			</tr>
 			<tr>
@@ -211,6 +278,23 @@
 		
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 <script type='text/javascript'>
+	window.onload = function(){
+		var subjecthtml = '';
+		if("${camBoard.CAMB_SUBJECT}" === "해양"){
+			subjecthtml += '<i class="fas fa-fish"></i>';
+			$('#subject_icon').prepend(subjecthtml);
+		} else if("${camBoard.CAMB_SUBJECT}" === "플라스틱"){
+			subjecthtml += '<i class="fas fa-recycle"></i>';
+			$('#subject_icon').prepend(subjecthtml);
+		}else if("${camBoard.CAMB_SUBJECT}" === "산림"){
+			subjecthtml += '<i class="fas fa-tree"></i>';
+			$('#subject_icon').prepend(subjecthtml);
+		}else if("${camBoard.CAMB_SUBJECT}" === "극지방"){
+			subjecthtml += '<i class="fas fa-icicles"></i>';
+			$('#subject_icon').prepend(subjecthtml);
+		}
+	}
+	
 	var linkUrl = window.location.href;
 	
 	function resize(obj) {

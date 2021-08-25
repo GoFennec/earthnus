@@ -136,8 +136,38 @@ public class CamBoardService {
 	public camBoardBean getCamBoard(String contentnum) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		
-		System.out.println("¼­ºñ½º : " + contentnum);
 		return camBoardDAO.getCamBoard(Integer.parseInt(contentnum));
+	}
+	
+	public int getBoardIndex(String search, String search_type, String arr, String orderBy, String order, 
+			String contentnum, String pagenum, int CAMB_NUM, Model model) {
+		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
+		int index = 0;
+		
+		PagingBean pBean = new PagingBean();
+		
+		pBean.setCAMB_NUM(CAMB_NUM);
+		int cPagenum = Integer.parseInt(pagenum);
+        int cContentnum = Integer.parseInt(contentnum);
+        
+        pBean.setCurrentPage(cPagenum);
+        pBean.setSearch_type(search_type);
+        pBean.setSearch(search);
+        pBean.setArr(arr);
+        pBean.setOrderBy(orderBy);
+        pBean.setOrder(order);
+        pBean.setTotalcount(camBoardDAO.getBoardListCount(pBean));
+        pBean.setPagenum(cPagenum-1);
+        pBean.setContentnum(cContentnum);
+        pBean.setCurrentblock(cPagenum);
+        pBean.setLastblock(pBean.getTotalcount());
+
+        pBean.prevnext(cPagenum);
+        pBean.setStartPage(pBean.getCurrentblock());
+        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
+		
+		index = camBoardDAO.getBoardIndex(pBean);
+		return index;
 	}
 	/*public MemberBean getMember(MemberBean mBean) {
 		return CamBoardDAO.getMember(mBean);
