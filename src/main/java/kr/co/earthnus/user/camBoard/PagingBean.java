@@ -16,6 +16,7 @@ public class PagingBean {
     private String order;						// 오름차순 내림차순
     private String orderBy;						// 오름차순 내림차순 기준점
 	private String search_type;
+	private int CAMB_NUM;
     
     public void prevnext(int pagenum) {
         if(calcpage(totalcount,contentnum)<6) {
@@ -40,6 +41,12 @@ public class PagingBean {
         return totalpage;
     }
     
+	public int getCAMB_NUM() {
+		return CAMB_NUM;
+	}
+	public void setCAMB_NUM(int cAMB_NUM) {
+		CAMB_NUM = cAMB_NUM;
+	}
 	public int getCurrentPage() {
 		return currentPage;
 	}
