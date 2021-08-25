@@ -148,6 +148,8 @@ public class MemberService {
 		System.out.println("update service");
 	}
 
+	
+	
 	// 비번수정
 	public void updatePw(Map<String, Object> map) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);

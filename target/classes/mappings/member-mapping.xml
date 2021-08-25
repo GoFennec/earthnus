@@ -87,8 +87,7 @@
 	</select>
 
 	<select id="pwCheck" parameterType="String" resultType="String">
-	select
-		mem_pw from member where mem_id = #{mem_id}
+	SELECT MEM_PW FROM MEMBER WHERE MEM_ID = #{mem_id}
 	</select>
 	
 
@@ -103,6 +102,8 @@
 		MEM_BIRTH=#{mem_birth}
 		WHERE MEM_ID=#{mem_id}
 	</update>
+	
+
 	
 		<update id="updatePw" parameterType="hashmap">
 		UPDATE MEMBER SET

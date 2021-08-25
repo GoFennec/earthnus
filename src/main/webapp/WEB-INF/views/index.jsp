@@ -68,7 +68,7 @@
 									</P>
 									<!-- Hero-btn -->
 									<div class="hero__btn">
-										<a href="/member/join" class="hero-btn mb-10"
+										<a href="member/join" class="hero-btn mb-10"
 											data-animation="fadeInUp" data-delay=".8s">함께하기</a>
 									</div>
 								</div>
@@ -309,6 +309,59 @@
 				</div>
 			</div>
 		</div>
+		
+		<!--? Blog Area Start -->
+		<section class="home-blog-area pb-padding">
+			<div class="container">
+				<!-- Section Tittle -->
+				<div class="row justify-content-center">
+					<div class="col-xl-8 col-lg-9 col-md-11">
+						<div class="section-tittle text-center mb-90">
+							<h2>캠패인 소식</h2>
+							<p>많은 사람들이 푸르른 지구와 우리의 미래를 위해 힘을 모으고 있습니다. 
+							<br>새로운 EARTH & US 캠페인 활동을 확인하시고 여러분도 동참해 주세요!</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-6 col-lg-6 col-md-6">
+						<div class="home-blog-single mb-30">
+							<div class="blog-img-cap">
+								<div class="blog-img">
+									<img src="resources/assets/img/gallery/home-blog1.png" alt="">
+								</div>
+								<div class="blog-cap">
+									<h3>
+										<a href="blog_details.html">Leverage agile frameworks to
+											provide a robust synopsis</a>
+									</h3>
+									<p>The automated process starts as soon as your clothes go
+										into the machine. Duis cursus, mi quis viverra ornare.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-6">
+						<div class="home-blog-single mb-30">
+							<div class="blog-img-cap">
+								<div class="blog-img">
+									<img src="resources/assets/img/gallery/home-blog2.png" alt="">
+								</div>
+								<div class="blog-cap">
+									<h3>
+										<a href="blog_details.html">Leverage agile frameworks to
+											provide a robust synopsis</a>
+									</h3>
+									<p>The automated process starts as soon as your clothes go
+										into the machine. Duis cursus, mi quis viverra ornare.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Blog Area End -->
 		<!-- Our Cases End -->
 		<!--? Services Area Start -->
 		<!--  <div class="service-area section-padding30">

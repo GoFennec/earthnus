@@ -679,14 +679,14 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="card">
 
-				<img class="card-img-top" src="/resources/donation/forestItem4.png" alt="forestItem4" title="나무이미지">
+				<img class="card-img-top" src="/resources/donation/forest04.png" alt="forest04" title="나무이미지">
 
 				<div class="card-body px-4 pt-2">
 					<p>내가 심은 나무</p>
 
-					<img src="/resources/donation/forestItem1.png" class="rounded-circle mr-1" alt="forestItem1" title="나무이미지" width="28" height="28">
-					<img src="/resources/donation/forestItem2.png" class="rounded-circle mr-1" alt="forestItem2" title="나무이미지" width="28" height="28">
-					<img src="/resources/donation/forestItem3.png" class="rounded-circle mr-1" alt="forestItem3" title="나무이미지" width="28" height="28">
+					<img src="/resources/donation/forest01.png" class="rounded-circle mr-1" alt="forest01" title="나무이미지" width="28" height="28">
+					<img src="/resources/donation/forest02.png" class="rounded-circle mr-1" alt="forest02" title="나무이미지" width="28" height="28">
+					<img src="/resources/donation/forest03.png" class="rounded-circle mr-1" alt="forest03" title="나무이미지" width="28" height="28">
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
@@ -701,14 +701,14 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 				<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="card">
 
-				<img class="card-img-top" src="/resources/donation/oceanItem4.png" alt="oceanItem4" title="해양사진">
+				<img class="card-img-top" src="/resources/donation/ocean04.png" alt="ocean04" title="해양사진">
 
 				<div class="card-body px-4 pt-2">
 					<p>내가 살린 바다 친구들</p>
 
-					<img src="/resources/donation/oceanItem1.png" class="rounded-circle mr-1" alt="oceanItem1" title="해양사진" width="28" height="28">
-					<img src="/resources/donation/oceanItem2.png" class="rounded-circle mr-1" alt="oceanItem2" title="해양사진" width="28" height="28">
-					<img src="/resources/donation/oceanItem3.png" class="rounded-circle mr-1" alt="oceanItem3" title="해양사진" width="28" height="28">
+					<img src="/resources/donation/ocean01.png" class="rounded-circle mr-1" alt="ocean01" title="해양사진" width="28" height="28">
+					<img src="/resources/donation/ocean02.png" class="rounded-circle mr-1" alt="ocean02" title="해양사진" width="28" height="28">
+					<img src="/resources/donation/ocean03.png" class="rounded-circle mr-1" alt="ocean03" title="해양사진" width="28" height="28">
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
@@ -723,13 +723,13 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="card">
 
-				<img class="card-img-top" src="/resources/donation/iceItem4.png" alt="iceItem4" title="북극곰사진">
+				<img class="card-img-top" src="/resources/donation/ice01.png" alt="ice04" title="북극곰사진">
 				<div class="card-body px-4 pt-2">
 					<p>내가 살린 북극곰</p>
 
-					<img src="/resources/donation/iceItem1.png" class="rounded-circle mr-1" alt="iceItem1" title="북극곰사진" width="28" height="28">
-					<img src="/resources/donation/iceItem2.png" class="rounded-circle mr-1" alt="iceItem2" title="북극곰사진" width="28" height="28">
-					<img src="/resources/donation/iceItem3.png" class="rounded-circle mr-1" alt="iceItem3" title="북극곰사진" width="28" height="28">
+					<img src="/resources/donation/ice01.png" class="rounded-circle mr-1" alt="ice01" title="북극곰사진" width="28" height="28">
+					<img src="/resources/donation/ice02.png" class="rounded-circle mr-1" alt="ice02" title="북극곰사진" width="28" height="28">
+					<img src="/resources/donation/ice03.png" class="rounded-circle mr-1" alt="ice03" title="북극곰사진" width="28" height="28">
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
@@ -742,14 +742,14 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="card">
 
-				<img class="card-img-top" src="/resources/donation/plasticItem4.png" alt="plasticItem4" title="플라스틱사진">
+				<img class="card-img-top" src="/resources/donation/plastic04.png" alt="plastic04" title="플라스틱사진">
 
 				<div class="card-body px-4 pt-2">
 					<p>내가 줄인 플라스틱</p>
 
-					<img src="/resources/donation/plasticItem1.png" class="rounded-circle mr-1" alt="plasticItem1" title="플라스틱사진" width="28" height="28">
-					<img src="/resources/donation/plasticItem2.png" class="rounded-circle mr-1" alt="plasticItem2" title="플라스틱사진" width="28" height="28">
-					<img src="/resources/donation/plasticItem3.png" class="rounded-circle mr-1" alt="plasticItem3" title="플라스틱사진" width="28" height="28">
+					<img src="/resources/donation/plastic01.png" class="rounded-circle mr-1" alt="plastic01" title="플라스틱사진" width="28" height="28">
+					<img src="/resources/donation/plastic02.png" class="rounded-circle mr-1" alt="plastic02" title="플라스틱사진" width="28" height="28">
+					<img src="/resources/donation/plastic03.png" class="rounded-circle mr-1" alt="plastic03" title="플라스틱사진" width="28" height="28">
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">

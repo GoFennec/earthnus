@@ -36,7 +36,7 @@
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
+ 
 
 <style type="text/css">
 body {
@@ -719,33 +719,74 @@ body {
 												<h4 class="modal-title">비밀번호 변경</h4>
 											</div>
 											<div class="modal-body">
-
-												<div class="form-group">
+				
+											
+												<div class="col-11 form-group">
 													<input type="password" class="form-control"
-														placeholder="변경할 비밀번호" required id="mem_cpw1">
+														placeholder="현재 비밀번호"  id="mem_pw">
 												</div>
-												<div class="form-group">
+												<button type="button"
+														class="btn btn-primary btn-block btn-lg"
+														onclick="pwCheck()">현재비밀번호 확인</button>
+				
+												<div class="col-11 form-group">
 													<input type="password" class="form-control"
-														placeholder="비밀번호 확인" required id="mem_cpw2">
+														placeholder="변경할 비밀번호"  id="mem_cpw1">
 												</div>
-												<div class="form-group">
+												<div class="col-11 form-group">
+													<input type="password" class="form-control"
+														placeholder="비밀번호 확인"  id="mem_cpw2">
+												</div>
+												<div class="col-11 form-group">
 													<button type="button"
 														class="btn btn-primary btn-block btn-lg"
-														onclick="updatePw()">확인</button>
+														onclick="updatePw()">비밀번호 변경</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-
+ <script type="text/javascript">
+				function pwCheck(){
+					var mem_pw = $("#mem_pw").val();
+					if(mem_pw === ""){
+						alert("비밀번호를 입력해주세요.");
+					}
+					$.ajax({
+			   			type: "POST", //요청 메소드 방식
+			  			 url:"/cpwCheck",
+			   			data: {"mem_pw":mem_pw},
+			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			   			
+			   			success : function(result){
+			   				if (result.error === true) {
+								alert("비밀번호 확인이 완료되었습니다. 변경할 비밀번호를 입력해주세요.");
+								 $("#mem_pw").attr("readonly",true);
+							} else if(result.error === false){
+			    	  			alert('비밀번호가 일치하지 않습니다.');
+			      			}
+						},
+						error : function(
+								request,
+								status, error) {
+							alert("code = "
+									+ request.status
+									+ " message = "
+									+ request.responseText
+									+ " error = "
+									+ error);
+							//통신 실패시 발생하는 함수(콜백)
+						}
+					});
+	} 
+					</script>
 
 								<script type="text/javascript">
 									function updatePw() {
 										var cpw1 = $("#mem_cpw1").val();
 										var cpw2 = $("#mem_cpw2").val();
 										if (cpw1 == cpw2) {
-											$
-													.ajax({
+											$.ajax({
 														type : "POST", //요청 메소드 방식
 														url : "/updatePw",
 														data : {
@@ -830,9 +871,9 @@ body {
 
 								<div class="col-md-9" style="padding-right: 0px">
 									<label for="address" class="form-label">주소</label> <input
-										type="text" class="form-control" id="postcode"
+										type="text" class="form-control" id="postcode" required 
 										placeholder="우편번호" onkeyup='call_addr()'
-										style="margin-top: 2px" required>
+										style="margin-top: 2px" >
 								</div>
 								<div class="col-md-3" style="margin-top: 53px;">
 									<button type="button" class="w-100 btn btn-primary btn-lg"
@@ -840,19 +881,19 @@ body {
 										style="padding-left: 9px; font-size: 13px">우편번호 찾기</button>
 								</div>
 								<div class="col-md-12">
-									<input type="text" class="form-control" id="address"
-										placeholder="주소" onkeyup='call_addr()' required>
+									<input type="text" class="form-control" id="address" required 
+										placeholder="주소" onkeyup='call_addr()' >
 								</div>
 								<div class="col-md-12">
-									<input type="text" class="form-control" id="detailAddress"
-										placeholder="상세주소" onkeyup='call_addr()' required>
+									<input type="text" class="form-control" id="detailAddress" required 
+										placeholder="상세주소" onkeyup='call_addr()' >
 								</div>
 								<div class="col-md-12">
-									<input type="text" class="form-control" id="extraAddress"
+									<input type="text" class="form-control" id="extraAddress" 
 										placeholder="참고항목" onkeyup='call_addr()'>
 								</div>
-								<input type="hidden" id="address_all" name="MemberBean.mem_addr">
-								<div class="invalid-feedback">필수 입력사항입니다.</div>
+								<input type="hidden" id="address_all" name="mem_addr" value="${MemberBean.mem_addr}" >
+								<div class="invalid-feedback" id="mem_addr">필수 입력사항입니다.</div>
 
 								<div id="wrap"
 									style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
@@ -922,8 +963,8 @@ body {
 											<div class="modal-body">
 
 												<div class="col-md-12">
-													<input type="email" name="mem_email2" class="form-control"
-														id="mem_email2" placeholder="변경할 이메일" required>
+													<input type="email" class="form-control"
+														id="mem_email2" placeholder="변경할 이메일" >
 												</div>
 
 												<div class="col-md-12">
@@ -933,7 +974,7 @@ body {
 												</div>
 
 												<div class="col-md-12">
-													<input type="text" name="mailCheck" class="form-control"
+													<input type="text"  class="form-control"
 														id="mailCheck" placeholder="이메일 인증번호"><br>
 													<div class="invalid-feedback" id="invalid-emailCheck">필수
 														입력사항입니다.</div>
@@ -1197,5 +1238,6 @@ body {
             if (e.keyCode == 13) e.preventDefault(); 
          });
       </script>
+      
 </body>
 </html>
