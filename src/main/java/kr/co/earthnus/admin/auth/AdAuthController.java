@@ -1,6 +1,7 @@
 package kr.co.earthnus.admin.auth;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.earthnus.user.goods.ExGoodsBean;
+import kr.co.earthnus.user.pay.PayBean;
+
 
 @Controller
 public class AdAuthController {
@@ -19,17 +23,21 @@ public class AdAuthController {
 	
 	@RequestMapping(value = "/adIndex", method = RequestMethod.GET)
 	public String index(Model model) {
-		int selectPlastic = Service.selectPlastic();
-		model.addAttribute("selectPlastic", selectPlastic);
 		
-		int selectOcean = Service.selectOcean();
-		model.addAttribute("selectOcean", selectOcean);
+		List<PayBean> adPayList = Service.adPay();
+		model.addAttribute("adPay", adPayList);
 		
-		int selectIce = Service.selectIce();
-		model.addAttribute("selectIce", selectIce);
+		List<ExGoodsBean> adGoodsList = Service.adGoods();
+		model.addAttribute("adGoods", adGoodsList);
 		
-		int selectForest = Service.selectForest();
-		model.addAttribute("selectForest", selectForest);
+		int sumPay = Service.sumPay();
+		model.addAttribute("sumPay",sumPay);
+		
+		int countMember = Service.countMember();
+		model.addAttribute("countMember",countMember);
+		
+		int orderExGoods = Service.orderExGoods();
+		model.addAttribute("orderExGoods",orderExGoods);
 		
 		return "adIndex";
 	}

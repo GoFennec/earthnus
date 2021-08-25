@@ -1,12 +1,15 @@
 package kr.co.earthnus.admin.auth;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.earthnus.admin.member.AdMemberBean;
+import kr.co.earthnus.user.goods.ExGoodsBean;
+import kr.co.earthnus.user.pay.PayBean;
 import kr.co.earthnus.util.SHA256;
 
 @Service("adAuthService")
@@ -40,24 +43,33 @@ public class AdAuthService {
 		return aBean;
 	}
 	
-	public int selectPlastic() {
+	public List<PayBean> adPay() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		int selectPlastic = dao.selectPlastic();
-		return selectPlastic;
+		List<PayBean> adPayList = dao.adPay();
+		return adPayList;
 	}
-	public int selectOcean() {
+	
+	public List<ExGoodsBean> adGoods() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		int selectOcean = dao.selectOcean();
-		return selectOcean;
+		List<ExGoodsBean> adGoodsList = dao.adGoods();
+		return adGoodsList;
 	}
-	public int selectIce() {
+	
+	public int sumPay() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		int selectIce = dao.selectIce();
-		return selectIce;
+		int sumPay = dao.sumPay();
+		return sumPay;
 	}
-	public int selectForest() {
+	
+	public int countMember() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		int selectForest = dao.selectForest();
-		return selectForest;
+		int countMember = dao.countMember();
+		return countMember;
+	}
+	
+	public int orderExGoods() {
+		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
+		int orderExGoods = dao.orderExGoods();
+		return orderExGoods;
 	}
 }

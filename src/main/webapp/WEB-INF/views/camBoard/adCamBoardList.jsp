@@ -90,6 +90,13 @@
           </div>
         </div>
       </li>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="/adDonation/list">
+        <i class="fas fa-fw fa-chart-area"></i>
+          <span>통계</span>
+        </a>
+      </li>
     </ul>
     <!-- Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -130,7 +137,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">응원릴레이 관리</h1>
+            <h1 class="h3 mb-0 text-gray-800">캠페인 관리</h1>
           </div>
 
           <!-- Row -->
