@@ -18,7 +18,6 @@
 	rel="stylesheet">
 <script
 	src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
 	rel="stylesheet">
@@ -36,7 +35,7 @@
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
- 
+
 
 <style type="text/css">
 body {
@@ -639,6 +638,86 @@ body {
 		display: inline-block
 	}
 }
+
+
+
+.modal-login {
+	color: #636363;
+	width: 350px;
+}
+.modal-login .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+.modal-login .modal-header {
+	border-bottom: none;
+	position: relative;
+	justify-content: center;
+}
+.modal-login h4 {
+	text-align: center;
+	font-size: 26px;
+}
+.modal-login  .form-group {
+	position: relative;
+	width: 80%;
+    margin: auto;
+}
+.modal-login i {
+	position: absolute;
+	left: 13px;
+	top: 11px;
+	font-size: 18px;
+}
+.modal-login .form-control {
+	padding-left: 40px;
+	    font-size: 1.5rem;
+}
+.modal-login .form-control:focus {
+	border-color: #00ce81;
+	width: 80%;
+    margin: auto;
+}
+.modal-login .form-control, .modal-login .btn {
+	min-height: 40px;
+	border-radius: 3px; 
+}
+.modal-login .hint-text {
+	text-align: center;
+	padding-top: 10px;
+}
+.modal-login .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}
+.modal-login .btn, .modal-login .btn:active {	
+	border: none;
+	background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE) !important;
+	display: block;
+	width: 80%;
+	line-height: normal;
+}
+.modal-login .btn:hover, .modal-login .btn:focus {
+	background: #00bf78 !important;
+}
+.modal-login .modal-footer {
+	background: #ecf0f1;
+	border-color: #dee4e7;
+	text-align: center;
+	margin: 0 -20px -20px;
+	border-radius: 5px;
+	font-size: 13px;
+	justify-content: center;
+}
+.modal-login .modal-footer a {
+	color: #999;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+}
 </style>
 
 </head>
@@ -708,44 +787,38 @@ body {
 							</c:if>
 
 
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-login">
+		<div class="modal-content">
+			<div class="modal-header">				
+				<h4 class="modal-title">비밀번호 변경</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+					<div class="form-group">
+					<input type="password" class="form-control"
+				placeholder="현재 비밀번호"  id="mem_pw">
+					</div>
+              <button type="button" class="btn btn-primary btn-block btn-lg" onclick="pwCheck()">현재비밀번호 확인</button>
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="변경할 비밀번호" required="required" id="mem_cpw1">					
+					</div>
+              <div class="form-group">
+						<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="mem_cpw2">					
+					</div>
+					
+						<button type="button" class="btn btn-primary btn-block btn-lg" onclick="updatePw()">비밀번호 변경</button>
+					
+			
+			</div>
+		
+		</div>
+	</div>
+</div>   
 
 
-								<!-- Modal HTML -->
-								<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
-									aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<div class="modal-dialog modal-login" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title">비밀번호 변경</h4>
-											</div>
-											<div class="modal-body">
-				
-											
-												<div class="col-11 form-group">
-													<input type="password" class="form-control"
-														placeholder="현재 비밀번호"  id="mem_pw">
-												</div>
-												<button type="button"
-														class="btn btn-primary btn-block btn-lg"
-														onclick="pwCheck()">현재비밀번호 확인</button>
-				
-												<div class="col-11 form-group">
-													<input type="password" class="form-control"
-														placeholder="변경할 비밀번호"  id="mem_cpw1">
-												</div>
-												<div class="col-11 form-group">
-													<input type="password" class="form-control"
-														placeholder="비밀번호 확인"  id="mem_cpw2">
-												</div>
-												<div class="col-11 form-group">
-													<button type="button"
-														class="btn btn-primary btn-block btn-lg"
-														onclick="updatePw()">비밀번호 변경</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+							
  <script type="text/javascript">
 				function pwCheck(){
 					var mem_pw = $("#mem_pw").val();
@@ -1238,6 +1311,6 @@ body {
             if (e.keyCode == 13) e.preventDefault(); 
          });
       </script>
-      
+      <jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>
