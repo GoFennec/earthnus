@@ -3,7 +3,6 @@
 <html><head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <style>
 	table {margin: auto;}
 	.td_left {text-align: center; vertical-align: middle;}
@@ -13,8 +12,7 @@
 <title>EARTH & US</title>
 <link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
 <link rel="icon" href="/resources/assets/img/favicon.ico">
-
-<script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script><!-- basic, standard, standard-all, full, full-all -->
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
@@ -59,16 +57,12 @@
 			<tr><td colspan="4" class="td_center"><label for="CAMB_CONTENT"><b>캠&nbsp;페&nbsp;인&nbsp;&nbsp;내&nbsp;용&nbsp;</b></label></td></tr>
 			<tr class="update" style="text-align: center;">
 				<td colspan="4">
-					<textarea id="CAMB_CONTENT" name="CAMB_CONTENT" cols="80" rows="10">
+					<textarea id = "CAMB_CONTENT" name = "CAMB_CONTENT" cols="80" rows="10">
 						This is my textarea to be replaced with CKEditor 4.
-					</textarea>
+					</textarea> 
 					<script>
-		                // Replace the <textarea id="editor1"> with a CKEditor 4
-		                // instance, using default configuration.
-		                CKEDITOR.replace( "CAMB_CONTENT", {
-		                	filebrowserUploadUrl:'/mine/imageUpload.do'
-		                });
-		            </script>
+						CKEDITOR.replace('CAMB_CONTENT',{filebrowserUploadUrl:'/ckupload/imgUpload'});
+					</script>
 				</td>
 			</tr>
 		</table><br>
@@ -85,6 +79,15 @@
 <script type="text/javascript">
 	window.onload = function(){		
 		$("#preview").html(['<img src="/resources/camBoard/imgDefault.png" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="기본 이미지" onchange="showUpdateButton()" title="기본 이미지"/>'].join(''))
+		
+		let today = new Date();   
+
+		let year = today.getFullYear(); // 년도
+		let month = today.getMonth() + 1;  // 월
+		let date = today.getDate();  // 날짜
+		
+		var input = document.getElementById("CAMB_STARTDATE");
+		input.setAttribute("min", "year-month-date");
 	}
 
 	function handleFileSelect(event) {
@@ -107,6 +110,11 @@
 	$('.preview-edit').click( function() {
 	  $("#file").click();
 	} );
+	
+	document.getElementById("CAMB_STARTDATE").onchange = function () {
+	    var input = document.getElementById("CAMB_FINDATE");
+	    input.setAttribute("min", this.value);
+	}
 </script>
 </body>
 </html>

@@ -7,6 +7,8 @@ public interface CamBoardMybatis {
 	public camBoardBean getCamBoard(int contentnum);
 	public int getBoardListCount(PagingBean pBean);
 	public int getBoardIndex(PagingBean pBean);
+	public camBoardBean nextBoard(PagingBean pBean);
+	public camBoardBean preBoard(PagingBean pBean);
 	public void camBoardInsert(camBoardBean cBean);
 	public void camBoardUpdate(camBoardBean cBean);
 	public void camBoardDelete(camBoardBean cBean);
