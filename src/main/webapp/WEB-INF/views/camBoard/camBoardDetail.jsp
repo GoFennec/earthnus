@@ -38,7 +38,6 @@
 	    -webkit-transition: all .3s ease;
 	    transition: all .3s ease;
 	}
-
 	.btn_wrap {
 	    position: relative;
 	    display: -webkit-box;
@@ -61,7 +60,6 @@
 	    -webkit-transition: all .2s ease-in-out;
 	    transition: all .2s ease-in-out;
 	}
-
 	.btn_wrap:hover {
 	    /* transition-delay: .4s; */
 	    -webkit-transform: scale(1);

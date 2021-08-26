@@ -7,7 +7,7 @@ import kr.co.earthnus.user.pay.PayBean;
 public interface CheBoardMybatis {
   List<CheBoardBean> CheBoardList(PageBean paramPageBean);
   
-  void replyDelete(int paramInt);
+  void replyDelete(int reply_id);
   
   void replyInsert(CheBoardBean paramCheBoardBean);
   

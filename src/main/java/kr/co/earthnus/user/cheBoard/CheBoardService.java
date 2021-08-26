@@ -17,6 +17,7 @@ public class CheBoardService {
   public void deleteReply(int reply_id) {
     CheBoardMybatis ChreBoardDAO = (CheBoardMybatis)this.mybatis.getMapper(CheBoardMybatis.class);
     ChreBoardDAO.replyDelete(reply_id);
+   
   }
   
   public void replyInsert(CheBoardBean boardBean) {
@@ -40,7 +41,6 @@ public class CheBoardService {
     CheBoardMybatis ChreBoardDAO = (CheBoardMybatis)this.mybatis.getMapper(CheBoardMybatis.class);
     List<PayBean> d_name = null;
     d_name = ChreBoardDAO.select_dname(user_id);
- 
     
     model.addAttribute("payCheck", d_name);
     

@@ -13,8 +13,8 @@ public class PagingBean {
     private int lastblock;
     private String arr;
     private String search;
-    private String order;						// �������� ��������
-    private String orderBy;						// �������� �������� ������
+    private String order;	
+    private String orderBy;	
 	private String search_type;
 	private int CAMB_NUM;
 	private int CAMB_INDEX;

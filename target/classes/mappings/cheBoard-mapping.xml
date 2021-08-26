@@ -2,12 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="kr.co.earthnus.user.cheBoard.CheBoardMybatis">
-      
-      
-      
-      
-      
-      
       <resultMap id="CheBoardResult" type="cheBoard">
 		<id property="cheb_num" column="CHEB_NUM"/>
 		<result property="cheb_id" column="CHEB_ID"/>
@@ -15,9 +9,7 @@
 		<result property="cheb_dname" column="CHEB_DNUM"/>
 		<result property="cheb_content" column="CHEB_CONTENT"/>
 		<result property="cheb_date" column="CHEB_DATE"/>
-	
 	</resultMap>
-      
       
 		<insert id ="replyInsert" parameterType = "cheBoard">
 			<![CDATA[
@@ -38,10 +30,6 @@
 	        ]]>
 		</insert>
       
-      
-      
-      
-      
       <select id="select_dname"  parameterType="String" resultType="pay">
       	<![CDATA[
 			select * from pay where PAY_COMMENT='N' and pay_id=#{user_id}
@@ -50,10 +38,12 @@
       
      <select id="CheBoardList" resultMap="CheBoardResult">
         <![CDATA[
-            SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC LIMIT #{comment_step} OFFSET #{startnum}
+            SELECT G.CHEB_NUM, G.CHEB_ID, G.CHEB_NAME, G.CHEB_DNAME, G.CHEB_CONTENT, G.CHEB_DATE, S.D_IMG FROM CHEBOARD AS G 
+            LEFT JOIN DONATION AS S ON G.CHEB_DNAME = S.D_NAME
+             ORDER BY CHEB_NUM DESC 
+             LIMIT #{comment_step} OFFSET #{startnum}
         ]]>
      </select>
-      
       
       <delete id="replyDelete" parameterType="int">
       		DELETE FROM CHEBOARD WHERE CHEB_NUM=#{reply_id}

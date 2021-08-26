@@ -122,7 +122,6 @@
 	
 	function showUpdateButton(){
 	}
-
 	function handleFileSelect(event) {
 	    var input = this;
 	    console.log(input.files)

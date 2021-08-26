@@ -81,7 +81,6 @@
 		$("#preview").html(['<img src="/resources/camBoard/imgDefault.png" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="기본 이미지" onchange="showUpdateButton()" title="기본 이미지"/>'].join(''))
 		
 		let today = new Date();   
-
 		let year = today.getFullYear(); // 년도
 		let month = today.getMonth() + 1;  // 월
 		let date = today.getDate();  // 날짜
@@ -89,7 +88,6 @@
 		var input = document.getElementById("CAMB_STARTDATE");
 		input.setAttribute("min", "year-month-date");
 	}
-
 	function handleFileSelect(event) {
 	    var input = this;
 	    console.log(input.files)

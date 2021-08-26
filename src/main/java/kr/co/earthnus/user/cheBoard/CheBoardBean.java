@@ -9,9 +9,9 @@ public class CheBoardBean {
 	private String cheb_dname;
 	private String cheb_content;
 	private Date cheb_date;
+	private String d_img;
 	private int Like_comment_number;
 	private String Like_click_user;
-	
 	public int getCheb_num() {
 		return cheb_num;
 	}
@@ -47,6 +47,12 @@ public class CheBoardBean {
 	}
 	public void setCheb_date(Date cheb_date) {
 		this.cheb_date = cheb_date;
+	}
+	public String getD_img() {
+		return d_img;
+	}
+	public void setD_img(String d_img) {
+		this.d_img = d_img;
 	}
 	public int getLike_comment_number() {
 		return Like_comment_number;

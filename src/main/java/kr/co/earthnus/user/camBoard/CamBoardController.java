@@ -39,7 +39,7 @@ public class CamBoardController{
 			@RequestParam(defaultValue = "6") String contentnum, @RequestParam( value = "search", required=false) String search ,
 			@RequestParam(defaultValue = "desc") String order, camBoardBean bean, Model model) {
 		
-		System.out.println("ÄÁÆ®·Ñ·¯ °Ë»ö¾î : " + search);
+		System.out.println("ì»¨íŠ¸ë¡¤ëŸ¬ ê²€ìƒ‰ì–´ : " + search);
 		
 		if(search != null) {
 			search = "%" + search + "%";
@@ -67,7 +67,7 @@ public class CamBoardController{
 		String orderBy = "CAMB_NUM";
 		
 		camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, Integer.parseInt(cambnum), list, model);
-		System.out.println("ÄÁÆ®·Ñ·¯ : " + cambnum);
+		System.out.println("ì»¨íŠ¸ë¡¤ëŸ¬ : " + cambnum);
 		model.addAttribute("index", list.get("index"));
 		model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
 		model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
