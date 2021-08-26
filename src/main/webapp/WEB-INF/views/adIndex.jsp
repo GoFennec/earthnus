@@ -26,6 +26,9 @@
   	tr,td{
   		text-align:center;
   	}
+  	#h6{
+  		margin-top:20px;
+  	}
   </style>
 </head>
 
@@ -118,8 +121,8 @@
                 <div class="card-body">
                   <div class="row align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">오늘의 후원 금액</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber type="number" maxFractionDigits="3" value="${sumPay}"/>원</div>
+                      <h6 class="m-0 font-weight-bold">오늘의 후원 금액</h6>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${sumPay}"/></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-primary"></i>
@@ -134,8 +137,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">오늘 가입한 회원</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${countMember}명</div>
+                      <h6 class="m-0 font-weight-bold">오늘 가입한 회원</h6>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">${countMember}명</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-shopping-cart fa-2x text-success"></i>
@@ -150,8 +153,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">오늘 주문한 지구 마켓</div>
-                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${orderExGoods}건</div>
+                      <h6 class="m-0 font-weight-bold">오늘 주문한 지구 마켓</h6>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="h6">${orderExGoods}건</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-users fa-2x text-info"></i>
@@ -166,8 +169,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">오늘의 방문</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <h6 class="m-0 font-weight-bold">오늘의 방문</h6>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">${todayVisitor}명</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-warning"></i>
@@ -181,6 +184,7 @@
             <div class="col-xl-6 col-lg-6 mb-4">
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <i class="fas fa-hand-holding-heart"></i>
                   <h6 class="m-0 font-weight-bold">포인트 적립 대기 중인 후원</h6>
                   <a class="m-0 float-right btn btn btn-sm" id="more" href="/adDonation/list">바로 가기 
                   <i class="fas fa-chevron-right"></i></a>
@@ -202,7 +206,7 @@
                       	<td>${adPayList.pay_no}</td>
                         <td>${adPayList.pay_id}</td>
                         <td>${adPayList.pay_dname}</td>
-                        <td>${adPayList.pay_price}</td>
+                        <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${adPayList.pay_price}"/></td>
                         <td>${adPayList.pay_pdate}</td>
                       </tr>
                      </c:forEach>
@@ -216,6 +220,7 @@
             <div class="col-xl-6 col-lg-6 mb-4">
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <i class="fas fa-shopping-cart"></i>
                   <h6 class="m-0 font-weight-bold">배송 대기 중인 주문</h6>
                   <a class="m-0 float-right btn btn btn-sm" id="more" href="/adExGoods/oList">바로 가기 
                   <i class="fas fa-chevron-right"></i></a>
@@ -236,7 +241,7 @@
                         <td>${adGoodsList.exg_num}</td>
                         <td>${adGoodsList.exg_id}</td>
                         <td>${adGoodsList.exg_gname}</td>
-                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${adGoodsList.exg_pdate}" /></td>
+                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${adGoodsList.exg_pdate}" /></td>
                       </tr>
                     </c:forEach>
                     </tbody>
@@ -249,57 +254,30 @@
             <div class="col-xl-6 col-lg-6 mb-4">
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">최근 응원릴레이</h6>
-                  <a class="m-0 float-right btn btn btn-sm" id="more" href="#">바로 가기 
+                <i class="fas fa-comments"></i>
+                  <h6 class="m-0 font-weight-bold">최근 작성한 응원릴레이</h6>
+                  <a class="m-0 float-right btn btn btn-sm" id="more" href="adCheBoard/list">바로 가기 
                   <i class="fas fa-chevron-right"></i></a>
                 </div>
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Item</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>응원<br>번호</th>
+                        <th>아이디</th>
+                        <th>카테고리</th>
+                        <th>작성<br>날짜</th>
                       </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${adCheboard}" var="adCheboardList">
                       <tr>
-                        <td><a href="#">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                        <td>${adCheboardList.cheb_num}</td>
+                        <td>${adCheboardList.cheb_id}</td>
+                        <td>${adCheboardList.cheb_dname}</td>
+                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${adCheboardList.cheb_date}" /></td>
                       </tr>
-                      <tr>
-                        <td><a href="#">RA5324</a></td>
-                        <td>Jaenab Bajigur</td>
-                        <td>Gundam 90' Edition</td>
-                        <td><span class="badge badge-warning">Shipping</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA8568</a></td>
-                        <td>Rivat Mahesa</td>
-                        <td>Oblong T-Shirt</td>
-                        <td><span class="badge badge-danger">Pending</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1453</a></td>
-                        <td>Indri Junanda</td>
-                        <td>Hat Rounded</td>
-                        <td><span class="badge badge-info">Processing</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1998</a></td>
-                        <td>Udin Cilok</td>
-                        <td>Baby Powder</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                        <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
-                      </tr>
+                    </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -309,7 +287,8 @@
                         <div class="col-xl-6 col-lg-6 mb-4">
               <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">현재 진행 중인 캠페인</h6>
+                <i class="fas fa-peace"></i>
+                  <h6 class="m-0 font-weight-bold">현재 진행 중인 캠페인</h6>
                   <a class="m-0 float-right btn btn btn-sm" id="more" href="/adCamBoard/list">바로 가기 
                   <i class="fas fa-chevron-right"></i></a>
                 </div>
@@ -317,43 +296,23 @@
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
-                        <th>캠페인 이름</th>
-                        <th>캠페인 주제</th>
-                        <th>시작 날짜</th>
-                        <th>종료 날짜</th>
+                      	<th>캠페인<br>번호</th>
+                        <th>캠페인<br>이름</th>
+                        <th>캠페인<br>주제</th>
+                        <th>시작<br>날짜</th>
+                        <th>종료<br>날짜</th>
                       </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${adCamboard}" var="adCamboardList">
                       <tr>
-                        <td><a href="#">RA0449</a></td>
-                        <td>Udin Wayang</td>
-                        <td>Nasi Padang</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
+                        <td>${adCamboardList.CAMB_NUM}</td>
+                        <td>${adCamboardList.CAMB_NAME}</td>
+                        <td>${adCamboardList.CAMB_SUBJECT}</td>
+                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${adCamboardList.CAMB_STARTDATE}" /></td>
+                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${adCamboardList.CAMB_FINDATE}" /></td>
                       </tr>
-                      <tr>
-                        <td><a href="#">RA5324</a></td>
-                        <td>Jaenab Bajigur</td>
-                        <td>Gundam 90' Edition</td>
-                        <td><span class="badge badge-warning">Shipping</span></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA8568</a></td>
-                        <td>Rivat Mahesa</td>
-                        <td>Oblong T-Shirt</td>
-                        <td><span class="badge badge-danger">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1453</a></td>
-                        <td>Indri Junanda</td>
-                        <td>Hat Rounded</td>
-                        <td><span class="badge badge-info">Processing</span></td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">RA1998</a></td>
-                        <td>Udin Cilok</td>
-                        <td>Baby Powder</td>
-                        <td><span class="badge badge-success">Delivered</span></td>
-                      </tr>
+                    </c:forEach>  
                     </tbody>
                   </table>
                 </div>

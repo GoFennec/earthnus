@@ -19,5 +19,10 @@ public class AdCheBoardService {
         List<CheBoardBean> cheBoardList = cheBoardDAO.getAdCheBoardList();
         return cheBoardList;
 	}
+	
+	public void deleteCheBoard(List<String> checkArr) {
+		AdCheBoardMybatis cheBoardDAO = mybatis.getMapper(AdCheBoardMybatis.class);
+		cheBoardDAO.deleteCheBoard(checkArr);
+	}
 
 }

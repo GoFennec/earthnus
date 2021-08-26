@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.earthnus.admin.member.AdMemberBean;
+import kr.co.earthnus.user.camBoard.camBoardBean;
+import kr.co.earthnus.user.cheBoard.CheBoardBean;
 import kr.co.earthnus.user.goods.ExGoodsBean;
 import kr.co.earthnus.user.pay.PayBean;
 import kr.co.earthnus.util.SHA256;
@@ -55,9 +57,21 @@ public class AdAuthService {
 		return adGoodsList;
 	}
 	
-	public int sumPay() {
+	public List<camBoardBean> adCamboard() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		int sumPay = dao.sumPay();
+		List<camBoardBean> adCamboardList = dao.adCamboard();
+		return adCamboardList;
+	}
+	
+	public List<CheBoardBean> adCheboard() {
+		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
+		List<CheBoardBean> adCheboardList = dao.adCheboard();
+		return adCheboardList;
+	}
+	
+	public String sumPay() {
+		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
+		String sumPay = dao.sumPay();
 		return sumPay;
 	}
 	
@@ -71,5 +85,11 @@ public class AdAuthService {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
 		int orderExGoods = dao.orderExGoods();
 		return orderExGoods;
+	}
+	
+	public int todayVisitor() {
+		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
+		int todayVisitor = dao.todayVisitor();
+		return todayVisitor;
 	}
 }
