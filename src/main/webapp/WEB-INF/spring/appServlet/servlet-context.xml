@@ -27,7 +27,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- <interceptors>
+	<interceptors>
 		<interceptor>
 			<mapping path="/goods/**" />
 			<mapping path="/member/**" />
@@ -35,6 +35,6 @@
 			<exclude-mapping path="/auth/login" />
 			<beans:bean id="twoInter" class="kr.co.earthnus.interceptor.Interceptor" />
 		</interceptor>
-	</interceptors> -->
+	</interceptors>
 	<beans:bean id="naverLoginBO" class="kr.co.earthnus.user.auth.NaverLoginBO" />
 </beans:beans>

@@ -95,11 +95,11 @@ public class AuthController {
 			session.setAttribute("mem_birth", mem_birth);
 			session.setAttribute("mem_gender", gender);
 			if (gender.equals("M")) {
-				session.setAttribute("mem_gender", "남자");
+				session.setAttribute("mem_gender", "male");
 			} else if (gender.equals("F")) {
-				session.setAttribute("mem_gender", "여자");
+				session.setAttribute("mem_gender", "female");
 			} else {
-				session.setAttribute("mem_gender", "선택안함");
+				session.setAttribute("mem_gender", "none");
 			}
 	
 			
@@ -186,11 +186,11 @@ public class AuthController {
 			
 			System.out.println("어쓰아이디" + auth_id);
 			if (userInfo.get("gender").toString().equals("male")) {
-				session.setAttribute("mem_gender", "남자");
+				session.setAttribute("mem_gender", "male");
 			} else if (userInfo.get("gender").toString().equals("female")) {
-				session.setAttribute("mem_gender", "여자");
+				session.setAttribute("mem_gender", "female");
 			} else {
-				session.setAttribute("mem_gender", "선택안함");
+				session.setAttribute("mem_gender", "none");
 			}
 			
 		

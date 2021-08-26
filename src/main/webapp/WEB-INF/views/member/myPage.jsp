@@ -805,6 +805,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	}
 </script>
 
-
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>
