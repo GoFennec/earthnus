@@ -1,6 +1,8 @@
 package kr.co.earthnus.user.camBoard;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,11 +56,22 @@ public class CamBoardController{
 	}
 	
 	@RequestMapping(value="/camBoard/detail")
-	public String getCamBoardDetail(@RequestParam("CAMB_NUM") String contentnum, @RequestParam(defaultValue = "1") String p, 
-			Model model) {
+	public String getCamBoardDetail(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
+			@RequestParam(defaultValue = "") String search , @RequestParam(defaultValue = "desc") String order, 
+			camBoardBean bean, @RequestParam("CAMB_NUM") String cambnum, @RequestParam(defaultValue = "1") String p, 
+			@RequestParam("CAMB_NAME") String cambname, Model model) {
+		search = "%" + search + "%";		
 		
-		System.out.println("컨트롤러 : " + contentnum);
-		model.addAttribute("camBoard", camBoardService.getCamBoard(contentnum));
+		Map<String, Object> list = new HashMap<String, Object>();
+		String search_type = "CAMB_NAME";
+		String orderBy = "CAMB_NUM";
+		
+		camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, Integer.parseInt(cambnum), list, model);
+		System.out.println("컨트롤러 : " + cambnum);
+		model.addAttribute("index", list.get("index"));
+		model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
+		model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
+		model.addAttribute("camBoard", camBoardService.getCamBoard(cambnum));
 		model.addAttribute("page", Integer.parseInt(p));
 		
 		return "camBoard/camBoardDetail";

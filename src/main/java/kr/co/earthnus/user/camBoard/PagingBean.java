@@ -13,10 +13,11 @@ public class PagingBean {
     private int lastblock;
     private String arr;
     private String search;
-    private String order;						// ¿À¸§Â÷¼ø ³»¸²Â÷¼ø
-    private String orderBy;						// ¿À¸§Â÷¼ø ³»¸²Â÷¼ø ±âÁØÁ¡
+    private String order;						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private String orderBy;						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private String search_type;
 	private int CAMB_NUM;
+	private int CAMB_INDEX;
     
     public void prevnext(int pagenum) {
         if(calcpage(totalcount,contentnum)<6) {
@@ -41,6 +42,12 @@ public class PagingBean {
         return totalpage;
     }
     
+	public int getCAMB_INDEX() {
+		return CAMB_INDEX;
+	}
+	public void setCAMB_INDEX(int cAMB_INDEX) {
+		CAMB_INDEX = cAMB_INDEX;
+	}
 	public int getCAMB_NUM() {
 		return CAMB_NUM;
 	}
