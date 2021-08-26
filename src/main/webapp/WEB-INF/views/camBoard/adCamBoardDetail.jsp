@@ -5,11 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
-
 <style>
-	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
+	table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
 	tr {max-width: 900px}
@@ -22,12 +19,12 @@
 	.sysBtn {text-align: center;}
 	#max{max-width: 600px}
 	.update{background-color: #FFFAFA;}
-	input[type=date]::-webkit-calendar-picker-indicator {margin-left: 100px; background: none;}
-	
+	.imgedit, .editbutton{cursor: pointer;}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Detail</title>
+<script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script><!-- basic, standard, standard-all, full, full-all -->
 <link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
 <link rel="icon" href="/resources/assets/img/favicon.ico">
 </head>
@@ -50,8 +47,8 @@
 									<div id="preview"></div>
 									<input type="hidden" name="goods_img" value="${goods.goods_img}">
 								<div style="text-align: center;" class="file-edit-icon">
-									<a href="#" class="preview-edit">수정</a>
-									<a href="#" class="preview-de">삭제</a>
+									<a class="preview-edit imgedit">사진수정</a>
+									<a class="preview-de imgedit">사진삭제</a>
 								</div>
 						</div>
 											
@@ -76,11 +73,11 @@
 				<tr>
 					<td><b>시작일</b></td>
 					<td class="update">
-					<input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE">
+					<input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE" value="${CAMB_STARTDATE}">
 					</td>
 					<td><b>종료일</b></td>
 					<td class="update">
-						<input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE">
+						<input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" value="${CAMB_FINDATE}">
 					</td>
 				</tr>
 				
@@ -88,18 +85,25 @@
 					<td colspan="4"><b>캠페인 내용</b></td>
 				</tr>
 				<tr class="update" style="text-align: center;">
-					<td colspan="4"><textarea id="CAMB_CONTENT" name="CAMB_CONTENT" required>${camBoard.CAMB_CONTENT}</textarea></td>
+					<td colspan="4">
+						<textarea id ="CAMB_CONTENT" name ="CAMB_CONTENT" cols="80" rows="10">
+						${camBoard.CAMB_CONTENT}
+						</textarea> 
+						<script>
+							CKEDITOR.replace('CAMB_CONTENT',{filebrowserUploadUrl:'/adCamBoard/insert/imgUpload'});
+						</script>
+					</td>
 				</tr>
 			</table>
 			<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
 			
 			<div class="sysBtn">
-				<input type="submit" class="btn-dark" value="수정">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" class="btn-dark editbutton" value="수정">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
-				<input type="button" class="btn-dark" value="삭제" 
+				<input type="button" class="btn-dark editbutton" value="삭제" 
 				onclick="location.href='/adCamBoard/delete?CAMB_NUM=${camBoard.CAMB_NUM}'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
-				<input type="button" class="btn-dark" value="목록" 
+				<input type="button" class="btn-dark editbutton" value="목록" 
 				onclick="location.href='/adCamBoard/list'"/>
 			</div>
 		</form>
@@ -109,13 +113,9 @@
 <script type="text/javascript">
 	window.onload = function(){
 		
-		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_SUBJECT}"/>'].join(''))
+		var date = "${camBoard.CAMB_STARTDATE}";
 		
-		var startdate = <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_STARTDATE}" />;
-		var findate = <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_FINDATE}" />;
-		
-		document.getElementById("CAMB_STARTDATE").value=startdate;
-		document.getElementById("CAMB_FINDATE").value=findate;
+		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="100%" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_SUBJECT}"/>'].join(''))
 		
 		$('#CAMB_SUBJECT').val('플라스틱').prop("selected", true);
 	}
@@ -130,15 +130,14 @@
 	        var reader = new FileReader();
 	        this.enabled = false
 	        reader.onload = (function (e) {
-	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="80%" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
+	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="100%" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
 	        });
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
 	$('#file').change(handleFileSelect);
 	$('.file-edit-icon').on('click', '.preview-de', function () {
-	    //$("#preview").html(['<img src="/resorces/camBoard/imgDefault.png" id="IMG" width="600" alt="캠페인" title="', escape(e.name), '"/>'].join(''))
-	    $("#file").val("");
+	    $("#preview").html(['<img src="/resources/camBoard/imgDefault.png" id="IMG" width="600" alt="캠페인" title="후원"/>'].join(''))
 	});
 	$('.preview-edit').click( function() {
 	  $("#file").click();
