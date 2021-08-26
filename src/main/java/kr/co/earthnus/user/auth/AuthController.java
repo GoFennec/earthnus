@@ -43,6 +43,7 @@ public class AuthController {
 	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
 	   public String login() {
 	      return "auth/login";
+	      
 	   }
 	
 

@@ -605,13 +605,14 @@ text-transform: capitalize;
     border-radius: 30px;
 display: inline-block;
     font-size: 15px;
+  color: #fff;
     transition: 0.6s;
     box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);
     background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
 background-size: 200%;
 margin-bottom: 5px;
 }
-table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
+table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 
@@ -777,7 +778,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                 <c:forEach items="${myPay}" var="pay">
                   <tr>
                     <td class="text-truncate">${pay.pay_dname}</td>
-                    <td class="text-truncate">${pay.pay_price}</td>
+                    <td class="text-truncate">${pay.pay_price}원</td>
                     <td class="text-truncate">${pay.pay_pdate}</td>
                  	<c:if test="${pay.pay_comment eq 'N'}" >
                     <td class="text-truncate"><button type="button" 
@@ -790,7 +791,9 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
          		 </c:forEach>
                 </tbody>
               </table>
+
 <br><br><br><br>
+
                </div>
                    
                  </form>
@@ -799,11 +802,13 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
         </section>
     </div>
 </div>
+
 	<script type="text/javascript">
 	function comment() {
 		location.href = "/cheBoard/list";
 	}
 </script>
+
 
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>

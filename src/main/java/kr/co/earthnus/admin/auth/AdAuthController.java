@@ -61,11 +61,14 @@ public class AdAuthController {
 	@RequestMapping(value = "/auth/adLogin", method = RequestMethod.POST)
 	public String adLoginch(@RequestParam("auth_pw") String auth_pw,
 			AdAuthBean aBean, HttpSession session, Model model) throws NoSuchAlgorithmException {
+		model.addAttribute("auth_id", aBean.getAuth_id());
+		System.out.println("adauth_id check" + aBean.getAuth_id());
+		System.out.println("adauth_pw check" + auth_pw);
 		aBean = Service.adLogin(aBean.getAuth_id(), auth_pw);
 		
 		if(aBean != null) {
 			session.setAttribute("auth", aBean);
-			System.out.println("abean test"+ aBean.getAuth_id());
+			System.out.println("session test");
 			return "redirect:/adIndex";
 		} else {
 			return "auth/adLogin";
@@ -75,6 +78,6 @@ public class AdAuthController {
 	@RequestMapping("/adLogout")
 	public String adLogout(HttpSession session) {
 		session.invalidate();
-		return "redirect:auth/adLogin";	
+		return "redirect:/auth/adLogin";	
 	}
 }
