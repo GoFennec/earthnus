@@ -707,6 +707,6 @@ function agree(){
 }
 
 </script>
-
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>
