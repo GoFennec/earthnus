@@ -40,7 +40,7 @@
                     </div>
                   
                     <div class="form-group">
-                      <a href="/adIndex" class="btn btn-primary btn-block">Login</a>
+                      <input type="submit" class="btn btn-primary btn-block" value="로그인">
                     </div>
                     <hr>
                   </form>

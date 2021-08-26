@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
-import kr.co.earthnus.user.member.MemberBean;
 
 @Controller
 public class AuthController {
@@ -45,6 +44,7 @@ public class AuthController {
 	@RequestMapping(value = "/auth/login", method = RequestMethod.GET)
 	   public String login() {
 	      return "auth/login";
+	      
 	   }
 	
 

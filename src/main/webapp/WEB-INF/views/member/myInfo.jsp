@@ -8,8 +8,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-<!--  All snippets are MIT license http://bootdey.com/license -->
+
 <title>내 정보</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -35,6 +34,7 @@
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
 <style type="text/css">
@@ -779,9 +779,11 @@ body {
 								<div class="col-12">
 									<label for="username" class="form-label">비밀번호</label>
 								</div>
+								
 								<div class="col-md-3">
 									<button class="btn btn-sm btn-default-alt pull-left"
 										data-toggle="modal" data-target="#myModal">비밀번호 변경</button>
+										
 								</div>
 								<br><br> <br>
 							</c:if>
@@ -802,10 +804,10 @@ body {
 					</div>
               <button type="button" class="btn btn-primary btn-block btn-lg" onclick="pwCheck()">현재비밀번호 확인</button>
 					<div class="form-group">
-						<input type="password" class="form-control" placeholder="변경할 비밀번호" required="required" id="mem_cpw1">					
+						<input type="password" class="form-control" placeholder="변경할 비밀번호" required  id="mem_cpw1">					
 					</div>
               <div class="form-group">
-						<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="mem_cpw2">					
+						<input type="password" class="form-control" placeholder="비밀번호 확인" required id="mem_cpw2">					
 					</div>
 					
 						<button type="button" class="btn btn-primary btn-block btn-lg" onclick="updatePw()">비밀번호 변경</button>
@@ -824,7 +826,7 @@ body {
 					var mem_pw = $("#mem_pw").val();
 					if(mem_pw === ""){
 						alert("비밀번호를 입력해주세요.");
-					}
+					}else{
 					$.ajax({
 			   			type: "POST", //요청 메소드 방식
 			  			 url:"/cpwCheck",
@@ -851,7 +853,7 @@ body {
 							//통신 실패시 발생하는 함수(콜백)
 						}
 					});
-	} 
+	} }
 					</script>
 
 								<script type="text/javascript">
@@ -1032,6 +1034,7 @@ body {
 										<div class="modal-content">
 											<div class="modal-header">
 												<h4 class="modal-title">이메일 변경</h4>
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 											</div>
 											<div class="modal-body">
 

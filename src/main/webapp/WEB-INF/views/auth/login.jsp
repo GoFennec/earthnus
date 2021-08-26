@@ -104,6 +104,19 @@ body {
 .login-form a {
 	color: #388E3C;
 }
+#naver {
+vertical-align: middle;
+border-style: none;
+margin-bottom: 10px;    
+}
+
+#kakao {
+vertical-align: middle;
+border-style: none;
+margin-bottom: 10px;    
+width:288px;
+height:46px;
+}
 </style>
 </head>
 <body>
@@ -134,11 +147,11 @@ body {
     apiURL += "&state=" + state;
     session.setAttribute("state", state);
  %>
-  <a href="<%=apiURL%>"><img width="288" height="46" src="/resources/Auth/btnG.png" alt="네이버로그인버튼" title="btnG"/></a>
+  <a href="<%=apiURL%>"><img width="288" height="46" id="naver" src="/resources/Auth/btnG.png" alt="네이버로그인버튼" title="로그인버튼" /></a>
             <div>
             <c:if test="${userId eq null}">
         <a href="https://kauth.kakao.com/oauth/authorize?client_id=1f09c57d8241952a7a44833618d75b13&redirect_uri=http://localhost:8090/kakaoLogin&response_type=code">
-            <img src="/resources/Auth/kakao_login_large_narrow.png" width="288" height="46" alt="카카오로그인버튼" title="kakao_login_medium_narrow">
+            <img src="/resources/Auth/kakao_login_large_narrow.png" id="kakao"  alt="카카오로그인버튼" title="로그인버튼">
         </a>
     </c:if>
     <c:if test="${userId ne null}">

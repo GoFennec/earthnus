@@ -184,7 +184,7 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases mb-40">
 							<div class="cases-img">
-								<img src="/resources/donation/ocean.jpg" height="250px"  title="바다가 힘들어요!" alt="해양오염 사진" >
+								<img src="/resources/donation/ocean.jpg" height="200px"  title="바다가 힘들어요!" alt="해양오염 사진" >
 							</div>
 							<div class="cases-caption">
 								<h3>
@@ -216,7 +216,7 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases mb-40">
 							<div class="cases-img">
-								<img src="resources/donation/forest.jpg" height="250px" title="나무를 심어요!" alt="사막화가 진행되고있는 토양 사진">
+								<img src="resources/donation/forest.jpg" height="200px" title="나무를 심어요!" alt="사막화가 진행되고있는 토양 사진">
 							</div>
 							<div class="cases-caption">
 								<h3>
@@ -247,7 +247,7 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases">
 							<div class="cases-img">
-								<img src="/resources/donation/plastic.jpg" height="250px" title="플라스틱이 넘쳐요!" alt="방대한 양의 플라스틱 사진" >
+								<img src="/resources/donation/plastic.jpg" height="200px" title="플라스틱이 넘쳐요!" alt="방대한 양의 플라스틱 사진" >
 							</div>
 							<div class="cases-caption">
 								<h3>
@@ -278,7 +278,7 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases">
 							<div class="cases-img">
-								<img  src="/resources/donation/ice.jpg" height="250px" title="북극곰을 도와줘요!" alt="삶의 터전을 잃어가는 북극곰 사진" >
+								<img  src="/resources/donation/ice.jpg" height="200px" title="북극곰을 도와줘요!" alt="삶의 터전을 잃어가는 북극곰 사진" >
 							</div>
 							<div class="cases-caption">
 								<h3>
