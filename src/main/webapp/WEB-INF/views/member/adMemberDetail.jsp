@@ -30,7 +30,7 @@
       </a>
       <li class="nav-item">
         <a class="nav-link" href="/adIndex">
-        <i class="fas fa-fw fa-chart-area"></i>
+        <i class="fas fa-desktop"></i>
           <span>관리자 메인</span></a>
       </li>
       <li class="nav-item active">
@@ -64,27 +64,25 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/oList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 주문목록</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
+          aria-controls="collapseForm">
+          <i class="fas fa-shopping-cart"></i>
+          <span>지구마켓 주문 관리</span>
         </a>
+        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/adExGoods/oList">주문 목록</a>
+            <a class="collapse-item" href="/adExGoods/dList">배송 처리 목록</a>
+            <a class="collapse-item" href="/adExGoods/aList">주문 승인 내역</a>
+            <a class="collapse-item" href="/adExGoods/cList">주문취소내역</a>
+          </div>
+        </div>
       </li>
-       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/dList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 배송처리목록</span>
-        </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/aList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 주문승인내역</span>
-        </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="/adExGoods/cList">
-        <i class="fas fa-shopping-cart"></i>
-          <span>지구마켓 주문취소내역</span>
+      <hr class="sidebar-divider">
+      <li class="nav-item">
+        <a class="nav-link" href="/adChart">
+        <i class="fas fa-fw fa-chart-area"></i>
+          <span>통계</span>
         </a>
       </li>
     </ul>
@@ -92,37 +90,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <!-- TopBar -->
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
-          <ul class="navbar-nav ml-auto">
-            <div class="topbar-divider d-none d-sm-block"></div>
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-				<i class="fas fa-address-card"></i>
-                <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
-          </ul>
-        </nav>
+        <jsp:include page="/WEB-INF/views/adHeader.jsp"/>
         <!-- Topbar -->
 
         <!-- Container Fluid-->
