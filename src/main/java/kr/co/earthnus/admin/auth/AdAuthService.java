@@ -72,6 +72,9 @@ public class AdAuthService {
 	public String sumPay() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
 		String sumPay = dao.sumPay();
+		if(sumPay == null) {
+			sumPay = "0";
+		}
 		return sumPay;
 	}
 	

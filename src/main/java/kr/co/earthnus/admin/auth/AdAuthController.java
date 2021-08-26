@@ -65,6 +65,7 @@ public class AdAuthController {
 		
 		if(aBean != null) {
 			session.setAttribute("auth", aBean);
+			System.out.println("abean test"+ aBean.getAuth_id());
 			return "redirect:/adIndex";
 		} else {
 			return "auth/adLogin";

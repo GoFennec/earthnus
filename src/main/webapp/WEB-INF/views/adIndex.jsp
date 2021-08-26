@@ -275,7 +275,7 @@
                         <td>${adCheboardList.cheb_num}</td>
                         <td>${adCheboardList.cheb_id}</td>
                         <td>${adCheboardList.cheb_dname}</td>
-                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${adCheboardList.cheb_date}" /></td>
+                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${adCheboardList.cheb_date}" /></td>
                       </tr>
                     </c:forEach>
                     </tbody>
@@ -358,7 +358,6 @@
 
   <script src="/resources/assets/js/jquery.min.js"></script>
   <script src="/resources/assets/js/bootstrap.bundle.min.js"></script>
-<!--   <script src="/resources/assets/js/bootstrap.min.js"></script> -->
   <script src="/resources/assets/js/jquery.easing.min.js"></script>
   <script src="/resources/assets/js/ruang-admin.min.js"></script>
   <script src="/resources/assets/js/Chart.min.js"></script>
