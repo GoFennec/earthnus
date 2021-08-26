@@ -30,6 +30,24 @@
   	.btn btn-sm btn-primary{
   		font-color:#6777EF;
   	}
+  	  		  /*radio 버튼 색상변경 */
+  		input[type='checkbox'] {
+    		-webkit-appearance:none;
+    		width:16px;
+    		height:16px;
+    		outline:none;
+    		background:#e6e6e6;
+  		}
+  		input[type='checkbox']:before {
+    		content:'';
+    		display:block;
+    		width:60%;
+    		height:60%;
+    		margin: 20% auto;  
+  		}
+  		input[type='checkbox']:checked:before {
+  			background:#66BB6A;
+  		}
   </style>
 </head>
 
@@ -63,7 +81,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/adDonation/list">
         <i class="fas fa-hand-holding-heart"></i>
-          <span>기부 관리</span>
+          <span>후원 관리</span>
         </a>
       </li>
       <li class="nav-item active">
@@ -228,33 +246,32 @@
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary"></h6>
-                </div>
                 <div class="table-responsive p-3">
                 <div class="row">
                 <div class="col-sm-12 col-md-6"></div>
                 <div class="col-sm-12 col-md-6" style="text-align:right;">
-                  <a href="" class="btn btn-sm btn-primary" id="cancel" style="background-color:#fc544b;border-color:#fc544b;">응원 삭제</a>
+                  <button class="btn btn-sm btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="checkDelete()">응원 삭제</button>
                 </div>
                 </div>
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
                         <th>응원 번호</th>
-                        <th>응원 내용</th>
                         <th>작성자 ID</th>
                         <th>작성자 이름</th>
+                        <th>카테고리</th>
+                        <th>응원 내용</th>
                         <th>작성 날짜</th>
                       </tr>
                     </thead>
 					<tbody>
                     	<c:forEach items="${CheBoard}" var="list">
                       	<tr class="cheInfo" id="${list.cheb_num}">
-                      		<td>${list.cheb_num}</td>
+                      		<td>${list.cheb_num} <br> <input type="checkbox" id="test_check" value="${list.cheb_num}"></td>
+                      		<td>${list.cheb_id}</td>
+                      		<td>${list.cheb_name}</td>
+                      		<td>${list.cheb_dname}</td>
                         	<td>${list.cheb_content}</td>
-                        	<td>${list.cheb_id}</td>
-                        	<td>${list.cheb_name}</td>
                         	<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${list.cheb_date}" /></td>
                       	</tr>
                      	</c:forEach>
@@ -265,6 +282,21 @@
             </div>
           </div>
           <!--Row-->
+          	<script type="text/javascript">
+			function checkDelete(){
+				var checkArr = [];     // 배열 초기화
+				$("input[id='test_check']:checked").each(function(i) {
+        			checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+    			});
+				if(checkArr.length == 0){
+					alert('삭제할 상품을 체크해주세요.');
+					return;
+				}else{
+					$("#cancelModal").modal('show');
+					$("#item").text("정말 응원 " + checkArr + " 을(를) 삭제하시겠습니까?");
+				}
+			}
+			</script>
 
           <!-- Modal Logout -->
           <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
@@ -287,6 +319,69 @@
               </div>
             </div>
           </div>
+          
+          <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">응원 삭제</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                	<input type="checkbox" id="itemCheck"> &nbsp &nbsp <span id="item"></span>
+                	<hr>
+                  	<p>관리자 비밀번호를 입력하세요.</p>
+                  	<input type="password" id="deletePW">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="cheBoardDelete()">삭제</button>
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+              <script type="text/javascript">
+				function cheBoardDelete(){
+					var checkArr = [];     // 배열 초기화
+					$("input[id='test_check']:checked").each(function(i) {
+	        			checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+	    			});
+					var deletePW = $("#deletePW").val();
+					if(deletePW == ""){
+						alert("관리자 비밀번호를 입력해주세요.");
+						return;
+					}
+					if($("input:checkbox[id=itemCheck]").is(":checked") == false) {
+						alert('확인 체크를 해주세요.');
+						return;
+					}
+		
+					$.ajax({
+			   			type: "POST", //요청 메소드 방식
+			  			 url:"/adCheBoard/delete",
+			   			data: {"checkArr":checkArr, "deletePW": deletePW},
+			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			   			
+			   			success : function(result){
+			      			if(result.error === true){
+			    	  			alert('삭제되었습니다.');
+			    	  			location.href="/adCheBoard/list";
+			      			}else if(result.error === false){
+			    	  			alert('관리자 비밀번호를 확인해 주세요.');
+			    	  			return;
+			      			}
+			   			},
+			   		 error:function(request,status,error){
+			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			      			//통신 실패시 발생하는 함수(콜백)
+			   				}
+						});
+				}
+			</script>
 
         </div>
         <!---Container Fluid-->

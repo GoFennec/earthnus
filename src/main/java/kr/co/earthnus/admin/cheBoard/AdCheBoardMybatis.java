@@ -6,4 +6,5 @@ import kr.co.earthnus.user.cheBoard.CheBoardBean;
 
 public interface AdCheBoardMybatis {
 	public List<CheBoardBean> getAdCheBoardList();
+	public void deleteCheBoard(List<String> checkArr);
 }

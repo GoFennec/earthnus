@@ -17,5 +17,14 @@
 	<select id="getAdCheBoardList" resultMap="cheBoardResult">
 		SELECT * FROM CHEBOARD
 	</select>
+	
+	<delete id="deleteCheBoard" parameterType="List">
+		DELETE FROM CHEBOARD
+		WHERE
+		CHEB_NUM IN
+    	<foreach collection="list" item="checkArr" index="i" open="(" separator="," close=")">
+      		#{checkArr}
+    	</foreach>
+	</delete>
 
 </mapper>
