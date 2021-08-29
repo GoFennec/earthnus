@@ -1,5 +1,7 @@
 package kr.co.earthnus.admin.chart;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,7 @@ public class AdChartController {
 		int selectForest = service.selectForest();
 		model.addAttribute("selectForest", selectForest);
 		
-		int[] countVisitor = service.countVisitor();
+		List<Integer> countVisitor = service.countVisitor();
 		model.addAttribute("countVisitor", countVisitor);
 		
 		return "auth/adChart";

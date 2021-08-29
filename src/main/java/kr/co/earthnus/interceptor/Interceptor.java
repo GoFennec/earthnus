@@ -13,30 +13,23 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class Interceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(Interceptor.class);
 
-	
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 
+		HttpSession session = request.getSession();
+		// AuthBean aBean= (AuthBean)session.getAttribute("aBean");
 
-	
-		@Override
-		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-				throws Exception {
-			
-			
-			HttpSession session = request.getSession();
-			//AuthBean aBean= (AuthBean)session.getAttribute("aBean");
-			
-			if (session.getAttribute("auth") == null) {
-				response.setContentType("text/html;charset=UTF-8"); 
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('로그인페이지로 이동합니다.'); location.href=\"/auth/login\"</script>");
-				out.close();
-				  String referrer = request.getHeader("Referer");
-				  request.getSession().setAttribute("url_prior_login", referrer);
-				//response.sendRedirect("/auth/login");
-				
-				return false;
-			}
-			return true;
+		if (session.getAttribute("auth") == null) {
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인페이지로 이동합니다.'); location.href=\"/auth/login\"</script>");
+			out.close();
+			String referrer = request.getHeader("Referer");
+			request.getSession().setAttribute("url_prior_login", referrer);
+			// response.sendRedirect("/auth/login");
+			return false;
 		}
-	
+		return true;
 	}
+}
