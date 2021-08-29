@@ -1,5 +1,9 @@
 package kr.co.earthnus.user.camBoard;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,8 +57,17 @@ public class CamBoardService {
         pBean.setSearch(search.substring(1, search.length()-1));
 
         camBoardBean cBean = new camBoardBean();
+        
+        DateFormat format = new SimpleDateFormat("MM월 dd일");
+        
         for(int i = 1; i <= CamBoardList.size(); i++) {
         	cBean = CamBoardList.get(i-1);
+        	
+        	String startdate = format.format(cBean.getCAMB_STARTDATE());
+        	String findate = format.format(cBean.getCAMB_FINDATE());
+
+        	System.out.println("startdate" + i + " : " + startdate + " ||||| findate" + i + " : " + findate);
+        	
         	csBean = statList.get(i-1);
         	int ABLEDATE = 472 - 472*csBean.getCAMB_ABLEDATE()/100;
         	int cBean_ABLEDATE = cBean.getCAMB_ABLEDATE();
@@ -63,7 +76,10 @@ public class CamBoardService {
         	}else if(csBean.getCAMB_ABLEDATE() < 0) {
         		ABLEDATE = 0;
         	}
+        	
         	model.addAttribute("CAMB_ABLEDATE" + i, ABLEDATE);
+        	model.addAttribute("CAMB_STARTDATE" + i, startdate);
+        	model.addAttribute("CAMB_FINDATE" + i, findate);
         }
 		model.addAttribute("CamBoardList", CamBoardList);
         model.addAttribute("page", pBean);

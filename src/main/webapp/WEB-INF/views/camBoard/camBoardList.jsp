@@ -16,6 +16,7 @@
 
 <style>
 a {cursor: pointer;}
+i {color: #388E3C;}
 
 div #selectView { text-align: left;}
 
@@ -53,6 +54,8 @@ table{ float: right; width: 50px;}
 	width: 160px;
 	border-radius: 50%;
 	padding: 20px;
+	box-shadow: 0px 4px 10px -1px rgba(0,0,0,0.2),
+				0px 4px 10px -1px rgba(255,255,255,0.7);
 }
 
 .inner{
@@ -71,6 +74,7 @@ table{ float: right; width: 50px;}
 }
 
 .number{
+	text-align: center;
 	font-weight: 600px;
 	color: #555;
 }
@@ -155,14 +159,7 @@ svg{
 	</div>
 	
 	<div id="search-box">
-		<table class="search_type"><tr><td>
-			<select>
-				<option selected="selected">전체</option>
-				<option>제목</option>
-				<option>내용</option>
-			</select>
-		</td></tr></table>
-		<input type="text" id="search" name="search" placeholder="검색" value="${page.search}">
+		<input type="text" id="search" name="search" placeholder="검색 . . ." value="${page.search}">
 		<a onclick="searchCamBoard()"><i class="fas fa-search"></i></a>
 	</div>
 	
@@ -225,9 +222,24 @@ svg{
 			var number = num;
 			number = document.getElementById(number);
 			
-			if(number.innerHTML !== "날짜"){
-				number.innerHTML = "날짜";
-			}else if(number.innerHTML === "날짜"){
+			var HTML = '';
+			if(num === "number1"){
+				HTML = '<i class="fas fa-calendar-alt"></i><br>${CAMB_STARTDATE1}<br>~<br>${CAMB_FINDATE1}'
+			}else if(num === "number2"){
+				HTML = '<i class="fas fa-calendar-alt"></i><br>${CAMB_STARTDATE2}<br>~<br>${CAMB_FINDATE2}'
+			}else if(num === "number3"){
+				HTML = '<i class="fas fa-calendar-alt"></i><br>${CAMB_STARTDATE3}<br>~<br>${CAMB_FINDATE3}'
+			}else if(num === "number4"){
+				HTML = '<i class="fas fa-calendar-alt"></i><br>${CAMB_STARTDATE4}<br>~<br>${CAMB_FINDATE4}'
+			}else if(num === "number5"){
+				HTML = '<i class="fas fa-calendar-alt"></i><br>${CAMB_STARTDATE5}<br>~<br>${CAMB_FINDATE5}'
+			}else if(num === "number6"){
+				HTML = '<i class="fas fa-calendar-alt"></i><br>${CAMB_STARTDATE6}<br>~<br>${CAMB_FINDATE6}'
+			}
+			
+			if(number.innerHTML !== HTML){
+				number.innerHTML = HTML;
+			}else if(number.innerHTML === HTML){
 				var rate = "";
 				if(CAMB_ABLEDATE >= 0){
 					if(CAMB_ABLEDATE-100 > 0){

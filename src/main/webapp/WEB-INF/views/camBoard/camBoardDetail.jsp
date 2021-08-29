@@ -27,6 +27,10 @@
 	.main{margin-right: 30px;}
 	.paging {text-align: center;}
 	.facebook:hover, .twitter:hover, .naverblog:hover, .kakaotalk:hover, .clipboard:hover {transform: scale( 1.2 )}
+	
+	li{
+	margin-right: 10px;
+	}
 	i {
 		border-radius: 80px;
 	    opacity: 0;
@@ -132,7 +136,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>	
-
+	<br><br><br><br>
 	<div class="main col-sm-12 col-lg-12">
 		<table class="mainlist goodsTable" id="detail" style="border-collapse: separate;">
 			
@@ -168,18 +172,18 @@
 			<tr>
 				<td colspan = "4">
 					<div class="navigation-top">
-					   <div class="d-sm-flex justify-content-between text-center">
+					   <div class="d-sm-flex justify-content-between text-center" style="margin-bottom: 30px;">
 					    <div class="col-sm-4 text-center my-2 my-sm-0">
 					     <span class="align-middle" onclick="donate()"><i class="fas fa-donate" style="margin-right: 15px"></i>후원하기</span>
 					   </div>
 					   <ul class="social-icons" style="float: left">
 					     <li style="float: left"><a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
-			        			<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="20px">
+			        			<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="25px">
 			        		</a></li>
-					     <li style="float: left"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="20px" class="twitter" onclick="shareTwitter()"></li>
-					     <li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="20px" class="naverblog" onclick="shareNaverBlog()"></li>
-					     <li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="20px" class="kakaotalk" onclick="shareKakaotalk()"></li>
-					   	<li style="float: left;"><i class="clipboard far fa-clipboard" style="font-size: 20px" onclick="shareURL()"></i></li>
+					     <li style="float: left"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="25px" class="twitter" onclick="shareTwitter()"></li>
+					     <li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="25px" class="naverblog" onclick="shareNaverBlog()"></li>
+					     <li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="25px" class="kakaotalk" onclick="shareKakaotalk()"></li>
+					   	<li style="float: left;"><i class="clipboard fas fa-copy" style="font-size: 24px" onclick="shareURL()"></i></li>
 					   </ul>
 					 </div>
 					 <div class="navigation-area">
@@ -188,7 +192,7 @@
 					   class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center"
 					   onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
 					   <div class="thumb">
-					      <img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="">
+					      <img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="" width="150px">
 					  </div>
 					  <div class="arrow">
 					    <span class="lnr text-white ti-arrow-left"></span>
@@ -209,7 +213,7 @@
 					  <span class="lnr text-white ti-arrow-right"></span>
 					</div>
 					<div class="thumb">
-					  <img class="img-fluid" src="${nextBoard.CAMB_FILE}" alt="">
+					  <img class="img-fluid" src="${nextBoard.CAMB_FILE}" alt="" width="150px">
 					</div>
 					</div>
 					</div>
