@@ -598,6 +598,9 @@ color: #a2a6af
     width: 40px;
     display: inline-block
 }
+table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
+	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
+	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 
 </style>
 

@@ -72,12 +72,7 @@
 						<input type="hidden" name="pay_dname" value="${donation.d_name}"/>
 						<input type="hidden" name="pay_price" value="${donation.d_price}"/>
 					<div class="cat-cap">
-						<c:if test="${empty auth}">
-							<div id="donationBt"><button type="button" class="btn btn-primary" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">후원하기</button></div>
-						</c:if>
-						<c:if test="${!empty auth}">
 							<div id="donationBt"><input type="submit" class="btn btn-primary" value="후원하기"/></div>
-						</c:if>
 					</div>
 					</form>	
 				</div>
@@ -93,12 +88,7 @@
 						<input type="hidden" name="pay_dname" value="${donation.d_name}"/>
 						<input type="text" size=10 height=20 name="pay_price"/>&nbsp;원<br><br>
 					<div class="cat-cap">	
-						<c:if test="${empty auth}">
-							<div id="lastDonationBt"><button type="button" class="btn btn-primary" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">자율후원</button></div>
-						</c:if>
-						<c:if test="${!empty auth}">
 							<div id="lastDonationBt"><input type="submit" class="btn btn-primary" value="자율후원"/></div>
-						</c:if>
 					</div>
 					</form>
 				</div>
