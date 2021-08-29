@@ -12,7 +12,6 @@
 <html>
 <head>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type="text/javascript" src="http://jsgetip.appspot.com"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
 	table {max-width: 90%; margin:auto; border-collapse: collapse; text-align: left; line-height: 1.5;}
@@ -39,7 +38,6 @@
 	    -webkit-transition: all .3s ease;
 	    transition: all .3s ease;
 	}
-
 	.btn_wrap {
 	    position: relative;
 	    display: -webkit-box;
@@ -62,7 +60,6 @@
 	    -webkit-transition: all .2s ease-in-out;
 	    transition: all .2s ease-in-out;
 	}
-
 	.btn_wrap:hover {
 	    /* transition-delay: .4s; */
 	    -webkit-transform: scale(1);
@@ -131,17 +128,6 @@
 <link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
 <link rel="icon" href="/resources/assets/img/favicon.ico">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-<link rel="stylesheet" href="assets/css/slicknav.css">
-<link rel="stylesheet" href="assets/css/animate.min.css">
-<link rel="stylesheet" href="assets/css/hamburgers.min.css">
-<link rel="stylesheet" href="assets/css/magnific-popup.css">
-<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="assets/css/themify-icons.css">
-<link rel="stylesheet" href="assets/css/slick.css">
-<link rel="stylesheet" href="assets/css/nice-select.css">
-<link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body>
@@ -197,87 +183,63 @@
 					 </div>
 					 <div class="navigation-area">
 					  <div class="row"  style="text-align: center;">
-					   <div
-					   class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+					   <div id="preBoard"
+					   class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center"
+					   onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}')">
 					   <div class="thumb">
-					     <a href="#">
-					      <img class="img-fluid" src="assets/img/post/preview.png" alt="">
-					    </a>
+					      <img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="">
 					  </div>
 					  <div class="arrow">
-					   <a href="#">
 					    <span class="lnr text-white ti-arrow-left"></span>
-					  </a>
 					</div>
 					<div class="detials">
-					 <p>Prev Post</p>
-					 <a href="#">
-					  <h4 style="color: #2d2d2d;">Space The Final Frontier</h4>
-					</a>
+					 <p>이전 캠페인</p>
+					  <h4 style="color: #2d2d2d;">${preBoard.CAMB_NAME}</h4>
 					</div>
 					</div>
-					<div class="col-lg-4 col-md-4 col-12 flex-row align-items-center">
-					<br><i class="fas fa-list-ul"></i>&nbsp;&nbsp;&nbsp;목록
-					</div>
-					<div
-					class="col-lg-4 col-md-4 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+					<div id="nextBoard"
+					class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center"
+					onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}')">
 					<div class="detials">
-					 <p>Next Post</p>
-					 <a href="#">
-					  <h4 style="color: #2d2d2d;">Telescopes 101</h4>
-					</a>
+					 <p>다음 캠페인</p>
+					  <h4 style="color: #2d2d2d;">${nextBoard.CAMB_NAME}</h4>
 					</div>
 					<div class="arrow">
-					 <a href="#">
 					  <span class="lnr text-white ti-arrow-right"></span>
-					</a>
 					</div>
 					<div class="thumb">
-					 <a href="#">
-					  <img class="img-fluid" src="assets/img/post/next.png" alt="">
-					</a>
+					  <img class="img-fluid" src="${nextBoard.CAMB_FILE}" alt="">
 					</div>
 					</div>
 					</div>
 					</div>
 					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="margin: auto;">
-					<div class="btn_wrap" style="border-radius: 80px; background-color: #f3f6f7">
-				        <span class="shareButton"><i class="fas fa-share-alt" style="margin-right: 15px"></i>공유하기</span>
-				        <div class="container">
-			        		<a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
-			        			<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="20px">
-			        		</a>
-							<img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="20px" class="twitter" onclick="shareTwitter()">
-							<img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="20px" class="naverblog" onclick="shareNaverBlog()">
-							<img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="20px" class="kakaotalk" onclick="shareKakaotalk()">
-			        		<i class="clipboard far fa-clipboard" style="font-size: 20px" onclick="shareURL()"></i>
-				        </div>
-				    </div>
-				</td>
-				<td colspan="2" style="margin: auto;">
-					<div class="btn_wrap" style="border-radius: 80px; background-color: #f3f6f7"  onclick="donate()">
-				        <span class="shareButton"><i class="fas fa-donate" style="margin-right: 15px"></i>후원하기</span>
-				        <div class="container">
-			        		<span>
-			        			<b>${camBoard.CAMB_SUBJECT}</b>
-			        		</span>
-				        </div>
-				    </div>
 				</td>
 			</tr>
 		</table>
 	</div>
-	
-	<div>
-	
+	<div>	
 	</div>
-		
-<jsp:include page="/WEB-INF/views/footer.jsp"/>
 <script type='text/javascript'>
+		var subquery = window.location.search;
+		var query = subquery.slice(subquery.lastIndexOf("CAMB_NAME=")+1, 0);
+	function detailUrl(name, num){
+		if (!name && !num){
+			
+		}else{
+			if(!query){
+				location.href="/camBoard/detail?CAMB_NAME=" + name + "&CAMB_NUM=" + num;
+			}else{
+				location.href="/camBoard/detail" + query +"&CAMB_NAME=" + name + "&CAMB_NUM=" + num;
+			}
+		}
+	}
+	
+	function list(){
+		alert(subquery + "////" + query);
+		//location.href="/camBoard/list" + query;
+	}
+	
 	window.onload = function(){
 		var subjecthtml = '';
 		if("${camBoard.CAMB_SUBJECT}" === "해양"){
@@ -292,6 +254,12 @@
 		}else if("${camBoard.CAMB_SUBJECT}" === "극지방"){
 			subjecthtml += '<i class="fas fa-icicles"></i>';
 			$('#subject_icon').prepend(subjecthtml);
+		}
+		
+		if(!'${preBoard.CAMB_NUM}'){
+			$('#preBoard').html('<div>이전 캠페인이 없습니다.</div>');
+		}else if(!'${nextBoard.CAMB_NUM}'){
+			$('#nextBoard').html('<div>다음 캠페인이 없습니다.</div>');
 		}
 	}
 	
@@ -383,5 +351,6 @@
     
   //]]>
 </script>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>
 </html>

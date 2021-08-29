@@ -28,9 +28,6 @@ public class AdChartController {
 		model.addAttribute("selectForest", selectForest);
 		
 		int[] countVisitor = service.countVisitor();
-		for(int i = 0; i < countVisitor.length; i++) {
-			System.out.println(countVisitor[i]);
-		}
 		model.addAttribute("countVisitor", countVisitor);
 		
 		return "auth/adChart";

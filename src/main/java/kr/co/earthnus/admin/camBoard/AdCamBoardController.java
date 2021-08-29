@@ -2,17 +2,22 @@ package kr.co.earthnus.admin.camBoard;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +35,7 @@ public class AdCamBoardController {
 	@Autowired
 	private AdCamBoardService adCamBoardService;
 			
-	@RequestMapping(value="/adCamBoard/list")
+	@RequestMapping(value= {"/adCamBoard/list", "/adCamBoard"})
 	public String getCamBoardList(Model model) {
 		
 		List<camBoardBean> list = adCamBoardService.getBoardList();
@@ -57,17 +62,19 @@ public class AdCamBoardController {
 	@RequestMapping(value="/adCamBoard/detail")
 	public String getCamBoardDetail(@RequestParam("CAMB_NUM") String contentnum, Model model) {
 		
-		System.out.println("Controller contentnum : " + contentnum);
-		System.out.println("Controller CAMB_SUBJECT : " + adCamBoardService.getCamBoard(contentnum).getCAMB_SUBJECT());
 		model.addAttribute("camBoard", adCamBoardService.getCamBoard(contentnum));
-				
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String CAMB_STARTDATE = simpleDateFormat.format(adCamBoardService.getCamBoard(contentnum).getCAMB_STARTDATE());
+		String CAMB_FINDATE = simpleDateFormat.format(adCamBoardService.getCamBoard(contentnum).getCAMB_FINDATE());
+		model.addAttribute("CAMB_STARTDATE", CAMB_STARTDATE);
+		model.addAttribute("CAMB_FINDATE", CAMB_FINDATE);
 		return "camBoard/adCamBoardDetail";
 	}
 	
 	@RequestMapping(value="/adCamBoard/insert")
 	public String insertCamBoard() {
-		
-		System.out.println("insertCamBoard");
 		
 		return "camBoard/adCamBoardInsert";
 	}
@@ -77,7 +84,6 @@ public class AdCamBoardController {
 			@RequestParam("CAMB_CONTENT") String CAMB_CONTENT , @RequestParam("CAMB_UPLOADFILE") MultipartFile CAMB_UPLOADFILE , 
 			@RequestParam("CAMB_STARTDATE") Date CAMB_STARTDATE, @RequestParam("CAMB_FINDATE") Date CAMB_FINDATE, Model model) {
 		
-		System.out.println("insertCamBoardOk");
 		
 		adCamBoardService.insertCamBoard(CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE, CAMB_STARTDATE, CAMB_FINDATE);
 		return "redirect:/adCamBoard/list";
@@ -115,10 +121,11 @@ public class AdCamBoardController {
 		return "redirect:/adCamBoard/list";
 	}
 	
-	@RequestMapping(value="/mine/imageUpload.do", method = RequestMethod.POST) 
+	@RequestMapping(value="/ckupload/imgUpload", method = RequestMethod.POST) 
 	public void imageUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile , 
 			@RequestParam MultipartFile upload) throws Exception{ // 랜덤 문자 생성 
-		UUID uid = UUID.randomUUID(); 
+		UUID uid1 = UUID.randomUUID();
+		UUID uid2 = UUID.randomUUID();
 		OutputStream out = null; 
 		PrintWriter printWriter = null; //인코딩 
 		response.setCharacterEncoding("utf-8"); 
@@ -126,8 +133,8 @@ public class AdCamBoardController {
 		try{ //파일 이름 가져오기 
 			String fileName = upload.getOriginalFilename(); 
 			byte[] bytes = upload.getBytes(); //이미지 경로 생성 
-			String path = "C:/upload/";// fileDir는 전역 변수라 그냥 이미지 경로 설정해주면 된다. 
-			String ckUploadPath = path + uid + "_" + fileName; 
+			String path = "C:/upload/";// fileDir는 전역 변수라 그냥 이미지 경로 설정해주면 된다.
+			String ckUploadPath = path + uid1 + "_" + uid2; 
 			File folder = new File(path); //해당 디렉토리 확인 
 			if(!folder.exists()){ 
 				try{ folder.mkdirs(); // 폴더 생성 
@@ -138,10 +145,9 @@ public class AdCamBoardController {
 			out.write(bytes); out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화 
 			String callback = request.getParameter("CKEditorFuncNum"); 
 			printWriter = response.getWriter(); 
-			String fileUrl = "/mine/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면 // 업로드시 메시지 출력 
-			printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}"); 
+			String fileUrl = "/upload/?uid=" + uid1 + "&fileName=" + uid2; // 작성화면 // 업로드시 메시지 출력 
+			printWriter.println("{\"filename\" : \""+uid2+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}"); 
 			printWriter.flush(); 
-			
 			}catch(IOException e){ 
 				e.printStackTrace(); 
 				} finally { 
@@ -156,6 +162,40 @@ public class AdCamBoardController {
 						} 
 					} return;
 				}
-	
-	
+
+	@RequestMapping(value="/upload/") 
+	public void ckSubmit(@RequestParam(value="uid") String uid , @RequestParam(value="fileName") String fileName , 
+			HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String path = "/upload/"; 
+		String sDirPath = path + uid + "_" + fileName; 
+		File imgFile = new File(sDirPath);
+		if(imgFile.isFile()){ 
+			byte[] buf = new byte[1024]; 
+			int readByte = 0; 
+			int length = 0; 
+			byte[] imgBuf = null; 
+			FileInputStream fileInputStream = null; 
+			ByteArrayOutputStream outputStream = null; 
+			ServletOutputStream out = null; 
+			
+			try{ 
+				fileInputStream = new FileInputStream(imgFile); 
+				outputStream = new ByteArrayOutputStream(); 
+				out = response.getOutputStream(); 
+				while((readByte = fileInputStream.read(buf)) != -1){ 
+					outputStream.write(buf, 0, readByte); 
+					} 
+				imgBuf = outputStream.toByteArray(); 
+				length = imgBuf.length; 
+				out.write(imgBuf, 0, length); out.flush(); 
+				}catch(IOException e){
+					}
+			finally { 
+				outputStream.close(); 
+				fileInputStream.close(); 
+				out.close(); 
+				} 
+			}
+		}
+
 }

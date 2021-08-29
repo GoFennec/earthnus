@@ -2,6 +2,7 @@ package kr.co.earthnus.admin.camBoard;
 
 import java.io.File;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -103,7 +104,13 @@ public class AdCamBoardService {
 	public camBoardBean getCamBoard(String contentnum) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		
-		System.out.println("검색 총 개수 : " + contentnum);
+
+		camBoardBean cBean = new camBoardBean();
+		
+		cBean = camBoardDAO.getCamBoard(Integer.parseInt(contentnum));
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("서비스 날짜 : " + cBean.getCAMB_STARTDATE() + "\n" + "서비스 날짜 타입 : " + cBean.getCAMB_STARTDATE().getClass());
+		
 		return camBoardDAO.getCamBoard(Integer.parseInt(contentnum));
 	}
 	/*public MemberBean getMember(MemberBean mBean) {

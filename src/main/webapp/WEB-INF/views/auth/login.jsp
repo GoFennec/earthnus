@@ -109,7 +109,6 @@ vertical-align: middle;
 border-style: none;
 margin-bottom: 10px;    
 }
-
 #kakao {
 vertical-align: middle;
 border-style: none;

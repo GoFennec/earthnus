@@ -3,43 +3,38 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
+<%
+	pageContext.setAttribute("crcn", "\n"); 
+	pageContext.setAttribute("br", "<br/>");
+%>
 <!DOCTYPE html>
-
 <html>
-
-
 <head>
 <style>
 table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
-	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
+	td {width: 350px;border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton {text-align: center;}
 	.paging {text-align: center;}
-
-
 	* {
     margin: 0;
     padding: 0;
     list-style: none;
 }
-
 #slider-wrap {
     width: 100%;
     height: 400px;
     position: relative;
     overflow: hidden;
 }
-
 #slider-wrap ul#slider {
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
 }
-
 #slider-wrap ul#slider li {
     float: left;
     position: relative;
@@ -52,7 +47,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     height: 100%;
     margin:auto;
 }
-
 /*btns*/
 .slider-btns {
     position: absolute;
@@ -73,31 +67,25 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     -o-transition: all 0.1s ease;
     transition: all 0.1s ease;
 }
-
 .slider-btns:hover {
     background: rgba(0, 0, 0, 0.3);
 }
-
 #next {
     right: -50px;
     border-radius: 7px 0px 0px 7px;
     color: #eee;
 }
-
 #previous {
     left: -50px;
     border-radius: 0px 7px 7px 7px;
     color: #eee;
 }
-
 #slider-wrap.active #next {
     right: 0px;
 }
-
 #slider-wrap.active #previous {
     left: 0px;
 }
-
 /*bar*/
 #slider-pagination-wrap {
     min-width: 20px;
@@ -108,11 +96,9 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     position: relative;
     text-align: center;
 }
-
 #slider-pagination-wrap ul {
     width: 100%;
 }
-
 #slider-pagination-wrap ul li {
     margin: 0 4px;
     display: inline-block;
@@ -124,7 +110,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     position: relative;
     top: 0;
 }
-
 #slider-pagination-wrap ul li.active {
     width: 12px;
     height: 12px;
@@ -133,7 +118,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
     box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
 }
-
 /*ANIMATION*/
 #slider-wrap ul,
 #slider-pagination-wrap ul li {
@@ -141,7 +125,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     -o-transition: all 0.3s cubic-bezier(1, .01, .32, 1);
     transition: all 0.3s cubic-bezier(1, .01, .32, 1);
 }
-
 #COMMENT_LIKE img {
 	width:30px;
 	height:30px;
@@ -149,13 +132,28 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	bottom: 0;
 	right : 0;
 }
+#img_profile {
+	 width: 70px;
+    height: 70px;
+    border-radius: 150px; 
+    vertical-align: middle;
+    object-fit: cover;
+    border: none;
+    
+}
+.id_profile {
+	display:inline-block;
+	width:70%;
+	border: none;
+	text-align: center;
+	
+}
 .delete {
 	margin-top: 10px;
 	position: absolute;
 	top: 0;
 	right : 0;
 }
-
 #replyInsert {
 	border: none;
     padding: 13px 33px;
@@ -175,10 +173,22 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 #insert_div {
 	position: relative;
 }
-#text {
-	width:85%;
-	height:80px;
-}
+#dname_select {
+  background-color: #fff;
+  border-radius: 5px;
+  border: solid 1px #e8e8e8;
+  box-sizing: border-box;
+  display: block;
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: normal;
+  height: 50px;
+  line-height: 40px;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 30px;
+  position: relative;
+  width: 200px; }
 </style>
 
 
@@ -257,7 +267,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     	
 	    	<c:if test="${auth.auth_id != null}">
 	    	<div id="insert_div">
-	         <textarea id="text"></textarea>
+	         <textarea id="text" wrap="hard" rows="4" cols="100"></textarea>
 	         <input type="button" id="replyInsert" value="응원하기">	
 	         </div>
 	        </c:if>
@@ -266,19 +276,21 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     
     
     <div>
-    	<table id="addList" border="1">
-        <thead>
-            <tr>
+    	<table id="addList" style="margin-bottom: 10px">
+    	<thead>
+       		<tr>
             	<th>환경을 위해 한마디</th>
             </tr>
-        </thead>	
-        <tbody id="listDiv">
+          </thead>
+        </table>
+        
+        <table id="listDiv" border="1">
         
         
         
         
-        </tbody>
-    </table>  
+        </table>
+     
     	
     </div>
     <div>  
@@ -298,11 +310,10 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	var step = 10;
 	var insert_commet = 0;
 	var All_dname = [];
-	
   $(document).ready(function (){
 	 
 	  <c:forEach items="${payCheck}" var="row">
-	    All_dname.push("${row.pay_dname}")
+	    All_dname.push("${row.pay_dname}");
 	  </c:forEach>
 	
 	    if(All_dname != null) {
@@ -312,29 +323,35 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	  
 	  	 init();
 	  	function select_dname() {
-	  			  		var str = '<select id="dname_select">'
+	  		
+	  		var count_tree = 0;
+	  		var count_sea = 0;
+	  		var count_pla = 0;
+	  		var count_bear = 0;
+	  
+	  		var str = '<select id="dname_select">'
 	  		for(var i=0; i < All_dname.length; i++) {
-	  			var count_tree = count_tree;
-		  		var count_sea = count_sea;
-		  		var count_pla = count_pla;
-		  		var count_bear = count_bear;
-		  		
-	  			if(count_tree <= 0 && All_dname[i] == "나무" || All_dname[i] == "숲" || All_dname[i] == "묘목" || All_dname[i] == "새싹" ) {
-	  				str += '<option>나무 응원</option>';
+	  			
+	  			
+	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "새우" || All_dname[i] == "문어" || All_dname[i] == "바다") ) {
+	  				str += '<option>바다</option>';
+	  				count_sea += 1;
+	  				
+	  			}
+		
+	  			if((count_tree <= 0 ) && (All_dname[i] == "나무" || All_dname[i] == "숲" || All_dname[i] == "묘목" || All_dname[i] == "새싹") ) {
+	  				str += '<option>숲</option>';
 	  				count_tree += 1;
-	  				console.log(count_tree);
+	  				
 	  			}
-	  			else if(count_sea <= 0 && All_dname[i] == "조개" || All_dname[i] == "새우" || All_dname[i] == "문어" || All_dname[i] == "바다" ) {
-	  				str += '<option>바다 응원</option>';
-	  				count_sea++;
+	  			
+	  			if((count_pla <= 0) && (All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경")) {
+	  				str += '<option>친환경</option>';
+	  				count_pla += 1;
 	  			}
-	  			else if(count_pla == 0 && All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경") {
-	  				str += '<option>플라스틱 응원</option>';
-	  				count_pla++;
-	  			}
-	  			else if( count_bear == 0 && All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "빙하" ) {
-	  				str += '<option>북극곰 응원</option>';
-	  				count_bear++;
+	  			if( (count_bear <= 0) && (All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "빙하")) {
+	  				str += '<option>북극곰</option>';
+	  				count_bear +=1;
 	  			}
 	  		}	
 	  		str += '</select>';
@@ -349,7 +366,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	  	
         $('#replyInsert').on('click',function() {
           	
-        	  var text = $('#text').val();
+        	  var text = $('#text').val().replace(/(?:\r\n|\r|\n)/g,'<br/>');
         	  var id = "${auth.auth_id}";
   	      	  var name = "${auth.auth_name}";
         	  var dnum = $("#dname_select option:selected").val();
@@ -359,7 +376,10 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
         		  $('#replyInsert').focus();
         		  return;
         	  }
-        	  
+        	  if(dnum == null) {
+        		  alert("카테고리를 선택해주세요");
+        		  return;
+        	  }
         	 $.ajax({
         		 url : "Cheboard_insert",
         		 type : "POST",
@@ -406,7 +426,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     clearInterval(autoSlider);
     slider.style.left = 0 + 'px';
     slider.style.width = sliderWidth * totalSlides + 'px';
-
    
     var nextBtn = document.getElementById('next');
     var prevBtn = document.getElementById('previous');
@@ -416,7 +435,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     prevBtn.addEventListener('click', function () {
         plusSlides(-1);
     });
-
    
     slideWrapper.addEventListener('mouseover', function () {
         this.classList.add('active');
@@ -428,16 +446,12 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
             plusSlides(1);
         }, 1000);
     });
-
-
     function plusSlides(n) {
         showSlides(slideIndex += n);
     }
-
     function currentSlides(n) {
         showSlides(slideIndex = n);
     }
-
     function showSlides(n) {
         slideIndex = n;
         if (slideIndex == -1) {
@@ -445,11 +459,9 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
         } else if (slideIndex === totalSlides) {
             slideIndex = 0;
         }
-
         slider.style.left = -(sliderWidth * slideIndex) + 'px';
         pagination();
     }
-
     
     function pagination() {
         var dots = document.querySelectorAll('#slider-pagination-wrap ul li');
@@ -458,14 +470,11 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
         });
         dots[slideIndex].classList.add('active');
     }
-
     pagination();	
     var autoSlider = setInterval(function () {
         plusSlides(1);
     }, 3000); 
     }
-
-
   
   
   
@@ -493,16 +502,16 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	        	var auth_id = "${auth.auth_id}";
 	        	
 	        	// $('#listDiv').empty();
-
 	        	 for(var i=0; i<obj.length;i++) {
             		var str = '<tr>';
-            		 str += '<td style="position:relative"><div>'+obj[i].cheb_name;
+	            	str += '<td style="width:50px;" "text-align:center";"><div class="id_profile"><img id="img_profile" src="'+obj[i].d_img + '"></div>';
+            		 str +='<td style="position:relative; width:90%;"><div>'+obj[i].cheb_content+'</div>';
+            		 
             		 if(auth_id == obj[i].cheb_id) { 
          				 str +='<span class="delete"><input type="button" value="삭제" class="deleteComment"  data_num="'+obj[i].cheb_num+'"/></span></div>';
-
             		 }
-            		 str += '<div>'+obj[i].cheb_content+'</div>'
-     				 str += '<div>'+obj[i].cheb_date+'</div>';
+            		 str += '<span>'+obj[i].cheb_name+'</span>'
+     				 str += '<span>'+obj[i].cheb_date+'</span>';
      				 str += '<div id="COMMENT_LIKE"><a href="javascript:void(0);" class="comment_like" data_num="'+obj[i].cheb_num+'"><img alt="사진" class=like_comment src="/resources/cheBoard/NOT_like.png"><a></div>';
             		 
             		 	 str += '</td>'
@@ -513,7 +522,8 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                      
             $('.deleteComment').on('click', function(){        
                 var reply_num = $(this).attr('data_num'); 
-                //console.log(reply_id);
+                console.log(reply_num);
+                
                 $.ajax({
                     
                     url : "Cheboard_delete",

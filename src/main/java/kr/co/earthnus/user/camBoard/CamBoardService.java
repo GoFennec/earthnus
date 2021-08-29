@@ -1,6 +1,7 @@
 package kr.co.earthnus.user.camBoard;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,35 +140,37 @@ public class CamBoardService {
 		return camBoardDAO.getCamBoard(Integer.parseInt(contentnum));
 	}
 	
-	public int getBoardIndex(String search, String search_type, String arr, String orderBy, String order, 
-			String contentnum, String pagenum, int CAMB_NUM, Model model) {
+	public Map<String, Object> getBoardIndex(String search, String search_type, String arr, String orderBy, String order, 
+			int CAMB_NUM, Map<String, Object> list, Model model) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
-		int index = 0;
 		
 		PagingBean pBean = new PagingBean();
 		
-		pBean.setCAMB_NUM(CAMB_NUM);
-		int cPagenum = Integer.parseInt(pagenum);
-        int cContentnum = Integer.parseInt(contentnum);
-        
-        pBean.setCurrentPage(cPagenum);
         pBean.setSearch_type(search_type);
         pBean.setSearch(search);
         pBean.setArr(arr);
         pBean.setOrderBy(orderBy);
         pBean.setOrder(order);
         pBean.setTotalcount(camBoardDAO.getBoardListCount(pBean));
-        pBean.setPagenum(cPagenum-1);
-        pBean.setContentnum(cContentnum);
-        pBean.setCurrentblock(cPagenum);
-        pBean.setLastblock(pBean.getTotalcount());
-
-        pBean.prevnext(cPagenum);
-        pBean.setStartPage(pBean.getCurrentblock());
-        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
-		
-		index = camBoardDAO.getBoardIndex(pBean);
-		return index;
+        
+        pBean.setCAMB_NUM(-1);
+        int total = camBoardDAO.getBoardIndex(pBean);
+        pBean.setCAMB_NUM(CAMB_NUM);
+        list.put("index", camBoardDAO.getBoardIndex(pBean));
+        if(camBoardDAO.getBoardIndex(pBean) == total) {
+            pBean.setCAMB_INDEX(camBoardDAO.getBoardIndex(pBean)-2);
+            list.put("preBoard", camBoardDAO.preBoard(pBean));
+        }else if(camBoardDAO.getBoardIndex(pBean) == 1) {
+        	pBean.setCAMB_INDEX(camBoardDAO.getBoardIndex(pBean));
+            list.put("nextBoard", camBoardDAO.nextBoard(pBean));
+        }else if(camBoardDAO.getBoardIndex(pBean) < total && camBoardDAO.getBoardIndex(pBean) > 1){
+        	pBean.setCAMB_INDEX(camBoardDAO.getBoardIndex(pBean));
+            list.put("nextBoard", camBoardDAO.nextBoard(pBean));
+            pBean.setCAMB_INDEX(camBoardDAO.getBoardIndex(pBean)-2);
+            list.put("preBoard", camBoardDAO.preBoard(pBean));
+        }
+        
+		return list;
 	}
 	/*public MemberBean getMember(MemberBean mBean) {
 		return CamBoardDAO.getMember(mBean);
