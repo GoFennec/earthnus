@@ -132,24 +132,61 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	bottom: 0;
 	right : 0;
 }
+
+#listDiv {
+	 border:1px solid black;
+}
+
+.id_date {
+	position:relative;
+	
+}
+.left-id{
+	width: 400px;
+}
+
+.left-content {
+	display:block;
+	padding: 0px 0px 10px 0px;
+	
+}
+
+.left-info{
+	padding:0 0 0 8px;
+	position:relative;
+	display:block;
+	width:100%;
+}
+
+.
+#main_container {
+    padding-left: 10px;
+    padding-right: 5px;
+    margin: 0 10px;
+}
 #img_profile {
-	 width: 70px;
-    height: 70px;
-    border-radius: 150px; 
+	 width: 30px;
+    height: 30px;
+    border-radius: 150px; /* ���̾� ��ũ�⸸ŭ �ݰ��� ���*/    
     vertical-align: middle;
     object-fit: cover;
     border: none;
-    
+    margin-top: 5px;
 }
+#mainpage, #pagemain {
+	padding:7px;
+}
+
 .id_profile {
-	display:inline-block;
+	display:inline;
 	width:70%;
 	border: none;
-	text-align: center;
-	
 }
+.id_id{
+	display:inline-block;
+}
+
 .delete {
-	margin-top: 10px;
 	position: absolute;
 	top: 0;
 	right : 0;
@@ -284,7 +321,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
           </thead>
         </table>
         
-        <table id="listDiv" border="1">
+        <table id="listDiv">
         
         
         
@@ -504,15 +541,16 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	        	// $('#listDiv').empty();
 	        	 for(var i=0; i<obj.length;i++) {
             		var str = '<tr>';
-	            	str += '<td style="width:50px;" "text-align:center";"><div class="id_profile"><img id="img_profile" src="'+obj[i].d_img + '"></div>';
-            		 str +='<td style="position:relative; width:90%;"><div>'+obj[i].cheb_content+'</div>';
-            		 
-            		 if(auth_id == obj[i].cheb_id) { 
-         				 str +='<span class="delete"><input type="button" value="삭제" class="deleteComment"  data_num="'+obj[i].cheb_num+'"/></span></div>';
+            		str += '<td class="left-info">'
+            		str +='<div class="id_date">'
+	            	str += '<div class="id_profile"><img id="img_profile" src="'+obj[i].d_img +'"></div>';
+	            	 if(auth_id == obj[i].cheb_id) { 
+         				 str +='<span class="delete"><input type="button" value="삭제" class="deleteComment"  data_num="'+obj[i].cheb_num+'"/></span>';
             		 }
-            		 str += '<span>'+obj[i].cheb_name+'</span>'
+	            	str += '<div class="id_id"><span class="left-id">'+obj[i].cheb_name+'</span></div>'
+            		 str +='<div class="left-content">'+obj[i].cheb_content+'</div>';		
      				 str += '<span>'+obj[i].cheb_date+'</span>';
-     				 str += '<div id="COMMENT_LIKE"><a href="javascript:void(0);" class="comment_like" data_num="'+obj[i].cheb_num+'"><img alt="사진" class=like_comment src="/resources/cheBoard/NOT_like.png"><a></div>';
+     				str += '</div>'
             		 
             		 	 str += '</td>'
 	            		 str += '</tr>';
