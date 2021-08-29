@@ -41,7 +41,6 @@ public class AdChartService {
 		
 		for(int i = 0; i < 7; i++) {
 			count = dao.countVisitor(i);
-			System.out.println(count);
 			count1.add(count);
 		}
 		return count1;
