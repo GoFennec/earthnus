@@ -3,6 +3,7 @@ package kr.co.earthnus.user.auth;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+
+import kr.co.earthnus.user.camBoard.camBoardBean;
 
 
 @Controller
@@ -36,7 +39,22 @@ public class AuthController {
 
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index() {
+	public String index(Model model) {
+		String total_pay = service.total_pay();
+		String total_f = service.total_f();
+		String total_o = service.total_o();
+		String total_i = service.total_i();
+		String total_p = service.total_p();
+		List<camBoardBean> list = service.cb_list();
+		//camBoardBean cbBean = service.cb_list();
+		
+		model.addAttribute("total_pay",total_pay);
+		model.addAttribute("total_f",total_f);
+		model.addAttribute("total_o",total_o);
+		model.addAttribute("total_i",total_i);
+		model.addAttribute("total_p",total_p);
+		//model.addAttribute("cbBean",cbBean);
+		model.addAttribute("cb_list", list);
 		return "index";
 	}
 
@@ -143,10 +161,22 @@ public class AuthController {
 		if (aBean != null) {
 			session.setAttribute("auth", aBean);
 			System.out.println("로그인쪽 세션" + session);
-			return "redirect:/";
-		} else {
-			return "auth/login";
+			 String redirectUrl = (String) session.getAttribute("url_prior_login");
+			 System.out.println(redirectUrl);
+			 if(redirectUrl != null) {
+				 String str = redirectUrl.substring(21);
+				 System.out.println(str);
+				 if(str.equals("/goods/list")) {
+					 return "redirect:" + str;
+				 }else if(str.contains("donation")) {
+					 return "redirect:" + str;
+				 }
+			 }
+			else {
+				 return "index";
+			 }
 		}
+			return "auth/login";
 	}
 
 	@RequestMapping("/logout")

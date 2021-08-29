@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -154,12 +154,12 @@
 					</div>
 					<div class="support-img-cap text-center d-flex">
 						<div class="single-one">
-							<span>2,950</span>
-							<p>총 후원자 수</p>
+							<span>${total_o}원</span>
+							<p>총 후원 금액</p>
 						</div>
 						<div class="single-two">
 							<span>230</span>
-							<p>완료된 캠패인 수</p>
+							<p>완료된 캠페인 수</p>
 						</div>
 					</div>
 				</div>
@@ -176,7 +176,7 @@
 						<div class="section-tittle text-center mb-80">
 							<h2>지구를 위한 우리의 손길</h2>
 							<p class="pl-20 pr-20">전 세계 많은 사람들이 푸르른 지구와 우리의 미래를 위해 힘을 모으고 있습니다. 
-							여러분도 동참해 주세요!</p>
+							<br>여러분도 동참해 주세요!</p>
 						</div>
 					</div>
 				</div>
@@ -184,7 +184,7 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases mb-40">
 							<div class="cases-img">
-								<img src="/resources/donation/ocean.jpg" height="200px"  title="바다가 힘들어요!" alt="해양오염 사진" >
+								<img src="/resources/donation/ocean.jpg"   title="바다가 힘들어요!" alt="해양오염 사진" >
 							</div>
 							<div class="cases-caption">
 								<h3>
@@ -193,21 +193,10 @@
 								<p>바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.
 								그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.
 								우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.</p>
-								<!-- Progress Bar -->
-								<div class="single-skill mb-15">
-									<div class="bar-progress">
-										<div id="bar1" class="barfiller">
-											<div class="tipWrap">
-												<span class="tip"></span>
-											</div>
-											<span class="fill" data-percentage="70"></span>
-										</div>
-									</div>
-								</div>
-								<!-- / progress -->
+							
 								<div class="prices">
 									<p>
-										<span>47,589 of 74,574</span>
+										<span>지금까지 후원금액: ${total_o}원</span>
 									</p>
 								</div>
 							</div>
@@ -216,7 +205,7 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases mb-40">
 							<div class="cases-img">
-								<img src="resources/donation/forest.jpg" height="200px" title="나무를 심어요!" alt="사막화가 진행되고있는 토양 사진">
+								<img src="resources/donation/forest.jpg"  title="나무를 심어요!" alt="사막화가 진행되고있는 토양 사진">
 							</div>
 							<div class="cases-caption">
 								<h3>
@@ -225,20 +214,10 @@
 								<p>숲은 육지에 서식하는 많은 동식물들의 집입니다.
 									인간의 욕심으로 인해 전 세계 산림의 절반이 사라졌습니다.
 									숲을 터전으로 살아가고있는 생물들은 멸종위기에 처했으며, 온실가스는 흡수되지않고 대기로 방출되고있습니다.</p>
-								<!-- Progress Bar -->
-								<div class="single-skill mb-15">
-									<div class="bar-progress">
-										<div id="bar2" class="barfiller">
-											<div class="tipWrap">
-												<span class="tip"></span>
-											</div>
-											<span class="fill" data-percentage="25"></span>
-										</div>
-									</div>
-								</div>
+							
 								<div class="prices">
 									<p>
-										<span>47,589 of 74,574</span>
+										<span>지금까지 후원금액: ${total_f}원</span>
 									</p>
 								</div>
 							</div>
@@ -247,7 +226,7 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases">
 							<div class="cases-img">
-								<img src="/resources/donation/plastic.jpg" height="200px" title="플라스틱이 넘쳐요!" alt="방대한 양의 플라스틱 사진" >
+								<img src="/resources/donation/plastic.jpg"  title="플라스틱이 넘쳐요!" alt="방대한 양의 플라스틱 사진" >
 							</div>
 							<div class="cases-caption">
 								<h3>
@@ -256,20 +235,10 @@
 								<p>플라스틱은 미세 플라스틱으로 분해됩니다.
 								수많은 해양 동물들은 이를 먹이로 착각하고 섭취하여 폐사에 이르고 있으며, 
 								결국 미세 플라스틱은 해양 먹이사슬을 타고 우리의 식탁으로 돌아옵니다.<br><br></p>
-								<!-- Progress Bar -->
-								<div class="single-skill mb-15">
-									<div class="bar-progress">
-										<div id="bar3" class="barfiller">
-											<div class="tipWrap">
-												<span class="tip"></span>
-											</div>
-											<span class="fill" data-percentage="50"></span>
-										</div>
-									</div>
-								</div>
+								
 								<div class="prices">
 									<p>
-										<span>47,589 of 74,574</span>
+										<span>지금까지 후원금액: ${total_p}원</span>
 									</p>
 								</div>
 							</div>
@@ -278,7 +247,7 @@
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-cases">
 							<div class="cases-img">
-								<img  src="/resources/donation/ice.jpg" height="200px" title="북극곰을 도와줘요!" alt="삶의 터전을 잃어가는 북극곰 사진" >
+								<img  src="/resources/donation/ice.jpg"  title="북극곰을 도와줘요!" alt="삶의 터전을 잃어가는 북극곰 사진" >
 							</div>
 							<div class="cases-caption">
 								<h3>
@@ -287,20 +256,9 @@
 								<p>지구 온난화로 북극 기온이 상승하여 빙하가 녹고있습니다.
 								북극을 해양보호구역으로 만들어 파괴적인 어업과 석유 시추의 중단이 시급합니다.
 								빠르게 녹고있는 북극을 지켜요.<br><br><br></p>
-								<!-- Progress Bar -->
-								<div class="single-skill mb-15">
-									<div class="bar-progress">
-										<div id="bar4" class="barfiller">
-											<div class="tipWrap">
-												<span class="tip"></span>
-											</div>
-											<span class="fill" data-percentage="50"></span>
-										</div>
-									</div>
-								</div>
 								<div class="prices">
 									<p>
-										<span>47,589 of 74,574</span>
+										<span>지금까지 후원금액: ${total_i}원 </span>
 									</p>
 								</div>
 							</div>
@@ -317,31 +275,32 @@
 				<div class="row justify-content-center">
 					<div class="col-xl-8 col-lg-9 col-md-11">
 						<div class="section-tittle text-center mb-90">
-							<h2>캠패인 소식</h2>
+							<h2>캠페인 소식</h2>
 							<p>많은 사람들이 푸르른 지구와 우리의 미래를 위해 힘을 모으고 있습니다. 
-							<br>새로운 EARTH & US 캠페인 활동을 확인하시고 여러분도 동참해 주세요!</p>
+							<br>새로운 EARTH & US 캠페인 활동을 확인하시고 관심 가져 주세요!</p>
 						</div>
 					</div>
 				</div>
+			
 				<div class="row">
+				<c:forEach items="${cb_list}" var="camBoard">
 					<div class="col-xl-6 col-lg-6 col-md-6">
 						<div class="home-blog-single mb-30">
 							<div class="blog-img-cap">
 								<div class="blog-img">
-									<img src="resources/assets/img/gallery/home-blog1.png" alt="">
+									<img src="${camBoard.CAMB_FILE}" alt="최신캠페인이미지">
 								</div>
 								<div class="blog-cap">
 									<h3>
-										<a href="blog_details.html">Leverage agile frameworks to
-											provide a robust synopsis</a>
+										<a href="blog_details.html">${camBoard.CAMB_NAME} [${camBoard.CAMB_SUBJECT}]</a>
 									</h3>
-									<p>The automated process starts as soon as your clothes go
-										into the machine. Duis cursus, mi quis viverra ornare.</p>
+									<p>${camBoard.CAMB_CONTENT}</p>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-6 col-lg-6 col-md-6">
+					</c:forEach>
+				<!-- 	<div class="col-xl-6 col-lg-6 col-md-6">
 						<div class="home-blog-single mb-30">
 							<div class="blog-img-cap">
 								<div class="blog-img">
@@ -349,15 +308,14 @@
 								</div>
 								<div class="blog-cap">
 									<h3>
-										<a href="blog_details.html">Leverage agile frameworks to
-											provide a robust synopsis</a>
+										<a href="blog_details.html">${cbBean.CAMB_NAME}</a>
 									</h3>
 									<p>The automated process starts as soon as your clothes go
 										into the machine. Duis cursus, mi quis viverra ornare.</p>
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</section>

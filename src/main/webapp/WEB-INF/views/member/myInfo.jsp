@@ -761,7 +761,7 @@ body {
 					</div>
 					<div class="content-panel">
 						<h2 class="title">&nbsp;&nbsp;&nbsp;내 정보</h2>
-						<form class="form-horizontal" method="post" action="/updateMyInfo">
+						<form class="form-horizontal" id="form" method="post" action="/updateMyInfo">
 							<fieldset class="fieldset">
 			
 								<div class="col-12">
@@ -1250,8 +1250,8 @@ body {
 								</script>
 
 								<div class="col-6">
-									<input type="submit" class="btn btn-sm btn-default-alt pull-left"
-									 style="margin-top: 10px" value="회원정보수정">
+									<input type="button" class="btn btn-sm btn-default-alt pull-left"
+									 style="margin-top: 10px" onclick="document.getElementById('form').submit();" value="회원정보수정">
 
 								</div>
 
@@ -1313,6 +1313,19 @@ body {
          $(document).keypress(function(e) { 
             if (e.keyCode == 13) e.preventDefault(); 
          });
+      </script>
+      <script>
+     document.getElemnetById('form').onclick = function() {
+    	  var pw = $('#mem_pw');
+    	  var cpw1 = $('#mem_cpw1');
+    	  var cpw2 = $('#mem_cpw2');
+    	  if(cpw1 == ""){
+    		  cpw1 = pw;
+    		  cpw2 = pw;
+    	  }
+    	  document.getElementById('form').submit();
+		return false;    	  
+      };
       </script>
       <jsp:include page="/WEB-INF/views/footer.jsp"/>
 </body>

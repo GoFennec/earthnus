@@ -47,6 +47,7 @@
 </head>
 
 <body id="page-top">
+
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
@@ -118,6 +119,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <!-- TopBar -->
+       
         <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
           <ul class="navbar-nav ml-auto">
             <div class="topbar-divider d-none d-sm-block"></div>
@@ -149,6 +151,7 @@
             </li>
           </ul>
         </nav>
+       
         <!-- Topbar -->
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
