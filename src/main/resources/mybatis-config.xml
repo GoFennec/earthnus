@@ -11,6 +11,7 @@
 		<typeAlias alias="goods" type="kr.co.earthnus.user.goods.GoodsBean"/>
 		<typeAlias alias="exGoods" type="kr.co.earthnus.user.goods.ExGoodsBean"/>
 		<typeAlias alias="camBoard" type="kr.co.earthnus.user.camBoard.camBoardBean"/>
+		<typeAlias alias="statBoard" type="kr.co.earthnus.user.camBoard.CamBoardStatBean"/>
 		<typeAlias alias="cheBoard" type="kr.co.earthnus.user.cheBoard.CheBoardBean"/>
 		<typeAlias alias="like_bean" type="kr.co.earthnus.user.cheBoard.like_Bean"/>
 		<typeAlias alias="mail" type="kr.co.earthnus.util.MailBean"/>

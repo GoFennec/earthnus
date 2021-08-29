@@ -17,8 +17,10 @@ public class CamBoardService {
 	public void getBoardList(String search, String search_type, String arr, String orderBy, String order, 
 			String contentnum, String pagenum, Model model) {
 		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
+		CamBoardStatBean csBean = new CamBoardStatBean();
 		PagingBean pBean = new PagingBean();
 		List<camBoardBean> CamBoardList = null;
+		List<CamBoardStatBean> statList = null;
 		
         int cPagenum = Integer.parseInt(pagenum);
         int cContentnum = Integer.parseInt(contentnum);
@@ -39,23 +41,33 @@ public class CamBoardService {
         pBean.setStartPage(pBean.getCurrentblock());
         pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
         
-        System.out.println("service pagenum : " + pBean.getPagenum());
         if(cContentnum == 6){
         	pBean.setPagenum(pBean.getPagenum()*6);
         	
         	CamBoardList = CamBoardDAO.getBoardList(pBean);
+        	statList = CamBoardDAO.getStatList(pBean);
         }
         
         pBean.setTotalcount(CamBoardDAO.getBoardListCount(pBean));
         
-        System.out.println("service pBean =======> search = " + pBean.getSearch() + ", contentnum = " + pBean.getContentnum() +
-        		", pagenum = " + pBean.getPagenum() + ", totalcount = " + CamBoardDAO.getBoardListCount(pBean) + 
-        		", CamBoardList ±æÀÌ = " + CamBoardList.size());
-        
         pBean.setSearch(search.substring(1, search.length()-1));
-        
+
+        camBoardBean cBean = new camBoardBean();
+        for(int i = 1; i <= CamBoardList.size(); i++) {
+        	cBean = CamBoardList.get(i-1);
+        	csBean = statList.get(i-1);
+        	int ABLEDATE = 472 - 472*csBean.getCAMB_ABLEDATE()/100;
+        	int cBean_ABLEDATE = cBean.getCAMB_ABLEDATE();
+        	if(csBean.getCAMB_ABLEDATE() >= 100) {
+        		ABLEDATE = 472;
+        	}else if(csBean.getCAMB_ABLEDATE() < 0) {
+        		ABLEDATE = 0;
+        	}
+        	model.addAttribute("CAMB_ABLEDATE" + i, ABLEDATE);
+        }
 		model.addAttribute("CamBoardList", CamBoardList);
         model.addAttribute("page", pBean);
+        
 	}
 	
 	public List<camBoardBean> getList(String search, String search_type, String arr, String orderBy, String order, 
@@ -89,10 +101,6 @@ public class CamBoardService {
         }
         
         pBean.setTotalcount(CamBoardDAO.getBoardListCount(pBean));
-        
-        System.out.println("service pBean =======> search = " + pBean.getSearch() + ", contentnum = " + pBean.getContentnum() +
-        		", pagenum = " + pBean.getPagenum() + ", totalcount = " + CamBoardDAO.getBoardListCount(pBean) + 
-        		", CamBoardList ±æÀÌ = " + CamBoardList.size());
         
         pBean.setSearch(search.substring(1, search.length()-1));
         
@@ -128,9 +136,6 @@ public class CamBoardService {
         pBean.setSearch(search.substring(1, search.length()-1));
         PageList.add(0, pBean);
         
-        System.out.println("service pBean =======> search = " + pBean.getSearch() + ", contentnum = " + pBean.getContentnum() +
-        		", pagenum = " + pBean.getPagenum() + ", totalcount = " + CamBoardDAO.getBoardListCount(pBean));
-        System.out.println("service PageList : " + PageList.isEmpty());
         return PageList;
 	}
 	

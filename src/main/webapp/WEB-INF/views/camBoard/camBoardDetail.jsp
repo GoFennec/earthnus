@@ -153,6 +153,7 @@
 			<tr>
 				<td colspan = "4" id="subject_icon">
 					<a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT">${camBoard.CAMB_SUBJECT}</a>
+					<hr>
 				</td>
 			</tr>
 			
@@ -161,7 +162,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" class="sysBtn" style="text-align: center;">
-					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>	
+					<input type="button" class="btn-dark" value="목록" onclick="camBoardlist()"/>	
 				</td>
 			</tr>
 			<tr>
@@ -185,7 +186,7 @@
 					  <div class="row"  style="text-align: center;">
 					   <div id="preBoard"
 					   class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center"
-					   onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}')">
+					   onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
 					   <div class="thumb">
 					      <img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="">
 					  </div>
@@ -199,7 +200,7 @@
 					</div>
 					<div id="nextBoard"
 					class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center"
-					onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}')">
+					onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}', 'next')">
 					<div class="detials">
 					 <p>다음 캠페인</p>
 					  <h4 style="color: #2d2d2d;">${nextBoard.CAMB_NAME}</h4>
@@ -221,26 +222,19 @@
 	<div>	
 	</div>
 <script type='text/javascript'>
-		var subquery = window.location.search;
-		var query = subquery.slice(subquery.lastIndexOf("CAMB_NAME=")+1, 0);
-	function detailUrl(name, num){
-		if (!name && !num){
-			
-		}else{
-			if(!query){
-				location.href="/camBoard/detail?CAMB_NAME=" + name + "&CAMB_NUM=" + num;
-			}else{
-				location.href="/camBoard/detail" + query +"&CAMB_NAME=" + name + "&CAMB_NUM=" + num;
-			}
-		}
-	}
-	
-	function list(){
-		alert(subquery + "////" + query);
-		//location.href="/camBoard/list" + query;
-	}
+	var pathname = window.location.pathname;
+	var subquery = window.location.search;
+	var query = subquery.slice(subquery.lastIndexOf("detail")+2, subquery.lastIndexOf("CAMB_NAME=")-1);
+	substring = "pagenum";
+	var URL = "";
+	var num = 0;
+	var pagenum = 0;				// 현재 캠페인이 위치한 실제 페이지
 	
 	window.onload = function(){
+		
+		num = ${index}/6;
+		pagenum = Math.ceil(num);
+		
 		var subjecthtml = '';
 		if("${camBoard.CAMB_SUBJECT}" === "해양"){
 			subjecthtml += '<i class="fas fa-fish"></i>';
@@ -261,6 +255,54 @@
 		}else if(!'${nextBoard.CAMB_NUM}'){
 			$('#nextBoard').html('<div>다음 캠페인이 없습니다.</div>');
 		}
+	}
+	
+	function detailUrl(CAMB_NAME, CAMB_NUM, type){
+		
+		if(type === "prev"){
+			num = (${index}-1)/6;
+			pagenum = Math.ceil(num);
+		}else if(type === "next"){
+			num = (${index}+1)/6;
+			pagenum = Math.ceil(num);
+		}
+		
+		if(name || num){
+			if(query){
+				if(query.lastIndexOf(substring) !== -1){
+					query = query.substr(0, subquery.indexOf("pagenum")-2);
+				}
+				if(pagenum !== 1){
+					URL += pathname + "?" + query + "&pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+				}else{
+					URL += pathname + "?" + query + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+				}
+			}else{
+				if(pagenum !== 1){
+					URL += pathname + "?pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+				}else{
+					URL += pathname + "?CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+				}
+			}
+		}
+		location.href = URL;
+	}
+	
+	function camBoardlist(){
+		if(query){
+			if(query.lastIndexOf(substring) !== -1){
+				query = query.substr(0, subquery.indexOf("pagenum")-2);
+			}
+			URL += "/camBoard/list?" + query;
+		}
+		
+		var pagenum = parseInt(${index}/6 + 1); 
+		
+		if(pagenum !== 1){
+			URL += "&pagenum=" + pagenum;
+		}
+		
+		location.href = URL;
 	}
 	
 	var linkUrl = window.location.href;

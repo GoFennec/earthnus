@@ -31,7 +31,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 
-	<div class="container col-sm-12 col-lg-4">
+	<div class="container col-sm-12 col-lg-8">
 		<form action="/adCamBoard/updateOk" method="POST" enctype="multipart/form-data">
 			<table class="goodsTable">
 				<tr>

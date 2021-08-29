@@ -14,6 +14,7 @@ public class camBoardBean {
 	private Date CAMB_STARTDATE;
 	private Date CAMB_FINDATE;
 	private Date CAMB_DATE;
+	private int CAMB_ABLEDATE;
 	
 	public int getCAMB_NUM() {
 		return CAMB_NUM;
@@ -74,12 +75,17 @@ public class camBoardBean {
 		
 		CAMB_DATE = cAMB_DATE;
 	}
-	
+	public int getCAMB_ABLEDATE() {
+		return CAMB_ABLEDATE;
+	}
+	public void setCAMB_ABLEDATE(int cAMB_ABLEDATE) {
+		CAMB_ABLEDATE = cAMB_ABLEDATE;
+	}
 	@Override
 	public String toString() {
-		return "CamBoardBean [CAMB_NUM=" + CAMB_NUM + ", CAMB_NAME=" + CAMB_NAME + ", CAMB_SUBJECT=" + CAMB_SUBJECT
-				+ ", CAMB_CONTENT=" + CAMB_CONTENT + ", CAMB_FILE=" + CAMB_FILE + ", CAMB_DATE=" + CAMB_DATE + "]";
+		return "camBoardBean [CAMB_NUM=" + CAMB_NUM + ", CAMB_NAME=" + CAMB_NAME + ", CAMB_SUBJECT=" + CAMB_SUBJECT
+				+ ", CAMB_CONTENT=" + CAMB_CONTENT + ", CAMB_FILE=" + CAMB_FILE + ", CAMB_UPLOADFILE=" + CAMB_UPLOADFILE
+				+ ", CAMB_STARTDATE=" + CAMB_STARTDATE + ", CAMB_FINDATE=" + CAMB_FINDATE + ", CAMB_DATE=" + CAMB_DATE
+				+ ", CAMB_ABLEDATE=" + CAMB_ABLEDATE + "]";
 	}
-	
-	
 }
