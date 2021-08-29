@@ -111,6 +111,21 @@
 		<img src="/resources/donation/iceThema02.jpg" title="" alt="" width="100%">
 	</div>
 	</div><br><br>
+	
+	<div class="row">
+	<div class="col-md-8 col-12">
+		<img src="/resources/donation/forestThema02.jpg" title="" alt="" width="100%">
+	</div>
+	<div class="col-md-4 col-12">
+		<div style="padding:10px;">
+			<h2 style="color: #388E3C;">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.</h2><br>
+			<p>그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.<br>
+			우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.<br>
+			어쩌구 저쩌구 .... 어쩌구...<br>
+			...... ...저쩌구..</p>
+		</div>
+	</div>
+	</div><br><br>
 
 	<div style="text-align: center; padding: 20px;">
 		<p>여러분이 보내주신 후원은 정부와 기업의 기후행동을 강화하여,<br>
