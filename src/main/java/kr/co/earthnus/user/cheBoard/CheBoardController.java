@@ -41,6 +41,7 @@ public class CheBoardController {
       return "/cheBoard/cheBoardList"; 
     String user_id = user.getAuth_id();
     service.donation_dname(model, user_id);
+    System.out.println("테스트");
     return "/cheBoard/cheBoardList";
   }
   
@@ -49,6 +50,8 @@ public class CheBoardController {
   public List<CheBoardBean> selectAllComment(String startnum, String comment_step) {
     List<CheBoardBean> CheBoardList = null;
     CheBoardList = service.selectAllComment(startnum, comment_step);
+    
+    System.out.println("");
     return CheBoardList;
   }
   
