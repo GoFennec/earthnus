@@ -95,7 +95,7 @@
 	        var reader = new FileReader();
 	        this.enabled = false
 	        reader.onload = (function (e) {
-	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
+	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="100%" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
 	        });
 	        reader.readAsDataURL(input.files[0]);
 	    }
