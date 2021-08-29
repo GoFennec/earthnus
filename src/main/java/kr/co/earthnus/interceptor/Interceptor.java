@@ -15,19 +15,19 @@ public class Interceptor extends HandlerInterceptorAdapter {
 
 
 	
-		@Override
-		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-				throws Exception {
-			
-			
-			HttpSession session = request.getSession();
-			//AuthBean aBean= (AuthBean)session.getAttribute("aBean");
-			
-			if (session.getAttribute("auth") == null) {
-				response.sendRedirect("/auth/login");
-				return false;
-			}
-			return true;
-		}
+//		@Override
+//		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+//				throws Exception {
+//			
+//			
+//			HttpSession session = request.getSession();
+//			//AuthBean aBean= (AuthBean)session.getAttribute("aBean");
+//			
+//			if (session.getAttribute("auth") == null) {
+//				response.sendRedirect("/auth/login");
+//				return false;
+//			}
+//			return true;
+//		}
 	
 	}

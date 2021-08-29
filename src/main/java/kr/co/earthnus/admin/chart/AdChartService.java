@@ -1,5 +1,8 @@
 package kr.co.earthnus.admin.chart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,14 +34,17 @@ public class AdChartService {
 		return selectForest;
 	}
 	
-	public int[] countVisitor() {
+	public List<Integer> countVisitor() {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int[] count = new int[7];
+		int count = 0;
+		List<Integer> count1 = new ArrayList<Integer>();
 		
-		for(int i = 0; i < count.length; i++) {
-			count[i] = dao.countVisitor(i);
+		for(int i = 0; i < 7; i++) {
+			count = dao.countVisitor(i);
+			System.out.println(count);
+			count1.add(count);
 		}
-		return count;
+		return count1;
 	}
 
 }

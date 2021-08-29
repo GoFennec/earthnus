@@ -434,18 +434,25 @@
   var year = today.getFullYear();
   var month = ('0' + (today.getMonth() + 1)).slice(-2);
   var day = new Array;
-  var dateString = new Array;
+  var dateString = [];
   for(var i = 0; i < 7; i++){
 	  day[i] = ('0' + (today.getDate() - i)).slice(-2);
 	  dateString[i] = year + '-' + month  + '-' + day[i];
   }
+  var dateLabel = dateString.reverse();
+  
+  var countVisitor = ${countVisitor};
+  var visitorData = countVisitor.reverse();
+  
   
 	//Area Chart Example
   var ctx = document.getElementById("myAreaChart");
   var myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: [dateString[6], dateString[5], dateString[4], dateString[3], dateString[2], dateString[1], dateString[0]],
+    	 
+      labels: dateLabel,
+    	 
       datasets: [{
         label: "",
         lineTension: 0,
@@ -459,7 +466,7 @@
         pointHoverBorderColor: "#388E3C",
         pointHitRadius: 10,
         pointBorderWidth: 2,
-        data: [${countVisitor[6]}, ${countVisitor[5]}, ${countVisitor[4]}, ${countVisitor[3]}, ${countVisitor[2]}, ${countVisitor[1]}, ${countVisitor[0]}],
+        data: visitorData,
       }],
     },
     options: {
