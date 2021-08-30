@@ -33,6 +33,7 @@
 .item p{text-align: center;}
 #donationBt{text-align: center;}
 #lastDonationBt{padding-top: 13px;}
+#camBt{text-align: right;}
 </style>
 
 <title>EARTH & US</title>
@@ -99,12 +100,10 @@
 <div class="container">
 	<div class="row">
 	<div class="col-md-7 col-12">
-		<div style="padding:10px;">
+		<div>
 			<h2 style="color: #388E3C;">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.</h2><br>
-			<p>그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.<br>
-			우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.<br>
-			어쩌구 저쩌구 .... 어쩌구...<br>
-			...... ...저쩌구..</p>
+			<p>그러나 바다는 지금 플라스틱 등 각종 독성 물질로 인한 오염, 파괴적인 어업은 물론 기후변화까지 심화되며 해양 생태계는 심각한 위협에 내몰리고 있습니다.
+			하지만 우리가 함께 노력한다면, 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을 것입니다.</p>
 		</div>
 	</div>
 	<div class="col-md-5 col-12">
@@ -114,26 +113,30 @@
 	
 	<div class="row">
 	<div class="col-md-8 col-12">
-		<img src="/resources/donation/forestThema02.jpg" title="" alt="" width="100%">
+		<img src="/resources/donation/oceanThema03.jpg" title="" alt="" width="100%">
 	</div>
 	<div class="col-md-4 col-12">
-		<div style="padding:10px;">
-			<h2 style="color: #388E3C;">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.</h2><br>
-			<p>그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.<br>
-			우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.<br>
-			어쩌구 저쩌구 .... 어쩌구...<br>
-			...... ...저쩌구..</p>
+		<div>
+			<h2 style="color: #388E3C;">EARTH & US 활동</h2><br>
+			<p>EARTH & US는 안전하고 건강한 바다를 위해 해양보호구역 지정을 요구합니다.
+			파괴적인 어업에 대항하고, 플라스틱 오염과 기후변화를 막기 위한 캠페인을 펼치며 바다를 보호하기 위해 활동하고 있습니다.</p>
+		</div><br>
+		<div id="camBt">
+			<button type="button" class="btn btn-primary" onclick="location.href='/camBoard/list'">캠페인 둘러보기</button>
 		</div>
 	</div>
 	</div><br><br>
 
+	<hr><br>
 	<div style="text-align: center; padding: 20px;">
-		<p>여러분이 보내주신 후원은 정부와 기업의 기후행동을 강화하여,<br>
-		인류가 자연에 미치는 영향을 줄임으로써 생물 다양성을 보전하는데 중요한 역할을 합니다.<br>
-		copy...</p>
+		<p style="font-weight: bold;">후원자님께서 보내주신 소중한 후원금은<br>
+			지금 이 순간에도 많은 변화를 이뤄내고 있습니다.</p>
 	</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="true"/>
+<div id="back-top" >
+	<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
 </body>
 </html>
