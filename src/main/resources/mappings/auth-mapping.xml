@@ -44,6 +44,12 @@
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('작은 얼음','큰 얼음','빙하 조각','북극곰')
 	</select>
 	<select id="cb_list" resultType="camBoard" parameterType="String">
-		SELECT CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_FILE FROM CAMBOARD ORDER BY CAMB_NUM DESC LIMIT 2
+		SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_FILE FROM CAMBOARD ORDER BY CAMB_NUM DESC LIMIT 2
+	</select>
+	<select id="ch_list" resultType="cheBoard" parameterType="String">
+		SELECT * FROM CHEBOARD ORDER BY CHEB_DATE DESC limit 6
+	</select>
+	<select id="d_img" resultType="cheBoard" parameterType="String">
+		SELECT D_IMG FROM DONATION WHERE D_NAME=#{d_name}
 	</select>
 </mapper>

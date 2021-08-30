@@ -20,6 +20,7 @@ public class ExGoodsBean {
 	private Date exg_ddate;
 	private Date exg_cdate;
 	private String exg_cancle;
+	private int count;
 	
 	public String getExg_num() {
 		return exg_num;
@@ -122,5 +123,11 @@ public class ExGoodsBean {
 	}
 	public void setExg_cancle(String exg_cancle) {
 		this.exg_cancle = exg_cancle;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 }

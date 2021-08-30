@@ -120,11 +120,11 @@
             <div class="col-lg-4">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold">카테고리 별 후원 건 수</h6>
+                  <h6 class="m-0 font-weight-bold">카테고리 별 후원</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-pie pt-4">
-                    <canvas id="myPieChart"></canvas>
+                    <canvas id="donationPieChart"></canvas>
                   </div>
                   <hr>
                 </div>
@@ -134,11 +134,11 @@
             <div class="col-lg-4">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">카테고리 별 후원 건 수</h6>
+                  <h6 class="m-0 font-weight-bold">카테고리 별 캠페인</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-pie pt-4">
-                    <canvas id="myPieChart"></canvas>
+                    <canvas id="camPieChart"></canvas>
                   </div>
                   <hr>
                 </div>
@@ -148,7 +148,7 @@
             <div class="col-lg-4">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">카테고리 별 후원 건 수</h6>
+                  <h6 class="m-0 font-weight-bold">카테고리 별 응원 릴레이</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-pie pt-4">
@@ -239,18 +239,55 @@
   <script type="text/javascript">
   //Pie Chart Example
 
-  var selectForest = ${selectForest};
-  var selectIce = ${selectIce};
-  var selectPlastic = ${selectPlastic};
-  var selectOcean = ${selectOcean};
+  var donationPieForest = ${donationPieForest};
+  var donationPieIce = ${donationPieIce};
+  var donationPiePlastic = ${donationPiePlastic};
+  var donationPieOcean = ${donationPieOcean};
   
-  var ctx = document.getElementById("myPieChart");
-  var myPieChart = new Chart(ctx, {
+  var ctx = document.getElementById("donationPieChart");
+  var donationPieChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels: ["숲", "얼음", "플라스틱", "바다"],
       datasets: [{
-        data: [selectForest, selectIce, selectPlastic, selectOcean],
+        data: [donationPieForest, donationPieIce, donationPiePlastic, donationPieOcean],
+        backgroundColor: ['#4e73df', '#ffa426', '#1cc88a', '#fc544b'],
+        hoverBackgroundColor: ['#2e59d9', '#FF8200', '#17a673', '#B9062F'],
+        hoverBorderColor: "rgba(234, 236, 244, 1)",
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#282828",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+      },
+      legend: {
+        display: true
+      },
+      cutoutPercentage: 80,
+    },
+  });
+  
+  
+  var camPiePlastic = ${camPiePlastic};
+  var camPieOcean = ${camPieOcean};
+  var camPieIce = ${camPieIce};
+  var camPieForest = ${camPieForest};
+  
+  var ctx = document.getElementById("camPieChart");
+  var camPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["숲", "얼음", "플라스틱", "바다"],
+      datasets: [{
+        data: [camPieForest, camPieIce, camPiePlastic, camPieOcean],
         backgroundColor: ['#4e73df', '#ffa426', '#1cc88a', '#fc544b'],
         hoverBackgroundColor: ['#2e59d9', '#FF8200', '#17a673', '#B9062F'],
         hoverBorderColor: "rgba(234, 236, 244, 1)",

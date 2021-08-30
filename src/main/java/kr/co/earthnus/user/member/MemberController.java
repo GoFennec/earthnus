@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.earthnus.user.auth.AuthBean;
 import kr.co.earthnus.user.cheBoard.CheBoardBean;
+import kr.co.earthnus.user.cheBoard.PageBean;
 import kr.co.earthnus.user.goods.ExGoodsBean;
+import kr.co.earthnus.user.goods.PagingBean;
 import kr.co.earthnus.user.pay.PayBean;
 import kr.co.earthnus.util.SHA256;
 
@@ -75,11 +77,9 @@ public class MemberController {
 	
 			//마이페이지
 			@RequestMapping(value="/member/myPage")
-			public String myPoint(HttpSession session, Model model, AuthBean aBean) {
+			public String myPage(HttpSession session, Model model, AuthBean aBean) {
 				aBean = (AuthBean) session.getAttribute("auth");
-				/*if(aBean == null) {
-					return "/auth/login";
-				}*/
+				
 				String mem_id = aBean.getAuth_id();
 				List<PayBean> list = memberService.myPay(mem_id);
 				String myPoint = memberService.myPoint(mem_id);
@@ -105,9 +105,6 @@ public class MemberController {
 			@RequestMapping(value="/member/myInfo")
 			public String myInfo(HttpSession session, Model model, AuthBean aBean) {
 				aBean = (AuthBean) session.getAttribute("auth");
-//				if(aBean == null) {
-//					return "/auth/login";
-//				}
 				String mem_id = aBean.getAuth_id();
 				System.out.println("myInfo controller" + mem_id);
 				MemberBean memberBean = memberService.myInfo(mem_id);
@@ -133,10 +130,6 @@ public class MemberController {
 			public Map<String, Object> cpwCheck(HttpSession session, AuthBean aBean, @RequestParam("mem_pw")String pw) throws NoSuchAlgorithmException {
 				aBean = (AuthBean) session.getAttribute("auth");
 				Map<String, Object> map = new HashMap<String, Object>();
-//				if(aBean == null) {
-//					map.put("url", "/auth/login");
-//					return map;
-//				}
 				
 				String mem_id = aBean.getAuth_id();
 				String mem_pw = memberService.pwCheck(mem_id);
@@ -171,12 +164,6 @@ public class MemberController {
 			public Map<String, Object> updatePw( @RequestParam("mem_pw")String mem_pw, Model model, HttpSession session, AuthBean aBean) throws NoSuchAlgorithmException {
 				aBean = (AuthBean) session.getAttribute("auth");
 				Map<String, Object> map = new HashMap<String, Object>();
-//				if(aBean == null) {
-//					map.put("error", false);
-//					map.put("url", "/auth/login");
-//					return map;
-//				}
-				
 
 				map.put("error", true);
 				
@@ -205,11 +192,6 @@ public class MemberController {
 			public Map<String, Object> updateEmail( @RequestParam("mem_email")String mem_email, Model model, HttpSession session, AuthBean aBean) throws NoSuchAlgorithmException {
 				aBean = (AuthBean) session.getAttribute("auth");
 				Map<String, Object> map = new HashMap<String, Object>();
-//				if(aBean == null) {
-//					map.put("error", false);
-//					map.put("url", "/auth/login");
-//					return map;
-//				}
 				
 
 				map.put("error", true);
@@ -222,17 +204,10 @@ public class MemberController {
 			}
 			
 			
-			
-			
-			
-			
 			//마이오더
 			@RequestMapping("/member/myOrder")
-			public String exGoodsList(HttpSession session, AuthBean aBean,Model model) {
+			public String exGoodsList(HttpSession session, AuthBean aBean, Model model) {
 				aBean = (AuthBean) session.getAttribute("auth");
-//				if(aBean == null) {
-//					return "/auth/login";
-//				}
 				String mem_id = aBean.getAuth_id();
 				List<ExGoodsBean> list = memberService.myOrder(mem_id);
 				model.addAttribute("myOrder", list);
@@ -243,16 +218,26 @@ public class MemberController {
 			@RequestMapping("/member/myMessage")
 			public String myMessageList(HttpSession session, AuthBean aBean,Model model) {
 				aBean = (AuthBean) session.getAttribute("auth");
-//				if(aBean == null) {
-//					return "/auth/login";
-//				}
 				String mem_id = aBean.getAuth_id();
 				List<CheBoardBean> list = memberService.myMessage(mem_id);
 				model.addAttribute("myMessage", list);
 				return "member/myMessage";
 			}
 			
+			/*@RequestMapping("/member/myMessage")
+			public String myMessageList(HttpSession session, AuthBean aBean,Model model, PagingBean pBean) {
+				
+				
+				aBean = (AuthBean) session.getAttribute("auth");
+				String mem_id = aBean.getAuth_id();
+				List<CheBoardBean> list = memberService.myMessage(mem_id);
+				memberService.myMessageCount(mem_id, model);//
+				model.addAttribute("myMessage", list);
+				
+				return "member/myMessage";
+			}*/
 			
+		
 			
 			
 			

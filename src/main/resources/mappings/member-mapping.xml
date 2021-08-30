@@ -41,7 +41,7 @@
 		<id property="cheb_num" column="CHEB_NUM"/>
 		<result property="cheb_id" column="CHEB_ID"/>
 		<result property="cheb_name" column="CHEB_NAME"/>
-		<result property="cheb_dnum" column="CHEB_DNUM"/>
+		<result property="cheb_dname" column="CHEB_DNAME"/>
 		<result property="cheb_content" column="CHEB_CONTENT"/>
 		<result property="cheb_date" column="CHEB_DATE"/>
 	
@@ -118,11 +118,15 @@
 	</update>
 
 <select id="myOrder"  parameterType="String" resultType="exGoods">
-	SELECT * FROM EXGOODS WHERE EXG_ID=#{mem_id}
+	SELECT * FROM EXGOODS WHERE EXG_ID=#{mem_id} ORDER BY EXG_PDATE DESC  
 	</select>
 	
+	
 <select id="myMessage"  parameterType="String" resultType="cheBoard">
-	SELECT CHEB_NUM, CHEB_DNUM, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id}
+	SELECT CHEB_NUM, CHEB_DNAME, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id} ORDER BY CHEB_DATE DESC
+	</select>
+	<select id="myMessageCount"  parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM CHEBOARD WHERE CHEB_ID=#{mem_id}
 	</select>
 
 	<update id="deleteMember" parameterType="member">UPDATE MEMBER SET

@@ -11,4 +11,14 @@ public interface AdDonationMybatis {
 	public int donationCount();
 	public void updatePay(PayBean bean);
 	public void updatePoint(PayBean bean);
+	
+	public String payTotal();
+	public String payMonthly();
+	public int payWaiting();
+	public String payTotalPoint();
+	
+	public String payPlastic();
+	public String payForest();
+	public String payIce();
+	public String payOcean();
 }

@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.earthnus.user.camBoard.camBoardBean;
-import kr.co.earthnus.user.goods.ExGoodsBean;
+import kr.co.earthnus.user.cheBoard.CheBoardBean;
 import kr.co.earthnus.user.member.MemberBean;
-import kr.co.earthnus.user.member.MemberMybatis;
 import kr.co.earthnus.util.SHA256;
 
 @Service("authService")
@@ -104,11 +103,11 @@ public class AuthService {
 		String total_p = dao.total_p();
 		return total_p;
 	}
-/*	public camBoardBean cb_list() {
+	public List<CheBoardBean> ch_list() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
-		camBoardBean cbBean = dao.cb_list();
-		return cbBean;
-	}*/
+		List<CheBoardBean> ch_list = dao.ch_list();
+		return ch_list;
+	}
 	public List<camBoardBean> cb_list() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
 		List<camBoardBean> list = dao.cb_list();

@@ -113,80 +113,48 @@
           <!-- Row -->
           <div class="row">
           
-                      <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
               <div class="card h-100">
                 <div class="card-body">
                   <div class="row align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                        <span>Since last month</span>
-                      </div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">전체 캠페인</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${camTotal}개</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                      <i class="fas fa-hourglass fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- Earnings (Annual) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
               <div class="card h-100">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Sales</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                        <span>Since last years</span>
-                      </div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">진행 중인 캠페인</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">${camIng}개</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                      <i class="fas fa-hourglass-half fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- New User Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
               <div class="card h-100">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">New User</div>
-                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
-                        <span>Since last month</span>
-                      </div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">종료한 캠페인</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${camFinish}개</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-info"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                        <span>Since yesterday</span>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-warning"></i>
+                      <i class="fas fa-hourglass-end fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -195,9 +163,6 @@
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary"></h6>
-                </div>
                 <div class="table-responsive p-3">
                   <a href="/adCamBoard/list" class="btn btn-sm btn-primary">전체 보기</a>
                   <a href="/adCamBoard/ing" class="btn btn-sm btn-primary">진행 중인 캠페인</a>

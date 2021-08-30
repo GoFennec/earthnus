@@ -44,18 +44,21 @@ public class AdDonationController {
 	@RequestMapping("/adDonation/list")
 	public String getAdDonationList(Model model) {
 		adDonationService.getAdDonationList(model);
+		adDonationService.countPay(model);
 		return "donation/adDonationList";
 	}
 	
 	@RequestMapping("/adDonation/waiting")
 	public String waiting(Model model) {
 		adDonationService.waiting(model);
+		adDonationService.countPay(model);
 		return "donation/adDonationList";
 	}
 	
 	@RequestMapping("/adDonation/canceled")
 	public String cancel(Model model) {
 		adDonationService.cancel(model);
+		adDonationService.countPay(model);
 		return "donation/adDonationList";
 	}
 	

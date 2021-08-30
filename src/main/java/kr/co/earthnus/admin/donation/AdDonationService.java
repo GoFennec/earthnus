@@ -44,4 +44,44 @@ public class AdDonationService {
 		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
 		dao.updatePoint(bean);
 	}
+	
+	public void countPay(Model model) {
+		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
+		
+		String payTotal = dao.payTotal();
+		String payMonthly = dao.payMonthly();
+		int payWaiting = dao.payWaiting();
+		String payTotalPoint = dao.payTotalPoint();
+		
+		String payPlastic = dao.payPlastic();
+		String payForest = dao.payForest();
+		String payIce = dao.payIce();
+		String payOcean = dao.payOcean();
+		
+		if(payTotal == null) {
+			payTotal = "0";
+		}else if(payMonthly == null) {
+			payMonthly = "0";
+		}else if(payTotalPoint == null) {
+			payTotalPoint = "0";
+		}else if(payPlastic == null) {
+			payPlastic = "0";
+		}else if(payForest == null) {
+			payForest = "0";
+		}else if(payIce == null) {
+			payIce = "0";
+		}else if(payOcean == null) {
+			payOcean = "0";
+		}
+		
+		model.addAttribute("payTotal",payTotal);
+		model.addAttribute("payMonthly",payMonthly);
+		model.addAttribute("payWaiting",payWaiting);
+		model.addAttribute("payTotalPoint",payTotalPoint);
+		
+		model.addAttribute("payPlastic",payPlastic);
+		model.addAttribute("payForest",payForest);
+		model.addAttribute("payIce",payIce);
+		model.addAttribute("payOcean",payOcean);
+	}
 }

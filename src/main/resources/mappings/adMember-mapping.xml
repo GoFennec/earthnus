@@ -47,5 +47,9 @@
 		MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
 		MEM_POINT="0" WHERE MEM_ID=#{deleteMember}
 	</update>	
+	
+	<select id="memberTotal" resultType="int">
+		select count(*) from member where mem_name != '삭제된회원'
+	</select>
 			
 </mapper>

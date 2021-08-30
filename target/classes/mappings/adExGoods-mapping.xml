@@ -49,25 +49,25 @@
 	
 	<select id="getAdExGoodsOrderList" resultMap="exGoodsResult">
 		<![CDATA[
-			SELECT * FROM EXGOODS WHERE EXG_STATE="결제완료" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM EXGOODS WHERE EXG_STATE="결제완료" ORDER BY EXG_NUM DESC
 		]]>
 	</select>
 	
 	<select id="getAdExGoodsDeliveryList" resultMap="exGoodsResult">
 		<![CDATA[
-			SELECT * FROM EXGOODS WHERE EXG_STATE="배송처리" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM EXGOODS WHERE EXG_STATE="배송처리" ORDER BY EXG_NUM DESC
 		]]>
 	</select>
 	
 	<select id="getAdExGoodsApproveList" resultMap="exGoodsResult">
 		<![CDATA[
-			SELECT * FROM EXGOODS WHERE NOT EXG_STATE="결제취소" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM EXGOODS WHERE NOT EXG_STATE="결제취소" ORDER BY EXG_NUM DESC
 		]]>
 	</select>
 	
 	<select id="getAdExGoodsCancleList" resultMap="exGoodsResult">
 		<![CDATA[
-			SELECT * FROM EXGOODS WHERE EXG_STATE="결제취소" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM EXGOODS WHERE EXG_STATE="결제취소" ORDER BY EXG_NUM DESC
 		]]>
 	</select>
 	
@@ -94,5 +94,29 @@
 			UPDATE MEMBER SET MEM_POINT=MEM_POINT+#{exg_point} WHERE MEM_ID=#{exg_id}
 		]]>
 	</update>
+	
+	<select id="countMonthly" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE DATE_FORMAT(EXG_PDATE,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+		]]>
+	</select>
+	
+	<select id="countTotal" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS
+		]]>
+	</select>
+	
+	<select id="countWaiting" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE DATE_FORMAT(EXG_PDATE,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
+		]]>
+	</select>
+	
+	<select id="countLanking" resultType="exGoods">
+		<![CDATA[
+			select exg_gname, count(*) count from exgoods where DATE_FORMAT(EXG_PDATE,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m') group by exg_gname order by count(*) desc limit 3
+		]]>
+	</select>
 	
 </mapper>

@@ -40,6 +40,16 @@ public class AdCamBoardController {
 		
 		List<camBoardBean> list = adCamBoardService.getBoardList();
 		model.addAttribute("CamBoardList", list);
+		
+		int camTotal = adCamBoardService.camTotal();
+		model.addAttribute("camTotal",camTotal);
+		
+		int camIng = adCamBoardService.camIng();
+		model.addAttribute("camIng",camIng);
+		
+		int camFinish = adCamBoardService.camFinish();
+		model.addAttribute("camFinish",camFinish);
+		
 		return "camBoard/adCamBoardList";
 	}
 	
@@ -48,6 +58,16 @@ public class AdCamBoardController {
 		
 		List<camBoardBean> list = adCamBoardService.getBoardIngList();
 		model.addAttribute("CamBoardIngList", list);
+		
+		int camTotal = adCamBoardService.camTotal();
+		model.addAttribute("camTotal",camTotal);
+		
+		int camIng = adCamBoardService.camIng();
+		model.addAttribute("camIng",camIng);
+		
+		int camFinish = adCamBoardService.camFinish();
+		model.addAttribute("camFinish",camFinish);
+		
 		return "camBoard/adCamBoardList";
 	}
 	
@@ -56,6 +76,16 @@ public class AdCamBoardController {
 		
 		List<camBoardBean> list = adCamBoardService.getBoardFinishList();
 		model.addAttribute("CamBoardFinishList", list);
+		
+		int camTotal = adCamBoardService.camTotal();
+		model.addAttribute("camTotal",camTotal);
+		
+		int camIng = adCamBoardService.camIng();
+		model.addAttribute("camIng",camIng);
+		
+		int camFinish = adCamBoardService.camFinish();
+		model.addAttribute("camFinish",camFinish);
+		
 		return "camBoard/adCamBoardList";
 	}
 	

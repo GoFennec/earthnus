@@ -43,5 +43,37 @@
  		SET A.MEM_POINT = MEM_POINT + #{pay_point}, B.PAY_PSTATE = '적립완료'
  		WHERE B.PAY_NO = #{pay_no}
 	</update>
+	
+	<select id="payTotal" resultType="String">
+		select sum(pay_price) from pay
+	</select>
+	
+	<select id="payMonthly" resultType="String">
+		select sum(pay_price) from pay where DATE_FORMAT(pay_pdate,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+	</select>
+	
+	<select id="payWaiting" resultType="int">
+		select count(*) from pay where pay_pstate = '적립예정'
+	</select>
+	
+	<select id="payTotalPoint" resultType="String">
+		select sum(pay_point) from pay
+	</select>
+	
+	<select id="payPlastic" resultType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경'
+	</select>
+	
+	<select id="payForest" resultType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲'
+	</select>
+	
+	<select id="payIce" resultType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='작은 얼음' OR PAY_DNAME='큰 얼음' OR PAY_DNAME='빙하 조각' OR PAY_DNAME='북극곰'
+	</select>
+	
+	<select id="payOcean" resultType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='조개' OR PAY_DNAME='바다거북' OR PAY_DNAME='고래' OR PAY_DNAME='바다'
+	</select>
 
 </mapper>

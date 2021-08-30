@@ -27,7 +27,9 @@ public class AdMemberController {
 	public String memberList(HttpServletRequest request, Model model) {
 		
 		List<MemberBean> memberList = adMemberService.memberList();
+		int memberTotal = adMemberService.memberTotal();
 		model.addAttribute("memberList",memberList);
+		model.addAttribute("memberTotal",memberTotal);
 		return "member/adMemberList";
 	}
 	
