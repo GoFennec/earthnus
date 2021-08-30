@@ -35,6 +35,24 @@ public class AdCamBoardService {
         return CamBoardList;
 	}
 	
+	public int camTotal() {
+		AdCamBoardMybatis CamBoardDAO = mybatis.getMapper(AdCamBoardMybatis.class);
+		int camTotal = CamBoardDAO.camTotal();
+		return camTotal;
+	}
+	
+	public int camIng() {
+		AdCamBoardMybatis CamBoardDAO = mybatis.getMapper(AdCamBoardMybatis.class);
+		int camIng = CamBoardDAO.camIng();
+		return camIng;
+	}
+	
+	public int camFinish() {
+		AdCamBoardMybatis CamBoardDAO = mybatis.getMapper(AdCamBoardMybatis.class);
+		int camFinish = CamBoardDAO.camFinish();
+		return camFinish;
+	}
+	
 	public void insertCamBoard(String CAMB_NAME, String CAMB_SUBJECT, String CAMB_CONTENT, 
 			MultipartFile CAMB_UPLOADFILE, Date CAMB_STARTDATE, Date CAMB_FINDATE) {
 		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);

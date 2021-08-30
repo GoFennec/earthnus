@@ -15,4 +15,6 @@ public interface AdMemberMybatis {
 	public int cheerCount(@Param("mem_id") String mem_id);
 	public int deletePW(@Param("deletePW") String deletePW);
 	public int adDeleteMember(@Param("deleteMember") String deleteMember);
+	
+	public int memberTotal();
 }

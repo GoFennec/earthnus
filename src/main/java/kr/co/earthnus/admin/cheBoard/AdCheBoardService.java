@@ -24,5 +24,17 @@ public class AdCheBoardService {
 		AdCheBoardMybatis cheBoardDAO = mybatis.getMapper(AdCheBoardMybatis.class);
 		cheBoardDAO.deleteCheBoard(checkArr);
 	}
+	
+	public int cheTotal() {
+		AdCheBoardMybatis cheBoardDAO = mybatis.getMapper(AdCheBoardMybatis.class);
+		int cheTotal = cheBoardDAO.cheTotal();
+		return cheTotal;
+	}
+	
+	public int cheToday() {
+		AdCheBoardMybatis cheBoardDAO = mybatis.getMapper(AdCheBoardMybatis.class);
+		int cheToday = cheBoardDAO.cheToday();
+		return cheToday;
+	}
 
 }

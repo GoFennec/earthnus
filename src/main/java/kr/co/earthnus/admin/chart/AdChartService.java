@@ -6,6 +6,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 @Service
 public class AdChartService {
@@ -13,26 +14,32 @@ public class AdChartService {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	public int selectPlastic() {
+	public void donationPie(Model model) {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int selectPlastic = dao.selectPlastic();
-		return selectPlastic;
+		int donationPiePlastic = dao.donationPiePlastic();
+		int donationPieOcean = dao.donationPieOcean();
+		int donationPieIce = dao.donationPieIce();
+		int donationPieForest = dao.donationPieForest();
+		
+		model.addAttribute("donationPiePlastic", donationPiePlastic);
+		model.addAttribute("donationPieOcean", donationPieOcean);
+		model.addAttribute("donationPieIce", donationPieIce);
+		model.addAttribute("donationPieForest", donationPieForest);
 	}
-	public int selectOcean() {
+	
+	public void camPie(Model model) {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int selectOcean = dao.selectOcean();
-		return selectOcean;
+		int camPiePlastic = dao.camPiePlastic();
+		int camPieOcean = dao.camPieOcean();
+		int camPieIce = dao.camPieIce();
+		int camPieForest = dao.camPieForest();
+		
+		model.addAttribute("camPiePlastic", camPiePlastic);
+		model.addAttribute("camPieOcean", camPieOcean);
+		model.addAttribute("camPieIce", camPieIce);
+		model.addAttribute("camPieForest", camPieForest);
 	}
-	public int selectIce() {
-		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int selectIce = dao.selectIce();
-		return selectIce;
-	}
-	public int selectForest() {
-		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int selectForest = dao.selectForest();
-		return selectForest;
-	}
+	
 	
 	public List<Integer> countVisitor() {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);

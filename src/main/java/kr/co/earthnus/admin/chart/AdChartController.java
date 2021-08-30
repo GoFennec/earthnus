@@ -17,17 +17,8 @@ public class AdChartController {
 	@RequestMapping(value = "/adChart", method = RequestMethod.GET)
 	public String chart(Model model) {
 		
-		int selectPlastic = service.selectPlastic();
-		model.addAttribute("selectPlastic", selectPlastic);
-		
-		int selectOcean = service.selectOcean();
-		model.addAttribute("selectOcean", selectOcean);
-		
-		int selectIce = service.selectIce();
-		model.addAttribute("selectIce", selectIce);
-		
-		int selectForest = service.selectForest();
-		model.addAttribute("selectForest", selectForest);
+		service.donationPie(model);
+		service.camPie(model);
 		
 		List<Integer> countVisitor = service.countVisitor();
 		model.addAttribute("countVisitor", countVisitor);

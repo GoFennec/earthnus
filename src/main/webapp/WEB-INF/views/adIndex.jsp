@@ -62,7 +62,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/adDonation/list">
         <i class="fas fa-hand-holding-heart"></i>
-          <span>기부 관리</span>
+          <span>후원 관리</span>
         </a>
       </li>
       <li class="nav-item">
@@ -125,7 +125,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${sumPay}"/></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                      <i class="fas fa-hand-holding-heart fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -141,7 +141,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">${countMember}명</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                      <i class="fas fa-users fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -157,7 +157,7 @@
                       <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="h6">${orderExGoods}건</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-info"></i>
+                      <i class="fas fa-shopping-cart fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -173,7 +173,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">${todayVisitor}명</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-warning"></i>
+                      <i class="fas fa-door-open fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>

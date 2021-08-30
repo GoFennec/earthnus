@@ -22,6 +22,12 @@ public class AdMemberService {
 		return memberList;
 	}
 	
+	public int memberTotal() {
+		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
+		int memberTotal = dao.memberTotal();
+		return memberTotal;
+	}
+	
 	public List<MemberBean> memberListDetail(String mem_id) {
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
 		List<MemberBean> memberList = dao.memberListDetail(mem_id);

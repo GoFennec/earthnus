@@ -12,11 +12,13 @@ public interface AdDonationMybatis {
 	public void updatePay(PayBean bean);
 	public void updatePoint(PayBean bean);
 	
-	public int payTotal();
-	public int payMonthly();
+	public String payTotal();
+	public String payMonthly();
 	public int payWaiting();
-	public int payTotalPoint();
+	public String payTotalPoint();
 	
-	public int payPlastic();
-	public int payForest();
+	public String payPlastic();
+	public String payForest();
+	public String payIce();
+	public String payOcean();
 }

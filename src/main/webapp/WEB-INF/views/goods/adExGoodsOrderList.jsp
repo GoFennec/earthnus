@@ -130,9 +130,13 @@
                     <div class="col mr-2">
                       <div class="m-0 font-weight-bold">전체 주문 건 수</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">${countTotal}건</div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span></span><br>
+                        <span></span>
+                      </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                      <i class="fas fa-list-alt fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -146,9 +150,13 @@
                     <div class="col mr-2">
                       <div class="m-0 font-weight-bold">이번 달의 주문</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">${countMonthly}건</div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span></span><br>
+                        <span></span>
+                      </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                      <i class="fas fa-calendar fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -163,9 +171,13 @@
                     <div class="col mr-2">
                       <div class="m-0 font-weight-bold">배송 대기 중인 주문</div>
                       <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="h6">${countWaiting}건</div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span></span><br>
+                        <span></span>
+                      </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-info"></i>
+                      <i class="far fa-stop-circle fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -185,7 +197,7 @@
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-list-ol fa-2x text-warning"></i>
+                      <i class="fas fa-list-ol fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -209,7 +221,7 @@
                     </thead>
 					<tbody>
                     	<c:forEach items="${exGoodsList}" var="exGoods">
-							<tr class="exGoodsTr" onclick="location.href='/adExGoods/detail?exg_num=${exGoods.exg_realnum}'">
+							<tr class="exGoodsTr" onclick="location.href='/adExGoods/detail?exg_num=${exGoods.exg_num}'">
 								<td>${exGoods.exg_num}</td>
 								<td>${exGoods.exg_id}</td>
 								<td>${exGoods.exg_state}</td>
