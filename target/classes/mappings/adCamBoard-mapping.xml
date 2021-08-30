@@ -28,5 +28,21 @@
 			SELECT * FROM CAMBOARD WHERE CAMB_FINDATE < NOW()
 		]]>
 	</select>
+	
+	<select id="camTotal" resultType="int">
+			SELECT COUNT(*) FROM CAMBOARD 
+	</select>
+	
+	<select id="camIng" resultType="int">
+		<![CDATA[	
+			SELECT COUNT(*) FROM CAMBOARD WHERE CAMB_STARTDATE <= now() and now() <= CAMB_FINDATE
+		]]>
+	</select>
+	
+	<select id="camFinish" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM CAMBOARD WHERE CAMB_FINDATE < NOW()
+		]]>
+	</select>
 
 </mapper>

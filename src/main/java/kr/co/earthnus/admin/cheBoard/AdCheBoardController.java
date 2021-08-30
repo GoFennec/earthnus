@@ -29,6 +29,11 @@ public class AdCheBoardController {
 		
 		List<CheBoardBean> list = adCheBoardService.getBoardList();
 		model.addAttribute("CheBoard", list);
+		
+		int cheTotal = adCheBoardService.cheTotal();
+		model.addAttribute("cheTotal",cheTotal);
+		int cheToday = adCheBoardService.cheToday();
+		model.addAttribute("cheToday",cheToday);
 		return "cheBoard/adCheBoardList";
 	}
 	

@@ -4,10 +4,17 @@ import org.apache.ibatis.annotations.Param;
 
 public interface AdChartMybatis {
 	
-	public int selectPlastic();
-	public int selectOcean();
-	public int selectIce();
-	public int selectForest();
+	public int donationPiePlastic();
+	public int donationPieOcean();
+	public int donationPieIce();
+	public int donationPieForest();
+	
+	public int camPiePlastic();
+	public int camPieOcean();
+	public int camPieIce();
+	public int camPieForest();
+	
+	
 	
 	public int countVisitor(@Param("i")int i);
 

@@ -26,5 +26,13 @@
       		#{checkArr}
     	</foreach>
 	</delete>
+	
+	<select id="cheTotal" resultType="int">
+		SELECT COUNT(*) FROM CHEBOARD
+	</select>
+	
+	<select id="cheToday" resultType="int">
+		SELECT COUNT(*) FROM CHEBOARD where date_format(cheb_date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+	</select>
 
 </mapper>

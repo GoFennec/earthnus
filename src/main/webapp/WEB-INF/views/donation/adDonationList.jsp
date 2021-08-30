@@ -139,7 +139,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${payTotal}"/></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                      <i class="fas fa-list-alt fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -155,7 +155,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${payMonthly}"/></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                      <i class="fas fa-calendar fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -171,7 +171,7 @@
                       <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${payWaiting}건</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-info"></i>
+                      <i class="far fa-stop-circle fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -187,7 +187,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber type="number" maxFractionDigits="3" value="${payTotalPoint}"/> 포인트</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-warning"></i>
+                      <i class="fas fa-coins fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -201,10 +201,10 @@
                   <div class="row align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">해양</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${payOcean}"/></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                      <i class="fas fa-tint fa-2x text-primary"></i>
                     </div>
                   </div>
                 </div>
@@ -220,7 +220,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${payForest}"/></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                      <i class="fas fa-tree fa-2x text-success"></i>
                     </div>
                   </div>
                 </div>
@@ -236,7 +236,7 @@
                       <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${payPlastic}"/></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-users fa-2x text-info"></i>
+                      <i class="fas fa-sync-alt fa-2x text-secondary"></i>
                     </div>
                   </div>
                 </div>
@@ -249,10 +249,10 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1">북극곰</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">￦<fmt:formatNumber type="number" maxFractionDigits="3" value="${payIce}"/></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-warning"></i>
+                      <i class="fas fa-snowflake fa-2x text-warning"></i>
                     </div>
                   </div>
                 </div>

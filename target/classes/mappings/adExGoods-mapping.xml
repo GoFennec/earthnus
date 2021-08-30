@@ -49,25 +49,25 @@
 	
 	<select id="getAdExGoodsOrderList" resultMap="exGoodsResult">
 		<![CDATA[
-			SELECT * FROM EXGOODS WHERE EXG_STATE="결제완료" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM EXGOODS WHERE EXG_STATE="결제완료" ORDER BY EXG_NUM DESC
 		]]>
 	</select>
 	
 	<select id="getAdExGoodsDeliveryList" resultMap="exGoodsResult">
 		<![CDATA[
-			SELECT * FROM EXGOODS WHERE EXG_STATE="배송처리" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM EXGOODS WHERE EXG_STATE="배송처리" ORDER BY EXG_NUM DESC
 		]]>
 	</select>
 	
 	<select id="getAdExGoodsApproveList" resultMap="exGoodsResult">
 		<![CDATA[
-			SELECT * FROM EXGOODS WHERE NOT EXG_STATE="결제취소" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM EXGOODS WHERE NOT EXG_STATE="결제취소" ORDER BY EXG_NUM DESC
 		]]>
 	</select>
 	
 	<select id="getAdExGoodsCancleList" resultMap="exGoodsResult">
 		<![CDATA[
-			SELECT * FROM EXGOODS WHERE EXG_STATE="결제취소" ORDER BY EXG_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM EXGOODS WHERE EXG_STATE="결제취소" ORDER BY EXG_NUM DESC
 		]]>
 	</select>
 	
