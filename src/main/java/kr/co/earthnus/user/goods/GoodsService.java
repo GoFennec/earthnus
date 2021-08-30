@@ -64,10 +64,10 @@ public class GoodsService {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
 		return goodsDAO.getMember(aBean);
 	}
-	public int insertExGoods(ExGoodsBean eBean) {
+	public String insertExGoods(ExGoodsBean eBean) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
 		goodsDAO.insertExGoods(eBean);
-		int exNum = goodsDAO.newExGoods(eBean);
+		String exNum = goodsDAO.newExGoods(eBean);
 		return exNum;
 	}
 	public MemberBean updateMemberPoint(ExGoodsBean eBean) {
@@ -75,7 +75,7 @@ public class GoodsService {
 		goodsDAO.updatePoint(eBean);
 		return goodsDAO.exMemberPoint(eBean);
 	}
-	public ExGoodsBean getExGoods(int exNum) {
+	public ExGoodsBean getExGoods(String exNum) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
 		return goodsDAO.getExGoods(exNum);
 	}

@@ -10,11 +10,22 @@
 		<result property="CAMB_SUBJECT" column="CAMB_SUBJECT"/>
 		<result property="CAMB_CONTENT" column="CAMB_CONTENT"/>
 		<result property="CAMB_FILE" column="CAMB_FILE"/>
+		<result property="CAMB_STARTDATE" column="CAMB_STARTDATE"/>
+		<result property="CAMB_FINDATE" column="CAMB_FINDATE"/>
 		<result property="CAMB_DATE" column="CAMB_DATE"/>
+		<result property="CAMB_ABLEDATE" column="CAMB_ABLEDATE"/>
+	</resultMap>
+	
+	<resultMap id="statResult" type="statBoard">
+		<result property="CAMB_ABLEDATE" column="CAMB_ABLEDATE"/>
 	</resultMap>
 	
 	<select id="getBoardList" resultMap="camBoardResult">
-			SELECT * 
+			<![CDATA[SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT,
+			SUBSTRING_INDEX(SUBSTRING_INDEX(CAMB_CONTENT, '</', 1), '>', -1) AS CAMB_CONTENT, CAMB_FILE, 
+			CAMB_STARTDATE, CAMB_FINDATE, CAMB_DATE, 
+			IF(floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100)>=0,
+			floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100),-1) AS "CAMB_ABLEDATE" ]]>
 			FROM CAMBOARD 
 			WHERE (
 			<choose>
@@ -54,6 +65,29 @@
 			<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
 			<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
 		</choose>
+	</select>
+	
+	<select id="getStatList" resultMap="statResult">
+		<![CDATA[SELECT IF(floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100)>=0,
+    	floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100),-1) AS "CAMB_ABLEDATE"]]>
+		FROM CAMBOARD 
+			WHERE (
+			<choose>
+				<when test='search_type.equals("CAMB_ENTIRE")'>
+				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+				</when>
+				<when test='search_type.equals("CAMB_NAME")'>CAMB_NAME LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_SUBJECT")'>CAMB_SUBJECT LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_CONTENT")'>CAMB_CONTENT LIKE #{search} </when>
+			</choose>
+			AND 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE())) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE())) ]]></when>
+				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
+			</choose>
+			ORDER BY ${orderBy} ${order} LIMIT #{contentnum} OFFSET #{pagenum}
 	</select>
 	
 	<select id="getBoardListCount" resultType="int">

@@ -14,7 +14,7 @@ public interface AdExGoodsMybatis {
 	public List<ExGoodsBean> getAdExGoodsDeliveryList(PagingBean pBean);
 	public List<ExGoodsBean> getAdExGoodsApproveList(PagingBean pBean);
 	public List<ExGoodsBean> getAdExGoodsCancleList(PagingBean pBean);
-	public ExGoodsBean getExGoods(int exGoodsNum);
+	public ExGoodsBean getExGoods(String exGoodsNum);
 	public void updateDeliveryOk(ExGoodsBean eBean);
 	public void cancleExGoods(ExGoodsBean eBean);
 	public void updatePoint(ExGoodsBean eBean);

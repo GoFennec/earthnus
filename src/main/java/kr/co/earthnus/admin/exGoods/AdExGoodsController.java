@@ -47,7 +47,7 @@ public class AdExGoodsController {
 	}
 	
 	@RequestMapping("/adExGoods/detail")
-	public String updateGoods(@RequestParam("exg_num") int exGoodsNum, Model model) {
+	public String updateGoods(@RequestParam("exg_num") String exGoodsNum, Model model) {
 		model.addAttribute("exGoods", adExGoodsService.getExGoods(exGoodsNum));
 		return "goods/adExGoodsDetail";
 	}
@@ -61,6 +61,6 @@ public class AdExGoodsController {
 	@RequestMapping("/adExGoods/cancle")
 	public String cancleGoods(@ModelAttribute ExGoodsBean eBean) {
 		adExGoodsService.cancleExGoods(eBean);
-		return "redirect:/adExGoods/oList";
+		return "redirect:/adExGoods/cList";
 	}
 }

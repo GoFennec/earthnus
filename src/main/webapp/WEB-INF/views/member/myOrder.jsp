@@ -598,6 +598,9 @@ color: #a2a6af
     width: 40px;
     display: inline-block
 }
+table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
+	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
+	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 
 </style>
 
@@ -633,7 +636,6 @@ color: #a2a6af
                 <div class="content-panel">
                     <h2 class="title">굿즈 교환 현황</h2>
 					<hr>
-                    <form class="form-horizontal" method="post" action="/member/myOrder" >
                          <table class="table table-hover table-xl mb-0">
                 <thead>
                   <tr>
@@ -641,7 +643,7 @@ color: #a2a6af
                     <th>굿즈 이름</th>
                     <th>사용한 포인트</th>
                     <th>교환한 날짜</th>
-                    
+                    <th>배송현황</th>
                   
                   </tr>
                 </thead>
@@ -650,14 +652,36 @@ color: #a2a6af
                   <tr>
                     <td class="text-truncate"><img src="${exGoods.exg_img}" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"  width="30%"/></td>
                     <td class="text-truncate">${exGoods.exg_gname}</td>
-                    <td class="text-truncate">${exGoods.exg_point}</td>
+                    <td class="text-truncate"><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
                     <td class="text-truncate"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}" /></td>
+                    <c:choose>
+                    	<c:when test="${exGoods.exg_state eq '결제완료'}">
+                    		<td class="text-truncate">배송대기중</td>
+                    	</c:when>
+                    	<c:when test="${exGoods.exg_state eq '배송처리'}">
+                    		<td class="text-truncate">
+								<form action="http://info.sweettracker.co.kr/tracking/4" method="post">
+					            <div class="form-group">
+					           		<input type="hidden" class="form-control" id="t_key" name="t_key" value="s1Du1jYfs5EDQXH2QufQnQ"/>
+					            </div>
+					            <div class="form-group">
+					              <input type="hidden" class="form-control" name="t_code" id="t_code" value="${exGoods.exg_cc}"/>
+					            </div>
+					            <div class="form-group">
+					            	<input type="hidden" class="form-control" name="t_invoice" id="t_invoice" value="${exGoods.exg_waybill}"/>
+					            </div>
+					            <button type="submit">조회하기</button>
+					        	</form>
+                    		</td>
+                    	</c:when>
+                    	<c:when test="${exGoods.exg_state eq '결제취소'}">
+                    		<td class="text-truncate">결제취소</td>
+                    	</c:when>
+                    </c:choose>
          		 </tr>
          		 </c:forEach>
                 </tbody>
               </table>
-                        
-                    </form>
                 </div>
             </div>
         </section>
