@@ -11,7 +11,7 @@
 
 <style>
 .image {
- background-image: url('/resources/donation/oceanThema01.jpg');
+ background-image: url('/resources/donation/oceanThema1.jpg');
  background-repeat: no-repeat;
  background-size: cover;
  }
@@ -107,13 +107,13 @@
 		</div>
 	</div>
 	<div class="col-md-5 col-12">
-		<img src="/resources/donation/oceanThema02.jpg" title="" alt="" width="100%">
+		<img src="/resources/donation/oceanThema2.jpg" title="" alt="" width="100%">
 	</div>
 	</div><br><br>
 	
 	<div class="row">
 	<div class="col-md-8 col-12">
-		<img src="/resources/donation/oceanThema03.jpg" title="" alt="" width="100%">
+		<img src="/resources/donation/oceanThema3.jpg" title="" alt="" width="100%">
 	</div>
 	<div class="col-md-4 col-12">
 		<div>
