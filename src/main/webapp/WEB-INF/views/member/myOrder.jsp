@@ -670,9 +670,12 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
 					            <div class="form-group">
 					            	<input type="hidden" class="form-control" name="t_invoice" id="t_invoice" value="${exGoods.exg_waybill}"/>
 					            </div>
-					            <button type="submit">조회하기</button>
+					            <button type="submit" formtarget="_blank">조회하기</button>
 					        	</form>
                     		</td>
+                    	</c:when>
+                    	<c:when test="${exGoods.exg_state eq '배송완료'}">
+                    		<td class="text-truncate">배송완료</td>
                     	</c:when>
                     	<c:when test="${exGoods.exg_state eq '결제취소'}">
                     		<td class="text-truncate">결제취소</td>
@@ -682,11 +685,6 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
          		 </c:forEach>
                 </tbody>
               </table>
-<<<<<<< HEAD
-=======
-                    
-                    </form>
->>>>>>> origin/kang
                 </div>
             </div>
         </section>
