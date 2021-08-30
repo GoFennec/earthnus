@@ -12,7 +12,14 @@
 <head>
 <style>
 table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
-	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
+	thead th {padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #388E3C;
+    border-bottom: 3px solid #388E3C;
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(56, 142, 60);}
 	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
 	td {width: 350px;border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
@@ -23,6 +30,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     padding: 0;
     list-style: none;
 }
+
 #slider-wrap {
     width: 100%;
     height: 400px;
@@ -134,12 +142,11 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 }
 
 #listDiv {
-	 border:1px solid black;
+	 border-top:1px solid black;
 }
 
-.id_date {
-	position:relative;
-	
+#id_date {
+	padding-left: 70px;
 }
 .left-id{
 	width: 400px;
@@ -156,6 +163,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	position:relative;
 	display:block;
 	width:100%;
+	padding: 21px 0 20px
 }
 
 .
@@ -164,28 +172,52 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     padding-right: 5px;
     margin: 0 10px;
 }
+.cheboard_user {
+  color: #000;
+}
 #img_profile {
-	 width: 30px;
-    height: 30px;
-    border-radius: 150px; /* ���̾� ��ũ�⸸ŭ �ݰ��� ���*/    
+	border-radius: 150px; /* ���̾� ��ũ�⸸ŭ �ݰ��� ���*/    
     vertical-align: middle;
     object-fit: cover;
     border: none;
     margin-top: 5px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-position: 0 -110px;
+    content: '';
 }
 #mainpage, #pagemain {
 	padding:7px;
 }
 
 .id_profile {
-	display:inline;
-	width:70%;
-	border: none;
+	float: left;
+    position: relative;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    
 }
 .id_id{
-	display:inline-block;
+	padding: 19px 0 0;
 }
-
+#cheboard_date {
+	float: none;
+    padding-top: 10px;
+}
+.cheboard_content {
+	height: auto;
+	padding: 0;
+	border: 0;
+    color: #666;
+    line-height: 21px;
+    letter-spacing: 0;
+    word-break: break-all;
+    margin: 0;
+}
 .delete {
 	position: absolute;
 	top: 0;
@@ -263,10 +295,10 @@ background:#000;color:#fff;
         <div id="slider-wrap">
        
             <ul id="slider">
-             <li><img alt="사진" class=item src="/resources/cheBoard/oceanItem1.png"></li>
-		     <li><img alt="사진" class=item src="/resources/cheBoard/oceanItem2.png"></li>
-		     <li><img alt="사진" class=item src="/resources/cheBoard/oceanItem3.png"></li>
-		     <li><img alt="사진" class=item src="/resources/cheBoard/oceanItem4.png"></li>
+             <li><img alt="사진" class=item src="/resources/cheBoard/plastics.jpg"></li>
+		     <li><img alt="사진" class=item src="/resources/cheBoard/animal.jpg"></li>
+		     <li><img alt="사진" class=item src="/resources/cheBoard/bear.jpg"></li>
+		     <li><img alt="사진" class=item src="/resources/cheBoard/tree.jpg"></li>
           	 </ul>
          
      <div class="slider-btns" id="next"><span>▶</span></div>
@@ -549,16 +581,15 @@ background:#000;color:#fff;
 	        		
             		str += '<tr>';
             		str += '<td class="left-info">'
-            		str +='<div class="id_date">'
-	            	str += '<div class="id_profile"><img id="img_profile" src="'+obj[i].d_img +'"></div>';
+ 	            	str += '<div class="id_profile"><img id="img_profile" src="'+obj[i].d_img +'"></div>';
+ 	            	str +='<div id="id_date">'
 	            	 if(auth_id == obj[i].cheb_id) { 
          				 str +='<span class="delete"><input type="button" value="삭제" class="deleteComment"  data_num="'+obj[i].cheb_num+'"/></span>';
             		 }
-	            	str += '<div class="id_id"><span class="left-id">'+obj[i].cheb_name+'</span></div>'
-            		 str +='<div class="left-content">'+obj[i].cheb_content+'</div>';		
-     				 str += '<span>'+obj[i].cheb_date+'</span>';
-     				str += '</div>'
-            		 
+            		 str +='<p class="cheboard_content">'+obj[i].cheb_content+'</p>';	
+            		 str += '<div id="cheboard_date">'+obj[i].cheb_date+'</div>';
+            		 str += '<div class="id_id"><Strong><span class="cheboard_user">'+obj[i].cheb_name+' 님</span></Strong</div>'
+            		 str +='</div>'
             		 	 str += '</td>'
 	            		 str += '</tr>';
 	            		
