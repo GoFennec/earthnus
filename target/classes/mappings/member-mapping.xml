@@ -125,7 +125,7 @@
 <select id="myMessage"  parameterType="String" resultType="cheBoard">
 	SELECT CHEB_NUM, CHEB_DNAME, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id} ORDER BY CHEB_DATE DESC
 	</select>
-	<select id="myMessageCount"  parameterType="String" resultType="cheBoard">
+	<select id="myMessageCount"  parameterType="String" resultType="int">
 	SELECT COUNT(*) FROM CHEBOARD WHERE CHEB_ID=#{mem_id}
 	</select>
 

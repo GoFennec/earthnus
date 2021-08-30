@@ -3,6 +3,7 @@ package kr.co.earthnus.user.auth;
 import java.util.List;
 
 import kr.co.earthnus.user.camBoard.camBoardBean;
+import kr.co.earthnus.user.cheBoard.CheBoardBean;
 import kr.co.earthnus.user.member.MemberBean;
 
 public interface AuthMybatis {
@@ -13,4 +14,5 @@ public interface AuthMybatis {
 	public String total_i();
 	public String total_p();
 	public List<camBoardBean> cb_list();
+	public List<CheBoardBean> ch_list();
 }
