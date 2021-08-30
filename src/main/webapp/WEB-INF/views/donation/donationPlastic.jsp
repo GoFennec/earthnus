@@ -11,7 +11,7 @@
 
 <style>
 .image {
- background-image: url('/resources/donation/plasticThema01.jpg');
+ background-image: url('/resources/donation/plasticThema1.jpg');
  background-repeat: no-repeat;
  background-size: cover;
  }
@@ -33,6 +33,7 @@
 .item p{text-align: center;}
 #donationBt{text-align: center;}
 #lastDonationBt{padding-top: 13px;}
+#camBt{text-align: right;}
 </style>
 
 <title>EARTH & US</title>
@@ -99,41 +100,43 @@
 <div class="container">
 	<div class="row">
 	<div class="col-md-7 col-12">
-		<div style="padding:10px;">
-			<h2 style="color: #388E3C;">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.</h2><br>
-			<p>그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.<br>
-			우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.<br>
-			어쩌구 저쩌구 .... 어쩌구...<br>
-			...... ...저쩌구..</p>
+		<div>
+			<h2 style="color: #388E3C;">플라스틱은 우리 생활 깊숙이 침투해 있습니다.</h2><br>
+			<p>플라스틱은 편리함의 대명사였습니다. 하지만 버려진 플라스틱 낚싯줄이 거북이와 바닷새의 목을 조르고,
+			수많은 해양동물들은 잘게 쪼개진 플라스틱 조각을 먹이로 착각하고 섭취해 폐사에 이르고 있습니다.</p>
 		</div>
 	</div>
 	<div class="col-md-5 col-12">
-		<img src="/resources/donation/plasticThema02.jpg" title="" alt="" width="100%">
+		<img src="/resources/donation/plasticThema2.jpg" title="" alt="" width="100%">
 	</div>
 	</div><br><br>
 	
 	<div class="row">
 	<div class="col-md-8 col-12">
-		<img src="/resources/donation/forestThema02.jpg" title="" alt="" width="100%">
+		<img src="/resources/donation/plasticThema3.jpg" title="" alt="" width="100%">
 	</div>
 	<div class="col-md-4 col-12">
-		<div style="padding:10px;">
-			<h2 style="color: #388E3C;">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.</h2><br>
-			<p>그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.<br>
-			우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.<br>
-			어쩌구 저쩌구 .... 어쩌구...<br>
-			...... ...저쩌구..</p>
+		<div>
+			<h2 style="color: #388E3C;">EARTH & US 활동</h2><br>
+			<p>재활용만으로는 결코 문제를 해결할 수 없습니다. 불필요한 플라스틱 사용을 줄이고 원천부터 막아야 합니다.
+			EARTH & US는 기업의 플라스틱 사용 규제를 요구하고 있으며, 정부 정책의 변화를 유도하고 있습니다.</p>
+		</div><br>
+		<div id="camBt">
+			<button type="button" class="btn btn-primary" onclick="location.href='/camBoard/list'">캠페인 둘러보기</button>
 		</div>
 	</div>
 	</div><br><br>
 
+	<hr><br>
 	<div style="text-align: center; padding: 20px;">
-		<p>여러분이 보내주신 후원은 정부와 기업의 기후행동을 강화하여,<br>
-		인류가 자연에 미치는 영향을 줄임으로써 생물 다양성을 보전하는데 중요한 역할을 합니다.<br>
-		copy...</p>
+		<p style="font-weight: bold;">후원자님께서 보내주신 소중한 후원금은<br>
+			지금 이 순간에도 많은 변화를 이뤄내고 있습니다.</p>
 	</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="true"/>
+<div id="back-top" >
+	<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
 </body>
 </html>

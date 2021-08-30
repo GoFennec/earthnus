@@ -35,7 +35,7 @@ public class GoodsController {
 	}
 	@RequestMapping("/goods/exGoodsOk")
 	public String getExGoodsOk(@ModelAttribute ExGoodsBean eBean, @ModelAttribute GoodsBean gBean, Model model) {
-		int exNum = goodsService.insertExGoods(eBean);
+		String exNum = goodsService.insertExGoods(eBean);
 		model.addAttribute("member", goodsService.updateMemberPoint(eBean));
 		model.addAttribute("goods", gBean);
 		model.addAttribute("exGoods", goodsService.getExGoods(exNum));
