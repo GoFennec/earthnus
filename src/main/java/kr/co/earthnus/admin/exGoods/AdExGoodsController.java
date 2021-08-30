@@ -19,6 +19,7 @@ public class AdExGoodsController {
 			@RequestParam(defaultValue = "10") String contentnum, Model model) {
 		String category = "Order";
 		adExGoodsService.getAdExGoodsList(pagenum, contentnum, category, model);
+		adExGoodsService.count(model);
 		return "goods/adExGoodsOrderList";
 	}
 	

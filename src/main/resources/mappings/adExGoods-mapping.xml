@@ -95,4 +95,28 @@
 		]]>
 	</update>
 	
+	<select id="countMonthly" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE DATE_FORMAT(EXG_PDATE,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+		]]>
+	</select>
+	
+	<select id="countTotal" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS
+		]]>
+	</select>
+	
+	<select id="countWaiting" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE DATE_FORMAT(EXG_PDATE,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
+		]]>
+	</select>
+	
+	<select id="countLanking" resultType="exGoods">
+		<![CDATA[
+			select exg_gname, count(*) count from exgoods where DATE_FORMAT(EXG_PDATE,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m') group by exg_gname order by count(*) desc limit 3
+		]]>
+	</select>
+	
 </mapper>

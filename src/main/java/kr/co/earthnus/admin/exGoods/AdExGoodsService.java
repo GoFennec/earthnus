@@ -73,4 +73,18 @@ public class AdExGoodsService {
 		exGoodsDAO.cancleExGoods(eBean);
 		exGoodsDAO.updatePoint(eBean);
 	}
+	
+	public void count(Model model) {
+		AdExGoodsMybatis exGoodsDAO = mybatis.getMapper(AdExGoodsMybatis.class);
+		int countMonthly = exGoodsDAO.countMonthly();
+		int countTotal = exGoodsDAO.countTotal();
+		int countWaiting = exGoodsDAO.countWaiting();
+		List<ExGoodsBean> countLanking = exGoodsDAO.countLanking();
+		
+		model.addAttribute("countMonthly",countMonthly);
+		model.addAttribute("countTotal",countTotal);
+		model.addAttribute("countWaiting",countWaiting);
+		model.addAttribute("countLanking",countLanking);
+		
+	}
 }

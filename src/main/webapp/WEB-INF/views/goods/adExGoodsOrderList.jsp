@@ -32,6 +32,9 @@
   	}
   	.exGoodsTr {
   		cursor: pointer;
+  	}
+  	#h6{
+  		margin-top:20px;
   	} 
   </style>
 </head>
@@ -119,37 +122,14 @@
           <!-- Row -->
           <div class="row">
           
-             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                        <span>Since last month</span>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-primary"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Earnings (Annual) Card Example -->
+          <!-- Earnings (Annual) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card h-100">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Sales</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                        <span>Since last years</span>
-                      </div>
+                      <div class="m-0 font-weight-bold">전체 주문 건 수</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">${countTotal}건</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-shopping-cart fa-2x text-success"></i>
@@ -158,18 +138,31 @@
                 </div>
               </div>
             </div>
+            
+             <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col mr-2">
+                      <div class="m-0 font-weight-bold">이번 달의 주문</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">${countMonthly}건</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- New User Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card h-100">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">New User</div>
-                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
-                        <span>Since last month</span>
-                      </div>
+                      <div class="m-0 font-weight-bold">배송 대기 중인 주문</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="h6">${countWaiting}건</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-users fa-2x text-info"></i>
@@ -184,15 +177,15 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="m-0 font-weight-bold">이번 달의 인기 제품</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">1. ${countLanking.get(0).getExg_gname()}(${countLanking.get(0).getCount()}개)</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                        <span>Since yesterday</span>
+                        <span>2. ${countLanking.get(1).getExg_gname()}(${countLanking.get(1).getCount()}개)</span><br>
+                        <span>3. ${countLanking.get(2).getExg_gname()}(${countLanking.get(2).getCount()}개)</span>
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-warning"></i>
+                      <i class="fas fa-list-ol fa-2x text-warning"></i>
                     </div>
                   </div>
                 </div>
@@ -201,9 +194,6 @@
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary"></h6>
-                </div>
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
@@ -213,7 +203,7 @@
                         <th>주문 상태</th>
                         <th>상품 정보</th>
                         <th>사용 포인트</th>
-                        <th>결제 날짜</th>
+                        <th>주문 날짜</th>
                         <th>배송 메세지</th>
                       </tr>
                     </thead>
