@@ -137,6 +137,7 @@ public class MemberController {
 //					map.put("url", "/auth/login");
 //					return map;
 //				}
+				
 				String mem_id = aBean.getAuth_id();
 				String mem_pw = memberService.pwCheck(mem_id);
 				SHA256 sha = new SHA256();
@@ -181,12 +182,18 @@ public class MemberController {
 				
 				SHA256 sha = new SHA256();
 				String smem_pw = sha.encrypt(mem_pw);
+				if(smem_pw.equals("mem_pw")) {
+					map.put("mem_pw", mem_pw);
+					String mem_id = aBean.getAuth_id();
+					map.put("mem_id", mem_id);
+					memberService.updatePw(map);
+				} else {
 				map.put("mem_pw", smem_pw);
 				String mem_id = aBean.getAuth_id();
 				map.put("mem_id", mem_id);
 				memberService.updatePw(map);
 				System.out.println("비번변경 컨트롤러");
-				
+				}
 				return map;
 			}
 			

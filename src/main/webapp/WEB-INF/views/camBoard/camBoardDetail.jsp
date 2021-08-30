@@ -27,6 +27,10 @@
 	.main{margin-right: 30px;}
 	.paging {text-align: center;}
 	.facebook:hover, .twitter:hover, .naverblog:hover, .kakaotalk:hover, .clipboard:hover {transform: scale( 1.2 )}
+	
+	li{
+	margin-right: 10px;
+	}
 	i {
 		border-radius: 80px;
 	    opacity: 0;
@@ -132,62 +136,61 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>	
-
+	<br><br><br><br>
 	<div class="main col-sm-12 col-lg-12">
 		<table class="mainlist goodsTable" id="detail" style="border-collapse: separate;">
-			
 			<tr>
 				<td colspan = "4">
 					<img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/>
 				</td>
 			</tr>
-			
-			
 			<tr>
 				<td colspan = "3" style="text-align: left; color: black; font-size: 45px;"><b>${camBoard.CAMB_NAME}</b></td>
-				<td style="text-align: right; color: gray; font-size: 10px;">
-				시작일 : <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${camBoard.CAMB_STARTDATE}" /><br>
-				종료일 : <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${camBoard.CAMB_FINDATE}" />
+				<td style="text-align: right; color: gray; font-size: 20px;">
+				시작일 : <fmt:formatDate pattern="MM월 dd일" value="${camBoard.CAMB_STARTDATE}" /><br>
+				종료일 : <fmt:formatDate pattern="MM월 dd일" value="${camBoard.CAMB_FINDATE}" />
 				</td>
 			</tr>
 			<tr>
 				<td colspan = "4" id="subject_icon">
 					<a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT">${camBoard.CAMB_SUBJECT}</a>
+					<hr>
 				</td>
 			</tr>
-			
 			<tr style="text-align: left;">
 				<td colspan="4" style=" border-bottom: 1px solid #ccc;">${camBoard.CAMB_CONTENT}</td>
 			</tr>
 			<tr>
 				<td colspan="4" class="sysBtn" style="text-align: center;">
-					<input type="button" class="btn-dark" value="목록" onclick="location.href='/camBoard/list'"/>	
+					<div class="header-right-btn d-none d-lg-block ml-20">
+						<a class="btn header-btn" onclick="camBoardlist()" style="color: white;">목록</a>
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td colspan = "4">
 					<div class="navigation-top">
-					   <div class="d-sm-flex justify-content-between text-center">
+					   <div class="d-sm-flex justify-content-between text-center" style="margin-bottom: 30px;">
 					    <div class="col-sm-4 text-center my-2 my-sm-0">
 					     <span class="align-middle" onclick="donate()"><i class="fas fa-donate" style="margin-right: 15px"></i>후원하기</span>
 					   </div>
 					   <ul class="social-icons" style="float: left">
 					     <li style="float: left"><a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
-			        			<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="20px">
+			        			<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="25px">
 			        		</a></li>
-					     <li style="float: left"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="20px" class="twitter" onclick="shareTwitter()"></li>
-					     <li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="20px" class="naverblog" onclick="shareNaverBlog()"></li>
-					     <li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="20px" class="kakaotalk" onclick="shareKakaotalk()"></li>
-					   	<li style="float: left;"><i class="clipboard far fa-clipboard" style="font-size: 20px" onclick="shareURL()"></i></li>
+					     <li style="float: left"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="25px" class="twitter" onclick="shareTwitter()"></li>
+					     <li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="25px" class="naverblog" onclick="shareNaverBlog()"></li>
+					     <li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="25px" class="kakaotalk" onclick="shareKakaotalk()"></li>
+					   	<li style="float: left;"><i class="clipboard fas fa-copy" style="font-size: 24px" onclick="shareURL()"></i></li>
 					   </ul>
 					 </div>
 					 <div class="navigation-area">
 					  <div class="row"  style="text-align: center;">
 					   <div id="preBoard"
 					   class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center"
-					   onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}')">
+					   onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
 					   <div class="thumb">
-					      <img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="">
+					      <img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="" width="150px">
 					  </div>
 					  <div class="arrow">
 					    <span class="lnr text-white ti-arrow-left"></span>
@@ -199,7 +202,7 @@
 					</div>
 					<div id="nextBoard"
 					class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center"
-					onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}')">
+					onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}', 'next')">
 					<div class="detials">
 					 <p>다음 캠페인</p>
 					  <h4 style="color: #2d2d2d;">${nextBoard.CAMB_NAME}</h4>
@@ -208,7 +211,7 @@
 					  <span class="lnr text-white ti-arrow-right"></span>
 					</div>
 					<div class="thumb">
-					  <img class="img-fluid" src="${nextBoard.CAMB_FILE}" alt="">
+					  <img class="img-fluid" src="${nextBoard.CAMB_FILE}" alt="" width="150px">
 					</div>
 					</div>
 					</div>
@@ -221,26 +224,19 @@
 	<div>	
 	</div>
 <script type='text/javascript'>
-		var subquery = window.location.search;
-		var query = subquery.slice(subquery.lastIndexOf("CAMB_NAME=")+1, 0);
-	function detailUrl(name, num){
-		if (!name && !num){
-			
-		}else{
-			if(!query){
-				location.href="/camBoard/detail?CAMB_NAME=" + name + "&CAMB_NUM=" + num;
-			}else{
-				location.href="/camBoard/detail" + query +"&CAMB_NAME=" + name + "&CAMB_NUM=" + num;
-			}
-		}
-	}
-	
-	function list(){
-		alert(subquery + "////" + query);
-		//location.href="/camBoard/list" + query;
-	}
+	var pathname = window.location.pathname;
+	var subquery = window.location.search;
+	var query = subquery.slice(subquery.lastIndexOf("detail")+2, subquery.lastIndexOf("CAMB_NAME=")-1);
+	substring = "pagenum";
+	var URL = "";
+	var num = 0;
+	var pagenum = 0;				// 현재 캠페인이 위치한 실제 페이지
 	
 	window.onload = function(){
+		
+		num = ${index}/6;
+		pagenum = Math.ceil(num);
+		
 		var subjecthtml = '';
 		if("${camBoard.CAMB_SUBJECT}" === "해양"){
 			subjecthtml += '<i class="fas fa-fish"></i>';
@@ -261,6 +257,54 @@
 		}else if(!'${nextBoard.CAMB_NUM}'){
 			$('#nextBoard').html('<div>다음 캠페인이 없습니다.</div>');
 		}
+	}
+	
+	function detailUrl(CAMB_NAME, CAMB_NUM, type){
+		
+		if(type === "prev"){
+			num = (${index}-1)/6;
+			pagenum = Math.ceil(num);
+		}else if(type === "next"){
+			num = (${index}+1)/6;
+			pagenum = Math.ceil(num);
+		}
+		
+		if(name || num){
+			if(query){
+				if(query.lastIndexOf(substring) !== -1){
+					query = query.substr(0, subquery.indexOf("pagenum")-2);
+				}
+				if(pagenum !== 1){
+					URL += pathname + "?" + query + "&pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+				}else{
+					URL += pathname + "?" + query + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+				}
+			}else{
+				if(pagenum !== 1){
+					URL += pathname + "?pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+				}else{
+					URL += pathname + "?CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+				}
+			}
+		}
+		location.href = URL;
+	}
+	
+	function camBoardlist(){
+		if(query){
+			if(query.lastIndexOf(substring) !== -1){
+				query = query.substr(0, subquery.indexOf("pagenum")-2);
+			}
+			URL += "/camBoard/list?" + query;
+		}
+		
+		var pagenum = parseInt(${index}/6 + 1); 
+		
+		if(pagenum !== 1){
+			URL += "&pagenum=" + pagenum;
+		}
+		
+		location.href = URL;
 	}
 	
 	var linkUrl = window.location.href;

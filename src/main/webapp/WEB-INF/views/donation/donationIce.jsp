@@ -11,7 +11,7 @@
 
 <style>
 .image {
- background-image: url('/resources/donation/iceThema01.jpg');
+ background-image: url('/resources/donation/iceThema1.jpg');
  background-repeat: no-repeat;
  background-size: cover;
  }
@@ -33,6 +33,7 @@
 .item p{text-align: center;}
 #donationBt{text-align: center;}
 #lastDonationBt{padding-top: 13px;}
+#camBt{text-align: right;}
 </style>
 
 <title>EARTH & US</title>
@@ -70,12 +71,7 @@
 						<input type="hidden" name="pay_dname" value="${donation.d_name}"/>
 						<input type="hidden" name="pay_price" value="${donation.d_price}"/>
 					<div class="cat-cap">
-						<c:if test="${empty auth}">
-							<div id="donationBt"><button type="button" class="btn btn-primary" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">후원하기</button></div>
-						</c:if>
-						<c:if test="${!empty auth}">
 							<div id="donationBt"><input type="submit" class="btn btn-primary" value="후원하기"/></div>
-						</c:if>
 					</div>
 					</form>
 				</div>
@@ -91,12 +87,7 @@
 						<input type="hidden" name="pay_dname" value="${donation.d_name}"/>
 						<input type="text" size=8 height=20 name="pay_price"/>&nbsp;원<br><br>
 					<div class="cat-cap">
-						<c:if test="${empty auth}">
-							<div id="lastDonationBt"><button type="button" class="btn btn-primary" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">자율후원</button></div>
-						</c:if>
-						<c:if test="${!empty auth}">
 							<div id="lastDonationBt"><input type="submit" class="btn btn-primary" value="자율후원"/></div>
-						</c:if>
 					</div>
 					</form>
 				</div>
@@ -109,26 +100,44 @@
 <div class="container">
 	<div class="row">
 	<div class="col-md-7 col-12">
-		<div style="padding:10px;">
-			<h2 style="color: #388E3C;">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.</h2><br>
-			<p>그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.<br>
-			우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.<br>
-			어쩌구 저쩌구 .... 어쩌구...<br>
-			...... ...저쩌구..</p>
+		<div>
+			<h2 style="color: #388E3C;">지구 온난화로 북극 기온이 상승하여 빙하가 녹고있습니다.</h2><br>
+			<p>북극을 지키고, 지구를 지키기 위한 가장 중요한 시점은 바로 지금입니다.
+			지구 온난화로 북극 기온이 빠르게 상승하고 있고, 매년 더 많은 빙하가 녹아 내리고 있습니다.
+			하지만 이러한 위기 상황에서도 일부 기업들은 석유 시추를 위해 북극을 개발하려 합니다.</p>
 		</div>
 	</div>
 	<div class="col-md-5 col-12">
-		<img src="/resources/donation/iceThema02.jpg" title="" alt="" width="100%">
+		<img src="/resources/donation/iceThema2.jpg" title="" alt="" width="100%">
+	</div>
+	</div><br><br>
+	
+	<div class="row">
+	<div class="col-md-8 col-12">
+		<img src="/resources/donation/iceThema3.jpg" title="" alt="" width="100%">
+	</div>
+	<div class="col-md-4 col-12">
+		<div>
+			<h2 style="color: #388E3C;">EARTH & US 활동</h2><br>
+			<p>빠르게 녹고 있는 북극을 지키기 위해서는 한시라도 빨리 화석연료에서 벗어나야 합니다.
+			EARTH & US는 북극 바다에 해양보호구역을 만들기 위한 캠페인을 진행하고 있습니다.</p>
+		</div><br>
+		<div id="camBt">
+			<button type="button" class="btn btn-primary" onclick="location.href='/camBoard/list'">캠페인 둘러보기</button>
+		</div>
 	</div>
 	</div><br><br>
 
+	<hr><br>
 	<div style="text-align: center; padding: 20px;">
-		<p>여러분이 보내주신 후원은 정부와 기업의 기후행동을 강화하여,<br>
-		인류가 자연에 미치는 영향을 줄임으로써 생물 다양성을 보전하는데 중요한 역할을 합니다.<br>
-		copy...</p>
+		<p style="font-weight: bold;">후원자님께서 보내주신 소중한 후원금은<br>
+			지금 이 순간에도 많은 변화를 이뤄내고 있습니다.</p>
 	</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/footer.jsp" flush="true"/>
+<div id="back-top" >
+	<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
 </body>
 </html>

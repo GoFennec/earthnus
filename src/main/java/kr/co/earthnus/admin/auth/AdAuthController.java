@@ -30,6 +30,10 @@ public class AdAuthController {
 		model.addAttribute("adPay", adPayList);
 		
 		List<ExGoodsBean> adGoodsList = Service.adGoods();
+		for(int i = 0; i < adGoodsList.size(); i++) {
+    		String exgnum = adGoodsList.get(i).getExg_num();
+    		adGoodsList.get(i).setExg_num(exgnum.substring(0, exgnum.length()-4));   
+    	}
 		model.addAttribute("adGoods", adGoodsList);
 		
 		List<camBoardBean> adCamboardList = Service.adCamboard();
@@ -67,7 +71,7 @@ public class AdAuthController {
 		aBean = Service.adLogin(aBean.getAuth_id(), auth_pw);
 		
 		if(aBean != null) {
-			session.setAttribute("auth", aBean);
+			session.setAttribute("adauth", aBean);
 			System.out.println("session test");
 			return "redirect:/adIndex";
 		} else {

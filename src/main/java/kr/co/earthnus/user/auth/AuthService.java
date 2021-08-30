@@ -1,12 +1,16 @@
 package kr.co.earthnus.user.auth;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.earthnus.user.camBoard.camBoardBean;
+import kr.co.earthnus.user.goods.ExGoodsBean;
 import kr.co.earthnus.user.member.MemberBean;
+import kr.co.earthnus.user.member.MemberMybatis;
 import kr.co.earthnus.util.SHA256;
 
 @Service("authService")
@@ -75,4 +79,39 @@ public class AuthService {
 			aBean.setAuth_name(mBean.getMem_name());
 		} return aBean;
 }
+	public String total_pay() {
+		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
+		String total_pay = dao.total_pay();
+		return total_pay;
+	}
+	public String total_f() {
+		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
+		String total_f = dao.total_f();
+		return total_f;
+	}
+	public String total_o() {
+		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
+		String total_o = dao.total_o();
+		return total_o;
+	}
+	public String total_i() {
+		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
+		String total_i = dao.total_i();
+		return total_i;
+	}
+	public String total_p() {
+		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
+		String total_p = dao.total_p();
+		return total_p;
+	}
+/*	public camBoardBean cb_list() {
+		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
+		camBoardBean cbBean = dao.cb_list();
+		return cbBean;
+	}*/
+	public List<camBoardBean> cb_list() {
+		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
+		List<camBoardBean> list = dao.cb_list();
+		return list;
+	}
 }

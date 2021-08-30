@@ -167,6 +167,23 @@ public class MemberService {
 	public List<ExGoodsBean> myOrder(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		List<ExGoodsBean> list = dao.myOrder(mem_id);
+		for(int i = 0; i < list.size(); i++) {
+			String cc = list.get(i).getExg_cc();
+			switch (cc) {
+				case "CJ대한통운":		list.get(i).setExg_cc("04"); break;
+				case "롯데택배":		list.get(i).setExg_cc("08"); break;
+				case "우체국택배":		list.get(i).setExg_cc("01"); break;
+				case "로젠택배":		list.get(i).setExg_cc("06"); break;
+				case "한진택배":		list.get(i).setExg_cc("05"); break;
+				case "CU편의점택배":	list.get(i).setExg_cc("46"); break;
+				case "EMS택배":		list.get(i).setExg_cc("12"); break;
+				case "경동택배":		list.get(i).setExg_cc("23"); break;
+				case "대신택배":		list.get(i).setExg_cc("22"); break;
+				case "DHL택배":		list.get(i).setExg_cc("13"); break;
+				case "FedEx":		list.get(i).setExg_cc("21"); break;
+			}
+		}
+		
 		return list;
 	}
 

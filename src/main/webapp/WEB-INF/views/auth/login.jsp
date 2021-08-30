@@ -153,9 +153,7 @@ height:46px;
             <img src="/resources/Auth/kakao_login_large_narrow.png" id="kakao"  alt="카카오로그인버튼" title="로그인버튼">
         </a>
     </c:if>
-    <c:if test="${userId ne null}">
-        <h1>로그인 성공입니다</h1>
-    </c:if>
+  
         </div>
       
        

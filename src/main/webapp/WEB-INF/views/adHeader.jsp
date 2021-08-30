@@ -21,7 +21,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-address-card"></i>
-               &nbsp; ${auth.auth_id}님 환영합니다.
+               &nbsp; ${adauth.auth_id}님 환영합니다.
              </a>
             </li>
             <div class="topbar-divider d-none d-sm-block"></div>
