@@ -494,7 +494,7 @@
 
 
 
-	<div class="row justify-content-center">
+<%-- 	<div class="row justify-content-center">
 					<div class="col-xl-8 col-lg-9 col-md-11">
 						<div class="section-tittle text-center mb-90">
 							<h2>최근 응원 릴레이</h2>
@@ -522,7 +522,7 @@
             </div>   
 		</div>
 		</c:forEach>
-	</div>
+	</div> --%>
 </div>
 
 
