@@ -682,6 +682,11 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
          		 </c:forEach>
                 </tbody>
               </table>
+<<<<<<< HEAD
+=======
+                    
+                    </form>
+>>>>>>> origin/kang
                 </div>
             </div>
         </section>

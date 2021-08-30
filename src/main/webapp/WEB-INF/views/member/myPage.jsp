@@ -39,6 +39,7 @@ padding: 30px;
 color: #616670;
 border-bottom: 1px solid #f3f3f3
 }
+
 .view-account .side-bar .user-info .img-profile {
 width: 120px;
 height: 120px;
@@ -569,7 +570,7 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
                                 <label class="col-md-2 col-sm-3 col-xs-12 control-label">나의 후원금액</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
                                    
-                                    <input type="text" class="form-control" name ="pay_price" readonly value=${myDonation } >
+                                    <input type="text" class="form-control" name ="pay_price" readonly value=${myDonation }원 >
                                
                                 </div>
                             </div>
@@ -578,7 +579,7 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
                               <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">포인트</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" readonly class="form-control" name ="mem_point" value=${myPoint } >
+                                    <input type="text" readonly class="form-control" name ="mem_point" value=${myPoint }점 >
                                 </div>
                             </div>
                         </fieldset>
@@ -690,6 +691,7 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
                 </tbody>
               </table>
 <br><br><br><br>
+
                </div>
                    
                  </form>

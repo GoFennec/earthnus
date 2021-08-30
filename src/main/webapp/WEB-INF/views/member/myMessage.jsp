@@ -668,14 +668,36 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
                 <c:forEach items="${myMessage}" var="message">
                   <tr>
                     <td class="text-truncate">${message.cheb_num}</td>
-                    <td class="text-truncate">${message.cheb_dnum}</td>
+                    <td class="text-truncate">${message.cheb_dname}</td>
                     <td class="text-truncate">${message.cheb_content}</td>
                     <td class="text-truncate"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${message.cheb_date}"/></td>
          		 </tr>
          		 </c:forEach>
                 </tbody>
               </table>
-                        
+                            <nav class="blog-pagination justify-content-center d-flex">
+		<ul class="pagination">
+			<c:if test="${page.prev}">
+	    		<li class="page-item">
+					<a href="?pagenum=${page.getStartPage()-1}" class="page-link" aria-label="Previous">
+						<i class="ti-angle-left"></i>
+					</a>
+				</li>
+			</c:if>
+			<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">	
+				<li class="page-item">
+					<a href="?pagenum=${idx}" class="page-link">${idx}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${page.next}">
+				<li class="page-item">
+					<a href="?pagenum=${page.getEndPage()+1}" class="page-link" aria-label="Next">
+						<i class="ti-angle-right"></i>
+					</a>
+				</li>
+			</c:if>
+		</ul>
+	</nav>
                     </form>
                 </div>
             </div>
