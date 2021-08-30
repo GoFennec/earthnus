@@ -103,8 +103,8 @@
                     <div class="col-md-5 col-xl-7 col-xxl-8 order-md-0"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-start rounded-md-top-0" src="/resources/donation/plastic.jpg" title="플라스틱이 넘쳐요!" alt="방대한 양의 플라스틱 사진"  /></div>
                     <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                       <h1 class="card-title mt-xl-5 mb-4 m-4">플라스틱이 넘쳐요!</h1>
-                      	<p class="m-4">플라스틱은 미세 플라스틱으로 분해됩니다.<br>
-									수많은 해양 동물들은 이를 먹이로 착각하고 섭취하여 폐사에 이르고 있으며, 결국 미세 플라스틱은 해양 먹이사슬을 타고 우리의 식탁으로 돌아옵니다.</p><br>
+                      	<p class="m-4">플라스틱은 우리 생활 깊숙이 침투해 있습니다.<br>
+									수많은 해양 동물들은 미세 플라스틱을 먹이로 착각하고 섭취하여 폐사에 이르고 있으며, 결국 미세 플라스틱은 해양 먹이사슬을 타고 우리의 식탁으로 돌아옵니다.</p><br>
                       <div class="d-grid bottom-0"><button type="button" class="btn btn-primary" onclick="location.href='/donation/plastic'">후원 바로가기&nbsp;&nbsp;>></button></div>
                     </div>
                   </div>
