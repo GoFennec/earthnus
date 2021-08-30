@@ -226,6 +226,16 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
   padding-right: 30px;
   position: relative;
   width: 200px; }
+  
+.btn_moreview {
+position:relative;width:100%;display:inline-block;*display:inline;text-align:center;margin:20px 0 0 0;
+}
+.btn_moreview a {
+border:1px solid #ddd;padding:8px 13px;font-size:10pt;font-weight:bold;text-align:center;text-decoration:none;
+}
+.btn_moreview a:hover {
+background:#000;color:#fff;
+}
 </style>
 
 
@@ -321,19 +331,19 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
           </thead>
         </table>
         
-        <table id="listDiv">
+        <div id="list">
         
         
         
         
-        </table>
+        </div>
      
     	
     </div>
-    <div>  
-        <button id="addBtn">더보기</button>
-      
-	</div>
+	<div class="btn_moreview">
+        <a href="#none" id="addBtn">댓글 더보기 </a>
+    </div>
+	
   </div>
 
 
@@ -343,7 +353,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 
 
 <script type="text/javascript">
-	var startNum = 1;
+	var startNum = 0;
 	var step = 10;
 	var insert_commet = 0;
 	var All_dname = [];
@@ -436,7 +446,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
           });
         
         $('#addBtn').on('click',function() {
-        	startNum += step;
+        	step += step;
         	init();
         });
        
@@ -521,12 +531,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
   //list
   	function init(){
   	
-  		if(insert_commet > 0) {
-    		$('#listDiv').empty();
-    			insert_commet = 0;
-    			 startNum = 0;
-    			 step = 10;
-  		}
   		
   		$.ajax({
 	        url : "comment_list",
@@ -538,9 +542,12 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	        success :function(obj){
 	        	var auth_id = "${auth.auth_id}";
 	        	
-	        	// $('#listDiv').empty();
+	        	if(startNum < 10) {
+	        	var str= '<table id="listDiv">'
+	        	}
 	        	 for(var i=0; i<obj.length;i++) {
-            		var str = '<tr>';
+	        		
+            		str += '<tr>';
             		str += '<td class="left-info">'
             		str +='<div class="id_date">'
 	            	str += '<div class="id_profile"><img id="img_profile" src="'+obj[i].d_img +'"></div>';
@@ -554,9 +561,18 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
             		 
             		 	 str += '</td>'
 	            		 str += '</tr>';
-	            		 $('#listDiv').append(str);
+	            		
+	            		
                       }
-                  
+	        	if(startNum < 10) {
+	        		
+	        		 $('#list').html(str);
+	        	}
+	        	else {
+	        		 $('#listDiv').append(str);
+	        	}
+	        	 str += '</table>'
+	        	
                      
             $('.deleteComment').on('click', function(){        
                 var reply_num = $(this).attr('data_num'); 
@@ -571,8 +587,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
                     	"reply_id" : reply_num
                     },
                     success : function(){
-                    	insert_commet++;
-                        init();
+                    	init();
                     },
                     error : function(error){
                         console.log(error);

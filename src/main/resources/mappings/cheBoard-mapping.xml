@@ -41,7 +41,7 @@
             SELECT G.CHEB_NUM, G.CHEB_ID, G.CHEB_NAME, G.CHEB_DNAME, G.CHEB_CONTENT, G.CHEB_DATE, S.D_IMG FROM CHEBOARD AS G 
             LEFT JOIN DONATION AS S ON G.CHEB_DNAME = S.D_NAME
              ORDER BY CHEB_NUM DESC 
-             LIMIT #{comment_step} OFFSET #{startnum}
+             LIMIT #{startnum}, #{comment_step}
         ]]>
      </select>
       
