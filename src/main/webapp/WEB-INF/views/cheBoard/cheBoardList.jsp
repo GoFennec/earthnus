@@ -209,14 +209,14 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     padding-top: 10px;
 }
 .cheboard_content {
-height: auto;
-padding: 0;
-border: 0;
-    font-size: 12px;
+	height: auto;
+	padding: 0;
+	border: 0;
     color: #666;
     line-height: 21px;
     letter-spacing: 0;
     word-break: break-all;
+    margin: 0;
 }
 .delete {
 	position: absolute;
@@ -582,8 +582,9 @@ background:#000;color:#fff;
             		str += '<tr>';
             		str += '<td class="left-info">'
  	            	str += '<div class="id_profile"><img id="img_profile" src="'+obj[i].d_img +'"></div>';
+ 	            	str +='<div id="id_date">'
 	            	 if(auth_id == obj[i].cheb_id) { 
-         				 str +='<div id="id_date"><span class="delete"><input type="button" value="삭제" class="deleteComment"  data_num="'+obj[i].cheb_num+'"/></span>';
+         				 str +='<span class="delete"><input type="button" value="삭제" class="deleteComment"  data_num="'+obj[i].cheb_num+'"/></span>';
             		 }
             		 str +='<p class="cheboard_content">'+obj[i].cheb_content+'</p>';	
             		 str += '<div id="cheboard_date">'+obj[i].cheb_date+'</div>';
