@@ -7,9 +7,11 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import kr.co.earthnus.user.cheBoard.CheBoardBean;
 import kr.co.earthnus.user.goods.ExGoodsBean;
+import kr.co.earthnus.user.member.PagingBean;
 import kr.co.earthnus.user.pay.PayBean;
 import kr.co.earthnus.util.SHA256;
 
@@ -194,6 +196,44 @@ public class MemberService {
 		return list;
 	}
 
+	
+	
+	
+/*	public PagingBean myMessageCount(String mem_id, Model model) {
+	
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		PagingBean pBean = new PagingBean();
+		int pagenum = 1;
+		int contentnum = 8;
+        int mytotal= dao.myMessageCount(mem_id);
+        pBean.setTotalcount(mytotal);
+        pBean.setPagenum(pagenum-1);   //
+        pBean.setContentnum(contentnum); // 한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
+        pBean.setCurrentblock(pagenum); // 현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
+        pBean.setLastblock(pBean.getTotalcount()); // 마지막 블록 번호를 전체 게시글 수를 통해서 정한다.
+
+        pBean.prevnext(pagenum);//현재 페이지 번호로 화살표를 나타낼지 정한다.
+        pBean.setStartPage(pBean.getCurrentblock()); // 시작 페이지를 페이지 블록번호로 정한다.
+        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
+        //마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+
+        if(contentnum == 8){//선택 게시글 수
+        	pBean.setPagenum(pBean.getPagenum()*8);
+        }
+		model.addAttribute("page", pBean);
+       return pBean;
+       
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 회원탈퇴
 	public void deleteMember(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);

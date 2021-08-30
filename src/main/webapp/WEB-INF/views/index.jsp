@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -30,6 +32,124 @@
 <link rel="stylesheet" href="resources/assets/css/slick.css">
 <link rel="stylesheet" href="resources/assets/css/nice-select.css">
 <link rel="stylesheet" href="resources/assets/css/style.css">
+
+
+<!-- CHEBOARD -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<style>
+.testimonial{
+    margin-bottom: 10px;
+}
+
+    .testimonial-section {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        position: relative;
+        border: 1px solid #fff;
+    }
+    .testimonial-section:after {
+        top: 100%;
+        left: 50px;
+        border: solid transparent;
+        content: " ";
+        position: absolute;
+        border-top-color: #fff;
+        border-width: 15px;
+        margin-left: -15px;
+    }
+
+    .testimonial-desc {
+        margin-top: 20px;
+        text-align:left;
+        padding-left: 15px;
+    }
+        .testimonial-desc img {
+            border: 1px solid #f5f5f5;
+            border-radius: 150px;
+            height: 70px;
+            padding: 3px;
+            width: 70px;
+            display:inline-block;
+            vertical-align: top;
+        }
+
+        .testimonial-writer{
+            display: inline-block;
+            vertical-align: top;
+            padding-left: 10px;
+        }
+
+            .testimonial-writer-name{
+                font-weight: bold;
+            }
+
+            .testimonial-writer-designation{
+                font-size: 85%;
+            }
+
+            .testimonial-writer-company{
+                font-size: 85%;
+            }
+    /*---- Outlined Styles ----*/
+    .testimonial.testimonial-default{
+        
+    }
+        .testimonial.testimonial-default .testimonial-section{
+            border-color: #777;
+        }
+
+            .testimonial.testimonial-default .testimonial-section:after{
+                border-top-color: #777;
+            }
+
+        .testimonial.testimonial-default .testimonial-desc{
+            
+        }
+
+            .testimonial.testimonial-default .testimonial-desc img{
+                border-color: #777;
+            }
+
+            .testimonial.testimonial-default .testimonial-writer-name{
+                color: #777;
+            }
+
+
+
+    .testimonial.testimonial-success{
+        
+    }
+        .testimonial.testimonial-success .testimonial-section{
+            border-color: #5CB85C;
+            color: #449d44;
+            background-color: rgba(92, 184, 92, 0.1);
+        }
+
+            .testimonial.testimonial-success .testimonial-section:after{
+                border-top-color: #5CB85C;
+            }
+
+        .testimonial.testimonial-success .testimonial-desc{
+            
+        }
+
+            .testimonial.testimonial-success .testimonial-desc img{
+                border-color: #5CB85C;
+            }
+
+            .testimonial.testimonial-success .testimonial-writer-name{
+                color: #5CB85C;
+            }
+
+   
+</style>
 </head>
 
 <body>
@@ -255,7 +375,7 @@
 								</h3>
 								<p>지구 온난화로 북극 기온이 상승하여 빙하가 녹고있습니다.
 								북극을 해양보호구역으로 만들어 파괴적인 어업과 석유 시추의 중단이 시급합니다.
-								빠르게 녹고있는 북극을 지켜요.<br><br><br></p>
+								빠르게 녹고있는 북극을 지켜요.<br><br></p>
 								<div class="prices">
 									<p>
 										<span>지금까지 후원금액: ${total_i}원 </span>
@@ -275,7 +395,7 @@
 				<div class="row justify-content-center">
 					<div class="col-xl-8 col-lg-9 col-md-11">
 						<div class="section-tittle text-center mb-90">
-							<h2>캠페인 소식</h2>
+							<h2>최근 캠페인 소식</h2>
 							<p>많은 사람들이 푸르른 지구와 우리의 미래를 위해 힘을 모으고 있습니다. 
 							<br>새로운 EARTH & US 캠페인 활동을 확인하시고 관심 가져 주세요!</p>
 						</div>
@@ -292,9 +412,9 @@
 								</div>
 								<div class="blog-cap">
 									<h3>
-										<a href="blog_details.html">${camBoard.CAMB_NAME} [${camBoard.CAMB_SUBJECT}]</a>
+										<a href="/camBoard/detail?CAMB_NAME=${camBoard.CAMB_NAME}&CAMB_NUM=${camBoard.CAMB_NUM}">${camBoard.CAMB_NAME} [${camBoard.CAMB_SUBJECT}]</a>
 									</h3>
-									<p>${camBoard.CAMB_CONTENT}</p>
+									
 								</div>
 							</div>
 						</div>
@@ -372,11 +492,55 @@
 
 
 
+
+
+	<div class="row justify-content-center">
+					<div class="col-xl-8 col-lg-9 col-md-11">
+						<div class="section-tittle text-center mb-90">
+							<h2>최근 응원 릴레이</h2>
+							<p>후원에 참여한 많은분들이 응원 메시지를 보내주고 있습니다. 
+							<br>함께 응원해 주세요!</p>
+						</div>
+					</div>
+				</div>
+			<div class="container" style="padding-top:30px">	
+	<div class="row">
+        <c:forEach items="${ch_list}" var="cheBoard">
+        <div class="col-sm-6">
+            <div id="tb-testimonial" class="testimonial testimonial-success">
+                <div class="testimonial-section">
+                ${cheBoard.cheb_content}
+                </div>
+                <div class="testimonial-desc">
+                    <img src="/resources/donation/ice04.png"  alt="" />
+                    <div class="testimonial-writer">
+                    	<div class="testimonial-writer-name"> ${cheBoard.cheb_id}</div>
+                    	<div class="testimonial-writer-designation" id="d_name"> ${cheBoard.cheb_dname}</div>
+                    	<a href="/cheBoard/list" class="testimonial-writer-company"> <fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${cheBoard.cheb_date}" /></a>
+                    </div>
+                </div>
+            </div>   
+		</div>
+		</c:forEach>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 		<!--? Visit Our Tailor Start -->
-		<div class="visit-tailor-area fix">
-			<!--Right Contents  -->
+	<!-- 	<div class="visit-tailor-area fix">
+			<!--Right Contents  --/>
 			<div class="tailor-offers"></div>
-			<!-- left Contents -->
+			<!-- left Contents --/>
 			<div class="tailor-details">
 				<span>Our Mission</span>
 				<h2>Our main goal is to protect animals</h2>
@@ -393,7 +557,7 @@
 					<h2>Capcilena Hanry</h2>
 				</div>
 			</div>
-		</div>
+		</div> 
 		<!-- Visit Our Tailor End -->
 
 

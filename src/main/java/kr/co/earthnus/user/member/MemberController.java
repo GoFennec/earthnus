@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.earthnus.user.auth.AuthBean;
 import kr.co.earthnus.user.cheBoard.CheBoardBean;
+import kr.co.earthnus.user.cheBoard.PageBean;
 import kr.co.earthnus.user.goods.ExGoodsBean;
+import kr.co.earthnus.user.goods.PagingBean;
 import kr.co.earthnus.user.pay.PayBean;
 import kr.co.earthnus.util.SHA256;
 
@@ -222,7 +224,20 @@ public class MemberController {
 				return "member/myMessage";
 			}
 			
+			/*@RequestMapping("/member/myMessage")
+			public String myMessageList(HttpSession session, AuthBean aBean,Model model, PagingBean pBean) {
+				
+				
+				aBean = (AuthBean) session.getAttribute("auth");
+				String mem_id = aBean.getAuth_id();
+				List<CheBoardBean> list = memberService.myMessage(mem_id);
+				memberService.myMessageCount(mem_id, model);//
+				model.addAttribute("myMessage", list);
+				
+				return "member/myMessage";
+			}*/
 			
+		
 			
 			
 			

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.co.earthnus.user.camBoard.camBoardBean;
+import kr.co.earthnus.user.cheBoard.CheBoardBean;
 
 
 @Controller
@@ -46,15 +47,15 @@ public class AuthController {
 		String total_i = service.total_i();
 		String total_p = service.total_p();
 		List<camBoardBean> list = service.cb_list();
-		//camBoardBean cbBean = service.cb_list();
+		List<CheBoardBean> ch_list = service.ch_list();
 		
 		model.addAttribute("total_pay",total_pay);
 		model.addAttribute("total_f",total_f);
 		model.addAttribute("total_o",total_o);
 		model.addAttribute("total_i",total_i);
 		model.addAttribute("total_p",total_p);
-		//model.addAttribute("cbBean",cbBean);
 		model.addAttribute("cb_list", list);
+		model.addAttribute("ch_list", ch_list);
 		return "index";
 	}
 
