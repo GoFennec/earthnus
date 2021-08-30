@@ -43,5 +43,29 @@
  		SET A.MEM_POINT = MEM_POINT + #{pay_point}, B.PAY_PSTATE = '적립완료'
  		WHERE B.PAY_NO = #{pay_no}
 	</update>
+	
+	<select id="payTotal" resultType="int">
+		select sum(pay_price) from pay
+	</select>
+	
+	<select id="payMonthly" resultType="int">
+		select sum(pay_price) from pay where DATE_FORMAT(pay_pdate,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+	</select>
+	
+	<select id="payWaiting" resultType="int">
+		select count(*) from pay where pay_pstate = '적립예정'
+	</select>
+	
+	<select id="payTotalPoint" resultType="int">
+		select sum(pay_point) from pay
+	</select>
+	
+	<select id="payPlastic" resultType="int">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경'
+	</select>
+	
+	<select id="payForest" resultType="int">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲'
+	</select>
 
 </mapper>

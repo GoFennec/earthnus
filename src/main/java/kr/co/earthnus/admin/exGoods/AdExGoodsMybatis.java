@@ -18,4 +18,9 @@ public interface AdExGoodsMybatis {
 	public void updateDeliveryOk(ExGoodsBean eBean);
 	public void cancleExGoods(ExGoodsBean eBean);
 	public void updatePoint(ExGoodsBean eBean);
+	
+	public int countMonthly();
+	public int countTotal();
+	public int countWaiting();
+	public List<ExGoodsBean> countLanking();
 }
