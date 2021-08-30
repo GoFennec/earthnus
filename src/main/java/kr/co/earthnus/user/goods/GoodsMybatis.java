@@ -13,8 +13,8 @@ public interface GoodsMybatis {
 	public GoodsBean getGoods(GoodsBean gBean);
 	public MemberBean getMember(AuthBean abean);
 	public int insertExGoods(ExGoodsBean eBean);
-	public int newExGoods(ExGoodsBean eBean);
+	public String newExGoods(ExGoodsBean eBean);
 	public int updatePoint(ExGoodsBean eBean);
 	public MemberBean exMemberPoint(ExGoodsBean eBean);
-	public ExGoodsBean getExGoods(int exNum);
+	public ExGoodsBean getExGoods(String exNum);
 }

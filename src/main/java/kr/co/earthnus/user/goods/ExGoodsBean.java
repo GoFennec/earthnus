@@ -3,7 +3,8 @@ package kr.co.earthnus.user.goods;
 import java.util.Date;
 
 public class ExGoodsBean {
-	private int exg_num;
+	private String exg_num;
+	private String exg_realnum;
 	private String exg_id;
 	private String exg_name;
 	private String exg_addr;
@@ -20,11 +21,17 @@ public class ExGoodsBean {
 	private Date exg_cdate;
 	private String exg_cancle;
 	
-	public int getExg_num() {
+	public String getExg_num() {
 		return exg_num;
 	}
-	public void setExg_num(int exg_num) {
+	public void setExg_num(String exg_num) {
 		this.exg_num = exg_num;
+	}
+	public String getExg_realnum() {
+		return exg_realnum;
+	}
+	public void setExg_realnum(String exg_realnum) {
+		this.exg_realnum = exg_realnum;
 	}
 	public String getExg_id() {
 		return exg_id;

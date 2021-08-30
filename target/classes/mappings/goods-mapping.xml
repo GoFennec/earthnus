@@ -84,12 +84,13 @@
 	
 	<insert id="insertExGoods">
 		<![CDATA[
-			INSERT INTO EXGOODS (EXG_ID,EXG_NAME,EXG_ADDR,EXG_MESSAGE,EXG_GNUM,EXG_GNAME,EXG_POINT,EXG_IMG) 
-			VALUES (#{exg_id},#{exg_name},#{exg_addr},#{exg_message},#{exg_gnum},#{exg_gname},#{exg_point},#{exg_img})
+			INSERT INTO EXGOODS (EXG_NUM,EXG_ID,EXG_NAME,EXG_ADDR,EXG_MESSAGE,EXG_GNUM,EXG_GNAME,EXG_POINT,EXG_IMG) 
+			VALUES (CONCAT(DATE_FORMAT(NOW(),'%Y%m%d%H%i%s'),LEFT(#{exg_id},4)),
+			#{exg_id},#{exg_name},#{exg_addr},#{exg_message},#{exg_gnum},#{exg_gname},#{exg_point},#{exg_img})
 		]]>
 	</insert>
 	
-	<select id="newExGoods" resultType="int">
+	<select id="newExGoods" resultType="string">
 		<![CDATA[
 			SELECT EXG_NUM FROM EXGOODS WHERE EXG_ID=#{exg_id} ORDER BY EXG_PDATE DESC LIMIT 1
 		]]>
