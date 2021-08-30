@@ -38,6 +38,12 @@ div #search-box{ text-align: right;}
 	border-right: none;
 }
 
+#search-box #cancelButton{
+	background-color: #388E3C;
+	color: white;
+	border: none;
+}
+
 table{ float: right; width: 50px;}
 
 .skill{
@@ -152,17 +158,27 @@ svg{
 <br><br><br><br>
 
 <div class="container">
-	<div id="selectView">
-		<a id="entire" onclick="select('${page.search}', 'entire')">전체보기</a>
-		<a id="doing" onclick="select('${page.search}', 'doing')">진행중인 캠페인</a>
-		<a id="end" onclick="select('${page.search}', 'end')">종료된 캠페인</a>
+	<div class="container">
+		<div class="row ">
+			<div class = "col-md-6 col-12" id="selectView">
+				<a id="entire" onclick="select('${page.search}', 'entire')">전체보기</a>
+				<a id="doing" onclick="select('${page.search}', 'doing')">진행중인 캠페인</a>
+				<a id="end" onclick="select('${page.search}', 'end')">종료된 캠페인</a>
+			</div>
+			<div class= "col-md-2 col-6" style="float: right">
+				<select>
+					<option selected="selected">전체</option>
+					<option>제목</option>
+					<option>내용</option>
+				</select>
+			</div>
+			<div class= "col-md-4 col-6" id="search-box">
+				<input type="text" id="search" name="search" placeholder="검색 . . ." value="${page.search}">
+				<a onclick="searchCamBoard()"><i class="fas fa-search"></i></a>
+			</div>
+		</div>
 	</div>
-	
-	<div id="search-box">
-		<input type="text" id="search" name="search" placeholder="검색 . . ." value="${page.search}">
-		<a onclick="searchCamBoard()"><i class="fas fa-search"></i></a>
-	</div>
-	
+</div>
 	<hr>
 <% int a = 1; %>
 <div id="camBoardListDiv">
@@ -217,6 +233,7 @@ svg{
 			rate = "종료";
 		}
 		number<%=a%>.innerHTML = rate;			
+		
 		
 		function dateCheck(num, CAMB_ABLEDATE, CAMB_STARTDATE, CAMB_FINDATE){
 			var number = num;
@@ -295,6 +312,14 @@ svg{
 	<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
 <script type="text/javascript">
+	window.onload = function(){
+		if("${page.search}"){
+			var cancelButton = '<input type="button" id="cancelButton" onclick="setAll()" value="취소">';
+			$("#search-box").append(cancelButton);
+		}else if(!"${page.search}"){
+		}
+	}
+
 	var pathname = window.location.pathname;
 	var subquery = window.location.search;
 	var query = subquery.slice(subquery.lastIndexOf("?")+1);
@@ -342,6 +367,10 @@ svg{
 		}else{
 			location.href="/camBoard/detail" + subquery +"&CAMB_NAME=" + name + "&CAMB_NUM=" + num;
 		}
+	}
+	
+	function setAll(){
+		location.href="/camBoard/list";
 	}
 </script>
 </body>

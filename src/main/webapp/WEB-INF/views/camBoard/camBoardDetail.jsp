@@ -139,19 +139,16 @@
 	<br><br><br><br>
 	<div class="main col-sm-12 col-lg-12">
 		<table class="mainlist goodsTable" id="detail" style="border-collapse: separate;">
-			
 			<tr>
 				<td colspan = "4">
 					<img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/>
 				</td>
 			</tr>
-			
-			
 			<tr>
 				<td colspan = "3" style="text-align: left; color: black; font-size: 45px;"><b>${camBoard.CAMB_NAME}</b></td>
-				<td style="text-align: right; color: gray; font-size: 10px;">
-				시작일 : <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${camBoard.CAMB_STARTDATE}" /><br>
-				종료일 : <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${camBoard.CAMB_FINDATE}" />
+				<td style="text-align: right; color: gray; font-size: 20px;">
+				시작일 : <fmt:formatDate pattern="MM월 dd일" value="${camBoard.CAMB_STARTDATE}" /><br>
+				종료일 : <fmt:formatDate pattern="MM월 dd일" value="${camBoard.CAMB_FINDATE}" />
 				</td>
 			</tr>
 			<tr>
@@ -160,13 +157,14 @@
 					<hr>
 				</td>
 			</tr>
-			
 			<tr style="text-align: left;">
 				<td colspan="4" style=" border-bottom: 1px solid #ccc;">${camBoard.CAMB_CONTENT}</td>
 			</tr>
 			<tr>
 				<td colspan="4" class="sysBtn" style="text-align: center;">
-					<input type="button" class="btn-dark" value="목록" onclick="camBoardlist()"/>	
+					<div class="header-right-btn d-none d-lg-block ml-20">
+						<a class="btn header-btn" onclick="camBoardlist()" style="color: white;">목록</a>
+					</div>
 				</td>
 			</tr>
 			<tr>
