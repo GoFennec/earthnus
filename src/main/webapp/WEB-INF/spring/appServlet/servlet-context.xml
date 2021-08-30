@@ -34,10 +34,12 @@
 			<mapping path="/member/my**" />
 			<mapping path="/pay/**" />
 			<exclude-mapping path="/auth/login" />
+			
 			<beans:bean id="twoInter" class="kr.co.earthnus.interceptor.Interceptor" />
 		</interceptor>
 		<interceptor>
 			<mapping path="/ad**" />
+			<mapping path="/ad**/**" />
 			<exclude-mapping path="/auth/adLogin" />
 			<beans:bean id="oneInter" class="kr.co.earthnus.interceptor.adInterceptor" />
 		</interceptor>
