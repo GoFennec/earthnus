@@ -15,7 +15,7 @@ public class AdExGoodsService {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
-	public void getAdExGoodsList(String pagenum, String contentnum, String category,Model model) {
+	public void getAdExGoodsList(String pagenum, String contentnum, String category, Model model) {
 		AdExGoodsMybatis exGoodsDAO = mybatis.getMapper(AdExGoodsMybatis.class);
 		
 		PagingBean pBean = new PagingBean();
@@ -50,17 +50,33 @@ public class AdExGoodsService {
             	exGoodsList = exGoodsDAO.getAdExGoodsDeliveryList(pBean);
             } else if (category.equals("Approve")) {
             	exGoodsList = exGoodsDAO.getAdExGoodsApproveList(pBean);
+            	for(int i = 0; i < exGoodsList.size(); i++) {
+            		String exgstate = exGoodsList.get(i).getExg_state();
+            		if (exgstate.equals("결제완료")) {
+            			exGoodsList.get(i).setExg_state("배송대기");
+            		}
+            	}
             } else if (category.equals("Cancle")) {
             	exGoodsList = exGoodsDAO.getAdExGoodsCancleList(pBean);
             }
+        	for(int i = 0; i < exGoodsList.size(); i++) {
+        		if (category.equals("Order")) {
+        			exGoodsList.get(i).setExg_realnum(exGoodsList.get(i).getExg_num());
+        		}
+        		String exgnum = exGoodsList.get(i).getExg_num();
+        		exGoodsList.get(i).setExg_num(exgnum.substring(0, exgnum.length()-4));   
+        	}
         }
+        
 		model.addAttribute("exGoodsList", exGoodsList);
         model.addAttribute("page", pBean);
 	}
 	
-	public ExGoodsBean getExGoods(int exGoodsNum) {
+	public ExGoodsBean getExGoods(String exGoodsNum) {
 		AdExGoodsMybatis exGoodsDAO = mybatis.getMapper(AdExGoodsMybatis.class);
-		return exGoodsDAO.getExGoods(exGoodsNum);
+		ExGoodsBean exGoodsBean = exGoodsDAO.getExGoods(exGoodsNum);
+		exGoodsBean.setExg_realnum(exGoodsNum);
+		return exGoodsBean;
 	}
 	
 	public void updateDeliveryOk(ExGoodsBean eBean) {

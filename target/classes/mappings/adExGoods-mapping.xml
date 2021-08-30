@@ -71,7 +71,7 @@
 		]]>
 	</select>
 	
-	<select id="getExGoods" resultType="exGoods" parameterType="int">
+	<select id="getExGoods" resultType="exGoods" parameterType="string">
 		<![CDATA[
 			SELECT * FROM EXGOODS WHERE EXG_NUM=#{exGoodsNumU}
 		]]>
