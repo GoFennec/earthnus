@@ -56,7 +56,7 @@ i {cursor: pointer;  margin-right: 10px; color: #388E3C;}
       <div class="container">
           <div class="row">
            <c:forEach items="${CamBoardList}" var="list" begin="0" end="3">        
-              <div class="col-md-6 col-12">
+              <div class="col-md-4 col-6">
                    <article class="blog_item">
                        <div class="blog_item_img">
                          <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="" height="250px;">
