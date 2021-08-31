@@ -665,12 +665,12 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${myMessage}" var="message">
+                <c:forEach items="${myMessage}" var="cheBoard">
                   <tr>
-                    <td class="text-truncate">${message.cheb_num}</td>
-                    <td class="text-truncate">${message.cheb_dname}</td>
-                    <td class="text-truncate">${message.cheb_content}</td>
-                    <td class="text-truncate"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${message.cheb_date}"/></td>
+                    <td class="text-truncate">${cheBoard.cheb_num}</td>
+                    <td class="text-truncate">${cheBoard.cheb_dname}</td>
+                    <td class="text-truncate">${cheBoard.cheb_content}</td>
+                    <td class="text-truncate">${cheBoard.cheb_date}</td>
          		 </tr>
          		 </c:forEach>
                 </tbody>

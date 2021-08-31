@@ -9,6 +9,7 @@ import kr.co.earthnus.user.member.MemberBean;
 public interface AuthMybatis {
 	public MemberBean selectById(String auth_id);
 	public String total_pay();
+	public String endCam();
 	public String total_f();
 	public String total_o();
 	public String total_i();

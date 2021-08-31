@@ -28,21 +28,17 @@ public class AuthService {
         //SHA256으로 암호화된 비밀번호
         String cryptogram = sha256.encrypt(password);
 
-        System.out.println(cryptogram);
 
         auth_pw = cryptogram;
         //비밀번호 일치 여부
-        System.out.println(cryptogram.equals(sha256.encrypt(password)) + " 암호화 한 비밀번호");
 
         MemberBean mBean = dao.selectById(auth_id);
 		if (mBean == null) {
 			aBean = null;
 		} else {
-			System.out.println(mBean.getMem_pw() + " 디비에 있는 비밀번호");
 			if (mBean.getMem_pw().equals(auth_pw) && mBean.getMem_id().equals(auth_id)) {
 				aBean.setAuth_id(mBean.getMem_id());
 				aBean.setAuth_name(mBean.getMem_name());
-				System.out.println(aBean.getAuth_id() + " 서비스");
 			} else {
 				aBean = null;
 			}
@@ -52,11 +48,9 @@ public class AuthService {
 	}
 	
 	public AuthBean kakaoLogin(String auth_id) {
-		System.out.println("서비스 auth_id" + auth_id);
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
 		AuthBean aBean = new AuthBean();
 		MemberBean mBean = dao.selectById(auth_id);
-			System.out.println("abean? " + aBean);
 			if (mBean == null) {
 				aBean = null;
 			} else {	
@@ -66,11 +60,9 @@ public class AuthService {
 }
 	
 	public AuthBean naverLogin(String auth_id) {
-		System.out.println("naver 서비스 auth_id" + auth_id);
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
 		AuthBean aBean = new AuthBean();
 		MemberBean mBean = dao.selectById(auth_id);
-			System.out.println("abean? " + aBean);
 			if (mBean == null) {
 				aBean = null;
 			} else {	
@@ -83,6 +75,12 @@ public class AuthService {
 		String total_pay = dao.total_pay();
 		return total_pay;
 	}
+	public String endCam() {
+		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
+		String endCam = dao.endCam();
+		return endCam;
+	}
+	
 	public String total_f() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
 		String total_f = dao.total_f();

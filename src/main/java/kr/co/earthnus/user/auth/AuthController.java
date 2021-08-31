@@ -42,6 +42,7 @@ public class AuthController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 		String total_pay = service.total_pay();
+		String endCam = service.endCam();
 		String total_f = service.total_f();
 		String total_o = service.total_o();
 		String total_i = service.total_i();
@@ -50,6 +51,7 @@ public class AuthController {
 		List<CheBoardBean> ch_list = service.ch_list();
 		
 		model.addAttribute("total_pay",total_pay);
+		model.addAttribute("endCam",endCam);
 		model.addAttribute("total_f",total_f);
 		model.addAttribute("total_o",total_o);
 		model.addAttribute("total_i",total_i);
@@ -71,14 +73,10 @@ public class AuthController {
 		@RequestMapping(value = "/auth/callback", method = RequestMethod.GET)
 		public String callback(Model model, @RequestParam String code, @RequestParam String state, 
 				HttpSession session, AuthBean aBean) throws IOException, ParseException{
-			System.out.println("여기는 callback session : " + session);
-			System.out.println("여기는 callback state : " + state);
-			System.out.println("여기는 callback code : " + code);
 			
 			OAuth2AccessToken oauthToken;
 			
 	        oauthToken = naverLoginBO.getAccessToken(session, code, state);
-	        System.out.println("oauthToken쪽 : " + oauthToken);
 	        //1. 로그인 사용자 정보를 읽어온다.
 			apiResult = naverLoginBO.getUserProfile(oauthToken);  //String형식의 json데이터
 			
@@ -103,7 +101,6 @@ public class AuthController {
 			String mem_birth = birthyear + '-' + birthday;
 			
 			mobile = mobile.replace("-","");
-			System.out.println(mobile);
 			if(response_obj.get("id") != null) {
 			//4.파싱 닉네임 세션으로 저장
 			session.setAttribute("mem_id",id); //세션 생성
@@ -124,7 +121,6 @@ public class AuthController {
 			
 			model.addAttribute("result", apiResult);
 			String auth_id = (String) session.getAttribute("mem_id");
-			System.out.println("id test" + auth_id);
 			aBean = service.naverLogin(auth_id);
 			model.addAttribute("aBean", aBean);
 			
@@ -142,7 +138,6 @@ public class AuthController {
 		//로그아웃
 		@RequestMapping(value = "/naverLogout")
 		public String naverLogout(HttpSession session)throws IOException {
-				System.out.println("여기는 logout");
 				session.removeAttribute(apiResult);
 				session.invalidate();
 
@@ -157,16 +152,12 @@ public class AuthController {
 	public String loginch(@RequestParam("auth_pw") String auth_pw, AuthBean aBean, HttpSession session, Model model)
 			throws NoSuchAlgorithmException {
 		model.addAttribute("id", aBean.getAuth_id());
-		System.out.println(auth_pw);
 		aBean = service.login(aBean.getAuth_id(), auth_pw);
 		if (aBean != null) {
 			session.setAttribute("auth", aBean);
-			System.out.println("로그인쪽 세션" + session);
 			 String redirectUrl = (String) session.getAttribute("url_prior_login");
-			 System.out.println(redirectUrl);
 			 if(redirectUrl != null) {
 				 String str = redirectUrl.substring(21);
-				 System.out.println(str);
 				 if(str.equals("/goods/list")) {
 					 return "redirect:" + str;
 				 }else if(str.contains("donation")) {
@@ -201,13 +192,9 @@ public class AuthController {
 	@RequestMapping(value = "/kakaoLogin")
 	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, Model model, AuthBean aBean) {
 
-		System.out.println("code : " + code);
 		String access_Token = kakao.getAccessToken(code);
-		System.out.println("controller access_token : " + access_Token);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-		System.out.println("login Controller : " + userInfo);
 		if (userInfo.get("email") != null) {
-			System.out.println("email not null");
 			session.setAttribute("auth_id", userInfo.get("email"));
 			session.setAttribute("auth_name", userInfo.get("nickname"));
 			session.setAttribute("mem_email", userInfo.get("email"));
@@ -215,7 +202,6 @@ public class AuthController {
 			
 			String auth_id = (String) session.getAttribute("auth_id");
 			
-			System.out.println("어쓰아이디" + auth_id);
 			if (userInfo.get("gender").toString().equals("male")) {
 				session.setAttribute("mem_gender", "male");
 			} else if (userInfo.get("gender").toString().equals("female")) {

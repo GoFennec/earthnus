@@ -82,8 +82,11 @@
 	<select id="myDonation_p" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('작은 얼음','큰 얼음','빙하 조각','북극곰')
 	</select>
-	<select id="myPay"  parameterType="String" resultType="pay">
-	SELECT PAY_DNAME, PAY_PRICE, PAY_PDATE, PAY_STATE, PAY_COMMENT FROM PAY WHERE PAY_ID=#{mem_id} ORDER BY PAY_PDATE DESC
+	<select id="myPay" resultType="pay">
+	SELECT PAY_DNAME, PAY_PRICE, PAY_PDATE, PAY_STATE, PAY_COMMENT FROM PAY WHERE PAY_ID=#{mem_id} ORDER BY PAY_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}    
+	</select>
+	<select id="myPayCount" parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM PAY WHERE PAY_ID=#{mem_id}
 	</select>
 
 	<select id="pwCheck" parameterType="String" resultType="String">
@@ -102,9 +105,6 @@
 		MEM_BIRTH=#{mem_birth}
 		WHERE MEM_ID=#{mem_id}
 	</update>
-	
-
-	
 		<update id="updatePw" parameterType="hashmap">
 		UPDATE MEMBER SET
 		MEM_PW=#{mem_pw}
@@ -117,17 +117,21 @@
 		WHERE MEM_ID=#{mem_id}
 	</update>
 
-<select id="myOrder"  parameterType="String" resultType="exGoods">
-	SELECT * FROM EXGOODS WHERE EXG_ID=#{mem_id} ORDER BY EXG_PDATE DESC  
+<select id="myOrder"  resultType="exGoods">
+	SELECT * FROM EXGOODS WHERE EXG_ID=#{mem_id} ORDER BY EXG_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}   
+	</select>
+	<select id="myOrderCount"  parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM EXGOODS WHERE EXG_ID=#{mem_id} 
 	</select>
 	
 	
-<select id="myMessage"  parameterType="String" resultType="cheBoard">
-	SELECT CHEB_NUM, CHEB_DNAME, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id} ORDER BY CHEB_DATE DESC
+	<select id="myMessage"  resultType="cheBoard">
+	SELECT CHEB_NUM, CHEB_DNAME, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id} ORDER BY CHEB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
 	</select>
 	<select id="myMessageCount"  parameterType="String" resultType="int">
 	SELECT COUNT(*) FROM CHEBOARD WHERE CHEB_ID=#{mem_id}
 	</select>
+
 
 	<update id="deleteMember" parameterType="member">UPDATE MEMBER SET
 		MEM_PW="NOTAMEMBER", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원",
