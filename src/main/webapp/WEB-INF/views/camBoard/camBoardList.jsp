@@ -32,7 +32,7 @@ i {cursor: pointer;  margin-right: 10px; color: #388E3C;}
 
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<br><br>
+<br><br><br><br>
 
 <div class="container">
    <div id="selectView">
@@ -55,7 +55,7 @@ i {cursor: pointer;  margin-right: 10px; color: #388E3C;}
    <section class="blog_area">
       <div class="container">
           <div class="row">
-           <c:forEach items="${CamBoardList}" var="list" begin="0" end="3">        
+           <c:forEach items="${CamBoardList}" var="list" begin="0" end="5">        
               <div class="col-md-4 col-6">
                    <article class="blog_item">
                        <div class="blog_item_img">
