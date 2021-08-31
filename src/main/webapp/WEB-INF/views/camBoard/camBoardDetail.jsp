@@ -1,228 +1,116 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%
-	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<style>
-	table {max-width: 90%; margin:auto; border-collapse: collapse; text-align: left; line-height: 1.5;}
-	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #086121; border-bottom: 3px solid #0ed145;}
-	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
-	.list:hover {background-color: #FFFFDE; cursor: pointer;}
-	td {width: 350px; padding: 10px; vertical-align: center;}
-	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
-	.exButton{text-align: center;}
-	input {border: none;}
-	textarea {border: none; width: 100%; height: auto; overflow:visible;}
-	#subject:hover {color: #2962FF; }
-	.main{margin-right: 30px;}
-	.paging {text-align: center;}
-	.facebook:hover, .twitter:hover, .naverblog:hover, .kakaotalk:hover, .clipboard:hover {transform: scale( 1.2 )}
-	
-	li{
-	margin-right: 10px;
-	}
-	i {
-		border-radius: 80px;
-	    opacity: 0;
-	    font-size: 28px;
-	    color: #31b528;
-	    will-change: transform;
-	    -webkit-transform: scale(.1);
-	            transform: scale(.1);
-	    -webkit-transition: all .3s ease;
-	    transition: all .3s ease;
-	}
-	.btn_wrap {
-	    position: relative;
-	    display: -webkit-box;
-	    display: -ms-flexbox;
-	    display: flex;
-	    -webkit-box-pack: center;
-	        -ms-flex-pack: center;
-	            justify-content: center;
-	    -webkit-box-align: center;
-	        -ms-flex-align: center;
-	            align-items: center;
-	    overflow: hidden;
-	    cursor: pointer;
-	    width: 180px;
-	    height: 60px;
-	    background-color: #EEEEED;   // ³»ºÎ»ö
-	    border-radius: 80px;
-	    padding: 0 18px;
-	    will-change: transform;
-	    -webkit-transition: all .2s ease-in-out;
-	    transition: all .2s ease-in-out;
-	}
-	.btn_wrap:hover {
-	    /* transition-delay: .4s; */
-	    -webkit-transform: scale(1);
-	            transform: scale(1)
-	}
-	
-	.shareButton {
-	    position: absolute;
-	    z-index: 99;
-	    width: 180px;
-	    height: 60px;
-	    border-radius: 80px;
-	    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	    font-size: 20px;
-	    text-align: center;
-	    line-height: 70px;
-	    letter-spacing: 2px;
-	    color: #EEEEED;				
-	    background-color: #35c718;	
-	    padding: 0 18px;
-	    -webkit-transition: all 1.2s ease;
-	    transition: all 1.2s ease;
-	}
-	
-	.container {
-	    display: -webkit-box;
-	    display: -ms-flexbox;
-	    display: flex;
-	    -ms-flex-pack: distribute;
-	        justify-content: space-around;
-	    -webkit-box-align: center;
-	        -ms-flex-align: center;
-	            align-items: center;
-	    width: 180x;
-	    height: 60px;
-	    border-radius: 80px;
-	}
-	
-	.container i:nth-of-type(1) {-webkit-transition-delay: 1.1s; transition-delay: 1.1s;}
-	
-	.container i:nth-of-type(2) {-webkit-transition-delay: .9s; transition-delay: .9s;}
-	
-	.container i:nth-of-type(3) {-webkit-transition-delay: .7s; transition-delay: .7s;}
-	
-	.container i:nth-of-type(4) {-webkit-transition-delay: .4s; transition-delay: .4s;}
-	
-	.btn_wrap:hover .shareButton {
-	    -webkit-transition-delay: .25s;
-	            transition-delay: .25s;
-	    -webkit-transform: translateX(-280px);
-	            transform: translateX(-280px)
-	}	
-	
-	.btn_wrap:hover i {opacity: 1; -webkit-transform: scale(1); transform: scale(1);}
-	
-	.dr {position: absolute; bottom: 16px; right: 16px; width:100px;}
-	
-	.link-icon { position: relative; display: inline-block; width: auto;    font-size: 14px; font-weight: 500; color: #333; margin-right: 10px; padding-top: 50px; }
-	.link-icon.twitter { background-image: url(./images/icon-twitter.png); background-repeat: no-repeat; }
-	.link-icon.facebook { background-image: url(./images/icon-facebook.png); background-repeat: no-repeat; } 
-	.link-icon.kakao { background-image: url(./images/icon-kakao.png); background-repeat: no-repeat; }
-</style>
-<title>${camBoard.CAMB_NAME}¿¡ ´ëÇÏ¿©..</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="/resources/assets/img/favicon.ico">
-<link rel="icon" href="/resources/assets/img/favicon.ico">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
+<style>
+#preBoard {cursor: pointer;}
+#nextBoard {cursor: pointer;}
+</style>
+
+<title>EARTH & US</title>
 </head>
+
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"/>	
-	<br><br><br><br>
-	<div class="main col-sm-12 col-lg-12">
-		<table class="mainlist goodsTable" id="detail" style="border-collapse: separate;">
-			<tr>
-				<td colspan = "4">
-					<img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="Ä·ÆäÀÎ" title="${camBoard.CAMB_SUBJECT}"/>
-				</td>
-			</tr>
-			<tr>
-				<td colspan = "3" style="text-align: left; color: black; font-size: 45px;"><b>${camBoard.CAMB_NAME}</b></td>
-				<td style="text-align: right; color: gray; font-size: 20px;">
-				½ÃÀÛÀÏ : <fmt:formatDate pattern="MM¿ù ddÀÏ" value="${camBoard.CAMB_STARTDATE}" /><br>
-				Á¾·áÀÏ : <fmt:formatDate pattern="MM¿ù ddÀÏ" value="${camBoard.CAMB_FINDATE}" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan = "4" id="subject_icon">
-					<a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT">${camBoard.CAMB_SUBJECT}</a>
-					<hr>
-				</td>
-			</tr>
-			<tr style="text-align: left;">
-				<td colspan="4" style=" border-bottom: 1px solid #ccc;">${camBoard.CAMB_CONTENT}</td>
-			</tr>
-			<tr>
-				<td colspan="4" class="sysBtn" style="text-align: center;">
-					<div class="header-right-btn d-none d-lg-block ml-20">
-						<a class="btn header-btn" onclick="camBoardlist()" style="color: white;">¸ñ·Ï</a>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan = "4">
-					<div class="navigation-top">
-					   <div class="d-sm-flex justify-content-between text-center" style="margin-bottom: 30px;">
-					    <div class="col-sm-4 text-center my-2 my-sm-0">
-					     <span class="align-middle" onclick="donate()"><i class="fas fa-donate" style="margin-right: 15px"></i>ÈÄ¿øÇÏ±â</span>
-					   </div>
-					   <ul class="social-icons" style="float: left">
-					     <li style="float: left"><a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
-			        			<img src="/resources/camBoard/facebook.png" alt="ÆäÀÌ½ººÏ °øÀ¯" class="facebook" width="25px">
-			        		</a></li>
-					     <li style="float: left"><img src="/resources/camBoard/twitter.png" alt="Æ®À§ÅÍ °øÀ¯" width="25px" class="twitter" onclick="shareTwitter()"></li>
-					     <li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="³×ÀÌ¹öºí·Î±× °øÀ¯" width="25px" class="naverblog" onclick="shareNaverBlog()"></li>
-					     <li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="Ä«Ä«¿ÀÅå °øÀ¯" width="25px" class="kakaotalk" onclick="shareKakaotalk()"></li>
-					   	<li style="float: left;"><i class="clipboard fas fa-copy" style="font-size: 24px" onclick="shareURL()"></i></li>
-					   </ul>
-					 </div>
-					 <div class="navigation-area">
-					  <div class="row"  style="text-align: center;">
-					   <div id="preBoard"
-					   class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center"
-					   onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
-					   <div class="thumb">
-					      <img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="" width="150px">
-					  </div>
-					  <div class="arrow">
-					    <span class="lnr text-white ti-arrow-left"></span>
-					</div>
-					<div class="detials">
-					 <p>ÀÌÀü Ä·ÆäÀÎ</p>
-					  <h4 style="color: #2d2d2d;">${preBoard.CAMB_NAME}</h4>
-					</div>
-					</div>
-					<div id="nextBoard"
-					class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center"
-					onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}', 'next')">
-					<div class="detials">
-					 <p>´ÙÀ½ Ä·ÆäÀÎ</p>
-					  <h4 style="color: #2d2d2d;">${nextBoard.CAMB_NAME}</h4>
-					</div>
-					<div class="arrow">
-					  <span class="lnr text-white ti-arrow-right"></span>
-					</div>
-					<div class="thumb">
-					  <img class="img-fluid" src="${nextBoard.CAMB_FILE}" alt="" width="150px">
-					</div>
-					</div>
-					</div>
-					</div>
-					</div>
-				</td>
-			</tr>
-		</table>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
+
+<main>
+  <section class="blog_area single-post-area section-padding">
+   <div class="container">
+    <div class="row">
+     <div class="col-12 posts-list">
+      <div class="single-post">
+       <div class="feature-img">
+        <img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="ìº í˜ì¸" title="${camBoard.CAMB_SUBJECT}"/>
+      </div>
+      <div class="blog_details">
+        <h2 style="color: #2d2d2d;">${camBoard.CAMB_NAME}</h2>
+		<div id="subject_icon">
+			<span style="display: inline-block;">
+			<p><a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT">${camBoard.CAMB_SUBJECT}&nbsp;&nbsp;</a>
+			|&nbsp;&nbsp;ì§„í–‰ ê¸°ê°„ <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_STARTDATE}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_FINDATE}"/></p>
+			</span>
+		</div>
+		<hr><br>
+		<div>
+		<p class="excert">
+		${camBoard.CAMB_CONTENT}
+		</p>
+		</div>
+      </div>
+  	  </div>
+ 	 </div><br><br>
+ 	 
+	 <div class="navigation-top col-12">
+	    <div class="d-sm-flex justify-content-between" style="margin: 30px;">
+	     <div>
+	     <ul class="social-icons">
+	     	<li style="float: left"><p style="font-size: 0.8em;">SNSê³µìœ í•˜ê¸°&nbsp;&nbsp;</p></li>
+		    <li style="float: left"><a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
+		 		<img src="/resources/camBoard/facebook.png" alt="í˜ì´ìŠ¤ë¶ ê³µìœ " class="facebook" width="25px"></a></li>
+			<li style="float: left"><img src="/resources/camBoard/twitter.png" alt="íŠ¸ìœ„í„° ê³µìœ " width="25px" class="twitter" onclick="shareTwitter()"></li>
+		 	<li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="ë„¤ì´ë²„ë¸”ë¡œê·¸ ê³µìœ " width="25px" class="naverblog" onclick="shareNaverBlog()"></li>
+			<li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="ì¹´ì¹´ì˜¤í†¡ ê³µìœ " width="25px" class="kakaotalk" onclick="shareKakaotalk()"></li>
+			<li style="float: left;"><i class="clipboard fas fa-copy" style="font-size: 24px" onclick="shareURL()"></i></li>
+	     </ul>
+	     </div>
+	     <div>
+		   	<button type="button" class="btn btn-primary" onclick="donate()">í›„ì› ë°”ë¡œê°€ê¸°</button>
+		 </div>
+	    </div>
+	   
+		<div class="navigation-area">
+		  <div class="row">
+		   <div id="preBoard" class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center"
+		   		onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
+		   <div class="thumb">
+				<img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="" width="150px">
+			</div>
+					  
+		   <div class="arrow">
+		        <span class="lnr text-white ti-arrow-left"></span>
+		   </div>
+		
+   		   <div class="detials">
+		  		<p>ì´ì „</p>
+				<p style="font-size: 0.8em;">${preBoard.CAMB_NAME}</p>
+		   </div>
+		   </div>
+
+		  <div class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+		  	<a class="btn header-btn" onclick="camBoardlist()" style="color: white;">ëª©ë¡ìœ¼ë¡œ</a>
+		  </div>
+		
+			<div id="nextBoard" class="col-lg-4 col-md-4 col-12 nav-right flex-row d-flex justify-content-end align-items-center"
+				 onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}', 'next')">
+			<div class="detials">
+			 	<p>ë‹¤ìŒ</p>
+			 	<p style="font-size: 0.8em;">${nextBoard.CAMB_NAME}</p>
+			</div>
+			
+			   <div class="arrow">
+			   		<span class="lnr text-white ti-arrow-right"></span>
+			   </div>
+			   <div class="thumb">
+			  		<img class="img-fluid" src="${nextBoard.CAMB_FILE}"  alt="" width="150px">
+			   </div>
+		    </div>
+		  </div>
+		</div>
+	  </div>
+
 	</div>
-	<div>	
-	</div>
+  </div>
+</section>
+</main>
+
+
+
 <script type='text/javascript'>
 	var pathname = window.location.pathname;
 	var subquery = window.location.search;
@@ -230,37 +118,34 @@
 	substring = "pagenum";
 	var URL = "";
 	var num = 0;
-	var pagenum = 0;				// ÇöÀç Ä·ÆäÀÎÀÌ À§Ä¡ÇÑ ½ÇÁ¦ ÆäÀÌÁö
+	var pagenum = 0;				// í˜„ì¬ ìº í˜ì¸ì´ ìœ„ì¹˜í•œ ì‹¤ì œ í˜ì´ì§€
 	
 	window.onload = function(){
-		
 		num = ${index}/6;
 		pagenum = Math.ceil(num);
 		
 		var subjecthtml = '';
-		if("${camBoard.CAMB_SUBJECT}" === "ÇØ¾ç"){
+		if("${camBoard.CAMB_SUBJECT}" === "í•´ì–‘"){
 			subjecthtml += '<i class="fas fa-fish"></i>';
 			$('#subject_icon').prepend(subjecthtml);
-		} else if("${camBoard.CAMB_SUBJECT}" === "ÇÃ¶ó½ºÆ½"){
+		}else if("${camBoard.CAMB_SUBJECT}" === "í”Œë¼ìŠ¤í‹±"){
 			subjecthtml += '<i class="fas fa-recycle"></i>';
 			$('#subject_icon').prepend(subjecthtml);
-		}else if("${camBoard.CAMB_SUBJECT}" === "»ê¸²"){
+		}else if("${camBoard.CAMB_SUBJECT}" === "ì‚°ë¦¼"){
 			subjecthtml += '<i class="fas fa-tree"></i>';
 			$('#subject_icon').prepend(subjecthtml);
-		}else if("${camBoard.CAMB_SUBJECT}" === "±ØÁö¹æ"){
+		}else if("${camBoard.CAMB_SUBJECT}" === "ê·¹ì§€ë°©"){
 			subjecthtml += '<i class="fas fa-icicles"></i>';
 			$('#subject_icon').prepend(subjecthtml);
 		}
-		
 		if(!'${preBoard.CAMB_NUM}'){
-			$('#preBoard').html('<div>ÀÌÀü Ä·ÆäÀÎÀÌ ¾ø½À´Ï´Ù.</div>');
+			$('#preBoard').html('<div>ì´ì „ ìº í˜ì¸ì´ ì—†ìŠµë‹ˆë‹¤.</div>');
 		}else if(!'${nextBoard.CAMB_NUM}'){
-			$('#nextBoard').html('<div>´ÙÀ½ Ä·ÆäÀÎÀÌ ¾ø½À´Ï´Ù.</div>');
+			$('#nextBoard').html('<div>ë‹¤ìŒ ìº í˜ì¸ì´ ì—†ìŠµë‹ˆë‹¤.</div>');
 		}
 	}
 	
 	function detailUrl(CAMB_NAME, CAMB_NUM, type){
-		
 		if(type === "prev"){
 			num = (${index}-1)/6;
 			pagenum = Math.ceil(num);
@@ -268,7 +153,6 @@
 			num = (${index}+1)/6;
 			pagenum = Math.ceil(num);
 		}
-		
 		if(name || num){
 			if(query){
 				if(query.lastIndexOf(substring) !== -1){
@@ -317,13 +201,13 @@
 	function donate(){
 		var type = "${camBoard.CAMB_SUBJECT}";
 		
-		if(type === "ÇØ¾ç"){
+		if(type === "í•´ì–‘"){
 			location.href="/donation/ocean";
-		}else if(type === "ÇÃ¶ó½ºÆ½"){
+		}else if(type === "í”Œë¼ìŠ¤í‹±"){
 			location.href="/donation/plastic";
-		}else if(type === "»ê¸²"){
+		}else if(type === "ì‚°ë¦¼"){
 			location.href="/donation/forest";
-		}else if(type === "±ØÁö¹æ"){
+		}else if(type === "ê·¹ì§€ë°©"){
 			location.href="/donation/ice";
 		}
 	}
@@ -337,7 +221,7 @@
 		textarea.select();
 		document.execCommand("copy");
 		document.body.removeChild(textarea);
-		alert("URLÀÌ º¹»çµÇ¾ú½À´Ï´Ù.")
+		alert("URLì´ ë³µì‚¬ë˜ì—ˆìŠµë‹ˆë‹¤.")
 	}
 	
 	function shareTwitter() {
@@ -361,7 +245,7 @@
 	      objectType: 'feed',
 	      content: {
 	    	  title: "${camBoard.CAMB_NAME}",
-		        description: 'Áö±¸ÀÇ ¿ôÀ½À» Ã£¾Æ¼­',
+		        description: 'ì§€êµ¬ì˜ ì›ƒìŒì„ ì°¾ì•„ì„œ',
 		        imageUrl: "${camBoard.CAMB_FILE}",
 		        link: {
 			          mobileWebUrl: linkUrl,
@@ -375,14 +259,14 @@
 	      },
 	      buttons: [
 		        {
-		          title: 'À¥À¸·Î º¸±â',
+		          title: 'ì›¹ìœ¼ë¡œ ë³´ê¸°',
 		          link: {
 		            mobileWebUrl: linkUrl,
 		            webUrl: linkUrl
 		          }
 		        },
 		        {
-		          title: '¾ÛÀ¸·Î º¸±â',
+		          title: 'ì•±ìœ¼ë¡œ ë³´ê¸°',
 		          link: {
 		            mobileWebUrl: linkUrl,
 		            webUrl: linkUrl
@@ -390,11 +274,15 @@
 		        }
 		      ]
 	    })
-	  }
-	;
+	  };
     
-  //]]>
 </script>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
+
+<!-- Scroll Up -->
+<div id="back-top" >
+ <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
 </body>
 </html>
