@@ -690,7 +690,29 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
          		 </c:forEach>
                 </tbody>
               </table>
-<br><br><br><br>
+<nav class="blog-pagination justify-content-center d-flex">
+		<ul class="pagination">
+			<c:if test="${page.prev}">
+	    		<li class="page-item">
+					<a href="?pagenum=${page.getStartPage()-1}" class="page-link" aria-label="Previous">
+						<i class="ti-angle-left"></i>
+					</a>
+				</li>
+			</c:if>
+			<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">	
+				<li class="page-item">
+					<a href="?pagenum=${idx}" class="page-link">${idx}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${page.next}">
+				<li class="page-item">
+					<a href="?pagenum=${page.getEndPage()+1}" class="page-link" aria-label="Next">
+						<i class="ti-angle-right"></i>
+					</a>
+				</li>
+			</c:if>
+		</ul>
+	</nav>
 
                </div>
                    

@@ -22,7 +22,6 @@ public class MemberService {
 	private SqlSessionTemplate mybatis;
 
 	public int insertMember(MemberBean memberBean) throws NoSuchAlgorithmException {
-		System.out.println("서비스");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		SHA256 sha256 = new SHA256();
 
@@ -31,19 +30,16 @@ public class MemberService {
 		// SHA256으로 암호화된 비밀번호
 		String cryptogram = sha256.encrypt(password);
 
-		System.out.println(cryptogram);
 
 		memberBean.setMem_pw(cryptogram);
 
 		// 비밀번호 일치 여부
-		System.out.println(cryptogram.equals(sha256.encrypt(password)));
 		int n = dao.insertMember(memberBean);
 		return n;
 	}
 
 	// 카카오 회원가입
 	public int insertMember_kakao(MemberBean memberBean) throws NoSuchAlgorithmException {
-		System.out.println("kakao 서비스");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		int n = dao.insertMember_kakao(memberBean);
 		return n;
@@ -51,7 +47,6 @@ public class MemberService {
 
 	// 네이버 회원가입
 	public int insertMember_naver(MemberBean memberBean) throws NoSuchAlgorithmException {
-		System.out.println("naver 서비스");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		int n = dao.insertMember_naver(memberBean);
 		return n;
@@ -59,22 +54,18 @@ public class MemberService {
 
 	// 마이페이지 포인트조회
 	public String myPoint(String mem_id) {
-		System.out.println("S : myPoint()실행");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		String myPoint = dao.myPoint(mem_id);
 		if (myPoint == null) {
 			myPoint = "0";
-			System.out.println("mypoint service");
 		}
 		return myPoint;
 	}
 
 	// 마이페이지 총기부금액
 	public String myDonation(String mem_id) {
-		System.out.println("S : mydonation()실행");
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		String myDonation = dao.myDonation(mem_id);
-		System.out.println("donation service");
 		if (myDonation == null) {
 			myDonation = "0";
 		}
@@ -85,7 +76,6 @@ public class MemberService {
 	public String myDonation_f(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		String myDonation_f = dao.myDonation_f(mem_id);
-		System.out.println("mydonation_f test" + myDonation_f);
 		if (myDonation_f == null) {
 			myDonation_f = "0";
 		}
@@ -122,11 +112,34 @@ public class MemberService {
 		return myDonation_p;
 	}
 	//기부내역
-	public List<PayBean> myPay(String mem_id) {
-		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		List<PayBean> list = dao.myPay(mem_id);
-		return list;
-	}
+		public void myPay(String mem_id, String pagenum, String contentnum, Model model) {
+			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+			PagingBean pBean = new PagingBean();
+		
+			  	int cPagenum = Integer.parseInt(pagenum);
+		        int cContentnum = Integer.parseInt(contentnum);
+		        List<PayBean> list = null;
+		        pBean.setTotalcount(dao.myPayCount(mem_id));
+		        pBean.setPagenum(cPagenum-1);   // 현재 페이지를 페이지 객체에 지정한다 -1 을 해야 쿼리에서 사용할수 있다
+		        pBean.setContentnum(cContentnum); // 한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
+		        pBean.setCurrentblock(cPagenum); // 현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
+		        pBean.setLastblock(pBean.getTotalcount()); // 마지막 블록 번호를 전체 게시글 수를 통해서 정한다.
+
+		        pBean.prevnext(cPagenum);//현재 페이지 번호로 화살표를 나타낼지 정한다.
+		        pBean.setStartPage(pBean.getCurrentblock()); // 시작 페이지를 페이지 블록번호로 정한다.
+		        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
+		        //마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+			
+		        if(cContentnum == 5){//선택 게시글 수
+		        	pBean.setPagenum(pBean.getPagenum()*5);
+		        	list = dao.myPay(mem_id, pBean.getContentnum(), pBean.getPagenum());
+		        }
+		        model.addAttribute("myPay", list);
+				model.addAttribute("page", pBean);
+		       
+			}
+			
+		
 	// 비밀번호체크
 	public String pwCheck(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
@@ -147,7 +160,6 @@ public class MemberService {
 	public void updateMyInfo(MemberBean memberBean) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		dao.updateMyInfo(memberBean);
-		System.out.println("update service");
 	}
 
 	
@@ -156,7 +168,6 @@ public class MemberService {
 	public void updatePw(Map<String, Object> map) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		dao.updatePw(map);
-		System.out.println("update pw service");
 	}
 
 	// 이메일 변경
@@ -165,67 +176,81 @@ public class MemberService {
 		dao.updateEmail(map);
 	}
 
-	// 마이오더
-	public List<ExGoodsBean> myOrder(String mem_id) {
-		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		List<ExGoodsBean> list = dao.myOrder(mem_id);
-		for(int i = 0; i < list.size(); i++) {
-			String cc = list.get(i).getExg_cc();
-			switch (cc) {
-				case "CJ대한통운":		list.get(i).setExg_cc("04"); break;
-				case "롯데택배":		list.get(i).setExg_cc("08"); break;
-				case "우체국택배":		list.get(i).setExg_cc("01"); break;
-				case "로젠택배":		list.get(i).setExg_cc("06"); break;
-				case "한진택배":		list.get(i).setExg_cc("05"); break;
-				case "CU편의점택배":	list.get(i).setExg_cc("46"); break;
-				case "EMS택배":		list.get(i).setExg_cc("12"); break;
-				case "경동택배":		list.get(i).setExg_cc("23"); break;
-				case "대신택배":		list.get(i).setExg_cc("22"); break;
-				case "DHL택배":		list.get(i).setExg_cc("13"); break;
-				case "FedEx":		list.get(i).setExg_cc("21"); break;
-			}
+	
+	// 마이메세지
+		public void myMessage(String mem_id, String pagenum, String contentnum, Model model) {
+			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+			PagingBean pBean = new PagingBean();
+
+	        int cPagenum = Integer.parseInt(pagenum);
+	        int cContentnum = Integer.parseInt(contentnum);
+	        List<CheBoardBean> list = null;
+	        pBean.setTotalcount(dao.myMessageCount(mem_id));
+	        pBean.setPagenum(cPagenum-1);   // 현재 페이지를 페이지 객체에 지정한다 -1 을 해야 쿼리에서 사용할수 있다
+	        pBean.setContentnum(cContentnum); // 한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
+	        pBean.setCurrentblock(cPagenum); // 현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
+	        pBean.setLastblock(pBean.getTotalcount()); // 마지막 블록 번호를 전체 게시글 수를 통해서 정한다.
+
+	        pBean.prevnext(cPagenum);//현재 페이지 번호로 화살표를 나타낼지 정한다.
+	        pBean.setStartPage(pBean.getCurrentblock()); // 시작 페이지를 페이지 블록번호로 정한다.
+	        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
+	        //마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
+		
+	        if(cContentnum == 8){//선택 게시글 수
+	        	pBean.setPagenum(pBean.getPagenum()*8);
+//	        	list = dao.myMessage(mem_id, pBean);
+	        	list = dao.myMessage(mem_id, pBean.getContentnum(), pBean.getPagenum());
+	        }
+	        model.addAttribute("myMessage", list);
+			model.addAttribute("page", pBean);
+	       
 		}
 		
-		return list;
-	}
-
-	// 마이메세지
-	public List<CheBoardBean> myMessage(String mem_id) {
-		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		List<CheBoardBean> list = dao.myMessage(mem_id);
-		return list;
-	}
 
 	
-	
-	
-/*	public PagingBean myMessageCount(String mem_id, Model model) {
-	
-		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		PagingBean pBean = new PagingBean();
-		int pagenum = 1;
-		int contentnum = 8;
-        int mytotal= dao.myMessageCount(mem_id);
-        pBean.setTotalcount(mytotal);
-        pBean.setPagenum(pagenum-1);   //
-        pBean.setContentnum(contentnum); // 한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
-        pBean.setCurrentblock(pagenum); // 현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
-        pBean.setLastblock(pBean.getTotalcount()); // 마지막 블록 번호를 전체 게시글 수를 통해서 정한다.
+		public void myOrder(String mem_id, String pagenum, String contentnum, Model model) {
+			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+			PagingBean pBean = new PagingBean();
+			
+	        int cPagenum = Integer.parseInt(pagenum);
+	        int cContentnum = Integer.parseInt(contentnum);
+	        List<ExGoodsBean> list = null;
+	        pBean.setTotalcount(dao.myOrderCount(mem_id));
+	        pBean.setPagenum(cPagenum-1);   
+	        pBean.setContentnum(cContentnum);
+	        pBean.setCurrentblock(cPagenum); 
+	        pBean.setLastblock(pBean.getTotalcount()); 
 
-        pBean.prevnext(pagenum);//현재 페이지 번호로 화살표를 나타낼지 정한다.
-        pBean.setStartPage(pBean.getCurrentblock()); // 시작 페이지를 페이지 블록번호로 정한다.
-        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
-        //마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
-
-        if(contentnum == 8){//선택 게시글 수
-        	pBean.setPagenum(pBean.getPagenum()*8);
-        }
-		model.addAttribute("page", pBean);
-       return pBean;
-       
-	}*/
-	
-	
+	        pBean.prevnext(cPagenum);
+	        pBean.setStartPage(pBean.getCurrentblock());
+	        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
+	        
+	        
+	        if(cContentnum == 8){
+	        	pBean.setPagenum(pBean.getPagenum()*8);
+	        	list = dao.myOrder(mem_id, pBean.getContentnum(), pBean.getPagenum());
+	        	for(int i = 0; i < list.size(); i++) {
+					String cc = list.get(i).getExg_cc();
+					switch (cc) {
+						case "CJ대한통운":		list.get(i).setExg_cc("04"); break;
+						case "롯데택배":		list.get(i).setExg_cc("08"); break;
+						case "우체국택배":		list.get(i).setExg_cc("01"); break;
+						case "로젠택배":		list.get(i).setExg_cc("06"); break;
+						case "한진택배":		list.get(i).setExg_cc("05"); break;
+						case "CU편의점택배":	list.get(i).setExg_cc("46"); break;
+						case "EMS택배":		list.get(i).setExg_cc("12"); break;
+						case "경동택배":		list.get(i).setExg_cc("23"); break;
+						case "대신택배":		list.get(i).setExg_cc("22"); break;
+						case "DHL택배":		list.get(i).setExg_cc("13"); break;
+						case "FedEx":		list.get(i).setExg_cc("21"); break;
+					}
+				}
+	        	
+	        }
+	        model.addAttribute("myOrder", list);
+			model.addAttribute("page", pBean);
+			
+		}
 	
 	
 	
@@ -238,7 +263,6 @@ public class MemberService {
 	public void deleteMember(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		dao.deleteMember(mem_id);
-		System.out.println("delete service");
 
 	}
 

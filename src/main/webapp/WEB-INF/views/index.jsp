@@ -160,7 +160,7 @@
 			<div class="preloader-inner position-relative">
 				<div class="preloader-circle"></div>
 				<div class="preloader-img pere-text">
-					<img src="resources/assets/img/logo/loder.png" alt="">
+					<img src="resources/assets/img/logo/loder.png" alt="로고이미지" title="사이트 로고이미지">
 				</div>
 			</div>
 		</div>
@@ -198,20 +198,19 @@
 				</div>
 				<!-- Single Slider -->
 				<div
-					class="single-slider hero-overly slider-height slider-bg1 d-flex align-items-center">
+					class="single-slider hero-overly slider-height slider-bg2 d-flex align-items-center">
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
 								<div class="hero__caption">
-									<h1 data-animation="fadeInUp" data-delay=".2s">Environment</h1>
+									<h1 data-animation="fadeInUp" data-delay=".2s">EARTH & US</h1>
 									<P data-animation="fadeInUp" data-delay=".4s">
-										Provide us a green and healthy life<br> we need to
-										protect
+										삶의 터전을 잃어가는 북극곰을 도와주세요!
 									</P>
 									<!-- Hero-btn -->
 									<div class="hero__btn">
-										<a href="resources/industries.html" class="hero-btn mb-10"
-											data-animation="fadeInUp" data-delay=".8s">Join Us Now</a>
+										<a href="donation/ice" class="hero-btn mb-10"
+											data-animation="fadeInUp" data-delay=".8s">북극곰 도와주기</a>
 									</div>
 								</div>
 							</div>
@@ -220,20 +219,20 @@
 				</div>
 				<!-- Single Slider -->
 				<div
-					class="single-slider hero-overly slider-height slider-bg1 d-flex align-items-center">
+					class="single-slider hero-overly slider-height slider-bg3 d-flex align-items-center">
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
 								<div class="hero__caption">
-									<h1 data-animation="fadeInUp" data-delay=".2s">Environment</h1>
+									<h1 data-animation="fadeInUp" data-delay=".2s">EARTH & US</h1>
 									<P data-animation="fadeInUp" data-delay=".4s">
-										Provide us a green and healthy life<br> we need to
-										protect
+										작은 것 부터 하나씩 시작하는 <br>
+										EARTH & US 캠페인 활동
 									</P>
 									<!-- Hero-btn -->
 									<div class="hero__btn">
-										<a href="resources/industries.html" class="hero-btn mb-10"
-											data-animation="fadeInUp" data-delay=".8s">Join Us Now</a>
+										<a href="camBoard/list" class="hero-btn mb-10"
+											data-animation="fadeInUp" data-delay=".8s">보러가기</a>
 									</div>
 								</div>
 							</div>
@@ -274,11 +273,11 @@
 					</div>
 					<div class="support-img-cap text-center d-flex">
 						<div class="single-one">
-							<span>${total_o}원</span>
-							<p>총 후원 금액</p>
+							<span>${total_pay}명</span>
+							<p>총 후원자 수</p>
 						</div>
 						<div class="single-two">
-							<span>230</span>
+							<span>${endCam}건</span>
 							<p>완료된 캠페인 수</p>
 						</div>
 					</div>
@@ -494,9 +493,9 @@
 
 
 
-<%-- 	<div class="row justify-content-center">
+<div class="row justify-content-center">
 					<div class="col-xl-8 col-lg-9 col-md-11">
-						<div class="section-tittle text-center mb-90">
+						<div class="section-tittle text-center mb-30" >
 							<h2>최근 응원 릴레이</h2>
 							<p>후원에 참여한 많은분들이 응원 메시지를 보내주고 있습니다. 
 							<br>함께 응원해 주세요!</p>
@@ -512,17 +511,28 @@
                 ${cheBoard.cheb_content}
                 </div>
                 <div class="testimonial-desc">
-                    <img src="/resources/donation/ice04.png"  alt="" />
+                    <c:if test="${cheBoard.cheb_dname eq '숲'}">
+                    <img src="/resources/donation/forest04.png"  alt="숲" title="숲일러스트"/>
+                    </c:if>
+                     <c:if test="${cheBoard.cheb_dname eq '바다'}">
+                    <img src="/resources/donation/ocean04.png"  alt="바다" title="바다일러스트"/>
+                    </c:if>
+                     <c:if test="${cheBoard.cheb_dname eq '북극곰'}">
+                    <img src="/resources/donation/ice04.png"  alt="북극곰" title="북극곰일러스트"/>
+                    </c:if>
+                     <c:if test="${cheBoard.cheb_dname eq '친환경'}">
+                    <img src="/resources/donation/plastic04.png"  alt="친환경" title="친환경일러스트"/>
+                    </c:if>
                     <div class="testimonial-writer">
                     	<div class="testimonial-writer-name"> ${cheBoard.cheb_id}</div>
-                    	<div class="testimonial-writer-designation" id="d_name"> ${cheBoard.cheb_dname}</div>
-                    	<a href="/cheBoard/list" class="testimonial-writer-company"> <fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${cheBoard.cheb_date}" /></a>
+                    	<div class="testimonial-writer-designation" id="d_name"> ${cheBoard.cheb_dname} 후원</div>
+                    	<a href="/cheBoard/list" class="testimonial-writer-company">${cheBoard.cheb_date}</a>
                     </div>
                 </div>
             </div>   
 		</div>
 		</c:forEach>
-	</div> --%>
+	</div> 
 </div>
 
 
