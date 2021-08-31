@@ -36,7 +36,6 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-
 <style type="text/css">
 body {
 	background: #f9f9fb;
@@ -572,7 +571,9 @@ body {
 .modal-login  .form-group {
 	position: relative;
 	width: 80%;
-    margin: auto;
+	margin-left: 45px;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 .modal-login i {
 	position: absolute;
@@ -586,7 +587,7 @@ body {
 }
 .modal-login .form-control:focus {
 	border-color: #00ce81;
-	width: 80%;
+	width: 100%;
     margin: auto;
 }
 .modal-login .form-control, .modal-login .btn {
@@ -715,11 +716,15 @@ body {
               <button type="button" class="btn btn-primary btn-block btn-lg" onclick="pwCheck()">현재비밀번호 확인</button>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="변경할 비밀번호" required  id="mem_cpw1">					
-					</div>
+				<div class="invalid-feedback" id="invalid-pw2">
+                	8~20자의 영문 대문자, 소문자와 특수문자로 비밀번호를 설정할 수 있습니다.
+              </div>
+					</div> 
+					
               <div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호 확인" required id="mem_cpw2">					
 					</div>
-					
+					 
 						<button type="button" class="btn btn-primary btn-block btn-lg" onclick="updatePw()">비밀번호 변경</button>
 					
 			
@@ -728,9 +733,25 @@ body {
 		</div>
 	</div>
 </div>   
-
-
-							
+ <script type="text/javascript">
+				$(function(){
+					$("#invalid-pw2").hide();
+					
+					$("input").keyup(function(){
+						var match = /^[A-Za-z0-9.;\-]{8,20}$/;
+						var pwd = $("#mem_cpw1").val();
+						if(pwd != ""){
+							if(!match.test(pwd)){
+								$("#invalid-pw2").show();
+							}else{
+								$("#invalid-pw2").hide();
+							}
+						}else{
+							$("#invalid-pw2").hide();
+						}
+					});
+					</script>
+					
  <script type="text/javascript">
 				function pwCheck(){
 					var mem_pw = $("#mem_pw").val();

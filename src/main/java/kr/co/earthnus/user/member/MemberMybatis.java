@@ -9,7 +9,6 @@ import kr.co.earthnus.user.cheBoard.CheBoardBean;
 import kr.co.earthnus.user.goods.ExGoodsBean;
 import kr.co.earthnus.user.pay.PayBean;
 import kr.co.earthnus.util.MailBean;
-import kr.co.earthnus.user.member.PagingBean;
 
 public interface MemberMybatis {
 	
@@ -39,8 +38,10 @@ public interface MemberMybatis {
 	public int findpw(@Param("findName") String findName, @Param("findEmail") String findEmail, @Param("mem_id") String mem_id);
 	public List<MemberBean> findID(@Param("findName") String findName, @Param("mail_receiver") String mail_receiver);
 	public int changePW(@Param("changeNum") String changeNum, @Param("email") String email, @Param("name") String name);
-	public List<ExGoodsBean> myOrder(String mem_id);
-	//public int myMessageCount(String mem_id); 
-	public List<CheBoardBean> myMessage(String mem_id);
-	public List<PayBean> myPay(String mem_id);
+	public int myOrderCount(String mem_id); 
+	public List<ExGoodsBean> myOrder(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
+	public int myMessageCount(String mem_id); 
+	public List<CheBoardBean> myMessage(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
+	public int myPayCount(String mem_id); 
+	public List<PayBean> myPay(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
 }

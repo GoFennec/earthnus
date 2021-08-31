@@ -30,6 +30,15 @@
   	.btn btn-sm btn-primary{
   		font-color:#6777EF;
   	}
+  	h6{
+  		text-align:center;
+  	}
+  	input{
+  		text-align:center;
+  	}
+  	#visitorArea{
+  		width:300px;
+  	}
   </style>
 </head>
 
@@ -152,7 +161,7 @@
                 </div>
                 <div class="card-body">
                   <div class="chart-pie pt-4">
-                    <canvas id="myPieChart"></canvas>
+                    <canvas id="chePieChart"></canvas>
                   </div>
                   <hr>
                 </div>
@@ -162,8 +171,13 @@
             <!-- Area Chart -->
             <div class="col-lg-12">
               <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold">최근 7일 방문자 수</h6>
+                  <div>
+                  <button id="leftWeek" onclick="leftWeek()"><i class="fas fa-angle-left"></i></button>
+                  <input type="text" id="visitorArea" readonly>
+                  <button id="rightWeek"><i class="fas fa-angle-right"></i></button>
+                  </div>
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
@@ -178,7 +192,7 @@
             <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">최근 7일 카테고리 별 최근 후원 금액</h6>
+                  <h6 class="m-0 font-weight-bold">최근 7일 카테고리 별 최근 후원 금액</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-bar">
@@ -190,28 +204,6 @@
             </div>
           </div>
           <!--Row-->
-
-          <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
 
         </div>
         <!---Container Fluid-->
@@ -288,6 +280,43 @@
       labels: ["숲", "얼음", "플라스틱", "바다"],
       datasets: [{
         data: [camPieForest, camPieIce, camPiePlastic, camPieOcean],
+        backgroundColor: ['#4e73df', '#ffa426', '#1cc88a', '#fc544b'],
+        hoverBackgroundColor: ['#2e59d9', '#FF8200', '#17a673', '#B9062F'],
+        hoverBorderColor: "rgba(234, 236, 244, 1)",
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#282828",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+      },
+      legend: {
+        display: true
+      },
+      cutoutPercentage: 80,
+    },
+  });
+  
+  
+  var chePiePlastic = ${chePiePlastic};
+  var chePieOcean = ${chePieOcean};
+  var chePieIce = ${chePieIce};
+  var chePieForest = ${chePieForest};
+  
+  var ctx = document.getElementById("chePieChart");
+  var chePieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["숲", "얼음", "플라스틱", "바다"],
+      datasets: [{
+        data: [chePieForest, chePieIce, chePiePlastic, chePieOcean],
         backgroundColor: ['#4e73df', '#ffa426', '#1cc88a', '#fc544b'],
         hoverBackgroundColor: ['#2e59d9', '#FF8200', '#17a673', '#B9062F'],
         hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -470,21 +499,44 @@
   var today = new Date();
   var year = today.getFullYear();
   var month = ('0' + (today.getMonth() + 1)).slice(-2);
+  var date = ('0' + (today.getDate())).slice(-2);
   var day = new Array;
   var dateString = [];
+  var lastWeek = new Date();
+  var pastWeek = new Date();
+  
   for(var i = 0; i < 7; i++){
-	  day[i] = ('0' + (today.getDate() - i)).slice(-2);
+	  day[i] = date - i;
 	  dateString[i] = year + '-' + month  + '-' + day[i];
   }
   var dateLabel = dateString.reverse();
-  
   var countVisitor = ${countVisitor};
   var visitorData = countVisitor.reverse();
+  
+  var sevenDay = dateString[0] + " ~ " + dateString[6];
+  
+  $("#visitorArea").val(sevenDay);
+  
+  $('#leftWeek').click(function(){
+	  pastWeek.setDate(today.getDate() - 7);
+	  for(var i = 0; i < 7; i++){
+		  pastWeek.setDate(pastWeek.getDate() - i);
+		  year = pastWeek.getFullYear();
+		  month = ('0' + (pastWeek.getMonth() + 1)).slice(-2);
+		  day[i] = ('0' + (pastWeek.getDate())).slice(-2);
+		  dateString[i] = year + '-' + month  + '-' + day[i];
+	  }
+	  dateLabel = dateString.reverse();
+	  sevenDay = dateString[0] + " ~ " + dateString[6];
+	  $("#visitorArea").val(sevenDay);
+  });
+  
+  
   
   
 	//Area Chart Example
   var ctx = document.getElementById("myAreaChart");
-  var myLineChart = new Chart(ctx, {
+  var myAreaChart = new Chart(ctx, {
     type: 'line',
     data: {
     	 

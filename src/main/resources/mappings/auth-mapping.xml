@@ -29,7 +29,7 @@
 		SELECT * FROM MEMBER WHERE MEM_ID=#{auth_id}
 	</select>
 	<select id="total_pay" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY 
+		SELECT Count(*) FROM PAY WHERE PAY_STATE="결제승인" 
 	</select>
 	<select id="total_f" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('묘목','새싹','나무','숲')
@@ -52,4 +52,10 @@
 	<select id="d_img" resultType="cheBoard" parameterType="String">
 		SELECT D_IMG FROM DONATION WHERE D_NAME=#{d_name}
 	</select>
+		<select id="endCam" resultType="String" parameterType="String">
+		<![CDATA[
+			SELECT COUNT(*) FROM CAMBOARD WHERE CAMB_FINDATE < NOW()
+		]]>
+	</select>
+	
 </mapper>

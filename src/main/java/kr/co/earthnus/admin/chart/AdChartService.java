@@ -40,6 +40,19 @@ public class AdChartService {
 		model.addAttribute("camPieForest", camPieForest);
 	}
 	
+	public void chePie(Model model) {
+		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
+		int chePiePlastic = dao.chePiePlastic();
+		int chePieOcean = dao.chePieOcean();
+		int chePieIce = dao.chePieIce();
+		int chePieForest = dao.chePieForest();
+		
+		model.addAttribute("chePiePlastic", chePiePlastic);
+		model.addAttribute("chePieOcean", chePieOcean);
+		model.addAttribute("chePieIce", chePieIce);
+		model.addAttribute("chePieForest", chePieForest);
+	}
+	
 	
 	public List<Integer> countVisitor() {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);

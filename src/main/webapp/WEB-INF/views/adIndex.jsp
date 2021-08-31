@@ -275,7 +275,7 @@
                         <td>${adCheboardList.cheb_num}</td>
                         <td>${adCheboardList.cheb_id}</td>
                         <td>${adCheboardList.cheb_dname}</td>
-                        <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${adCheboardList.cheb_date}" /></td>
+                        <td>${adCheboardList.cheb_date}</td>
                       </tr>
                     </c:forEach>
                     </tbody>

@@ -36,13 +36,12 @@ public class CheBoardController {
   @RequestMapping(value = {"/cheBoard/list"}, method = {RequestMethod.GET})
   public String sessionRequest(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
     AuthBean user = (AuthBean)session.getAttribute("auth");
-    System.out.println(session);
+    
     if (user == null)
       return "/cheBoard/cheBoardList"; 
     String user_id = user.getAuth_id();
     service.donation_dname(model, user_id);
-    System.out.println("테스트");
-    return "/cheBoard/cheBoardList";
+      return "/cheBoard/cheBoardList";
   }
   
   @ResponseBody
