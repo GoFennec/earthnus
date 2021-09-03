@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.earthnus.user.auth.AuthBean;
@@ -29,9 +30,12 @@ public class CheBoardController {
   
   @ResponseBody
   @RequestMapping(value = {"/cheBoard/Cheboard_insert"}, method = {RequestMethod.POST})
-  public void CheBoardInsert(@RequestBody CheBoardBean BoardBean) {
-    this.service.replyInsert(BoardBean);
+  public void CheBoardInsert(@RequestBody CheBoardBean BoardBean ) {
+	this.service.replyInsert(BoardBean);
+	
+	service.pay_comment_update(BoardBean);
   }
+  
   
   @RequestMapping(value = {"/cheBoard/list"}, method = {RequestMethod.GET})
   public String sessionRequest(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {

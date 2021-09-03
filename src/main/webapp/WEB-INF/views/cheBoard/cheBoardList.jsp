@@ -39,7 +39,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 }
 
 #listDiv {
-	 border-top:1px solid black;
+	 
 }
 
 #id_date {
@@ -60,7 +60,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	position:relative;
 	display:block;
 	width:100%;
-	padding: 21px 0 20px;
+	padding: 26px 0 20px;
 	border-bottom: 1px solid #ccc;
 }
 
@@ -212,15 +212,16 @@ background:#000;color:#fff;
 }
 .post-slider .post-wrapper{
 
-  width:84%;
-  margin:0px auto;
+  width:70%;
+  margin:auto;
   overflow: hidden;
   padding:10px 0px 10px 0px;
 }
 
 
 .post-slider .post-wrapper .post .slider-image{
-  width:50%;
+  width: 500px;
+  height: 300px;
   border-top-left-radius:5px;
   border-top-right-radius:5px;
   margin: auto;
@@ -299,16 +300,16 @@ background:#000;color:#fff;
         <i class="fas fa-chevron-right next"></i>
         <div class="post-wrapper">
           <div class="post">
-            <img src="/resources/donation/ice01.png" class="slider-image">
+            <img src="/resources/cheBoard/animal.jpg" class="slider-image">
           </div>
           <div class="post">
-            <img src="/resources/donation/forest04.png" class="slider-image">
+            <img src="/resources/cheBoard/bear.jpg" class="slider-image">
           </div>
           <div class="post">
-            <img src="/resources/donation/ocean04.png" class="slider-image">
+            <img src="/resources/cheBoard/plastics.jpg" class="slider-image">
           </div>
           <div class="post">
-            <img src="/resources/donation/plastic04.png" class="slider-image">
+            <img src="/resources/cheBoard/tree.jpg" class="slider-image">
           </div>
         </div>
       </div>
@@ -325,14 +326,6 @@ background:#000;color:#fff;
 	 	<c:if test="${auth.auth_id != null}">
     	<c:choose>
     		
-    		<c:when test="${payCheck eq null}">
-    		
-    			 <select disabled>
-	       			<option>응원 카테고리</option>
-	       		</select>
-	       	
-    		</c:when>
-    		
     		<c:when test="${payCheck != null }">
     		
     			<div id="select_dname">
@@ -345,7 +338,7 @@ background:#000;color:#fff;
     	</c:if>
 	   
     
-    <c:if test="${auth.auth_id != null}">
+    <c:if test="${auth.auth_id != null and payCheck != []}">
     	<table >
     		<tr>
 	    	 <td style="width: 90%;">
@@ -402,24 +395,16 @@ background:#000;color:#fff;
 	var All_dname = [];
   $(document).ready(function (){
 	 
-	  <c:forEach items="${payCheck}" var="row">
-	    All_dname.push("${row.pay_dname}");
-	  </c:forEach>
-	
-	    if(All_dname != null) {
-	    	select_dname();
-	    }
-	    $('.post-wrapper').slick({
-	    	slidesToShow: 1,
-	    	  slidesToScroll: 1,
-	    	  autoplay: true,
-	    	  autoplaySpeed: 3000,
-	    	  nextArrow:$('.next'),
-	    	  prevArrow:$('.prev'),
-	    	  dots: true,
-	    	  infinite: true,
-	    	  adaptiveHeight: true
-	    	});
+		  
+		  <c:forEach items="${payCheck}" var="row">
+		    All_dname.push("${row.pay_dname}");
+		  </c:forEach>
+		  
+		  <c:if test="${payCheck != []}">
+			  
+		    	select_dname();
+		   </c:if>
+	   
 	  
 	  	 init();
 	  	function select_dname() {
@@ -428,12 +413,10 @@ background:#000;color:#fff;
 	  		var count_sea = 0;
 	  		var count_pla = 0;
 	  		var count_bear = 0;
-	  
 	  		var str = '<select id="dname_select">'
 	  		for(var i=0; i < All_dname.length; i++) {
 	  			
-	  			
-	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "새우" || All_dname[i] == "문어" || All_dname[i] == "바다") ) {
+	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "새우" || All_dname[i] == "고래" || All_dname[i] == "바다") ) {
 	  				str += '<option>바다</option>';
 	  				count_sea += 1;
 	  				
@@ -470,7 +453,7 @@ background:#000;color:#fff;
         	  var id = "${auth.auth_id}";
   	      	  var name = "${auth.auth_name}";
         	  var dnum = $("#dname_select option:selected").val();
-        	  var senData = {"cheb_id":id, "cheb_name":name, "cheb_dname":dnum, "cheb_content": text}
+        	  var senData = {"cheb_id":id, "cheb_name":name, "cheb_dname":dnum, "cheb_content": text,}
         	  if(text.trim().length==0) {
         		  alert("내용을 작성해주세요");
         		  $('#replyInsert').focus();
@@ -487,22 +470,26 @@ background:#000;color:#fff;
         		 contentType : "application/json; charset=utf-8",
         		 success : function(){
         			 $('#comment_content').val("");
-        			 insert_commet++;
-                     init();
-                 },
-                 error : function(error){
-                     console.log(error);
-                 }
-        		
-        	 });
-        	 
-          });
+        			 
+                	 init();
+        	} 
+          });	 
+        });
         
         $('#addBtn').on('click',function() {
         	step += step;
         	init();
         });
-       
+        $('.post-wrapper').slick({
+	    	slidesToShow: 1,
+	    	  slidesToScroll: 1,
+	    	  autoplay: true,
+	    	  autoplaySpeed: 3000,
+	    	  nextArrow:$('.next'),
+	    	  prevArrow:$('.prev')
+	    	});
+        
+        
   });
  
   
@@ -536,7 +523,7 @@ background:#000;color:#fff;
 	            		str +='<div class="delete">'
 	            		str +='<div class="menu">'
 	            		str +='<a><img alt="사진" class="deleteicon"src="/resources/cheBoard/deleteicon.png"></a>';	
-	            		str +='<ul class="hide">'
+	            		str +='<ul id="deletehide" class="hide">'
 	            		str +='<a class="deleteComment" data_num="'+obj[i].cheb_num+'"><li>댓글 삭제하기</li><a>'
 	            		str +='</ul>'
 	            		str +='</div>'
@@ -559,11 +546,14 @@ background:#000;color:#fff;
 	        		 $('#listDiv').append(str);
 	        	}
 	        	 str += '</table>'
-	        	
+	        	if(obj.length <= 0) {
+	        		alert("댓글이 더이상 없습니다");
+	        		return;
+	        	}
                      
             $('.deleteComment').on('click', function(){
                 var reply_num = $(this).attr('data_num'); 
-                console.log(reply_num);
+               
                 
                 $.ajax({
                     
@@ -603,7 +593,8 @@ background:#000;color:#fff;
             	})
             });
            $(".menu>a").click(function() {
-        	   $(this).next("ul").toggleClass("hide");
+        	  
+   				 $(this).next("ul").toggleClass("hide");
            })
     	}
 	});
