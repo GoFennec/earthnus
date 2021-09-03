@@ -153,6 +153,7 @@
 </head>
 
 <body>
+
 	<!-- ? Preloader Start -->
 	<div id="preloader-active">
 		<div
@@ -253,7 +254,7 @@
 					<!-- section tittle -->
 					<div class="section-tittle section-tittle2 mb-30">
 						<span>당신의 후원이 변화를 만듭니다</span>
-						<h2>우리의 지구를 함께 지켜주세요</h2>
+						<h2>우리의 지구를 <br> 함께 지켜주세요</h2>
 					</div>
 					<div class="support-caption">
 						<p class="pera-top">지구는 동시다발적인 환경문제로 심각한 위기에 처해있습니다. 하지만 우리에게는
@@ -269,7 +270,7 @@
 				<div class="right-content">
 					<!-- img -->
 					<div class="right-img">
-						<img src="resources/assets/img/gallery/safe_in.png" alt="">
+						<img src="resources/assets/img/gallery/safe_in.png" alt="지구를지키자" title="지구지키기포스터를들고있는소녀">
 					</div>
 					<div class="support-img-cap text-center d-flex">
 						<div class="single-one">
@@ -309,13 +310,17 @@
 								<h3>
 									<a href="/donation/ocean">바다가 힘들어요!</a>
 								</h3>
-								<p>바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.
-								그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.
+								<p>70만 종 이상 생명체가 살고있는 바다가 큰 위험에 처해있습니다.
 								우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.</p>
 							
 								<div class="prices">
 									<p>
+										<c:if test="${total_o ne null}" >
 										<span>지금까지 후원금액: ${total_o}원</span>
+										</c:if>
+												<c:if test="${total_o eq null}" >
+										<span>지금까지 후원금액: 0원</span>
+										</c:if>
 									</p>
 								</div>
 							</div>
@@ -330,13 +335,18 @@
 								<h3>
 									<a href="/donation/forest">나무를 심어요!</a>
 								</h3>
-								<p>숲은 육지에 서식하는 많은 동식물들의 집입니다.
-									인간의 욕심으로 인해 전 세계 산림의 절반이 사라졌습니다.
-									숲을 터전으로 살아가고있는 생물들은 멸종위기에 처했으며, 온실가스는 흡수되지않고 대기로 방출되고있습니다.</p>
+								<p>
+									인간의 욕심으로 인해 숲이 줄어들고 있어요.<br>
+									숲을 터전으로 살아가고있는 생물들은 멸종위기에 처했으며, 온실가스는 흡수되지않고 대기로 방출 되고있어요.</p>
 							
 								<div class="prices">
 									<p>
+										<c:if test="${total_f ne null}" >
 										<span>지금까지 후원금액: ${total_f}원</span>
+										</c:if>
+												<c:if test="${total_f eq null}" >
+										<span>지금까지 후원금액: 0원</span>
+										</c:if>
 									</p>
 								</div>
 							</div>
@@ -351,13 +361,16 @@
 								<h3>
 									<a href="/donation/plastic">플라스틱이 넘쳐요!</a>
 								</h3>
-								<p>플라스틱은 미세 플라스틱으로 분해됩니다.
-								수많은 해양 동물들은 이를 먹이로 착각하고 섭취하여 폐사에 이르고 있으며, 
-								결국 미세 플라스틱은 해양 먹이사슬을 타고 우리의 식탁으로 돌아옵니다.<br><br></p>
+								<p>플라스틱은 미세 플라스틱으로 분해되어 생태계를 어지럽히고 있어요. <br>
+								플라스틱 사용을 줄여 지구를 지켜요.<br><br></p>
 								
 								<div class="prices">
-									<p>
+									<p><c:if test="${total_p ne null}" >
 										<span>지금까지 후원금액: ${total_p}원</span>
+										</c:if>
+												<c:if test="${total_p eq null}" >
+										<span>지금까지 후원금액: 0원</span>
+										</c:if>
 									</p>
 								</div>
 							</div>
@@ -372,12 +385,16 @@
 								<h3>
 									<a href="/donation/ice">북극곰을 도와줘요!</a>
 								</h3>
-								<p>지구 온난화로 북극 기온이 상승하여 빙하가 녹고있습니다.
-								북극을 해양보호구역으로 만들어 파괴적인 어업과 석유 시추의 중단이 시급합니다.
-								빠르게 녹고있는 북극을 지켜요.<br><br></p>
+								<p>지구 온난화로 기온이 상승하여 빙하가 녹고있어요.<br>
+								북극곰과 친구들은 집을 잃어가고 있어요.<br>빠르게 녹고있는 북극을 지켜요.<br><br></p>
 								<div class="prices">
 									<p>
-										<span>지금까지 후원금액: ${total_i}원 </span>
+									<c:if test="${total_i ne null}" >
+										<span>지금까지 후원금액: ${total_i}원</span>
+										</c:if>
+												<c:if test="${total_i eq null}" >
+										<span>지금까지 후원금액: 0원</span>
+										</c:if>
 									</p>
 								</div>
 							</div>
@@ -407,7 +424,7 @@
 						<div class="home-blog-single mb-30">
 							<div class="blog-img-cap">
 								<div class="blog-img">
-									<img src="${camBoard.CAMB_FILE}" alt="최신캠페인이미지">
+									<img src="${camBoard.CAMB_FILE}" height="400px" alt="최신캠페인이미지">
 								</div>
 								<div class="blog-cap">
 									<h3>
@@ -507,7 +524,8 @@
         <c:forEach items="${ch_list}" var="cheBoard">
         <div class="col-sm-6">
             <div id="tb-testimonial" class="testimonial testimonial-success">
-                <div class="testimonial-section">
+               
+                <div class="testimonial-section" style=" cursor: pointer;" onclick="location.href='/cheBoard/list'" >
                 ${cheBoard.cheb_content}
                 </div>
                 <div class="testimonial-desc">
@@ -526,7 +544,7 @@
                     <div class="testimonial-writer">
                     	<div class="testimonial-writer-name"> ${cheBoard.cheb_id}</div>
                     	<div class="testimonial-writer-designation" id="d_name"> ${cheBoard.cheb_dname} 후원</div>
-                    	<a href="/cheBoard/list" class="testimonial-writer-company">${cheBoard.cheb_date}</a>
+                    	<div class="testimonial-writer-company">${cheBoard.cheb_date}</div>
                     </div>
                 </div>
             </div>   
@@ -534,7 +552,6 @@
 		</c:forEach>
 	</div> 
 </div>
-
 
 
 
@@ -623,6 +640,11 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script src="resources/assets/js/plugins.js"></script>
 	<script src="resources/assets/js/main.js"></script>
+<script>
+var cheContent =  ${cheBoard.cheb_content};
+var cutCh = cheContent.subString(20);
+var ch = cutCh+"...";
 
+</script>
 </body>
 </html>

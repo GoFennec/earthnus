@@ -107,7 +107,10 @@ body {
 #naver {
 vertical-align: middle;
 border-style: none;
+margin-top:10px;
 margin-bottom: 10px;    
+width:288px;
+height:46px;
 }
 #kakao {
 vertical-align: middle;
@@ -116,6 +119,7 @@ margin-bottom: 10px;
 width:288px;
 height:46px;
 }
+
 </style>
 </head>
 <body>
@@ -123,7 +127,6 @@ height:46px;
 <br><br><br><br>
 <div class="login-form">    
     <form method="post" class="form" action="/auth/login">
-		<!-- <div class="avatar"><i class="material-icons">&#xE7FF;</i></div> -->
     	<h4 class="modal-title">로그인</h4>
         <div class="form-group">
             <input type="text" class="form-control" id="auth_id" name="auth_id" placeholder="아이디" required="required">
@@ -133,7 +136,7 @@ height:46px;
        
              </div> 
              <input type="submit" class="w-100 btn btn-primary btn-lg" value="로그인"> 
-       <p>----------------------or----------------------</p>
+     
           
          <%
     String clientId = "vDkmCgxDt2L_BtosPOoP";//애플리케이션 클라이언트 아이디값";
@@ -146,15 +149,17 @@ height:46px;
     apiURL += "&state=" + state;
     session.setAttribute("state", state);
  %>
-  <a href="<%=apiURL%>"><img width="288" height="46" id="naver" src="/resources/Auth/btnG.png" alt="네이버로그인버튼" title="로그인버튼" /></a>
+
+   <a href="<%=apiURL%>"><img id="naver" src="/resources/Auth/btnG.png" alt="네이버로그인버튼" title="로그인버튼" /></a>
             <div>
             <c:if test="${userId eq null}">
         <a href="https://kauth.kakao.com/oauth/authorize?client_id=1f09c57d8241952a7a44833618d75b13&redirect_uri=http://localhost:8090/kakaoLogin&response_type=code">
-            <img src="/resources/Auth/kakao_login_large_narrow.png" id="kakao"  alt="카카오로그인버튼" title="로그인버튼">
+            <img src="/resources/Auth/kakao_login_large_wide.png" id="kakao"  alt="카카오로그인버튼" title="로그인버튼">
         </a>
     </c:if>
   
         </div>
+      
       
        
          
@@ -164,5 +169,7 @@ height:46px;
     </form>			
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
+
+
 </body>
 </html>

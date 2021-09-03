@@ -176,7 +176,7 @@
             <div class="col-12">
               <label for="username" class="form-label">비밀번호 확인</label>
               <input type="password" class="form-control" id="PasswordCheck" placeholder="" required>
-              <div class="invalid-feedback" >
+              <div class="invalid-feedback" id="invalid-pw3">
                 	필수 입력사항입니다.
               </div>
             </div>

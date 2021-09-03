@@ -190,7 +190,7 @@ public class MemberController {
 			//마이오더
 			@RequestMapping("/member/myOrder")
 			public String exGoodsList(@RequestParam(defaultValue = "1") String pagenum, 
-					@RequestParam(defaultValue = "8") String contentnum, HttpSession session, AuthBean aBean, Model model) {
+					@RequestParam(defaultValue = "10") String contentnum, HttpSession session, AuthBean aBean, Model model) {
 				aBean = (AuthBean) session.getAttribute("auth");
 				String mem_id = aBean.getAuth_id();
 				memberService.myOrder(mem_id, pagenum, contentnum, model);//
@@ -202,7 +202,7 @@ public class MemberController {
 			//내가 작성한 글
 				@RequestMapping("/member/myMessage")
 				public String myMessageList(@RequestParam(defaultValue = "1") String pagenum, 
-						@RequestParam(defaultValue = "8") String contentnum, AuthBean aBean, HttpSession session, Model model) {
+						@RequestParam(defaultValue = "10") String contentnum, AuthBean aBean, HttpSession session, Model model) {
 					aBean = (AuthBean) session.getAttribute("auth");
 					String mem_id = aBean.getAuth_id();
 					memberService.myMessage(mem_id, pagenum, contentnum, model);//
@@ -229,7 +229,6 @@ public class MemberController {
 			public String pwCheck(HttpSession session, AuthBean aBean, @RequestParam("mem_pw")String pw) throws NoSuchAlgorithmException {
 				aBean = (AuthBean) session.getAttribute("auth");
 				String mem_id = aBean.getAuth_id();
-				String mem_pw = memberService.pwCheck(mem_id);
 				String mem_shapw = memberService.pwCheck(mem_id);
 				SHA256 sha = new SHA256();
 				String smem_pw = sha.encrypt(pw);

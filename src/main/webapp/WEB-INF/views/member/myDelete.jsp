@@ -600,14 +600,39 @@ col-md-6 col-sm-8 col-xs-12 pwlabel{
     margin-bottom: 0;
     text-align: right;
 margin-top: 13px;}
+#p1{
+font-family: "Montserrat",sans-serif;
+    color: #425140;
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
 
+#p2{
+font-family: "Montserrat",sans-serif;
+    color: #388E3C;
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+#s1{
+font-family: "Montserrat",sans-serif;
+    color: #425140;
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
 
 </style>
 
 </head>
 <jsp:include page="/WEB-INF/views/header.jsp"/> 
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false' >
-
+<br>
 <div class="container">
     <div class="view-account">
         <section class="module">
@@ -618,7 +643,6 @@ margin-top: 13px;}
 								src="/resources/Auth/account_1.png"
 								title="account" alt="계정사진">
 							<ul class="meta list list-unstyled">
-								<!-- <li class="id"><a>${auth.auth_id}</a></li> -->
 								<li class="name">${auth.auth_name}님</li>
 							</ul>
 						</div>
@@ -643,27 +667,29 @@ margin-top: 13px;}
         <div class="col-lg-12">
             <h4>회원가입 탈퇴 안내</h4>
             <div class="panel-body" style="border: 1px solid #ccc">
-            <p>회원탈퇴에 앞서 유의사항 및 안내를 반드시 읽고 진행해주세요!</p>
+            <p id="p1">회원탈퇴에 앞서 유의사항 및 안내를 반드시 읽고 진행해주세요!</p>
         </div>
         <br>
         <h4>개인정보</h4>
         <div class="panel-body" style="border: 1px solid #ccc">
         
-			<p>
-			EARTH & US 아이디 재사용 및 복구 불가 안내<br>
+			<p id="p1">
+			<span id="s1"> [EARTH & US 아이디 재사용 및 복구 불가 안내] </span><br>
 			회원 탈퇴 진행시 본인을 포함한 타인 모두 아이디 재사용이나 복구가 불가능합니다.
 			신중히 선택하신 후 결정해주세요.
 			<br></p>
 			<br>        
-            <p>사용자 개인정보 처리 안내<br>결제 정보를 포함한 개인 정보(이름, 주소, 전화번호, 이메일)는 기록이 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.
+            <p id="p1">
+            <span id="s1">[사용자 개인정보 처리 안내]</span><br>결제 정보를 포함한 개인 정보(이름, 주소, 전화번호, 이메일)는 기록이 모두 삭제되며, 삭제된 데이터는 복구되지 않습니다.
            	이외 사용자에 의해 발생된 기부내역 및 나이, 성별 정보는 서비스 통계·제공 및 향상, 안전한 인터넷 이용환경 구축 등 의 목적으로만 이용됩니다.
             
             <br></p>
-            <p>게시판형 서비스에 등록한 게시글 삭제 불가 안내<br>
+            <p id="p1"><span id="s1">[게시판형 서비스에 등록한 게시글 삭제 불가 안내]</span><br>
             	삭제를 원하는 게시글이 있다면 반드시 회원탈퇴 전 비공개 처리하거나 삭제하시기 바랍니다.<br>
             	탈퇴 후에는 회원정보가 삭제되어 본인 여부를 확인할 수 있는 방법이 없어, 게시글을 임의로 삭제해드릴 수 없습니다.<br>
 			</p><br>
-			<p>포인트의 경우 회원 탈퇴 후 사용 또는 갱신이 불가능 합니다. 포인트를 이용하고 싶으 신 경우 탈퇴 전 사용 부탁드리며, 탈퇴 후 포인트 소멸에 대한 책임은 지지 않으니 신중한 선택 부탁드립니다. 
+			<p id="p2"><span id="s1">[포인트 사용 및 복구 불가 안내]</span><br>
+			포인트의 경우 회원 탈퇴 후 사용 또는 갱신이 불가능 합니다. 포인트를 이용하고 싶으 신 경우 탈퇴 전 사용 부탁드리며, 탈퇴 후 포인트 소멸에 대한 책임은 지지 않으니 신중한 선택 부탁드립니다. 
 			
         </div>
         <br/>
