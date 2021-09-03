@@ -22,5 +22,10 @@ public interface AdChartMybatis {
 	
 	
 	public int countVisitor(@Param("i")int i);
+	
+	public String sumPlastic(@Param("i")int i);
+	public String sumOcean(@Param("i")int i);
+	public String sumIce(@Param("i")int i);
+	public String sumForest(@Param("i")int i);
 
 }

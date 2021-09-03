@@ -11,12 +11,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>RuangAdmin - Form Basics</title>
+  <title>EARTH & US</title>
   <link href="/resources/assets/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="/resources/assets/css/ruang-admin.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-  
 </head>
 
 <body id="page-top">
@@ -165,28 +164,6 @@
             </div>
           </div>
           <!--Row-->
-
-          <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
           
           
           <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
@@ -236,6 +213,8 @@
 			      			}else if(result.error === false){
 			    	  			alert('관리자 비밀번호를 확인해 주세요.');
 			    	  			return;
+			      			}else{
+								alert('해당 회원은 배송 되지 않은 지구마켓 상품이 있습니다.');			      				
 			      			}
 			   			},
 			   		 error:function(request,status,error){

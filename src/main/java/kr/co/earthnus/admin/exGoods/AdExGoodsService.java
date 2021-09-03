@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import kr.co.earthnus.user.goods.ExGoodsBean;
-import kr.co.earthnus.user.goods.PagingBean;
 
 @Service("adExGoodsService")
 public class AdExGoodsService {

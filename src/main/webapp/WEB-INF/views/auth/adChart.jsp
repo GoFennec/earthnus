@@ -36,8 +36,9 @@
   	input{
   		text-align:center;
   	}
-  	#visitorArea{
-  		width:300px;
+  	#visitorArea,#visitorArea2{
+  		width:200px;
+  		text-align:center;
   	}
   </style>
 </head>
@@ -174,9 +175,7 @@
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold">최근 7일 방문자 수</h6>
                   <div>
-                  <button id="leftWeek" onclick="leftWeek()"><i class="fas fa-angle-left"></i></button>
-                  <input type="text" id="visitorArea" readonly>
-                  <button id="rightWeek"><i class="fas fa-angle-right"></i></button>
+                  <input type="date" id="visitorArea" readonly> ~ <input type="date" id="visitorArea2">
                   </div>
                 </div>
                 <div class="card-body">
@@ -238,7 +237,7 @@
   
   var ctx = document.getElementById("donationPieChart");
   var donationPieChart = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
       labels: ["숲", "얼음", "플라스틱", "바다"],
       datasets: [{
@@ -366,64 +365,71 @@
 	  }
 	  return s.join(dec);
 	}
-  	
-  var today = new Date();
-  var year = today.getFullYear();
-  var month = ('0' + (today.getMonth() + 1)).slice(-2);
+  
+  var sumPlastic = ${sumPlastic};
+  var sumOcean = ${sumOcean};
+  var sumIce = ${sumIce};
+  var sumForest = ${sumForest};
   var day = new Array;
   var dateString = new Array;
   for(var i = 0; i < 7; i++){
-	  day[i] = ('0' + (today.getDate() - i)).slice(-2);
-	  dateString[i] = year + '-' + month  + '-' + day[i];
+	  var today = new Date();
+	  today.setDate(today.getDate()-i);
+	  var year = today.getFullYear();
+	  var month = ('0' + (today.getMonth() + 1)).slice(-2);
+	  var date = ('0' + (today.getDate())).slice(-2);
+	  dateString[i] = year + '-' + month  + '-' + date;
   }
-
+	dateString = dateString.reverse();
+	sumPlastic = sumPlastic.reverse();
+  
 	// Bar Chart Example
 	var ctx = document.getElementById("myBarChart");
 	var myBarChart = new Chart(ctx, {
-	  type: 'bar',
+	  type: 'line',
 	  data: {
-	    labels: [dateString[6], dateString[5], dateString[4], dateString[3], dateString[2], dateString[1], dateString[0]],
+	    labels: dateString,
 	    datasets: [
 	    	{	  
-	    		  type: 'bar',
+	    		  type: 'line',
 	    		  label: "숲",
+	    		  lineTension: 0,
 	    		  backgroundColor: "#4e73df",
 	    		  hoverBackgroundColor: "#2e59d9",
 	    		  borderColor: "#4e73df",
-	    		  data: [4215, 5312, 6251, 7841, 9821, 14984],
+	    		  fill: false,
+	    		  data: sumForest,
 	    		},
 	    	{
-	    		  type: 'bar',
+	    		  type: 'line',
 	    	      label: "얼음",
+	    	      lineTension: 0,
 	    	      backgroundColor: "#ffa426",
 	    	      hoverBackgroundColor: "#FF8200",
 	    	      borderColor: "#ffa426",
-	    	      data: [4215, 5312, 6251, 7841, 9821, 14984],
+	    	      fill: false,
+	    	      data: sumIce,
 	    	    },
 	    	{
-	    	      type: 'bar',
+	    	      type: 'line',
 	    	      label: "플라스틱",
+	    	      lineTension: 0,
 	    	      backgroundColor: "#1cc88a",
 	    	      hoverBackgroundColor: "#17a673",
 	    	      borderColor: "#1cc88a",
-	    	      data: [4215, 5312, 6251, 7841, 9821, 14984],
+	    	      fill: false,
+	    	      data: sumPlastic,
 	    	    },
 	        {
-	    	      type: 'bar',
+	    	      type: 'line',
 	      	      label: "바다",
+	      	      lineTension: 0,
 	      	      backgroundColor: "#fc544b",
 	      	      hoverBackgroundColor: "#B9062F",
 	      	      borderColor: "#fc544b",
-	      	      data: [4215, 5312, 6251, 7841, 9821, 14984],
+	      	      fill: false,
+	      	      data: sumOcean,
 	      	    }, 
-	      	    {
-	                type: 'line',
-	                label: '매출 평균',
-	                backgroundColor: "#b4b4b4",
-		      	    hoverBackgroundColor: "#282828",
-		      	    borderColor: "#5a5a5a",
-	                data: [1950, 5750, 7550, 5550, 9821, 14984],
-	            }
 	    ],
 	  },
 	  options: {
@@ -439,7 +445,7 @@
 	    scales: {
 	      xAxes: [{
 	        time: {
-	          unit: 'month'
+	          unit: 'date'
 	        },
 	        gridLines: {
 	          display: false,
@@ -451,24 +457,22 @@
 	        maxBarThickness: 25,
 	      }],
 	      yAxes: [{
-	        ticks: {
-	          min: 0,
-	          max: 15000,
-	          maxTicksLimit: 5,
-	          padding: 10,
-	          // Include a dollar sign in the ticks
-	          callback: function(value, index, values) {
-	            return '￦' + number_format(value);
+	          ticks: {
+	            maxTicksLimit: 5,
+	            padding: 10,
+	            // Include a dollar sign in the ticks
+	            callback: function(value, index, values) {
+	              return  '￦' + number_format(value);
+	            }
+	          },
+	          gridLines: {
+	            color: "rgb(234, 236, 244)",
+	            zeroLineColor: "rgb(234, 236, 244)",
+	            drawBorder: false,
+	            borderDash: [2],
+	            zeroLineBorderDash: [2]
 	          }
-	        },
-	        gridLines: {
-	          color: "rgb(234, 236, 244)",
-	          zeroLineColor: "rgb(234, 236, 244)",
-	          drawBorder: false,
-	          borderDash: [2],
-	          zeroLineBorderDash: [2]
-	        }
-	      }],
+	        }],
 	    },
 	    legend: {
 	      display: true
@@ -496,18 +500,23 @@
 	});
   </script>
   <script type="text/javascript">
-  var today = new Date();
-  var year = today.getFullYear();
-  var month = ('0' + (today.getMonth() + 1)).slice(-2);
-  var date = ('0' + (today.getDate())).slice(-2);
+  
+  var sevenDate = new Date();
+  var yyyy = sevenDate.getFullYear();
+  var mm = ('0' + (sevenDate.getMonth() + 1)).slice(-2);
+  var dd = ('0' + (sevenDate.getDate())).slice(-2);
   var day = new Array;
   var dateString = [];
   var lastWeek = new Date();
   var pastWeek = new Date();
   
   for(var i = 0; i < 7; i++){
-	  day[i] = date - i;
-	  dateString[i] = year + '-' + month  + '-' + day[i];
+	  var today = new Date();
+	  today.setDate(today.getDate()-i);
+	  var year = today.getFullYear();
+	  var month = ('0' + (today.getMonth() + 1)).slice(-2);
+	  var date = ('0' + (today.getDate())).slice(-2);
+	  dateString[i] = year + '-' + month  + '-' + date;
   }
   var dateLabel = dateString.reverse();
   var countVisitor = ${countVisitor};
@@ -515,20 +524,11 @@
   
   var sevenDay = dateString[0] + " ~ " + dateString[6];
   
-  $("#visitorArea").val(sevenDay);
+  $("#visitorArea2").val(dateString[6]);
+  $("#visitorArea").val(dateString[0]);
   
   $('#leftWeek').click(function(){
-	  pastWeek.setDate(today.getDate() - 7);
-	  for(var i = 0; i < 7; i++){
-		  pastWeek.setDate(pastWeek.getDate() - i);
-		  year = pastWeek.getFullYear();
-		  month = ('0' + (pastWeek.getMonth() + 1)).slice(-2);
-		  day[i] = ('0' + (pastWeek.getDate())).slice(-2);
-		  dateString[i] = year + '-' + month  + '-' + day[i];
-	  }
-	  dateLabel = dateString.reverse();
-	  sevenDay = dateString[0] + " ~ " + dateString[6];
-	  $("#visitorArea").val(sevenDay);
+	  alert(sevenDate);
   });
   
   
@@ -544,7 +544,7 @@
     	 
       datasets: [{
         label: "",
-        lineTension: 0,
+        lineTension: 0.3,
         backgroundColor: "#AAEBAA",
         borderColor: "#388E3C",
         pointRadius: 3,

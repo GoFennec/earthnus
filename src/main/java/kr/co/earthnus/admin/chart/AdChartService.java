@@ -54,7 +54,7 @@ public class AdChartService {
 	}
 	
 	
-	public List<Integer> countVisitor() {
+	public void countVisitor(Model model) {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
 		int count = 0;
 		List<Integer> count1 = new ArrayList<Integer>();
@@ -63,7 +63,75 @@ public class AdChartService {
 			count = dao.countVisitor(i);
 			count1.add(count);
 		}
-		return count1;
+		model.addAttribute("countVisitor", count1);
+	}
+	
+	public void sumPlastic(Model model) {
+		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
+		String count = null;
+		int parse = 0;
+		List<Integer> count1 = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 7; i++) {
+			count = dao.sumPlastic(i);
+			if(count == null) {
+				count = "0";
+			}
+			parse = Integer.parseInt(count);
+			count1.add(parse);
+		}
+		model.addAttribute("sumPlastic", count1);
+	}
+	
+	public void sumOcean(Model model) {
+		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
+		String count = null;
+		int parse = 0;
+		List<Integer> count1 = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 7; i++) {
+			count = dao.sumOcean(i);
+			if(count == null) {
+				count = "0";
+			}
+			parse = Integer.parseInt(count);
+			count1.add(parse);
+		}
+		model.addAttribute("sumOcean", count1);
+	}
+	
+	public void sumIce(Model model) {
+		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
+		String count = null;
+		int parse = 0;
+		List<Integer> count1 = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 7; i++) {
+			count = dao.sumIce(i);
+			if(count == null) {
+				count = "0";
+			}
+			parse = Integer.parseInt(count);
+			count1.add(parse);
+		}
+		model.addAttribute("sumIce", count1);
+	}
+	
+	public void sumForest(Model model) {
+		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
+		String count = null;
+		int parse = 0;
+		List<Integer> count1 = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 7; i++) {
+			count = dao.sumForest(i);
+			if(count == null) {
+				count = "0";
+			}
+			parse = Integer.parseInt(count);
+			count1.add(parse);
+		}
+		model.addAttribute("sumForest", count1);
 	}
 
 }

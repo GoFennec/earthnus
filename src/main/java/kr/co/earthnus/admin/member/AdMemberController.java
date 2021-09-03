@@ -52,7 +52,15 @@ public class AdMemberController {
 	public Map<String, Object> deletePW(@RequestParam("deletePW") String deletePW, @RequestParam("deleteMember") String deleteMember, HttpServletRequest request) throws NoSuchAlgorithmException {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		int delete = adMemberService.deletePW(deletePW);
+		int delete = 0;
+		int checkExgoods = adMemberService.checkExgoods(deleteMember);
+		
+		if(checkExgoods > 0) {
+			map.put("error", "checkExgoods");
+			return map;
+		}else {
+			delete = adMemberService.deletePW(deletePW);
+		}
 		
 		if(delete > 0) {
 			adMemberService.deleteMember(deleteMember);

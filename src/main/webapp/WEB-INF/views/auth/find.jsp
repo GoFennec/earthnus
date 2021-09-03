@@ -118,6 +118,12 @@
 #button{
 	padding-top:30px;
 }
+td{
+	width:300px;
+}
+#ID{
+	padding-left:50px;
+}
 
 </style>
 <title>EARTH & US</title>
@@ -238,8 +244,8 @@
 										<table>
 											<c:forEach var="findID1" items="${findID}">
 												<tr>
-													<td>아이디 : ${findID1.mem_id}</td>
-													<td>가입 날짜 : <fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${findID1.mem_date}" /></td>
+													<td>아이디 :&nbsp;&nbsp; <b>${findID1.mem_id}</b></td>
+													<td>가입 날짜 :&nbsp;&nbsp; <b><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${findID1.mem_date}" /></b></td>
 												</tr>
 											</c:forEach>
 										</table>

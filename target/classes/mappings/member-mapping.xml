@@ -18,7 +18,7 @@
 		<result property="mem_point" column="MEM_POINT"/>
 		<result property="mem_api" column="MEM_API"/>
 	</resultMap>
-<resultMap id="exGoodsResult" type="exGoods">
+	<resultMap id="exGoodsResult" type="exGoods">
 		<id property="exg_num" column="EXG_NUM"/>
 		<result property="exg_id" column="EXG_ID"/>
 		<result property="exg_name" column="EXG_NAME"/>

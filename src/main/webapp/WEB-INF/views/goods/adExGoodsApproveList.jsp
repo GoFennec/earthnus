@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,24 +29,6 @@
   	.btn btn-sm btn-primary{
   		font-color:#6777EF;
   	}
-  	  		  /*radio 버튼 색상변경 */
-  		input[type='checkbox'] {
-    		-webkit-appearance:none;
-    		width:16px;
-    		height:16px;
-    		outline:none;
-    		background:#e6e6e6;
-  		}
-  		input[type='checkbox']:before {
-    		content:'';
-    		display:block;
-    		width:60%;
-    		height:60%;
-    		margin: 20% auto;  
-  		}
-  		input[type='checkbox']:checked:before {
-  			background:#66BB6A;
-  		}
   </style>
 </head>
 
@@ -81,10 +62,10 @@
       <li class="nav-item">
         <a class="nav-link" href="/adDonation/list">
         <i class="fas fa-hand-holding-heart"></i>
-          <span>후원 관리</span>
+          <span>기부 관리</span>
         </a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="/adCheBoard/list">
         <i class="fas fa-comments"></i>
           <span>응원릴레이 관리</span>
@@ -102,11 +83,11 @@
           <i class="fas fa-shopping-cart"></i>
           <span>지구마켓 주문 관리</span>
         </a>
-        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div id="collapseForm" class="collapse show" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="/adExGoods/oList">주문 목록</a>
             <a class="collapse-item" href="/adExGoods/dList">배송 처리 목록</a>
-            <a class="collapse-item" href="/adExGoods/aList">주문 승인 내역</a>
+            <a class="collapse-item active" href="/adExGoods/aList">주문 승인 내역</a>
             <a class="collapse-item" href="/adExGoods/cList">주문취소내역</a>
           </div>
         </div>
@@ -128,74 +109,44 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">응원릴레이 관리</h1>
+            <h1 class="h3 mb-0 text-gray-800">지구마켓 주문 승인 내역</h1>
           </div>
 
           <!-- Row -->
           <div class="row">
-          
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">전체 응원 릴레이</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${cheTotal} 개</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-info"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Earnings (Annual) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">오늘의 응원 릴레이</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${cheToday} 개</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comment fa-2x text-info"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
             <!-- DataTable with Hover -->
             <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="table-responsive p-3">
-                <div class="row">
-                <div class="col-sm-12 col-md-6"></div>
-                <div class="col-sm-12 col-md-6" style="text-align:right;">
-                  <button class="btn btn-sm btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="checkDelete()">응원 삭제</button>
-                </div>
-                </div>
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>응원 번호</th>
-                        <th>작성자 ID</th>
-                        <th>작성자 이름</th>
-                        <th>카테고리</th>
-                        <th>응원 내용</th>
+                        <th>결제 번호</th>
+                        <th>아이디</th>
+                        <th>주문 상태</th>
+                        <th>상품 정보</th>
+                        <th>사용한 포인트</th>
+                        <th>결제 날짜</th>
                       </tr>
                     </thead>
 					<tbody>
-                    	<c:forEach items="${CheBoard}" var="list">
-                      	<tr class="cheInfo" id="${list.cheb_num}">
-                      		<td>${list.cheb_num} <br> <input type="checkbox" id="test_check" value="${list.cheb_num}"></td>
-                      		<td>${list.cheb_id}</td>
-                      		<td>${list.cheb_name}</td>
-                      		<td>${list.cheb_dname}</td>
-                        	<td>${list.cheb_content}</td>
-                      	</tr>
-                     	</c:forEach>
+                    	<c:forEach items="${exGoodsList}" var="exGoods">
+							<tr class="exGoodsInfo" id="${exGoods.exg_num}">
+								<td>${exGoods.exg_num}</td>
+								<td>${exGoods.exg_id}</td>
+								<c:choose>
+								<c:when test="${exGoods.exg_state eq '배송대기'}">
+								<td class="text-warning">${exGoods.exg_state}</td>
+								</c:when>
+								<c:when test="${exGoods.exg_state != '배송대기'}">
+								<td class="text-success">${exGoods.exg_state}</td>
+								</c:when>
+								</c:choose>
+								<td>${exGoods.exg_gnum}(${exGoods.exg_gname})</td>
+								<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
+								<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td>
+							</tr>
+						</c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -203,77 +154,28 @@
             </div>
           </div>
           <!--Row-->
-          	<script type="text/javascript">
-			function checkDelete(){
-				var checkArr = [];     // 배열 초기화
-				$("input[id='test_check']:checked").each(function(i) {
-        			checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
-    			});
-				if(checkArr.length == 0){
-					alert('삭제할 상품을 체크해주세요.');
-					return;
-				}else{
-					$("#cancelModal").modal('show');
-				}
-			}
-			</script>
-          
-          <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+
+          <!-- Modal Logout -->
+          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">응원 삭제</h5>
+                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  	<p>관리자 비밀번호를 입력하세요.</p>
-                  	<input type="password" id="deletePW">
+                  <p>Are you sure you want to logout?</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="cheBoardDelete()">삭제</button>
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소</button>
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                  <a href="login.html" class="btn btn-primary">Logout</a>
                 </div>
               </div>
             </div>
           </div>
-          
-              <script type="text/javascript">
-				function cheBoardDelete(){
-					var checkArr = [];     // 배열 초기화
-					$("input[id='test_check']:checked").each(function(i) {
-	        			checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
-	    			});
-					var deletePW = $("#deletePW").val();
-					if(deletePW == ""){
-						alert("관리자 비밀번호를 입력해주세요.");
-						return;
-					}
-		
-					$.ajax({
-			   			type: "POST", //요청 메소드 방식
-			  			 url:"/adCheBoard/delete",
-			   			data: {"checkArr":checkArr, "deletePW": deletePW},
-			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-			   			
-			   			success : function(result){
-			      			if(result.error === true){
-			    	  			alert('삭제되었습니다.');
-			    	  			location.href="/adCheBoard/list";
-			      			}else if(result.error === false){
-			    	  			alert('관리자 비밀번호를 확인해 주세요.');
-			    	  			return;
-			      			}
-			   			},
-			   		 error:function(request,status,error){
-			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			      			//통신 실패시 발생하는 함수(콜백)
-			   				}
-						});
-				}
-			</script>
 
         </div>
         <!---Container Fluid-->

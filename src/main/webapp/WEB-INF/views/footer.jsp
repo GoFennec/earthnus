@@ -38,7 +38,7 @@
                        <div class="row d-flex align-items-center">
                            <div class="col-xl-12 ">
                                <div class="footer-copy-right text-center">
-                                   <p>  <a href="index.html"><img src="/resources/assets/img/logo/logo2_footer.png" alt=""></a>
+                                   <p>  <a href="/"><img src="/resources/assets/img/logo/logo2_footer.png" alt=""></a>
                                    <p>Copyright &copy;Team <script>document.write(new Date().getFullYear());</script> All rights reserved. 
                                  <br> Member: 고현성 윤영경 강유경 김정빈 백인엽 유인길<br>
                                  <a href="/auth/adLogin" title="바로가기"><i class="fas fa-cogs"></i>&nbsp;&nbsp;바로가기</a></p>

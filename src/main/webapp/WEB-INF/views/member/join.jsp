@@ -34,7 +34,7 @@
       }
       
       main{
-      	padding-bottom:100px;
+      	padding-bottom:50px;
       }
       
        .form-control{
@@ -64,8 +64,13 @@
         display: inline-block;
         text-align: left;
         vertical-align: middle;
+	}
+	.py-5{
+		padding-top:10rem;
 	}	   
-	
+	.modal-content{
+		width:500px;
+	}
     </style>
 
     
@@ -80,6 +85,7 @@
   <main>
     <div class="py-5 text-center">
       <a href="/"><img class="d-block mx-auto mb-4" src="/resources/assets/img/logo/loder.png" alt="" ></a>
+      <div style="font-size:40px; padding-top:20px">회원가입</div>
     </div>
 
     <div class="row g-5">
@@ -106,18 +112,20 @@
 				});
 			</script>
 			
-			<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
 				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h3 class="modal-title" id="exampleModalLabel">아이디 중복확인</h3>
+					<div class="modal-content" style="width:500px; align-items:center;">
+						<div class="modal-header" style="width:100%; text-align:center;">
+							<h3 class="modal-title" id="exampleModalLabel" style="margin-left:175px">아이디 중복확인</h3>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+                  			</button>
 						</div>
 						<br>
-						<input type="text" class="form-control" id="mem_idcheck" placeholder="아이디를 입력하세요." >
+						<input type="text" class="form-control" style="width:400px" id="mem_idcheck" placeholder="아이디를 입력하세요." >
 						<br>
 						<div class="modal-footer">
 							<button type="button" class="w-100 btn btn-primary btn-lg" id="modalY" onclick="idcheck()">중복확인</button>
-							<button type="button" class="w-100 btn btn-primary btn-lg" type="button" data-dismiss="modal">닫기</button>
 						</div>
 					</div>
 				</div>
@@ -138,12 +146,12 @@
 					$.ajax({
 			   			type: "POST", //요청 메소드 방식
 			  			 url:"/member/idcheck",
-			   			data: {"mem_id":id},
+			   			data: {"mem_id":idcheck},
 			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 			   			
 			   			success : function(result){
-			      			if(result.error === true && idcheck != ""){
-			    	  			var yesno = confirm('사용 가능한 아이디입니다. \n 사용하시겠습니까?');
+			      			if(result.error == true && idcheck != ""){
+			    	  			var yesno = confirm('사용 가능한 아이디입니다. \n사용하시겠습니까?');
 			    	  			if(yesno){
 			    	  				$("#mem_id").val(idcheck);
 			    	  				$("#mem_id").attr("readonly",true);
@@ -164,12 +172,12 @@
 
             <div class="col-12">
               <label for="username" class="form-label">비밀번호</label>
-              <input type="password" name="mem_pw" class="form-control" id="Password" placeholder="" required>
+              <input type="password" name="mem_pw" class="form-control" id="Password" required>
               <div class="invalid-feedback" id="invalid-pw">
                 	필수 입력사항입니다.
               </div>
               <div class="invalid-feedback" id="invalid-pw2">
-                	8~20자의 영문 대문자, 소문자와 특수문자로 비밀번호를 설정할 수 있습니다.
+                	8~20자의 영문 대문자, 소문자와 숫자로 비밀번호를 설정할 수 있습니다.
               </div>
             </div>
             
@@ -186,13 +194,13 @@
 					$("#invalid-pw2").hide();
 					
 					$("input").keyup(function(){
-						var match = /^[A-Za-z0-9.;\-]{8,20}$/;
+						var match = /^[A-Za-z0-9]{8,20}$/;
 						var pwd = $("#Password").val();
 						if(pwd != ""){
-							if(!match.test(pwd)){
-								$("#invalid-pw2").show();
-							}else{
+							if(match.test(pwd)){
 								$("#invalid-pw2").hide();
+							}else if(!match.test(pwd)){
+								$("#invalid-pw2").show();
 							}
 						}else{
 							$("#invalid-pw2").hide();
@@ -275,7 +283,7 @@
     			<option value="non">선택 안함</option>
 			</select>
 			</div>
-			<div class="invalid-feedback" id="invalid-gender">
+			<div class="invalid-feedback">
                 	필수 입력사항입니다.
               </div>
 			
@@ -343,7 +351,7 @@
 			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 			   			success : function(result){
 			      			if(result.error == true){
-			    	  			alert('입력하신 이메일로 회원가입 인증번호를 발송했습니다. \n 인증번호가 오지 않으면 입력하신 이메일을 다시 확인해주세요.');
+			    	  			alert('입력하신 이메일로 회원가입 인증번호를 발송했습니다. \n인증번호가 오지 않는다면 입력하신 이메일을 다시 확인해주세요.');
 			    	  			$('#testBtn1').hide();
 			    	  			$('#testBtn2').show();
 			      			}else if(result.error == false){
@@ -390,7 +398,7 @@
 		    	  			$("#mem_email").attr("readonly",true);
 		    	  			$("#mailCheck").attr("disabled",true);
 		      			}else if(result.error == false){
-		    	  			alert('이메일 인증번호가 일치하지 않습니다. \n 이메일을 다시 한 번 확인해주세요.');
+		    	  			alert('이메일 인증번호가 일치하지 않습니다. \n이메일을 다시 한 번 확인해주세요.');
 		      			}
 		   			},
 		   		 error:function(request,status,error){
@@ -448,6 +456,18 @@
 						return false;
 					}else if(!$("#mailCheck").attr("disabled")){
 						alert('이메일 인증을 완료해주세요.');
+						return false;
+					}else if($('#invalid-pw2').is(':visible')){
+						alert('입력하신 정보를 다시 확인해주세요.');
+						return false;
+					}else if($('#alert-danger').is(':visible')){
+						alert('입력하신 정보를 다시 확인해주세요.');
+						return false;
+					}else if($('#invalid-name2').is(':visible')){
+						alert('입력하신 정보를 다시 확인해주세요.');
+						return false;
+					}else if($('#invalid-phone').is(':visible')){
+						alert('입력하신 정보를 다시 확인해주세요.');
 						return false;
 					}
 						var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
