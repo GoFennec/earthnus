@@ -28,9 +28,8 @@
 								<input type="file" name="CAMB_UPLOADFILE" id="file" class="upload-box upload-plus" accept="image/*" style="display: none;">
 									<div id="preview"></div>
 									<input type="hidden" name="goods_img" value="${goods.goods_img}">
-								<div style="text-align: center;" class="file-edit-icon">
-									<a href="#" class="preview-edit">수정</a>
-									<a href="#" class="preview-de">삭제</a>
+								<div class="file-edit-icon" id="file-edit" style="text-align: center;">
+									<a href="#" class="preview-edit">추가</a>
 								</div>
 						</div>
 											
@@ -47,19 +46,18 @@
 						<option>플라스틱</option>
 						<option>산림</option>
 						<option>극지방</option>
+						<option>기타</option>
 					</select>
 				</td></tr>
 			<tr><td colspan="4"><b>캠페인 기간</b></td></tr>
 			<tr><td class="td_left"><label for="CAMB_NAME"><b>시작날짜</b></label></td>
 				<td class="td_right"><input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE" required></td>
 				<td class="td_left"><label for="CAMB_NAME"><b>종료날짜</b></label></td>
-				<td class="td_right"><input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" required></td></tr>
+				<td class="td_right"><input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" onclick="checkStartDate()" required></td></tr>
 			<tr><td colspan="4" class="td_center"><label for="CAMB_CONTENT"><b>캠&nbsp;페&nbsp;인&nbsp;&nbsp;내&nbsp;용&nbsp;</b></label></td></tr>
 			<tr class="update" style="text-align: center;">
 				<td colspan="4">
-					<textarea id = "CAMB_CONTENT" name = "CAMB_CONTENT" cols="80" rows="10">
-						This is my textarea to be replaced with CKEditor 4.
-					</textarea> 
+					<textarea id = "CAMB_CONTENT" name = "CAMB_CONTENT" cols="80" rows="10"placeholder="캠페인 내용을 입력해주세요."></textarea> 
 					<script>
 						CKEDITOR.replace('CAMB_CONTENT',{filebrowserUploadUrl:'/ckupload/imgUpload'});
 					</script>
@@ -78,7 +76,7 @@
 <script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
 <script type="text/javascript">
 	window.onload = function(){		
-		$("#preview").html(['<img src="/resources/camBoard/imgDefault.png" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="기본 이미지" onchange="showUpdateButton()" title="기본 이미지"/>'].join(''))
+		$("#preview").html(['<img src="" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="600" alt="" onchange="showUpdateButton()" title="기본 이미지"/>'].join(''))
 		
 		let today = new Date();   
 		let year = today.getFullYear(); // 년도
@@ -109,10 +107,47 @@
 	  $("#file").click();
 	} );
 	
+	document.getElementById("CAMB_UPLOADFILE").onchange = function () {
+		$( '#file-edit' ).html( '<a href="#" class="preview-edit">수정</a>' );
+	}
+	
+	function submitCheck(){
+		if(!document.getElementById("preview")){
+			alert("메인 사진을 추가해 주세요.");
+			return false;
+		} else{
+			return true;
+		}
+		
+	}
+	
 	document.getElementById("CAMB_STARTDATE").onchange = function () {
 	    var input = document.getElementById("CAMB_FINDATE");
 	    input.setAttribute("min", this.value);
 	}
+	
+	function checkStartDate(){
+		if(!document.getElementById("CAMB_STARTDATE").value){
+			alert("먼저 캠페인 시작날짜를 선택하세요.");
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	 if(dd<10){
+	        dd='0'+dd
+	    } 
+	    if(mm<10){
+	        mm='0'+mm
+	    } 
+
+	today = yyyy+'-'+mm+'-'+dd;
+	document.getElementById("CAMB_STARTDATE").setAttribute("max", today);
 </script>
 </body>
 </html>

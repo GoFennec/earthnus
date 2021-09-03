@@ -9,8 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-#preBoard {cursor: pointer;}
-#nextBoard {cursor: pointer;}
+.facebook, .twitter, .naverblog, .kakaotalk, .clipboard {cursor: pointer;}
+.facebook:hover, .twitter:hover, .naverblog:hover, .kakaotalk:hover, .clipboard:hover {transform: scale( 1.2 )}
 </style>
 
 <title>EARTH & US</title>
@@ -55,7 +55,7 @@
 		 		<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="25px"></a></li>
 			<li style="float: left"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="25px" class="twitter" onclick="shareTwitter()"></li>
 		 	<li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="25px" class="naverblog" onclick="shareNaverBlog()"></li>
-			<li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="25px" class="kakaotalk" onclick="shareKakaotalk()"></li>
+			<li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="25px" class="kakaotalk" onclick="shareKakao()"></li>
 			<li style="float: left;"><i class="clipboard fas fa-copy" style="font-size: 24px" onclick="shareURL()"></i></li>
 	     </ul>
 	     </div>
@@ -66,39 +66,41 @@
 	   
 		<div class="navigation-area">
 		  <div class="row">
-		   <div id="preBoard" class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center"
-		   		onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
-		   <div class="thumb">
-				<img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="" width="150px">
-			</div>
-					  
-		   <div class="arrow">
-		        <span class="lnr text-white ti-arrow-left"></span>
-		   </div>
-		
-   		   <div class="detials">
-		  		<p>이전</p>
-				<p style="font-size: 0.8em;">${preBoard.CAMB_NAME}</p>
-		   </div>
+		   <div id="preBoard" class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+			   <div style="cursor: pointer;" onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
+				   	<div class="thumb">
+						<img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="" width="150px">
+					</div>
+						  
+				   <div class="arrow">
+				        <span class="lnr text-white ti-arrow-left"></span>
+				   </div>
+				
+		   		   <div class="detials">
+				  		<p>이전</p>
+						<p style="font-size: 0.8em;">${preBoard.CAMB_NAME}</p>
+				   </div>
+			   </div>
 		   </div>
 
 		  <div class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-		  	<a class="btn header-btn" onclick="camBoardlist()" style="color: white;">목록으로</a>
+		  	<a class="btn header-btn" onclick="camBoard()" style="color: white;">목록으로</a>
 		  </div>
 		
-			<div id="nextBoard" class="col-lg-4 col-md-4 col-12 nav-right flex-row d-flex justify-content-end align-items-center"
-				 onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}', 'next')">
-			<div class="detials">
-			 	<p>다음</p>
-			 	<p style="font-size: 0.8em;">${nextBoard.CAMB_NAME}</p>
-			</div>
+			<div id="nextBoard" class="col-lg-4 col-md-4 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+				<div style="cursor: pointer;" onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}', 'next')">
+					<div class="detials">
+				 	<p>다음</p>
+				 	<p style="font-size: 0.8em;">${nextBoard.CAMB_NAME}</p>
+				</div>
 			
-			   <div class="arrow">
-			   		<span class="lnr text-white ti-arrow-right"></span>
-			   </div>
-			   <div class="thumb">
-			  		<img class="img-fluid" src="${nextBoard.CAMB_FILE}"  alt="" width="150px">
-			   </div>
+				   <div class="arrow">
+				   		<span class="lnr text-white ti-arrow-right"></span>
+				   </div>
+				   <div class="thumb">
+				  		<img class="img-fluid" src="${nextBoard.CAMB_FILE}"  alt="" width="150px">
+				   </div>
+				</div>
 		    </div>
 		  </div>
 		</div>
@@ -121,12 +123,14 @@
 	var pagenum = 0;				// 현재 캠페인이 위치한 실제 페이지
 	
 	window.onload = function(){
+		console.log("${index}");
+		
 		num = ${index}/6;
 		pagenum = Math.ceil(num);
 		
 		var subjecthtml = '';
 		if("${camBoard.CAMB_SUBJECT}" === "해양"){
-			subjecthtml += '<i class="fas fa-fish"></i>';
+			subjecthtml += '<i class="fas fa-water"></i>';
 			$('#subject_icon').prepend(subjecthtml);
 		}else if("${camBoard.CAMB_SUBJECT}" === "플라스틱"){
 			subjecthtml += '<i class="fas fa-recycle"></i>';
@@ -135,7 +139,10 @@
 			subjecthtml += '<i class="fas fa-tree"></i>';
 			$('#subject_icon').prepend(subjecthtml);
 		}else if("${camBoard.CAMB_SUBJECT}" === "극지방"){
-			subjecthtml += '<i class="fas fa-icicles"></i>';
+			subjecthtml += '<i class="fas fa-snowflake"></i>';
+			$('#subject_icon').prepend(subjecthtml);
+		}else if("${camBoard.CAMB_SUBJECT}" === "기타"){
+			subjecthtml += '<i class="fas fa-globe"></i>';
 			$('#subject_icon').prepend(subjecthtml);
 		}
 		if(!'${preBoard.CAMB_NUM}'){
@@ -145,7 +152,8 @@
 		}
 	}
 	
-	function detailUrl(CAMB_NAME, CAMB_NUM, type){
+function detailUrl(CAMB_NAME, CAMB_NUM, type){
+		
 		if(type === "prev"){
 			num = (${index}-1)/6;
 			pagenum = Math.ceil(num);
@@ -153,6 +161,7 @@
 			num = (${index}+1)/6;
 			pagenum = Math.ceil(num);
 		}
+		
 		if(name || num){
 			if(query){
 				if(query.lastIndexOf(substring) !== -1){
@@ -170,22 +179,35 @@
 					URL += pathname + "?CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
 				}
 			}
+			
+			location.href = URL;
+			
+		} else if(!num && type === "prev"){
+			
+			
+		} else if(!num && type === "next"){
+			
+			
 		}
-		location.href = URL;
+		
+		
 	}
 	
-	function camBoardlist(){
+	function camBoard(){
+		substring = "pagenum";
+		var pagenum = parseInt(${totalIndex}/6 + 1) - parseInt(${index}/6 + 1); 
+		
 		if(query){
 			if(query.lastIndexOf(substring) !== -1){
 				query = query.substr(0, subquery.indexOf("pagenum")-2);
 			}
 			URL += "/camBoard/list?" + query;
-		}
-		
-		var pagenum = parseInt(${index}/6 + 1); 
-		
-		if(pagenum !== 1){
-			URL += "&pagenum=" + pagenum;
+		}else{
+			if(pagenum !== 1){
+				URL += "/camBoard/list?pagenum=" + pagenum;
+			}else{
+				URL += "/camBoard/list"
+			}
 		}
 		
 		location.href = URL;
@@ -239,7 +261,7 @@
 		var shareURL = "https://blog.naver.com/openapi/share?serviceCode=share&url=" + url + "&title=" + title; document.location = shareURL; 
 	}
 	
-	function shareKakaotalk() {
+	function shareKakao() {
 	    Kakao.init('3b1b5dd541e88935221a7fb05cd01dad')
 	    Kakao.Link.sendDefault({
 	      objectType: 'feed',

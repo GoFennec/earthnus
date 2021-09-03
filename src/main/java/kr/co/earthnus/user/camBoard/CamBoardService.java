@@ -26,6 +26,25 @@ public class CamBoardService {
 		List<camBoardBean> CamBoardList = null;
 		List<CamBoardStatBean> statList = null;
 		
+		if(search.equals("ocean")) {
+			search = "해양";
+		}else if(search.equals("plastic")) {
+			search = "플라스틱";
+		}else if(search.equals("forest")) {
+			search = "산림";
+		}else if(search.equals("ice")) {
+			search = "극지방";
+		}else if(search.equals("all")) {
+			search = "기타";
+		}
+		
+		if(search != null) {
+			search = "%" + search + "%";
+		}else if(search == null || search.equals("")) {
+			search = "%%";
+		}
+		
+		
         int cPagenum = Integer.parseInt(pagenum);
         int cContentnum = Integer.parseInt(contentnum);
         
@@ -66,8 +85,6 @@ public class CamBoardService {
         	String startdate = format.format(cBean.getCAMB_STARTDATE());
         	String findate = format.format(cBean.getCAMB_FINDATE());
 
-        	System.out.println("startdate" + i + " : " + startdate + " ||||| findate" + i + " : " + findate);
-        	
         	csBean = statList.get(i-1);
         	int ABLEDATE = 472 - 472*csBean.getCAMB_ABLEDATE()/100;
         	int cBean_ABLEDATE = cBean.getCAMB_ABLEDATE();
@@ -81,6 +98,7 @@ public class CamBoardService {
         	model.addAttribute("CAMB_STARTDATE" + i, startdate);
         	model.addAttribute("CAMB_FINDATE" + i, findate);
         }
+        System.out.println("서비스 캠페인 개수 : " + CamBoardList.size() + ", 찾는 단어 : " + search);
 		model.addAttribute("CamBoardList", CamBoardList);
         model.addAttribute("page", pBean);
         
@@ -164,7 +182,6 @@ public class CamBoardService {
 	public Map<String, Object> getBoardIndex(String search, String search_type, String arr, String orderBy, String order, 
 			int CAMB_NUM, Map<String, Object> list, Model model) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
-		
 		PagingBean pBean = new PagingBean();
 		
         pBean.setSearch_type(search_type);
@@ -176,8 +193,13 @@ public class CamBoardService {
         
         pBean.setCAMB_NUM(-1);
         int total = camBoardDAO.getBoardIndex(pBean);
+        list.put("totalIndex", total);
         pBean.setCAMB_NUM(CAMB_NUM);
         list.put("index", camBoardDAO.getBoardIndex(pBean));
+        System.out.println("캠페인 인덱스찾는 길");
+        
+        System.out.println("total index: " + total + ", index : " + camBoardDAO.getBoardIndex(pBean));
+        
         if(camBoardDAO.getBoardIndex(pBean) == total) {
             pBean.setCAMB_INDEX(camBoardDAO.getBoardIndex(pBean)-2);
             list.put("preBoard", camBoardDAO.preBoard(pBean));

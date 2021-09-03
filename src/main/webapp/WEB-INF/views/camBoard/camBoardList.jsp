@@ -12,20 +12,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 div #selectView {text-align: right;}
 #selectView a {font-weight: bold; color: #388E3C; font-size: 0.8em;}
 #camBoardListDiv {margin-bottom: 4%;}
+
 .blog_item_date {text-align: center;}
 .blog_details {cursor: pointer;}
 .search-div {text-align: center;}
-.search-box {display:inline-block}
-#search {border-left: none; border-right: none; border-top: none; margin-right: -20px; border-bottom-color: #388E3C;}
+article {cursor: pointer;}
+
 #cancelButton {border-radius: 10px; border: none; background-color: #388E3C; color: white;}
-i {cursor: pointer;  margin-right: 10px; color: #388E3C;}
+i {cursor: pointer; color: #388E3C;}
+.search-type {margin-left: 20px;}
+.descript-type{background-color: #388E3C; width: 0px;}
+
+.search-type:hover > .descript-type {width: 100px;}
+
+#search {width:91%; margin-left: 10px; border-left: none; border-right: none; border-top: none; margin-right: -20px; border-bottom-color: #388E3C;}
 </style>
+
+
 
 <title>EARTH & US</title>
 </head>
@@ -35,19 +43,37 @@ i {cursor: pointer;  margin-right: 10px; color: #388E3C;}
 <br><br><br><br>
 
 <div class="container">
-   <div id="selectView">
-      <c:if test="${empty page.search}">
+<div class="row">
+	<div class="col-sm-12 col-md-6">
+		<table>
+			    <tr>
+			    	<td>
+			    		<select>
+				            <option selected="selected">전체</option>
+				            <option>제목</option>
+				            <option>내용</option>
+				         </select>
+			    	</td>
+			    	<td id="search-text">
+			    		<input type="text" id="search" name="search" placeholder="검색 . . .">
+		         		<a onclick="searchCamBoard()"><i class="fas fa-search"></i></a>
+			    	</td>
+			    </tr>
+		      </table>
+	</div>
+	<div class="col-sm-12 col-md-6" id="selectView">
       <a href="/camBoard/list?arr=entire" id="entire">전체보기&nbsp;&nbsp;&nbsp;&nbsp;</a>
       <a href="/camBoard/list?arr=doing" id="doing">진행중인 캠페인&nbsp;&nbsp;&nbsp;&nbsp;</a>
-      <a href="/camBoard/list?arr=end" id="end">종료된 캠페인</a>
-      </c:if>
-         
-      <c:if test="${!empty page.search}">
-      <a href="/camBoard/list/search?search=${page.search}&arr=entire" id="entire">전체보기&nbsp;&nbsp;&nbsp;&nbsp;</a>
-      <a href="/camBoard/list/search?search=${page.search}&arr=doing" id="doing">진행중인 캠페인&nbsp;&nbsp;&nbsp;&nbsp;</a>
-      <a href="/camBoard/list/search?search=${page.search}&arr=end" id="end">종료된 캠페인&nbsp;&nbsp;&nbsp;</a>
-      </c:if>
-   </div><hr>
+      <a href="/camBoard/list?arr=end" id="end">종료된 캠페인</a><br><br>
+      <a style="margin-right: 20px">주제</a>|
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" class="search-type" id=""><i class="fas fa-globe"></i></a>
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" class="search-type" id=""><i class="fas fa-recycle"></i></a>
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" class="search-type" id=""><i class="fas fa-tree"></i></a>
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" class="search-type" id=""><i class="fas fa-snowflake"></i></a>
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=all" class="search-type" id=""><i class="fas fa-globe"></i></a><br>
+   </div>
+</div>
+   <hr>
 </div>
 
 <div id="camBoardListDiv">
@@ -56,12 +82,12 @@ i {cursor: pointer;  margin-right: 10px; color: #388E3C;}
       <div class="container">
           <div class="row">
            <c:forEach items="${CamBoardList}" var="list" begin="0" end="5">        
-              <div class="col-md-4 col-6">
-                   <article class="blog_item">
+              <div class="col-sm-12 col-md-6">
+                   <article class="blog_item" onclick="detailUrl('${list.CAMB_NAME}', '${list.CAMB_NUM}')">
                        <div class="blog_item_img">
                          <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="" height="250px;">
-                  </div>
-                       <div class="blog_details" style="height: 200px;" onclick="detailUrl('${list.CAMB_NAME}', '${list.CAMB_NUM}')">
+                  		</div>
+                       <div class="blog_details" style="height: 200px;">
                           <p style="font-size: 0.8em;">진행 기간 <fmt:formatDate pattern="yyyy-MM-dd" value="${list.CAMB_STARTDATE}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${list.CAMB_FINDATE}"/></p>
                            <h3 class="blog-head">${list.CAMB_NAME}</h3>
                        </div>
@@ -75,42 +101,36 @@ i {cursor: pointer;  margin-right: 10px; color: #388E3C;}
 </div>
 
 <div class="container">
-   <div class="row">
-      <div class= "col-md-2 col-6" >
-         <select>
-            <option selected="selected">전체</option>
-            <option>제목</option>
-            <option>내용</option>
-         </select>
-      </div>
-      <div class="col-md-4 col-6" id="search-box" style="margin-left: 20px;">
-         <input type="text" id="search" name="search" placeholder="검색 . . ." value="${page.search}">
-         <a onclick="searchCamBoard()"><i class="fas fa-search"></i></a>
-      </div>
-   </div>
-   <nav class="blog-pagination justify-content-center d-flex">
-      <ul class="pagination">
-         <c:if test="${page.prev}">
-             <li class="page-item">
-               <a class="page-link" aria-label="Previous" onclick="paging('${page.getStartPage()-1}')">
-                  <i class="ti-angle-left"></i>
-               </a>
-            </li>
-         </c:if>
-         <c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">   
-            <li class="page-item">
-               <a class="page-link" onclick="paging('${idx}')">${idx}</a>
-            </li>
-         </c:forEach>
-         <c:if test="${page.next}">
-            <li class="page-item">
-               <a class="page-link" aria-label="Next" onclick="paging('${page.getEndPage()+1}')">
-                  <i class="ti-angle-right"></i>
-               </a>
-            </li>
-         </c:if>
-      </ul>
-   </nav>
+	<div class="row">
+	<div class="col-sm-2 col-lg-4"></div>
+	<div class="col-sm-8 col-lg-4">
+		<nav class="blog-pagination justify-content-center d-flex">
+		      <ul class="pagination">
+	         <c:if test="${page.prev}">
+	             <li class="page-item">
+	              <a class="page-link" aria-label="Previous" onclick="paging('${page.getStartPage()-1}')">
+	                  <i class="ti-angle-left"></i>
+	               </a>
+	            </li>
+	         </c:if>
+	         <c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">   
+	            <li class="page-item">
+	               <a class="page-link" onclick="paging('${idx}')">${idx}</a>
+	            </li>
+	         </c:forEach>
+	         <c:if test="${page.next}">
+	            <li class="page-item">
+	               <a class="page-link" aria-label="Next" onclick="paging('${page.getEndPage()+1}')">
+	                  <i class="ti-angle-right"></i>
+	               </a>
+	            </li>
+	         </c:if>
+	      </ul>
+	   </nav>
+	</div>
+	<div class="col-sm-2 col-lg-4"></div>
+	</div>
+	
 </div>
 
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
@@ -120,12 +140,6 @@ i {cursor: pointer;  margin-right: 10px; color: #388E3C;}
 
 <script type="text/javascript">
    window.onload = function(){
-      if("${page.search}"){
-         var cancelButton = '<input type="button" id="cancelButton" onclick="setAll()" value="취소">';
-         $("#search-box").append(cancelButton);
-      }else if(!"${page.search}"){
-         
-      }
    }
    
    var pathname = window.location.pathname;
@@ -144,6 +158,7 @@ i {cursor: pointer;  margin-right: 10px; color: #388E3C;}
       
       if(!search){
          alert("검색어를 입력해 주세요.");
+         return false;
       }else{
          location.href="/camBoard/list/search?search=" + search;   
       }
