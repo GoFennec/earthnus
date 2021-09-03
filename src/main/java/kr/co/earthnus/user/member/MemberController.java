@@ -3,7 +3,6 @@ package kr.co.earthnus.user.member;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.earthnus.user.auth.AuthBean;
-import kr.co.earthnus.user.pay.PayBean;
 import kr.co.earthnus.util.SHA256;
 
 @Controller
@@ -35,7 +33,7 @@ public class MemberController {
 	@RequestMapping(value="/member/join", method=RequestMethod.POST)
 	public String memberJoin2(MemberBean memberBean) throws NoSuchAlgorithmException {
 		memberService.insertMember(memberBean);
-		return "redirect:/";
+		return "redirect:/auth/login";
 	}
 
 			

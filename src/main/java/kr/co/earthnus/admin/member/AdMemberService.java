@@ -57,6 +57,12 @@ public class AdMemberService {
 		return cheerCount;
 	}
 	
+	public int checkExgoods (String deleteMember) {
+		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
+		int checkExgoods = dao.checkExgoods(deleteMember);
+		return checkExgoods;
+	}
+	
 	public int deletePW(String deletePW) throws NoSuchAlgorithmException {
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
         SHA256 sha256 = new SHA256();

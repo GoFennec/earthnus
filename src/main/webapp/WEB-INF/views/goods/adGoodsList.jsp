@@ -213,32 +213,9 @@
 					return;
 				}else{
 					$("#cancelModal").modal('show');
-					$("#item").text("정말 " + checkArr + " 상품을 삭제하시겠습니까?");
 				}
 			}
 			</script>
-			
-          <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
           
           <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
             aria-hidden="true">
@@ -251,8 +228,6 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                	<input type="checkbox" id="itemCheck"> &nbsp &nbsp <span id="item"></span>
-                	<hr>
                   	<p>관리자 비밀번호를 입력하세요.</p>
                   	<input type="password" id="deletePW">
                 </div>
@@ -272,10 +247,6 @@
 					var deletePW = $("#deletePW").val();
 					if(deletePW == ""){
 						alert("관리자 비밀번호를 입력해주세요.");
-						return;
-					}
-					if($("input:checkbox[id=itemCheck]").is(":checked") == false) {
-						alert('확인 체크를 해주세요.');
 						return;
 					}
 		

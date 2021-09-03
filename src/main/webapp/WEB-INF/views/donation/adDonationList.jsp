@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,6 +44,8 @@
   		input[type='checkbox']:checked:before {
   			background:#66BB6A;
   		}
+  		
+  		
   	</style>
 </head>
 
@@ -130,7 +133,7 @@
           <!-- Row -->
           <div class="row">
           
-             <div class="col-xl-3 col-md-6 mb-4">
+             <div class="col-xl-4 col-md-6 mb-4">
               <div class="card h-100">
                 <div class="card-body">
                   <div class="row align-items-center">
@@ -146,7 +149,7 @@
               </div>
             </div>
             <!-- Earnings (Annual) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
               <div class="card h-100">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
@@ -162,7 +165,7 @@
               </div>
             </div>
             <!-- New User Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
               <div class="card h-100">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
@@ -172,22 +175,6 @@
                     </div>
                     <div class="col-auto">
                       <i class="far fa-stop-circle fa-2x text-info"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">전체 발생 포인트</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><fmt:formatNumber type="number" maxFractionDigits="3" value="${payTotalPoint}"/> 포인트</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-coins fa-2x text-info"></i>
                     </div>
                   </div>
                 </div>
@@ -269,7 +256,7 @@
                 <a href="/adDonation/canceled" class="btn btn-sm btn-primary">취소된 후원</a>
                 </div>
                 <div class="col-sm-12 col-md-6" style="text-align:right;">
-                <button class="btn btn-sm btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="checkDelete()">결제 취소</button>
+                <button class="btn btn-sm btn-danger" onclick="checkDelete()">결제 취소</button>
                 </div>
                 </div>  
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
@@ -397,32 +384,9 @@
 					return;
 				}else{
 					$("#cancelModal").modal('show');
-					$("#item").text(checkArr + " 후원을 삭제합니다.");
 				}
 			}
 			</script>
-
-          <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
           
           <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
             aria-hidden="true">
@@ -435,14 +399,12 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                	<input type="checkbox" id="itemCheck"> &nbsp; &nbsp; <span id="item"></span>
-                	<hr>
                   	<p>관리자 비밀번호를 입력하세요.</p>
                   	<input type="password" id="deletePW">
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="donationDelete()">삭제</button>
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소</button>
+                  <button type="button" class="btn btn-danger" onclick="donationDelete()">삭제</button>
+                  <button type="button" class="btn" data-dismiss="modal">취소</button>
                 </div>
               </div>
             </div>
@@ -466,7 +428,7 @@
 			   			
 			   			success : function(result){
 			      			if(result.error === true){
-			    	  			alert('삭제되었습니다.');
+			    	  			alert('결제가 취소되었습니다.');
 			      			}else if(result.error === false){
 			    	  			alert('관리자 비밀번호를 확인해 주세요.');
 			    	  			return;
@@ -537,9 +499,6 @@ function donationDelete(){
    var deletePW = $("#deletePW").val();
    if(deletePW == ""){
       alert("관리자 비밀번호를 입력해주세요.");
-      return;
-   }else if($("input:checkbox[id=itemCheck]").is(":checked") == false) {
-      alert('확인 체크를 해주세요.');
       return;
    }
 

@@ -134,7 +134,14 @@
 							<tr class="exGoodsInfo" id="${exGoods.exg_num}">
 								<td>${exGoods.exg_num}</td>
 								<td>${exGoods.exg_id}</td>
-								<td>${exGoods.exg_state}</td>
+								<c:choose>
+								<c:when test="${exGoods.exg_state eq '배송대기'}">
+								<td class="text-warning">${exGoods.exg_state}</td>
+								</c:when>
+								<c:when test="${exGoods.exg_state != '배송대기'}">
+								<td class="text-success">${exGoods.exg_state}</td>
+								</c:when>
+								</c:choose>
 								<td>${exGoods.exg_gnum}(${exGoods.exg_gname})</td>
 								<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
 								<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td>

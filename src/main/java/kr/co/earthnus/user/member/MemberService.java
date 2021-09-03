@@ -270,6 +270,7 @@ public class MemberService {
 	public int idCheck(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		int n = dao.idCheck(mem_id);
+		System.out.println(n);
 		return n;
 	}
 

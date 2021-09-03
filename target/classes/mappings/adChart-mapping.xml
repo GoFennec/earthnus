@@ -58,9 +58,30 @@
 	
 	
 	
-	
+	<!-- 방문자 카운트 -->
 	<select id="countVisitor" parameterType="int" resultType="int">
 		select count(*) from visitor where date_format(visit_time,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d')
+	</select>
+	
+	<!-- 카테고리 별 매출 -->
+	<select id="sumPlastic" parameterType="int" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d') 
+		and (PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경') and pay_state != '결제취소'
+	</select>
+	
+	<select id="sumOcean" parameterType="int" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d') 
+		and (PAY_DNAME='조개' OR PAY_DNAME='바다거북' OR PAY_DNAME='고래' OR PAY_DNAME='바다') and pay_state != '결제취소'
+	</select>
+	
+	<select id="sumIce" parameterType="int" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d') 
+		and (PAY_DNAME='작은 얼음' OR PAY_DNAME='큰 얼음' OR PAY_DNAME='빙하 조각' OR PAY_DNAME='북극곰') and pay_state != '결제취소'
+	</select>
+	
+	<select id="sumForest" parameterType="int" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d') 
+		and (PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲') and pay_state != '결제취소'
 	</select>
 	
 </mapper>

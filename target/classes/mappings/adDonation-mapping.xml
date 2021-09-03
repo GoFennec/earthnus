@@ -45,7 +45,7 @@
 	</update>
 	
 	<select id="payTotal" resultType="String">
-		select sum(pay_price) from pay
+		select sum(pay_price) from pay where pay_state != '결제취소'
 	</select>
 	
 	<select id="payMonthly" resultType="String">
@@ -57,7 +57,7 @@
 	</select>
 	
 	<select id="payTotalPoint" resultType="String">
-		select sum(pay_point) from pay
+		select sum(pay_point) from pay where pay_pstate = '적립완료'
 	</select>
 	
 	<select id="payPlastic" resultType="String">

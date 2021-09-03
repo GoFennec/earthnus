@@ -190,11 +190,14 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="m-0 font-weight-bold">이번 달의 인기 제품</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">1. ${countLanking.get(0).getExg_gname()}(${countLanking.get(0).getCount()}개)</div>
+                      <c:if test="${not empty countLanking}">
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6"><i class="fas fa-crown"></i> ${countLanking.get(0).getExg_gname()}(${countLanking.get(0).getCount()}개)</div>
                       <div class="mt-2 mb-0 text-muted text-xs">
-                        <span>2. ${countLanking.get(1).getExg_gname()}(${countLanking.get(1).getCount()}개)</span><br>
-                        <span>3. ${countLanking.get(2).getExg_gname()}(${countLanking.get(2).getCount()}개)</span>
                       </div>
+                      </c:if>
+                      <c:if test="${empty countLanking}">
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="h6">없음</div>
+                      </c:if>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-list-ol fa-2x text-info"></i>
@@ -239,27 +242,6 @@
           </div>
           <!--Row-->
 
-          <!-- Modal Logout -->
-          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div>
 
         </div>
         <!---Container Fluid-->

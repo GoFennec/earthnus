@@ -51,7 +51,6 @@
                       </div>
                   </div>
               </div>
-          </div>
       </footer>
 
 	<script src="/resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>

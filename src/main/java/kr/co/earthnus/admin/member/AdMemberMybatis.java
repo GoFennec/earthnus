@@ -13,6 +13,8 @@ public interface AdMemberMybatis {
 	public int payCount(@Param("mem_id") String mem_id);
 	public Integer payTotal(@Param("mem_id") String mem_id);
 	public int cheerCount(@Param("mem_id") String mem_id);
+	
+	public int checkExgoods(@Param("deleteMember") String deleteMember);
 	public int deletePW(@Param("deletePW") String deletePW);
 	public int adDeleteMember(@Param("deleteMember") String deleteMember);
 	

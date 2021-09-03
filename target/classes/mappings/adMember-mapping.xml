@@ -38,6 +38,10 @@
 		select count(*) from CHEBOARD where cheb_id = #{mem_id}
 	</select>
 	
+	<select id="checkExgoods" parameterType="String" resultType="int">
+		select count(*) from exgoods where exg_id = #{deleteMember} and exg_state = '결제완료' or exg_state = '배송처리'
+	</select>
+	
 	<select id="deletePW" parameterType="String" resultType="int">
 		select count(*) from ADMEMBER where AD_PW = #{deletePW}
 	</select>
