@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,18 +17,21 @@
   <link href="/resources/assets/css/ruang-admin.min.css" rel="stylesheet">
   <link href="/resources/assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<style>
-	table {margin: auto;}
-	thead th {padding: 5px; font-weight: bold; vertical-align: top; color: #696969; border-bottom: 3px solid #BEBEBE;}
-	.td_left {text-align: center; vertical-align: middle;}
-	.td_right input {width: 400px;}
-	.td_right2 .text {width: 199px;}
-	#selectBox {width: 30%}
-	.td_right2 .btnAdd {width: 80px;}
-	.sysBtn {text-align: center;}
-</style>
+  
+  <style type="text/css">
+  	label{
+  		margin-top:1rem;
+  	}
+  	
+  	th,td{
+  		text-align:center;
+  	}
+  	.btn btn-sm btn-primary{
+  		font-color:#6777EF;
+  	}
+  </style>
 </head>
-<body>
+
 <body id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
@@ -80,9 +85,9 @@
         </a>
         <div id="collapseForm" class="collapse show" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item active" href="/adExGoods/oList">주문 목록</a>
+            <a class="collapse-item" href="/adExGoods/oList">주문 목록</a>
             <a class="collapse-item" href="/adExGoods/dList">배송 처리 목록</a>
-            <a class="collapse-item" href="/adExGoods/aList">주문 승인 내역</a>
+            <a class="collapse-item active" href="/adExGoods/aList">주문 승인 내역</a>
             <a class="collapse-item" href="/adExGoods/cList">주문취소내역</a>
           </div>
         </div>
@@ -103,49 +108,43 @@
         <!-- Topbar -->
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">지구마켓 주문 승인 내역</h1>
+          </div>
 
           <!-- Row -->
           <div class="row">
-          
-		 <!-- DataTable with Hover -->
-			<div class="col-lg-12">
-				<div class="insertForm">
-	<form action="/adGoods/insertOk" method="POST" enctype="multipart/form-data" onsubmit="return checkAdd();">
-		<table class="insertFormTable">
-			<thead><tr><th scope="col" colspan="2">지구마켓 상품추가</th></tr></thead>
-			<tr><td class="td_left"><label for="goods_numV">상&nbsp;품&nbsp;&nbsp;번&nbsp;호&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right"><input type="text" id="goods_numV" value="${newGoodsNum}" disabled required>
-				<input type="hidden" name="goods_num" value="${newGoodsNum}"></td></tr>
-			<tr><td class="td_left"><label for="goods_name">상&nbsp;품&nbsp;&nbsp;이&nbsp;름&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right"><input type="text" name="goods_name" id="goods_name" required></td></tr>
-			<tr><td class="td_left"><label for="goods_category">상&nbsp;품&nbsp;&nbsp;분&nbsp;류&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right2"><input type="text" name="goods_category" id="goods_category" required>
-				<select id="selectBox">
-					<option value="">직접입력</option>
-				<c:forEach var="category" items="${goodsCategory}">
-					<option value="${category.goods_category}">${category.goods_category}</option>
-				</c:forEach>
-				</select></td></tr>
-			<tr><td class="td_left"><label for="goods_point">상품포인트&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right"><input type="text" name="goods_point" id="goods_point" required></td></tr>
-			<tr><td class="td_left"><label for="goods_desc">상&nbsp;품&nbsp;&nbsp;설&nbsp;명&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right"><textarea cols="43" rows="4" style="resize: none;" name="goods_desc" id="goods_desc" required></textarea></td></tr>
-			<tr><td class="td_left"><label for="goods_uploadFile">상&nbsp;품&nbsp;&nbsp;사&nbsp;진&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right"><input type="file" accept="image/*" name="goods_uploadFile" id="goods_uploadFile"></td></tr>
-			<tr><td class="td_left"><label for="goods_info">상&nbsp;품&nbsp;&nbsp;정&nbsp;보&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right2">
-					<input type="hidden" name="total" id="total" value="2">
-					<input type="text" name="goods_info_1" id="goods_info_1" class="text" required placeholder="색상">
-					<input type="text" name="goods_info_2" id="goods_info_2" class="text" required placeholder="레드">
-					<input type="button" id="addInput" class="btn-dark btnAdd" value="정보추가"/></td></tr>
-		</table><br>
-		<div class="sysBtn">
-			<input type="submit" class="btn-dark" value="상품추가"/>&nbsp;&nbsp;&nbsp;
-			<input type="button" class="btn-dark" value="뒤로가기" onclick="location.href='/adGoods/list'"/>
-		</div>
-	</form>
-	</div><br>
-</div>
+            <!-- DataTable with Hover -->
+            <div class="col-lg-12">
+              <div class="card mb-4">
+                <div class="table-responsive p-3">
+                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>결제 번호</th>
+                        <th>아이디</th>
+                        <th>주문 상태</th>
+                        <th>상품 정보</th>
+                        <th>사용한 포인트</th>
+                        <th>결제 날짜</th>
+                      </tr>
+                    </thead>
+					<tbody>
+                    	<c:forEach items="${exGoodsList}" var="exGoods">
+							<tr class="exGoodsInfo" id="${exGoods.exg_num}">
+								<td>${exGoods.exg_num}</td>
+								<td>${exGoods.exg_id}</td>
+								<td>${exGoods.exg_state}</td>
+								<td>${exGoods.exg_gnum}(${exGoods.exg_gname})</td>
+								<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
+								<td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td>
+							</tr>
+						</c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
           <!--Row-->
 
@@ -192,38 +191,15 @@
   <!-- Page level plugins -->
   <script src="/resources/assets/js/jquery.dataTables.min.js"></script>
   <script src="/resources/assets/js/dataTables.bootstrap4.min.js"></script>
-<script type="text/javascript">
-var i = 3;
-$(function() {                
-    $('#addInput').click (function () {
-        $('.insertFormTable').append (
-            "<tr><td></td><td class='td_right2'><input type='text' name='goods_info_"+i+"' id='goods_info_"+i+"' class='text' required> "
-            +"<input type='text' name='goods_info_"+(i+1)+"' id='goods_info_"+(i+1)+"' class='text' required> "
-            +"<input type='button' class='btnRemove btn-dark btnAdd' value='삭제'></td></tr>");
-        $('.btnRemove').on('click', function () {
-            $(this).prev().prev().remove();
-            $(this).prev().remove();
-            $(this).next().remove();
-            $(this).remove();
-        });
-        i++; i++;
-        $('#total').val(i-1);
+
+  <!-- Page level custom scripts -->
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
     });
-});
-function checkAdd() {
-	var o = 1;
-	var dataInput = "";
-	for (var num = 1; num <= $('#total').val(); num++) {
-		if ($('#goods_info_'+num).val() == "" || $('#goods_info_'+num).val() == null) {
-		} else {
-			dataInput += num+",";
-		}
-	}
-	$('#total').val(dataInput);
-}
-$("#selectBox").change(function(){
-	$("#goods_category").val($("#selectBox").val());
-});
-</script>
+  </script>
+
 </body>
+
 </html>

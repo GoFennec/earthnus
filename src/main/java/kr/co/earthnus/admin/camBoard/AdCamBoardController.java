@@ -7,9 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -25,6 +28,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -134,21 +138,26 @@ public class AdCamBoardController {
 			@RequestParam(value="CAMB_NUM") String CAMB_NUM, @RequestParam("CAMB_STARTDATE") Date CAMB_STARTDATE, 
 			@RequestParam("CAMB_FINDATE") Date CAMB_FINDATE, Model model) {
 		
-		System.out.println("updateOk 而⑦듃濡ㅻ윭 =======> �젣紐� : " + CAMB_NAME + ", 二쇱젣 : " + CAMB_SUBJECT + 
-				", �궡�슜 : " + CAMB_CONTENT + ", �뙆�씪 : " + CAMB_UPLOADFILE + ", 번호 : " + CAMB_NUM);
 		adCamBoardService.updateCamBoard(CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE, CAMB_STARTDATE, CAMB_FINDATE);
 		System.out.println("updateCamBoardOk");
 		
 		return "redirect:/adCamBoard/list";
 	}
 	
-	@RequestMapping(value="/adCamBoard/delete")
-	public String deleteCamBoard(camBoardBean cBean, Model model) {
+	@RequestMapping(value="/adCamBoard/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteCamBoard(@RequestParam("deletePW") String deletePW, @RequestParam("CAMB_NUM") String CAMB_NUM, HttpServletRequest request) throws NoSuchAlgorithmException {
 		
-		System.out.println("deleteCamBoard");
-		adCamBoardService.deleteCamBoard(cBean);
+		Map<String, Object> map = new HashMap<String, Object>();
+		int delete = adCamBoardService.deletePW(deletePW);
 		
-		return "redirect:/adCamBoard/list";
+		if(delete > 0) {
+			adCamBoardService.deleteCamBoard(Integer.parseInt(CAMB_NUM));
+			map.put("error", true);
+		}else {
+			map.put("error", false);
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="/ckupload/imgUpload", method = RequestMethod.POST) 

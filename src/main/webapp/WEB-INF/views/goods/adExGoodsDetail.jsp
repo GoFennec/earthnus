@@ -157,7 +157,7 @@
 					    <option value="FedEx">FedEx</option></select>
 					<!-- <input type="text" id="exg_cc" value="" required> -->
 				<tr><td class="td_left"><label for="exg_waybill">운 송 장 번 호&nbsp;&nbsp;&nbsp;</label></td>
-					<td class="td_right"><input type="text" name="exg_waybill" id="exg_waybill" value="" required></td>
+					<td class="td_right"><input type="text" name="exg_waybill" id="exg_waybill" value="" maxlength="13" required pattern="^[0-9]+$"></td>
 			</tbody>
 		</table><br>
 		<div class="sysBtn">

@@ -35,6 +35,7 @@ public class AdGoodsController {
 	@RequestMapping("/adGoods/insert")
 	public String insertGoods(Model model) {
 		model.addAttribute("newGoodsNum", adGoodsService.newGoodsNum());
+		model.addAttribute("goodsCategory", adGoodsService.getGoodsCategory());
 		return "goods/adGoodsInsert";
 	}
 	
@@ -46,8 +47,8 @@ public class AdGoodsController {
 	
 	@RequestMapping("/adGoods/update")
 	public String updateGoods(@RequestParam String goodsNumU, Model model) {
-		System.out.println(goodsNumU);
 		adGoodsService.updateGoods(goodsNumU, model);
+		model.addAttribute("goodsCategory", adGoodsService.getGoodsCategory());
 		return "goods/adGoodsUpdate";
 	}
 	

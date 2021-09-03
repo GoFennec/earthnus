@@ -113,7 +113,7 @@ button {
 	</div>
 	<br><br>
 	
-	</section><br>
+	</section>
 	
 </div>	
 

@@ -13,7 +13,7 @@
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton{text-align: center;}
-	input {border: none; background: transparent;}
+	input .CAMB_NAME, .CAMB_STARTDATE, .CAMB_FINDATE{border: none; background: transparent;}
 	textarea {border: none; width: 100%; background: transparent;}
 	select {border: none; background: transparent;}
 	.sysBtn {text-align: center;}
@@ -48,7 +48,6 @@
 									<input type="hidden" name="goods_img" value="${goods.goods_img}">
 								<div style="text-align: center;" class="file-edit-icon">
 									<a class="preview-edit imgedit">사진수정</a>
-									<a class="preview-de imgedit">사진삭제</a>
 								</div>
 						</div>
 											
@@ -58,7 +57,7 @@
 				
 				<tr>
 					<td><b>제목</b></td>
-					<td class="update"><input type="text" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
+					<td class="update"><input type="text" id="CAMB_NAME" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
 					<td><b>주제</b></td> 
 					<td class="update">
 						<select id="CAMB_SUBJECT" name="CAMB_SUBJECT" onchange="showUpdateButton()" required>
@@ -98,14 +97,32 @@
 			<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
 			
 			<div class="sysBtn">
-				<input type="submit" class="btn-dark editbutton" value="수정">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
-				<input type="button" class="btn-dark editbutton" value="삭제" 
-				onclick="location.href='/adCamBoard/delete?CAMB_NUM=${camBoard.CAMB_NUM}'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				
-				<input type="button" class="btn-dark editbutton" value="목록" 
-				onclick="location.href='/adCamBoard/list'"/>
+				<input type="button" class="btn-dark editbutton" value="삭제"  data-toggle="modal" data-target="#deleteModal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" class="btn-dark editbutton" value="목록" onclick="location.href='/adCamBoard/list'"/>
 			</div>
+			
+			<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">"${camBoard.CAMB_NAME}" 캠페인을 삭제합니다.</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>관리자 비밀번호를 입력하세요.</p>
+                  <input type="password" id="deletePW">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" style="background-color:#fc544b;border-color:#fc544b;" onclick="camBoardDelete()">삭제</button>
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">취소</button>
+                </div>
+              </div>
+            </div>
+          </div>
 		</form>
 	</div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
@@ -134,6 +151,7 @@
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
+	
 	$('#file').change(handleFileSelect);
 	$('.file-edit-icon').on('click', '.preview-de', function () {
 	    $("#preview").html(['<img src="/resources/camBoard/imgDefault.png" id="IMG" width="600" alt="캠페인" title="후원"/>'].join(''))
@@ -141,6 +159,37 @@
 	$('.preview-edit').click( function() {
 	  $("#file").click();
 	} );
+	
+	function camBoardDelete(){
+		var CAMB_NUM = "${CAMB_NUM}";
+		var deletePW = $("#deletePW").val();
+		
+		if(deletePW == ""){
+			alert("관리자 비밀번호를 입력해주세요.");
+			return;
+		}
+
+		$.ajax({
+   			type: "POST", //요청 메소드 방식
+  			 url:"/adCamBoard/delete",
+   			data: {"CAMB_NUM":CAMB_NUM, "deletePW":deletePW},
+   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+   			
+   			success : function(result){
+      			if(result.error === true){
+    	  			alert('삭제되었습니다.');
+    	  			location.href="/adCamBoard/list";
+      			}else if(result.error === false){
+    	  			alert('관리자 비밀번호를 확인해 주세요.');
+    	  			return;
+      			}
+   			},
+   		 error:function(request,status,error){
+   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+      			//통신 실패시 발생하는 함수(콜백)
+   				}
+			});
+	}
 </script>
 </body>
 </html>

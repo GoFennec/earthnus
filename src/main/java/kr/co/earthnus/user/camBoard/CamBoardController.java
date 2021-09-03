@@ -18,7 +18,7 @@ public class CamBoardController{
 	public String getCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
 			@RequestParam(defaultValue = "6") String contentnum, camBoardBean bean, Model model) {
 		
-		String search = "%%";
+		String search = "";
 		String search_type = "CAMB_NAME";
 		String orderBy = "CAMB_NUM";
 		String order = "DESC";
@@ -29,16 +29,11 @@ public class CamBoardController{
 	}
 	
 	@RequestMapping("/camBoard/list/search")
-	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "6") String contentnum, @RequestParam( value = "search", required=false) String search ,
-			@RequestParam(defaultValue = "desc") String order, camBoardBean bean, Model model) {
+	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "CAMB_ENTIRE") String search_type, 
+			@RequestParam(defaultValue = "1") String pagenum, @RequestParam(defaultValue = "6") String contentnum, 
+			@RequestParam( value = "search", required=false) String search , @RequestParam(defaultValue = "desc") String order, 
+			camBoardBean bean, Model model) {
 				
-		if(search != null) {
-			search = "%" + search + "%";
-		}else if(search == null || search.equals("")) {
-			search = "%%";
-		}
-		String search_type = "CAMB_NAME";
 		String orderBy = "CAMB_NUM";
 		
 		camBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
@@ -58,6 +53,7 @@ public class CamBoardController{
 		String orderBy = "CAMB_NUM";
 		
 		camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, Integer.parseInt(cambnum), list, model);
+		model.addAttribute("totalIndex", list.get("totalIndex"));
 		model.addAttribute("index", list.get("index"));
 		model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
 		model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));

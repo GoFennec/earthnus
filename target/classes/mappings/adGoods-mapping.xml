@@ -7,6 +7,7 @@
 	<resultMap id="goodsResult" type="goods">
 		<id property="goods_num" column="GOODS_NUM"/>
 		<result property="goods_name" column="GOODS_NAME"/>
+		<result property="goods_category" column="GOODS_CATEGORY"/>
 		<result property="goods_point" column="GOODS_POINT"/>
 		<result property="goods_info" column="GOODS_INFO"/>
 		<result property="goods_desc" column="GOODS_DESC"/>
@@ -31,10 +32,16 @@
 		]]>
 	</select>
 	
+	<select id="getGoodsCategory" resultMap="goodsResult">
+		<![CDATA[
+			SELECT DISTINCT GOODS_CATEGORY FROM GOODS;
+		]]>
+	</select>
+	
 	<insert id="isertGoodsOk">
 		<![CDATA[
-			INSERT INTO GOODS (GOODS_NUM,GOODS_NAME,GOODS_POINT,GOODS_INFO,GOODS_DESC,GOODS_IMG) 
-			VALUES (#{goods_num},#{goods_name},#{goods_point},#{goods_info},#{goods_desc},#{goods_img})
+			INSERT INTO GOODS (GOODS_NUM,GOODS_NAME,GOODS_CATEGORY,GOODS_POINT,GOODS_INFO,GOODS_DESC,GOODS_IMG) 
+			VALUES (#{goods_num},#{goods_name},#{goods_category},#{goods_point},#{goods_info},#{goods_desc},#{goods_img})
 		]]>
 	</insert>
 	
@@ -46,7 +53,7 @@
 	
 	<update id="updateGoodsOk">
 		<![CDATA[
-			UPDATE GOODS SET GOODS_NAME=#{goods_name},GOODS_POINT=#{goods_point},
+			UPDATE GOODS SET GOODS_NAME=#{goods_name},GOODS_CATEGORY=#{goods_category},GOODS_POINT=#{goods_point},
 			GOODS_INFO=#{goods_info},GOODS_DESC=#{goods_desc},GOODS_IMG=#{goods_img} 
 			WHERE GOODS_NUM=#{goods_num}
 		]]>

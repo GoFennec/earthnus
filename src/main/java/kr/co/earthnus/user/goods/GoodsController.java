@@ -21,6 +21,7 @@ public class GoodsController {
 			@RequestParam(defaultValue = "8") String contentnum, 
 			@RequestParam(defaultValue = "") String goodsKinds, GoodsBean gBean, Model model) {
 		model.addAttribute("goodsKinds", goodsKinds);
+		model.addAttribute("goodsCategory", goodsService.getGoodsCategory());
 		goodsService.getGoodsList(gBean, pagenum, contentnum, goodsKinds, model);
 		return "goods/goodsList";
 	}
