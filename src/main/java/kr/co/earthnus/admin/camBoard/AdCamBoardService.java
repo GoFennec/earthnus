@@ -1,6 +1,7 @@
 package kr.co.earthnus.admin.camBoard;
 
 import java.io.File;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -10,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.earthnus.admin.member.AdMemberMybatis;
 import kr.co.earthnus.user.camBoard.CamBoardMybatis;
 import kr.co.earthnus.user.camBoard.camBoardBean;
+import kr.co.earthnus.util.SHA256;
 
 @Service
 public class AdCamBoardService {
@@ -94,8 +97,6 @@ public class AdCamBoardService {
 		cBean.setCAMB_STARTDATE(CAMB_STARTDATE);
 		cBean.setCAMB_FINDATE(CAMB_FINDATE);
 		
-		System.out.println("updateOk 서비스 =======> 제목 : " + cBean.getCAMB_NAME() + ", 주제 : " + cBean.getCAMB_SUBJECT() + 
-				", 내용 : " + cBean.getCAMB_CONTENT() + ", 파일 : " + cBean.getCAMB_UPLOADFILE() + ", 번호 : " + cBean.getCAMB_NUM());
 		MultipartFile uploadFile = cBean.getCAMB_UPLOADFILE();
 		if (!uploadFile.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();
@@ -113,10 +114,25 @@ public class AdCamBoardService {
 		CamBoardDAO.camBoardUpdate(cBean);
 	}
 	
-	public void deleteCamBoard(camBoardBean cBean) {
+	public int deletePW(String deletePW) throws NoSuchAlgorithmException {
+		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
+        SHA256 sha256 = new SHA256();
+
+        //SHA256으로 암호화된 비밀번호
+        String cryptogram = sha256.encrypt("암호화 비밀번호 : " + deletePW);
+
+        System.out.println(cryptogram);
+
+        //비밀번호 일치 여부
+        System.out.println(cryptogram.equals(sha256.encrypt(deletePW)));
+		int deletePass = dao.deletePW(cryptogram);
+		return deletePass;
+	}
+	
+	public void deleteCamBoard(int CAMB_NUM) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
-		
-		camBoardDAO.camBoardDelete(cBean);
+		System.out.println("서비스 삭제 캠페인 번호 : " + CAMB_NUM);
+		camBoardDAO.camBoardDelete(CAMB_NUM);
 	}
 	
 	public camBoardBean getCamBoard(String contentnum) {
@@ -127,7 +143,6 @@ public class AdCamBoardService {
 		
 		cBean = camBoardDAO.getCamBoard(Integer.parseInt(contentnum));
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println("서비스 날짜 : " + cBean.getCAMB_STARTDATE() + "\n" + "서비스 날짜 타입 : " + cBean.getCAMB_STARTDATE().getClass());
 		
 		return camBoardDAO.getCamBoard(Integer.parseInt(contentnum));
 	}

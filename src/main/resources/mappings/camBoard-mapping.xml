@@ -43,7 +43,14 @@
 				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
 				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
 			</choose>
-			ORDER BY ${orderBy} ${order} LIMIT #{contentnum} OFFSET #{pagenum}
+			ORDER BY 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[${orderBy} AND (SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order} ]]></when>
+				<when test='arr.equals("doing")'>${orderBy} ${order} </when>
+				<when test='arr.equals("exp")'>${orderBy} ${order} </when>
+				<when test='arr.equals("end")'>${orderBy} ${order} </when>
+			</choose>
+			LIMIT #{contentnum} OFFSET #{pagenum}
 	</select>
 	
 	<select id="getAdBoardList" resultMap="camBoardResult">
@@ -204,6 +211,10 @@
 			VALUES(#{CAMB_NAME}, #{CAMB_SUBJECT}, #{CAMB_CONTENT}, #{CAMB_FILE}, #{CAMB_STARTDATE}, #{CAMB_FINDATE})
 		]]>
 	</insert>
+	
+	<select id="deletePW" parameterType="String" resultType="int">
+		select count(*) from ADMEMBER where AD_PW = #{deletePW}
+	</select>
 	
 	<delete id="camBoardDelete">
 		<![CDATA[
