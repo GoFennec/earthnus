@@ -20,7 +20,7 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
 	rel="stylesheet">
-
+<link href="/resources/assets/css/form-validation.css" rel="stylesheet">
 
 <!-- 모달창 관련 -->
 <link rel="stylesheet"
@@ -636,10 +636,7 @@ body {
 <body oncontextmenu='return false' onselectstart='return false'
 	ondragstart='return false'>
 	<br>
-	<br>
-	<br>
-	<br>
-
+	
 	<div class="container">
 		<div class="view-account">
 			<section class="module">
@@ -715,7 +712,8 @@ body {
 					</div>
               <button type="button" class="btn btn-primary btn-block btn-lg" onclick="pwCheck()">현재비밀번호 확인</button>
 					<div class="form-group">
-						<input type="password" class="form-control" placeholder="변경할 비밀번호" required  id="mem_cpw1">					
+						<input type="password" class="form-control" placeholder="변경할 비밀번호" required  id="mem_cpw1" >					
+						
 				<div class="invalid-feedback" id="invalid-pw2">
                 	8~20자의 영문 대문자, 소문자와 특수문자로 비밀번호를 설정할 수 있습니다.
               </div>
@@ -725,7 +723,7 @@ body {
 						<input type="password" class="form-control" placeholder="비밀번호 확인" required id="mem_cpw2">					
 					</div>
 					 
-						<button type="button" class="btn btn-primary btn-block btn-lg" onclick="updatePw()">비밀번호 변경</button>
+						<button type="button" id="pwch" class="btn btn-primary btn-block btn-lg" onclick="updatePw()">비밀번호 변경</button>
 					
 			
 			</div>
@@ -750,10 +748,12 @@ body {
 							$("#invalid-pw2").hide();
 						}
 					});
+				});
 					</script>
 					
  <script type="text/javascript">
 				function pwCheck(){
+					
 					var mem_pw = $("#mem_pw").val();
 					if(mem_pw === ""){
 						alert("비밀번호를 입력해주세요.");
@@ -827,15 +827,24 @@ body {
 										}
 									}
 								</script>
-								
+									<c:if test="${MemberBean.mem_birth eq null}" >
 								<div class="col-12">
-									<label for="username" class="form-label">생년월일 </label> <input
+									<label for="username" class="form-label">생년월일 </label> 
+									<input
 										type="date" name="mem_birth" class="form-control" id="birth"
-										value="${MemberBean.mem_birth }" required>
-									<div class="invalid-feedback" id="invalid-birth">필수
+										 required>
+									<div class="invalid-feedback" id="invalid-birth" >필수
 										입력사항입니다.</div>
 								</div>
-
+								</c:if>
+									<c:if test="${MemberBean.mem_birth ne null}" >
+								<div class="col-12">
+									<label for="username" class="form-label">생년월일 </label> 
+									<input
+										type="date" name="mem_birth" class="form-control" id="birth"
+										value="${MemberBean.mem_birth }" readonly>
+									</div>
+									</c:if>
 								<div class="col-12">
 									<label for="username" class="form-label">성별 </label>
 								</div>
@@ -1188,7 +1197,7 @@ body {
 			</section>
 		</div>
 	</div>
-
+    <jsp:include page="/WEB-INF/views/footer.jsp"/>
 
 <script>	
 		$(function() {
@@ -1253,6 +1262,8 @@ body {
 		return false;    	  
       };
       </script>
-      <jsp:include page="/WEB-INF/views/footer.jsp"/>
+  
+      
+      <script src="/resources/assets/js/form-validation.js"></script>
 </body>
 </html>

@@ -77,10 +77,10 @@
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('조개','바다거북','고래','바다')
 	</select>
 	<select id="myDonation_i" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('플라스틱 줄이기','해양 청소','대지 청소','친환경')
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('작은 얼음','큰 얼음','빙하 조각','북극곰')
 	</select>
 	<select id="myDonation_p" resultType="String" parameterType="String">
-		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('작은 얼음','큰 얼음','빙하 조각','북극곰')
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('플라스틱 줄이기','해양 청소','대지 청소','친환경')
 	</select>
 	<select id="myPay" resultType="pay">
 	SELECT PAY_DNAME, PAY_PRICE, PAY_PDATE, PAY_STATE, PAY_COMMENT FROM PAY WHERE PAY_ID=#{mem_id} ORDER BY PAY_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}    

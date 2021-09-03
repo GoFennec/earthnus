@@ -196,8 +196,8 @@ public class MemberService {
 	        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
 	        //마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록 번호로 정한다.
 		
-	        if(cContentnum == 8){//선택 게시글 수
-	        	pBean.setPagenum(pBean.getPagenum()*8);
+	        if(cContentnum == 10){//선택 게시글 수
+	        	pBean.setPagenum(pBean.getPagenum()*10);
 //	        	list = dao.myMessage(mem_id, pBean);
 	        	list = dao.myMessage(mem_id, pBean.getContentnum(), pBean.getPagenum());
 	        }
@@ -226,8 +226,8 @@ public class MemberService {
 	        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
 	        
 	        
-	        if(cContentnum == 8){
-	        	pBean.setPagenum(pBean.getPagenum()*8);
+	        if(cContentnum == 10){
+	        	pBean.setPagenum(pBean.getPagenum()*10);
 	        	list = dao.myOrder(mem_id, pBean.getContentnum(), pBean.getPagenum());
 	        	for(int i = 0; i < list.size(); i++) {
 					String cc = list.get(i).getExg_cc();

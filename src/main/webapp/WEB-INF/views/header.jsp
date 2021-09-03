@@ -29,7 +29,23 @@
 <link rel="stylesheet" href="/resources/assets/css/nice-select.css">
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 
-
+<style>
+.donation{
+border: none;
+    padding: 13px 33px;
+    text-transform: capitalize;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    transition: 0.6s;
+    box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);
+    background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
+    background-position: right;
+    background-size: 200%;
+}
+</style>
 </head>
 <body>
 
@@ -45,7 +61,7 @@
 							<div class="col-xl-2 col-lg-2">
 								<div class="logo">
 									<a href="/"><img
-										src="/resources/assets/img/logo/logo.png" alt=""></a>
+										src="/resources/assets/img/logo/logo.png" alt="로고이미지" title="사이트 로고"></a>
 								</div>
 							</div>
 							<div class="col-xl-10 col-lg-10">
@@ -74,15 +90,15 @@
 														<li><a href="/logout">로그아웃</a></li>
 													</ul></li>
 												</c:if>
+												<li><input type="button" class="donation"
+									 onclick="location.href='/donation/list'" value="후원하기"></li>
 											</ul>
 										</nav>
 									</div>
-									<!-- Header-btn -->
-								
+									<!-- Header-btn 
 									<div class="header-right-btn d-none d-lg-block ml-20">
 										<a href="/donation/list" class="btn header-btn">후원하기</a>
-									
-									</div>
+									</div>-->
 								</div>
 							</div>
 							<!-- Mobile Menu -->

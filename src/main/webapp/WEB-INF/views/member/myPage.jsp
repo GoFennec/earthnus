@@ -534,6 +534,7 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
 </head>
 <jsp:include page="/WEB-INF/views/header.jsp"/> 
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false' >
+<br>
 <div class="container">
     <div class="view-account">
         <section class="module">
@@ -587,6 +588,22 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
                         <br><br>
                         <h3>내가 구한 지구</h3>
                          <hr>
+			<div class="col-md-3 col-sm-3 col-xs-12">
+			<div class="card">
+				<img class="card-img-top" src="/resources/donation/ocean04.png" alt="ocean04" title="해양사진">
+				<div class="card-body px-4 pt-2">
+					<p>내가 살린 바다 친구들</p>
+					<img src="/resources/donation/ocean01.png" class="rounded-circle mr-1" alt="ocean01" title="해양사진" width="28" height="28">
+					<img src="/resources/donation/ocean02.png" class="rounded-circle mr-1" alt="ocean02" title="해양사진" width="28" height="28">
+					<img src="/resources/donation/ocean03.png" class="rounded-circle mr-1" alt="ocean03" title="해양사진" width="28" height="28">
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item px-4 pb-4">
+									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_o}</span></p>
+					</li>
+				</ul>
+			</div>
+		</div>
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="card">
 				<img class="card-img-top" src="/resources/donation/forest04.png" alt="forest04" title="나무이미지">
@@ -606,18 +623,18 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
 		</div>
 		
 		
-				<div class="col-md-3 col-sm-3 col-xs-12">
+			<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="card">
-				<img class="card-img-top" src="/resources/donation/ocean04.png" alt="ocean04" title="해양사진">
+				<img class="card-img-top" src="/resources/donation/plastic04.png" alt="plastic04" title="플라스틱사진">
 				<div class="card-body px-4 pt-2">
-					<p>내가 살린 바다 친구들</p>
-					<img src="/resources/donation/ocean01.png" class="rounded-circle mr-1" alt="ocean01" title="해양사진" width="28" height="28">
-					<img src="/resources/donation/ocean02.png" class="rounded-circle mr-1" alt="ocean02" title="해양사진" width="28" height="28">
-					<img src="/resources/donation/ocean03.png" class="rounded-circle mr-1" alt="ocean03" title="해양사진" width="28" height="28">
+					<p>내가 줄인 플라스틱</p>
+					<img src="/resources/donation/plastic01.png" class="rounded-circle mr-1" alt="plastic01" title="플라스틱사진" width="28" height="28">
+					<img src="/resources/donation/plastic02.png" class="rounded-circle mr-1" alt="plastic02" title="플라스틱사진" width="28" height="28">
+					<img src="/resources/donation/plastic03.png" class="rounded-circle mr-1" alt="plastic03" title="플라스틱사진" width="28" height="28">
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_o}</span></p>
+									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_p}</span></p>
 					</li>
 				</ul>
 			</div>
@@ -642,22 +659,7 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
 			</div>
 		</div>
 		
-		<div class="col-md-3 col-sm-3 col-xs-12">
-			<div class="card">
-				<img class="card-img-top" src="/resources/donation/plastic04.png" alt="plastic04" title="플라스틱사진">
-				<div class="card-body px-4 pt-2">
-					<p>내가 줄인 플라스틱</p>
-					<img src="/resources/donation/plastic01.png" class="rounded-circle mr-1" alt="plastic01" title="플라스틱사진" width="28" height="28">
-					<img src="/resources/donation/plastic02.png" class="rounded-circle mr-1" alt="plastic02" title="플라스틱사진" width="28" height="28">
-					<img src="/resources/donation/plastic03.png" class="rounded-circle mr-1" alt="plastic03" title="플라스틱사진" width="28" height="28">
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item px-4 pb-4">
-									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_p}</span></p>
-					</li>
-				</ul>
-			</div>
-		</div>
+
 </div>
 	
                     <div class="col-md-12 col-sm-12 col-xs-12">
