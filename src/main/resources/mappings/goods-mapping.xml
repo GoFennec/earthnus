@@ -7,6 +7,7 @@
 	<resultMap id="goodsResult" type="goods">
 		<id property="goods_num" column="GOODS_NUM"/>
 		<result property="goods_name" column="GOODS_NAME"/>
+		<result property="goods_category" column="GOODS_CATEGORY"/>
 		<result property="goods_point" column="GOODS_POINT"/>
 		<result property="goods_info" column="GOODS_INFO"/>
 		<result property="goods_desc" column="GOODS_DESC"/>
@@ -54,7 +55,13 @@
 	
 	<select id="goodsKindsCount" resultType="int">
 		<![CDATA[
-			SELECT COUNT(*) FROM GOODS WHERE GOODS_NAME LIKE CONCAT('%',#{goodsKinds},'%')
+			SELECT COUNT(*) FROM GOODS WHERE GOODS_CATEGORY=#{goodsKinds}
+		]]>
+	</select>
+	
+	<select id="getGoodsCategory" resultMap="goodsResult">
+		<![CDATA[
+			SELECT DISTINCT GOODS_CATEGORY FROM GOODS;
 		]]>
 	</select>
 	
@@ -66,7 +73,7 @@
 	
 	<select id="getGoodsKindsList" resultMap="goodsResult">
 		<![CDATA[
-			SELECT * FROM GOODS WHERE GOODS_NAME LIKE CONCAT('%',#{goodsKinds},'%') ORDER BY GOODS_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+			SELECT * FROM GOODS WHERE GOODS_CATEGORY=#{goodsKinds} ORDER BY GOODS_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
 		]]>
 	</select>
 	

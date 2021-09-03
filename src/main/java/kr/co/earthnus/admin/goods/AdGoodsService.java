@@ -41,6 +41,12 @@ public class AdGoodsService {
 		return gNum;
 	}
 	
+	public  List<GoodsBean> getGoodsCategory() {
+		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
+		 List<GoodsBean> goodsCategory = goodsDAO.getGoodsCategory();
+		return goodsCategory;
+	}
+	
 	public String isertGoodsOk(String total,  HashMap<String, String> paramMap, GoodsBean gBean, HttpServletResponse res) {
 		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
 		MultipartFile uploadFile = gBean.getGoods_uploadFile();
@@ -51,10 +57,10 @@ public class AdGoodsService {
 		String path = "C:\\upload";
 		File Folder = new File(path);
 		String goodsInfo = "";
-		StringTokenizer st = new StringTokenizer(total, ",");
+		StringTokenizer st = new StringTokenizer(total, "&");
 		
 		while (st.hasMoreTokens()) {
-			goodsInfo += paramMap.get("goods_info_"+st.nextToken()) + ",";
+			goodsInfo += paramMap.get("goods_info_"+st.nextToken()) + "&";
 		}
 		goodsInfo = goodsInfo.substring(0, goodsInfo.length()-1);
 		gBean.setGoods_info(goodsInfo);
@@ -102,7 +108,7 @@ public class AdGoodsService {
 		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
 		GoodsBean goodsBean = goodsDAO.getGoodsU(goodsNumU);
 		String fullGoodsInfo = goodsBean.getGoods_info();
-		String[] goodsInfo = fullGoodsInfo.split(",");
+		String[] goodsInfo = fullGoodsInfo.split("&");
 		
 		model.addAttribute("goods", goodsBean);
 		model.addAttribute("goodsInfo", goodsInfo);
@@ -118,10 +124,10 @@ public class AdGoodsService {
 		String path = "C:\\upload";
 		File Folder = new File(path);
 		String goodsInfo = "";
-		StringTokenizer st = new StringTokenizer(total, ",");
+		StringTokenizer st = new StringTokenizer(total, "&");
 		
 		while (st.hasMoreTokens()) {
-			goodsInfo += paramMap.get("goods_info_"+st.nextToken()) + ",";
+			goodsInfo += paramMap.get("goods_info_"+st.nextToken()) + "&";
 		}
 		goodsInfo = goodsInfo.substring(0, goodsInfo.length()-1);
 		gBean.setGoods_info(goodsInfo);
