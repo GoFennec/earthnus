@@ -221,7 +221,7 @@
                     </thead>
 					<tbody>
                     	<c:forEach items="${exGoodsList}" var="exGoods">
-							<tr class="exGoodsTr" onclick="location.href='/adExGoods/detail?exg_num=${exGoods.exg_num}'">
+							<tr class="exGoodsTr" onclick="location.href='/adExGoods/detail?exg_num=${exGoods.exg_realnum}'">
 								<td>${exGoods.exg_num}</td>
 								<td>${exGoods.exg_id}</td>
 								<td>${exGoods.exg_state}</td>

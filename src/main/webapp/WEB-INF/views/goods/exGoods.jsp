@@ -50,11 +50,11 @@
 			<tr><th scope="col">주문자</th><td>${member.mem_name}</td></tr>
 			<tr><th scope="col">전화번호</th><td>${member.mem_tel}</td></tr>
 			<tr><th scope="col">배송지 정보</th>
-			<td><input type="text" id="postcode" required placeholder="우편번호" style="width:160px;">
+			<td><input type="text" id="postcode" required placeholder="우편번호" style="width:160px;" maxlength="5" pattern="^[0-9]+$">
 			<input type="button" onclick="execDaumPostcode()" value="주소수정"><br>
-			<input type="text" id="address" required placeholder="주소" style="width:604px; margin:5px 0px"><br>
-			<input type="text" id="detailAddress" required placeholder="상세주소" style="width:300px;">
-			<input type="text" id="extraAddress" placeholder="참고항목" style="width:300px;"></td></tr>
+			<input type="text" id="address" required placeholder="주소" style="width:604px; margin:5px 0px" maxlength="50"><br>
+			<input type="text" id="detailAddress" required placeholder="상세주소" style="width:300px;" maxlength="30">
+			<input type="text" id="extraAddress" placeholder="참고항목" style="width:300px;" maxlength="20"></td></tr>
 			<tr><th scope="col">요청사항</th><td><textarea id="message" rows="2" cols="66" placeholder="요청사항이 있으시면 입력해주세요."></textarea></td></tr>
 			<tr><th scope="col">보유 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${member.mem_point}"/> point</td></tr>
 			<tr><th scope="col">필요 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>

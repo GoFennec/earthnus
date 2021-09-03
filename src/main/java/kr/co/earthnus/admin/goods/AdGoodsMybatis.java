@@ -8,6 +8,7 @@ public interface AdGoodsMybatis {
 	public int adGoodsCount();
 	public List<GoodsBean> getAdGoodsList();
 	public String newGoodsNum();
+	public List<GoodsBean> getGoodsCategory();
 	public void isertGoodsOk(GoodsBean gBean);
 	public GoodsBean getGoodsU(String goodsNumU);
 	public void updateGoodsOk(GoodsBean gBean);

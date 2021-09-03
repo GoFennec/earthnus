@@ -7,9 +7,10 @@ import kr.co.earthnus.user.member.MemberBean;
 
 public interface GoodsMybatis {
 	public int goodsCount();
-	public int goodsKindsCount();
+	public int goodsKindsCount(PagingBean pBean);
 	public List<GoodsBean> getGoodsList(PagingBean pBean);
 	public List<GoodsBean> getGoodsKindsList(PagingBean pBean);
+	public List<GoodsBean> getGoodsCategory();
 	public GoodsBean getGoods(GoodsBean gBean);
 	public MemberBean getMember(AuthBean abean);
 	public int insertExGoods(ExGoodsBean eBean);
