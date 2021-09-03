@@ -152,6 +152,7 @@
                         <th>상품 <br> 번호</th>
                         <th>상품 <br> 사진</th>
                         <th>상품 <br> 이름</th>
+                        <th>상품 <br> 분류</th>
                         <th>상품 <br> 포인트</th>
                         <th>상품 <br> 정보</th>
                         <th>상품 <br> 설명</th>
@@ -163,9 +164,10 @@
 							<td>${goods.goods_num} <br> <input type="checkbox" id="test_check" value="${goods.goods_num}"></td>
 							<td class="goodsImg"><img src="<spring:url value='${goods.goods_img}'/>" height="120" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></td>
 							<td>${goods.goods_name}</td>
+							<td>${goods.goods_category}</td>
 							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point<br/></td>
 							<td><c:set var = "num" value="0"/>
-							<c:forTokens  var="info" items="${goods.goods_info}" delims=",">
+							<c:forTokens  var="info" items="${goods.goods_info}" delims="&">
 								${info}<c:if test="${num % 2 eq 0}"> : </c:if>
 								<c:if test="${num % 2 eq 1}"><br></c:if>
 								<c:set var="num" value="${num+1}"/>

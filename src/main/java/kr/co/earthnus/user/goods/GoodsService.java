@@ -28,7 +28,7 @@ public class GoodsService {
         if (goodsKinds.equals("")) {
             pBean.setTotalcount(goodsDAO.goodsCount());
         } else if (!goodsKinds.equals("")) {
-        	pBean.setTotalcount(goodsDAO.goodsKindsCount());
+        	pBean.setTotalcount(goodsDAO.goodsKindsCount(pBean));
         }
         pBean.setPagenum(cPagenum-1);   // 현재 페이지를 페이지 객체에 지정한다 -1 을 해야 쿼리에서 사용할수 있다
         pBean.setContentnum(cContentnum); // 한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
@@ -48,15 +48,18 @@ public class GoodsService {
             	goodsList = goodsDAO.getGoodsKindsList(pBean);
             }
         }
-        String gOptions = "천연수세미,텀블러,에코백,빨대,칫솔";
-        model.addAttribute("gOptions", gOptions);
 		model.addAttribute("goodsList", goodsList);
         model.addAttribute("page", pBean);
+	}
+	public  List<GoodsBean> getGoodsCategory() {
+		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
+		List<GoodsBean> goodsCategory = goodsDAO.getGoodsCategory();
+		return goodsCategory;
 	}
 	public GoodsBean getGoods(GoodsBean gBean, Model model) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
 		GoodsBean goodsBean = goodsDAO.getGoods(gBean);
-		String[] goodsInfo = goodsBean.getGoods_info().split(",");
+		String[] goodsInfo = goodsBean.getGoods_info().split("&");
 		model.addAttribute("goodsInfo", goodsInfo);
 		return goodsBean;
 	}
