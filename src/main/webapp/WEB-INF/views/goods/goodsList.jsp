@@ -33,16 +33,14 @@
 				<th scope="col">지구마켓</th>
 				<td id="selectTd"><select name="goodsKinds" id="selectBox" onchange="goodsChange(this);">
 					<option value="">전체보기</option>
-					<c:forTokens var="o" items="${gOptions}" delims=",">
-						<c:choose>
-							<c:when test="${goodsKinds eq o}">
-								<option value="${o}" selected>${o}</option>
-							</c:when>
-							<c:when test="${goodsKinds ne o}">
-								<option value="${o}">${o}</option>
-							</c:when>
-						</c:choose>
-					</c:forTokens>
+					<c:forEach var="category" items="${goodsCategory}">
+						<c:if test="${goodsKinds eq category.goods_category}">
+							<option value="${category.goods_category}" selected>${category.goods_category}</option>
+						</c:if>
+						<c:if test="${goodsKinds ne category.goods_category}">
+							<option value="${category.goods_category}">${category.goods_category}</option>
+						</c:if>	
+					</c:forEach>
 				</select></td>
 			</tr>
 		</thead>

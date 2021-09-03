@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class GoodsBean {
 	private String goods_num;
 	private String goods_name;
+	private String goods_category;
 	private int goods_point;
 	private String goods_info;
 	private String goods_desc;
@@ -22,6 +23,12 @@ public class GoodsBean {
 	}
 	public void setGoods_name(String goods_name) {
 		this.goods_name = goods_name;
+	}
+	public String getGoods_category() {
+		return goods_category;
+	}
+	public void setGoods_category(String goods_category) {
+		this.goods_category = goods_category;
 	}
 	public int getGoods_point() {
 		return goods_point;
@@ -53,5 +60,4 @@ public class GoodsBean {
 	public void setGoods_uploadFile(MultipartFile goods_uploadFile) {
 		this.goods_uploadFile = goods_uploadFile;
 	}
-	
 }
