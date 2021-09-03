@@ -53,4 +53,11 @@ public class CheBoardService {
       ChreBoardDAO.Comment_like(likebean);
      
 }
+
+public void pay_comment_update(CheBoardBean BoardBean) {
+	 CheBoardMybatis ChreBoardDAO = (CheBoardMybatis)this.mybatis.getMapper(CheBoardMybatis.class);
+	 ChreBoardDAO.pay_comment_update(BoardBean);
+}
+
+
 }

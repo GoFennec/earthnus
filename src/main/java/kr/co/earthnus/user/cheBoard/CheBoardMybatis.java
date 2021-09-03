@@ -14,4 +14,6 @@ public interface CheBoardMybatis {
   List<PayBean> select_dname(String user_id);
 
   void Comment_like(like_Bean likebean);
+
+  void pay_comment_update(CheBoardBean BoardBean);
 }
