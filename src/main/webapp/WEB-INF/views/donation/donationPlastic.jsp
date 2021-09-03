@@ -82,10 +82,10 @@
 			<div class="item col-md-3 col-6">
 				<div class="single-cat text-center mb-30">
 					<div class="cat-icon"><img src="${donation.d_img}" title="후원 상품 이미지" alt="금액대별 후원 상품 이미지"></div><br>
-					<form action="/pay/pay" method="POST">
+					<form action="/pay/pay" method="POST" name="ac" onsubmit="return check()">
 						<input type="hidden" name="mem_id" value="${auth_id}"/>
 						<input type="hidden" name="pay_dname" value="${donation.d_name}"/>
-						<input type="text" size=8 height=20 name="pay_price"/>&nbsp;원<br><br>
+						<input type="number" name="amount" min="1000" max="10000000" size=8 height=20 name="pay_price"/>&nbsp;원<br><br>
 					<div class="cat-cap">
 							<div id="lastDonationBt"><input type="submit" class="btn btn-primary" value="자율후원"/></div>
 					</div>
@@ -138,5 +138,17 @@
 <div id="back-top" >
 	<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
+
+<script>
+function check() {
+	if(ac.amount.value == "") {
+		alert("후원하실 금액을 입력해 주세요.");
+	    ac.amount.focus();
+	    return false;
+	} else {
+		return true;
+	} 
+}
+</script>
 </body>
 </html>

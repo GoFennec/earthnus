@@ -74,13 +74,14 @@ td {
 		</tbody>
 		</table>	
 	</div>
-	</section><br><br><br>
+	<br><br><br>
 
 	<div id="button">
 		<button type="button" class="btn btn-dark" onclick="location.href='/'">메인으로</button>&nbsp;&nbsp;
 		<button type="button" class="btn btn-dark" onclick="location.href='/member/myPage'">나의 후원내역</button>&nbsp;&nbsp;
 		<button type="button" class="btn btn-dark" onclick="location.href='/cheBoard/list'">응원 릴레이</button>
-	</div>
+	</div><br><br>
+	</section>
 
 </div>
 
