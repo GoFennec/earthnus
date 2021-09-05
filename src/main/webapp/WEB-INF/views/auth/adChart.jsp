@@ -170,13 +170,10 @@
             </div>
             
             <!-- Area Chart -->
-            <div class="col-lg-12">
+            <div class="col-lg-6">
               <div class="card mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold">최근 7일 방문자 수</h6>
-                  <div>
-                  <input type="date" id="visitorArea" readonly> ~ <input type="date" id="visitorArea2">
-                  </div>
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
@@ -188,7 +185,7 @@
             <!-- Pie Chart -->
 
             <!-- Bar Chart -->
-            <div class="col-lg-12">
+            <div class="col-lg-6">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold">최근 7일 카테고리 별 최근 후원 금액</h6>
@@ -197,7 +194,35 @@
                   <div class="chart-bar">
                     <canvas id="myBarChart"></canvas>
                   </div>
-                  <hr>
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            <div class="col-lg-6">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold">최근 7일 가입자 수</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-bar">
+                    <canvas id="myMemberChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="col-lg-6">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold">최근 7일 지구마켓 주문</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-bar">
+                    <canvas id="myExgoodsChart"></canvas>
+                  </div>
                 </div>
               </div>
             </div>
@@ -370,6 +395,9 @@
   var sumOcean = ${sumOcean};
   var sumIce = ${sumIce};
   var sumForest = ${sumForest};
+  var countMember = ${countMember};
+  var countExgoods = ${countExgoods};
+  
   var day = new Array;
   var dateString = new Array;
   for(var i = 0; i < 7; i++){
@@ -382,16 +410,21 @@
   }
 	dateString = dateString.reverse();
 	sumPlastic = sumPlastic.reverse();
+	sumOcean = sumOcean.reverse();
+	sumIce = sumIce.reverse();
+	sumForest = sumForest.reverse();
+	countMember = countMember.reverse();
+	countExgoods = countExgoods.reverse();
   
 	// Bar Chart Example
 	var ctx = document.getElementById("myBarChart");
 	var myBarChart = new Chart(ctx, {
-	  type: 'line',
+	  type: 'bar',
 	  data: {
 	    labels: dateString,
 	    datasets: [
 	    	{	  
-	    		  type: 'line',
+	    		  type: 'bar',
 	    		  label: "숲",
 	    		  lineTension: 0,
 	    		  backgroundColor: "#4e73df",
@@ -401,7 +434,7 @@
 	    		  data: sumForest,
 	    		},
 	    	{
-	    		  type: 'line',
+	    		  type: 'bar',
 	    	      label: "얼음",
 	    	      lineTension: 0,
 	    	      backgroundColor: "#ffa426",
@@ -411,7 +444,7 @@
 	    	      data: sumIce,
 	    	    },
 	    	{
-	    	      type: 'line',
+	    	      type: 'bar',
 	    	      label: "플라스틱",
 	    	      lineTension: 0,
 	    	      backgroundColor: "#1cc88a",
@@ -421,7 +454,7 @@
 	    	      data: sumPlastic,
 	    	    },
 	        {
-	    	      type: 'line',
+	    	      type: 'bar',
 	      	      label: "바다",
 	      	      lineTension: 0,
 	      	      backgroundColor: "#fc544b",
@@ -534,7 +567,7 @@
   
   
   
-	//Area Chart Example
+	
   var ctx = document.getElementById("myAreaChart");
   var myAreaChart = new Chart(ctx, {
     type: 'line',
@@ -556,6 +589,190 @@
         pointHitRadius: 10,
         pointBorderWidth: 2,
         data: visitorData,
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'date'
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            maxTicksLimit: 7
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            maxTicksLimit: 5,
+            padding: 10,
+            // Include a dollar sign in the ticks
+            callback: function(value, index, values) {
+              return number_format(value) + "명";
+            }
+          },
+          gridLines: {
+            color: "rgb(234, 236, 244)",
+            zeroLineColor: "rgb(234, 236, 244)",
+            drawBorder: false,
+            borderDash: [2],
+            zeroLineBorderDash: [2]
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        intersect: false,
+        mode: 'index',
+        caretPadding: 10,
+        callbacks: {
+          label: function(tooltipItem, chart) {
+            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+            return datasetLabel + number_format(tooltipItem.yLabel) + "명";
+          }
+        }
+      }
+    }
+  });
+  
+//가입한 회원
+  var ctx = document.getElementById("myMemberChart");
+  var myMemberChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+    	 
+      labels: dateLabel,
+    	 
+      datasets: [{
+        label: "",
+        lineTension: 0.3,
+        backgroundColor: "#AAEBAA",
+        borderColor: "#388E3C",
+        pointRadius: 3,
+        pointBackgroundColor: "#66bb6a",
+        pointBorderColor: "#388E3C",
+        pointHoverRadius: 3,
+        pointHoverBackgroundColor: "#388E3C",
+        pointHoverBorderColor: "#388E3C",
+        pointHitRadius: 10,
+        pointBorderWidth: 2,
+        data: countMember,
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'date'
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            maxTicksLimit: 7
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            maxTicksLimit: 5,
+            padding: 10,
+            // Include a dollar sign in the ticks
+            callback: function(value, index, values) {
+              return number_format(value) + "명";
+            }
+          },
+          gridLines: {
+            color: "rgb(234, 236, 244)",
+            zeroLineColor: "rgb(234, 236, 244)",
+            drawBorder: false,
+            borderDash: [2],
+            zeroLineBorderDash: [2]
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        intersect: false,
+        mode: 'index',
+        caretPadding: 10,
+        callbacks: {
+          label: function(tooltipItem, chart) {
+            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+            return datasetLabel + number_format(tooltipItem.yLabel) + "명";
+          }
+        }
+      }
+    }
+  });
+  
+//굳즈
+  var ctx = document.getElementById("myExgoodsChart");
+  var myExgoodsChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+    	 
+      labels: dateLabel,
+    	 
+      datasets: [{
+        label: "",
+        lineTension: 0.3,
+        backgroundColor: "#AAEBAA",
+        borderColor: "#388E3C",
+        pointRadius: 3,
+        pointBackgroundColor: "#66bb6a",
+        pointBorderColor: "#388E3C",
+        pointHoverRadius: 3,
+        pointHoverBackgroundColor: "#388E3C",
+        pointHoverBorderColor: "#388E3C",
+        pointHitRadius: 10,
+        pointBorderWidth: 2,
+        data: countExgoods,
       }],
     },
     options: {

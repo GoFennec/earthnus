@@ -84,4 +84,14 @@
 		and (PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲') and pay_state != '결제취소'
 	</select>
 	
+	<select id="countMember" parameterType="int" resultType="int">
+		select count(*) from member where date_format(mem_date,'%y-%m-%d') = date_format(date_add(now(), interval - ${i} day), '%y-%m-%d') 
+		and mem_pw != '삭제된회원'
+	</select>
+	
+	<select id="countExgoods" parameterType="int" resultType="int">
+		select count(*) from exgoods where date_format(exg_pdate,'%y-%m-%d') = date_format(date_add(now(), interval - ${i} day), '%y-%m-%d') 
+		and exg_state != '결제취소'
+	</select>
+	
 </mapper>
