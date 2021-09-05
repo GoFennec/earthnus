@@ -30,6 +30,9 @@
 <link rel="stylesheet" href="/resources/assets/css/style.css">
 
 <style>
+body{
+background-color: #f8f9fa!important;
+}
 .donation{
 border: none;
     padding: 13px 33px;
@@ -83,7 +86,7 @@ border: none;
 												</c:if>
 													
 												<c:if test="${!empty auth}">
-													<li>${auth.auth_name}님 환영합니다.
+													<li>${auth.auth_name}님 환영합니다.&nbsp;&nbsp;&nbsp;&nbsp;
 													<ul class="submenu">
 													<li><a href="/member/myPage">마이페이지</a></li>
 														

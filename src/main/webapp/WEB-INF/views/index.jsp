@@ -640,11 +640,6 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script src="resources/assets/js/plugins.js"></script>
 	<script src="resources/assets/js/main.js"></script>
-<script>
-var cheContent =  ${cheBoard.cheb_content};
-var cutCh = cheContent.subString(20);
-var ch = cutCh+"...";
 
-</script>
 </body>
 </html>

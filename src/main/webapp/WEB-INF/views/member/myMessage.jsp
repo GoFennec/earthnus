@@ -620,6 +620,10 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 
+#nocontent{
+text-align:center;
+margin-top: 20px;
+}	
 </style>
 
 </head>
@@ -674,8 +678,12 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
          		 </tr>
          		 </c:forEach>
                 </tbody>
-              </table>
-                            <nav class="blog-pagination justify-content-center d-flex">
+              </table>   <c:choose>
+              <c:when test="${empty myMessage}">
+		              <div id="nocontent"> 해당 정보가 존재하지 않습니다.</div>
+              </c:when>
+              <c:otherwise>
+               <nav class="blog-pagination justify-content-center d-flex">
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 	    		<li class="page-item">
@@ -698,6 +706,8 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
 			</c:if>
 		</ul>
 	</nav>
+              </c:otherwise>
+              </c:choose>
                     </form>
                 </div>
             </div>
