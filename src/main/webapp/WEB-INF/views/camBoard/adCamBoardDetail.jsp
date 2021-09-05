@@ -161,7 +161,7 @@
 	} );
 	
 	function camBoardDelete(){
-		var CAMB_NUM = "${CAMB_NUM}";
+		var CAMB_NUM = "${camBoard.CAMB_NUM}";
 		var deletePW = $("#deletePW").val();
 		
 		if(deletePW == ""){
@@ -172,7 +172,7 @@
 		$.ajax({
    			type: "POST", //요청 메소드 방식
   			 url:"/adCamBoard/delete",
-   			data: {"CAMB_NUM":CAMB_NUM, "deletePW":deletePW},
+   			data: {"deletePW":deletePW, "CAMB_NUM":CAMB_NUM},
    			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
    			
    			success : function(result){

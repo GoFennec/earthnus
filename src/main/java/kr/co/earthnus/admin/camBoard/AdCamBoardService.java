@@ -114,21 +114,6 @@ public class AdCamBoardService {
 		CamBoardDAO.camBoardUpdate(cBean);
 	}
 	
-	public int deletePW(String deletePW) throws NoSuchAlgorithmException {
-		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
-        SHA256 sha256 = new SHA256();
-
-        //SHA256으로 암호화된 비밀번호
-        String cryptogram = sha256.encrypt("암호화 비밀번호 : " + deletePW);
-
-        System.out.println(cryptogram);
-
-        //비밀번호 일치 여부
-        System.out.println(cryptogram.equals(sha256.encrypt(deletePW)));
-		int deletePass = dao.deletePW(cryptogram);
-		return deletePass;
-	}
-	
 	public void deleteCamBoard(int CAMB_NUM) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		System.out.println("서비스 삭제 캠페인 번호 : " + CAMB_NUM);

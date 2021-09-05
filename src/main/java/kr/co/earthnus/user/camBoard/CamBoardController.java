@@ -43,16 +43,29 @@ public class CamBoardController{
 	
 	@RequestMapping(value="/camBoard/detail")
 	public String getCamBoardDetail(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "") String search , @RequestParam(defaultValue = "desc") String order, 
+			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "CAMB_ENTIRE") String search_type, 
+			@RequestParam(defaultValue = "desc") String order, 
 			camBoardBean bean, @RequestParam("CAMB_NUM") String cambnum, @RequestParam(defaultValue = "1") String p, 
 			@RequestParam("CAMB_NAME") String cambname, Model model) {
-		search = "%" + search + "%";		
 		
+		if(search.equals("plastic")) {
+			search = "플라스틱";
+		}else if(search.equals("ocean")) {
+			search = "해양";
+		}else if(search.equals("forest")) {
+			search = "산림";
+		}else if(search.equals("ice")) {
+			search = "극지방";
+		}else if(search.equals("all")) {
+			search = "기타";
+		}
+		
+		search = "%" + search + "%";		
 		Map<String, Object> list = new HashMap<String, Object>();
-		String search_type = "CAMB_NAME";
 		String orderBy = "CAMB_NUM";
 		
 		camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, Integer.parseInt(cambnum), list, model);
+
 		model.addAttribute("totalIndex", list.get("totalIndex"));
 		model.addAttribute("index", list.get("index"));
 		model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));

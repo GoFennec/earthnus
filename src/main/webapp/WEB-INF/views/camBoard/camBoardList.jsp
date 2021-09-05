@@ -25,6 +25,7 @@ article {cursor: pointer;}
 
 #cancelButton {border-radius: 10px; border: none; background-color: #388E3C; color: white;}
 i {cursor: pointer; color: #388E3C;}
+i:hover {border-bottom-color: red;}
 .search-type {margin-left: 20px;}
 .descript-type{background-color: #388E3C; width: 0px;}
 
@@ -66,11 +67,11 @@ i {cursor: pointer; color: #388E3C;}
       <a href="/camBoard/list?arr=doing" id="doing">진행중인 캠페인&nbsp;&nbsp;&nbsp;&nbsp;</a>
       <a href="/camBoard/list?arr=end" id="end">종료된 캠페인</a><br><br>
       <a style="margin-right: 20px">주제</a>|
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" class="search-type" id=""><i class="fas fa-globe"></i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" class="search-type" id=""><i class="fas fa-recycle"></i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" class="search-type" id=""><i class="fas fa-tree"></i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" class="search-type" id=""><i class="fas fa-snowflake"></i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=all" class="search-type" id=""><i class="fas fa-globe"></i></a><br>
+      <span><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" class="search-type" id=""><i class="fas fa-globe"></i></a></span>
+      <span><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" class="search-type" id=""><i class="fas fa-recycle"></i></a></span>
+      <span><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" class="search-type" id=""><i class="fas fa-tree"></i></a></span>
+      <span><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" class="search-type" id=""><i class="fas fa-snowflake"></i></a></span>
+      <span><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=all" class="search-type" id=""><i class="fas fa-globe"></i></a><br></span>
    </div>
 </div>
    <hr>
