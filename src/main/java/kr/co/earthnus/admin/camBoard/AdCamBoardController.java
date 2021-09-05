@@ -32,12 +32,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.earthnus.admin.member.AdMemberService;
 import kr.co.earthnus.user.camBoard.camBoardBean;
 
 @Controller
 public class AdCamBoardController {
 	@Autowired
 	private AdCamBoardService adCamBoardService;
+	@Autowired
+	private AdMemberService adMemberService;
 			
 	@RequestMapping(value= {"/adCamBoard/list", "/adCamBoard"})
 	public String getCamBoardList(Model model) {
@@ -149,7 +152,8 @@ public class AdCamBoardController {
 	public Map<String, Object> deleteCamBoard(@RequestParam("deletePW") String deletePW, @RequestParam("CAMB_NUM") String CAMB_NUM, HttpServletRequest request) throws NoSuchAlgorithmException {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		int delete = adCamBoardService.deletePW(deletePW);
+		int delete = adMemberService.deletePW(deletePW);
+		System.out.println("delete : " + delete + ", CAMB_NUM : " + CAMB_NUM);
 		
 		if(delete > 0) {
 			adCamBoardService.deleteCamBoard(Integer.parseInt(CAMB_NUM));

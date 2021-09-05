@@ -98,7 +98,6 @@ public class CamBoardService {
         	model.addAttribute("CAMB_STARTDATE" + i, startdate);
         	model.addAttribute("CAMB_FINDATE" + i, findate);
         }
-        System.out.println("서비스 캠페인 개수 : " + CamBoardList.size() + ", 찾는 단어 : " + search);
 		model.addAttribute("CamBoardList", CamBoardList);
         model.addAttribute("page", pBean);
         
@@ -196,9 +195,6 @@ public class CamBoardService {
         list.put("totalIndex", total);
         pBean.setCAMB_NUM(CAMB_NUM);
         list.put("index", camBoardDAO.getBoardIndex(pBean));
-        System.out.println("캠페인 인덱스찾는 길");
-        
-        System.out.println("total index: " + total + ", index : " + camBoardDAO.getBoardIndex(pBean));
         
         if(camBoardDAO.getBoardIndex(pBean) == total) {
             pBean.setCAMB_INDEX(camBoardDAO.getBoardIndex(pBean)-2);

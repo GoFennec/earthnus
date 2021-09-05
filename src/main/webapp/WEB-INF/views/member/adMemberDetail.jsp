@@ -195,6 +195,7 @@
 				function memberDelete(){
 					var deletePW = $("#deletePW").val();
 					var deleteMember = $("#mem_id").val();
+					
 					if(deletePW == ""){
 						alert("관리자 비밀번호를 입력해주세요.");
 						return;
