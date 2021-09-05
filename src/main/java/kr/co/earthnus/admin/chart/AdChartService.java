@@ -133,5 +133,30 @@ public class AdChartService {
 		}
 		model.addAttribute("sumForest", count1);
 	}
+	
+	public void countMember(Model model) {
+		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
+		int count = 0;
+		List<Integer> count1 = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 7; i++) {
+			count = dao.countMember(i);
+			count1.add(count);
+		}
+		model.addAttribute("countMember", count1);
+	}
+	
+	public void countExgoods(Model model) {
+		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
+		int count = 0;
+		List<Integer> count1 = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 7; i++) {
+			count = dao.countExgoods(i);
+			System.out.println(count);
+			count1.add(count);
+		}
+		model.addAttribute("countExgoods", count1);
+	}
 
 }

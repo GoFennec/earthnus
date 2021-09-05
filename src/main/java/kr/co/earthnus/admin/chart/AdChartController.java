@@ -25,6 +25,10 @@ public class AdChartController {
 		service.sumIce(model);
 		service.sumForest(model);
 		
+		service.countVisitor(model);
+		service.countMember(model);
+		service.countExgoods(model);
+		
 		return "auth/adChart";
 	}
 	
