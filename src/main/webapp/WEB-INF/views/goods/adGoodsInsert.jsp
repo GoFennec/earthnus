@@ -126,7 +126,7 @@
 					<option value="${category.goods_category}">${category.goods_category}</option>
 				</c:forEach>
 				</select></td></tr>
-			<tr><td class="td_left"><label for="goods_point">상품포인트&nbsp;&nbsp;&nbsp;</label></td>
+			<tr><td class="td_left"><label for="goods_point" pattern="^[0-9]+$">상품포인트&nbsp;&nbsp;&nbsp;</label></td>
 				<td class="td_right"><input type="text" name="goods_point" id="goods_point" required></td></tr>
 			<tr><td class="td_left"><label for="goods_desc">상&nbsp;품&nbsp;&nbsp;설&nbsp;명&nbsp;&nbsp;&nbsp;</label></td>
 				<td class="td_right"><textarea cols="43" rows="4" style="resize: none;" name="goods_desc" id="goods_desc" required></textarea></td></tr>
@@ -216,7 +216,7 @@ function checkAdd() {
 	for (var num = 1; num <= $('#total').val(); num++) {
 		if ($('#goods_info_'+num).val() == "" || $('#goods_info_'+num).val() == null) {
 		} else {
-			dataInput += num+",";
+			dataInput += num+"&";
 		}
 	}
 	$('#total').val(dataInput);

@@ -10,6 +10,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.apache.tika.Tika;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import kr.co.earthnus.user.goods.GoodsBean;
 public class AdGoodsService {
 	@Autowired
 	private SqlSessionTemplate mybatis;
+	private static final Log LOG = LogFactory.getLog(AdGoodsService.class);
 
 	public void getAdGoodsList(Model model) {
 		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
@@ -54,7 +57,7 @@ public class AdGoodsService {
 		String fileName = uploadFile.getOriginalFilename();
 		String savedName = uuid.toString() + "_" + fileName;
 		String returnStr = "";
-		String path = "C:\\upload";
+		String path = "/var/lib/tomcat9/webapps/upload";
 		File Folder = new File(path);
 		String goodsInfo = "";
 		StringTokenizer st = new StringTokenizer(total, "&");
@@ -67,7 +70,7 @@ public class AdGoodsService {
 		
 		if (!Folder.exists()) {
 			try{		
-				Folder.mkdir();
+				Folder.mkdirs();
 			} catch(Exception e){
 				e.getStackTrace();
 			}
@@ -77,9 +80,9 @@ public class AdGoodsService {
 				InputStream inputStream = uploadFile.getInputStream();
 				Tika tika = new Tika();
 				String mimeType = tika.detect(inputStream);
-				
+
 				if (mimeType.startsWith("image")) {
-					uploadFile.transferTo(new File("C:/upload/" + savedName));
+					uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/upload/" + savedName));
 					gBean.setGoods_img("/upload/" + savedName);
 					goodsDAO.isertGoodsOk(gBean);
 					returnStr = "redirect:/adGoods/list";
@@ -121,7 +124,7 @@ public class AdGoodsService {
 		String fileName = uploadFile.getOriginalFilename();
 		String savedName = uuid.toString() + "_" + fileName;
 		String returnStr = "";
-		String path = "C:\\upload";
+		String path = "/var/lib/tomcat9/webapps/upload";
 		File Folder = new File(path);
 		String goodsInfo = "";
 		StringTokenizer st = new StringTokenizer(total, "&");
@@ -134,7 +137,7 @@ public class AdGoodsService {
 		
 		if (!Folder.exists()) {
 			try{		
-				Folder.mkdir();
+				Folder.mkdirs();
 			} catch(Exception e){
 				e.getStackTrace();
 			}
@@ -146,7 +149,7 @@ public class AdGoodsService {
 				String mimeType = tika.detect(inputStream);
 				
 				if (mimeType.startsWith("image")) {
-					uploadFile.transferTo(new File("C:/upload/" + savedName));
+					uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/upload/" + savedName));
 					gBean.setGoods_img("/upload/" + savedName);
 					goodsDAO.updateGoodsOk(gBean);
 					returnStr = "redirect:/adGoods/list";
