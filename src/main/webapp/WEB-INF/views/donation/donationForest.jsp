@@ -109,13 +109,13 @@
 		</div>
 	</div>
 	<div class="col-md-5 col-12">
-		<img src="/resources/donation/forestThema2.jpg" title="" alt="" width="100%">
+		<img src="/resources/donation/forestThema2.jpg" title="나무를 심어요! 테마 사진 2" alt="맑은 숲속 사진" width="100%">
 	</div>
 	</div><br><br>
 	
 	<div class="row">
 	<div class="col-md-8 col-12">
-		<img src="/resources/donation/forestThema3.jpg" title="" alt="" width="100%">
+		<img src="/resources/donation/forestThema3.jpg" title="나무를 심어요! 테마 사진 3" alt="숱 속의 사슴 사진" width="100%">
 	</div>
 	<div class="col-md-4 col-12">
 		<div>
@@ -127,11 +127,10 @@
 			<button type="button" class="btn btn-primary" onclick="location.href='/camBoard/list'">캠페인 둘러보기</button>
 		</div>
 	</div>
-	</div><br><br>
+	</div><br><br><br>
 	
-	<hr><br>
-	<div style="text-align: center; padding: 20px;">
-		<p style="font-weight: bold;">후원자님께서 보내주신 소중한 후원금은<br>
+	<div style="text-align: center;">
+		<p style="font-size: 0.8em;">후원자님께서 보내주신 소중한 후원금은<br>
 			지금 이 순간에도 많은 변화를 이뤄내고 있습니다.</p>
 	</div>
 </div>
