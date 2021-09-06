@@ -39,6 +39,7 @@
 <style type="text/css">
 body {
 	background: #f9f9fb;
+	
 }
 .view-account {
 	background: #FFFFFF;
@@ -192,7 +193,8 @@ body {
 	padding: 10px;
 	border-bottom: 1px solid #f3f3f3;
 	color: #616670;
-	overflow: hidden
+	overflow: hidden;
+
 }
 .view-account .content-panel .mails-wrapper .mail-item>div {
 	float: left
@@ -604,6 +606,7 @@ body {
 	right: -5px;
 }
 .modal-login .btn, .modal-login .btn:active {	
+	margin-left: 45px;
 	border: none;
 	background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE) !important;
 	display: block;
@@ -689,14 +692,21 @@ body {
 								</div>
 								
 								<div class="col-md-3">
-									<button class="btn btn-sm btn-default-alt pull-left"
-										data-toggle="modal" data-target="#myModal">비밀번호 변경</button>
+									<button class="btn btn-sm btn-default-alt pull-left" id=pwbutton
+										data-toggle="modal" data-target="#myModal" >비밀번호 변경</button>
 										
 								</div>
 								<br><br> <br>
 							</c:if>
 
-
+    <script>
+				$('#pwbutton').click(function(){
+					$('#myModal').modal("show");
+					$('#mem_cpw1').hide();
+					$('#mem_cpw2').hide();
+					$('#pwch').hide();
+				});
+			</script>
 <!-- Modal HTML -->
 <div id="myModal" class="modal fade">
 	<div class="modal-dialog modal-login">
@@ -741,6 +751,7 @@ body {
 						if(pwd != ""){
 							if(!match.test(pwd)){
 								$("#invalid-pw2").show();
+								
 							}else{
 								$("#invalid-pw2").hide();
 							}
@@ -748,6 +759,7 @@ body {
 							$("#invalid-pw2").hide();
 						}
 					});
+				
 				});
 					</script>
 					
@@ -768,6 +780,9 @@ body {
 			   				if (result.error === true) {
 								alert("비밀번호 확인이 완료되었습니다. 변경할 비밀번호를 입력해주세요.");
 								 $("#mem_pw").attr("readonly",true);
+								 $('#mem_cpw1').show();
+									$('#mem_cpw2').show();
+									$('#pwch').show();
 							} else if(result.error === false){
 			    	  			alert('비밀번호가 일치하지 않습니다.');
 			      			}
@@ -789,8 +804,13 @@ body {
 
 								<script type="text/javascript">
 									function updatePw() {
+										
 										var cpw1 = $("#mem_cpw1").val();
 										var cpw2 = $("#mem_cpw2").val();
+										if($('#invalid-pw2').is(':visible')){
+											alert('입력하신 정보를 다시 확인해주세요.');
+								    		  return;
+								    		  }else{
 										if (cpw1 == cpw2) {
 											$.ajax({
 														type : "POST", //요청 메소드 방식
@@ -824,7 +844,7 @@ body {
 													});
 										} else {
 											alert("비밀번호가 일치하지 않습니다.")
-										}
+										}}
 									}
 								</script>
 									<c:if test="${MemberBean.mem_birth eq null}" >
@@ -837,6 +857,21 @@ body {
 										입력사항입니다.</div>
 								</div>
 								</c:if>
+						<script>
+									$(function() {
+										var valueDate = document.getElementById('birth').value;
+										var date = $("#mem_birth").val();
+										$("#invalid-birth").show();
+										$("#birth").on("propertychange change keyup paste input", function() {
+											date = $("#birth").val();
+										if (!valueDate) {
+												$("#invalid-birth").hide();
+											}
+										});
+									});
+								</script>
+					
+								
 									<c:if test="${MemberBean.mem_birth ne null}" >
 								<div class="col-12">
 									<label for="username" class="form-label">생년월일 </label> 
@@ -845,6 +880,7 @@ body {
 										value="${MemberBean.mem_birth }" readonly>
 									</div>
 									</c:if>
+									
 								<div class="col-12">
 									<label for="username" class="form-label">성별 </label>
 								</div>
@@ -856,19 +892,24 @@ body {
 								<div class="col-12">
 									<label for="username" class="form-label">전화번호</label> <input
 										type="text" name="mem_tel" class="form-control" id="mem_tel"
-										value="${MemberBean.mem_tel}" maxlength='11' required>
-									<div class="invalid-feedback">필수 입력사항입니다.</div>
+										value="${MemberBean.mem_tel}" maxlength='11' >
+									<div class="invalid-feedback" id="invalid-phone1">필수 입력사항입니다.</div>
 									<div class="invalid-feedback" id="invalid-phone">숫자만
 										입력해주세요.</div>
 								</div>
 
 
-								<script>
+<script>
 									$(function() {
+										var tel = $("#mem_tel").val();
 										$("#invalid-phone").hide();
-										$("input").keyup(function() {
+										if (tel == "") {
+											$("#invalid-phone1").show();
+										}
+										$("#mem_tel").keyup(function() {
+											$("#invalid-phone1").hide();
 											var match = /[^0-9]/g;
-											var tel = $("#mem_tel").val();
+											tel = $("#mem_tel").val();
 											if (tel != "") {
 												if (match.test(tel)) {
 													$("#invalid-phone").show();
@@ -876,11 +917,15 @@ body {
 													$("#invalid-phone").hide();
 												}
 											} else if (tel == "") {
-												$("#invalid-phone").hide();
+												$("#invalid-phone1").show();
 											}
 										});
 									});
 								</script>
+								
+								
+								
+								
 
 								<div class="col-md-9" style="padding-right: 0px">
 									<label for="address" class="form-label">주소</label> <input
@@ -906,7 +951,7 @@ body {
 										placeholder="참고항목" onkeyup='call_addr()'>
 								</div>
 								<input type="hidden" id="address_all" name="mem_addr" value="${MemberBean.mem_addr}" >
-								<div class="invalid-feedback" id="mem_addr">필수 입력사항입니다.</div>
+								<div class="invalid-feedback" id="invalid-addr">필수 입력사항입니다.</div>
 
 								<div id="wrap"
 									style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
@@ -915,7 +960,7 @@ body {
 										style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
 										onclick="foldDaumPostcode()" alt="접기 버튼">
 								</div>
-
+								
 								<script>
 									function call_addr() {
 										if (document.getElementById("postcode").value
@@ -1135,10 +1180,6 @@ body {
 									</div>
 								</div>
 
-
-
-
-
 								<script type="text/javascript">
 									$('#testBtn3')
 											.click(
@@ -1186,7 +1227,7 @@ body {
 
 								<div class="col-6">
 									<input type="button" class="btn btn-sm btn-default-alt pull-left"
-									 style="margin-top: 10px" onclick="document.getElementById('form').submit();" value="회원정보수정">
+									 style="margin-top: 10px" onclick="document.getElementById('form').submit();" id="modify" value="회원정보수정">
 
 								</div>
 
@@ -1249,19 +1290,24 @@ body {
             if (e.keyCode == 13) e.preventDefault(); 
          });
       </script>
-      <script>
-     document.getElemnetById('form').onclick = function() {
-    	  var pw = $('#mem_pw');
-    	  var cpw1 = $('#mem_cpw1');
-    	  var cpw2 = $('#mem_cpw2');
-    	  if(cpw1 == ""){
-    		  cpw1 = pw;
-    		  cpw2 = pw;
-    	  }
-    	  document.getElementById('form').submit();
-		return false;    	  
-      };
+          <script>
+          $('#modify').click( function(){
+       	 if($('#invalid-phone1').is(':visible')){
+			alert('필수 입력 사항을 입력해주세요');
+    		  return;
+    	  } else if($('#invalid-phone').is(':visible')){
+				alert('입력하신 정보를 다시 확인해주세요.');
+				return;
+    	  } else if($('#invalid-birth').is(':visible')){
+					alert('필수 입력 사항을 입력해주세요');
+		    		  return;
+		    	  } else if($('#invalid-pw2').is(':visible')){
+						alert('입력하신 정보를 다시 확인해주세요.');
+			    		  return;
+		    	  }
+    	      });
       </script>
+  
   
       
       <script src="/resources/assets/js/form-validation.js"></script>

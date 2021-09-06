@@ -530,6 +530,10 @@ margin-bottom: 5px;
 table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
+#nocontent{
+text-align:center;
+margin-top: 20px;
+}		
 </style>
 </head>
 <jsp:include page="/WEB-INF/views/header.jsp"/> 
@@ -692,7 +696,12 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
          		 </c:forEach>
                 </tbody>
               </table>
-<nav class="blog-pagination justify-content-center d-flex">
+ <c:choose>
+              <c:when test="${empty myPay}">
+		              <div id="nocontent"> 해당 정보가 존재하지 않습니다.</div>
+              </c:when>
+              <c:otherwise>
+               <nav class="blog-pagination justify-content-center d-flex">
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 	    		<li class="page-item">
@@ -715,7 +724,8 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
 			</c:if>
 		</ul>
 	</nav>
-
+              </c:otherwise>
+              </c:choose>
                </div>
                    
                  </form>

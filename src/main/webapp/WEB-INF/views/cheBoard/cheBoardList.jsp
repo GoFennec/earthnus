@@ -337,8 +337,7 @@ background:#000;color:#fff;
     	</c:choose>
     	</c:if>
 	   
-    
-    <c:if test="${auth.auth_id != null and payCheck != []}">
+    <c:if test="${auth.auth_id != null and !empty payCheck}">
     	<table >
     		<tr>
 	    	 <td style="width: 90%;">
@@ -398,9 +397,9 @@ background:#000;color:#fff;
 		  
 		  <c:forEach items="${payCheck}" var="row">
 		    All_dname.push("${row.pay_dname}");
-			  </c:forEach>
+		    </c:forEach>
 			  
-			  <c:if test="${payCheck != []}">
+		    <c:if test="${payCheck != []}">
 			  
 		    	select_dname();
 		   </c:if>

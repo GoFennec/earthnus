@@ -1,10 +1,12 @@
 package kr.co.earthnus.user.auth;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -149,8 +151,8 @@ public class AuthController {
 	
 	
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
-	public String loginch(@RequestParam("auth_pw") String auth_pw, AuthBean aBean, HttpSession session, Model model)
-			throws NoSuchAlgorithmException {
+	public String loginch(@RequestParam("auth_pw") String auth_pw, AuthBean aBean,  HttpServletResponse response, HttpSession session, Model model)
+			throws NoSuchAlgorithmException, IOException {
 		model.addAttribute("id", aBean.getAuth_id());
 		aBean = service.login(aBean.getAuth_id(), auth_pw);
 		if (aBean != null) {
@@ -163,12 +165,17 @@ public class AuthController {
 				 }else if(str.contains("donation")) {
 					 return "redirect:" + str;
 				 }
-			 }
-			else {
+			 }else {
 				 return "index";
 			 }
+		}else {
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.');location.href=\"/auth/login\"</script>");
+			out.close();
 		}
-			return "auth/login";
+		return "auth/login";
+			
 	}
 
 	@RequestMapping("/logout")
