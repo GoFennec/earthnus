@@ -672,7 +672,7 @@ body {
 					</div>
 					<div class="content-panel">
 						<h2 class="title">&nbsp;&nbsp;&nbsp;내 정보</h2>
-						<form class="form-horizontal" id="form" method="post" action="/updateMyInfo">
+						<form class="form-horizontal" id="form" method="post"  action="/updateMyInfo">
 							<fieldset class="fieldset">
 			
 								<div class="col-12">
@@ -960,25 +960,39 @@ body {
 										style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
 										onclick="foldDaumPostcode()" alt="접기 버튼">
 								</div>
+
+								
 								
 								<script>
+								$(function() {
+									var addr1 = $("#postcode").val();
+									var addr2 = $("#address").val();
+									var addr3 = $("#detailAddress").val();
+									var addr4 = $("#address_all").val();
+									$("#invalid-addr").hide();
+									if (addr1 == "" || addr2 == "" || addr3 == "" ) {
+										$("#invalid-addr").show();
+									 
+							
 									function call_addr() {
+										var addr3 = $("#detailAddress").val();
+										$("#invalid-addr").hide();
 										if (document.getElementById("postcode").value
-												&& document
-														.getElementById("address").value
-												&& document
-														.getElementById("detailAddress").value) {
-											document
-													.getElementById('address_all').value = document
-													.getElementById('postcode').value
-													+ '&'
-													+ document
-															.getElementById('address').value
-													+ '&'
-													+ document
-															.getElementById('detailAddress').value;
+												&& document.getElementById("address").value
+												&& document.getElementById("detailAddress").value) {
+													document.getElementById('address_all').value 
+													= document.getElementById('postcode').value
+													+ '&'+ document.getElementById('address').value
+													+ '&'+ document.getElementById('detailAddress').value;
+										}											
+										if (addr3 != "") {
+											$("#invalid-addr").hide();
+										} else if (addr3 == "") {
+											$("#invalid-addr").show();
 										}
-									}
+										
+									}}
+								});
 								</script>
 
 
@@ -1227,7 +1241,7 @@ body {
 
 								<div class="col-6">
 									<input type="button" class="btn btn-sm btn-default-alt pull-left"
-									 style="margin-top: 10px" onclick="document.getElementById('form').submit();" id="modify" value="회원정보수정">
+									 style="margin-top: 10px" onclick="check()" id="modify" value="회원정보수정">
 
 								</div>
 
@@ -1291,21 +1305,23 @@ body {
          });
       </script>
           <script>
-          $('#modify').click( function(){
-       	 if($('#invalid-phone1').is(':visible')){
-			alert('필수 입력 사항을 입력해주세요');
-    		  return;
-    	  } else if($('#invalid-phone').is(':visible')){
+          function check(){
+        	  
+       	 	if($('#invalid-phone1').is(':visible')){
+				alert('필수 입력 사항을 입력해주세요');
+    		  	return false;
+    	  	} else if($('#invalid-phone').is(':visible')){
 				alert('입력하신 정보를 다시 확인해주세요.');
-				return;
-    	  } else if($('#invalid-birth').is(':visible')){
-					alert('필수 입력 사항을 입력해주세요');
-		    		  return;
-		    	  } else if($('#invalid-pw2').is(':visible')){
-						alert('입력하신 정보를 다시 확인해주세요.');
-			    		  return;
-		    	  }
-    	      });
+				return false;
+    	  	} else if($('#invalid-birth').is(':visible')){
+				alert('필수 입력 사항을 입력해주세요');
+		    	return false;
+		  	} else if($('#invalid-pw2').is(':visible')){
+				alert('입력하신 정보를 다시 확인해주세요.');
+			    return false;
+		  	}
+			document.getElementById('form').submit();
+          }
       </script>
   
   
