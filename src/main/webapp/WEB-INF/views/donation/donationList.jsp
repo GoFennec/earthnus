@@ -54,7 +54,7 @@
               <div class="card card-span mb-3 shadow-lg" style="border-radius: 0.5rem">
                 <div class="card-body py-0 px-0">
                   <div class="row justify-content-center">
-                    <div class="col-md-5 col-xl-7 col-xxl-8 gy-0 order-md-0"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-start rounded-md-top-0" src="/resources/donation/ocean.jpg" title="바다가 힘들어요!" alt="해양오염 사진" /></div>
+                    <div class="col-md-5 col-xl-7 col-xxl-8 gy-0 order-md-0"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-start rounded-md-top-0" src="/resources/donation/ocean.jpg" title="바다가 힘들어요! 테마 사진 1" alt="해양오염 사진" /></div>
                     <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                       <h1 class="card-title mt-xl-5 mb-4 m-4">바다가 힘들어요!</h1>
                       	<p class="m-4">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.<br>
@@ -77,7 +77,7 @@
               <div class="card card-span mb-3 shadow-lg" style="border-radius: 0.5rem">
                 <div class="card-body py-0 px-0">
                   <div class="row justify-content-center">
-                    <div class="col-md-5 col-xl-7 col-xxl-8 order-0 order-md-1"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-end rounded-md-top-0" src="/resources/donation/forest.jpg" title="나무를 심어요!" alt="사막화가 진행되고있는 토양 사진" /></div>
+                    <div class="col-md-5 col-xl-7 col-xxl-8 order-0 order-md-1"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-end rounded-md-top-0" src="/resources/donation/forest.jpg" title="나무를 심어요! 테마 사진 1" alt="사막화가 진행되고있는 토양 사진" /></div>
                     <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                       <h1 class="card-title mt-xl-5 mb-4 m-4">나무를 심어요!</h1>
                       	<p class="m-4">숲은 육지에 서식하는 많은 동식물들의 집입니다.<br>
@@ -100,7 +100,7 @@
               <div class="card card-span mb-3 shadow-lg" style="border-radius: 0.5rem">
                 <div class="card-body py-0 px-0">
                   <div class="row justify-content-center">
-                    <div class="col-md-5 col-xl-7 col-xxl-8 order-md-0"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-start rounded-md-top-0" src="/resources/donation/plastic.jpg" title="플라스틱이 넘쳐요!" alt="방대한 양의 플라스틱 사진"  /></div>
+                    <div class="col-md-5 col-xl-7 col-xxl-8 order-md-0"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-start rounded-md-top-0" src="/resources/donation/plastic.jpg" title="플라스틱이 넘쳐요! 테마 사진 1" alt="방대한 양의 플라스틱 사진"  /></div>
                     <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                       <h1 class="card-title mt-xl-5 mb-4 m-4">플라스틱이 넘쳐요!</h1>
                       	<p class="m-4">플라스틱은 우리 생활 깊숙이 침투해 있습니다.<br>
@@ -122,7 +122,7 @@
               <div class="card card-span mb-3 shadow-lg" style="border-radius: 0.5rem">
                 <div class="card-body py-0 px-0">
                   <div class="row justify-content-center">
-                    <div class="col-md-5 col-xl-7 col-xxl-8 order-0 order-md-1"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-end rounded-md-top-0" src="/resources/donation/ice.jpg" title="북극곰을 도와줘요!" alt="삶의 터전을 잃어가는 북극곰 사진" /></div>
+                    <div class="col-md-5 col-xl-7 col-xxl-8 order-0 order-md-1"><img class="img-fluid w-100 fit-cover h-100 rounded-top rounded-md-end rounded-md-top-0" src="/resources/donation/ice.jpg" title="북극곰을 도와줘요! 테마 사진 1" alt="삶의 터전을 잃어가는 북극곰 사진" /></div>
                     <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                       <h1 class="card-title mt-xl-5 mb-4 m-4">북극곰을 도와줘요!</h1>
                       	<p class="m-4">지구 온난화로 북극 기온이 상승하여 빙하가 녹고있습니다.<br>
