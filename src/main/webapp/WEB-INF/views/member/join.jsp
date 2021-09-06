@@ -436,7 +436,6 @@
 						}else if(tel == ""){
 							$("#invalid-phone").hide();
 						}
-						
 					});
             	});
             </script>

@@ -80,7 +80,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="/adDonation/list">
         <i class="fas fa-hand-holding-heart"></i>
-          <span>기부 관리</span>
+          <span>후원 관리</span>
         </a>
       </li>
       <li class="nav-item">
