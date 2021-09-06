@@ -38,6 +38,10 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- CAMBOARD -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <style>
 .testimonial{
@@ -148,7 +152,111 @@
                 color: #5CB85C;
             }
 
-   
+ /* card details start  */
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto+Condensed:400,400i,700,700i');
+section{
+    padding: 100px 0;
+}
+
+
+.card-content {
+	background: #ffffff;
+	border: 4px;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+.card-img {
+	position: relative;
+	overflow: hidden;
+	border-radius: 0;
+	z-index: 1;
+}
+
+.card-img img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.card-img span {
+	position: absolute;
+    top: 15%;
+    left: 12%;
+    background: #1ABC9C;
+    padding: 6px;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    transform: translate(-50%,-50%);
+}
+.card-img span h4{
+        font-size: 12px;
+        margin:0;
+        padding:10px 5px;
+         line-height: 0;
+}
+.card-desc {
+	padding: 1.25rem;
+}
+
+.card-desc h3 {
+	color: #000000;
+    font-weight: 600;
+    font-size: 1.5em;
+    line-height: 1.3em;
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+.card-desc p {
+	color: #747373;
+    font-size: 14px;
+	font-weight: 400;
+	font-size: 1em;
+	line-height: 1.5;
+	margin: 0px;
+	margin-bottom: 20px;
+	padding: 0;
+	font-family: 'Raleway', sans-serif;
+}
+.btn-card{
+	background-color: #1ABC9C;
+	color: #fff;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    padding: .84rem 2.14rem;
+    font-size: .81rem;
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    margin: 0;
+    border: 0;
+    -webkit-border-radius: .125rem;
+    border-radius: .125rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    white-space: normal;
+    word-wrap: break-word;
+    color: #fff;
+}
+
+a.btn-card {
+    text-decoration: none;
+    color: #fff;
+}
+/* End card section */  
+
+#chContent
+ {
+       
+
+        }
 </style>
 </head>
 
@@ -417,8 +525,28 @@
 						</div>
 					</div>
 				</div>
-			
-				<div class="row">
+			<section class="details-card">
+    <div class="container">
+        <div class="row">
+            <c:forEach items="${cb_list}" var="camBoard">
+            <div class="col-md-6">
+                <div class="card-content">
+                    <div class="card-img">
+                        <img src="${camBoard.CAMB_FILE}" height="400px" alt="최신캠페인이미지">
+                    </div>
+                    <div class="card-desc">
+                        <h3>${camBoard.CAMB_SUBJECT}</h3>
+                        <p>${camBoard.CAMB_NAME}</p>
+                            <a href="/camBoard/detail?CAMB_NAME=${camBoard.CAMB_NAME}&CAMB_NUM=${camBoard.CAMB_NUM}" class="btn-card">자세히보기</a>   
+                    </div>
+                </div>
+            </div>
+            </c:forEach>
+          </div>
+    </div>
+</section>
+
+				<!-- <div class="row">
 				<c:forEach items="${cb_list}" var="camBoard">
 					<div class="col-xl-6 col-lg-6 col-md-6">
 						<div class="home-blog-single mb-30">
@@ -436,7 +564,7 @@
 						</div>
 					</div>
 					</c:forEach>
-				<!-- 	<div class="col-xl-6 col-lg-6 col-md-6">
+					<div class="col-xl-6 col-lg-6 col-md-6">
 						<div class="home-blog-single mb-30">
 							<div class="blog-img-cap">
 								<div class="blog-img">
@@ -453,58 +581,8 @@
 						</div>
 					</div>-->
 				</div>
-			</div>
 		</section>
-		<!-- Blog Area End -->
-		<!-- Our Cases End -->
-		<!--? Services Area Start -->
-		<!--  <div class="service-area section-padding30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-11">
-                        <div class="single-cat text-center mb-30">
-                            <div class="cat-icon">
-                                <img src="resources/assets/img/gallery/services1.png" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#">Clean Water</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-11">
-                        <div class="single-cat text-center mb-30">
-                            <div class="cat-icon">
-                                <img src="resources/assets/img/gallery/services1.png" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#">Clean Water</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-11">
-                        <div class="single-cat text-center mb-30">
-                            <div class="cat-icon">
-                                <img src="resources/assets/img/gallery/services2.png" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#">Renewable energy</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-11">
-                        <div class="single-cat text-center mb-30">
-                            <div class="cat-icon">
-                                <img src="resources/assets/img/gallery/services3.png" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#">Protect animals</a></h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-       Services Area End -->
+		
 
 
 
@@ -525,7 +603,7 @@
         <div class="col-sm-6">
             <div id="tb-testimonial" class="testimonial testimonial-success">
                
-                <div class="testimonial-section" style=" cursor: pointer;" onclick="location.href='/cheBoard/list'" >
+                <div class="testimonial-section" id="chContent" style="cursor: pointer;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" onclick="location.href='/cheBoard/list'" >
                 ${cheBoard.cheb_content}
                 </div>
                 <div class="testimonial-desc">
@@ -557,38 +635,6 @@
 
 
 
-
-
-
-
-
-
-		<!--? Visit Our Tailor Start -->
-	<!-- 	<div class="visit-tailor-area fix">
-			<!--Right Contents  --/>
-			<div class="tailor-offers"></div>
-			<!-- left Contents --/>
-			<div class="tailor-details">
-				<span>Our Mission</span>
-				<h2>Our main goal is to protect animals</h2>
-				<p>The automated process starts as soon as your clothes go into
-					the machine. Duis cursus, mi quis viverra ornare, eros dolor
-					interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus
-					nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae
-					risus tristique posuere.</p>
-				<p class="pera-bottom">Interdum nulla, ut commodo diam libero
-					vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem
-					imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
-				<div class="footer-tittles">
-					<p>CEO, Consulto</p>
-					<h2>Capcilena Hanry</h2>
-				</div>
-			</div>
-		</div> 
-		<!-- Visit Our Tailor End -->
-
-
-	
 
 	</main>
 	<jsp:include page="footer.jsp" />
