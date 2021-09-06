@@ -45,7 +45,7 @@
 			</choose>
 			ORDER BY 
 			<choose>
-				<when test='arr.equals("entire")'><![CDATA[${orderBy} AND (SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order} ]]></when>
+				<when test='arr.equals("entire")'><![CDATA[(SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order} ]]></when>
 				<when test='arr.equals("doing")'>${orderBy} ${order} </when>
 				<when test='arr.equals("exp")'>${orderBy} ${order} </when>
 				<when test='arr.equals("end")'>${orderBy} ${order} </when>
@@ -148,7 +148,7 @@
 			</choose>		
 	</select>
 	
-	<select id="nextBoard" resultMap="camBoardResult">
+	<select id="getOtherBoard" resultMap="camBoardResult">
 		SELECT * 
 		FROM CAMBOARD 
 		WHERE 
@@ -167,29 +167,14 @@
 				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE() ]]></when>
 				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE() ]]></when>
 			</choose>
-			ORDER BY ${orderBy} ${order} limit ${CAMB_INDEX}, 1				
-	</select>
-	
-	<select id="preBoard" resultMap="camBoardResult">
-		SELECT * 
-		FROM CAMBOARD 
-		WHERE 
-		<choose>
-				<when test='search_type.equals("CAMB_ENTIRE")'>
-				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
-				</when>
-				<when test='search_type.equals("CAMB_NAME")'>(CAMB_NAME LIKE #{search}) </when>
-				<when test='search_type.equals("CAMB_SUBJECT")'>(CAMB_SUBJECT LIKE #{search}) </when>
-				<when test='search_type.equals("CAMB_CONTENT")'>(CAMB_CONTENT LIKE #{search}) </when>
-			</choose>
-			AND 
+			ORDER BY 
 			<choose>
-				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE()) ]]></when>
-				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE()) ]]></when>
-				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE() ]]></when>
-				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE() ]]></when>
+				<when test='arr.equals("entire")'><![CDATA[(SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order} ]]></when>
+				<when test='arr.equals("doing")'>${orderBy} ${order} </when>
+				<when test='arr.equals("exp")'>${orderBy} ${order} </when>
+				<when test='arr.equals("end")'>${orderBy} ${order} </when>
 			</choose>
-			ORDER BY ${orderBy} ${order} limit ${CAMB_INDEX}, 1				
+			limit ${limit} offset ${offset}			
 	</select>
 	
 	<select id="getCamBoard" resultMap="camBoardResult">
