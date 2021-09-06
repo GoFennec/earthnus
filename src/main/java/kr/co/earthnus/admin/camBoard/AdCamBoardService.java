@@ -73,7 +73,7 @@ public class AdCamBoardService {
 			try {
 				System.out.println("service filename : " + fileName);
 				System.out.println(uploadFile);
-				uploadFile.transferTo(new File("C:/upload/" + fileName));
+				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/upload/" + fileName));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -101,7 +101,7 @@ public class AdCamBoardService {
 		if (!uploadFile.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();
 			try {
-				uploadFile.transferTo(new File("C:/upload/" + fileName));
+				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/upload/" + fileName));
 				System.out.println("service filename : " + fileName);
 			} catch (Exception e) {
 				e.printStackTrace();
