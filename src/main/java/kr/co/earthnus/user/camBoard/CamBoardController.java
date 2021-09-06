@@ -1,6 +1,7 @@
 package kr.co.earthnus.user.camBoard;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class CamBoardController{
 			@RequestParam(defaultValue = "6") String contentnum, camBoardBean bean, Model model) {
 		
 		String search = "";
-		String search_type = "CAMB_NAME";
+		String search_type = "CAMB_ENTIRE";
 		String orderBy = "CAMB_NUM";
 		String order = "DESC";
 		
@@ -29,11 +30,20 @@ public class CamBoardController{
 	}
 	
 	@RequestMapping("/camBoard/list/search")
-	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "CAMB_ENTIRE") String search_type, 
+	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "전체") String search_type, 
 			@RequestParam(defaultValue = "1") String pagenum, @RequestParam(defaultValue = "6") String contentnum, 
 			@RequestParam( value = "search", required=false) String search , @RequestParam(defaultValue = "desc") String order, 
 			camBoardBean bean, Model model) {
-				
+		if(search_type.equals("제목")) {
+			search_type = "CAMB_NAME";
+		}else if(search_type.equals("내용")) {
+			search_type = "CAMB_CONTENT";
+		}else if(search_type.equals("CAMB_SUBJECT")){
+			
+		}else {
+			search_type = "CAMB_ENTIRE";
+		}
+		
 		String orderBy = "CAMB_NUM";
 		
 		camBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
@@ -43,10 +53,19 @@ public class CamBoardController{
 	
 	@RequestMapping(value="/camBoard/detail")
 	public String getCamBoardDetail(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "CAMB_ENTIRE") String search_type, 
+			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "전체") String search_type, 
 			@RequestParam(defaultValue = "desc") String order, 
 			camBoardBean bean, @RequestParam("CAMB_NUM") String cambnum, @RequestParam(defaultValue = "1") String p, 
 			@RequestParam("CAMB_NAME") String cambname, Model model) {
+		if(search_type.equals("제목")) {
+			search_type = "CAMB_NAME";
+		}else if(search_type.equals("내용")) {
+			search_type = "CAMB_CONTENT";
+		}else if(search_type.equals("CAMB_SUBJECT")){
+			
+		}else {
+			search_type = "CAMB_ENTIRE";
+		}
 		
 		if(search.equals("plastic")) {
 			search = "플라스틱";
@@ -62,15 +81,37 @@ public class CamBoardController{
 		
 		search = "%" + search + "%";		
 		Map<String, Object> list = new HashMap<String, Object>();
+		List<camBoardBean> CamBoardList = null;
+		
 		String orderBy = "CAMB_NUM";
 		
-		camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, Integer.parseInt(cambnum), list, model);
-
+		int num = Integer.parseInt(cambnum);
+		
+		int limit = 0;
+		int offset = 0;
+		
+		if(cambnum.equals(list.get("totalIndex"))) {
+			limit = 2;
+			offset = num - 2;
+			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, num, limit, offset, CamBoardList, list, model);
+			model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
+		} else if(cambnum.equals("1")) {
+			limit = 2;
+			offset = num - 1;
+			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, num, limit, offset, CamBoardList, list, model);
+			model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
+		} else {
+			limit = 3;
+			offset = num - 2;
+			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, num, limit, offset, CamBoardList, list, model);
+			model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
+			model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
+		}
+		
 		model.addAttribute("totalIndex", list.get("totalIndex"));
-		model.addAttribute("index", list.get("index"));
-		model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
-		model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
-		model.addAttribute("camBoard", camBoardService.getCamBoard(cambnum));
+		model.addAttribute("index", num);
+		
+		model.addAttribute("camBoard", camBoardService.getCamBoard(num));
 		model.addAttribute("page", Integer.parseInt(p));
 		
 		return "camBoard/camBoardDetail";

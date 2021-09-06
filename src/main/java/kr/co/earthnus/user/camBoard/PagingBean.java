@@ -18,6 +18,8 @@ public class PagingBean {
 	private String search_type;
 	private int CAMB_NUM;
 	private int CAMB_INDEX;
+	private int limit;
+	private int offset;
     
     public void prevnext(int pagenum) {
         if(calcpage(totalcount,contentnum)<6) {
@@ -42,6 +44,18 @@ public class PagingBean {
         return totalpage;
     }
     
+	public int getLimit() {
+		return limit;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+	public int getOffset() {
+		return offset;
+	}
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
 	public int getCAMB_INDEX() {
 		return CAMB_INDEX;
 	}
@@ -124,7 +138,7 @@ public class PagingBean {
     }
     public void setEndPage(int getlastblock, int getcurrentblock) {
     	if(totalcount <= 30) {
-    		this.endPage = totalcount / 6 + 1;
+    		this.endPage = totalcount / 6;
     	}else {
             if(getlastblock == getcurrentblock){
                 this.endPage = calcpage(getTotalcount(),getContentnum());
