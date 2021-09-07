@@ -28,5 +28,8 @@ public interface AdChartMybatis {
 	
 	public int countMember(@Param("i")int i);
 	public int countExgoods(@Param("i")int i);
-
+	
+	public int getMonthData(@Param("i")int i,@Param("select_year")int select_year,@Param("select_month")int select_month,@Param("lastDay")int lastDay);
+	public int getDonationMonth(@Param("i")int i,@Param("select_year")int select_year,@Param("select_month")int select_month,@Param("lastDay")int lastDay);
+	
 }

@@ -40,6 +40,15 @@
   		width:200px;
   		text-align:center;
   	}
+  	#cButton{
+  		display: flex;
+  		align-items: center;
+  		justify-content: center;
+  		padding-bottom:25px;
+  	}
+  	#select_div{
+  		margin-left:10px;
+  	}
   </style>
 </head>
 
@@ -169,8 +178,25 @@
               </div>
             </div>
             
+            <div class="col-lg-12" id="cButton">
+            	<div>
+            		<button class="btn btn-sm btn-primary" id="dayButton">최근 일주일</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            		<button class="btn btn-sm btn-primary" id="monthButton">월별 데이터</button>
+            	</div><br>
+            	<div id="select_div">
+            		<select id="select_year" onchange="onchangeItem()">
+            			<option value="2021">2021</option>
+            			<option value="2020">2020</option>
+            		</select>
+            		<select id="select_month">
+            		</select>
+            		<button onclick="getMonthData()">조회</button>
+            	</div>
+            </div>
+            
+            <div id="sevenDay" class="col-lg-12">
             <!-- Area Chart -->
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="card mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold">최근 7일 방문자 수</h6>
@@ -185,7 +211,7 @@
             <!-- Pie Chart -->
 
             <!-- Bar Chart -->
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold">최근 7일 카테고리 별 최근 후원 금액</h6>
@@ -198,9 +224,7 @@
               </div>
             </div>
             
-            
-            
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold">최근 7일 가입자 수</h6>
@@ -213,8 +237,7 @@
               </div>
             </div>
             
-            
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold">최근 7일 지구마켓 주문</h6>
@@ -226,15 +249,69 @@
                 </div>
               </div>
             </div>
+            </div>
+            
+            
+            
+            <div id="month" class="col-lg-12">
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold" id="visitorMonthly"></h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-bar">
+                    <canvas id="myVisitorMonthChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold">이번 달 후원</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-bar">
+                    <canvas id="myDonationMonthChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold">이번 달 가입자</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-bar">
+                    <canvas id="myMemberMonthChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold">이번 달 지구마켓 주문</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-bar">
+                    <canvas id="myExgoodsMonthChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            
+            
           </div>
           <!--Row-->
-
         </div>
-        <!---Container Fluid-->
       </div>
-
-      <!-- Footer -->
-      <!-- Footer -->
     </div>
   </div>
 
@@ -253,8 +330,14 @@
       <script src="/resources/assets/js/Chart.min.js"></script>
 
   <script type="text/javascript">
-  //Pie Chart Example
 
+
+  
+
+  
+  
+  
+  //Pie Chart Example
   var donationPieForest = ${donationPieForest};
   var donationPieIce = ${donationPieIce};
   var donationPiePlastic = ${donationPiePlastic};
@@ -534,10 +617,6 @@
   </script>
   <script type="text/javascript">
   
-  var sevenDate = new Date();
-  var yyyy = sevenDate.getFullYear();
-  var mm = ('0' + (sevenDate.getMonth() + 1)).slice(-2);
-  var dd = ('0' + (sevenDate.getDate())).slice(-2);
   var day = new Array;
   var dateString = [];
   var lastWeek = new Date();
@@ -804,7 +883,7 @@
             padding: 10,
             // Include a dollar sign in the ticks
             callback: function(value, index, values) {
-              return number_format(value) + "명";
+              return number_format(value) + "건";
             }
           },
           gridLines: {
@@ -842,6 +921,192 @@
       }
     }
   });
+  
+  	
+  
+	  //이번달 방문자
+  	  $("#month").hide();
+  	  $("#select_div").hide();
+  	  
+  	  $('#dayButton').click(function(){
+  		  $("#sevenDay").show();
+  		  $("#month").hide();
+  		  $("#select_div").hide();
+  	  });
+  	  $('#monthButton').click(function(){
+  		  
+  		  $("#select_div").show();
+  	  });
+  	  
+  	  var d = new Date();
+  	  var yy = d.getFullYear();
+  	  var mm = ('0' + (d.getMonth() + 1)).slice(-2);
+  	  var select_year;
+  	  var select_month;
+  	  
+  	  	for(var i = d.getMonth() + 1; i > 0; i--){
+  		  	$("#select_month").append("<option value=" + i + ">" + i + "월</option>");
+  	  	}
+  	  	
+  	  	$("select[id=select_year]").change(function(){
+  	  	  select_year = $("select[id='select_year']").val();
+  		  if(yy == select_year){
+  			  $('#select_month').children('option').remove();
+  			  for(var i = d.getMonth() + 1; i > 0; i--){
+  				  $("#select_month").append("<option value=" + i + ">" + i + "월</option>");
+  			  }
+  		  }else{
+  			  $('#select_month').children('option').remove();
+  			  for(var i = 12; i > 0; i--){
+  				  $("#select_month").append("<option value=" + i + ">" + i + "월</option>");
+  			  }
+  		  }
+  	  	});
+  	  	
+  	  	$("select[id=select_month]").change(function(){
+  	  	  select_month = $("select[id='select_month']").val();
+  	    });
+  	  	var myVisitorMonthChart;
+  	  	function getMonthData(){
+  	  		select_year = $("select[id='select_year']").val();
+  	  		select_month = $("select[id='select_month']").val();
+  			$.ajax({
+  	   			type: "POST", //요청 메소드 방식
+  	  			 url:"/adchart/getMonthData",
+  	   			data: {"select_year":select_year, "select_month":select_month},
+  	   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+  	   			success : function(result){
+  	      			if(result.error != null){
+  	      				countVisitorMonth = result.error;
+  	      				countVisitorMonth = countVisitorMonth.reverse();
+  	      			    $("#month").show();
+  	      				$("#sevenDay").hide();
+  	      				
+  	      	    	  var monthString = [];
+  	            	  var thisMonth = new Date();
+  	            	  thisMonth.setYear($("select[id='select_year']").val());
+  	            	  thisMonth.setMonth($("select[id='select_month']").val());
+  	            	  thisMonth.setDate(0);
+  	            	  var year = thisMonth.getFullYear();
+  	          	  	  var month = ('0' + (thisMonth.getMonth())).slice(-2);
+  	          	  	  var date = ('0' + (thisMonth.getDate())).slice(-2);
+  	          	  	  var getDate = thisMonth.getDate();
+  	          	  	  $("#visitorMonthly").text((thisMonth.getMonth() + 1) + "월 방문자 수");
+  	            	  
+  	            	  for(var i = 0; i < getDate; i++){
+  	            		var mmonth = new Date(year, month, date);
+  	            		mmonth.setDate(mmonth.getDate()-i);
+  	            		var myear = mmonth.getFullYear();
+  	            	    var mmmonth = ('0' + (mmonth.getMonth() + 1)).slice(-2);
+  	            	    var mdate = ('0' + (mmonth.getDate())).slice(-2);
+  	            	    monthString[i] = myear + '-' + mmmonth  + '-' + mdate;
+  	            	  }
+  	        	   	  monthString = monthString.reverse();
+  	      				
+  	      		  var ctx = document.getElementById("myVisitorMonthChart");
+  	      			if(window.myCharts != undefined)
+  	      			window.myCharts.destroy();
+  	      			window.myCharts = new Chart(ctx, {
+  	      		    type: 'line',
+  	      		    data: {
+  	      		    	 
+  	      		      labels: monthString,
+  	      		    	 
+  	      		      datasets: [{
+  	      		        label: "",
+  	      		        lineTension: 0.3,
+  	      		        backgroundColor: "#AAEBAA",
+  	      		        borderColor: "#388E3C",
+  	      		        pointRadius: 3,
+  	      		        pointBackgroundColor: "#66bb6a",
+  	      		        pointBorderColor: "#388E3C",
+  	      		        pointHoverRadius: 3,
+  	      		        pointHoverBackgroundColor: "#388E3C",
+  	      		        pointHoverBorderColor: "#388E3C",
+  	      		        pointHitRadius: 10,
+  	      		        pointBorderWidth: 2,
+  	      		        data: countVisitorMonth,
+  	      		      }],
+  	      		    },
+  	      		    options: {
+  	      		      maintainAspectRatio: false,
+  	      		      layout: {
+  	      		        padding: {
+  	      		          left: 10,
+  	      		          right: 25,
+  	      		          top: 25,
+  	      		          bottom: 0
+  	      		        }
+  	      		      },
+  	      		      scales: {
+  	      		        xAxes: [{
+  	      		          time: {
+  	      		            unit: 'date'
+  	      		          },
+  	      		          gridLines: {
+  	      		            display: false,
+  	      		            drawBorder: false
+  	      		          },
+  	      		          ticks: {
+  	      		            maxTicksLimit: 7
+  	      		          }
+  	      		        }],
+  	      		        yAxes: [{
+  	      		          ticks: {
+  	      		            maxTicksLimit: 5,
+  	      		            padding: 10,
+  	      		            // Include a dollar sign in the ticks
+  	      		            callback: function(value, index, values) {
+  	      		              return number_format(value) + "명";
+  	      		            }
+  	      		          },
+  	      		          gridLines: {
+  	      		            color: "rgb(234, 236, 244)",
+  	      		            zeroLineColor: "rgb(234, 236, 244)",
+  	      		            drawBorder: false,
+  	      		            borderDash: [2],
+  	      		            zeroLineBorderDash: [2]
+  	      		          }
+  	      		        }],
+  	      		      },
+  	      		      legend: {
+  	      		        display: false
+  	      		      },
+  	      		      tooltips: {
+  	      		        backgroundColor: "rgb(255,255,255)",
+  	      		        bodyFontColor: "#858796",
+  	      		        titleMarginBottom: 10,
+  	      		        titleFontColor: '#6e707e',
+  	      		        titleFontSize: 14,
+  	      		        borderColor: '#dddfeb',
+  	      		        borderWidth: 1,
+  	      		        xPadding: 15,
+  	      		        yPadding: 15,
+  	      		        displayColors: false,
+  	      		        intersect: false,
+  	      		        mode: 'index',
+  	      		        caretPadding: 10,
+  	      		        callbacks: {
+  	      		          label: function(tooltipItem, chart) {
+  	      		            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+  	      		            return datasetLabel + number_format(tooltipItem.yLabel) + "명";
+  	      		          }
+  	      		        }
+  	      		      }
+  	      		    }
+  	      		  });
+  	      				
+  	      			}else{
+  	      				alert('실패');
+  	      			}
+  	   			},
+  	   		 error:function(request,status,error){
+  	   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+  	      			//통신 실패시 발생하는 함수(콜백)
+  	   				}
+  				});
+  	  	}
+  
   </script>
    
 
