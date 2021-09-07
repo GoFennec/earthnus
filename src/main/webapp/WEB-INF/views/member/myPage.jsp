@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -549,7 +550,6 @@ margin-top: 20px;
 								src="/resources/Auth/account_1.png"
 								title="account" alt="계정사진">
 							<ul class="meta list list-unstyled">
-								<!-- <li class="id"><a>${auth.auth_id}</a></li> -->
 								<li class="name">${auth.auth_name}님</li>
 							</ul>
 						</div>
@@ -575,7 +575,7 @@ margin-top: 20px;
                                 <label class="col-md-2 col-sm-3 col-xs-12 control-label">나의 후원금액</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
                                    
-                                    <input type="text" class="form-control" name ="pay_price" readonly value=${myDonation }원 >
+                                    <input type="text" class="form-control" name ="pay_price" readonly value=<fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation }" />원 >
                                
                                 </div>
                             </div>
@@ -584,7 +584,8 @@ margin-top: 20px;
                               <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">포인트</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" readonly class="form-control" name ="mem_point" value=${myPoint }점 >
+                                
+                                    <input type="text" readonly class="form-control" name ="mem_point" value=<fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyPoint }" />점 >
                                 </div>
                             </div>
                         </fieldset>
@@ -603,7 +604,7 @@ margin-top: 20px;
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_o}</span></p>
+						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_o}" />원</span></p>
 					</li>
 				</ul>
 			</div>
@@ -619,8 +620,7 @@ margin-top: 20px;
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-					 <input type="hidden" id=myDonation_f name="pay_price" value=${myDonation_f }>
-						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_f}</span></p>
+						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_f}" />원</span></p>
 					</li>
 				</ul>
 			</div>
@@ -638,7 +638,7 @@ margin-top: 20px;
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_p}</span></p>
+									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_p}" />원</span></p>
 					</li>
 				</ul>
 			</div>
@@ -657,7 +657,7 @@ margin-top: 20px;
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right">${myDonation_i}</span></p>
+						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_i}" />원</span></p>
 					</li>
 				</ul>
 			</div>
@@ -680,24 +680,24 @@ margin-top: 20px;
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${myPay}" var="pay">
+                <c:forEach items="${getMyPay}" var="pay">
                   <tr>
                     <td class="text-truncate">${pay.pay_dname}</td>
-                    <td class="text-truncate">${pay.pay_price}원</td>
+                    <td class="text-truncate"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pay.pay_price}" />원</td>
                     <td class="text-truncate">${pay.pay_pdate}</td>
-                 	<c:if test="${pay.pay_comment eq 'N'}" >
+              	<c:if test="${pay.pay_comment eq 'N'}" >
                     <td class="text-truncate"><button type="button" 
                     class="btn_comment" onclick="comment()">응원글 작성</button></td>
          		 </c:if>
          		 <c:if test="${pay.pay_comment eq 'Y'}" >
                     <td class="text-truncate"></td>
-         		 </c:if>
+         		 </c:if> 
          		 </tr>
          		 </c:forEach>
                 </tbody>
               </table>
  <c:choose>
-              <c:when test="${empty myPay}">
+              <c:when test="${empty getMyPay}">
 		              <div id="nocontent"> 해당 정보가 존재하지 않습니다.</div>
               </c:when>
               <c:otherwise>

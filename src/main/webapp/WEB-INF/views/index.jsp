@@ -252,11 +252,7 @@ a.btn-card {
 }
 /* End card section */  
 
-#chContent
- {
-       
 
-        }
 </style>
 </head>
 
@@ -356,7 +352,7 @@ a.btn-card {
 
 
 		<!--? About Area Start -->
-		<section class="support-company-area fix pt-10">
+		<section class="support-company-area fix pt-10" style="margin-left: -100px;">
 			<div class="support-wrapper align-items-center">
 				<div class="left-content">
 					<!-- section tittle -->
@@ -364,8 +360,8 @@ a.btn-card {
 						<span>당신의 후원이 변화를 만듭니다</span>
 						<h2>우리의 지구를 <br> 함께 지켜주세요</h2>
 					</div>
-					<div class="support-caption">
-						<p class="pera-top">지구는 동시다발적인 환경문제로 심각한 위기에 처해있습니다. 하지만 우리에게는
+					<div class="support-caption" style="padding-right: 100px;">
+						<p class="pera-top" style="font-size: 20px;">지구는 동시다발적인 환경문제로 심각한 위기에 처해있습니다. 하지만 우리에게는
 							아직 기회가 있습니다. 지구를 지키는 가장 쉬운 방법 EARTH & US와 함께 하세요!
 							EARTH & US는 기후변화, 해양 생태계 파괴와 산림 파괴, 유해
 							화학물질로부터 우리의 소중한 지구를 지키기 위해 쉼없이 달려왔습니다. 환경문제 해결을 위해서는 한시라도 빨리 행동해야
@@ -382,11 +378,11 @@ a.btn-card {
 					</div>
 					<div class="support-img-cap text-center d-flex">
 						<div class="single-one">
-							<span>${total_pay}명</span>
+							<span>${getTotal_pay}명</span>
 							<p>총 후원자 수</p>
 						</div>
 						<div class="single-two">
-							<span>${endCam}건</span>
+							<span>${getEndCam}건</span>
 							<p>완료된 캠페인 수</p>
 						</div>
 					</div>
@@ -423,10 +419,10 @@ a.btn-card {
 							
 								<div class="prices">
 									<p>
-										<c:if test="${total_o ne null}" >
-										<span>지금까지 후원금액: ${total_o}원</span>
+										<c:if test="${getTotal_o ne null}" >
+										<span>지금까지 후원금액: ${getTotal_o}원</span>
 										</c:if>
-												<c:if test="${total_o eq null}" >
+												<c:if test="${getTotal_o eq null}" >
 										<span>지금까지 후원금액: 0원</span>
 										</c:if>
 									</p>
@@ -444,15 +440,15 @@ a.btn-card {
 									<a href="/donation/forest">나무를 심어요!</a>
 								</h3>
 								<p>
-									인간의 욕심으로 인해 숲이 줄어들고 있어요.<br>
+									인간의 욕심으로 인해 숲이 줄어들고 있어요.
 									숲을 터전으로 살아가고있는 생물들은 멸종위기에 처했으며, 온실가스는 흡수되지않고 대기로 방출 되고있어요.</p>
 							
 								<div class="prices">
 									<p>
-										<c:if test="${total_f ne null}" >
-										<span>지금까지 후원금액: ${total_f}원</span>
+										<c:if test="${getTotal_f ne null}" >
+										<span>지금까지 후원금액: ${getTotal_f}원</span>
 										</c:if>
-												<c:if test="${total_f eq null}" >
+												<c:if test="${getTotal_f eq null}" >
 										<span>지금까지 후원금액: 0원</span>
 										</c:if>
 									</p>
@@ -469,14 +465,14 @@ a.btn-card {
 								<h3>
 									<a href="/donation/plastic">플라스틱이 넘쳐요!</a>
 								</h3>
-								<p>플라스틱은 미세 플라스틱으로 분해되어 생태계를 어지럽히고 있어요. <br>
+								<p>플라스틱은 미세 플라스틱으로 분해되어 생태계를 어지럽히고 있어요.
 								플라스틱 사용을 줄여 지구를 지켜요.<br><br></p>
 								
 								<div class="prices">
-									<p><c:if test="${total_p ne null}" >
-										<span>지금까지 후원금액: ${total_p}원</span>
+									<p><c:if test="${getTotal_p ne null}" >
+										<span>지금까지 후원금액: ${getTotal_p}원</span>
 										</c:if>
-												<c:if test="${total_p eq null}" >
+												<c:if test="${getTotal_p eq null}" >
 										<span>지금까지 후원금액: 0원</span>
 										</c:if>
 									</p>
@@ -493,14 +489,14 @@ a.btn-card {
 								<h3>
 									<a href="/donation/ice">북극곰을 도와줘요!</a>
 								</h3>
-								<p>지구 온난화로 기온이 상승하여 빙하가 녹고있어요.<br>
+								<p>지구 온난화로 기온이 상승하여 빙하가 녹고있어요.
 								북극곰과 친구들은 집을 잃어가고 있어요.<br>빠르게 녹고있는 북극을 지켜요.<br><br></p>
 								<div class="prices">
 									<p>
-									<c:if test="${total_i ne null}" >
-										<span>지금까지 후원금액: ${total_i}원</span>
+									<c:if test="${getTotal_i ne null}" >
+										<span>지금까지 후원금액: ${getTotal_i}원</span>
 										</c:if>
-												<c:if test="${total_i eq null}" >
+												<c:if test="${getTotal_i eq null}" >
 										<span>지금까지 후원금액: 0원</span>
 										</c:if>
 									</p>
@@ -525,10 +521,10 @@ a.btn-card {
 						</div>
 					</div>
 				</div>
-			<section class="details-card">
+			
     <div class="container">
         <div class="row">
-            <c:forEach items="${cb_list}" var="camBoard">
+            <c:forEach items="${getCb_list}" var="camBoard">
             <div class="col-md-6">
                 <div class="card-content">
                     <div class="card-img">
@@ -544,7 +540,6 @@ a.btn-card {
             </c:forEach>
           </div>
     </div>
-</section>
 
 				<!-- <div class="row">
 				<c:forEach items="${cb_list}" var="camBoard">
@@ -599,7 +594,7 @@ a.btn-card {
 				</div>
 			<div class="container" style="padding-top:30px">	
 	<div class="row">
-        <c:forEach items="${ch_list}" var="cheBoard">
+        <c:forEach items="${getCh_list}" var="cheBoard">
         <div class="col-sm-6">
             <div id="tb-testimonial" class="testimonial testimonial-success">
                

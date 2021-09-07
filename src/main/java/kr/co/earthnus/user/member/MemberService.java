@@ -55,7 +55,7 @@ public class MemberService {
 	// 마이페이지 포인트조회
 	public String myPoint(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		String myPoint = dao.myPoint(mem_id);
+		String myPoint = dao.getMyPoint(mem_id);
 		if (myPoint == null) {
 			myPoint = "0";
 		}
@@ -65,7 +65,7 @@ public class MemberService {
 	// 마이페이지 총기부금액
 	public String myDonation(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		String myDonation = dao.myDonation(mem_id);
+		String myDonation = dao.getMyDonation(mem_id);
 		if (myDonation == null) {
 			myDonation = "0";
 		}
@@ -75,7 +75,7 @@ public class MemberService {
 	// 나무
 	public String myDonation_f(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		String myDonation_f = dao.myDonation_f(mem_id);
+		String myDonation_f = dao.getMyDonation_f(mem_id);
 		if (myDonation_f == null) {
 			myDonation_f = "0";
 		}
@@ -85,7 +85,7 @@ public class MemberService {
 	// 해양
 	public String myDonation_o(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		String myDonation_o = dao.myDonation_o(mem_id);
+		String myDonation_o = dao.getMyDonation_o(mem_id);
 		if (myDonation_o == null) {
 			myDonation_o = "0";
 		}
@@ -95,7 +95,7 @@ public class MemberService {
 	// 북극
 	public String myDonation_i(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		String myDonation_i = dao.myDonation_i(mem_id);
+		String myDonation_i = dao.getMyDonation_i(mem_id);
 		if (myDonation_i == null) {
 			myDonation_i = "0";
 		}
@@ -105,21 +105,21 @@ public class MemberService {
 	// 플라스틱
 	public String myDonation_p(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		String myDonation_p = dao.myDonation_p(mem_id);
+		String myDonation_p = dao.getMyDonation_p(mem_id);
 		if (myDonation_p == null) {
 			myDonation_p = "0";
 		}
 		return myDonation_p;
 	}
 	//기부내역
-		public void myPay(String mem_id, String pagenum, String contentnum, Model model) {
+		public void getMyPay(String mem_id, String pagenum, String contentnum, Model model) {
 			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 			PagingBean pBean = new PagingBean();
 		
 			  	int cPagenum = Integer.parseInt(pagenum);
 		        int cContentnum = Integer.parseInt(contentnum);
 		        List<PayBean> list = null;
-		        pBean.setTotalcount(dao.myPayCount(mem_id));
+		        pBean.setTotalcount(dao.getMyPayCount(mem_id));
 		        pBean.setPagenum(cPagenum-1);   // 현재 페이지를 페이지 객체에 지정한다 -1 을 해야 쿼리에서 사용할수 있다
 		        pBean.setContentnum(cContentnum); // 한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
 		        pBean.setCurrentblock(cPagenum); // 현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
@@ -132,9 +132,9 @@ public class MemberService {
 			
 		        if(cContentnum == 5){//선택 게시글 수
 		        	pBean.setPagenum(pBean.getPagenum()*5);
-		        	list = dao.myPay(mem_id, pBean.getContentnum(), pBean.getPagenum());
+		        	list = dao.getMyPay(mem_id, pBean.getContentnum(), pBean.getPagenum());
 		        }
-		        model.addAttribute("myPay", list);
+		        model.addAttribute("getMyPay", list);
 				model.addAttribute("page", pBean);
 		       
 			}
@@ -143,16 +143,15 @@ public class MemberService {
 	// 비밀번호체크
 	public String pwCheck(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		String mem_pw = dao.pwCheck(mem_id);
+		String mem_pw = dao.getPwCheck(mem_id);
 		return mem_pw;
 	}
 
 	// 내정보
 	public MemberBean myInfo(String mem_id) {
-		System.out.println("S : myInfo()실행");
 		MemberBean memberBean = null;
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		memberBean = dao.myInfo(mem_id);
+		memberBean = dao.getMyInfo(mem_id);
 		return memberBean;
 	}
 
@@ -185,7 +184,7 @@ public class MemberService {
 	        int cPagenum = Integer.parseInt(pagenum);
 	        int cContentnum = Integer.parseInt(contentnum);
 	        List<CheBoardBean> list = null;
-	        pBean.setTotalcount(dao.myMessageCount(mem_id));
+	        pBean.setTotalcount(dao.getMyMessageCount(mem_id));
 	        pBean.setPagenum(cPagenum-1);   // 현재 페이지를 페이지 객체에 지정한다 -1 을 해야 쿼리에서 사용할수 있다
 	        pBean.setContentnum(cContentnum); // 한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
 	        pBean.setCurrentblock(cPagenum); // 현재 페이지 블록이 몇번인지 현재 페이지 번호를 통해서 지정한다.
@@ -198,10 +197,9 @@ public class MemberService {
 		
 	        if(cContentnum == 10){//선택 게시글 수
 	        	pBean.setPagenum(pBean.getPagenum()*10);
-//	        	list = dao.myMessage(mem_id, pBean);
-	        	list = dao.myMessage(mem_id, pBean.getContentnum(), pBean.getPagenum());
+	        	list = dao.getMyMessage(mem_id, pBean.getContentnum(), pBean.getPagenum());
 	        }
-	        model.addAttribute("myMessage", list);
+	        model.addAttribute("getMyMessage", list);
 			model.addAttribute("page", pBean);
 	       
 		}
@@ -215,7 +213,7 @@ public class MemberService {
 	        int cPagenum = Integer.parseInt(pagenum);
 	        int cContentnum = Integer.parseInt(contentnum);
 	        List<ExGoodsBean> list = null;
-	        pBean.setTotalcount(dao.myOrderCount(mem_id));
+	        pBean.setTotalcount(dao.getMyOrderCount(mem_id));
 	        pBean.setPagenum(cPagenum-1);   
 	        pBean.setContentnum(cContentnum);
 	        pBean.setCurrentblock(cPagenum); 
@@ -226,9 +224,9 @@ public class MemberService {
 	        pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
 	        
 	        
-	        if(cContentnum == 10){
-	        	pBean.setPagenum(pBean.getPagenum()*10);
-	        	list = dao.myOrder(mem_id, pBean.getContentnum(), pBean.getPagenum());
+	        if(cContentnum == 5){
+	        	pBean.setPagenum(pBean.getPagenum()*5);
+	        	list = dao.getMyOrder(mem_id, pBean.getContentnum(), pBean.getPagenum());
 	        	for(int i = 0; i < list.size(); i++) {
 					String cc = list.get(i).getExg_cc();
 					switch (cc) {
@@ -247,7 +245,7 @@ public class MemberService {
 				}
 	        	
 	        }
-	        model.addAttribute("myOrder", list);
+	        model.addAttribute("getMyOrder", list);
 			model.addAttribute("page", pBean);
 			
 		}
@@ -265,6 +263,13 @@ public class MemberService {
 		dao.deleteMember(mem_id);
 
 	}
+	/*
+	public void deleteMember_api(String mem_id) {
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		dao.deleteMember_api(mem_id);
+
+	}*/
+
 
 	// 아이디 중복체크
 	public int idCheck(String mem_id) {

@@ -18,7 +18,7 @@ public class AuthService {
 	private SqlSessionTemplate mybatis;
 
 	
-	public AuthBean login(String auth_id, String auth_pw) throws NoSuchAlgorithmException{
+	public AuthBean getLogin(String auth_id, String auth_pw) throws NoSuchAlgorithmException{
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
 		AuthBean aBean = new AuthBean();
 
@@ -32,7 +32,7 @@ public class AuthService {
         auth_pw = cryptogram;
         //비밀번호 일치 여부
 
-        MemberBean mBean = dao.selectById(auth_id);
+        MemberBean mBean = dao.getSelectById(auth_id);
 		if (mBean == null) {
 			aBean = null;
 		} else {
@@ -47,10 +47,10 @@ public class AuthService {
 		return aBean;
 	}
 	
-	public AuthBean kakaoLogin(String auth_id) {
+	public AuthBean getKakaoLogin(String auth_id) {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
 		AuthBean aBean = new AuthBean();
-		MemberBean mBean = dao.selectById(auth_id);
+		MemberBean mBean = dao.getSelectById(auth_id);
 			if (mBean == null) {
 				aBean = null;
 			} else {	
@@ -59,10 +59,10 @@ public class AuthService {
 		} return aBean;
 }
 	
-	public AuthBean naverLogin(String auth_id) {
+	public AuthBean getNaverLogin(String auth_id) {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
 		AuthBean aBean = new AuthBean();
-		MemberBean mBean = dao.selectById(auth_id);
+		MemberBean mBean = dao.getSelectById(auth_id);
 			if (mBean == null) {
 				aBean = null;
 			} else {	
@@ -70,45 +70,45 @@ public class AuthService {
 			aBean.setAuth_name(mBean.getMem_name());
 		} return aBean;
 }
-	public String total_pay() {
+	public String getTotal_pay() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
-		String total_pay = dao.total_pay();
+		String total_pay = dao.getTotal_pay();
 		return total_pay;
 	}
-	public String endCam() {
+	public String getEndCam() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
-		String endCam = dao.endCam();
+		String endCam = dao.getEndCam();
 		return endCam;
 	}
 	
-	public String total_f() {
+	public String getTotal_f() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
-		String total_f = dao.total_f();
+		String total_f = dao.getTotal_f();
 		return total_f;
 	}
-	public String total_o() {
+	public String getTotal_o() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
-		String total_o = dao.total_o();
+		String total_o = dao.getTotal_o();
 		return total_o;
 	}
-	public String total_i() {
+	public String getTotal_i() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
-		String total_i = dao.total_i();
+		String total_i = dao.getTotal_i();
 		return total_i;
 	}
-	public String total_p() {
+	public String getTotal_p() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
-		String total_p = dao.total_p();
+		String total_p = dao.getTotal_p();
 		return total_p;
 	}
-	public List<CheBoardBean> ch_list() {
+	public List<CheBoardBean> getCh_list() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
-		List<CheBoardBean> ch_list = dao.ch_list();
+		List<CheBoardBean> ch_list = dao.getCh_list();
 		return ch_list;
 	}
-	public List<camBoardBean> cb_list() {
+	public List<camBoardBean> getCb_list() {
 		AuthMybatis dao = mybatis.getMapper(AuthMybatis.class);
-		List<camBoardBean> list = dao.cb_list();
+		List<camBoardBean> list = dao.getCb_list();
 		return list;
 	}
 }

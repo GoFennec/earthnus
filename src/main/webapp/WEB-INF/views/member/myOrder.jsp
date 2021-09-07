@@ -652,9 +652,9 @@ margin-top: 20px;
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${myOrder}" var="exGoods">
+                <c:forEach items="${getMyOrder}" var="exGoods">
                   <tr>
-                    <td class="text-truncate"><img src="${exGoods.exg_img}" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"  width="30%"/></td>
+                    <td class="text-truncate"><img src="${exGoods.exg_img}" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"  width="50%"/></td>
                     <td class="text-truncate">${exGoods.exg_gname}</td>
                     <td class="text-truncate"><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
                     <td class="text-truncate"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}" /></td>
@@ -690,7 +690,7 @@ margin-top: 20px;
                 </tbody>
               </table> 
               <c:choose>
-              <c:when test="${empty myOrder}">
+              <c:when test="${empty getMyOrder}">
 		              <div id="nocontent"> 해당 정보가 존재하지 않습니다.</div>
               </c:when>
               <c:otherwise>

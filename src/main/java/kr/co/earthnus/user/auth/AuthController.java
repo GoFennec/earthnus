@@ -42,24 +42,24 @@ public class AuthController {
 
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(Model model) {
-		String total_pay = service.total_pay();
-		String endCam = service.endCam();
-		String total_f = service.total_f();
-		String total_o = service.total_o();
-		String total_i = service.total_i();
-		String total_p = service.total_p();
-		List<camBoardBean> list = service.cb_list();
-		List<CheBoardBean> ch_list = service.ch_list();
+	public String getIndex(Model model) {
+		String total_pay = service.getTotal_pay();
+		String endCam = service.getEndCam();
+		String total_f = service.getTotal_f();
+		String total_o = service.getTotal_o();
+		String total_i = service.getTotal_i();
+		String total_p = service.getTotal_p();
+		List<camBoardBean> list = service.getCb_list();
+		List<CheBoardBean> ch_list = service.getCh_list();
 		
-		model.addAttribute("total_pay",total_pay);
-		model.addAttribute("endCam",endCam);
-		model.addAttribute("total_f",total_f);
-		model.addAttribute("total_o",total_o);
-		model.addAttribute("total_i",total_i);
-		model.addAttribute("total_p",total_p);
-		model.addAttribute("cb_list", list);
-		model.addAttribute("ch_list", ch_list);
+		model.addAttribute("getTotal_pay",total_pay);
+		model.addAttribute("getEndCam",endCam);
+		model.addAttribute("getTotal_f",total_f);
+		model.addAttribute("getTotal_o",total_o);
+		model.addAttribute("getTotal_i",total_i);
+		model.addAttribute("getTotal_p",total_p);
+		model.addAttribute("getCb_list", list);
+		model.addAttribute("getCh_list", ch_list);
 		return "index";
 	}
 
@@ -123,7 +123,7 @@ public class AuthController {
 			
 			model.addAttribute("result", apiResult);
 			String auth_id = (String) session.getAttribute("mem_id");
-			aBean = service.naverLogin(auth_id);
+			aBean = service.getNaverLogin(auth_id);
 			model.addAttribute("aBean", aBean);
 			
 			if(aBean == null) {
@@ -154,7 +154,7 @@ public class AuthController {
 	public String loginch(@RequestParam("auth_pw") String auth_pw, AuthBean aBean,  HttpServletResponse response, HttpSession session, Model model)
 			throws NoSuchAlgorithmException, IOException {
 		model.addAttribute("id", aBean.getAuth_id());
-		aBean = service.login(aBean.getAuth_id(), auth_pw);
+		aBean = service.getLogin(aBean.getAuth_id(), auth_pw);
 		if (aBean != null) {
 			session.setAttribute("auth", aBean);
 			 String redirectUrl = (String) session.getAttribute("url_prior_login");
@@ -166,7 +166,7 @@ public class AuthController {
 					 return "redirect:" + str;
 				 }
 			 }else {
-				 return "index";
+				 return "redirect:/";
 			 }
 		}else {
 			response.setContentType("text/html;charset=UTF-8");
@@ -219,7 +219,7 @@ public class AuthController {
 			
 		
 			session.setAttribute("access_Token", access_Token);
-			aBean = service.kakaoLogin(auth_id);
+			aBean = service.getKakaoLogin(auth_id);
 			model.addAttribute("aBean", aBean);
 			if (aBean == null) {
 				return "redirect:/join_kakao";
