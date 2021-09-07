@@ -1,11 +1,14 @@
 package kr.co.earthnus.user.member;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +74,7 @@ public class MemberController {
 					@RequestParam(defaultValue = "5") String contentnum, HttpSession session, Model model, AuthBean aBean) {
 				aBean = (AuthBean) session.getAttribute("auth");
 				String mem_id = aBean.getAuth_id();
-				memberService.myPay(mem_id, pagenum, contentnum, model);
+				memberService.getMyPay(mem_id, pagenum, contentnum, model);
 				String myPoint = memberService.myPoint(mem_id);
 				String myDonation = memberService.myDonation(mem_id);
 				String myDonation_f = memberService.myDonation_f(mem_id);
@@ -79,12 +82,12 @@ public class MemberController {
 				String myDonation_i = memberService.myDonation_i(mem_id);
 				String myDonation_p = memberService.myDonation_p(mem_id);
 				
-				model.addAttribute("myDonation",myDonation);
-				model.addAttribute("myPoint",myPoint);
-				model.addAttribute("myDonation_f",myDonation_f);
-				model.addAttribute("myDonation_o",myDonation_o);
-				model.addAttribute("myDonation_i",myDonation_i);
-				model.addAttribute("myDonation_p",myDonation_p);
+				model.addAttribute("getMyDonation",myDonation);
+				model.addAttribute("getMyPoint",myPoint);
+				model.addAttribute("getMyDonation_f",myDonation_f);
+				model.addAttribute("getMyDonation_o",myDonation_o);
+				model.addAttribute("getMyDonation_i",myDonation_i);
+				model.addAttribute("getMyDonation_p",myDonation_p);
 				return "member/myPage";
 			}
 			
@@ -188,7 +191,7 @@ public class MemberController {
 			//마이오더
 			@RequestMapping("/member/myOrder")
 			public String exGoodsList(@RequestParam(defaultValue = "1") String pagenum, 
-					@RequestParam(defaultValue = "10") String contentnum, HttpSession session, AuthBean aBean, Model model) {
+					@RequestParam(defaultValue = "5") String contentnum, HttpSession session, AuthBean aBean, Model model) {
 				aBean = (AuthBean) session.getAttribute("auth");
 				String mem_id = aBean.getAuth_id();
 				memberService.myOrder(mem_id, pagenum, contentnum, model);//
@@ -220,11 +223,15 @@ public class MemberController {
 			@RequestMapping(value="/member/myDelete")
 			public String myDelete(HttpSession session, Model model, 
 					AuthBean aBean) {
+				aBean = (AuthBean) session.getAttribute("auth");
+				String mem_id = aBean.getAuth_id();
+				MemberBean myInfo = memberService.myInfo(mem_id);
+				model.addAttribute("getMyInfo",myInfo);
 				return "member/myDelete";
 			}
 			
 			@RequestMapping(value="/pwCheck", method=RequestMethod.POST)
-			public String pwCheck(HttpSession session, AuthBean aBean, @RequestParam("mem_pw")String pw) throws NoSuchAlgorithmException {
+			public String pwCheck(HttpSession session, AuthBean aBean, HttpServletResponse response, @RequestParam("mem_pw")String pw) throws NoSuchAlgorithmException, IOException {
 				aBean = (AuthBean) session.getAttribute("auth");
 				String mem_id = aBean.getAuth_id();
 				String mem_shapw = memberService.pwCheck(mem_id);
@@ -232,23 +239,45 @@ public class MemberController {
 				String smem_pw = sha.encrypt(pw);
 				if(mem_shapw.equals(smem_pw)) {
 				return "redirect:/deleteMember";
+				
 				}else {
-				return "member/myDelete";
-				}
+					response.setContentType("text/html;charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('비밀번호가 일치하지 않습니다.');location.href=\"member/myDelete\"</script>");
+					out.close();
+				}				return "member/myDelete";
+
 			}
 			
 			
 			@RequestMapping(value = "/deleteMember")
 			public String myDelete(HttpSession session, Model model, 
-					AuthBean aBean, String mem_id){
+					AuthBean aBean, HttpServletResponse response, String mem_id) throws IOException{
 				aBean = (AuthBean) session.getAttribute("auth");
 				mem_id = aBean.getAuth_id();
 				memberService.deleteMember(mem_id);
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('탈퇴가 완료 되었습니다.');location.href=\"/\"</script>");
+				out.close();
 				session.invalidate();
 				return "redirect:/";			
 			}
 			
-		
+		/*	@RequestMapping(value = "/deleteMember_api")
+			public String myDelete_api(HttpSession session, Model model, 
+					AuthBean aBean, HttpServletResponse response, String mem_id) throws IOException{
+				aBean = (AuthBean) session.getAttribute("auth");
+				mem_id = aBean.getAuth_id();
+				memberService.deleteMember_api(mem_id);
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('탈퇴가 완료 되었습니다.');location.href=\"/\"</script>");
+				out.close();
+				session.invalidate();
+				return "redirect:/";			
+			}
+		*/
 	
 	@RequestMapping(value="/member/idcheck", method=RequestMethod.POST)
 	@ResponseBody

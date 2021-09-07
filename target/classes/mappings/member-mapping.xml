@@ -62,39 +62,39 @@
 	</insert>
 	
 	
-	<select id="myPoint" resultType="String">SELECT MEM_POINT FROM MEMBER
+	<select id="getMyPoint" resultType="String">SELECT MEM_POINT FROM MEMBER
 		WHERE MEM_ID=#{mem_id}
 	</select>
 
-	<select id="myDonation" resultType="String">SELECT SUM(PAY_PRICE) FROM
+	<select id="getMyDonation" resultType="String">SELECT SUM(PAY_PRICE) FROM
 		PAY WHERE PAY_ID=#{mem_id}
 	</select>
 
-<select id="myDonation_f" resultType="String" parameterType="String">
+<select id="getMyDonation_f" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('묘목','새싹','나무','숲')
 	</select>
-	<select id="myDonation_o" resultType="String" parameterType="String">
+	<select id="getMyDonation_o" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('조개','바다거북','고래','바다')
 	</select>
-	<select id="myDonation_i" resultType="String" parameterType="String">
+	<select id="getMyDonation_i" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('작은 얼음','큰 얼음','빙하 조각','북극곰')
 	</select>
-	<select id="myDonation_p" resultType="String" parameterType="String">
+	<select id="getMyDonation_p" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('플라스틱 줄이기','해양 청소','대지 청소','친환경')
 	</select>
-	<select id="myPay" resultType="pay">
+	<select id="getMyPay" resultType="pay">
 	SELECT PAY_DNAME, PAY_PRICE, PAY_PDATE, PAY_STATE, PAY_COMMENT FROM PAY WHERE PAY_ID=#{mem_id} ORDER BY PAY_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}    
 	</select>
-	<select id="myPayCount" parameterType="String" resultType="int">
+	<select id="getMyPayCount" parameterType="String" resultType="int">
 	SELECT COUNT(*) FROM PAY WHERE PAY_ID=#{mem_id}
 	</select>
 
-	<select id="pwCheck" parameterType="String" resultType="String">
+	<select id="getPwCheck" parameterType="String" resultType="String">
 	SELECT MEM_PW FROM MEMBER WHERE MEM_ID = #{mem_id}
 	</select>
 	
 
-	<select id="myInfo" resultType="member">
+	<select id="getMyInfo" resultType="member">
 		SELECT * FROM MEMBER WHERE
 		MEM_ID=#{mem_id}
 	</select>
@@ -117,18 +117,18 @@
 		WHERE MEM_ID=#{mem_id}
 	</update>
 
-<select id="myOrder"  resultType="exGoods">
+<select id="getMyOrder"  resultType="exGoods">
 	SELECT * FROM EXGOODS WHERE EXG_ID=#{mem_id} ORDER BY EXG_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}   
 	</select>
-	<select id="myOrderCount"  parameterType="String" resultType="int">
+	<select id="getMyOrderCount"  parameterType="String" resultType="int">
 	SELECT COUNT(*) FROM EXGOODS WHERE EXG_ID=#{mem_id} 
 	</select>
 	
 	
-	<select id="myMessage"  resultType="cheBoard">
+	<select id="getMyMessage"  resultType="cheBoard">
 	SELECT CHEB_NUM, CHEB_DNAME, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id} ORDER BY CHEB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
 	</select>
-	<select id="myMessageCount"  parameterType="String" resultType="int">
+	<select id="getMyMessageCount"  parameterType="String" resultType="int">
 	SELECT COUNT(*) FROM CHEBOARD WHERE CHEB_ID=#{mem_id}
 	</select>
 
@@ -138,6 +138,11 @@
 		MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
 		MEM_POINT="0" WHERE MEM_ID=#{mem_id}
 	</update>
+	<!-- <update id="deleteMember_api" parameterType="member">UPDATE MEMBER SET
+		MEM_ID="삭제된회원" "MEM_PW="NOTAMEMBER", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원",
+		MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
+		MEM_POINT="0" WHERE MEM_ID=#{mem_id}
+	</update> -->
 	<select id="find" parameterType="String" resultType="int">
 		SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail}
 	</select>

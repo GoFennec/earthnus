@@ -15,21 +15,22 @@ public interface MemberMybatis {
 	public int insertMember(MemberBean memberBean);
 	public int insertMember_kakao(MemberBean memberBean);
 	public int insertMember_naver(MemberBean memberBean);
-	public String myPoint(String mem_id);
-	public String myDonation(String mem_id);
-	public String myDonation_f(String mem_id);
-	public String myDonation_o(String mem_id);
-	public String myDonation_i(String mem_id);
-	public String myDonation_p(String mem_id);
+	public String getMyPoint(String mem_id);
+	public String getMyDonation(String mem_id);
+	public String getMyDonation_f(String mem_id);
+	public String getMyDonation_o(String mem_id);
+	public String getMyDonation_i(String mem_id);
+	public String getMyDonation_p(String mem_id);
 	
-	public MemberBean myInfo(String mem_id);
+	public MemberBean getMyInfo(String mem_id);
 	public void updateMyInfo(MemberBean memberBean);
 
 	public void updatePw(Map<String, Object> map);
 	public void updateEmail(Map<String, Object> map);
 	public void deleteMember(String mem_id);
+	//public void deleteMember_api(String mem_id);
 	public int idCheck(@Param("mem_id") String mem_id);
-	public String pwCheck(String mem_id);
+	public String getPwCheck(String mem_id);
 	
 	public int insertMail(MailBean MailBean);
 	public MailBean selectMail(@Param("name") String name, @Param("email") String email);
@@ -38,10 +39,10 @@ public interface MemberMybatis {
 	public int findpw(@Param("findName") String findName, @Param("findEmail") String findEmail, @Param("mem_id") String mem_id);
 	public List<MemberBean> findID(@Param("findName") String findName, @Param("mail_receiver") String mail_receiver);
 	public int changePW(@Param("changeNum") String changeNum, @Param("email") String email, @Param("name") String name);
-	public int myOrderCount(String mem_id); 
-	public List<ExGoodsBean> myOrder(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
-	public int myMessageCount(String mem_id); 
-	public List<CheBoardBean> myMessage(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
-	public int myPayCount(String mem_id); 
-	public List<PayBean> myPay(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
+	public int getMyOrderCount(String mem_id); 
+	public List<ExGoodsBean> getMyOrder(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
+	public int getMyMessageCount(String mem_id); 
+	public List<CheBoardBean> getMyMessage(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
+	public int getMyPayCount(String mem_id); 
+	public List<PayBean> getMyPay(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
 }

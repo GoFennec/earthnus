@@ -24,35 +24,35 @@
 		<result property="mem_api" column="MEM_API" />
 	</resultMap>
 
-	<select id="selectById" resultType="member"
+	<select id="getSelectById" resultType="member"
 		parameterType="string">
 		SELECT * FROM MEMBER WHERE MEM_ID=#{auth_id}
 	</select>
-	<select id="total_pay" resultType="String" parameterType="String">
+	<select id="getTotal_pay" resultType="String" parameterType="String">
 		SELECT Count(*) FROM PAY WHERE PAY_STATE="결제승인" 
 	</select>
-	<select id="total_f" resultType="String" parameterType="String">
+	<select id="getTotal_f" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('묘목','새싹','나무','숲')
 	</select>
-	<select id="total_o" resultType="String" parameterType="String">
+	<select id="getTotal_o" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('조개','바다거북','고래','바다')
 	</select>
-	<select id="total_p" resultType="String" parameterType="String">
+	<select id="getTotal_p" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('플라스틱 줄이기','해양 청소','대지 청소','친환경')
 	</select>
-	<select id="total_i" resultType="String" parameterType="String">
+	<select id="getTotal_i" resultType="String" parameterType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('작은 얼음','큰 얼음','빙하 조각','북극곰')
 	</select>
-	<select id="cb_list" resultType="camBoard" parameterType="String">
+	<select id="getCb_list" resultType="camBoard" parameterType="String">
 		SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_FILE FROM CAMBOARD ORDER BY CAMB_NUM DESC LIMIT 2
 	</select>
-	<select id="ch_list" resultType="cheBoard" parameterType="String">
+	<select id="getCh_list" resultType="cheBoard" parameterType="String">
 		SELECT * FROM CHEBOARD ORDER BY CHEB_DATE DESC limit 6
 	</select>
-	<select id="d_img" resultType="cheBoard" parameterType="String">
+	<select id="getD_img" resultType="cheBoard" parameterType="String">
 		SELECT D_IMG FROM DONATION WHERE D_NAME=#{d_name}
 	</select>
-		<select id="endCam" resultType="String" parameterType="String">
+		<select id="getEndCam" resultType="String" parameterType="String">
 		<![CDATA[
 			SELECT COUNT(*) FROM CAMBOARD WHERE CAMB_FINDATE < NOW()
 		]]>

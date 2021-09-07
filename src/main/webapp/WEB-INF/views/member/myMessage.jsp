@@ -669,7 +669,7 @@ margin-top: 20px;
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${myMessage}" var="cheBoard">
+                <c:forEach items="${getMyMessage}" var="cheBoard">
                   <tr>
                     <td class="text-truncate">${cheBoard.cheb_num}</td>
                     <td class="text-truncate">${cheBoard.cheb_dname}</td>
@@ -679,7 +679,7 @@ margin-top: 20px;
          		 </c:forEach>
                 </tbody>
               </table>   <c:choose>
-              <c:when test="${empty myMessage}">
+              <c:when test="${empty getMyMessage}">
 		              <div id="nocontent"> 해당 정보가 존재하지 않습니다.</div>
               </c:when>
               <c:otherwise>

@@ -899,7 +899,7 @@ body {
 								</div>
 
 
-<script>
+							<script>
 									$(function() {
 										var tel = $("#mem_tel").val();
 										$("#invalid-phone").hide();
@@ -936,22 +936,23 @@ body {
 								<div class="col-md-3" style="margin-top: 53px;">
 									<button type="button" class="w-100 btn btn-primary btn-lg"
 										onclick="execDaumPostcode()" id="findPC"
-										style="padding-left: 9px; font-size: 13px">우편번호 찾기</button>
+										style="text-align: center; margin-bottom: 10px;">우편번호 찾기</button>
 								</div>
 								<div class="col-md-12">
 									<input type="text" class="form-control" id="address" required 
-										placeholder="주소" onkeyup='call_addr()' >
+										placeholder="주소" onkeyup='call_addr()' style="margin-bottom: 10px;" >
 								</div>
 								<div class="col-md-12">
 									<input type="text" class="form-control" id="detailAddress" required 
-										placeholder="상세주소" onkeyup='call_addr()' >
+										placeholder="상세주소" onkeyup='call_addr()'  style="margin-bottom: 10px;" >
 								</div>
 								<div class="col-md-12">
 									<input type="text" class="form-control" id="extraAddress" 
 										placeholder="참고항목" onkeyup='call_addr()'>
+										<div class="invalid-feedback" id="invalid-addr">필수 입력사항입니다.</div>
 								</div>
 								<input type="hidden" id="address_all" name="mem_addr" value="${MemberBean.mem_addr}" >
-								<div class="invalid-feedback" id="invalid-addr">필수 입력사항입니다.</div>
+								
 
 								<div id="wrap"
 									style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
