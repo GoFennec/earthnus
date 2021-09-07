@@ -157,5 +157,17 @@ public class AdChartService {
 		}
 		model.addAttribute("countExgoods", count1);
 	}
-
+	
+	
+	public List<Integer> getMonthData(int select_year, int select_month, int lastDay) {
+		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
+		List<Integer> count1 = new ArrayList<Integer>();
+		int count = 0;
+		for(int i = 0; i < lastDay; i++) {
+			count = dao.getMonthData(i, select_year, select_month, lastDay);
+			count1.add(count);
+		}
+		return count1;
+		
+	}
 }

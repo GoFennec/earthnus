@@ -94,4 +94,16 @@
 		and exg_state != '결제취소'
 	</select>
 	
+	
+	<!-- 월별 차트 -->
+	<select id="getMonthData" parameterType="int" resultType="int">
+		select count(*) from visitor where date_format(visit_time,'%Y-%m-%d') = date_add(last_day('${select_year}-${select_month}-${lastDay}'), interval - ${i} day)
+	</select>
+	
+	<select id="getDonationMonth" parameterType="int" resultType="int">
+		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_add(last_day('2021-08-30'), interval - 1 day) 
+        and (PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경') and pay_state != '결제취소'
+	</select>
+	
+	
 </mapper>
