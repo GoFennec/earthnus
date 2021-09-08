@@ -87,31 +87,27 @@ public class CamBoardController{
 		
 		int num = Integer.parseInt(cambnum);
 		
-		int limit = 0;
+		int limit = 1;
 		int offset = 0;
 		
 		if(cambnum.equals(list.get("totalIndex"))) {
-			limit = 2;
-			offset = num - 2;
 			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, num, limit, offset, CamBoardList, list, model);
-			model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
 		} else if(cambnum.equals("1")) {
 			limit = 2;
 			offset = num - 1;
 			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, num, limit, offset, CamBoardList, list, model);
-			model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
 		} else {
 			limit = 3;
 			offset = num - 2;
 			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, num, limit, offset, CamBoardList, list, model);
-			model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
-			model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
 		}
 		
 		model.addAttribute("totalIndex", list.get("totalIndex"));
 		model.addAttribute("index", num);
 		
-		model.addAttribute("camBoard", camBoardService.getCamBoard(num));
+		model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
+		model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
+		model.addAttribute("camBoard", camBoardService.getCamBoard(cambname));
 		model.addAttribute("page", Integer.parseInt(p));
 		
 		return "camBoard/camBoardDetail";

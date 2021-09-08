@@ -45,7 +45,7 @@
 			</choose>
 			ORDER BY 
 			<choose>
-				<when test='arr.equals("entire")'><![CDATA[(SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order} ]]></when>
+				<when test='arr.equals("entire")'><![CDATA[(SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order}, CAMB_NUM ${order} ]]></when>
 				<when test='arr.equals("doing")'>${orderBy} ${order} </when>
 				<when test='arr.equals("exp")'>${orderBy} ${order} </when>
 				<when test='arr.equals("end")'>${orderBy} ${order} </when>
@@ -169,7 +169,7 @@
 			</choose>
 			ORDER BY 
 			<choose>
-				<when test='arr.equals("entire")'><![CDATA[(SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order} ]]></when>
+				<when test='arr.equals("entire")'><![CDATA[(SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order}, CAMB_NUM ${order} ]]></when>
 				<when test='arr.equals("doing")'>${orderBy} ${order} </when>
 				<when test='arr.equals("exp")'>${orderBy} ${order} </when>
 				<when test='arr.equals("end")'>${orderBy} ${order} </when>
@@ -179,7 +179,7 @@
 	
 	<select id="getCamBoard" resultMap="camBoardResult">
 		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE CAMB_NUM=#{contentnum}
+			SELECT * FROM CAMBOARD WHERE CAMB_NAME=#{cambname}
 		]]>
 	</select>
 	
