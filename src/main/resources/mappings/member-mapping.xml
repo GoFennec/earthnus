@@ -131,18 +131,24 @@
 	<select id="getMyMessageCount"  parameterType="String" resultType="int">
 	SELECT COUNT(*) FROM CHEBOARD WHERE CHEB_ID=#{mem_id}
 	</select>
-
+<select id="getCheckExgoods" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM EXGOODS WHERE EXG_ID = #{mem_id} and (exg_state = '결제완료' or exg_state = '배송처리')
+	</select>
 
 	<update id="deleteMember" parameterType="member">UPDATE MEMBER SET
 		MEM_PW="NOTAMEMBER", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원",
 		MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
-		MEM_POINT="0" WHERE MEM_ID=#{mem_id}
+		MEM_POINT="0", MEM_LDATE=NOW() WHERE MEM_ID=#{mem_id}
 	</update>
-	<!-- <update id="deleteMember_api" parameterType="member">UPDATE MEMBER SET
-		MEM_ID="삭제된회원" "MEM_PW="NOTAMEMBER", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원",
+	<update id="deleteMember_api" parameterType="String">UPDATE MEMBER SET
+		MEM_ID=#{deleteMember}, MEM_PW="NOTAMEMBER", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원",
 		MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
-		MEM_POINT="0" WHERE MEM_ID=#{mem_id}
-	</update> -->
+		MEM_POINT="0", MEM_LDATE=NOW() WHERE MEM_ID=#{mem_id}
+	</update>
+	<select id="getDeleteCount" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE MEM_ID LIKE "%삭제된회원%"
+	</select>
+	
 	<select id="find" parameterType="String" resultType="int">
 		SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail}
 	</select>

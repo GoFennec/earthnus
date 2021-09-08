@@ -27,8 +27,10 @@ public interface MemberMybatis {
 
 	public void updatePw(Map<String, Object> map);
 	public void updateEmail(Map<String, Object> map);
+	public int getCheckExgoods(String mem_id);
 	public void deleteMember(String mem_id);
-	//public void deleteMember_api(String mem_id);
+	public void deleteMember_api(@Param("mem_id")String mem_id,@Param("deleteMember")String deleteMember);
+	public int getDeleteCount();
 	public int idCheck(@Param("mem_id") String mem_id);
 	public String getPwCheck(String mem_id);
 	

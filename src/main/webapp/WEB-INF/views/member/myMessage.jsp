@@ -619,7 +619,21 @@ color: #a2a6af
 table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
-
+.btn_comment{
+background-position: left;
+    text-decoration: none;
+border: none;
+text-transform: capitalize;
+    border-radius: 30px;
+display: inline-block;
+    font-size: 15px;
+  color: #fff;
+    transition: 0.6s;
+    box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);
+    background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
+background-size: 200%;
+margin-bottom: 5px;
+}
 #nocontent{
 text-align:center;
 margin-top: 20px;
@@ -662,19 +676,20 @@ margin-top: 20px;
                          <table class="table table-hover table-xl mb-0">
                 <thead>
                   <tr>
-                    <th>글 번호</th>
-                    <th>기부 번호</th>
+                    <th>기부 내역</th>
                     <th>내용</th>
                     <th>작성한 날짜</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${getMyMessage}" var="cheBoard">
                   <tr>
-                    <td class="text-truncate">${cheBoard.cheb_num}</td>
                     <td class="text-truncate">${cheBoard.cheb_dname}</td>
                     <td class="text-truncate">${cheBoard.cheb_content}</td>
                     <td class="text-truncate">${cheBoard.cheb_date}</td>
+                    <td class="text-turncate"><button type="button" 
+                    class="btn_comment" onclick="delete_c()">삭제하기</button></td>
          		 </tr>
          		 </c:forEach>
                 </tbody>
@@ -716,6 +731,10 @@ margin-top: 20px;
 </div>
 
   <jsp:include page="/WEB-INF/views/footer.jsp"/>
-
+<script type="text/javascript">
+	function delete_c() {
+		location.href = "/delete_c";
+	}
+</script>
 </body>
 </html>

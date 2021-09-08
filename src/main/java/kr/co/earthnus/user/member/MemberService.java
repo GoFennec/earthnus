@@ -253,23 +253,26 @@ public class MemberService {
 	
 	
 	
-	
-	
-	
-	
 	// 회원탈퇴
 	public void deleteMember(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		dao.deleteMember(mem_id);
 
 	}
-	/*
+	
 	public void deleteMember_api(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		dao.deleteMember_api(mem_id);
-
-	}*/
-
+		int deleteCount = dao.getDeleteCount();
+		deleteCount += 1;
+		String deleteMember = "삭제된회원"+deleteCount;
+		
+		dao.deleteMember_api(mem_id,deleteMember);
+	}
+	public int getCheckExgoods(String mem_id) {
+		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+		int n = dao.getCheckExgoods(mem_id);
+		return n;
+	}
 
 	// 아이디 중복체크
 	public int idCheck(String mem_id) {
