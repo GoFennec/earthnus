@@ -124,8 +124,6 @@
 	var pagenum = 0;				// 현재 캠페인이 위치한 실제 페이지
 	
 	window.onload = function(){
-		console.log("${index}");
-		
 		num = ${index}/6;
 		pagenum = Math.ceil(num);
 		
@@ -199,10 +197,13 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
 		var pagenum = parseInt(${totalIndex}/6 + 1) - parseInt(${index}/6 + 1); 
 		
 		if(query){
+			if(query.lastIndexOf("search") !== -1){
+				query = "/search?" + query;
+			}
 			if(query.lastIndexOf(substring) !== -1){
 				query = query.substr(0, subquery.indexOf("pagenum")-2);
 			}
-			URL += "/camBoard/list?" + query;
+			URL += "/camBoard/list" + query;
 		}else{
 			if(pagenum !== 1){
 				URL += "/camBoard/list?pagenum=" + pagenum;

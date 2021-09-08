@@ -215,7 +215,7 @@ i {cursor: pointer; color: #388E3C;}
    
    function detailUrl(name, num){
 	  var index = ((${page.currentPage}-1) * 6 + num * 1);
-      if(!subquery){
+	  if(!subquery){
          location.href="/camBoard/detail?CAMB_NAME=" + name + "&CAMB_NUM=" + index;
       }else{
          location.href="/camBoard/detail" + subquery +"&CAMB_NAME=" + name + "&CAMB_NUM=" + index;
