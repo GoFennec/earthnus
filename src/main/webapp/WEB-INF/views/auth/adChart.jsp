@@ -30,7 +30,7 @@
   	.btn btn-sm btn-primary{
   		font-color:#6777EF;
   	}
-  	h6{
+  	h6,h5{
   		text-align:center;
   	}
   	input{
@@ -48,6 +48,9 @@
   	}
   	#select_div{
   		margin-left:10px;
+  	}
+  	h6{
+  		margin-top:10px;
   	}
   </style>
 </head>
@@ -180,7 +183,7 @@
             
             <div class="col-lg-12" id="cButton">
             	<div>
-            		<button class="btn btn-sm btn-primary" id="dayButton">최근 일주일</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            		<button class="btn btn-sm btn-primary" id="dayButton">최근 7일</button>&nbsp;&nbsp;&nbsp;&nbsp;
             		<button class="btn btn-sm btn-primary" id="monthButton">월별 데이터</button>
             	</div><br>
             	<div id="select_div">
@@ -257,7 +260,8 @@
             <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold" id="visitorMonthly"></h6>
+                  <h5 class="m-0 font-weight-bold" id="visitorMonthly"></h5>
+                  <h6 class="font-weight-bold" id="getCountVisitorMonth"></h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-bar">
@@ -270,7 +274,8 @@
             <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold">이번 달 후원</h6>
+                  <h5 class="m-0 font-weight-bold" id="donationMonthly"></h5>
+                  <h6 class="font-weight-bold">총 : 100명</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-bar">
@@ -283,7 +288,8 @@
             <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold">이번 달 가입자</h6>
+                  <h5 class="m-0 font-weight-bold" id="memberMonthly"></h5>
+                  <h6 class="font-weight-bold">총 : 100명</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-bar">
@@ -296,7 +302,8 @@
             <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold">이번 달 지구마켓 주문</h6>
+                  <h5 class="m-0 font-weight-bold" id="exgoodsMonthly"></h5>
+                  <h6 class="font-weight-bold">총 : 100명</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-bar">
@@ -382,7 +389,7 @@
   
   var ctx = document.getElementById("camPieChart");
   var camPieChart = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
       labels: ["숲", "얼음", "플라스틱", "바다"],
       datasets: [{
@@ -419,7 +426,7 @@
   
   var ctx = document.getElementById("chePieChart");
   var chePieChart = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
       labels: ["숲", "얼음", "플라스틱", "바다"],
       datasets: [{
@@ -915,7 +922,7 @@
         callbacks: {
           label: function(tooltipItem, chart) {
             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-            return datasetLabel + number_format(tooltipItem.yLabel) + "명";
+            return datasetLabel + number_format(tooltipItem.yLabel) + "건";
           }
         }
       }
@@ -953,12 +960,12 @@
   		  if(yy == select_year){
   			  $('#select_month').children('option').remove();
   			  for(var i = d.getMonth() + 1; i > 0; i--){
-  				  $("#select_month").append("<option value=" + i + ">" + i + "월</option>");
+  				$("#select_month").append("<option value=" + i + ">" + i + "월</option>");
   			  }
   		  }else{
   			  $('#select_month').children('option').remove();
   			  for(var i = 12; i > 0; i--){
-  				  $("#select_month").append("<option value=" + i + ">" + i + "월</option>");
+  				$("#select_month").append("<option value=" + i + ">" + i + "월</option>");
   			  }
   		  }
   	  	});
@@ -967,20 +974,25 @@
   	  	  select_month = $("select[id='select_month']").val();
   	    });
   	  	var myVisitorMonthChart;
+  	    var myDonationMonthChart;
+  	    var myMemberMonthChart;
+  	    var myExgoodsMonthChart;
+  	  
   	  	function getMonthData(){
   	  		select_year = $("select[id='select_year']").val();
-  	  		select_month = $("select[id='select_month']").val();
+  	  		select_month = ('0' + ($("select[id='select_month']").val())).slice(-2);
+  	  		$("#month").show();
+			$("#sevenDay").hide();
   			$.ajax({
   	   			type: "POST", //요청 메소드 방식
   	  			 url:"/adchart/getMonthData",
   	   			data: {"select_year":select_year, "select_month":select_month},
   	   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
   	   			success : function(result){
-  	      			if(result.error != null){
-  	      				countVisitorMonth = result.error;
+  	   				
+  	      			if(result.error.getMonthData != null){
+  	      				countVisitorMonth = result.error.getMonthData;
   	      				countVisitorMonth = countVisitorMonth.reverse();
-  	      			    $("#month").show();
-  	      				$("#sevenDay").hide();
   	      				
   	      	    	  var monthString = [];
   	            	  var thisMonth = new Date();
@@ -1002,6 +1014,9 @@
   	            	    monthString[i] = myear + '-' + mmmonth  + '-' + mdate;
   	            	  }
   	        	   	  monthString = monthString.reverse();
+  	        	   	  
+  	        	   	  
+  	        	   	$("#getCountVisitorMonth").text("총 : " + result.error.getCountVisitorMonth + "명");
   	      				
   	      		  var ctx = document.getElementById("myVisitorMonthChart");
   	      			if(window.myCharts != undefined)
@@ -1095,9 +1110,342 @@
   	      		      }
   	      		    }
   	      		  });
+  	      			
+  	      			}
+  	      			if(result.error.getPlasticMonth != null){
+  	      			//월별 후원
+  	      			var getPlasticMonth = result.error.getPlasticMonth;
+  	      			var getOceanMonth = result.error.getOceanMonth;
+  	      			var getIceMonth = result.error.getIceMonth;
+  	      			var getForestMonth = result.error.getForestMonth;
+  	      		    getPlasticMonth = getPlasticMonth.reverse();
+  	      			getOceanMonth = getOceanMonth.reverse();
+  	      			getIceMonth = getIceMonth.reverse();
+  	      			getForestMonth = getForestMonth.reverse();
+  	      		    
+  	      			$("#donationMonthly").text((thisMonth.getMonth() + 1) + "월 후원 금액");
+  	      			
+  	      			var ctx = document.getElementById("myDonationMonthChart");
+  	      			if(window.myCharts1 != undefined)
+  	      			window.myCharts1.destroy();
+  	      			window.myCharts1 = new Chart(ctx, {
+  	      		  	type: 'bar',
+  	      		  	data: {
+  	      		    	labels: monthString,
+  	      		    	datasets: [
+  	      		    		{	  
+  	      		    		  type: 'bar',
+  	      		    		  label: "숲",
+  	      		    		  lineTension: 0,
+  	      		    		  backgroundColor: "#4e73df",
+  	      		    		  hoverBackgroundColor: "#2e59d9",
+  	      		    		  borderColor: "#4e73df",
+  	      		    		  fill: false,
+  	      		    		  data: getForestMonth,
+  	      		    		},
+  	      		    	{
+  	      		    		  type: 'bar',
+  	      		    	      label: "얼음",
+  	      		    	      lineTension: 0,
+  	      		    	      backgroundColor: "#ffa426",
+  	      		    	      hoverBackgroundColor: "#FF8200",
+  	      		    	      borderColor: "#ffa426",
+  	      		    	      fill: false,
+  	      		    	      data: getIceMonth,
+  	      		    	    },
+  	      		    	{
+  	      		    	      type: 'bar',
+  	      		    	      label: "플라스틱",
+  	      		    	      lineTension: 0,
+  	      		    	      backgroundColor: "#1cc88a",
+  	      		    	      hoverBackgroundColor: "#17a673",
+  	      		    	      borderColor: "#1cc88a",
+  	      		    	      fill: false,
+  	      		    	      data: getPlasticMonth,
+  	      		    	    },
+  	      		        {
+  	      		    	      type: 'bar',
+  	      		      	      label: "바다",
+  	      		      	      lineTension: 0,
+  	      		      	      backgroundColor: "#fc544b",
+  	      		      	      hoverBackgroundColor: "#B9062F",
+  	      		      	      borderColor: "#fc544b",
+  	      		      	      fill: false,
+  	      		      	      data: getOceanMonth,
+  	      		      	    }, 
+  	      		    ],
+  	      		  },
+  	      		  options: {
+  	      		    maintainAspectRatio: false,
+  	      		    layout: {
+  	      		      padding: {
+  	      		        left: 10,
+  	      		        right: 25,
+  	      		        top: 25,
+  	      		        bottom: 0
+  	      		      }
+  	      		    },
+  	      		    scales: {
+  	      		      xAxes: [{
+  	      		        time: {
+  	      		          unit: 'date'
+  	      		        },
+  	      		        gridLines: {
+  	      		          display: false,
+  	      		          drawBorder: false
+  	      		        },
+  	      		        ticks: {
+  	      		          maxTicksLimit: 6
+  	      		        },
+  	      		        maxBarThickness: 25,
+  	      		      }],
+  	      		      yAxes: [{
+  	      		          ticks: {
+  	      		            maxTicksLimit: 5,
+  	      		            padding: 10,
+  	      		            // Include a dollar sign in the ticks
+  	      		            callback: function(value, index, values) {
+  	      		              return  '￦' + number_format(value);
+  	      		            }
+  	      		          },
+  	      		          gridLines: {
+  	      		            color: "rgb(234, 236, 244)",
+  	      		            zeroLineColor: "rgb(234, 236, 244)",
+  	      		            drawBorder: false,
+  	      		            borderDash: [2],
+  	      		            zeroLineBorderDash: [2]
+  	      		          }
+  	      		        }],
+  	      		    },
+  	      		    legend: {
+  	      		      display: true
+  	      		    },
+  	      		    tooltips: {
+  	      		      titleMarginBottom: 10,
+  	      		      titleFontColor: '#6e707e',
+  	      		      titleFontSize: 14,
+  	      		      backgroundColor: "rgb(255,255,255)",
+  	      		      bodyFontColor: "#858796",
+  	      		      borderColor: '#dddfeb',
+  	      		      borderWidth: 1,
+  	      		      xPadding: 15,
+  	      		      yPadding: 15,
+  	      		      displayColors: false,
+  	      		      caretPadding: 10,
+  	      		      callbacks: {
+  	      		        label: function(tooltipItem, chart) {
+  	      		          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+  	      		          return datasetLabel + ': ￦' + number_format(tooltipItem.yLabel);
+  	      		        }
+  	      		      }
+  	      		    },
+  	      		  }
+  	      		});
+  	      			}
+  	      			if(result.error.getMemberMonth != null){
+  	      				var getMemberMonth = result.error.getMemberMonth;
+  	      				var getDelMemberMonth = result.error.getDelMemberMonth;
+  	      				getMemberMonth = getMemberMonth.reverse();
+  	      				getDelMemberMonth = getDelMemberMonth.reverse();
+  	
+  	      			$("#memberMonthly").text((thisMonth.getMonth() + 1) + "월 가입자 수");
+  	      				//월별 가입자
+  	      		  var ctx = document.getElementById("myMemberMonthChart");
+  	      			if(window.myCharts2 != undefined)
+  	      			window.myCharts2.destroy();
+  	      			window.myCharts2 = new Chart(ctx, {
+  	  	      		  	type: 'bar',
+  	  	      		  	data: {
+  	  	      		    	labels: monthString,
+  	  	      		    	datasets: [
+  	  	      		    		{	  
+  	  	      		    		  type: 'bar',
+  	  	      		    		  label: "가입한 회원",
+  	  	      		    		  lineTension: 0,
+  	  	      		    		  backgroundColor: "#4e73df",
+  	  	      		    		  hoverBackgroundColor: "#2e59d9",
+  	  	      		    		  borderColor: "#4e73df",
+  	  	      		    		  fill: false,
+  	  	      		    		  data: getMemberMonth,
+  	  	      		    		},
+  	  	      		        {
+  	  	      		    	      type: 'bar',
+  	  	      		      	      label: "탈퇴한 회원",
+  	  	      		      	      lineTension: 0,
+  	  	      		      	      backgroundColor: "#fc544b",
+  	  	      		      	      hoverBackgroundColor: "#B9062F",
+  	  	      		      	      borderColor: "#fc544b",
+  	  	      		      	      fill: false,
+  	  	      		      	      data: getDelMemberMonth,
+  	  	      		      	    }, 
+  	  	      		    ],
+  	  	      		  },
+  	  	      		  options: {
+  	  	      		    maintainAspectRatio: false,
+  	  	      		    layout: {
+  	  	      		      padding: {
+  	  	      		        left: 10,
+  	  	      		        right: 25,
+  	  	      		        top: 25,
+  	  	      		        bottom: 0
+  	  	      		      }
+  	  	      		    },
+  	  	      		    scales: {
+  	  	      		      xAxes: [{
+  	  	      		        time: {
+  	  	      		          unit: 'date'
+  	  	      		        },
+  	  	      		        gridLines: {
+  	  	      		          display: false,
+  	  	      		          drawBorder: false
+  	  	      		        },
+  	  	      		        ticks: {
+  	  	      		          maxTicksLimit: 6
+  	  	      		        },
+  	  	      		        maxBarThickness: 25,
+  	  	      		      }],
+  	  	      		      yAxes: [{
+  	  	      		          ticks: {
+  	  	      		            maxTicksLimit: 5,
+  	  	      		            padding: 10,
+  	  	      		            // Include a dollar sign in the ticks
+  	  	      		            callback: function(value, index, values) {
+  	  	      		              return  number_format(value) + "명";
+  	  	      		            }
+  	  	      		          },
+  	  	      		          gridLines: {
+  	  	      		            color: "rgb(234, 236, 244)",
+  	  	      		            zeroLineColor: "rgb(234, 236, 244)",
+  	  	      		            drawBorder: false,
+  	  	      		            borderDash: [2],
+  	  	      		            zeroLineBorderDash: [2]
+  	  	      		          }
+  	  	      		        }],
+  	  	      		    },
+  	  	      		    legend: {
+  	  	      		      display: true
+  	  	      		    },
+  	  	      		    tooltips: {
+  	  	      		      titleMarginBottom: 10,
+  	  	      		      titleFontColor: '#6e707e',
+  	  	      		      titleFontSize: 14,
+  	  	      		      backgroundColor: "rgb(255,255,255)",
+  	  	      		      bodyFontColor: "#858796",
+  	  	      		      borderColor: '#dddfeb',
+  	  	      		      borderWidth: 1,
+  	  	      		      xPadding: 15,
+  	  	      		      yPadding: 15,
+  	  	      		      displayColors: false,
+  	  	      		      caretPadding: 10,
+  	  	      		      callbacks: {
+  	  	      		        label: function(tooltipItem, chart) {
+  	  	      		          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+  	  	      		          return datasetLabel + " " + number_format(tooltipItem.yLabel) + " 명";
+  	  	      		        }
+  	  	      		      }
+  	  	      		    },
+  	  	      		  }
+  	  	      		});
+  	      			}
+  	      			if(result.error.getExgoodsMonth != null){
+  	      			//이번달 굿즈
+  	      				getExgoodsMonth = result.error.getExgoodsMonth;
+  	      				getExgoodsMonth = getExgoodsMonth.reverse();
+  	      			$("#exgoodsMonthly").text((thisMonth.getMonth() + 1) + "월 지구마켓 주문");
   	      				
-  	      			}else{
-  	      				alert('실패');
+  	      		  var ctx = document.getElementById("myExgoodsMonthChart");
+  	      			if(window.myCharts3 != undefined)
+  	      			window.myCharts3.destroy();
+  	      			window.myCharts3 = new Chart(ctx, {
+  	      		    type: 'line',
+  	      		    data: {
+  	      		    	 
+  	      		      labels: monthString,
+  	      		    	 
+  	      		      datasets: [{
+  	      		        label: "",
+  	      		        lineTension: 0.3,
+  	      		        backgroundColor: "#AAEBAA",
+  	      		        borderColor: "#388E3C",
+  	      		        pointRadius: 3,
+  	      		        pointBackgroundColor: "#66bb6a",
+  	      		        pointBorderColor: "#388E3C",
+  	      		        pointHoverRadius: 3,
+  	      		        pointHoverBackgroundColor: "#388E3C",
+  	      		        pointHoverBorderColor: "#388E3C",
+  	      		        pointHitRadius: 10,
+  	      		        pointBorderWidth: 2,
+  	      		        data: getExgoodsMonth,
+  	      		      }],
+  	      		    },
+  	      		    options: {
+  	      		      maintainAspectRatio: false,
+  	      		      layout: {
+  	      		        padding: {
+  	      		          left: 10,
+  	      		          right: 25,
+  	      		          top: 25,
+  	      		          bottom: 0
+  	      		        }
+  	      		      },
+  	      		      scales: {
+  	      		        xAxes: [{
+  	      		          time: {
+  	      		            unit: 'date'
+  	      		          },
+  	      		          gridLines: {
+  	      		            display: false,
+  	      		            drawBorder: false
+  	      		          },
+  	      		          ticks: {
+  	      		            maxTicksLimit: 7
+  	      		          }
+  	      		        }],
+  	      		        yAxes: [{
+  	      		          ticks: {
+  	      		            maxTicksLimit: 5,
+  	      		            padding: 10,
+  	      		            // Include a dollar sign in the ticks
+  	      		            callback: function(value, index, values) {
+  	      		              return number_format(value) + "건";
+  	      		            }
+  	      		          },
+  	      		          gridLines: {
+  	      		            color: "rgb(234, 236, 244)",
+  	      		            zeroLineColor: "rgb(234, 236, 244)",
+  	      		            drawBorder: false,
+  	      		            borderDash: [2],
+  	      		            zeroLineBorderDash: [2]
+  	      		          }
+  	      		        }],
+  	      		      },
+  	      		      legend: {
+  	      		        display: false
+  	      		      },
+  	      		      tooltips: {
+  	      		        backgroundColor: "rgb(255,255,255)",
+  	      		        bodyFontColor: "#858796",
+  	      		        titleMarginBottom: 10,
+  	      		        titleFontColor: '#6e707e',
+  	      		        titleFontSize: 14,
+  	      		        borderColor: '#dddfeb',
+  	      		        borderWidth: 1,
+  	      		        xPadding: 15,
+  	      		        yPadding: 15,
+  	      		        displayColors: false,
+  	      		        intersect: false,
+  	      		        mode: 'index',
+  	      		        caretPadding: 10,
+  	      		        callbacks: {
+  	      		          label: function(tooltipItem, chart) {
+  	      		            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+  	      		            return datasetLabel + number_format(tooltipItem.yLabel) + "건";
+  	      		          }
+  	      		        }
+  	      		      }
+  	      		    }
+  	      		  });
+  	      			
   	      			}
   	   			},
   	   		 error:function(request,status,error){
