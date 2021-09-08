@@ -43,11 +43,11 @@
 <jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
 
 <div class="image">
-	<div class="slider-height2 d-flex align-items-center">
+	<div class="slider-height2 align-items-center">
 		<div class="container">
 			<div class="row">
 			<div class="col-xl-8 col-lg-8 col-md-8 col-12">
-            	<div class="hero-cap hero-cap2 pt-10 animated animatedFadeInUp fadeInUp">
+            	<div class="hero-cap hero-cap2 pt-85 m-4 animated animatedFadeInUp fadeInUp">
                 	<h1 style="font-size: 2.5em; color: white;">플라스틱이 넘쳐요!</h1>
                     <p style="color: white;">EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
             	</div>
@@ -98,10 +98,10 @@
 </div>
 
 <div class="container">
-	<div class="row">
+	<div class="row m-4">
 	<div class="col-md-7 col-12">
 		<div>
-			<h2 style="color: #388E3C;">플라스틱은 우리 생활 깊숙이 침투해 있습니다.</h2><br>
+			<h2 style="color: #388E3C; margin-top: 0.5em;">플라스틱은 우리 생활 깊숙이 침투해 있습니다.</h2><br>
 			<p>플라스틱은 편리함의 대명사였습니다. 하지만 버려진 플라스틱 낚싯줄이 거북이와 바닷새의 목을 조르고,
 			수많은 해양동물들은 잘게 쪼개진 플라스틱 조각을 먹이로 착각하고 섭취해 폐사에 이르고 있습니다.</p>
 		</div>
@@ -111,13 +111,13 @@
 	</div>
 	</div><br><br>
 	
-	<div class="row">
+	<div class="row m-4">
 	<div class="col-md-8 col-12">
 		<img src="/resources/donation/plasticThema3.jpg" title="플라스틱이 넘쳐요! 테마 사진 3" alt="손 안의 작은 새싹 사진" width="100%">
 	</div>
 	<div class="col-md-4 col-12">
 		<div>
-			<h2 style="color: #388E3C;">EARTH & US 활동</h2><br>
+			<h2 style="color: #388E3C; margin-top: 0.5em;">EARTH & US 활동</h2><br>
 			<p>재활용만으로는 결코 문제를 해결할 수 없습니다. 불필요한 플라스틱 사용을 줄이고 원천부터 막아야 합니다.
 			EARTH & US는 기업의 플라스틱 사용 규제를 요구하고 있으며, 정부 정책의 변화를 유도하고 있습니다.</p>
 		</div><br>

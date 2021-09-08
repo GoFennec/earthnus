@@ -39,7 +39,7 @@
   border-bottom-left-radius: 0.5rem !important;
   border-top-left-radius: 0.5rem !important;
 }
-
+button {width: 200px;}
 </style>
 </head>
 
@@ -47,7 +47,7 @@
 <jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
 <br><br><br><br>
 
-	<section class="py-0">
+	<section class="py-0 m-4">
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -59,8 +59,8 @@
                       <h1 class="card-title mt-xl-5 mb-4 m-4">바다가 힘들어요!</h1>
                       	<p class="m-4">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.<br>
 						                      그러나 지금 바다는 그 어느 때보다 큰 위험에 처해있습니다.<br>
-						                      우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.</p><br>
-                      <div class="d-grid bottom-0"><button type="button" class="btn btn-primary" onclick="location.href='/donation/ocean'">후원 바로가기&nbsp;&nbsp;>></button></div>
+						                      우리의 노력이 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을거에요.</p>
+                      <div class="d-grid bottom-0 m-4"><button type="button" class="btn btn-primary" onclick="location.href='/donation/ocean'">후원 바로가기&nbsp;&nbsp;>></button></div>
                     </div>
                   </div>
                 </div>
@@ -70,7 +70,7 @@
         </div>
     </section><br><br>
 
-	<section class="pb-5 pt-8">
+	<section class="pb-5 pt-8 m-4">
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -82,8 +82,8 @@
                       <h1 class="card-title mt-xl-5 mb-4 m-4">나무를 심어요!</h1>
                       	<p class="m-4">숲은 육지에 서식하는 많은 동식물들의 집입니다.<br>
 									인간의 욕심으로 인해 전 세계 산림의 절반이 사라졌습니다.<br>
-									숲을 터전으로 살아가고있는 생물들은 멸종위기에 처했으며, 온실가스는 흡수되지않고 대기로 방출되고있습니다.</p><br>
-                      <div class="d-grid bottom-0"><button type="button" class="btn btn-primary" onclick="location.href='/donation/forest'">후원 바로가기&nbsp;&nbsp;>></button></div>
+									숲을 터전으로 살아가고있는 생물들은 멸종위기에 처했으며, 온실가스는 흡수되지않고 대기로 방출되고있습니다.</p>
+                      <div class="d-grid bottom-0 m-4"><button type="button" class="btn btn-primary" onclick="location.href='/donation/forest'">후원 바로가기&nbsp;&nbsp;>></button></div>
                     </div>
                   </div>
                 </div>
@@ -93,7 +93,7 @@
         </div>
     </section><br><br>
     
-    <section class="py-0">
+    <section class="py-0 m-4">
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -104,8 +104,8 @@
                     <div class="col-md-7 col-xl-5 col-xxl-4 p-4 p-lg-5">
                       <h1 class="card-title mt-xl-5 mb-4 m-4">플라스틱이 넘쳐요!</h1>
                       	<p class="m-4">플라스틱은 우리 생활 깊숙이 침투해 있습니다.<br>
-									수많은 해양 동물들은 미세 플라스틱을 먹이로 착각하고 섭취하여 폐사에 이르고 있으며, 결국 미세 플라스틱은 해양 먹이사슬을 타고 우리의 식탁으로 돌아옵니다.</p><br>
-                      <div class="d-grid bottom-0"><button type="button" class="btn btn-primary" onclick="location.href='/donation/plastic'">후원 바로가기&nbsp;&nbsp;>></button></div>
+									수많은 해양 동물들은 미세 플라스틱을 먹이로 착각하고 섭취하여 폐사에 이르고 있으며, 결국 미세 플라스틱은 해양 먹이사슬을 타고 우리의 식탁으로 돌아옵니다.</p>
+                      <div class="d-grid bottom-0 m-4"><button type="button" class="btn btn-primary" onclick="location.href='/donation/plastic'">후원 바로가기&nbsp;&nbsp;>></button></div>
                     </div>
                   </div>
                 </div>
@@ -115,7 +115,7 @@
         </div>
     </section><br><br>
 
-	<section class="pb-5 pt-8">
+	<section class="pb-5 pt-8 m-4">
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -127,8 +127,8 @@
                       <h1 class="card-title mt-xl-5 mb-4 m-4">북극곰을 도와줘요!</h1>
                       	<p class="m-4">지구 온난화로 북극 기온이 상승하여 빙하가 녹고있습니다.<br>
 									북극을 해양보호구역으로 만들어 파괴적인 어업과 석유 시추의 중단이 시급합니다.<br>
-									빠르게 녹고있는 북극을 지켜요.</p><br>
-                      <div class="d-grid bottom-0"><button type="button" class="btn btn-primary" onclick="location.href='/donation/ice'">후원 바로가기&nbsp;&nbsp;>></button></div>
+									빠르게 녹고있는 북극을 지켜요.</p>
+                      <div class="d-grid bottom-0 m-4"><button type="button" class="btn btn-primary" onclick="location.href='/donation/ice'">후원 바로가기&nbsp;&nbsp;>></button></div>
                     </div>
                   </div>
                 </div>

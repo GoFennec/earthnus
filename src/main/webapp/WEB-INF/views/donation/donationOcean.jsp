@@ -43,11 +43,11 @@
 <jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
 
 <div class="image">
-	<div class="slider-height2 d-flex align-items-center">
+	<div class="slider-height2 align-items-center">
 		<div class="container">
 			<div class="row">
-			<div class="col-xl-8 col-lg-8 col-md-8 col-12">
-            	<div class="hero-cap hero-cap2 pt-10 animated animatedFadeInUp fadeInUp">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            	<div class="hero-cap hero-cap2 pt-85 m-4 animated animatedFadeInUp fadeInUp">
                 	<h1 style="font-size: 2.5em; color: white;">바다가 힘들어요!</h1>
                     <p style="color: white;">EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
             	</div>
@@ -98,10 +98,10 @@
 </div>
 
 <div class="container">
-	<div class="row">
+	<div class="row m-4">
 	<div class="col-md-7 col-12">
 		<div>
-			<h2 style="color: #388E3C;">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.</h2><br>
+			<h2 style="color: #388E3C; margin-top: 0.5em;">바다는 70만 종 이상 생명체가 살아가는 삶의 터전입니다.</h2><br>
 			<p>그러나 바다는 지금 플라스틱 등 각종 독성 물질로 인한 오염, 파괴적인 어업은 물론 기후변화까지 심화되며 해양 생태계는 심각한 위협에 내몰리고 있습니다.
 			하지만 우리가 함께 노력한다면, 바다를 살리고 바다를 터전으로 살아가는 수많은 해양생물과 사람들을 지켜낼 수 있을 것입니다.</p>
 		</div>
@@ -111,13 +111,13 @@
 	</div>
 	</div><br><br>
 	
-	<div class="row">
+	<div class="row m-4">
 	<div class="col-md-8 col-12">
 		<img src="/resources/donation/oceanThema3.jpg" title="바다가 힘들어요! 테마 사진 3" alt="돌고래 사진" width="100%">
 	</div>
 	<div class="col-md-4 col-12">
 		<div>
-			<h2 style="color: #388E3C;">EARTH & US 활동</h2><br>
+			<h2 style="color: #388E3C; margin-top: 0.5em;">EARTH & US 활동</h2><br>
 			<p>EARTH & US는 안전하고 건강한 바다를 위해 해양보호구역 지정을 요구합니다.
 			파괴적인 어업에 대항하고, 플라스틱 오염과 기후변화를 막기 위한 캠페인을 펼치며 바다를 보호하기 위해 활동하고 있습니다.</p>
 		</div><br>
