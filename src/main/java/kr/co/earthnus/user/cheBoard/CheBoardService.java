@@ -33,8 +33,8 @@ public class CheBoardService {
     int step_num = Integer.parseInt(comment_step);
     bean.setComment_step(step_num);
     bean.setStartNum(start_num);
-    CheBoardList = ChreBoardDAO.CheBoardList(bean);
     
+    CheBoardList = ChreBoardDAO.CheBoardList(bean);
     return CheBoardList;
   }
   
@@ -42,9 +42,11 @@ public class CheBoardService {
     CheBoardMybatis ChreBoardDAO = (CheBoardMybatis)this.mybatis.getMapper(CheBoardMybatis.class);
     List<PayBean> d_name = null;
     d_name = ChreBoardDAO.select_dname(user_id);
-    
+    int total_comment = ChreBoardDAO.total_comment();
+    System.out.println("12322");
     model.addAttribute("payCheck", d_name);
-    
+    model.addAttribute("total_comment", total_comment);
+    System.out.println("123123");
   }
 
  public void Comment_like(like_Bean likebean) {
@@ -57,6 +59,12 @@ public class CheBoardService {
 public void pay_comment_update(CheBoardBean BoardBean) {
 	 CheBoardMybatis ChreBoardDAO = (CheBoardMybatis)this.mybatis.getMapper(CheBoardMybatis.class);
 	 ChreBoardDAO.pay_comment_update(BoardBean);
+}
+
+public void total_comment(Model model) {
+	CheBoardMybatis ChreBoardDAO = (CheBoardMybatis)this.mybatis.getMapper(CheBoardMybatis.class);
+	int total_comment = ChreBoardDAO.total_comment();
+	model.addAttribute("total_comment", total_comment);
 }
 
 

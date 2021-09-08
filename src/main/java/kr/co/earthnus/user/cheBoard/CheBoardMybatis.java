@@ -11,6 +11,7 @@ public interface CheBoardMybatis {
   
   void replyInsert(CheBoardBean paramCheBoardBean);
   
+  int total_comment();
   List<PayBean> select_dname(String user_id);
 
   void Comment_like(like_Bean likebean);

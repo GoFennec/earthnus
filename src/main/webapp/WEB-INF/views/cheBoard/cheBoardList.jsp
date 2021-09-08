@@ -30,29 +30,11 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     list-style: none;
 }
 
-#COMMENT_LIKE img {
-	width:30px;
-	height:30px;
-	position: absolute;
-	bottom: 0;
-	right : 0;
-}
 
-#listDiv {
-	 
-}
 
 #id_date {
 	padding-left: 70px;
-}
-.left-id{
-	width: 400px;
-}
-
-.left-content {
-	display:block;
-	padding: 0px 0px 10px 0px;
-	
+	padding-right: 23px;
 }
 
 .left-info{
@@ -63,8 +45,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	padding: 26px 0 20px;
 	border-bottom: 1px solid #ccc;
 }
-
-.
 #main_container {
     padding-left: 10px;
     padding-right: 5px;
@@ -129,20 +109,14 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 #replyInsert {
 	border: none;
     padding: 13px 33px;
-    text-transform: capitalize;
     border-radius: 30px;
     color: #fff;
     cursor: pointer;
-    display: inline-block;
-    font-size: 15px;
     box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);
     background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
     background-position: right;
     background-size: 200%;
     margin-left: 10px;
-}
-#insert_div {
-	position: relative;
 }
 #dname_select {
   background-color: #fff;
@@ -171,16 +145,34 @@ border:1px solid #ddd;padding:8px 13px;font-size:10pt;font-weight:bold;text-alig
 background:#000;color:#fff;
 }
 .menu a{cursor:pointer; }
-.menu .hide{display:none;
-}
 .deleteComment {
 	position: relative;
     top: 28px;
     right: 10px;
-    background-color: darkred;
     background-clip: padding-box;
     border-radius: 4px;
+    display: none;
+    z-index:1;
 }
+.deleteComment > li {
+	overflow-y: auto;
+    z-index: 1;
+    max-height: 416px;
+    padding: 10px 0;
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: 6px;
+    box-shadow: 0 1px 12px 0 rgb(0 0 0 / 6%);
+    background-color: #fff;
+    box-sizing: border-box;
+    min-width: 100px;
+    padding: 0 15px;
+    font-size: 13px;
+    line-height: 37px;
+}
+.deleteComment>li:hover {
+	background-color:#e5e5e5;
+}
+
 #comment_content{
 	position: relative;
     display: block;
@@ -269,7 +261,6 @@ background:#000;color:#fff;
 	
 </style>
 
-
 <title>EARTH & US</title>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -338,7 +329,7 @@ background:#000;color:#fff;
     	</c:if>
 	   
     <c:if test="${auth.auth_id != null and !empty payCheck}">
-    	<table >
+    		<table id="comment_table">
     		<tr>
 	    	 <td style="width: 90%;">
 		         <div class="comment-txt" style="width: 100%">
@@ -356,7 +347,7 @@ background:#000;color:#fff;
     
     
     <div>
-    	<table id="addList" style="margin-bottom: 10px">
+    	<table id="addList">
     	<thead>
        		<tr>
             	<th>환경을 위해 한마디</th>
@@ -392,14 +383,15 @@ background:#000;color:#fff;
 	var step = 10;
 	var insert_commet = 0;
 	var All_dname = [];
+	var total_comment = 0;
   $(document).ready(function (){
 	 
-		  
+		  total_comment = ${total_comment};
 		  <c:forEach items="${payCheck}" var="row">
 		    All_dname.push("${row.pay_dname}");
-		    </c:forEach>
+		  </c:forEach>
 			  
-		    <c:if test="${payCheck != []}">
+			  <c:if test="${payCheck != []}">
 			  
 		    	select_dname();
 		   </c:if>
@@ -415,7 +407,7 @@ background:#000;color:#fff;
 	  		var str = '<select id="dname_select">'
 	  		for(var i=0; i < All_dname.length; i++) {
 	  			
-	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "새우" || All_dname[i] == "고래" || All_dname[i] == "바다") ) {
+	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "새우" || All_dname[i] == "문어" || All_dname[i] == "바다") ) {
 	  				str += '<option>바다</option>';
 	  				count_sea += 1;
 	  				
@@ -469,21 +461,31 @@ background:#000;color:#fff;
         		 contentType : "application/json; charset=utf-8",
         		 success : function(){
         			 $('#comment_content').val("");
-        			 
+        			 $("#dname_select option:selected").remove();
+        			 if( $("#dname_select option").size() == 0) {
+        				 $('#dname_select').remove();
+        				 $('#comment_table').css("display", "none");
+        			 }
+        			 total_comment++;
                 	 init();
         	} 
           });	 
         });
         
         $('#addBtn').on('click',function() {
-        	step += step;
-        	init();
+        	if(total_comment <= step) {
+        		alert("더이상 댓글이 없습니다");
+        	}
+        	else {
+        		step += step;
+            	init();
+        	}
         });
         $('.post-wrapper').slick({
 	    	slidesToShow: 1,
 	    	  slidesToScroll: 1,
 	    	  autoplay: true,
-	    	  autoplaySpeed: 3000,
+	    	  autoplaySpeed: 5000,
 	    	  nextArrow:$('.next'),
 	    	  prevArrow:$('.prev')
 	    	});
@@ -508,7 +510,6 @@ background:#000;color:#fff;
             }, 
 	        success :function(obj){
 	        	var auth_id = "${auth.auth_id}";
-	        	
 	        	if(startNum < 10) {
 	        	var str= '<table id="listDiv">'
 	        	}
@@ -522,14 +523,14 @@ background:#000;color:#fff;
 	            		str +='<div class="delete">'
 	            		str +='<div class="menu">'
 	            		str +='<a><img alt="사진" class="deleteicon"src="/resources/cheBoard/deleteicon.png"></a>';	
-	            		str +='<ul id="deletehide" class="hide">'
-	            		str +='<a class="deleteComment" data_num="'+obj[i].cheb_num+'"><li>댓글 삭제하기</li><a>'
+	            		str +='<ul id="deletehide" idx="'+i+'" >'
+	            		str +='<div><a class="deleteComment deleteComment'+i+'" data_num="'+obj[i].cheb_num+'"><li>삭제</li><a></div>'
 	            		str +='</ul>'
 	            		str +='</div>'
 	            		str +='</div>'
             		 }
             		 str +='<p class="cheboard_content">'+obj[i].cheb_content+'</p>';	
-            		 str += '<div id="cheboard_date">'+obj[i].cheb_date+'</div>';
+            		 str += '<div id="cheboard_date">'+obj[i].cheb_date.substring(0,16)+'</div>';
             		 str += '<div class="id_id"><Strong><span class="cheboard_user">'+obj[i].cheb_name+' 님</span></Strong</div>'
             		 str +='</div>'
             		 	 str += '</td>'
@@ -545,11 +546,7 @@ background:#000;color:#fff;
 	        		 $('#listDiv').append(str);
 	        	}
 	        	 str += '</table>'
-	        	if(obj.length <= 0) {
-	        		alert("댓글이 더이상 없습니다");
-	        		return;
-	        	}
-                     
+	        	       
             $('.deleteComment').on('click', function(){
                 var reply_num = $(this).attr('data_num'); 
                
@@ -592,8 +589,15 @@ background:#000;color:#fff;
             	})
             });
            $(".menu>a").click(function() {
-        	  
-   				 $(this).next("ul").toggleClass("hide");
+        	   
+        	  var idx_table = $(this).next("ul").attr('idx');
+        	 
+        	  if ( $(".deleteComment"+idx_table).css('display') === 'none' ) { 
+        		  $(".deleteComment").hide();
+        		  $(".deleteComment"+idx_table).show();
+        		  } 
+        	  else {  $(".deleteComment"+idx_table).hide(); 
+        	  	}
            })
     	}
 	});

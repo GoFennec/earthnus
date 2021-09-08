@@ -41,8 +41,10 @@ public class CheBoardController {
   public String sessionRequest(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
     AuthBean user = (AuthBean)session.getAttribute("auth");
     
-    if (user == null)
+    if (user == null) {
+    	service.total_comment(model);
       return "/cheBoard/cheBoardList"; 
+    }
     String user_id = user.getAuth_id();
     service.donation_dname(model, user_id);
       return "/cheBoard/cheBoardList";
