@@ -115,7 +115,7 @@ height:46px;
 #kakao {
 vertical-align: middle;
 border-style: none;
-margin-bottom: 10px;    
+margin-top: 10px;    
 width:288px;
 height:46px;
 }
@@ -137,7 +137,15 @@ height:46px;
              </div> 
              <input type="submit" class="w-100 btn btn-primary btn-lg" value="로그인"> 
      
-          
+           <div>
+            <c:if test="${userId eq null}">
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=1f09c57d8241952a7a44833618d75b13&redirect_uri=http://localhost:8090/kakaoLogin&response_type=code">
+            <img src="/resources/Auth/kakao_login_large_wide.png" id="kakao"  alt="카카오로그인버튼" title="로그인버튼">
+        </a>
+    </c:if>
+  
+        </div>
+      
          <%
     String clientId = "vDkmCgxDt2L_BtosPOoP";//애플리케이션 클라이언트 아이디값";
     String redirectURI = URLEncoder.encode("http://localhost:8090/auth/callback", "UTF-8");
@@ -151,20 +159,12 @@ height:46px;
  %>
 
    <a href="<%=apiURL%>"><img id="naver" src="/resources/Auth/btnG.png" alt="네이버로그인버튼" title="로그인버튼" /></a>
-            <div>
-            <c:if test="${userId eq null}">
-        <a href="https://kauth.kakao.com/oauth/authorize?client_id=1f09c57d8241952a7a44833618d75b13&redirect_uri=http://localhost:8090/kakaoLogin&response_type=code">
-            <img src="/resources/Auth/kakao_login_large_wide.png" id="kakao"  alt="카카오로그인버튼" title="로그인버튼">
-        </a>
-    </c:if>
-  
-        </div>
-      
+           
       
        
-         
-        <a href="/member/join" class="forgot-link" title="회원가입">회원가입</a>             
-         <a href="/auth/find" class="forgot-link" title="아이디/비밀번호찾기">아이디/비밀번호찾기&nbsp;&nbsp;</a> 
+         <a href="/auth/find" class="forgot-link" title="아이디/비밀번호찾기" >아이디/비밀번호찾기</a>  
+        <a href="/member/join" class="forgot-link" title="회원가입" style="margin-right:73px" >회원가입</a> 
+        
 				
     </form>			
 </div>

@@ -588,7 +588,7 @@ margin-top: 20px;
                                     <input type="text" readonly class="form-control" name ="mem_point" value=<fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyPoint }" />점 >
                                 </div>
                             </div>
-                        </fieldset>
+                    
                         <div>
                         <br><br>
                         <h3>내가 구한 지구</h3>
@@ -727,7 +727,7 @@ margin-top: 20px;
               </c:otherwise>
               </c:choose>
                </div>
-                   
+                       </fieldset>
                  </form>
             </div>
             </div>

@@ -225,25 +225,19 @@ section{
 	font-family: 'Raleway', sans-serif;
 }
 .btn-card{
-	background-color: #1ABC9C;
-	color: #fff;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-    padding: .84rem 2.14rem;
-    font-size: .81rem;
-    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    -o-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    margin: 0;
-    border: 0;
-    -webkit-border-radius: .125rem;
-    border-radius: .125rem;
+	border: none;
+    padding: 13px 23px;
+    text-transform: capitalize;
     cursor: pointer;
-    text-transform: uppercase;
-    white-space: normal;
-    word-wrap: break-word;
     color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    transition: 0.6s;
+    box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);
+    background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
+    background-position: right;
+    background-size: 200%;
+    
 }
 
 a.btn-card {
@@ -531,9 +525,9 @@ a.btn-card {
                         <img src="${camBoard.CAMB_FILE}" height="400px" alt="최신캠페인이미지">
                     </div>
                     <div class="card-desc">
-                        <h3>${camBoard.CAMB_SUBJECT}</h3>
-                        <p>${camBoard.CAMB_NAME}</p>
-                            <a href="/camBoard/detail?CAMB_NAME=${camBoard.CAMB_NAME}&CAMB_NUM=${camBoard.CAMB_NUM}" class="btn-card">자세히보기</a>   
+                        <h3>${camBoard.CAMB_NAME}</h3>
+                        <p>${camBoard.CAMB_SUBJECT}</p>
+                        <a href="/camBoard/detail?CAMB_NAME=${camBoard.CAMB_NAME}&CAMB_NUM=${camBoard.CAMB_NUM}" class="btn-card">자세히보기</a>   
                     </div>
                 </div>
             </div>
@@ -541,40 +535,7 @@ a.btn-card {
           </div>
     </div>
 
-				<!-- <div class="row">
-				<c:forEach items="${cb_list}" var="camBoard">
-					<div class="col-xl-6 col-lg-6 col-md-6">
-						<div class="home-blog-single mb-30">
-							<div class="blog-img-cap">
-								<div class="blog-img">
-									<img src="${camBoard.CAMB_FILE}" height="400px" alt="최신캠페인이미지">
-								</div>
-								<div class="blog-cap">
-									<h3>
-										<a href="/camBoard/detail?CAMB_NAME=${camBoard.CAMB_NAME}&CAMB_NUM=${camBoard.CAMB_NUM}">${camBoard.CAMB_NAME} [${camBoard.CAMB_SUBJECT}]</a>
-									</h3>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					</c:forEach>
-					<div class="col-xl-6 col-lg-6 col-md-6">
-						<div class="home-blog-single mb-30">
-							<div class="blog-img-cap">
-								<div class="blog-img">
-									<img src="resources/assets/img/gallery/home-blog2.png" alt="">
-								</div>
-								<div class="blog-cap">
-									<h3>
-										<a href="blog_details.html">${cbBean.CAMB_NAME}</a>
-									</h3>
-									<p>The automated process starts as soon as your clothes go
-										into the machine. Duis cursus, mi quis viverra ornare.</p>
-								</div>
-							</div>
-						</div>
-					</div>-->
+				
 				</div>
 		</section>
 		

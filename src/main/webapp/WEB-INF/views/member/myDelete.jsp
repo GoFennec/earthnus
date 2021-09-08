@@ -743,8 +743,8 @@ function agree(){
 <script>
 function agree2(){
 	if($("input:checkbox[name=agreement]").is(":checked") == true) {
-	//location.href="/deleteMember_api";
-		location.href="/deleteMember";
+	location.href="/deleteMember_api";
+	//	location.href="/deleteMember";
 	}else{
 		alert("동의하기를 체크해주세요");
 	}

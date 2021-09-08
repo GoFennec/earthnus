@@ -155,11 +155,13 @@ public class MemberController {
 				SHA256 sha = new SHA256();
 				String smem_pw = sha.encrypt(mem_pw);
 				if(smem_pw.equals("mem_pw")) {
+					System.out.println("if");
 					map.put("mem_pw", mem_pw);
 					String mem_id = aBean.getAuth_id();
 					map.put("mem_id", mem_id);
 					memberService.updatePw(map);
 				} else {
+					System.out.println("else");
 				map.put("mem_pw", smem_pw);
 				String mem_id = aBean.getAuth_id();
 				map.put("mem_id", mem_id);
@@ -255,29 +257,48 @@ public class MemberController {
 					AuthBean aBean, HttpServletResponse response, String mem_id) throws IOException{
 				aBean = (AuthBean) session.getAttribute("auth");
 				mem_id = aBean.getAuth_id();
+				int exGoods = memberService.getCheckExgoods(mem_id);
+				if(exGoods == 0) {
 				memberService.deleteMember(mem_id);
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('탈퇴가 완료 되었습니다.');location.href=\"/\"</script>");
 				out.close();
 				session.invalidate();
-				return "redirect:/";			
+				return "redirect:/";	
+				}else {
+					response.setContentType("text/html;charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('배송 완료 되지 않은 지구마켓 상품이 있습니다. 배송 완료 후 탈퇴 가능합니다.');location.href=\"/member/myDelete\"</script>");
+					out.close();
+				}
+				return "redirect: /member/myDelete";
 			}
 			
-		/*	@RequestMapping(value = "/deleteMember_api")
+	@RequestMapping(value = "/deleteMember_api")
 			public String myDelete_api(HttpSession session, Model model, 
 					AuthBean aBean, HttpServletResponse response, String mem_id) throws IOException{
 				aBean = (AuthBean) session.getAttribute("auth");
 				mem_id = aBean.getAuth_id();
+				int exGoods = memberService.getCheckExgoods(mem_id);
+				if(exGoods == 0) {
 				memberService.deleteMember_api(mem_id);
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('탈퇴가 완료 되었습니다.');location.href=\"/\"</script>");
 				out.close();
 				session.invalidate();
-				return "redirect:/";			
+				return "redirect:/";	
+			} else {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('배송 완료 되지 않은 지구마켓 상품이 있습니다. 배송 완료 후 탈퇴 가능합니다.');location.href=\"/member/myDelete\"</script>");
+				out.close();
 			}
-		*/
+			return "redirect: /member/myDelete";
+		}
+		
+	
 	
 	@RequestMapping(value="/member/idcheck", method=RequestMethod.POST)
 	@ResponseBody
