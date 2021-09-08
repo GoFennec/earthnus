@@ -45,11 +45,11 @@
 
 
 <div class="image">
-	<div class="slider-height2 d-flex align-items-center">
+	<div class="slider-height2 align-items-center">
 		<div class="container">
 			<div class="row">
 			<div class="col-xl-8 col-lg-8 col-md-8 col-12">
-            	<div class="hero-cap hero-cap2 pt-10 animated animatedFadeInUp fadeInUp">
+            	<div class="hero-cap hero-cap2 pt-85 m-4 animated animatedFadeInUp fadeInUp">
                 	<h1 style="font-size: 2.5em; color: white;">나무를 심어요!</h1>
                     <p style="color: white;">EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
             	</div>
@@ -100,10 +100,10 @@
 </div>
 
 <div class="container">
-	<div class="row">
+	<div class="row m-4">
 	<div class="col-md-7 col-12">
 		<div>
-			<h2 style="color: #388E3C;">숲은 육지에 서식하는 많은 동식물들의 집입니다.</h2><br>
+			<h2 style="color: #388E3C; margin-top: 0.5em;">숲은 육지에 서식하는 많은 동식물들의 집입니다.</h2><br>
 			<p>숲은 야생동물의 서식지이자 깨끗한 공기를 지켜주고 기후변화를 완화시키는 등 지구 전체를 위해 중요한 역할을 합니다.
 			육지에 서식하는 식물과 동물 종의 약 3분의 2가 숲에 살고 있으며, 크고 작은 지역사회에 생명을 불어넣습니다.</p>
 		</div>
@@ -113,13 +113,13 @@
 	</div>
 	</div><br><br>
 	
-	<div class="row">
+	<div class="row m-4">
 	<div class="col-md-8 col-12">
 		<img src="/resources/donation/forestThema3.jpg" title="나무를 심어요! 테마 사진 3" alt="숱 속의 사슴 사진" width="100%">
 	</div>
 	<div class="col-md-4 col-12">
 		<div>
-			<h2 style="color: #388E3C;">EARTH & US 활동</h2><br>
+			<h2 style="color: #388E3C; margin-top: 0.5em;">EARTH & US 활동</h2><br>
 			<p>EARTH & US는 무분별한 벌채와 불법 목재 거래 등 산림 파괴를 막고 전 세계의 숲을 보호하기 위해 싸우고 있습니다.
 			우리는 여러 환경 단체 및 시민들과 연대하고 함께 행동하며 자신들의 이익을 위해 숲을 파괴하는 기업과 정부에 대항합니다.</p>
 		</div><br>
