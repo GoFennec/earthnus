@@ -37,7 +37,7 @@
       					<![CDATA[
 	       				 UPDATE PAY
 				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '바다' or pay_dname ='조개' or pay_dname ='바다 거북' or pay_dname ='고래');
+				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '바다' or pay_dname ='조개' or pay_dname ='문어' or pay_dname ='새우');
 				       	 ]]>
       				</when>
       				<when test='cheb_dname == "숲"'>
@@ -65,7 +65,11 @@
       			</choose>
       </update>
       
-      
+      <select id="total_comment" resultType="int">
+      	<![CDATA[
+			select count(*) from cheboard;
+		]]>
+      </select>
       
       <select id="select_dname"  parameterType="String" resultType="pay">
       	<![CDATA[
