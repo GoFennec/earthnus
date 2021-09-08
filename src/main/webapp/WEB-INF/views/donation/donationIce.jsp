@@ -43,11 +43,11 @@
 <jsp:include page="/WEB-INF/views/header.jsp" flush="true"/>
 
 <div class="image">
-	<div class="slider-height2 d-flex align-items-center">
+	<div class="slider-height2 align-items-center">
 		<div class="container">
 			<div class="row">
 			<div class="col-xl-8 col-lg-8 col-md-8 col-12">
-            	<div class="hero-cap hero-cap2 pt-10 animated animatedFadeInUp fadeInUp">
+            	<div class="hero-cap hero-cap2 pt-85 m-4 animated animatedFadeInUp fadeInUp">
                 	<h1 style="font-size: 2.5em; color: white;">북극곰을 도와줘요!</h1>
                     <p style="color: white;">EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
             	</div>
@@ -98,10 +98,10 @@
 </div>
 
 <div class="container">
-	<div class="row">
+	<div class="row m-4">
 	<div class="col-md-7 col-12">
 		<div>
-			<h2 style="color: #388E3C;">지구 온난화로 북극 기온이 상승하여 빙하가 녹고있습니다.</h2><br>
+			<h2 style="color: #388E3C; margin-top: 0.5em;">지구 온난화로 북극 기온이 상승하여 빙하가 녹고있습니다.</h2><br>
 			<p>북극을 지키고, 지구를 지키기 위한 가장 중요한 시점은 바로 지금입니다.
 			지구 온난화로 북극 기온이 빠르게 상승하고 있고, 매년 더 많은 빙하가 녹아 내리고 있습니다.
 			하지만 이러한 위기 상황에서도 일부 기업들은 석유 시추를 위해 북극을 개발하려 합니다.</p>
@@ -112,13 +112,13 @@
 	</div>
 	</div><br><br>
 	
-	<div class="row">
+	<div class="row m-4">
 	<div class="col-md-8 col-12">
 		<img src="/resources/donation/iceThema3.jpg" title="북극곰을 도와줘요! 테마 사진 3" alt="거대한 빙하 사진" width="100%">
 	</div>
 	<div class="col-md-4 col-12">
 		<div>
-			<h2 style="color: #388E3C;">EARTH & US 활동</h2><br>
+			<h2 style="color: #388E3C; margin-top: 0.5em;">EARTH & US 활동</h2><br>
 			<p>빠르게 녹고 있는 북극을 지키기 위해서는 한시라도 빨리 화석연료에서 벗어나야 합니다.
 			EARTH & US는 북극 바다에 해양보호구역을 만들기 위한 캠페인을 진행하고 있습니다.</p>
 		</div><br>
