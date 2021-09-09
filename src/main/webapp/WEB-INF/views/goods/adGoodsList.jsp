@@ -22,6 +22,7 @@
 	<style type="text/css">
   		th,td{
   			text-align:center;
+  			font-size: 0.8em;
   		}
   		label{
   		margin-top:1rem;

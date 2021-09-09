@@ -25,6 +25,7 @@
   	}
   	tr,td{
   		text-align:center;
+  		font-size: 0.8em;
   	}
   	#h6{
   		margin-top:20px;

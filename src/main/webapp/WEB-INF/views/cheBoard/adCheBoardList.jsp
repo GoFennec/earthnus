@@ -26,6 +26,7 @@
   	
   	th,td{
   		text-align:center;
+  		font-size: 0.8em;
   	}
   	.btn btn-sm btn-primary{
   		font-color:#6777EF;
