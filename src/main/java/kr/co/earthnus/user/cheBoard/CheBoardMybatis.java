@@ -5,14 +5,14 @@ import java.util.List;
 import kr.co.earthnus.user.pay.PayBean;
 
 public interface CheBoardMybatis {
-  List<CheBoardBean> CheBoardList(PageBean paramPageBean);
+  List<CheBoardBean> get_CheBoardList(PageBean paramPageBean);
   
   void replyDelete(int reply_id);
   
   void replyInsert(CheBoardBean paramCheBoardBean);
   
-  int total_comment();
-  List<PayBean> select_dname(String user_id);
+  int get_total_comment();
+  List<PayBean> get_select_dname(String user_id);
 
   void Comment_like(like_Bean likebean);
 
