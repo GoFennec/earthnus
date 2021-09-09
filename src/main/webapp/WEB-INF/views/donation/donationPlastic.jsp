@@ -85,7 +85,7 @@
 					<form action="/pay/pay" method="POST" name="ac" onsubmit="return check()">
 						<input type="hidden" name="mem_id" value="${auth_id}"/>
 						<input type="hidden" name="pay_dname" value="${donation.d_name}"/>
-						<input type="number" name="amount" min="1000" max="10000000" size=8 height=20 name="pay_price"/>&nbsp;원<br><br>
+						<input type="number" name="pay_price" min="1000" max="10000000" height=20/>&nbsp;원<br><br>
 					<div class="cat-cap">
 							<div id="lastDonationBt"><input type="submit" class="btn btn-primary" value="자율후원"/></div>
 					</div>
@@ -140,9 +140,9 @@
 
 <script>
 function check() {
-	if(ac.amount.value == "") {
+	if(ac.pay_price.value == "") {
 		alert("후원하실 금액을 입력해 주세요.");
-	    ac.amount.focus();
+	    ac.pay_price.focus();
 	    return false;
 	} else {
 		return true;
