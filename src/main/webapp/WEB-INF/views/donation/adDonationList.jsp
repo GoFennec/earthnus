@@ -22,6 +22,7 @@
 	<style type="text/css">
   		th,td{
   			text-align:center;
+  			font-size: 0.8em;
   		}
   		label{
   		margin-top:1rem;
@@ -127,7 +128,7 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">기부 관리</h1>
+            <h1 class="h3 mb-0 text-gray-800">후원 관리</h1>
           </div>
 
           <!-- Row -->
@@ -409,39 +410,6 @@
               </div>
             </div>
           </div>
-              <script type="text/javascript">
-				function memberDelete(){
-					var cancelNo = 0;
-					var cancelNum = "";
-					var deletePW = $("#deletePW").val();
-					var deleteMember = $("#mem_id").val();
-					if(deletePW == ""){
-						alert("관리자 비밀번호를 입력해주세요.");
-						return;
-					}
-		
-					$.ajax({
-			   			type: "POST", //요청 메소드 방식
-			  			 url:"/adMember/delete",
-			   			data: {"deletePW":deletePW, "deleteMember":deleteMember},
-			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-			   			
-			   			success : function(result){
-			      			if(result.error === true){
-			    	  			alert('결제가 취소되었습니다.');
-			      			}else if(result.error === false){
-			    	  			alert('관리자 비밀번호를 확인해 주세요.');
-			    	  			return;
-			      			}
-			   			},
-			   		 error:function(request,status,error){
-			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			      			//통신 실패시 발생하는 함수(콜백)
-			   				}
-						});
-				}
-			</script>
-
         </div>
         <!---Container Fluid-->
       </div>

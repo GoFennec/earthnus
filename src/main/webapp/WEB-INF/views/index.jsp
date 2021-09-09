@@ -368,7 +368,7 @@ a.btn-card {
 				<div class="right-content">
 					<!-- img -->
 					<div class="right-img">
-						<img src="resources/assets/img/gallery/safe_in.png" alt="지구를지키자" title="지구지키기포스터를들고있는소녀">
+						<img src="resources/assets/img/gallery/safe_in.png" alt="지구지키기포스터를들고있는소녀" title="지구를지키자">
 					</div>
 					<div class="support-img-cap text-center d-flex">
 						<div class="single-one">
@@ -522,7 +522,7 @@ a.btn-card {
             <div class="col-md-6">
                 <div class="card-content">
                     <div class="card-img">
-                        <img src="${camBoard.CAMB_FILE}" height="400px" alt="최신캠페인이미지">
+                        <img src="${camBoard.CAMB_FILE}" height="400px" title="최신캠페인이미지" alt="최신캠페인이미지">
                     </div>
                     <div class="card-desc">
                         <h3>${camBoard.CAMB_NAME}</h3>
@@ -559,7 +559,7 @@ a.btn-card {
         <div class="col-sm-6">
             <div id="tb-testimonial" class="testimonial testimonial-success">
                
-                <div class="testimonial-section" id="chContent" style="cursor: pointer;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" onclick="location.href='/cheBoard/list'" >
+                <div class="testimonial-section" id="chContent" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" onclick="location.href='/cheBoard/list'" >
                 ${cheBoard.cheb_content}
                 </div>
                 <div class="testimonial-desc">

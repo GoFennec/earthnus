@@ -7,8 +7,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
     <title>굿즈교환현황</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -601,7 +599,7 @@ color: #a2a6af
 table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
 	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
-	
+
 #nocontent{
 text-align:center;
 margin-top: 20px;
@@ -620,7 +618,7 @@ margin-top: 20px;
                    <div class="user-info">
 							<img class="img-profile img-circle img-responsive center-block"
 								src="/resources/Auth/account_1.png"
-								title="account" alt="계정사진">
+								title="기본계정사진" alt="아바타모형사진">
 							<ul class="meta list list-unstyled">
 								<!-- <li class="id"><a>${auth.auth_id}</a></li> -->
 								<li class="name">${auth.auth_name}님</li>
@@ -640,7 +638,8 @@ margin-top: 20px;
                 <div class="content-panel">
                     <h2 class="title">굿즈 교환 현황</h2>
 					<hr>
-                         <table class="table table-hover table-xl mb-0">
+					
+                        <table class="table" style="table-layout:fixed;">
                 <thead>
                   <tr>
                     <th>굿즈 사진</th>
@@ -720,7 +719,7 @@ margin-top: 20px;
               </c:otherwise>
               </c:choose>
                 </div>
-            </div>
+                </div>
         </section>
     </div>
 </div>

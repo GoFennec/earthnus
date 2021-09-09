@@ -204,6 +204,19 @@ public class MemberService {
 	       
 		}
 		
+		
+		public void myMessageDelete(int cheb_num) {
+			System.out.println("service1" + cheb_num);
+			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+			dao.myMessageDelete(cheb_num);
+			System.out.println("Service2");
+		}
+	/*	public void update_pay_comment(String mem_id) {
+			MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
+			dao.update_pay_comment(mem_id);
+		}
+		*/
+		
 
 	
 		public void myOrder(String mem_id, String pagenum, String contentnum, Model model) {

@@ -642,7 +642,7 @@ font-family: "Montserrat",sans-serif;
                     <div class="user-info">
 							<img class="img-profile img-circle img-responsive center-block"
 								src="/resources/Auth/account_1.png"
-								title="account" alt="계정사진">
+								title="기본계정사진" alt="아바타모형사진">
 							<ul class="meta list list-unstyled">
 								<li class="name">${auth.auth_name}님</li>
 							</ul>
