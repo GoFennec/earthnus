@@ -29,7 +29,6 @@
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/goods/exGoods" />
 			<mapping path="/goods/exGoodsOk" />
 			<mapping path="/member/my**" />
 			<mapping path="/pay/**" />

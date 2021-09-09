@@ -616,9 +616,9 @@ color: #a2a6af
         text-align: left;
         vertical-align: middle;
 	}	   
-table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
-	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
-	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
+table {table-layout:fixed; width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
+thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
+td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 .btn_comment{
 background-position: left;
     text-decoration: none;
@@ -638,6 +638,18 @@ margin-bottom: 5px;
 text-align:center;
 margin-top: 20px;
 }	
+#symbol{
+margin-right: .25rem!important;
+border-radius: 50%!important;
+vertical-align: middle;
+    border-style: none;
+    -webkit-font-smoothing: antialiased;
+width: 28px;
+    aspect-ratio: auto 28 / 28;
+    height: 28px;
+
+
+}
 </style>
 
 </head>
@@ -652,7 +664,7 @@ margin-top: 20px;
                    <div class="user-info">
 							<img class="img-profile img-circle img-responsive center-block"
 								src="/resources/Auth/account_1.png"
-								title="account" alt="계정사진">
+								title="기본계정사진" alt="아바타모형사진">
 							<ul class="meta list list-unstyled">
 								<!-- <li class="id"><a>${auth.auth_id}</a></li> -->
 								<li class="name">${auth.auth_name}님</li>
@@ -672,8 +684,8 @@ margin-top: 20px;
                 <div class="content-panel">
                     <h2 class="title">내가 작성한 글</h2>
 					<hr>
-                    <form class="form-horizontal" method="post" action="/member/myMessage" >
-                         <table class="table table-hover table-xl mb-0">
+                  
+                         <table class="table" style="table-layout:fixed;">
                 <thead>
                   <tr>
                     <th>기부 내역</th>
@@ -684,16 +696,41 @@ margin-top: 20px;
                 </thead>
                 <tbody>
                 <c:forEach items="${getMyMessage}" var="cheBoard">
+               
                   <tr>
-                    <td class="text-truncate">${cheBoard.cheb_dname}</td>
+                   
+                 <td class="text-truncate">
+                   <c:if test="${cheBoard.cheb_dname eq '숲'}">
+                    <img src="/resources/donation/forest04.png" id="symbol" alt="숲" title="숲일러스트"/>
+                    </c:if>
+                     <c:if test="${cheBoard.cheb_dname eq '바다'}">
+                    <img src="/resources/donation/ocean04.png" id="symbol" alt="바다" title="바다일러스트"/>
+                    </c:if>
+                     <c:if test="${cheBoard.cheb_dname eq '북극곰'}">
+                    <img src="/resources/donation/ice04.png" id="symbol" alt="북극곰" title="북극곰일러스트"/>
+                    </c:if>
+                     <c:if test="${cheBoard.cheb_dname eq '친환경'}">
+                    <img src="/resources/donation/plastic04.png" id="symbol" alt="친환경" title="친환경일러스트"/>
+                    </c:if>${cheBoard.cheb_dname}
+                  </td>
                     <td class="text-truncate">${cheBoard.cheb_content}</td>
                     <td class="text-truncate">${cheBoard.cheb_date}</td>
-                    <td class="text-turncate"><button type="button" 
-                    class="btn_comment" onclick="delete_c()">삭제하기</button></td>
+                     <td class="text-turncate">
+                      <form class="form-horizontal" method="post" action="/delete_c" >
+                     <div>
+                     <input type="hidden" class="form-control" name="cheb_num" id="cheb_num" value="${cheBoard.cheb_num}"/>
+                     <button type="submit" class="btn_comment" >삭제하기</button>
+                     </div>
+                     </form>
+                    </td>
          		 </tr>
          		 </c:forEach>
                 </tbody>
-              </table>   <c:choose>
+              </table>  
+              <script>
+      
+              </script>
+               <c:choose>
               <c:when test="${empty getMyMessage}">
 		              <div id="nocontent"> 해당 정보가 존재하지 않습니다.</div>
               </c:when>
@@ -731,10 +768,6 @@ margin-top: 20px;
 </div>
 
   <jsp:include page="/WEB-INF/views/footer.jsp"/>
-<script type="text/javascript">
-	function delete_c() {
-		location.href = "/delete_c";
-	}
-</script>
+
 </body>
 </html>

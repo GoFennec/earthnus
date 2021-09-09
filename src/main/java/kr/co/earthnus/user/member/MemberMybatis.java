@@ -45,6 +45,8 @@ public interface MemberMybatis {
 	public List<ExGoodsBean> getMyOrder(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
 	public int getMyMessageCount(String mem_id); 
 	public List<CheBoardBean> getMyMessage(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
+	public void myMessageDelete(@Param("cheb_num") int cheb_num);
+	//public void update_pay_comment(String mem_id);
 	public int getMyPayCount(String mem_id); 
 	public List<PayBean> getMyPay(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);
 }

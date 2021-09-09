@@ -160,7 +160,7 @@ public class AuthController {
 			 String redirectUrl = (String) session.getAttribute("url_prior_login");
 			 if(redirectUrl != null) {
 				 String str = redirectUrl.substring(21);
-				 if(str.equals("/goods/list")) {
+				 if(str.equals("/goods/exGoods")) {
 					 return "redirect:" + str;
 				 }else if(str.contains("donation")) {
 					 return "redirect:" + str;

@@ -84,7 +84,7 @@
 	<input type="hidden" name="exg_img" value="${goods.goods_img}">
 	<div class="exButton"><button type="button" class="btn" onclick="location.href='/goods/list'">목록보기</button>&nbsp;&nbsp;&nbsp;
 	<c:if test="${empty auth}">
-		<button type="button" class="btn" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">교환하기</button>
+		<button type="button" class="btn" onclick="location.href='/goods/exGoodsOk'">교환하기</button>
 	</c:if>	
 	<c:if test="${!empty auth}">
 		<input type="submit" class="btn" value="교환하기 "/>
