@@ -64,10 +64,8 @@ public class CamBoardService {
         	pBean.setPagenum(pBean.getPagenum()*6);
         	CamBoardList = CamBoardDAO.getBoardList(pBean);
         }
-        
         pBean.setTotalcount(CamBoardDAO.getBoardListCount(pBean));
         pBean.setSearch(search.substring(1, search.length()-1));
-
 		model.addAttribute("CamBoardList", CamBoardList);
         model.addAttribute("page", pBean);
         
@@ -142,8 +140,10 @@ public class CamBoardService {
         return PageList;
 	}
 	
-	public camBoardBean getCamBoard(String cambname) {
+	public camBoardBean getCamBoard(int cambnum, String cambname) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
+		camBoardBean cBean = new camBoardBean();
+		cBean.setCAMB_NUM(cambnum);
 		
 		return camBoardDAO.getCamBoard(cambname);
 	}
@@ -152,7 +152,6 @@ public class CamBoardService {
 			int CAMB_NUM, int limit, int offset, List<camBoardBean> CamBoardList, Map<String, Object> list, Model model) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		PagingBean pBean = new PagingBean();
-		
         pBean.setSearch_type(search_type);
         pBean.setSearch(search);
         pBean.setArr(arr);
@@ -164,7 +163,6 @@ public class CamBoardService {
         pBean.setCAMB_NUM(-1);
         int total = camBoardDAO.getBoardIndex(pBean);
         list.put("totalIndex", total);
-        
         if(CAMB_NUM == total) {
         	pBean.setOffset(CAMB_NUM - 2);
             list.put("preBoard", camBoardDAO.getOtherBoard(pBean));
@@ -177,7 +175,6 @@ public class CamBoardService {
             pBean.setOffset(CAMB_NUM - 2);
             list.put("preBoard", camBoardDAO.getOtherBoard(pBean));
         }
-        
 		return list;
 	}
 	/*public MemberBean getMember(MemberBean mBean) {

@@ -27,13 +27,13 @@
      <div class="col-12 posts-list">
       <div class="single-post">
        <div class="feature-img">
-        <img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="캠페인" title="${camBoard.CAMB_SUBJECT}"/>
+        <img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="${camBoard.CAMB_NAME}" title="${camBoard.CAMB_NAME}"/>
       </div>
       <div class="blog_details">
         <h2 style="color: #2d2d2d;">${camBoard.CAMB_NAME}</h2>
 		<div id="subject_icon">
 			<span style="display: inline-block;">
-			<p><a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT">${camBoard.CAMB_SUBJECT}&nbsp;&nbsp;</a>
+			<p><a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT" title="${camBoard.CAMB_SUBJECT} 캠페인">${camBoard.CAMB_SUBJECT}&nbsp;&nbsp;</a>
 			|&nbsp;&nbsp;진행 기간 <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_STARTDATE}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_FINDATE}"/></p>
 			</span>
 		</div>
@@ -70,7 +70,7 @@
 		   <div id="preBoard" class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 			   <div style="cursor: pointer;" onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
 				   	<div class="thumb">
-						<img class="img-fluid" src="${preBoard.CAMB_FILE}" alt="" width="150px">
+						<img class="img-fluid" src="${preBoard.CAMB_FILE}" title="${preBoard.CAMB_NAME}" alt="${preBoard.CAMB_NAME}" width="150px">
 					</div>
 						  
 				   <div class="arrow">
@@ -99,7 +99,7 @@
 				   		<span class="lnr text-white ti-arrow-right"></span>
 				   </div>
 				   <div class="thumb">
-				  		<img class="img-fluid" src="${nextBoard.CAMB_FILE}"  alt="" width="150px">
+				  		<img class="img-fluid" src="${nextBoard.CAMB_FILE}" title="${nextBoard.CAMB_NAME}" alt="${nextBoard.CAMB_NAME}" width="150px">
 				   </div>
 				</div>
 		    </div>
@@ -152,14 +152,15 @@
 	}
 	
 function detailUrl(CAMB_NAME, CAMB_NUM, type){
-		
+		var currentIndex = 0;
 		if(type === "prev"){
 			num = (${index}-1)/6;
-			pagenum = Math.ceil(num);
+			currentIndex = ${currentIndex} - 1;
 		}else if(type === "next"){
 			num = (${index}+1)/6;
-			pagenum = Math.ceil(num);
+			currentIndex = ${currentIndex} + 1;
 		}
+		pagenum = Math.ceil(num);
 		
 		if(name || num){
 			if(query){
@@ -167,15 +168,15 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
 					query = query.substr(0, subquery.indexOf("pagenum")-2);
 				}
 				if(pagenum !== 1){
-					URL += pathname + "?" + query + "&pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+					URL += pathname + "?" + query + "&pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
 				}else{
-					URL += pathname + "?" + query + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+					URL += pathname + "?" + query + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
 				}
 			}else{
 				if(pagenum !== 1){
-					URL += pathname + "?pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+					URL += pathname + "?pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
 				}else{
-					URL += pathname + "?CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM;
+					URL += pathname + "?CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
 				}
 			}
 			
@@ -203,7 +204,11 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
 			if(query.lastIndexOf(substring) !== -1){
 				query = query.substr(0, subquery.indexOf("pagenum")-2);
 			}
-			URL += "/camBoard/list" + query;
+			URL += "/camBoard/list?" + query;
+			
+			if(pagenum !== 1){
+				URL += "&pagenum=" + pagenum;
+			}
 		}else{
 			if(pagenum !== 1){
 				URL += "/camBoard/list?pagenum=" + pagenum;

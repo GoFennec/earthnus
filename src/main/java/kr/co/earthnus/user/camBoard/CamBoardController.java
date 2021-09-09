@@ -30,13 +30,13 @@ public class CamBoardController{
 	}
 	
 	@RequestMapping("/camBoard/list/search")
-	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "ÀüÃ¼") String search_type, 
+	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "ï¿½ï¿½Ã¼") String search_type, 
 			@RequestParam(defaultValue = "1") String pagenum, @RequestParam(defaultValue = "6") String contentnum, 
 			@RequestParam( value = "search", required=false) String search , @RequestParam(defaultValue = "desc") String order, 
 			camBoardBean bean, Model model) {
-		if(search_type.equals("Á¦¸ñ")) {
+		if(search_type.equals("ï¿½ï¿½ï¿½ï¿½")) {
 			search_type = "CAMB_NAME";
-		}else if(search_type.equals("³»¿ë")) {
+		}else if(search_type.equals("ï¿½ï¿½ï¿½ï¿½")) {
 			search_type = "CAMB_CONTENT";
 		}else if(search_type.equals("CAMB_SUBJECT")){
 			
@@ -53,13 +53,13 @@ public class CamBoardController{
 	
 	@RequestMapping(value="/camBoard/detail")
 	public String getCamBoardDetail(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "ÀüÃ¼") String search_type, 
+			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "ï¿½ï¿½Ã¼") String search_type, 
 			@RequestParam(defaultValue = "desc") String order, 
 			camBoardBean bean, @RequestParam("CAMB_NUM") String cambnum, @RequestParam(defaultValue = "1") String p, 
 			@RequestParam("CAMB_NAME") String cambname, Model model) {
-		if(search_type.equals("Á¦¸ñ")) {
+		if(search_type.equals("ï¿½ï¿½ï¿½ï¿½")) {
 			search_type = "CAMB_NAME";
-		}else if(search_type.equals("³»¿ë")) {
+		}else if(search_type.equals("ï¿½ï¿½ï¿½ï¿½")) {
 			search_type = "CAMB_CONTENT";
 		}else if(search_type.equals("CAMB_SUBJECT")){
 			
@@ -68,15 +68,15 @@ public class CamBoardController{
 		}
 		
 		if(search.equals("plastic")) {
-			search = "ÇÃ¶ó½ºÆ½";
+			search = "í”Œë¼ìŠ¤í‹±";
 		}else if(search.equals("ocean")) {
-			search = "ÇØ¾ç";
+			search = "í•´ì–‘";
 		}else if(search.equals("forest")) {
-			search = "»ê¸²";
+			search = "ì‚°ë¦¼";
 		}else if(search.equals("ice")) {
-			search = "±ØÁö¹æ";
+			search = "ê·¹ì§€ë°©";
 		}else if(search.equals("all")) {
-			search = "±âÅ¸";
+			search = "ê¸°íƒ€";
 		}
 		
 		search = "%" + search + "%";		
@@ -107,7 +107,8 @@ public class CamBoardController{
 		
 		model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
 		model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
-		model.addAttribute("camBoard", camBoardService.getCamBoard(cambname));
+		model.addAttribute("camBoard", camBoardService.getCamBoard(Integer.parseInt(cambnum), cambname));
+		model.addAttribute("currentIndex", Integer.parseInt(cambnum));
 		model.addAttribute("page", Integer.parseInt(p));
 		
 		return "camBoard/camBoardDetail";

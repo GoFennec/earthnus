@@ -113,6 +113,7 @@ public class AdCamBoardController {
 	@RequestMapping(value="/adCamBoard/insert")
 	public String insertCamBoard() {
 		
+		//return "camBoard/insertTest";
 		return "camBoard/adCamBoardInsert";
 	}
 	
