@@ -27,13 +27,13 @@ public class AdCheBoardService {
 	
 	public int cheTotal() {
 		AdCheBoardMybatis cheBoardDAO = mybatis.getMapper(AdCheBoardMybatis.class);
-		int cheTotal = cheBoardDAO.cheTotal();
+		int cheTotal = cheBoardDAO.getCheTotal();
 		return cheTotal;
 	}
 	
 	public int cheToday() {
 		AdCheBoardMybatis cheBoardDAO = mybatis.getMapper(AdCheBoardMybatis.class);
-		int cheToday = cheBoardDAO.cheToday();
+		int cheToday = cheBoardDAO.getCheToday();
 		return cheToday;
 	}
 

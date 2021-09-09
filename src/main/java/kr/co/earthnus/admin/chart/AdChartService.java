@@ -18,10 +18,10 @@ public class AdChartService {
 	
 	public void donationPie(Model model) {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int donationPiePlastic = dao.donationPiePlastic();
-		int donationPieOcean = dao.donationPieOcean();
-		int donationPieIce = dao.donationPieIce();
-		int donationPieForest = dao.donationPieForest();
+		int donationPiePlastic = dao.getDonationPiePlastic();
+		int donationPieOcean = dao.getDonationPieOcean();
+		int donationPieIce = dao.getDonationPieIce();
+		int donationPieForest = dao.getDonationPieForest();
 		
 		model.addAttribute("donationPiePlastic", donationPiePlastic);
 		model.addAttribute("donationPieOcean", donationPieOcean);
@@ -31,10 +31,10 @@ public class AdChartService {
 	
 	public void camPie(Model model) {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int camPiePlastic = dao.camPiePlastic();
-		int camPieOcean = dao.camPieOcean();
-		int camPieIce = dao.camPieIce();
-		int camPieForest = dao.camPieForest();
+		int camPiePlastic = dao.getCamPiePlastic();
+		int camPieOcean = dao.getCamPieOcean();
+		int camPieIce = dao.getCamPieIce();
+		int camPieForest = dao.getCamPieForest();
 		
 		model.addAttribute("camPiePlastic", camPiePlastic);
 		model.addAttribute("camPieOcean", camPieOcean);
@@ -44,10 +44,10 @@ public class AdChartService {
 	
 	public void chePie(Model model) {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int chePiePlastic = dao.chePiePlastic();
-		int chePieOcean = dao.chePieOcean();
-		int chePieIce = dao.chePieIce();
-		int chePieForest = dao.chePieForest();
+		int chePiePlastic = dao.getChePiePlastic();
+		int chePieOcean = dao.getChePieOcean();
+		int chePieIce = dao.getChePieIce();
+		int chePieForest = dao.getChePieForest();
 		
 		model.addAttribute("chePiePlastic", chePiePlastic);
 		model.addAttribute("chePieOcean", chePieOcean);
@@ -62,7 +62,7 @@ public class AdChartService {
 		List<Integer> count1 = new ArrayList<Integer>();
 		
 		for(int i = 0; i < 7; i++) {
-			count = dao.countVisitor(i);
+			count = dao.getCountVisitor(i);
 			count1.add(count);
 		}
 		model.addAttribute("countVisitor", count1);
@@ -75,7 +75,7 @@ public class AdChartService {
 		List<Integer> count1 = new ArrayList<Integer>();
 		
 		for(int i = 0; i < 7; i++) {
-			count = dao.sumPlastic(i);
+			count = dao.getSumPlastic(i);
 			if(count == null) {
 				count = "0";
 			}
@@ -92,7 +92,7 @@ public class AdChartService {
 		List<Integer> count1 = new ArrayList<Integer>();
 		
 		for(int i = 0; i < 7; i++) {
-			count = dao.sumOcean(i);
+			count = dao.getSumOcean(i);
 			if(count == null) {
 				count = "0";
 			}
@@ -109,7 +109,7 @@ public class AdChartService {
 		List<Integer> count1 = new ArrayList<Integer>();
 		
 		for(int i = 0; i < 7; i++) {
-			count = dao.sumIce(i);
+			count = dao.getSumIce(i);
 			if(count == null) {
 				count = "0";
 			}
@@ -126,7 +126,7 @@ public class AdChartService {
 		List<Integer> count1 = new ArrayList<Integer>();
 		
 		for(int i = 0; i < 7; i++) {
-			count = dao.sumForest(i);
+			count = dao.getSumForest(i);
 			if(count == null) {
 				count = "0";
 			}
@@ -142,7 +142,7 @@ public class AdChartService {
 		List<Integer> count1 = new ArrayList<Integer>();
 		
 		for(int i = 0; i < 7; i++) {
-			count = dao.countMember(i);
+			count = dao.getCountMember(i);
 			count1.add(count);
 		}
 		model.addAttribute("countMember", count1);
@@ -154,7 +154,7 @@ public class AdChartService {
 		List<Integer> count1 = new ArrayList<Integer>();
 		
 		for(int i = 0; i < 7; i++) {
-			count = dao.countExgoods(i);
+			count = dao.getCountExgoods(i);
 			count1.add(count);
 		}
 		model.addAttribute("countExgoods", count1);
@@ -239,6 +239,45 @@ public class AdChartService {
 		
 		int getCountVisitorMonth = dao.getCountVisitorMonth(select_year, select_month);
 		map.put("getCountVisitorMonth", getCountVisitorMonth);
+		
+		int getCountMemberMonth = dao.getCountMemberMonth(select_year, select_month);
+		map.put("getCountMemberMonth", getCountMemberMonth);
+		
+		int getCountDelMemberMonth = dao.getCountDelMemberMonth(select_year, select_month);
+		map.put("getCountDelMemberMonth", getCountDelMemberMonth);
+		
+		int getCountExgoodsMonth = dao.getCountExgoodsMonth(select_year, select_month);
+		map.put("getCountExgoodsMonth", getCountExgoodsMonth);
+		
+		String getCountDonationMonth = dao.getCountDonationMonth(select_year, select_month);
+		if(getCountDonationMonth == null) {
+			getCountDonationMonth = "0";
+		}
+		map.put("getCountDonationMonth", getCountDonationMonth);
+		
+		String getCountPlasticMonth = dao.getCountPlasticMonth(select_year, select_month);
+		if(getCountPlasticMonth == null) {
+			getCountPlasticMonth = "0";
+		}
+		map.put("getCountPlasticMonth", getCountPlasticMonth);
+		
+		String getCountOceanMonth = dao.getCountOceanMonth(select_year, select_month);
+		if(getCountOceanMonth == null) {
+			getCountOceanMonth = "0";
+		}
+		map.put("getCountOceanMonth", getCountOceanMonth);
+		
+		String getCountIceMonth = dao.getCountIceMonth(select_year, select_month);
+		if(getCountIceMonth == null) {
+			getCountIceMonth = "0";
+		}
+		map.put("getCountIceMonth", getCountIceMonth);
+		
+		String getCountForestMonth = dao.getCountForestMonth(select_year, select_month);
+		if(getCountForestMonth == null) {
+			getCountForestMonth = "0";
+		}
+		map.put("getCountForestMonth", getCountForestMonth);
 		
 		
 		return map;

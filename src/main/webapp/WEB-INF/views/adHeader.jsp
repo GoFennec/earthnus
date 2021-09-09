@@ -27,7 +27,7 @@
             <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="/adLogout" id="userDropdown" 
                 aria-haspopup="true" aria-expanded="false">
-               로그 아웃
+               로그아웃
               </a> 
             </li>
           </ul>

@@ -31,15 +31,14 @@ public interface MemberMybatis {
 	public void deleteMember(String mem_id);
 	public void deleteMember_api(@Param("mem_id")String mem_id,@Param("deleteMember")String deleteMember);
 	public int getDeleteCount();
-	public int idCheck(@Param("mem_id") String mem_id);
+	public int getIdCheck(@Param("mem_id") String mem_id);
 	public String getPwCheck(String mem_id);
 	
 	public int insertMail(MailBean MailBean);
-	public MailBean selectMail(@Param("name") String name, @Param("email") String email);
-	public String selectMailPW(@Param("email") String email, @Param("mem_id") String mem_id);
-	public int find(@Param("findName") String findName, @Param("findEmail") String findEmail);
-	public int findpw(@Param("findName") String findName, @Param("findEmail") String findEmail, @Param("mem_id") String mem_id);
-	public List<MemberBean> findID(@Param("findName") String findName, @Param("mail_receiver") String mail_receiver);
+	public MailBean getSelectMail(@Param("name") String name, @Param("email") String email);
+	public int getFind(@Param("findName") String findName, @Param("findEmail") String findEmail);
+	public int getFindpw(@Param("findName") String findName, @Param("findEmail") String findEmail, @Param("mem_id") String mem_id);
+	public List<MemberBean> getFindID(@Param("findName") String findName, @Param("mail_receiver") String mail_receiver);
 	public int changePW(@Param("changeNum") String changeNum, @Param("email") String email, @Param("name") String name);
 	public int getMyOrderCount(String mem_id); 
 	public List<ExGoodsBean> getMyOrder(@Param("mem_id") String mem_id, @Param("contentnum") int contentnum, @Param("pagenum") int pagenum);

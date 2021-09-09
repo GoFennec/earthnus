@@ -54,9 +54,9 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adIndex">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adIndex" title="관리자 메인화면 바로가기">
         <div class="sidebar-brand-icon">
-          <img src="/resources/assets/img/logo/logo2_footer.png">
+          <img src="/resources/assets/img/logo/logo2_footer.png" alt="관리자 메인화면 바로가기">
         </div>
       </a>
       <hr class="sidebar-divider my-0">
@@ -409,39 +409,6 @@
               </div>
             </div>
           </div>
-              <script type="text/javascript">
-				function memberDelete(){
-					var cancelNo = 0;
-					var cancelNum = "";
-					var deletePW = $("#deletePW").val();
-					var deleteMember = $("#mem_id").val();
-					if(deletePW == ""){
-						alert("관리자 비밀번호를 입력해주세요.");
-						return;
-					}
-		
-					$.ajax({
-			   			type: "POST", //요청 메소드 방식
-			  			 url:"/adMember/delete",
-			   			data: {"deletePW":deletePW, "deleteMember":deleteMember},
-			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-			   			
-			   			success : function(result){
-			      			if(result.error === true){
-			    	  			alert('결제가 취소되었습니다.');
-			      			}else if(result.error === false){
-			    	  			alert('관리자 비밀번호를 확인해 주세요.');
-			    	  			return;
-			      			}
-			   			},
-			   		 error:function(request,status,error){
-			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			      			//통신 실패시 발생하는 함수(콜백)
-			   				}
-						});
-				}
-			</script>
-
         </div>
         <!---Container Fluid-->
       </div>

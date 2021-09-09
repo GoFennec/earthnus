@@ -6,10 +6,10 @@ import kr.co.earthnus.user.goods.ExGoodsBean;
 import kr.co.earthnus.user.goods.PagingBean;
 
 public interface AdExGoodsMybatis {
-   public int adExGoodsOrderCount();
-   public int adExGoodsDeliveryCount();
-   public int adExGoodsApproveCount();
-   public int adExGoodsCancleCount();
+   public int getAdExGoodsOrderCount();
+   public int getAdExGoodsDeliveryCount();
+   public int getAdExGoodsApproveCount();
+   public int getAdExGoodsCancleCount();
    public List<ExGoodsBean> getAdExGoodsOrderList(PagingBean pBean);
    public List<ExGoodsBean> getAdExGoodsDeliveryList(PagingBean pBean);
    public List<ExGoodsBean> getAdExGoodsApproveList(PagingBean pBean);
@@ -19,8 +19,8 @@ public interface AdExGoodsMybatis {
    public void cancleExGoods(ExGoodsBean eBean);
    public void updatePoint(ExGoodsBean eBean);
    
-   public int countMonthly();
-   public int countTotal();
-   public int countWaiting();
-   public List<ExGoodsBean> countLanking();
+   public int getCountMonthly();
+   public int getCountTotal();
+   public int getCountWaiting();
+   public List<ExGoodsBean> getCountLanking();
 }

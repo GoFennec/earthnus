@@ -29,7 +29,7 @@ public class AdAuthService {
         auth_pw = cryptogram;
 
 		
-        AdMemberBean mBean = dao.selectByAdId(auth_id);
+        AdMemberBean mBean = dao.getSelectByAdId(auth_id);
 		if (mBean == null) {
 			aBean = null;
 		} else {
@@ -47,31 +47,31 @@ public class AdAuthService {
 	
 	public List<PayBean> adPay() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		List<PayBean> adPayList = dao.adPay();
+		List<PayBean> adPayList = dao.getAdPay();
 		return adPayList;
 	}
 	
 	public List<ExGoodsBean> adGoods() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		List<ExGoodsBean> adGoodsList = dao.adGoods();
+		List<ExGoodsBean> adGoodsList = dao.getAdGoods();
 		return adGoodsList;
 	}
 	
 	public List<camBoardBean> adCamboard() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		List<camBoardBean> adCamboardList = dao.adCamboard();
+		List<camBoardBean> adCamboardList = dao.getAdCamboard();
 		return adCamboardList;
 	}
 	
 	public List<CheBoardBean> adCheboard() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		List<CheBoardBean> adCheboardList = dao.adCheboard();
+		List<CheBoardBean> adCheboardList = dao.getAdCheboard();
 		return adCheboardList;
 	}
 	
 	public String sumPay() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		String sumPay = dao.sumPay();
+		String sumPay = dao.getSumPay();
 		if(sumPay == null) {
 			sumPay = "0";
 		}
@@ -80,19 +80,19 @@ public class AdAuthService {
 	
 	public int countMember() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		int countMember = dao.countMember();
+		int countMember = dao.getCountMember();
 		return countMember;
 	}
 	
 	public int orderExGoods() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		int orderExGoods = dao.orderExGoods();
+		int orderExGoods = dao.getOrderExGoods();
 		return orderExGoods;
 	}
 	
 	public int todayVisitor() {
 		AdAuthMybatis dao = mybatis.getMapper(AdAuthMybatis.class);
-		int todayVisitor = dao.todayVisitor();
+		int todayVisitor = dao.getTodayVisitor();
 		return todayVisitor;
 	}
 }

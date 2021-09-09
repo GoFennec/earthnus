@@ -40,19 +40,19 @@ public class AdCamBoardService {
 	
 	public int camTotal() {
 		AdCamBoardMybatis CamBoardDAO = mybatis.getMapper(AdCamBoardMybatis.class);
-		int camTotal = CamBoardDAO.camTotal();
+		int camTotal = CamBoardDAO.getCamTotal();
 		return camTotal;
 	}
 	
 	public int camIng() {
 		AdCamBoardMybatis CamBoardDAO = mybatis.getMapper(AdCamBoardMybatis.class);
-		int camIng = CamBoardDAO.camIng();
+		int camIng = CamBoardDAO.getCamIng();
 		return camIng;
 	}
 	
 	public int camFinish() {
 		AdCamBoardMybatis CamBoardDAO = mybatis.getMapper(AdCamBoardMybatis.class);
-		int camFinish = CamBoardDAO.camFinish();
+		int camFinish = CamBoardDAO.getCamFinish();
 		return camFinish;
 	}
 	

@@ -21,11 +21,11 @@
 		values(#{mail_title},#{mail_content},#{mail_pw},now(),#{mail_sender},#{mail_receiver},#{mail_customer})
 	</insert>
 	
-	<select id="selectMail" parameterType="String" resultType="mail">
+	<select id="getSelectMail" parameterType="String" resultType="mail">
 		SELECT * FROM MAILCHECK WHERE MAIL_CUSTOMER = #{name} AND MAIL_RECEIVER = #{email} ORDER BY MAIL_NUM DESC LIMIT 1
 	</select>
 	
-	<select id="findID" resultMap="member">
+	<select id="getFindID" resultMap="member">
 		select mem_id, mem_date from member where mem_name = #{findName} and mem_email = #{mail_receiver}
 	</select>
 	

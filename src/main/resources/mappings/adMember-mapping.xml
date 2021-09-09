@@ -18,31 +18,31 @@
 		<result property="mem_point" column="MEM_POINT"/>
 	</resultMap>
 
-	<select id="memberList" resultMap="member">
+	<select id="getMemberList" resultMap="member">
 		select * from member where mem_name != '삭제된회원'
 	</select>
 	
-	<select id="memberListDetail" parameterType="String" resultMap="member">
+	<select id="getMemberListDetail" parameterType="String" resultMap="member">
 		select * from member where mem_id = #{mem_id}
 	</select>
 	
-	<select id="payCount" parameterType="String" resultType="int">
+	<select id="getPayCount" parameterType="String" resultType="int">
 		select count(*) from pay where pay_id = #{mem_id}
 	</select>
 	
-	<select id="payTotal" parameterType="String" resultType="Integer">
+	<select id="getPayTotal" parameterType="String" resultType="Integer">
 		select sum(pay_price) from pay where pay_id = #{mem_id}
 	</select>
 	
-	<select id="cheerCount" parameterType="String" resultType="int">
+	<select id="getCheerCount" parameterType="String" resultType="int">
 		select count(*) from CHEBOARD where cheb_id = #{mem_id}
 	</select>
 	
-	<select id="checkExgoods" parameterType="String" resultType="int">
+	<select id="getCheckExgoods" parameterType="String" resultType="int">
 		select count(*) from exgoods where exg_id = #{deleteMember} and exg_state = '결제완료' or exg_state = '배송처리'
 	</select>
 	
-	<select id="deletePW" parameterType="String" resultType="int">
+	<select id="getDeletePW" parameterType="String" resultType="int">
 		select count(*) from ADMEMBER where AD_PW = #{deletePW}
 	</select>
 	
@@ -52,7 +52,7 @@
 		MEM_POINT="0" WHERE MEM_ID=#{deleteMember}
 	</update>	
 	
-	<select id="memberTotal" resultType="int">
+	<select id="getMemberTotal" resultType="int">
 		select count(*) from member where mem_name != '삭제된회원'
 	</select>
 			

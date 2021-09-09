@@ -9,7 +9,7 @@ public interface AdCamBoardMybatis {
 	public List<camBoardBean> getAdBoardIngList();
 	public List<camBoardBean> getAdBoardFinishList();
 	
-	public int camTotal();
-	public int camIng();
-	public int camFinish();
+	public int getCamTotal();
+	public int getCamIng();
+	public int getCamFinish();
 }

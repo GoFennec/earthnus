@@ -9,16 +9,16 @@ import kr.co.earthnus.user.goods.ExGoodsBean;
 import kr.co.earthnus.user.pay.PayBean;
 
 public interface AdAuthMybatis {
-	public AdMemberBean selectByAdId(String auth_id);
-	public List<PayBean> adPay();
-	public List<ExGoodsBean> adGoods();
-	public List<camBoardBean> adCamboard();
-	public List<CheBoardBean> adCheboard();
+	public AdMemberBean getSelectByAdId(String auth_id);
+	public List<PayBean> getAdPay();
+	public List<ExGoodsBean> getAdGoods();
+	public List<camBoardBean> getAdCamboard();
+	public List<CheBoardBean> getAdCheboard();
 	
-	public String sumPay();
-	public int countMember();
-	public int orderExGoods();
-	public int todayVisitor();
+	public String getSumPay();
+	public int getCountMember();
+	public int getOrderExGoods();
+	public int getTodayVisitor();
 	
 	public void insertVisitor(VisitCountBean vcb);
 }

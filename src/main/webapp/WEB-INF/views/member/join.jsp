@@ -84,7 +84,7 @@
 <div class="container" style="max-width:450px">
   <main>
     <div class="py-5 text-center">
-      <a href="/"><img class="d-block mx-auto mb-4" src="/resources/assets/img/logo/loder.png" alt="" ></a>
+      <a href="/" title="메인화면 바로가기"><img class="d-block mx-auto mb-4" src="/resources/assets/img/logo/loder.png" alt="메인화면 바로가기" ></a>
       <div style="font-size:40px; padding-top:20px">회원가입</div>
     </div>
 

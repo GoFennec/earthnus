@@ -4,30 +4,30 @@ import org.apache.ibatis.annotations.Param;
 
 public interface AdChartMybatis {
 	
-	public int donationPiePlastic();
-	public int donationPieOcean();
-	public int donationPieIce();
-	public int donationPieForest();
+	public int getDonationPiePlastic();
+	public int getDonationPieOcean();
+	public int getDonationPieIce();
+	public int getDonationPieForest();
 	
-	public int camPiePlastic();
-	public int camPieOcean();
-	public int camPieIce();
-	public int camPieForest();
+	public int getCamPiePlastic();
+	public int getCamPieOcean();
+	public int getCamPieIce();
+	public int getCamPieForest();
 	
-	public int chePiePlastic();
-	public int chePieOcean();
-	public int chePieIce();
-	public int chePieForest();
+	public int getChePiePlastic();
+	public int getChePieOcean();
+	public int getChePieIce();
+	public int getChePieForest();
 	
-	public int countVisitor(@Param("i")int i);
+	public int getCountVisitor(@Param("i")int i);
 	
-	public String sumPlastic(@Param("i")int i);
-	public String sumOcean(@Param("i")int i);
-	public String sumIce(@Param("i")int i);
-	public String sumForest(@Param("i")int i);
+	public String getSumPlastic(@Param("i")int i);
+	public String getSumOcean(@Param("i")int i);
+	public String getSumIce(@Param("i")int i);
+	public String getSumForest(@Param("i")int i);
 	
-	public int countMember(@Param("i")int i);
-	public int countExgoods(@Param("i")int i);
+	public int getCountMember(@Param("i")int i);
+	public int getCountExgoods(@Param("i")int i);
 	
 	public int getMonthData(@Param("i")int i,@Param("select_year")String select_year,@Param("select_month")String select_month,@Param("lastDay")int lastDay);
 	public String getPlasticMonth(@Param("i")int i,@Param("select_year")String select_year,@Param("select_month")String select_month,@Param("lastDay")int lastDay);
@@ -39,5 +39,13 @@ public interface AdChartMybatis {
 	public int getExgoodsMonth(@Param("i")int i,@Param("select_year")String select_year,@Param("select_month")String select_month,@Param("lastDay")int lastDay);
 	
 	public int getCountVisitorMonth(@Param("select_year")String select_year,@Param("select_month")String select_month);
+	public int getCountMemberMonth(@Param("select_year")String select_year,@Param("select_month")String select_month);
+	public int getCountDelMemberMonth(@Param("select_year")String select_year,@Param("select_month")String select_month);
+	public int getCountExgoodsMonth(@Param("select_year")String select_year,@Param("select_month")String select_month);
+	public String getCountDonationMonth(@Param("select_year")String select_year,@Param("select_month")String select_month);
+	public String getCountPlasticMonth(@Param("select_year")String select_year,@Param("select_month")String select_month);
+	public String getCountOceanMonth(@Param("select_year")String select_year,@Param("select_month")String select_month);
+	public String getCountIceMonth(@Param("select_year")String select_year,@Param("select_month")String select_month);
+	public String getCountForestMonth(@Param("select_year")String select_year,@Param("select_month")String select_month);
 	
 }

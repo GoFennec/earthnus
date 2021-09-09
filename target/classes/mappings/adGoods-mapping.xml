@@ -14,7 +14,7 @@
 		<result property="goods_img" column="GOODS_IMG"/>
 	</resultMap>
 	
-	<select id="adGoodsCount" resultType="int">
+	<select id="getAdGoodsCount" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM GOODS
 		]]>
@@ -26,7 +26,7 @@
 		]]>
 	</select>
 	
-	<select id="newGoodsNum" resultType="string">
+	<select id="getNewGoodsNum" resultType="string">
 		<![CDATA[
 			SELECT GOODS_NUM FROM GOODS ORDER BY GOODS_NUM DESC LIMIT 1
 		]]>

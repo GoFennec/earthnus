@@ -36,9 +36,9 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adIndex">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" title="관리자 메인화면 바로가기" href="/adIndex">
         <div class="sidebar-brand-icon">
-          <img src="/resources/assets/img/logo/logo2_footer.png">
+          <img src="/resources/assets/img/logo/logo2_footer.png" alt="관리자 메인화면 바로가기">
         </div>
       </a>
       <hr class="sidebar-divider my-0">

@@ -8,15 +8,15 @@ import kr.co.earthnus.user.member.MemberBean;
 
 public interface AdMemberMybatis {
 	
-	public List<MemberBean> memberList();
-	public List<MemberBean>	memberListDetail(@Param("mem_id") String mem_id);
-	public int payCount(@Param("mem_id") String mem_id);
-	public Integer payTotal(@Param("mem_id") String mem_id);
-	public int cheerCount(@Param("mem_id") String mem_id);
+	public List<MemberBean> getMemberList();
+	public List<MemberBean>	getMemberListDetail(@Param("mem_id") String mem_id);
+	public int getPayCount(@Param("mem_id") String mem_id);
+	public Integer getPayTotal(@Param("mem_id") String mem_id);
+	public int getCheerCount(@Param("mem_id") String mem_id);
 	
-	public int checkExgoods(@Param("deleteMember") String deleteMember);
-	public int deletePW(@Param("deletePW") String deletePW);
+	public int getCheckExgoods(@Param("deleteMember") String deleteMember);
+	public int getDeletePW(@Param("deletePW") String deletePW);
 	public int adDeleteMember(@Param("deleteMember") String deleteMember);
 	
-	public int memberTotal();
+	public int getMemberTotal();
 }

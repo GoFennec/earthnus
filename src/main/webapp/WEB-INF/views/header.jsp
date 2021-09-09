@@ -63,8 +63,7 @@ border: none;
 							<!-- Logo -->
 							<div class="col-xl-2 col-lg-2">
 								<div class="logo">
-									<a href="/"><img
-										src="/resources/assets/img/logo/logo.png" alt="로고이미지" title="사이트 로고"></a>
+									<a href="/" title="메인화면 바로가기"><img src="/resources/assets/img/logo/logo.png" alt="로고이미지" title="메인화면 바로가기"></a>
 								</div>
 							</div>
 							<div class="col-xl-10 col-lg-10">
