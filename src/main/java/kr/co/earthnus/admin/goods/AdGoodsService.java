@@ -37,7 +37,7 @@ public class AdGoodsService {
 	
 	public String newGoodsNum() {
 		AdGoodsMybatis goodsDAO = mybatis.getMapper(AdGoodsMybatis.class);
-		String gNum = goodsDAO.newGoodsNum();
+		String gNum = goodsDAO.getNewGoodsNum();
 		String alp = gNum.substring(0, 1);
 		String num = String.valueOf(Integer.parseInt(gNum.substring(1)) + 1);
 		gNum = alp + num;

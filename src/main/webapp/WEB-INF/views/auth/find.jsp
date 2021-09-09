@@ -135,7 +135,7 @@ td{
 	<div class="container">
 	
 	<div class="py-5 text-center">
-      <a href="/"><img class="d-block mx-auto mb-4" src="/resources/assets/img/logo/loder.png" alt="" ></a>
+      <a href="/" title="메인화면 바로가기"><img class="d-block mx-auto mb-4" src="/resources/assets/img/logo/loder.png" alt="메인화면 바로가기"></a>
     </div>
     
     	<div class="row" id="outter">

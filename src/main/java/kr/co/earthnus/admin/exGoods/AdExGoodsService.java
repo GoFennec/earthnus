@@ -24,13 +24,13 @@ public class AdExGoodsService {
         List<ExGoodsBean> exGoodsList = null;
         
         if (category.equals("Order")) {
-            pBean.setTotalcount(exGoodsDAO.adExGoodsOrderCount());
+            pBean.setTotalcount(exGoodsDAO.getAdExGoodsOrderCount());
         } else if (category.equals("Delivery")) {
-           pBean.setTotalcount(exGoodsDAO.adExGoodsDeliveryCount());
+           pBean.setTotalcount(exGoodsDAO.getAdExGoodsDeliveryCount());
         } else if (category.equals("Approve")) {
-           pBean.setTotalcount(exGoodsDAO.adExGoodsApproveCount());
+           pBean.setTotalcount(exGoodsDAO.getAdExGoodsApproveCount());
         } else if (category.equals("Cancle")) {
-           pBean.setTotalcount(exGoodsDAO.adExGoodsCancleCount());
+           pBean.setTotalcount(exGoodsDAO.getAdExGoodsCancleCount());
         }
         pBean.setPagenum(cPagenum-1);   // 현재 페이지를 페이지 객체에 지정한다 -1 을 해야 쿼리에서 사용할수 있다
         pBean.setContentnum(cContentnum); // 한 페이지에 몇개씩 게시글을 보여줄지 지정한다.
@@ -90,10 +90,10 @@ public class AdExGoodsService {
    
    public void count(Model model) {
       AdExGoodsMybatis exGoodsDAO = mybatis.getMapper(AdExGoodsMybatis.class);
-      int countMonthly = exGoodsDAO.countMonthly();
-      int countTotal = exGoodsDAO.countTotal();
-      int countWaiting = exGoodsDAO.countWaiting();
-      List<ExGoodsBean> countLanking = exGoodsDAO.countLanking();
+      int countMonthly = exGoodsDAO.getCountMonthly();
+      int countTotal = exGoodsDAO.getCountTotal();
+      int countWaiting = exGoodsDAO.getCountWaiting();
+      List<ExGoodsBean> countLanking = exGoodsDAO.getCountLanking();
       
       model.addAttribute("countMonthly",countMonthly);
       model.addAttribute("countTotal",countTotal);

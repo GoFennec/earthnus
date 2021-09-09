@@ -16,7 +16,7 @@
 		<result property="pay_date" column="PAY_DATE" />
 	</resultMap>
 	
-	<select id="donationCount" resultType="int">
+	<select id="getDonationCount" resultType="int">
 		SELECT COUNT(*) FROM PAY
 	</select>
 	
@@ -24,11 +24,11 @@
 		SELECT * FROM PAY ORDER BY PAY_NO DESC
 	</select>
 	
-	<select id="waiting" resultMap="donationResult">
+	<select id="getWaiting" resultMap="donationResult">
 		select * from pay where pay_pstate = '적립예정'
 	</select>
 	
-	<select id="cancel" resultMap="donationResult">
+	<select id="getCancel" resultMap="donationResult">
 		select * from pay where pay_state = '결제취소'
 	</select>
 	
@@ -44,35 +44,35 @@
  		WHERE B.PAY_NO = #{pay_no}
 	</update>
 	
-	<select id="payTotal" resultType="String">
+	<select id="getPayTotal" resultType="String">
 		select sum(pay_price) from pay where pay_state != '결제취소'
 	</select>
 	
-	<select id="payMonthly" resultType="String">
+	<select id="getPayMonthly" resultType="String">
 		select sum(pay_price) from pay where DATE_FORMAT(pay_pdate,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
 	</select>
 	
-	<select id="payWaiting" resultType="int">
+	<select id="getPayWaiting" resultType="int">
 		select count(*) from pay where pay_pstate = '적립예정'
 	</select>
 	
-	<select id="payTotalPoint" resultType="String">
+	<select id="getPayTotalPoint" resultType="String">
 		select sum(pay_point) from pay where pay_pstate = '적립완료'
 	</select>
 	
-	<select id="payPlastic" resultType="String">
+	<select id="getPayPlastic" resultType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경'
 	</select>
 	
-	<select id="payForest" resultType="String">
+	<select id="getPayForest" resultType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲'
 	</select>
 	
-	<select id="payIce" resultType="String">
+	<select id="gatPayIce" resultType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='작은 얼음' OR PAY_DNAME='큰 얼음' OR PAY_DNAME='빙하 조각' OR PAY_DNAME='북극곰'
 	</select>
 	
-	<select id="payOcean" resultType="String">
+	<select id="getPayOcean" resultType="String">
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='조개' OR PAY_DNAME='바다거북' OR PAY_DNAME='고래' OR PAY_DNAME='바다'
 	</select>
 

@@ -27,11 +27,11 @@
     	</foreach>
 	</delete>
 	
-	<select id="cheTotal" resultType="int">
+	<select id="getCheTotal" resultType="int">
 		SELECT COUNT(*) FROM CHEBOARD
 	</select>
 	
-	<select id="cheToday" resultType="int">
+	<select id="getCheToday" resultType="int">
 		SELECT COUNT(*) FROM CHEBOARD where date_format(cheb_date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
 	</select>
 

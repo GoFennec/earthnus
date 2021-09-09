@@ -5,53 +5,53 @@
 
 <mapper namespace="kr.co.earthnus.admin.chart.AdChartMybatis">
 	<!-- 카테고리 별 후원 -->
-	<select id="donationPiePlastic" resultType="int">
+	<select id="getDonationPiePlastic" resultType="int">
 		SELECT COUNT(*) FROM PAY WHERE PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경'
 	</select>
 	
-	<select id="donationPieOcean" resultType="int">
+	<select id="getDonationPieOcean" resultType="int">
 		SELECT COUNT(*) FROM PAY WHERE PAY_DNAME='조개' OR PAY_DNAME='바다거북' OR PAY_DNAME='고래' OR PAY_DNAME='바다'
 	</select>
 	
-	<select id="donationPieIce" resultType="int">
+	<select id="getDonationPieIce" resultType="int">
 		SELECT COUNT(*) FROM PAY WHERE PAY_DNAME='작은 얼음' OR PAY_DNAME='큰 얼음' OR PAY_DNAME='빙하 조각' OR PAY_DNAME='북극곰'
 	</select>
 	
-	<select id="donationPieForest" resultType="int">
+	<select id="getDonationPieForest" resultType="int">
 		SELECT COUNT(*) FROM PAY WHERE PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲'
 	</select>
 	
 	<!-- 카테고리 별 캠페인 -->
-	<select id="camPiePlastic" resultType="int">
+	<select id="getCamPiePlastic" resultType="int">
 		select count(*) from camboard where camb_subject = '플라스틱'
 	</select>
 	
-	<select id="camPieOcean" resultType="int">
+	<select id="getCamPieOcean" resultType="int">
 		select count(*) from camboard where camb_subject = '해양'
 	</select>
 	
-	<select id="camPieIce" resultType="int">
+	<select id="getCamPieIce" resultType="int">
 		select count(*) from camboard where camb_subject = '극지방'
 	</select>
 	
-	<select id="camPieForest" resultType="int">
+	<select id="getCamPieForest" resultType="int">
 		select count(*) from camboard where camb_subject = '산림'
 	</select>
 	
 	<!-- 카테고리 별 응원 -->
-	<select id="chePiePlastic" resultType="int">
+	<select id="getChePiePlastic" resultType="int">
 		select count(*) from cheboard where cheb_dname = '친환경'
 	</select>
 	
-	<select id="chePieOcean" resultType="int">
+	<select id="getChePieOcean" resultType="int">
 		select count(*) from cheboard where cheb_dname = '바다'
 	</select>
 	
-	<select id="chePieIce" resultType="int">
+	<select id="getChePieIce" resultType="int">
 		select count(*) from cheboard where cheb_dname = '북극곰'
 	</select>
 	
-	<select id="chePieForest" resultType="int">
+	<select id="getChePieForest" resultType="int">
 		select count(*) from cheboard where cheb_dname = '숲'
 	</select>
 	
@@ -59,36 +59,36 @@
 	
 	
 	<!-- 방문자 카운트 -->
-	<select id="countVisitor" parameterType="int" resultType="int">
+	<select id="getCountVisitor" parameterType="int" resultType="int">
 		select count(*) from visitor where date_format(visit_time,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d')
 	</select>
 	
 	<!-- 카테고리 별 매출 -->
-	<select id="sumPlastic" parameterType="int" resultType="String">
+	<select id="getSumPlastic" parameterType="int" resultType="String">
 		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d') 
 		and (PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경') and pay_state != '결제취소'
 	</select>
 	
-	<select id="sumOcean" parameterType="int" resultType="String">
+	<select id="getSumOcean" parameterType="int" resultType="String">
 		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d') 
 		and (PAY_DNAME='조개' OR PAY_DNAME='바다거북' OR PAY_DNAME='고래' OR PAY_DNAME='바다') and pay_state != '결제취소'
 	</select>
 	
-	<select id="sumIce" parameterType="int" resultType="String">
+	<select id="getSumIce" parameterType="int" resultType="String">
 		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d') 
 		and (PAY_DNAME='작은 얼음' OR PAY_DNAME='큰 얼음' OR PAY_DNAME='빙하 조각' OR PAY_DNAME='북극곰') and pay_state != '결제취소'
 	</select>
 	
-	<select id="sumForest" parameterType="int" resultType="String">
+	<select id="getSumForest" parameterType="int" resultType="String">
 		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(date_add(now(), interval - ${i} day),'%Y-%m-%d') 
 		and (PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲') and pay_state != '결제취소'
 	</select>
 	
-	<select id="countMember" parameterType="int" resultType="int">
+	<select id="getCountMember" parameterType="int" resultType="int">
 		select count(*) from member where date_format(mem_date,'%y-%m-%d') = date_format(date_add(now(), interval - ${i} day), '%y-%m-%d') 
 	</select>
 	
-	<select id="countExgoods" parameterType="int" resultType="int">
+	<select id="getCountExgoods" parameterType="int" resultType="int">
 		select count(*) from exgoods where date_format(exg_pdate,'%y-%m-%d') = date_format(date_add(now(), interval - ${i} day), '%y-%m-%d') 
 		and exg_state != '결제취소'
 	</select>
@@ -135,6 +135,42 @@
 	
 	<select id="getCountVisitorMonth" parameterType="String" resultType="int">
 		select count(*) from visitor where date_format(visit_time,'%Y-%m') = '${select_year}-${select_month}'
+	</select>
+	
+	<select id="getCountDonationMonth" parameterType="String" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate, '%Y-%m') = '${select_year}-${select_month}' and pay_state != '결제취소'
+	</select>
+	
+	<select id="getCountPlasticMonth" parameterType="String" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate, '%Y-%m') = '${select_year}-${select_month}' 
+		and (PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경') and pay_state != '결제취소'
+	</select>
+	
+	<select id="getCountOceanMonth" parameterType="String" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate, '%Y-%m') = '${select_year}-${select_month}' 
+		and (PAY_DNAME='조개' OR PAY_DNAME='바다거북' OR PAY_DNAME='고래' OR PAY_DNAME='바다') and pay_state != '결제취소'
+	</select>
+	
+	<select id="getCountIceMonth" parameterType="String" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate, '%Y-%m') = '${select_year}-${select_month}' 
+		and (PAY_DNAME='작은 얼음' OR PAY_DNAME='큰 얼음' OR PAY_DNAME='빙하 조각' OR PAY_DNAME='북극곰') and pay_state != '결제취소'
+	</select>
+	
+	<select id="getCountForestMonth" parameterType="String" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate, '%Y-%m') = '${select_year}-${select_month}' 
+		and (PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲') and pay_state != '결제취소'
+	</select>
+	
+	<select id="getCountMemberMonth" parameterType="String" resultType="int">
+		select count(*) from member where date_format(mem_date,'%Y-%m') = '${select_year}-${select_month}'
+	</select>
+	
+	<select id="getCountDelMemberMonth" parameterType="String" resultType="int">
+		select count(*) from member where date_format(mem_ldate,'%Y-%m') = '${select_year}-${select_month}'	and mem_name like '%삭제된회원%'
+	</select>
+	
+	<select id="getCountExgoodsMonth" parameterType="String" resultType="int">
+		select count(*) from exgoods where date_format(exg_pdate,'%Y-%m') = '${select_year}-${select_month}' and exg_state != '결제취소'
 	</select>
 	
 	

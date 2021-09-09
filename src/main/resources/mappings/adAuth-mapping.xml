@@ -23,42 +23,42 @@
 		<result property="ad_role" column="AD_ROLE"/>
 	</resultMap>
 	
-	<select id="selectByAdId" resultType="adMember" parameterType="String">
+	<select id="getSelectByAdId" resultType="adMember" parameterType="String">
 		SELECT * FROM ADMEMBER WHERE AD_ID=#{auth_id}
 	</select>
 	
-	<select id="adPay" resultType="pay">
+	<select id="getAdPay" resultType="pay">
 		select PAY_NO, PAY_ID, PAY_DNAME, PAY_PRICE, PAY_PDATE from pay where pay_pstate = '적립예정' order by pay_pdate desc limit 5
 	</select>
 	
-	<select id="adGoods" resultType="exGoods">
+	<select id="getAdGoods" resultType="exGoods">
 		SELECT EXG_NUM, EXG_ID, EXG_GNAME, EXG_PDATE FROM EXGOODS WHERE EXG_STATE = '결제완료' ORDER BY EXG_NUM DESC LIMIT 5
 	</select>
 	
-	<select id="adCamboard" resultType="camBoard">
+	<select id="getAdCamboard" resultType="camBoard">
 		<![CDATA[
 		SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_STARTDATE, CAMB_FINDATE FROM CAMBOARD 
 		WHERE CAMB_STARTDATE <= now() and now() <= CAMB_FINDATE ORDER BY CAMB_NUM DESC LIMIT 5
 		]]>
 	</select>
 	
-	<select id="adCheboard" resultType="cheBoard">
+	<select id="getAdCheboard" resultType="cheBoard">
 		select * from cheboard order by cheb_num desc limit 5
 	</select>
 	
-	<select id="sumPay" resultType="String">
+	<select id="getSumPay" resultType="String">
 		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
 	</select>
 	
-	<select id="countMember" resultType="int">
+	<select id="getCountMember" resultType="int">
 		select count(*) from member where date_format(mem_date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
 	</select>
 	
-	<select id="orderExGoods" resultType="int">
+	<select id="getOrderExGoods" resultType="int">
 		select count(*) from exgoods where date_format(exg_pdate,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
 	</select>
 	
-	<select id="todayVisitor" resultType="int">
+	<select id="getTodayVisitor" resultType="int">
 		select count(*) from visitor where  date_format(visit_time,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
 	</select>
 	

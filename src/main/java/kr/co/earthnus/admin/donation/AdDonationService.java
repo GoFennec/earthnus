@@ -24,14 +24,14 @@ public class AdDonationService {
 	public void waiting(Model model) {
 		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
 
-		List<PayBean> waitingList = dao.waiting();
+		List<PayBean> waitingList = dao.getWaiting();
 		model.addAttribute("waitingList", waitingList);
 	}
 	
 	public void cancel(Model model) {
 		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
 
-		List<PayBean> cancelList = dao.cancel();
+		List<PayBean> cancelList = dao.getCancel();
 		model.addAttribute("cancelList", cancelList);
 	}
 	
@@ -48,15 +48,15 @@ public class AdDonationService {
 	public void countPay(Model model) {
 		AdDonationMybatis dao = mybatis.getMapper(AdDonationMybatis.class);
 		
-		String payTotal = dao.payTotal();
-		String payMonthly = dao.payMonthly();
-		int payWaiting = dao.payWaiting();
-		String payTotalPoint = dao.payTotalPoint();
+		String payTotal = dao.getPayTotal();
+		String payMonthly = dao.getPayMonthly();
+		int payWaiting = dao.getPayWaiting();
+		String payTotalPoint = dao.getPayTotalPoint();
 		
-		String payPlastic = dao.payPlastic();
-		String payForest = dao.payForest();
-		String payIce = dao.payIce();
-		String payOcean = dao.payOcean();
+		String payPlastic = dao.getPayPlastic();
+		String payForest = dao.getPayForest();
+		String payIce = dao.gatPayIce();
+		String payOcean = dao.getPayOcean();
 		
 		if(payTotal == null) {
 			payTotal = "0";

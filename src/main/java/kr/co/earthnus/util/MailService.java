@@ -92,7 +92,6 @@ public class MailService {
 			i++;
 			System.out.println("Exception : " + ex.getMessage());
 		}
-		System.out.println(i + " error service");
 		return i;
 	}
 	
@@ -160,7 +159,6 @@ public class MailService {
 			i++;
 			System.out.println("Exception : " + ex.getMessage());
 		}
-		System.out.println(i + " error service");
 		return i;
 	}
 	
@@ -172,9 +170,6 @@ public class MailService {
         //SHA256으로 암호화된 비밀번호
         String changeNum = sha256.encrypt(newnum);
 
-        //비밀번호 일치 여부
-        System.out.println(changeNum.equals(sha256.encrypt(newnum)));
-
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
 		int n = dao.changePW(changeNum, email, name);
 		return n;
@@ -184,7 +179,7 @@ public class MailService {
 	public boolean mailCheck(String mailCheck, String name, String email) {
 		boolean correct = false;
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		MailBean mailBean = dao.selectMail(name, email);
+		MailBean mailBean = dao.getSelectMail(name, email);
 		
 		if(mailBean.getMail_pw().equals(mailCheck)) {
 			correct = true;
@@ -196,7 +191,7 @@ public class MailService {
 	public boolean find(String findName, String findEmail) {
 		boolean correct = false;
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		int find = dao.find(findName, findEmail);
+		int find = dao.getFind(findName, findEmail);
 		
 		if(find > 0) {
 			correct = true;
@@ -208,7 +203,7 @@ public class MailService {
 	public boolean findpw(String findName, String findEmail, String mem_id) {
 		boolean correct = false;
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		int find = dao.findpw(findName, findEmail, mem_id);
+		int find = dao.getFindpw(findName, findEmail, mem_id);
 		
 		if(find > 0) {
 			correct = true;
@@ -219,7 +214,7 @@ public class MailService {
 	//아이디 찾기에서 인증번호 일치 확인
 	public List<MemberBean> findID(String findName, String mail_receiver) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		List<MemberBean> findID = dao.findID(findName, mail_receiver);
+		List<MemberBean> findID = dao.getFindID(findName, mail_receiver);
 		
 		return findID;
 	}

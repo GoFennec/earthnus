@@ -153,4 +153,17 @@
       MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
       MEM_POINT="0", MEM_LDATE=NOW() WHERE MEM_ID=#{mem_id}
     </update>
+    
+    <select id="getFind" parameterType="String" resultType="int">
+    	SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail} 
+    </select>
+
+	<select id="getFindpw" parameterType="String" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail} AND MEM_ID = #{mem_id} 
+	</select>
+
+	<select id="getIdCheck" parameterType="String" resultType="int">
+		select count(*) from member where mem_id = #{mem_id} 
+	</select>
+	
 </mapper>

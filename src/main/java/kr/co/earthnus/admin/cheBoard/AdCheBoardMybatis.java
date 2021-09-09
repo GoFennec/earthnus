@@ -8,6 +8,6 @@ public interface AdCheBoardMybatis {
 	public List<CheBoardBean> getAdCheBoardList();
 	public void deleteCheBoard(List<String> checkArr);
 	
-	public int cheTotal();
-	public int cheToday();
+	public int getCheTotal();
+	public int getCheToday();
 }

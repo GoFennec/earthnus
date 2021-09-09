@@ -290,8 +290,7 @@ public class MemberService {
 	// 아이디 중복체크
 	public int idCheck(String mem_id) {
 		MemberMybatis dao = mybatis.getMapper(MemberMybatis.class);
-		int n = dao.idCheck(mem_id);
-		System.out.println(n);
+		int n = dao.getIdCheck(mem_id);
 		return n;
 	}
 

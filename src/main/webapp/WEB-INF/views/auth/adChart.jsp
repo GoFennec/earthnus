@@ -59,9 +59,9 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adIndex">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adIndex" title="관리자 메인화면 바로가기">
         <div class="sidebar-brand-icon">
-          <img src="/resources/assets/img/logo/logo2_footer.png">
+          <img src="/resources/assets/img/logo/logo2_footer.png" alt="관리자 메인화면 바로가기">
         </div>
       </a>
       <hr class="sidebar-divider my-0">
@@ -182,10 +182,12 @@
             </div>
             
             <div class="col-lg-12" id="cButton">
-            	<div>
-            		<button class="btn btn-sm btn-primary" id="dayButton">최근 7일</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            		<button class="btn btn-sm btn-primary" id="dayButton">최근 7일</button>&nbsp;&nbsp;
+            		<div id="input_date">
+            			<input type="text" id="select_lastDate" readonly> ~ <input type="date" id="select_startDate" onchange="change_date(this)">&nbsp;
+            			<button onclick="getSevenData()">조회</button>&nbsp;&nbsp;
+            		</div>
             		<button class="btn btn-sm btn-primary" id="monthButton">월별 데이터</button>
-            	</div><br>
             	<div id="select_div">
             		<select id="select_year" onchange="onchangeItem()">
             			<option value="2021">2021</option>
@@ -195,6 +197,14 @@
             		</select>
             		<button onclick="getMonthData()">조회</button>
             	</div>
+            </div>
+            
+            <div class="col-lg-12" id="buttonInfo">
+              <div class="card mb-4">
+                <div class="card-header py-3">
+                  <h5 class="m-0 font-weight-bold">조회 버튼을 누르세요.</h5>
+                </div>
+              </div>
             </div>
             
             <div id="sevenDay" class="col-lg-12">
@@ -275,7 +285,8 @@
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h5 class="m-0 font-weight-bold" id="donationMonthly"></h5>
-                  <h6 class="font-weight-bold">총 : 100명</h6>
+                  <h6 class="font-weight-bold" id="getCountDonationMonth"></h6>
+                  <h6 class="font-weight-bold" id="getCountPlasticMonth"></h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-bar">
@@ -289,7 +300,7 @@
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h5 class="m-0 font-weight-bold" id="memberMonthly"></h5>
-                  <h6 class="font-weight-bold">총 : 100명</h6>
+                  <h6 class="font-weight-bold" id="getCountMemberMonth"></h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-bar">
@@ -303,7 +314,7 @@
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h5 class="m-0 font-weight-bold" id="exgoodsMonthly"></h5>
-                  <h6 class="font-weight-bold">총 : 100명</h6>
+                  <h6 class="font-weight-bold" id="getCountExgoodsMonth"></h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-bar">
@@ -338,12 +349,6 @@
 
   <script type="text/javascript">
 
-
-  
-
-  
-  
-  
   //Pie Chart Example
   var donationPieForest = ${donationPieForest};
   var donationPieIce = ${donationPieIce};
@@ -455,6 +460,9 @@
     },
   });
   </script>
+  
+  
+  
 <script type="text/javascript">
   function number_format(number, decimals, dec_point, thousands_sep) {
 	  // *     example: number_format(1234.56, 2, ',', ' ');
@@ -624,36 +632,49 @@
   </script>
   <script type="text/javascript">
   
+  var select_startDate;
+  var date_arr;
   var day = new Array;
   var dateString = [];
-  var lastWeek = new Date();
-  var pastWeek = new Date();
   
+  $("#sevenDay").hide();
+  
+  //7일 그래프
+  function change_date(e){
+	  select_startDate = $("#select_startDate").val();
+	  date_arr = select_startDate.split('-');
+	
+	  for(var i = 0; i < 7; i++){
+		  var today = new Date(date_arr[0], date_arr[1], date_arr[2]);
+		  today.setDate(today.getDate()-i);
+		  var year = today.getFullYear();
+		  var month = ('0' + (today.getMonth())).slice(-2);
+		  var date = ('0' + (today.getDate())).slice(-2);
+		  dateString[i] = year + '-' + month  + '-' + date;
+	  }
+	  $("#select_lastDate").val(dateString[6]);
+  }
+	
+  function getSevenData(){
+	  $("#sevenDay").show();
+	  $("#buttonInfo").hide();
+	  $("#month").hide();
+  }
+
   for(var i = 0; i < 7; i++){
-	  var today = new Date();
+	  var today = document.getElementById('select_startDate').valueAsDate = new Date();
 	  today.setDate(today.getDate()-i);
 	  var year = today.getFullYear();
 	  var month = ('0' + (today.getMonth() + 1)).slice(-2);
 	  var date = ('0' + (today.getDate())).slice(-2);
 	  dateString[i] = year + '-' + month  + '-' + date;
   }
+  $("#select_lastDate").val(dateString[6]);
   var dateLabel = dateString.reverse();
   var countVisitor = ${countVisitor};
   var visitorData = countVisitor.reverse();
   
-  var sevenDay = dateString[0] + " ~ " + dateString[6];
   
-  $("#visitorArea2").val(dateString[6]);
-  $("#visitorArea").val(dateString[0]);
-  
-  $('#leftWeek').click(function(){
-	  alert(sevenDate);
-  });
-  
-  
-  
-  
-	
   var ctx = document.getElementById("myAreaChart");
   var myAreaChart = new Chart(ctx, {
     type: 'line',
@@ -929,19 +950,17 @@
     }
   });
   
-  	
   
 	  //이번달 방문자
   	  $("#month").hide();
   	  $("#select_div").hide();
   	  
   	  $('#dayButton').click(function(){
-  		  $("#sevenDay").show();
-  		  $("#month").hide();
+  		  $("#input_date").show();
   		  $("#select_div").hide();
   	  });
   	  $('#monthButton').click(function(){
-  		  
+  		  $("#input_date").hide();
   		  $("#select_div").show();
   	  });
   	  
@@ -979,6 +998,7 @@
   	    var myExgoodsMonthChart;
   	  
   	  	function getMonthData(){
+  	  		$("#buttonInfo").hide();
   	  		select_year = $("select[id='select_year']").val();
   	  		select_month = ('0' + ($("select[id='select_month']").val())).slice(-2);
   	  		$("#month").show();
@@ -1016,8 +1036,13 @@
   	        	   	  monthString = monthString.reverse();
   	        	   	  
   	        	   	  
-  	        	   	$("#getCountVisitorMonth").text("총 : " + result.error.getCountVisitorMonth + "명");
-  	      				
+  	        	  $("#getCountVisitorMonth").text("총 : " + result.error.getCountVisitorMonth + "명");
+  	        	  $("#getCountMemberMonth").text("가입 회원 : " + result.error.getCountMemberMonth + "명 / 탈퇴 회원 : " + result.error.getCountDelMemberMonth + "명");
+  	        	  $("#getCountExgoodsMonth").text("총 : " + result.error.getCountExgoodsMonth + "건");
+  	        	  $("#getCountDonationMonth").text("총 : ￦" + number_format(result.error.getCountDonationMonth));
+  	        	  $("#getCountPlasticMonth").text("플라스틱 : ￦" + number_format(result.error.getCountPlasticMonth) + " / 바다 : ￦" + number_format(result.error.getCountOceanMonth) + " / 얼음 : ￦" + number_format(result.error.getCountIceMonth) + " / 숲 : ￦" + number_format(result.error.getCountForestMonth));
+  	        	  
+  	        	   	
   	      		  var ctx = document.getElementById("myVisitorMonthChart");
   	      			if(window.myCharts != undefined)
   	      			window.myCharts.destroy();
@@ -1262,9 +1287,9 @@
   	  	      		    		  type: 'bar',
   	  	      		    		  label: "가입한 회원",
   	  	      		    		  lineTension: 0,
-  	  	      		    		  backgroundColor: "#4e73df",
-  	  	      		    		  hoverBackgroundColor: "#2e59d9",
-  	  	      		    		  borderColor: "#4e73df",
+  	  	      		       		  backgroundColor: "#1cc88a",
+	      		    	      	  hoverBackgroundColor: "#17a673",
+	      		    	      	  borderColor: "#1cc88a",
   	  	      		    		  fill: false,
   	  	      		    		  data: getMemberMonth,
   	  	      		    		},

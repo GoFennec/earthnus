@@ -18,48 +18,48 @@ public class AdMemberService {
 	
 	public List<MemberBean> memberList() {
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
-		List<MemberBean> memberList = dao.memberList();
+		List<MemberBean> memberList = dao.getMemberList();
 		return memberList;
 	}
 	
 	public int memberTotal() {
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
-		int memberTotal = dao.memberTotal();
+		int memberTotal = dao.getMemberTotal();
 		return memberTotal;
 	}
 	
 	public List<MemberBean> memberListDetail(String mem_id) {
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
-		List<MemberBean> memberList = dao.memberListDetail(mem_id);
+		List<MemberBean> memberList = dao.getMemberListDetail(mem_id);
 		return memberList;
 	}
 	
 	public int payCount(String mem_id) {
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
-		int payCount = dao.payCount(mem_id);
+		int payCount = dao.getPayCount(mem_id);
 		return payCount;
 	}
 	
 	public Integer payTotal(String mem_id) {
 		int payTotal = 0;
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
-		if(dao.payTotal(mem_id) == null) {
+		if(dao.getPayTotal(mem_id) == null) {
 			payTotal = 0;
 		}else {
-			payTotal = dao.payTotal(mem_id);
+			payTotal = dao.getPayTotal(mem_id);
 		}
 		return payTotal;
 	}
 	
 	public int cheerCount(String mem_id) {
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
-		int cheerCount = dao.cheerCount(mem_id);
+		int cheerCount = dao.getCheerCount(mem_id);
 		return cheerCount;
 	}
 	
 	public int checkExgoods (String deleteMember) {
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
-		int checkExgoods = dao.checkExgoods(deleteMember);
+		int checkExgoods = dao.getCheckExgoods(deleteMember);
 		return checkExgoods;
 	}
 	
@@ -74,7 +74,7 @@ public class AdMemberService {
 
         //비밀번호 일치 여부
         System.out.println(cryptogram.equals(sha256.encrypt(deletePW)));
-		int deletePass = dao.deletePW(cryptogram);
+		int deletePass = dao.getDeletePW(cryptogram);
 		return deletePass;
 	}
 	

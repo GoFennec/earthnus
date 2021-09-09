@@ -23,25 +23,25 @@
 		<result property="exg_cancle" column="EXG_CANCLE"/>
 	</resultMap>
 	
-	<select id="adExGoodsOrderCount" resultType="int">
+	<select id="getAdExGoodsOrderCount" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="결제완료"
 		]]>
 	</select>
 	
-	<select id="adExGoodsDeliveryCount" resultType="int">
+	<select id="getAdExGoodsDeliveryCount" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="배송처리"
 		]]>
 	</select>
 	
-	<select id="adExGoodsApproveCount" resultType="int">
+	<select id="getAdExGoodsApproveCount" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM EXGOODS WHERE NOT EXG_STATE="결제취소"
 		]]>
 	</select>
 	
-	<select id="adExGoodsCancleCount" resultType="int">
+	<select id="getAdExGoodsCancleCount" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="결제취소"
 		]]>
@@ -95,25 +95,25 @@
 		]]>
 	</update>
 	
-	<select id="countMonthly" resultType="int">
+	<select id="getCountMonthly" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM EXGOODS WHERE DATE_FORMAT(EXG_PDATE,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
 		]]>
 	</select>
 	
-	<select id="countTotal" resultType="int">
+	<select id="getCountTotal" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM EXGOODS
 		]]>
 	</select>
 	
-	<select id="countWaiting" resultType="int">
+	<select id="getCountWaiting" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="결제완료"
 		]]>
 	</select>
 	
-	<select id="countLanking" resultType="exGoods">
+	<select id="getCountLanking" resultType="exGoods">
 		<![CDATA[
 			select exg_gname, count(*) count from exgoods where DATE_FORMAT(EXG_PDATE,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m') and exg_state != '결제취소' group by exg_gname order by count(*) desc limit 3
 		]]>

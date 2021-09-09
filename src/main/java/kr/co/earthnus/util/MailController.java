@@ -61,9 +61,6 @@ public class MailController {
 	@RequestMapping(value="/auth/find", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> find(@RequestParam("findName")String findName, @RequestParam("findEmail")String findEmail, HttpServletRequest request) {
-		System.out.println("findID");
-		System.out.println(findName + " findID");
-		System.out.println(findEmail + " findEmail");
 		
 		boolean correct = mailService.find(findName, findEmail);
 		
