@@ -95,6 +95,13 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     word-break: break-all;
     margin: 0;
 }
+#counter {
+	position: absolute;
+    color: #aaa;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
 .delete {
 	position: absolute;
 	top: 0;
@@ -178,6 +185,7 @@ background:#000;color:#fff;
     display: block;
     width: 100%;
     padding: 0 0 5px 0;
+    margin-top: 21px;
 }
 
 
@@ -331,12 +339,13 @@ background:#000;color:#fff;
     <c:if test="${auth.auth_id != null and !empty payCheck}">
     		<table id="comment_table">
     		<tr>
-	    	 <td style="width: 90%;">
+	    	 <td style="width: 90%; position:relative">
+	    	 		<span style="color:#aaa;" id="counter">(0 / 최대 200자)</span>
 		         <div class="comment-txt" style="width: 100%">
-		         <textarea id="comment_content" wrap="hard" rows="4" cols="100"></textarea>
+		         <textarea id="comment_content" name="comment_content" wrap="hard" rows="4" cols="100" maxlength='300' placeholder="환경을 위해 한마디  해주세요"></textarea>
 		         </div>
 	         </td>
-	         <td>
+	         <td style="padding-top: 21px;">
 	         	<div class="comment-button"><input type="button" id="replyInsert" value="응원하기"></div>
 	         </td>
 	 
@@ -365,7 +374,7 @@ background:#000;color:#fff;
     	
     </div>
 	<div class="btn_moreview">
-        <a href="#none" id="addBtn">댓글 더보기 </a>
+        <a href="#none" id="addBtn" title="comment more">댓글 더보기 </a>
     </div>
 	
   </div>
@@ -376,8 +385,11 @@ background:#000;color:#fff;
 
 
 
+<div id="back-top" >
+   <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
 
-
+</body>
 <script type="text/javascript">
 	var startNum = 0;
 	var step = 10;
@@ -431,13 +443,7 @@ background:#000;color:#fff;
 	  		str += '</select>';
 	  		$('#select_dname').append(str);
 	  	}
-	  
-	  	
-	  	
-	  	
-	  	
-	  	
-	  	
+	   	
         $('#replyInsert').on('click',function() {
           	
         	  var text = $('#comment_content').val().replace(/(?:\r\n|\r|\n)/g,'<br/>');
@@ -490,7 +496,16 @@ background:#000;color:#fff;
 	    	  prevArrow:$('.prev')
 	    	});
         
-        
+        $('#comment_content').keyup(function (e){
+	  	    var content = $(this).val();
+	  	    $('#counter').html("("+content.length+" / 최대 200자)");    //글자수 실시간 카운팅
+
+	  	    if (content.length > 200){
+	  	        alert("최대 200자까지 입력 가능합니다.");
+	  	        $(this).val(content.substring(0, 200));
+	  	        $('#counter').html("(200 / 최대 200자)");
+	  	    }
+	  	}); 
   });
  
   
@@ -517,14 +532,15 @@ background:#000;color:#fff;
 	        		
             		str += '<tr>';
             		str += '<td class="left-info">'
- 	            	str += '<div class="id_profile"><img id="img_profile" src="'+obj[i].d_img +'"></div>';
+ 	            	str += '<div class="id_profile"><img alt="profile" id="img_profile" src="'+obj[i].d_img +'"></div>';
  	            	str +='<div id="id_date">'
 	            	 if(auth_id == obj[i].cheb_id) { 
 	            		str +='<div class="delete">'
 	            		str +='<div class="menu">'
-	            		str +='<a><img alt="사진" class="deleteicon"src="/resources/cheBoard/deleteicon.png"></a>';	
+	            		str +='<a title="delete icon"><img alt="delete icon image" class="deleteicon"src="/resources/cheBoard/deleteicon.png"></a>';	
 	            		str +='<ul id="deletehide" idx="'+i+'" >'
-	            		str +='<div><a class="deleteComment deleteComment'+i+'" data_num="'+obj[i].cheb_num+'"><li>삭제</li><a></div>'
+	            		str +='<div><a title="comment delete" class="deleteComment deleteComment'+i+'" data_num="'+obj[i].cheb_num+'"><li>삭제</li><a></div>'
+	            		str +='<div><a title="comment update" class="deleteComment deleteComment'+i+'" data_num="'+obj[i].cheb_num+'"><li>수정</li><a></div>'
 	            		str +='</ul>'
 	            		str +='</div>'
 	            		str +='</div>'
@@ -603,5 +619,4 @@ background:#000;color:#fff;
 	});
 	}
 </script>
-</body>
 </html>

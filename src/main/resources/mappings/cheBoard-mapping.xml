@@ -65,19 +65,19 @@
       			</choose>
       </update>
       
-      <select id="total_comment" resultType="int">
+      <select id="get_total_comment" resultType="int">
       	<![CDATA[
 			select count(*) from cheboard;
 		]]>
       </select>
       
-      <select id="select_dname"  parameterType="String" resultType="pay">
+      <select id="get_select_dname"  parameterType="String" resultType="pay">
       	<![CDATA[
 			select * from pay where PAY_COMMENT='N' and pay_id=#{user_id}
 		]]>
       </select>
       
-     <select id="CheBoardList" resultMap="CheBoardResult">
+     <select id="get_CheBoardList" resultMap="CheBoardResult">
         <![CDATA[
             SELECT G.CHEB_NUM, G.CHEB_ID, G.CHEB_NAME, G.CHEB_DNAME, G.CHEB_CONTENT, G.CHEB_DATE, S.D_IMG FROM CHEBOARD AS G 
             LEFT JOIN DONATION AS S ON G.CHEB_DNAME = S.D_NAME
