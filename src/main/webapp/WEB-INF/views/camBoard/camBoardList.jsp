@@ -17,7 +17,16 @@
 div #selectView {text-align: right;}
 #selectView a {font-weight: bold; color: #388E3C; font-size: 0.8em;}
 #camBoardListDiv {margin-bottom: 4%;}
-#search {background: none;}
+#search {
+	background: none; 
+	width:91%; 
+	margin-left: 10px; 
+	border-left: none; 
+	border-right: none; 
+	border-top: none; 
+	margin-right: -20px; 
+	border-bottom-color: #388E3C;
+}
 
 .blog_item_date {text-align: center;}
 .blog_details {cursor: pointer;}
@@ -27,50 +36,35 @@ article {cursor: pointer;}
 #cancelButton {border-radius: 10px; border: none; background-color: #388E3C; color: white;}
 i {cursor: pointer; color: #388E3C;}
 
-[data-tooltip-text]:hover {
-	position: relative;
-}
-
-[data-tooltip-text]:hover:after {
-	background-color: #000000;
-	background-color: rgba(0, 0, 0, 0.8);
-
-	-webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-	-moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-	box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
-
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-
-	color: #FFFFFF;
-	font-size: 0.8em;
-	content: attr(data-tooltip-text);
-	
-	text-align: center;
-  	margin-bottom: 10px;
-	top: 130%;
-	left: 0;    
-	padding: 7px 12px;
-	position: absolute;
-	width: auto;
-	min-width: 77px;
-	max-width: 300px;
-	word-wrap: break-word;
-
-	z-index: 9999;
-}
-
-.type:hover {transform: scale( 1.1)}
+.type:hover {transform: scale( 1.1 )}
 .search-type {margin-left: 20px;}
 .descript-type{background-color: #388E3C; width: 0px;}
 
 .search-type:hover > .descript-type {width: 100px;}
 
-#search {width:91%; margin-left: 10px; border-left: none; border-right: none; border-top: none; margin-right: -20px; border-bottom-color: #388E3C;}
+.nice-select{
+
+}
+
+#search_type {
+	display: block !important;
+	height: 28px;
+	margin-right: -12px;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	border-bottom: 2px solid #388E3C; 
+	background: none;
+	color: red;
+}
+
+.nice-select{
+	display: none !important;
+}
 </style>
 
 <title>EARTH & US</title>
+
 </head>
 
 <body>
@@ -90,22 +84,24 @@ i {cursor: pointer; color: #388E3C;}
 				         </select>
 			    	</td>
 			    	<td id="search-text">
-			    		<input type="text" id="search" name="search" placeholder="검색 . . .">
-		         		<a onclick="searchCamBoard()"><i class="fas fa-search"></i></a>
+			    		<div class="search-block">
+			    			<input type="text" id="search" name="search" placeholder="검색 . . .">
+		         			<a onclick="searchCamBoard()" title="검색하기"><i class="fas fa-search"></i></a>
+			    		</div>
 			    	</td>
 			    </tr>
 		      </table>
 	</div>
 	<div class="col-sm-12 col-md-6" id="selectView">
-      <a href="/camBoard/list?arr=entire" id="entire">전체보기&nbsp;&nbsp;&nbsp;&nbsp;</a>
-      <a href="/camBoard/list?arr=doing" id="doing">진행중인 캠페인&nbsp;&nbsp;&nbsp;&nbsp;</a>
-      <a href="/camBoard/list?arr=end" id="end">종료된 캠페인</a><br><br>
+      <a href="/camBoard/list?arr=entire" id="entire" title="전체보기">전체보기&nbsp;&nbsp;&nbsp;&nbsp;</a>
+      <a href="/camBoard/list?arr=doing" id="doing" title="진행중인 캠페인">진행중인 캠페인&nbsp;&nbsp;&nbsp;&nbsp;</a>
+      <a href="/camBoard/list?arr=end" id="end" title="종료된 캠페인">종료된 캠페인</a><br><br>
       <a style="margin-right: 20px">주제</a>|
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" class="search-type" id=""><i class="type fas fa-globe">&nbsp;&nbsp;해양</i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" class="search-type" id=""><i class="type fas fa-recycle">&nbsp;&nbsp;플라스틱</i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" class="search-type" id=""><i class="type fas fa-tree">&nbsp;&nbsp;산림</i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" class="search-type" id=""><i class="type fas fa-snowflake">&nbsp;&nbsp;극지방</i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=all" class="search-type" id=""><i class="type fas fa-globe">&nbsp;&nbsp;기타</i></a><br>
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" class="search-type" title="해양"><i class="type fas fa-globe">&nbsp;&nbsp;해양</i></a>
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" class="search-type" title="플라스틱"><i class="type fas fa-recycle">&nbsp;&nbsp;플라스틱</i></a>
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" class="search-type" title="산림"><i class="type fas fa-tree">&nbsp;&nbsp;산림</i></a>
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" class="search-type" title="극지방"><i class="type fas fa-snowflake">&nbsp;&nbsp;극지방</i></a>
+      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=all" class="search-type" title="기타"><i class="type fas fa-globe">&nbsp;&nbsp;기타</i></a><br>
    </div>
 </div>
    <hr>
@@ -121,7 +117,7 @@ i {cursor: pointer; color: #388E3C;}
               <div class="col-sm-12 col-md-6">
                    <article class="blog_item" onclick="detailUrl('${list.CAMB_NAME}', '<%= index %>')">
                        <div class="blog_item_img">
-                         <img class="card-img rounded-0" src="${list.CAMB_FILE}" alt="" height="250px;">
+                         <img class="card-img rounded-0" src="${list.CAMB_FILE}" title="${list.CAMB_NAME}" alt="${list.CAMB_NAME} 사진" height="250px;">
                   		</div>
                        <div class="blog_details" style="height: 200px;">
                           <p style="font-size: 0.8em;">진행 기간 <fmt:formatDate pattern="yyyy-MM-dd" value="${list.CAMB_STARTDATE}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${list.CAMB_FINDATE}"/></p>
@@ -144,19 +140,19 @@ i {cursor: pointer; color: #388E3C;}
 		      <ul class="pagination">
 	         <c:if test="${page.prev}">
 	             <li class="page-item">
-	              <a class="page-link" aria-label="Previous" onclick="paging('${page.getStartPage()-1}')">
+	              <a class="page-link" title="${page.getStartPage()-1}번 페이지" aria-label="Previous" onclick="paging('${page.getStartPage()-1}')">
 	                  <i class="ti-angle-left"></i>
 	               </a>
 	            </li>
 	         </c:if>
 	         <c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">   
 	            <li class="page-item">
-	               <a class="page-link" onclick="paging('${idx}')">${idx}</a>
+	               <a class="page-link" title="${idx}페이지" onclick="paging('${idx}')">${idx}</a>
 	            </li>
 	         </c:forEach>
 	         <c:if test="${page.next}">
 	            <li class="page-item">
-	               <a class="page-link" aria-label="Next" onclick="paging('${page.getEndPage()+1}')">
+	               <a class="page-link" title="${page.getEndPage()+1}번 페이지" aria-label="Next" onclick="paging('${page.getEndPage()+1}')">
 	                  <i class="ti-angle-right"></i>
 	               </a>
 	            </li>
@@ -176,7 +172,6 @@ i {cursor: pointer; color: #388E3C;}
 
 <script type="text/javascript">
    window.onload = function(){
-	   
    }
    
    var pathname = window.location.pathname;

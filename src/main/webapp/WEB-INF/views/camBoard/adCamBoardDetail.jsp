@@ -18,6 +18,7 @@
   <link href="/resources/assets/css/ruang-admin.min.css" rel="stylesheet">
   <link href="/resources/assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
   
   <style type="text/css">
   	label{
@@ -26,7 +27,21 @@
   	
   	th,td{
   		text-align:center;
+  		min-height: 30px;
   	}
+  	
+  	.file-edit-icon a {
+  		cursor: pointer;
+  	}
+  	
+  	input, select {
+  		border: none;
+  	}
+  	
+  	#CAMB_SUBJECT{
+  		width: 120px;
+  	}
+  	
   </style>
 </head>
 
@@ -111,15 +126,9 @@
           </div>
 
             <!-- DataTable with Hover -->
-            <div class="container col-sm-12 col-lg-8">
-		<form action="/adCamBoard/updateOk" method="POST" enctype="multipart/form-data">
+            <div class="container col-sm-12 col-lg-8" style="text-align: center;">
+			<form action="/adCamBoard/updateOk" method="POST" enctype="multipart/form-data">
 			<table class="goodsTable">
-				<tr>
-					<td colspan = "4">
-						<h1 style="text-align: center"><b>캠페인 정보</b>&nbsp;&nbsp;&nbsp;<b>#${camBoard.CAMB_NUM}</b></h1>
-						<input type="hidden" name="CAMB_NUM" value="${camBoard.CAMB_NUM}">
-					</td>
-				</tr>
 				<tr>
 					<td colspan = "4">
 						<div id="max" class="file-wrapper flie-wrapper-area" style="padding-top: 30px;">
@@ -127,7 +136,7 @@
 									<div id="preview"></div>
 									<input type="hidden" name="goods_img" value="${goods.goods_img}">
 								<div style="text-align: center;" class="file-edit-icon">
-									<a class="preview-edit imgedit">사진수정</a>
+									<a class="preview-edit imgedit">사진 수정</a>
 								</div>
 						</div>
 											
@@ -152,7 +161,7 @@
 				<tr>
 					<td><b>시작일</b></td>
 					<td class="update">
-					<input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE" value="${CAMB_STARTDATE}">
+					<input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE" value="${CAMB_STARTDATE}" onchange="findate()">
 					</td>
 					<td><b>종료일</b></td>
 					<td class="update">
@@ -261,10 +270,31 @@
 		
 		var date = "${camBoard.CAMB_STARTDATE}";
 		
-		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="100%" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_SUBJECT}"/>'].join(''))
+		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="100%" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_NAME}"/>'].join(''))
 		
 		$('#CAMB_SUBJECT').val('플라스틱').prop("selected", true);
-	}
+			
+    	var today = new Date();
+    	var dd = today.getDate();
+    	var mm = today.getMonth()+1; //January is 0!
+    	var yyyy = today.getFullYear();
+    	 if(dd<10){
+    	        dd='0'+dd
+    	    } 
+    	    if(mm<10){
+    	        mm='0'+mm
+    	    } 
+    	today = yyyy+'-'+mm+'-'+dd;
+    	document.getElementById("CAMB_STARTDATE").setAttribute("max", today);
+    	
+    	var startdate = document.getElementById("CAMB_STARTDATE").value;
+	  	document.getElementById("CAMB_FINDATE").setAttribute("min", startdate);
+		}
+	    
+	    function findate(){
+	  	  var startdate = document.getElementById("CAMB_STARTDATE").value;
+	  	  document.getElementById("CAMB_FINDATE").setAttribute("min", startdate);
+	    }
 	
 	function showUpdateButton(){
 	}

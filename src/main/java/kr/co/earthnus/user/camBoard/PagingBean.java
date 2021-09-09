@@ -133,19 +133,21 @@ public class PagingBean {
     		this.startPage = 1;
     	}else this.startPage = (currentblock*5)-4;        
     }
-    public int getEndPage() {
-        return endPage;
-    }
     public void setEndPage(int getlastblock, int getcurrentblock) {
     	if(totalcount <= 30) {
-    		this.endPage = totalcount / 6;
-    	}else {
             if(getlastblock == getcurrentblock){
                 this.endPage = calcpage(getTotalcount(),getContentnum());
-            }else{
-                this.endPage = getStartPage()+4;   
+            } else if(totalcount == 0) {
+            	this.endPage = 0;
+            } else{
+                this.endPage = getStartPage()+4;
             }
+            
     	}
+    }
+    
+    public int getEndPage() {
+        return endPage;
     }
     public boolean isPrev() {
         return prev;
