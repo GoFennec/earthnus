@@ -118,9 +118,9 @@
 				<td class="td_right"><input type="text" id="goods_numV" value="${goods.goods_num}" disabled required>
 				<input type="hidden" name="goods_num" value="${goods.goods_num}"></td></tr>
 			<tr><td class="td_left"><label for="goods_name">상&nbsp;품&nbsp;&nbsp;이&nbsp;름&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right"><input type="text" name="goods_name" id="goods_name" value="${goods.goods_name}" required></td></tr>
+				<td class="td_right"><input type="text" name="goods_name" id="goods_name" value="${goods.goods_name}" required maxlength="50"></td></tr>
 			<tr><td class="td_left"><label for="goods_category">상&nbsp;품&nbsp;&nbsp;분&nbsp;류&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right2"><input type="text" name="goods_category" id="goods_category" required>
+				<td class="td_right2"><input type="text" name="goods_category" id="goods_category" required maxlength="50">
 				<select id="selectBox">
 					<option value="">직접입력</option>
 				<c:forEach var="category" items="${goodsCategory}">
@@ -133,9 +133,9 @@
 				</c:forEach>
 				</select></td></tr>
 			<tr><td class="td_left"><label for="goods_point" pattern="^[0-9]+$">상품포인트&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right"><input type="text" name="goods_point" id="goods_point" value="${goods.goods_point}" required></td></tr>
+				<td class="td_right"><input type="text" name="goods_point" id="goods_point" value="${goods.goods_point}" required pattern="^[0-9]+$" maxlength="10"></td></tr>
 			<tr><td class="td_left"><label for="goods_desc">상&nbsp;품&nbsp;&nbsp;설&nbsp;명&nbsp;&nbsp;&nbsp;</label></td>
-				<td class="td_right"><textarea cols="43" rows="6" style="resize: none;" name="goods_desc" id="goods_desc" required>${goods.goods_desc}</textarea></td></tr>
+				<td class="td_right"><textarea cols="43" rows="6" style="resize: none;" name="goods_desc" id="goods_desc" required maxlength="1000">${goods.goods_desc}</textarea></td></tr>
 			<tr><td class="td_left"><label for="goods_uploadFile">상&nbsp;품&nbsp;&nbsp;사&nbsp;진&nbsp;&nbsp;&nbsp;</label></td>
 				<td class="td_right"><input type="file" accept="image/*" name="goods_uploadFile" id="goods_uploadFile">
 				<input type="hidden" name="goods_img" value="${goods.goods_img}"></td></tr>
@@ -144,17 +144,17 @@
 				<c:choose>
 					<c:when test="${num % 2 eq 0 and num eq 0}">
 						<tr><td class="td_left"><label for="goods_info">상&nbsp;품&nbsp;&nbsp;정&nbsp;보&nbsp;&nbsp;&nbsp;</label></td>
-						<td class="td_right2"><input type="text" name="goods_info_${num+1}" id="goods_info_${num+1}" class="text" value="${info}" required placeholder="색상">
+						<td class="td_right2"><input type="text" name="goods_info_${num+1}" id="goods_info_${num+1}" class="text" value="${info}" required placeholder="색상" maxlength="30">
 					</c:when>
 					<c:when test="${num % 2 eq 0 and num ne 0}">
-						<tr><td></td><td class='td_right2'><input type="text" name="goods_info_${num+1}" id="goods_info_${num+1}" class="text" value="${info}" required>
+						<tr><td></td><td class='td_right2'><input type="text" name="goods_info_${num+1}" id="goods_info_${num+1}" class="text" value="${info}" required maxlength="30">
 					</c:when>
 					<c:when test="${num % 2 eq 1 and num eq 1}">
-						<input type="text" name="goods_info_${num+1}" id="goods_info_${num+1}" class="text" value="${info}" required placeholder="색상">
+						<input type="text" name="goods_info_${num+1}" id="goods_info_${num+1}" class="text" value="${info}" required placeholder="색상" maxlength="30">
 						<input type="button" id="addInput" class="btn-dark btnAdd" value="정보추가"/></td></tr>
 					</c:when>
 					<c:when test="${num % 2 eq 1 and num ne 1}">
-						<input type="text" name="goods_info_${num+1}" id="goods_info_${num+1}" class="text" value="${info}" required placeholder="색상">
+						<input type="text" name="goods_info_${num+1}" id="goods_info_${num+1}" class="text" value="${info}" required placeholder="색상" maxlength="30">
 						<input type='button' class='btnRemove btn-dark btnAdd' value='삭제'></td></tr>
 					</c:when>
 				</c:choose>
@@ -222,8 +222,8 @@ $(function() {
 	$("#goods_category").val($("#selectBox").val());
     $('#addInput').click (function () {
         $('.insertFormTable').append (
-            "<tr><td></td><td class='td_right2'><input type='text' name='goods_info_"+i+"' id='goods_info_"+i+"' class='text' required> "
-            +"<input type='text' name='goods_info_"+(i+1)+"' id='goods_info_"+(i+1)+"' class='text' required> "
+            "<tr><td></td><td class='td_right2'><input type='text' name='goods_info_"+i+"' id='goods_info_"+i+"' class='text' required maxlength='30'> "
+            +"<input type='text' name='goods_info_"+(i+1)+"' id='goods_info_"+(i+1)+"' class='text' required maxlength='30'> "
             +"<input type='button' class='btnRemove btn-dark btnAdd' value='삭제'></td></tr>");
         $('.btnRemove').on('click', function () {
             $(this).prev().prev().remove();

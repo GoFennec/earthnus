@@ -30,21 +30,21 @@
 	</table>
 	<c:if test="${empty auth}">
 		<table class="exGoods">
-			<tr><td rowspan="3"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td>
-			<th scope="col" colspan="2">선택 상품</th><td colspan="3">${goods.goods_name}</td></tr>
-			<tr><th scope="col" colspan="2">상품 정보</th><td colspan="3">${goods.goods_desc}</td></tr>
-			<tr><th scope="col" colspan="2">필요 포인트</th><td colspan="3"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
+			<tr><td colspan="2"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td></tr>
+			<tr><th scope="col">선택 상품</th><td>${goods.goods_name}</td></tr>
+			<tr><th scope="col">상품 정보</th><td>${goods.goods_desc}</td></tr>
+			<tr><th scope="col">필요 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
 			<tr><td colspan="5" align="center"><strong>교환은 로그인 후 가능합니다.</strong></td></tr>
 		</table><br>
 	</c:if>
 	
 	<c:if test="${!empty auth}">
 		<table class="exGoods">
-			<tr><td rowspan="3"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td>
-			<th scope="col" colspan="2">선택 상품</th><td colspan="3">${goods.goods_name}</td></tr>
-			<tr><th scope="col" colspan="2">상품 정보</th><td colspan="3">${goods.goods_desc}</td></tr>
-			<tr><th scope="col" colspan="2">필요 포인트</th><td colspan="3"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
-			<tr><td colspan="6"></td></tr>
+			<tr><td colspan="2"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td></tr>
+			<tr><th scope="col">선택 상품</th><td>${goods.goods_name}</td></tr>
+			<tr><th scope="col">상품 정보</th><td>${goods.goods_desc}</td></tr>
+			<tr><th scope="col">필요 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
+			<tr><td colspan="2"></td></tr>
 		</table>
 		<table class="exGoods">
 			<tr><th scope="col">주문자</th><td>${member.mem_name}</td></tr>
@@ -85,7 +85,7 @@
 	<div class="exButton"><button type="button" class="btn" onclick="location.href='/goods/list'">목록보기</button>&nbsp;&nbsp;&nbsp;
 	<c:if test="${empty auth}">
 		<button type="button" class="btn" onclick="alert('로그인 페이지로 이동합니다.'); location.href='/auth/login'">교환하기</button>
-	</c:if>	
+	</c:if>
 	<c:if test="${!empty auth}">
 		<input type="submit" class="btn" value="교환하기 "/>
 	</c:if>
