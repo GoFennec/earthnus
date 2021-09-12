@@ -149,7 +149,9 @@
 					<tbody>
                     	<c:forEach items="${memberList}" var="memberList">
                       	<tr onclick="location.href='/adMember/detail?mem_id=${memberList.mem_id}'">
-                        	<td>${memberList.mem_id}</td>
+                      		<c:if test="${memberList.mem_api eq \"NAVER\" }"><td>네이버 로그인 회원</td></c:if>
+                      		<c:if test="${memberList.mem_api eq \"KAKAO\" }"><td>카카오 로그인 회원</td></c:if>
+                      		<c:if test="${memberList.mem_api eq null }"><td>${memberList.mem_id}</td></c:if>
                         	<td>${memberList.mem_name}</td>
                         	<td>${memberList.mem_tel}</td>
                         	<td>${memberList.mem_email}</td>

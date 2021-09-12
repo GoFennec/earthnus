@@ -26,7 +26,7 @@
 	</select>
 	
 	<select id="getFindID" resultMap="member">
-		select mem_id, mem_date from member where mem_name = #{findName} and mem_email = #{mail_receiver}
+		select mem_id, mem_date, mem_api from member where mem_name = #{findName} and mem_email = #{mail_receiver}
 	</select>
 	
 	<update id="changePW" parameterType="String">

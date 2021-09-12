@@ -32,11 +32,11 @@
                   </div>
                   <form class="user" method="post"  action="/auth/adLogin">
                     <div class="form-group">
-                      <input id="auth_id" class="form-control" type="text" name="auth_id" autocomplete="on" placeholder="아이디를 입력하세요" required />
+                      <input id="auth_id" class="form-control" type="text" name="auth_id" autocomplete="on" placeholder="admin" required />
                         
                     </div>
                     <div class="form-group">
-                   <input id="auth_pw" class="form-control" type="password" name="auth_pw" placeholder="비밀번호를 입력하세요" required />
+                   <input id="auth_pw" class="form-control" type="password" name="auth_pw" placeholder="admin1234" required />
                     </div>
                   
                     <div class="form-group">

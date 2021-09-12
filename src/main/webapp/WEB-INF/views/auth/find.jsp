@@ -244,7 +244,9 @@ td{
 										<table>
 											<c:forEach var="findID1" items="${findID}">
 												<tr>
-													<td>아이디 :&nbsp;&nbsp; <b>${findID1.mem_id}</b></td>
+													<c:if test="${findID1.mem_api eq \"NAVER\" }"><td>아이디 :&nbsp;&nbsp; <b>네이버 로그인 회원</b></td></c:if>
+                      								<c:if test="${findID1.mem_api eq \"KAKAO\" }"><td>아이디 :&nbsp;&nbsp; <b>카카오 로그인 회원</b></td></c:if>
+                      								<c:if test="${findID1.mem_api eq null }"><td>아이디 :&nbsp;&nbsp; <b>${findID1.mem_id}</b></td></c:if>
 													<td>가입 날짜 :&nbsp;&nbsp; <b><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${findID1.mem_date}" /></b></td>
 												</tr>
 											</c:forEach>
