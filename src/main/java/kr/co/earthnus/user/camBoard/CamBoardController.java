@@ -30,13 +30,13 @@ public class CamBoardController{
 	}
 	
 	@RequestMapping("/camBoard/list/search")
-	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "��ü") String search_type, 
+	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "占쏙옙체") String search_type, 
 			@RequestParam(defaultValue = "1") String pagenum, @RequestParam(defaultValue = "6") String contentnum, 
 			@RequestParam( value = "search", required=false) String search , @RequestParam(defaultValue = "desc") String order, 
 			camBoardBean bean, Model model) {
-		if(search_type.equals("����")) {
+		if(search_type.equals("제목")) {
 			search_type = "CAMB_NAME";
-		}else if(search_type.equals("����")) {
+		}else if(search_type.equals("내용")) {
 			search_type = "CAMB_CONTENT";
 		}else if(search_type.equals("CAMB_SUBJECT")){
 			
@@ -53,13 +53,13 @@ public class CamBoardController{
 	
 	@RequestMapping(value="/camBoard/detail")
 	public String getCamBoardDetail(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "��ü") String search_type, 
+			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "占쏙옙체") String search_type, 
 			@RequestParam(defaultValue = "desc") String order, 
 			camBoardBean bean, @RequestParam("CAMB_NUM") String cambnum, @RequestParam(defaultValue = "1") String p, 
 			@RequestParam("CAMB_NAME") String cambname, Model model) {
-		if(search_type.equals("����")) {
+		if(search_type.equals("제목")) {
 			search_type = "CAMB_NAME";
-		}else if(search_type.equals("����")) {
+		}else if(search_type.equals("내용")) {
 			search_type = "CAMB_CONTENT";
 		}else if(search_type.equals("CAMB_SUBJECT")){
 			
