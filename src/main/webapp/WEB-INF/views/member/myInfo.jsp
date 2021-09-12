@@ -670,11 +670,28 @@ body {
                   <form class="form-horizontal" id="form" method="post"  action="/updateMyInfo">
                      <fieldset class="fieldset">
          <div class="form-group">
+          <c:if test="${MemberBean.mem_api eq null}" >
                         <div class="col-12">
                            <label for="username" class="form-label">아이디</label> <input
                               type="text" name="mem_id" class="form-control" id="mem_id"
                               value="${MemberBean.mem_id }" readonly>
                         </div>
+                        </c:if>
+                         <c:if test="${MemberBean.mem_api eq 'KAKAO'}" >
+                        <div class="col-12">
+                           <label for="username" class="form-label">아이디</label> <input
+                              type="text" name="mem_id" class="form-control" id="mem_id"
+                              value="카카오 간편 로그인 회원" readonly>
+                        </div>
+                        </c:if>
+                         <c:if test="${MemberBean.mem_api eq 'NAVER'}" >
+                        <div class="col-12">
+                           <label for="username" class="form-label">아이디</label> <input
+                              type="text" name="mem_id" class="form-control" id="mem_id"
+                              value="네이버 간편 로그인 회원" readonly>
+                        </div>
+                        </c:if>
+                        
                         <div class="col-12">
                            <label for="username" class="form-label">이름</label> <input
                               type="text" name="mem_name" class="form-control" id="mem_name"
@@ -816,7 +833,6 @@ body {
                                           success : function(result) {
                                              if (result.error) {
                                                 alert("비밀번호 변경이 완료되었습니다.");
-                                                alert(result.mem_pw);
                                                               $(".modal-backdrop").remove();
                                                               $("#myModal").modal("hide");
                                              } else {

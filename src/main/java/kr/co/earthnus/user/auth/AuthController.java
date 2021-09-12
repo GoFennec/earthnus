@@ -164,7 +164,10 @@ public class AuthController {
 					 return "redirect:" + str;
 				 }else if(str.contains("donation")) {
 					 return "redirect:" + str;
+				 }else if(str.contains("/member/myMessage")) {
+					 return "redirect:" + str;
 				 }
+				 
 			 }else {
 				 return "redirect:/";
 			 }

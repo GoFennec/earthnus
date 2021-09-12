@@ -214,17 +214,13 @@ public class MemberController {
 				
 				@RequestMapping(value = "/delete_c")
 				public String myMessageDelete(HttpSession session, Model model, 
-						AuthBean aBean, @RequestParam("cheb_num") int cheb_num, HttpServletResponse response) throws IOException{
+						AuthBean aBean, @RequestParam("cheb_num") int cheb_num){
 					aBean = (AuthBean) session.getAttribute("auth");
 					memberService.myMessageDelete(cheb_num);
 					//memberService.update_pay_comment(mem_id);
-					response.setContentType("text/html;charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>alert('삭제 되었습니다.');location.href=\"/member/myMessage\"</script>");
-					out.close();
-					session.invalidate();
+				
 				//	}
-					return "redirect: /member/myMessage";
+					return "redirect:/member/myMessage";
 				}
 		
 			
