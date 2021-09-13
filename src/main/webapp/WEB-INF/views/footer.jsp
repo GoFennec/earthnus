@@ -44,7 +44,7 @@
                                    <p>  <img src="/resources/assets/img/logo/logo2_footer.png" alt="">
                                    <p>Copyright &copy;Team <script>document.write(new Date().getFullYear());</script> All rights reserved. 
                                  <br> Member: 고현성 윤영경 강유경 김정빈 백인엽 유인길<br>
-                                 <a href="/auth/adLogin" title="바로가기"><i class="fas fa-cogs"></i>&nbsp;&nbsp;바로가기</a></p>
+                                 <a href="/auth/adLogin" title="관리자 바로가기"><i class="fas fa-cogs"></i>&nbsp;&nbsp;바로가기</a></p>
                                   </div>
                               </div>
                           </div>

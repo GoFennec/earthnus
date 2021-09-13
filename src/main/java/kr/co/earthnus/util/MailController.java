@@ -1,5 +1,7 @@
 package kr.co.earthnus.util;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -104,7 +107,7 @@ public class MailController {
 	
 	//아이디 찾기에서 인증번호 확인
 	@RequestMapping(value="/auth/findID", method=RequestMethod.POST)
-	public String findID(MailBean mailBean, HttpServletRequest request, Model model) {
+	public String findID(MailBean mailBean, HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		
 		String mail_customer = mailBean.getMail_customer();
 		String mail_receiver = mailBean.getMail_receiver();
@@ -117,7 +120,13 @@ public class MailController {
 			model.addAttribute("findID",findID);
 			return "/auth/find";
 		}else {
-			return null;
+	         response.setContentType("text/html;charset=UTF-8");
+	         PrintWriter out = response.getWriter();
+	         out.println("<script>alert('인증번호가 올바르지 않습니다.');");
+	         out.println("history.back();");
+	         out.println("</script>");
+	         out.close();
+	         return null;
 		}
 	}
 

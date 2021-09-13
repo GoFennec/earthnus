@@ -28,17 +28,6 @@ public class AdChartController {
 		service.camPie(model);
 		service.chePie(model);
 		
-		service.countVisitor(model);
-		service.sumPlastic(model);
-		service.sumOcean(model);
-		service.sumIce(model);
-		service.sumForest(model);
-		
-		service.countVisitor(model);
-		
-		service.countMember(model);
-		service.countExgoods(model);
-		
 		return "auth/adChart";
 	}
 	
@@ -56,6 +45,18 @@ public class AdChartController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		Map<String, Object> map1 = service.getMonthData(select_year, select_month, lastDay);
+		map.put("error", map1);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/adchart/getSevenData", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getSevenData(@RequestParam("select_year") String select_year, @RequestParam("select_month") String select_month, @RequestParam("select_date") String select_date, HttpServletRequest request){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		Map<String, Object> map1 = service.getSevenData(select_year, select_month, select_date);
 		map.put("error", map1);
 		
 		return map;

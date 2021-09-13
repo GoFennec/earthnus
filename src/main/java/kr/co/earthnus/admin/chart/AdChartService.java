@@ -56,111 +56,6 @@ public class AdChartService {
 	}
 	
 	
-	public void countVisitor(Model model) {
-		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int count = 0;
-		List<Integer> count1 = new ArrayList<Integer>();
-		
-		for(int i = 0; i < 7; i++) {
-			count = dao.getCountVisitor(i);
-			count1.add(count);
-		}
-		model.addAttribute("countVisitor", count1);
-	}
-	
-	public void sumPlastic(Model model) {
-		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		String count = null;
-		int parse = 0;
-		List<Integer> count1 = new ArrayList<Integer>();
-		
-		for(int i = 0; i < 7; i++) {
-			count = dao.getSumPlastic(i);
-			if(count == null) {
-				count = "0";
-			}
-			parse = Integer.parseInt(count);
-			count1.add(parse);
-		}
-		model.addAttribute("sumPlastic", count1);
-	}
-	
-	public void sumOcean(Model model) {
-		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		String count = null;
-		int parse = 0;
-		List<Integer> count1 = new ArrayList<Integer>();
-		
-		for(int i = 0; i < 7; i++) {
-			count = dao.getSumOcean(i);
-			if(count == null) {
-				count = "0";
-			}
-			parse = Integer.parseInt(count);
-			count1.add(parse);
-		}
-		model.addAttribute("sumOcean", count1);
-	}
-	
-	public void sumIce(Model model) {
-		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		String count = null;
-		int parse = 0;
-		List<Integer> count1 = new ArrayList<Integer>();
-		
-		for(int i = 0; i < 7; i++) {
-			count = dao.getSumIce(i);
-			if(count == null) {
-				count = "0";
-			}
-			parse = Integer.parseInt(count);
-			count1.add(parse);
-		}
-		model.addAttribute("sumIce", count1);
-	}
-	
-	public void sumForest(Model model) {
-		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		String count = null;
-		int parse = 0;
-		List<Integer> count1 = new ArrayList<Integer>();
-		
-		for(int i = 0; i < 7; i++) {
-			count = dao.getSumForest(i);
-			if(count == null) {
-				count = "0";
-			}
-			parse = Integer.parseInt(count);
-			count1.add(parse);
-		}
-		model.addAttribute("sumForest", count1);
-	}
-	
-	public void countMember(Model model) {
-		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int count = 0;
-		List<Integer> count1 = new ArrayList<Integer>();
-		
-		for(int i = 0; i < 7; i++) {
-			count = dao.getCountMember(i);
-			count1.add(count);
-		}
-		model.addAttribute("countMember", count1);
-	}
-	
-	public void countExgoods(Model model) {
-		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
-		int count = 0;
-		List<Integer> count1 = new ArrayList<Integer>();
-		
-		for(int i = 0; i < 7; i++) {
-			count = dao.getCountExgoods(i);
-			count1.add(count);
-		}
-		model.addAttribute("countExgoods", count1);
-	}
-	
-	
 	public Map<String, Object> getMonthData(String select_year, String select_month, int lastDay) {
 		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
 		List<Integer> count1 = new ArrayList<Integer>();
@@ -279,6 +174,109 @@ public class AdChartService {
 		}
 		map.put("getCountForestMonth", getCountForestMonth);
 		
+		
+		return map;
+	}
+	
+	public Map<String, Object> getSevenData(String select_year, String select_month, String select_date) {
+		AdChartMybatis dao = mybatis.getMapper(AdChartMybatis.class);
+		List<Integer> count1 = new ArrayList<Integer>();
+		List<Integer> count2 = new ArrayList<Integer>();
+		List<Integer> count3 = new ArrayList<Integer>();
+		List<Integer> count4 = new ArrayList<Integer>();
+		List<Integer> count5 = new ArrayList<Integer>();
+		List<Integer> count6 = new ArrayList<Integer>();
+		List<Integer> count7 = new ArrayList<Integer>();
+		List<Integer> count8 = new ArrayList<Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int totalVisitor = 0;
+		for(int i = 0; i < 7; i++) {
+			int count = dao.getCountVisitor(i, select_year, select_month, select_date);
+			count1.add(count);
+			totalVisitor += count;
+		}
+		map.put("getVisitorSeven", count1);
+		map.put("getCountVisitorSeven", totalVisitor);
+		
+		int totalPlatic = 0;
+		for(int i = 0; i < 7; i++) {
+			String count = dao.getSumPlastic(i, select_year, select_month, select_date);
+			if(count == null) {
+				count = "0";
+			}
+			int parse = Integer.parseInt(count);
+			totalPlatic += parse;
+			count2.add(parse);
+		}
+		map.put("sumPlastic", count2);
+		map.put("getCountPlasticSeven", totalPlatic);
+		
+		int totalOcean = 0;
+		for(int i = 0; i < 7; i++) {
+			String count = dao.getSumOcean(i, select_year, select_month, select_date);
+			if(count == null) {
+				count = "0";
+			}
+			int parse = Integer.parseInt(count);
+			totalOcean += parse;
+			count3.add(parse);
+		}
+		map.put("sumOcean", count3);
+		map.put("getCountOceanSeven", totalOcean);
+		
+		int totalIce = 0;
+		for(int i = 0; i < 7; i++) {
+			String count = dao.getSumIce(i, select_year, select_month, select_date);
+			if(count == null) {
+				count = "0";
+			}
+			int parse = Integer.parseInt(count);
+			totalIce += parse;
+			count4.add(parse);
+		}
+		map.put("sumIce", count4);
+		map.put("getCountIceSeven", totalIce);
+		
+		int totalForest = 0;
+		for(int i = 0; i < 7; i++) {
+			String count = dao.getSumForest(i, select_year, select_month, select_date);
+			if(count == null) {
+				count = "0";
+			}
+			int parse = Integer.parseInt(count);
+			totalForest += parse;
+			count5.add(parse);
+		}
+		map.put("sumForest", count5);
+		map.put("getCountForestSeven", totalForest);
+		
+		int totalMember = 0;
+		for(int i = 0; i < 7; i++) {
+			int count = dao.getCountMember(i, select_year, select_month, select_date);
+			count6.add(count);
+			totalMember += count;
+		}
+		map.put("getCountMember", count6);
+		map.put("getCountMemberSeven", totalMember);
+		
+		int totalDelMember = 0;
+		for(int i = 0; i < 7; i++) {
+			int count = dao.getCountDelMember(i, select_year, select_month, select_date);
+			count7.add(count);
+			totalDelMember += count;
+		}
+		map.put("getCountDelMember", count7);
+		map.put("getCountDelMemberSeven", totalDelMember);
+		
+		int totalExgoods = 0;
+		for(int i = 0; i < 7; i++) {
+			int count = dao.getCountExgoods(i, select_year, select_month, select_date);
+			count8.add(count);
+			totalExgoods += count;
+		}
+		map.put("getCountExgoods", count8);
+		map.put("getCountExgoodsSeven", totalExgoods);
 		
 		return map;
 		
