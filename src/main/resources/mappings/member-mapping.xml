@@ -85,6 +85,8 @@
 	<select id="getMyPay" resultType="pay">
 	SELECT PAY_DNAME, PAY_PRICE, PAY_PDATE, PAY_STATE, PAY_PSTATE, PAY_COMMENT FROM PAY WHERE PAY_ID=#{mem_id} ORDER BY PAY_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}    
 	</select>
+	<!-- SELECT DONATION.D_IMG, PAY.PAY_DNAME, PAY.PAY_PRICE, PAY.PAY_PDATE, PAY.PAY_STATE, PAY.PAY_PSTATE, PAY.PAY_COMMENT FROM DONATION JOIN PAY ON DONATION.D_NAME=PAY.PAY_DNAME WHERE PAY_ID=#{mem_id} ORDER BY PAY_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}    
+	 -->
 	<select id="getMyPayCount" parameterType="String" resultType="int">
 	SELECT COUNT(*) FROM PAY WHERE PAY_ID=#{mem_id}
 	</select>

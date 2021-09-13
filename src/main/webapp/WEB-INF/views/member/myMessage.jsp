@@ -716,7 +716,7 @@ width: 28px;
                     <td class="text-truncate">${cheBoard.cheb_content}</td>
                     <td class="text-truncate">${cheBoard.cheb_date}</td>
                      <td class="text-turncate">
-                      <form class="form-horizontal" method="post" action="/delete_c" >
+                      <form class="form-horizontal" id="messageDelete" method="post" action="/delete_c" >
                      <div>
                      <input type="hidden" class="form-control" name="cheb_num" id="cheb_num" value="${cheBoard.cheb_num}"/>
                      <button type="submit" class="btn_comment" >삭제하기</button>
@@ -728,7 +728,11 @@ width: 28px;
                 </tbody>
               </table>  
               <script>
-      
+              $('#messageDelete').submit(
+            		  function(){
+            			  alert("삭제되었습니다.");
+            		  });
+
               </script>
                <c:choose>
               <c:when test="${empty getMyMessage}">
