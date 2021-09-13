@@ -535,6 +535,18 @@ table {width: 100%; border-collapse: collapse; text-align: center; line-height: 
 text-align:center;
 margin-top: 20px;
 }		
+#symbol{
+margin-right: .25rem!important;
+border-radius: 50%!important;
+vertical-align: middle;
+    border-style: none;
+    -webkit-font-smoothing: antialiased;
+width: 28px;
+    aspect-ratio: auto 28 / 28;
+    height: 28px;
+
+
+}
 </style>
 </head>
 <jsp:include page="/WEB-INF/views/header.jsp"/> 
@@ -670,9 +682,10 @@ margin-top: 20px;
                     <br><br>
 					<h3>내가 구한 지구 상세 내역</h3>
 					<hr>
-                <table class="table">
+                 <table class="table">
                 <thead>
                   <tr>
+                  	<th></th>
                     <th>기부 상품</th>
                     <th>기부 금액</th>
                     <th>기부 날짜</th>
@@ -682,7 +695,22 @@ margin-top: 20px;
                 <tbody>
                 <c:forEach items="${getMyPay}" var="pay">
                   <tr>
-                    <td class="text-truncate">${pay.pay_dname}</td>
+                  <td class="text-truncate" "style=width:10%;">
+                  <c:if test="${pay.pay_dname == '숲' || pay.pay_dname == '새싹' || pay.pay_dname ==  '묘목' || pay.pay_dname ==  '나무' }">
+                    <img src="/resources/donation/forest04.png" id="symbol" alt="숲" title="숲일러스트"/>
+                    </c:if>
+                     <c:if test="${pay.pay_dname == '바다' || pay.pay_dname ==  '조개' ||pay.pay_dname ==  '바다거북' || pay.pay_dname ==  '고래' }">
+                    <img src="/resources/donation/ocean04.png" id="symbol" alt="바다" title="바다일러스트"/>
+                    </c:if>
+                     <c:if test="${pay.pay_dname == '북극곰' || pay.pay_dname == '작은 얼음' || pay.pay_dname == '큰 얼음' || pay.pay_dname == '빙하 조각' }">
+                    <img src="/resources/donation/ice04.png" id="symbol" alt="북극곰" title="북극곰일러스트"/>
+                    </c:if>
+                     <c:if test="${pay.pay_dname == '친환경' || pay.pay_dname == '플라스틱 줄이기' || pay.pay_dname ==  '해양 청소' || pay.pay_dname == '대지 청소' }">
+                    <img src="/resources/donation/plastic04.png" id="symbol" alt="친환경" title="친환경일러스트"/>
+                    </c:if>
+                  </td>
+                    <td class="text-truncate"> 
+                    ${pay.pay_dname}</td>
                     <td class="text-truncate"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pay.pay_price}" />원</td>
                     <td class="text-truncate">${pay.pay_pdate}</td>
               	<c:if test="${pay.pay_comment eq 'N'}" >
@@ -695,7 +723,7 @@ margin-top: 20px;
          		 </tr>
          		 </c:forEach>
                 </tbody>
-              </table>
+              </table> 
  <c:choose>
               <c:when test="${empty getMyPay}">
 		              <div id="nocontent"> 해당 정보가 존재하지 않습니다.</div>
