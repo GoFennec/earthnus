@@ -14,18 +14,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style>
+table {border-collapse: collapse;}
+table tr {border-bottom: 2px solid #388E3C;}
+
 div #selectView {text-align: right;}
 #selectView a {font-weight: bold; color: #388E3C; font-size: 0.8em;}
 #camBoardListDiv {margin-bottom: 4%;}
 #search {
 	background: none; 
-	width:91%; 
-	margin-left: 10px; 
-	border-left: none; 
-	border-right: none; 
-	border-top: none; 
-	margin-right: -20px; 
-	border-bottom-color: #388E3C;
+	width:100%; 
+	border: none; 
+	font-weight: 500;
 }
 
 .blog_item_date {text-align: center;}
@@ -36,31 +35,94 @@ article {cursor: pointer;}
 #cancelButton {border-radius: 10px; border: none; background-color: #388E3C; color: white;}
 i {cursor: pointer; color: #388E3C;}
 
-.type:hover {transform: scale( 1.1 )}
-.search-type {margin-left: 20px;}
-.descript-type{background-color: #388E3C; width: 0px;}
+.search-type:hover > .descript-type { width: 100px; }
 
-.search-type:hover > .descript-type {width: 100px;}
-
-.nice-select{
-
+.search-block i{
+	border: none;
+	background: none;
 }
 
 #search_type {
 	display: block !important;
+	text-align: center;
+	width: 70px;
 	height: 28px;
-	margin-right: -12px;
-	border-top: none;
-	border-right: none;
-	border-left: none;
-	border-bottom: 2px solid #388E3C; 
+	border: none;
 	background: none;
-	color: red;
+	color: #388E3C;
 }
 
 .nice-select{
 	display: none !important;
 }
+
+#nav{
+	list-style: none;
+	height: 40px;
+	padding: 5px 1px;
+	margin: 0;
+}
+
+.filter{
+	border: none;
+    text-transform: capitalize;
+    width: 100px;
+    height: 34px;
+	border-radius: 17px;
+    cursor: pointer;
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    transition: 0.6s;
+    box-shadow: 0px 7px 15px 0px rgb(0 0 0 / 12%);
+    background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
+    background-position: right;
+    background-size: 200%;
+}
+
+.filter:active { 
+	box-shadow: 1px 1px 0 rgb(0,0,0,0.5); 
+	position: relative; 
+	top:2px; 
+}
+
+#nav li{
+	float: right;
+	position: relative;
+	margin: 0px 4%;
+	padding: 0;
+}
+
+#nav li a {
+	display: block;
+	font-size: 15px;
+	padding: 7px 8px;
+	margin: 0;
+	color: #388E3C;
+}
+
+#nav ul{
+	z-index: 1000000;
+	background: #f8f9fa;
+	list-style: none;
+	margin-left: -25%;
+	padding: 0;
+	position: absolute;
+	left: 0;
+	top: 40px;
+	width: 150px;
+	text-align: center;
+	border-radius: 17px;
+	box-shadow: 0px 10px 10px rgb(0 0 0 / 12%);
+}
+
+#nav ul li{
+	z-index: 1000;
+	float: none;
+	padding: 0;
+	font-size: 10px;
+}
+
 </style>
 
 <title>EARTH & US</title>
@@ -73,7 +135,7 @@ i {cursor: pointer; color: #388E3C;}
 
 <div class="container">
 <div class="row">
-	<div class="col-sm-12 col-md-6">
+	<div class="col-sm-6 col-md-7">
 		<table>
 			    <tr>
 			    	<td>
@@ -86,22 +148,33 @@ i {cursor: pointer; color: #388E3C;}
 			    	<td id="search-text">
 			    		<div class="search-block">
 			    			<input type="text" id="search" name="search" placeholder="검색 . . .">
-		         			<a onclick="searchCamBoard()" title="검색하기"><i class="fas fa-search"></i></a>
 			    		</div>
 			    	</td>
+			    	<td class="search-imoji">
+				    	<i class="fas fa-search" onclick="searchCamBoard()"></i>
+			    	</td>
 			    </tr>
-		      </table>
+		 </table>
 	</div>
-	<div class="col-sm-12 col-md-6" id="selectView">
-      <a href="/camBoard/list?arr=entire" id="entire" title="전체보기">전체보기&nbsp;&nbsp;&nbsp;&nbsp;</a>
-      <a href="/camBoard/list?arr=doing" id="doing" title="진행중인 캠페인">진행중인 캠페인&nbsp;&nbsp;&nbsp;&nbsp;</a>
-      <a href="/camBoard/list?arr=end" id="end" title="종료된 캠페인">종료된 캠페인</a><br><br>
-      <a style="margin-right: 20px">주제</a>|
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" class="search-type" title="해양"><i class="type fas fa-globe">&nbsp;&nbsp;해양</i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" class="search-type" title="플라스틱"><i class="type fas fa-recycle">&nbsp;&nbsp;플라스틱</i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" class="search-type" title="산림"><i class="type fas fa-tree">&nbsp;&nbsp;산림</i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" class="search-type" title="극지방"><i class="type fas fa-snowflake">&nbsp;&nbsp;극지방</i></a>
-      <a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=all" class="search-type" title="기타"><i class="type fas fa-globe">&nbsp;&nbsp;기타</i></a><br>
+	<div class="col-sm-6 col-md-5" id="selectView">
+		<ul id="nav">
+			<li class="sub-nav type"><button class="filter">주제</button>
+				<ul class="sub-type">
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" title="해양보호 캠페인"><i class="type fas fa-globe">&nbsp;&nbsp;해양</i></a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" title="플라스틱 재활용 캠페인"><i class="type fas fa-recycle">&nbsp;&nbsp;플라스틱</i></a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" title="산림 지킴이 캠페인"><i class="type fas fa-tree">&nbsp;&nbsp;산림</i></a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" title="북극곰 집 지키기 캠페인"><i class="type fas fa-snowflake">&nbsp;&nbsp;극지방</i></a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=all" title="기타"><i class="type fas fa-globe">&nbsp;&nbsp;기타</i></a><br></li>
+				</ul>
+			</li>
+			<li class="sub-nav history"><button class="filter">이력</button>
+				<ul class="sub-history">
+					<li><a href="/camBoard/list?arr=entire" id="entire" title="전체보기">전체보기</a></li>
+					<li><a href="/camBoard/list?arr=doing" id="doing" title="진행중인 캠페인">진행중인 캠페인</a></li>
+					<li><a href="/camBoard/list?arr=end" id="end" title="종료된 캠페인">종료된 캠페인</a></li>
+				</ul>
+			</li>
+		</ul>
    </div>
 </div>
    <hr>
@@ -114,10 +187,10 @@ i {cursor: pointer; color: #388E3C;}
           <div class="row">
            <c:forEach items="${CamBoardList}" var="list" begin="0" end="5">
            <% index++; %>
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sm-12 col-md-6 col-lg-4">
                    <article class="blog_item" onclick="detailUrl('${list.CAMB_NAME}', '<%= index %>')">
                        <div class="blog_item_img">
-                         <img class="card-img rounded-0" src="${list.CAMB_FILE}" title="${list.CAMB_NAME}" alt="${list.CAMB_NAME} 사진" height="250px;">
+                         <img class="card-img rounded-0" src="${list.CAMB_FILE}" title="${list.CAMB_NAME}" alt="${list.CAMB_NAME} 사진" height="200px;">
                   		</div>
                        <div class="blog_details" style="height: 200px;">
                           <p style="font-size: 0.8em;">진행 기간 <fmt:formatDate pattern="yyyy-MM-dd" value="${list.CAMB_STARTDATE}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${list.CAMB_FINDATE}"/></p>
@@ -147,7 +220,7 @@ i {cursor: pointer; color: #388E3C;}
 	         </c:if>
 	         <c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">   
 	            <li class="page-item">
-	               <a class="page-link" title="${idx}페이지" onclick="paging('${idx}')">${idx}</a>
+	               <a class="page-link" title="${idx}페이지" id="${idx}" onclick="paging('${idx}')">${idx}</a>
 	            </li>
 	         </c:forEach>
 	         <c:if test="${page.next}">
@@ -171,9 +244,29 @@ i {cursor: pointer; color: #388E3C;}
 </div>
 
 <script type="text/javascript">
-   window.onload = function(){
-   }
-   
+	$(document).ready(function(){
+		$("#nav ul").hide();
+	});
+	
+	$('#${page.currentPage}').off('click');
+	
+	$("#nav li.type").click(function(){
+		$("ul", this).slideToggle("fast");
+		if($("#nav .sub-history").is(':visible') === true){
+			$("#nav .sub-history").slideToggle("fast");
+		}
+	})
+	
+	$("#nav li.history").click(function(){
+		$("ul", this).slideToggle("fast");
+		if($(".sub-type").is(':visible') === true){
+			$(".sub-type").slideToggle("fast");
+		}
+	})
+	$('html').click(function() { 
+		
+	});
+	
    var pathname = window.location.pathname;
    var subquery = window.location.search;
    var query = subquery.slice(subquery.lastIndexOf("?")+1);

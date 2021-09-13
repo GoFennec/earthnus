@@ -10,8 +10,23 @@
 <script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <style>
-.facebook, .twitter, .naverblog, .kakaotalk, .clipboard {cursor: pointer;}
-.facebook:hover, .twitter:hover, .naverblog:hover, .kakaotalk:hover, .clipboard:hover {transform: scale( 1.2 )}
+.facebook, .twitter, .naverblog, .kakaotalk, .clipboard { cursor: pointer; }
+.facebook:hover, .twitter:hover, .naverblog:hover, .kakaotalk:hover, .clipboard:hover {
+	transform: scale( 1.2 ); 
+	padding-bottom: 8px; 
+	border-bottom: 1px solid black;
+}
+.thumb {
+	background: none !important;
+}
+.thumb img{
+	width: 150px;
+	height: 80px;
+}
+.list{
+	text-align: center !important;
+}
+
 </style>
 
 <title>EARTH & US</title>
@@ -24,10 +39,11 @@
   <section class="blog_area single-post-area section-padding">
    <div class="container">
     <div class="row">
-     <div class="col-12 posts-list">
+    <div class="col-1"></div>
+     <div class="col-10 posts-list">
       <div class="single-post">
-       <div class="feature-img">
-        <img src="${camBoard.CAMB_FILE}" id="IMG" width="100%" alt="${camBoard.CAMB_NAME}" title="${camBoard.CAMB_NAME}"/>
+       <div class="feature-img" style="text-align: center;">
+        <img src="${camBoard.CAMB_FILE}" id="IMG" width="90%" alt="${camBoard.CAMB_NAME}" title="${camBoard.CAMB_NAME}"/>
       </div>
       <div class="blog_details">
         <h2 style="color: #2d2d2d;">${camBoard.CAMB_NAME}</h2>
@@ -70,7 +86,7 @@
 		   <div id="preBoard" class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
 			   <div style="cursor: pointer;" onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
 				   	<div class="thumb">
-						<img class="img-fluid" src="${preBoard.CAMB_FILE}" title="${preBoard.CAMB_NAME}" alt="${preBoard.CAMB_NAME}" width="150px">
+						<img class="img-fluid" src="${preBoard.CAMB_FILE}" title="${preBoard.CAMB_NAME}" alt="${preBoard.CAMB_NAME}">
 					</div>
 						  
 				   <div class="arrow">
@@ -84,29 +100,29 @@
 			   </div>
 		   </div>
 
-		  <div class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+		  <div class="list col-lg-4 col-md-4 col-12 ">
 		  	<a class="btn header-btn" onclick="camBoard()" style="color: white;">목록으로</a>
 		  </div>
 		
 			<div id="nextBoard" class="col-lg-4 col-md-4 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
 				<div style="cursor: pointer;" onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}', 'next')">
+				   <div class="thumb">
+				  		<img class="img-fluid" src="${nextBoard.CAMB_FILE}" title="${nextBoard.CAMB_NAME}" alt="${nextBoard.CAMB_NAME}">
+				   </div>
 					<div class="detials">
 				 	<p>다음</p>
 				 	<p style="font-size: 0.8em;">${nextBoard.CAMB_NAME}</p>
-				</div>
+					</div>
 			
 				   <div class="arrow">
 				   		<span class="lnr text-white ti-arrow-right"></span>
-				   </div>
-				   <div class="thumb">
-				  		<img class="img-fluid" src="${nextBoard.CAMB_FILE}" title="${nextBoard.CAMB_NAME}" alt="${nextBoard.CAMB_NAME}" width="150px">
 				   </div>
 				</div>
 		    </div>
 		  </div>
 		</div>
 	  </div>
-
+	<div class="col-1"></div>
 	</div>
   </div>
 </section>
@@ -194,18 +210,21 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
 	}
 	
 	function camBoard(){
-		substring = "pagenum";
-		var pagenum = parseInt(${totalIndex}/6 + 1) - parseInt(${index}/6 + 1); 
 		
+		substring = "pagenum";
+		var pagenum = parseInt(${totalIndex}/6 + 1) - parseInt(${index}/6 + 1);
+		if(${totalIndex} <= 6){
+			pagenum = 1;
+		}
 		if(query){
 			if(query.lastIndexOf("search") !== -1){
 				query = "/search?" + query;
+				URL += "/camBoard/list" + query;
 			}
 			if(query.lastIndexOf(substring) !== -1){
 				query = query.substr(0, subquery.indexOf("pagenum")-2);
+				URL += "/camBoard/list?" + query;
 			}
-			URL += "/camBoard/list?" + query;
-			
 			if(pagenum !== 1){
 				URL += "&pagenum=" + pagenum;
 			}
