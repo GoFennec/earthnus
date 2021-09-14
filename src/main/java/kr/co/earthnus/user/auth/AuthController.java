@@ -125,25 +125,34 @@ public class AuthController {
 			String auth_id = (String) session.getAttribute("mem_id");
 			aBean = service.getNaverLogin(auth_id);
 			model.addAttribute("aBean", aBean);
-			
-			if(aBean == null) {
-				return "redirect:/join_naver";
-			}else {
+			if (aBean != null) {
 				session.setAttribute("auth", aBean);
-				return "redirect:/";
-			}
-		} else {
-			return "/auth/login";
-		}
-}
+				 String redirectUrl = (String) session.getAttribute("url_prior_login");
+				 if(redirectUrl != null) {
+					 String str = redirectUrl.substring(23);
+					 if(str.equals("/goods/exGoods")) {
+						 return "redirect:" + str;
+					 }else if(str.contains("donation")) {
+						 return "redirect:" + str;
+					 }
+				 }else {
+					 return "redirect:/";
+				 }
+				 }else {
+					 return "redirect:/join_naver";
+				 }
+		} return "/auth/login";
+	}
 		
-		//로그아웃
-		@RequestMapping(value = "/naverLogout")
-		public String naverLogout(HttpSession session)throws IOException {
+
+		
+		
+//로그아웃
+	@RequestMapping(value = "/naverLogout")
+	public String naverLogout(HttpSession session)throws IOException {
 				session.removeAttribute(apiResult);
 				session.invalidate();
 
-		        
 				return "redirect:/";
 			}
 	
@@ -159,15 +168,12 @@ public class AuthController {
 			session.setAttribute("auth", aBean);
 			 String redirectUrl = (String) session.getAttribute("url_prior_login");
 			 if(redirectUrl != null) {
-				 String str = redirectUrl.substring(21);
+				 String str = redirectUrl.substring(23);
 				 if(str.equals("/goods/exGoods")) {
 					 return "redirect:" + str;
 				 }else if(str.contains("donation")) {
 					 return "redirect:" + str;
-				 }else if(str.contains("/member/myMessage")) {
-					 return "redirect:" + str;
 				 }
-				 
 			 }else {
 				 return "redirect:/";
 			 }
@@ -224,15 +230,23 @@ public class AuthController {
 			session.setAttribute("access_Token", access_Token);
 			aBean = service.getKakaoLogin(auth_id);
 			model.addAttribute("aBean", aBean);
-			if (aBean == null) {
-				return "redirect:/join_kakao";
-			} else {
+			if (aBean != null) {
 				session.setAttribute("auth", aBean);
-				return "redirect:/";
-			}
-		} else {
-			return "/auth/login";
-		}
+				 String redirectUrl = (String) session.getAttribute("url_prior_login");
+				 if(redirectUrl != null) {
+					 String str = redirectUrl.substring(23);
+					 if(str.equals("/goods/exGoods")) {
+						 return "redirect:" + str;
+					 }else if(str.contains("donation")) {
+						 return "redirect:" + str;
+					 }
+				 }else {
+					 return "redirect:/";
+				 }
+				 }else { 
+					 return "redirect:/join_kakao";
+				 }
+		} return "/auth/login";
 	}
 
 //카카오 로그아웃
@@ -241,7 +255,7 @@ public class AuthController {
 		kakao.kakaoLogout((String) session.getAttribute("access_Token"));
 		session.removeAttribute("access_Token");
 		session.removeAttribute("auth_id");
-		return "index";
+		return "/";
 	}
 
 	
