@@ -8,7 +8,9 @@
 		<result property="cheb_name" column="CHEB_NAME"/>
 		<result property="cheb_dname" column="CHEB_DNUM"/>
 		<result property="cheb_content" column="CHEB_CONTENT"/>
+		<result property="cheb_comment_like_total" column="CHEB_COMMENT_LIKE_TOTAL"/>
 		<result property="cheb_date" column="CHEB_DATE"/>
+		
 	</resultMap>
       
 		<insert id ="replyInsert" parameterType = "cheBoard">
@@ -30,14 +32,72 @@
 	       		 
 	        ]]>
 		</insert>
+		
+	   <delete id="Comment_like_candle"  parameterType ="like_bean">
+	  		 <![CDATA[
+      		DELETE FROM comment_like WHERE comment_user_id=#{comment_user_id} AND comment_num=#{comment_num}
+      		 ]]>
+      </delete>
       
-      <update id="pay_comment_update" parameterType ="cheBoard">
+       <update id="like_countdelete" parameterType ="like_bean">
+       		 <![CDATA[
+      		 	update cheboard set cheb_comment_like_total=cheb_comment_like_total-1 where cheb_num =#{comment_num}
+      		 ]]>
+       </update>
+      
+       <update id="like_countplus" parameterType ="like_bean">
+       		 <![CDATA[
+      		 	update cheboard set cheb_comment_like_total=cheb_comment_like_total+1 where cheb_num =#{comment_num}
+      		 ]]>
+       </update>
+       
+       <select id="get_select_total_like" parameterType ="like_bean" resultType="int">
+      	<![CDATA[
+			select cheb_comment_like_total from cheboard where cheb_num=#{comment_num};
+		]]>
+      </select>
+     
+      
+       <select id="get_like_num" parameterType ="String" resultType="_integer">
+      	<![CDATA[
+			select comment_num from comment_like where comment_user_id=#{user_id};
+		]]>
+      </select>
+      
+      
+      <select id="get_total_comment" resultType="int">
+      	<![CDATA[
+			select count(*) from cheboard;
+		]]>
+      </select>
+      
+      <select id="get_select_dname"  parameterType="String" resultType="pay">
+      	<![CDATA[
+			select * from pay where PAY_COMMENT='N' and pay_id=#{user_id}
+		]]>
+      </select>
+      
+     <select id="get_CheBoardList" resultMap="CheBoardResult">
+        <![CDATA[
+            SELECT G.CHEB_NUM, G.CHEB_ID, G.CHEB_NAME, G.CHEB_DNAME, G.CHEB_CONTENT, G.CHEB_DATE, G.CHEB_COMMENT_LIKE_TOTAL, S.D_IMG  FROM CHEBOARD AS G 
+            LEFT JOIN DONATION AS S ON G.CHEB_DNAME = S.D_NAME
+             ORDER BY CHEB_NUM DESC 
+             LIMIT #{startnum}, #{comment_step}
+        ]]>
+     </select>
+      
+      <delete id="replyDelete" parameterType="int">
+      		DELETE FROM CHEBOARD WHERE CHEB_NUM=#{reply_id}
+      </delete>
+      
+      
+       <update id="pay_comment_update" parameterType ="cheBoard">
       			<choose>
       				<when test='cheb_dname == "바다"'>
       					<![CDATA[
 	       				 UPDATE PAY
 				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '바다' or pay_dname ='조개' or pay_dname ='문어' or pay_dname ='새우');
+				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '조개' or pay_dname ='바다거북' or pay_dname ='고래' or pay_dname ='바다');
 				       	 ]]>
       				</when>
       				<when test='cheb_dname == "숲"'>
@@ -65,28 +125,8 @@
       			</choose>
       </update>
       
-      <select id="get_total_comment" resultType="int">
-      	<![CDATA[
-			select count(*) from cheboard;
-		]]>
-      </select>
       
-      <select id="get_select_dname"  parameterType="String" resultType="pay">
-      	<![CDATA[
-			select * from pay where PAY_COMMENT='N' and pay_id=#{user_id}
-		]]>
-      </select>
       
-     <select id="get_CheBoardList" resultMap="CheBoardResult">
-        <![CDATA[
-            SELECT G.CHEB_NUM, G.CHEB_ID, G.CHEB_NAME, G.CHEB_DNAME, G.CHEB_CONTENT, G.CHEB_DATE, S.D_IMG FROM CHEBOARD AS G 
-            LEFT JOIN DONATION AS S ON G.CHEB_DNAME = S.D_NAME
-             ORDER BY CHEB_NUM DESC 
-             LIMIT #{startnum}, #{comment_step}
-        ]]>
-     </select>
       
-      <delete id="replyDelete" parameterType="int">
-      		DELETE FROM CHEBOARD WHERE CHEB_NUM=#{reply_id}
-      </delete>
+      
 </mapper>

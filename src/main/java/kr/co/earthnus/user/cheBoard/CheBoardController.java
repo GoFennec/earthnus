@@ -32,7 +32,6 @@ public class CheBoardController {
   @RequestMapping(value = {"/cheBoard/Cheboard_insert"}, method = {RequestMethod.POST})
   public void CheBoardInsert(@RequestBody CheBoardBean BoardBean ) {
 	this.service.replyInsert(BoardBean);
-	
 	service.pay_comment_update(BoardBean);
   }
   
@@ -55,20 +54,26 @@ public class CheBoardController {
   public List<CheBoardBean> selectAllComment(String startnum, String comment_step) {
     List<CheBoardBean> CheBoardList = null;
     CheBoardList = service.selectAllComment(startnum, comment_step);
-    
-    System.out.println("");
+
     return CheBoardList;
   }
   
   @ResponseBody
-  @RequestMapping(value = {"/cheBoard/Cheboard_comment_like"}, method = {RequestMethod.POST})
-  public void Comment_like(@RequestBody like_Bean likebean) {
-   
-    System.out.println("1111");
+  @RequestMapping(value = {"/cheBoard/comment_like"}, method = {RequestMethod.POST})
+  public int Comment_like(@RequestBody like_Bean likebean) {
+   int like_total = 0;
     service.Comment_like(likebean);
-   
+    like_total = service.select_total_like(likebean);
+   return like_total;
   }
-
+  @ResponseBody
+  @RequestMapping(value = {"/cheBoard/comment_like_cancle"}, method = {RequestMethod.POST})
+  public int Comment_like_candle(@RequestBody like_Bean likebean) {
+	  int like_total = 0;
+    service.Comment_like_candle(likebean);
+    like_total = service.select_total_like(likebean);
+    return like_total;
+  }
   
 }
 	

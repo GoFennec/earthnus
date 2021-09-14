@@ -187,7 +187,14 @@ background:#000;color:#fff;
     padding: 0 0 5px 0;
     margin-top: 21px;
 }
-
+.like_icon {
+	width:30px;
+	position :absolute;
+	bottom: 0;
+	right: 0;
+	cursor: pointer;
+	
+}
 
 .post-slider{
   width:100%;
@@ -197,7 +204,7 @@ background:#000;color:#fff;
 .post-slider .next{
   position:absolute;
   top:50%;
-  right:10%;
+  right:20%;
   font-size:2em;
   color:gray;
   cursor: pointer;
@@ -205,14 +212,14 @@ background:#000;color:#fff;
 .post-slider .prev{
   position:absolute;
   top:50%;
-  left:10%;
+  left:20%;
   font-size:2em;
   color:gray;
     cursor: pointer;
 }
 .post-slider .post-wrapper{
 
-  width:70%;
+  width:50%;
   margin:auto;
   overflow: hidden;
   padding:10px 0px 10px 0px;
@@ -220,8 +227,8 @@ background:#000;color:#fff;
 
 
 .post-slider .post-wrapper .post .slider-image{
-  width: 500px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   border-top-left-radius:5px;
   border-top-right-radius:5px;
   margin: auto;
@@ -257,7 +264,6 @@ background:#000;color:#fff;
 			
 			text-indent: -9999px;
 		}
-	
 		li.slick-active button {
 			width: 12px;
 		    height: 12px;
@@ -335,7 +341,7 @@ background:#000;color:#fff;
     		</c:when>
     	</c:choose>
     	</c:if>
-	   
+	
     <c:if test="${auth.auth_id != null and !empty payCheck}">
     		<table id="comment_table">
     		<tr>
@@ -373,10 +379,11 @@ background:#000;color:#fff;
      
     	
     </div>
+    <c:if test="${total_comment ge 10}">
 	<div class="btn_moreview">
         <a href="#none" id="addBtn" title="comment more">댓글 더보기 </a>
     </div>
-	
+	</c:if>
   </div>
 
 
@@ -399,16 +406,16 @@ background:#000;color:#fff;
   $(document).ready(function (){
 	 
 		  total_comment = ${total_comment};
+		  
 		  <c:forEach items="${payCheck}" var="row">
 		    All_dname.push("${row.pay_dname}");
 		  </c:forEach>
 			  
-			  <c:if test="${payCheck != []}">
-			  
-		    	select_dname();
-		   </c:if>
-	   
-	  
+		  <c:if test="${payCheck != []}">
+		   	select_dname();
+	 	  </c:if>
+	 	 
+	 	 	
 	  	 init();
 	  	function select_dname() {
 	  		
@@ -419,13 +426,13 @@ background:#000;color:#fff;
 	  		var str = '<select id="dname_select">'
 	  		for(var i=0; i < All_dname.length; i++) {
 	  			
-	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "새우" || All_dname[i] == "문어" || All_dname[i] == "바다") ) {
+	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") ) {
 	  				str += '<option>바다</option>';
 	  				count_sea += 1;
 	  				
 	  			}
 		
-	  			if((count_tree <= 0 ) && (All_dname[i] == "나무" || All_dname[i] == "숲" || All_dname[i] == "묘목" || All_dname[i] == "새싹") ) {
+	  			if((count_tree <= 0 ) && (All_dname[i] == "새싹" || All_dname[i] == "묘목" || All_dname[i] == "나무" || All_dname[i] == "숲") ) {
 	  				str += '<option>숲</option>';
 	  				count_tree += 1;
 	  				
@@ -435,7 +442,7 @@ background:#000;color:#fff;
 	  				str += '<option>친환경</option>';
 	  				count_pla += 1;
 	  			}
-	  			if( (count_bear <= 0) && (All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "빙하")) {
+	  			if( (count_bear <= 0) && (All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "북극곰")) {
 	  				str += '<option>북극곰</option>';
 	  				count_bear +=1;
 	  			}
@@ -479,13 +486,9 @@ background:#000;color:#fff;
         });
         
         $('#addBtn').on('click',function() {
-        	if(total_comment <= step) {
-        		alert("더이상 댓글이 없습니다");
-        	}
-        	else {
+        	
         		step += step;
             	init();
-        	}
         });
         $('.post-wrapper').slick({
 	    	slidesToShow: 1,
@@ -524,6 +527,7 @@ background:#000;color:#fff;
 	        	"comment_step" : step
             }, 
 	        success :function(obj){
+	        	var check = 0;
 	        	var auth_id = "${auth.auth_id}";
 	        	if(startNum < 10) {
 	        	var str= '<table id="listDiv">'
@@ -537,10 +541,9 @@ background:#000;color:#fff;
 	            	 if(auth_id == obj[i].cheb_id) { 
 	            		str +='<div class="delete">'
 	            		str +='<div class="menu">'
-	            		str +='<a title="delete icon"><img alt="delete icon image" class="deleteicon"src="/resources/cheBoard/deleteicon.png"></a>';	
+	            		str +='<a title="delete icon"><img alt="delete icon image" class="deleteicon"src="/resources/cheBoard/deleteicon.png"></a>'	;	
 	            		str +='<ul id="deletehide" idx="'+i+'" >'
 	            		str +='<div><a title="comment delete" class="deleteComment deleteComment'+i+'" data_num="'+obj[i].cheb_num+'"><li>삭제</li><a></div>'
-	            		str +='<div><a title="comment update" class="deleteComment deleteComment'+i+'" data_num="'+obj[i].cheb_num+'"><li>수정</li><a></div>'
 	            		str +='</ul>'
 	            		str +='</div>'
 	            		str +='</div>'
@@ -548,12 +551,35 @@ background:#000;color:#fff;
             		 str +='<p class="cheboard_content">'+obj[i].cheb_content+'</p>';	
             		 str += '<div id="cheboard_date">'+obj[i].cheb_date.substring(0,16)+'</div>';
             		 str += '<div class="id_id"><Strong><span class="cheboard_user">'+obj[i].cheb_name+' 님</span></Strong</div>'
+            		 str += '<div>'
+            		<c:choose>
+            		 <c:when test="${!empty like_check_num}">
+            		 <c:set var="doneLoop" value="false"/>
+            			 <c:forEach items="${like_check_num}" var="item" varStatus="status">
+            			 
+         	 			if("${like_check_num[status.index]}" == obj[i].cheb_num) {
+         	 				<c:set var="doneLoop" value="true"/>
+         	 				 str +='<a class="comment_like" idx="'+i+'" data_num="'+obj[i].cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/like.png"></a>'
+         	 				check = 1;
+         	 			}
+         	 			
+         	 			</c:forEach>
+            		 </c:when>
+            		 <c:when test="${empty like_check_num}">
+            		 	str +='<a class="comment_like" idx="'+i+'" data_num="'+obj[i].cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/NOT_like.png"></a>'
+            		 </c:when> 	
+            		</c:choose>
+            		if(check == 0) {
+            			str +='<a class="comment_like" idx="'+i+'" data_num="'+obj[i].cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/NOT_like.png"></a>'
+            		}
+          			 str +='<span class="like_total">'+obj[i].cheb_comment_like_total+'</span></div>'
             		 str +='</div>'
             		 	 str += '</td>'
 	            		 str += '</tr>';
 	            		
-	            		
-                      }
+	            		check = 0;
+                }
+	        	 str += '</table>'
 	        	if(startNum < 10) {
 	        		
 	        		 $('#list').html(str);
@@ -561,8 +587,14 @@ background:#000;color:#fff;
 	        	else {
 	        		 $('#listDiv').append(str);
 	        	}
-	        	 str += '</table>'
+	        	
+	        	if(total_comment <= step) {
+	        		$("#addBtn").remove();
+	        	}
 	        	       
+	        	 
+	        	 
+	        	 
             $('.deleteComment').on('click', function(){
                 var reply_num = $(this).attr('data_num'); 
                
@@ -588,21 +620,43 @@ background:#000;color:#fff;
             
             $('.comment_like').on('click', function(){
             	var reply_num = $(this).attr('data_num');
-            	
+            	var like_idx = $(this).attr('idx');
             	var senData = {"comment_user_id":auth_id, "comment_num": reply_num}
-      	    if(auth_id == null) {
-        		  alert("로그인 을 해주세요");
-        		  return;
-        	  }
-            	$.ajax({
-            		url: "Cheboard_comment_like",
-            		type : "POST",
-            		data :	JSON.stringify(senData),
-           		 	contentType : "application/json; charset=utf-8",
-           			success : function() {
-           				init();
-           			}
-            	})
+            	var src = $($(this).children('.like_icon')).attr("src");
+            	var this_comment = $(this);
+            	
+            	<c:if test="${auth.auth_id == null}">
+      		  		alert("로그인 을 해주세요");
+      		  		return;
+      	  		</c:if>
+            	
+            	
+            	if(src == "/resources/cheBoard/NOT_like.png") {
+            		
+            		$.ajax({
+                		url: "comment_like",
+                		type : "POST",
+                		data :	JSON.stringify(senData),
+               		 	contentType : "application/json; charset=utf-8",
+               			success : function(obj) {
+               				
+               				this_comment.next().html(obj);
+               				$(this_comment.children('.like_icon')).attr("src","/resources/cheBoard/like.png");
+               			}
+                	})
+            	}
+            	else {
+            		$.ajax({
+                		url: "comment_like_cancle",
+                		type : "POST",
+                		data :	JSON.stringify(senData),
+               		 	contentType : "application/json; charset=utf-8",
+               			success : function(obj) {
+               				this_comment.next().html(obj);
+               				$(this_comment.children('.like_icon')).attr("src","/resources/cheBoard/NOT_like.png");
+               			}
+                	})
+            	}
             });
            $(".menu>a").click(function() {
         	   

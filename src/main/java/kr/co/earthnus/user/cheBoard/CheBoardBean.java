@@ -9,9 +9,9 @@ public class CheBoardBean {
 	private String cheb_dname;
 	private String cheb_content;
 	private String cheb_date;
+	private int cheb_comment_like_total;
 	private String d_img;
-	private int Like_comment_number;
-	private String Like_click_user;
+	
 	public int getCheb_num() {
 		return cheb_num;
 	}
@@ -54,17 +54,12 @@ public class CheBoardBean {
 	public void setD_img(String d_img) {
 		this.d_img = d_img;
 	}
-	public int getLike_comment_number() {
-		return Like_comment_number;
+	public int getCheb_comment_like_total() {
+		return cheb_comment_like_total;
 	}
-	public void setLike_comment_number(int like_comment_number) {
-		Like_comment_number = like_comment_number;
+	public void setCheb_comment_like_total(int cheb_comment_like_total) {
+		this.cheb_comment_like_total = cheb_comment_like_total;
 	}
-	public String getLike_click_user() {
-		return Like_click_user;
-	}
-	public void setLike_click_user(String like_click_user) {
-		Like_click_user = like_click_user;
-	}
+	
 	
 }
