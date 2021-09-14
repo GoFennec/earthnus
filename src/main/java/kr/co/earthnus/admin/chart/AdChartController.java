@@ -23,7 +23,6 @@ public class AdChartController {
 	@RequestMapping(value = "/adChart", method = RequestMethod.GET)
 	public String chart(Model model) {
 
-		
 		service.donationPie(model);
 		service.camPie(model);
 		service.chePie(model);

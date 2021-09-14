@@ -560,7 +560,9 @@ a.btn-card {
             <div id="tb-testimonial" class="testimonial testimonial-success">
                
                 <div class="testimonial-section" id="chContent" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" onclick="location.href='/cheBoard/list'" >
+                <div class="inline-block text-truncate" style="max-width: 500px;">
                 ${cheBoard.cheb_content}
+                </div>
                 </div>
                 <div class="testimonial-desc">
                     <c:if test="${cheBoard.cheb_dname eq '숲'}">

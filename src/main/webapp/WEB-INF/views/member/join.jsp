@@ -88,12 +88,12 @@
       <div style="font-size:40px; padding-top:20px">회원가입</div>
     </div>
 
-    <div class="row g-5">
+    <div class="col-md-6 col-lg-12">
       <div class="">
         <form class="needs-validation" action="/member/join" method="post" onsubmit="return check()" novalidate>
           <div class="row g-3">
           
-            <div class="col-md-9" style="padding-right:0px">
+            <div class="col-md-9 col-9" style="padding-right:0px">
               <label for="firstName" class="form-label">아이디</label>
               <input type="text" name="mem_id" class="form-control" id="mem_id" placeholder="중복확인 버튼을 누르세요." readonly>
               <div class="invalid-feedback" id="invalid-id">
@@ -101,8 +101,8 @@
               </div>
             </div>
             
-            <div class="col-md-3" style="margin-top:50px;">
-              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:20px" id="testBtn">중복확인</button>
+            <div class="col-md-3 col-3" style="margin-top:50px;">
+              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:12px" id="testBtn">중복확인</button>
             </div>
             
             <script>
@@ -124,8 +124,8 @@
 						<br>
 						<input type="text" class="form-control" style="width:400px" id="mem_idcheck" placeholder="아이디를 입력하세요." >
 						<br>
-						<div class="modal-footer">
-							<button type="button" class="w-100 btn btn-primary btn-lg" id="modalY" onclick="idcheck()">중복확인</button>
+						<div class="modal-footer" style="width:100%;align-items:center;">
+							<button type="button" class="btn btn-primary btn-lg" id="modalY" onclick="idcheck()">중복확인</button>
 						</div>
 					</div>
 				</div>
@@ -289,9 +289,9 @@
 			
 			 
 			
-              <div class="col-md-9" style="padding-right:0px"><label for="address" class="form-label">주소</label>
+              <div class="col-md-9 col-9" style="padding-right:0px"><label for="address" class="form-label">주소</label>
               <input type="text" class="form-control" id="postcode" placeholder="우편번호"  onkeyup='call_addr()' style="margin-top:2px" required></div>
-              <div class="col-md-3" style="margin-top:53px;"><button type="button" class="w-100 btn btn-primary btn-lg" onclick="execDaumPostcode()" style="padding-left:9px; font-size:13px">우편번호 찾기</button><br></div>
+              <div class="col-md-3 col-3" style="margin-top:53px;"><button type="button" class="w-100 btn btn-primary btn-lg" onclick="execDaumPostcode()" style="padding-left:3px; font-size:12px"><b></b>우편번호 찾기</button><br></div>
 			  <div class="col-md-12"><input type="text" class="form-control" id="address" placeholder="주소" onkeyup='call_addr()' required></div>
 			  <div class="col-md-12"><input type="text" class="form-control" id="detailAddress" placeholder="상세주소" onkeyup='call_addr()' required></div>
 			  <div class="col-md-12"><input type="text" class="form-control" id="extraAddress" placeholder="참고항목" onkeyup='call_addr()'></div>
@@ -311,11 +311,8 @@
  					}
 				}
 			</script>
-          </div>
-
-          <div class="row gy-3">
           
-            <div class="col-md-9" style="padding-right:0px">
+            <div class="col-md-9 col-9" style="padding-right:0px">
               <label for="cc-name" class="form-label">이메일</label>
               <input type="email" name="mem_email" class="form-control" id="mem_email" placeholder="ex)EARTHNUS@email.com">
               <div class="invalid-feedback" id="invalid-email">
@@ -323,8 +320,8 @@
               </div>
             </div>
             
-            <div class="col-md-3" style="margin-top:53px;">
-              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:9px; font-size:13px" onclick="mail()" id="testBtn1">인증번호 받기</button>
+            <div class="col-md-3 col-3" style="margin-top:53px;">
+              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:3px; font-size:12px" onclick="mail()" id="testBtn1">인증번호 받기</button>
             </div>
             
             <script type="text/javascript">
@@ -367,13 +364,13 @@
 				}
 			</script>
             
-            <div class="col-md-9" style="padding-right:0px">
+            <div class="col-md-9 col-9" style="padding-right:0px">
               <input type="text" name="mailCheck" class="form-control" id="mailCheck" placeholder="이메일 인증번호" required>
               <div class="invalid-feedback" id="invalid-emailCheck">
                 	필수 입력사항입니다.
               </div>
             </div>
-            <div class="col-md-3" style="margin-top:5px;">
+            <div class="col-md-3 col-3" style="margin-top:5px;">
               <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:9px; font-size:13px" onclick="mailCheck()" id="testBtn2">인증번호 확인</button>
             </div>
             
