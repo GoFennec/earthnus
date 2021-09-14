@@ -691,11 +691,15 @@ font-family: "Montserrat",sans-serif;
 			</p><br>
 			<p id="p2"><span id="s1">[포인트 사용 및 복구 불가 안내]</span><br>
 			포인트의 경우 회원 탈퇴 후 사용 또는 갱신이 불가능 합니다. 포인트를 이용하고 싶으 신 경우 탈퇴 전 사용 부탁드리며, 탈퇴 후 포인트 소멸에 대한 책임은 지지 않으니 신중한 선택 부탁드립니다. 
+			<br>
+			<p id="p2"><span id="s1">[지구마켓 상품 배송완료 전 탈퇴 불가 안내]</span><br>
+			배송이 진행중인 지구마켓 상품이 있는 경우 탈퇴가 불가능 합니다.  
+			
 			
         </div>
         <br/>
        
-            <div class="form-group">
+            <div class="form-group"> 
                 <label class="checkbox-inline">
                     <input type="checkbox" name="agreement" value="true">동의합니다.
                    

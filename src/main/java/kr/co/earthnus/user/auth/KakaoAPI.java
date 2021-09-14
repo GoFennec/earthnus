@@ -36,7 +36,7 @@ public class KakaoAPI {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=1f09c57d8241952a7a44833618d75b13");
-            sb.append("&redirect_uri=http://localhost:8090/kakaoLogin");
+            sb.append("&redirect_uri=http://www.earthnus.link/kakaoLogin");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -131,7 +131,7 @@ public class KakaoAPI {
 
     
     public void kakaoLogout(String access_Token) {
-        String reqURL = "https://kauth.kakao.com/oauth/logout?client_id=1f09c57d8241952a7a44833618d75b13&logout_redirect_uri=http://localhost:8090/kakaoLogout";
+        String reqURL = "https://kauth.kakao.com/oauth/logout?client_id=1f09c57d8241952a7a44833618d75b13&logout_redirect_uri=http://www.earthnus.link/kakaoLogout";
         try {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

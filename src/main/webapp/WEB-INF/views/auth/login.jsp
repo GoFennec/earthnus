@@ -139,7 +139,7 @@ height:46px;
      
            <div>
             <c:if test="${userId eq null}">
-        <a href="https://kauth.kakao.com/oauth/authorize?client_id=1f09c57d8241952a7a44833618d75b13&redirect_uri=http://localhost:8090/kakaoLogin&response_type=code">
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=1f09c57d8241952a7a44833618d75b13&redirect_uri=http://www.earthnus.link/kakaoLogin&response_type=code">
             <img src="/resources/Auth/kakao_login_large_wide.png" id="kakao"  alt="카카오로그인버튼" title="로그인버튼">
         </a>
     </c:if>
@@ -148,7 +148,7 @@ height:46px;
       
          <%
     String clientId = "vDkmCgxDt2L_BtosPOoP";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8090/auth/callback", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://www.earthnus.link/auth/callback", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
     String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
