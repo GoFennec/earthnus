@@ -194,7 +194,7 @@
                       		<td>${list.cheb_id}</td>
                       		<td>${list.cheb_name}</td>
                       		<td>${list.cheb_dname}</td>
-                        	<td>${list.cheb_content}</td>
+                        	<td class="inline-block text-truncate" style="max-width: 150px;">${list.cheb_content}</td>
                       	</tr>
                      	</c:forEach>
                     </tbody>

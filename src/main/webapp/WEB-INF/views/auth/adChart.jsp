@@ -182,7 +182,7 @@
             </div>
             
             <div class="col-lg-12" id="cButton">
-            		<button class="btn btn-sm btn-primary" id="dayButton">7일 데이터 보기</button>&nbsp;&nbsp;
+            		<button class="btn btn-sm btn-primary" id="dayButton">일주일 데이터 보기</button>&nbsp;&nbsp;
             		<div id="input_date">
             			<input type="text" id="select_lastDate" readonly> ~ <input type="date" id="select_startDate" onchange="change_date(this)">&nbsp;
             			<button onclick="getSevenData()">조회</button>&nbsp;&nbsp;
@@ -1003,7 +1003,7 @@
 			});
   }
   
-	  //이번달 방문자
+	  //월별 그래프
   	  $("#month").hide();
   	  $("#select_div").hide();
   	  
