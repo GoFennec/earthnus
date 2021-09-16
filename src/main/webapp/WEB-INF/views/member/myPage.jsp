@@ -616,7 +616,7 @@ width: 28px;
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_o}" />원</span></p>
+						<p class="mb-2 font-weight-bold">후원 금액 <br><span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_o}" />원</span></p>
 					</li>
 				</ul>
 			</div>
@@ -632,7 +632,7 @@ width: 28px;
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_f}" />원</span></p>
+						<p class="mb-2 font-weight-bold">후원 금액 <br><span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_f}" />원</span></p>
 					</li>
 				</ul>
 			</div>
@@ -650,7 +650,7 @@ width: 28px;
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-									<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_p}" />원</span></p>
+									<p class="mb-2 font-weight-bold">후원 금액 <br><span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_p}" />원</span></p>
 					</li>
 				</ul>
 			</div>
@@ -669,7 +669,7 @@ width: 28px;
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item px-4 pb-4">
-						<p class="mb-2 font-weight-bold">후원 금액 <span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_i}" />원</span></p>
+						<p class="mb-2 font-weight-bold">후원 금액 <br><span class="float-right"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation_i}" />원</span></p>
 					</li>
 				</ul>
 			</div>

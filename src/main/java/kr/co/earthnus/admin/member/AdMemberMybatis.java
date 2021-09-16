@@ -9,7 +9,7 @@ import kr.co.earthnus.user.member.MemberBean;
 public interface AdMemberMybatis {
 	
 	public List<MemberBean> getMemberList();
-	public List<MemberBean>	getMemberListDetail(@Param("mem_id") String mem_id);
+	public MemberBean getMemberListDetail(@Param("mem_id") String mem_id);
 	public int getPayCount(@Param("mem_id") String mem_id);
 	public Integer getPayTotal(@Param("mem_id") String mem_id);
 	public int getCheerCount(@Param("mem_id") String mem_id);

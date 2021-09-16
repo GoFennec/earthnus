@@ -21,7 +21,7 @@
 .slick-list
 {
     position: relative;
-
+	height: 600px;
     display: block;
     overflow: hidden;
 
@@ -34,6 +34,7 @@
 }
 .slick-list.dragging
 {
+	height: 600px;
     cursor: pointer;
     cursor: hand;
 }

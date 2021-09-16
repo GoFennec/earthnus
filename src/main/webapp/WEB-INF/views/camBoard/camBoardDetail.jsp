@@ -42,9 +42,6 @@
     <div class="col-1"></div>
      <div class="col-10 posts-list">
       <div class="single-post">
-       <div class="feature-img" style="text-align: center;">
-        <img src="${camBoard.CAMB_FILE}" id="IMG" width="90%" alt="${camBoard.CAMB_NAME}" title="${camBoard.CAMB_NAME}"/>
-      </div>
       <div class="blog_details">
         <h2 style="color: #2d2d2d;">${camBoard.CAMB_NAME}</h2>
 		<div id="subject_icon">

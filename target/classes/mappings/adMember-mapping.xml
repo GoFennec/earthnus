@@ -22,7 +22,7 @@
 		select * from member where mem_name != '삭제된회원'
 	</select>
 	
-	<select id="getMemberListDetail" parameterType="String" resultMap="member">
+	<select id="getMemberListDetail" parameterType="String" resultType="member">
 		select * from member where mem_id = #{mem_id}
 	</select>
 	

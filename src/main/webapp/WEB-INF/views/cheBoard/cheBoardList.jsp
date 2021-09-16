@@ -30,7 +30,14 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     list-style: none;
 }
 
-
+#select_dname > span {
+	float: left;
+    text-align: center;
+    position: relative;
+    top: 13px;
+    margin-right: 10px;
+}
+}
 
 #id_date {
 	padding-left: 70px;
@@ -40,8 +47,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 .left-info{
 	padding:0 0 0 8px;
 	position:relative;
-	display:block;
-	width:100%;
 	padding: 26px 0 20px;
 	border-bottom: 1px solid #ccc;
 }
@@ -79,7 +84,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     
 }
 .id_id{
-	padding: 19px 0 0;
+	padding: 9px 0 0 50px;
 }
 #cheboard_date {
 	float: none;
@@ -140,7 +145,9 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
   padding-left: 18px;
   padding-right: 30px;
   position: relative;
-  width: 200px; }
+  width: 200px; 
+  float:left;
+  }
   
 .btn_moreview {
 position:relative;width:100%;display:inline-block;*display:inline;text-align:center;margin:20px 0 0 0;
@@ -188,14 +195,19 @@ background:#000;color:#fff;
     margin-top: 21px;
 }
 .like_icon {
-	width:30px;
-	position :absolute;
-	bottom: 0;
-	right: 0;
-	cursor: pointer;
-	
+	width: 20px;
+    cursor: pointer;
 }
-
+.like_comment_div {
+	position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.like_total {
+	margin-left: 3px;
+    position: relative;
+    bottom: -2px;
+}
 .post-slider{
   width:100%;
   margin: auto;
@@ -331,9 +343,10 @@ background:#000;color:#fff;
 	 	<c:if test="${auth.auth_id != null}">
     	<c:choose>
     		
-    		<c:when test="${payCheck != null }">
+    		<c:when test="${!empty payCheck}">
     		
     			<div id="select_dname">
+    			<span>카테고리:</span>
     			</div>
     				
     		
@@ -402,21 +415,20 @@ background:#000;color:#fff;
 	var step = 10;
 	var insert_commet = 0;
 	var All_dname = [];
-	var total_comment = 0;
+	var total_comment = ${total_comment};
+	var first_comming = 0;
   $(document).ready(function (){
-	 
-		  total_comment = ${total_comment};
 		  
 		  <c:forEach items="${payCheck}" var="row">
 		    All_dname.push("${row.pay_dname}");
 		  </c:forEach>
 			  
-		  <c:if test="${payCheck != []}">
-		   	select_dname();
+		  <c:if test="${!empty payCheck}">
+		  	 	select_dname();
 	 	  </c:if>
 	 	 
 	 	 	
-	  	 init();
+	  	 	init();
 	  	function select_dname() {
 	  		
 	  		var count_tree = 0;
@@ -433,17 +445,17 @@ background:#000;color:#fff;
 	  			}
 		
 	  			if((count_tree <= 0 ) && (All_dname[i] == "새싹" || All_dname[i] == "묘목" || All_dname[i] == "나무" || All_dname[i] == "숲") ) {
-	  				str += '<option>숲</option>';
+	  				str += '<option>나무</option>';
 	  				count_tree += 1;
 	  				
 	  			}
 	  			
 	  			if((count_pla <= 0) && (All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경")) {
-	  				str += '<option>친환경</option>';
+	  				str += '<option>플라스틱</option>';
 	  				count_pla += 1;
 	  			}
 	  			if( (count_bear <= 0) && (All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "북극곰")) {
-	  				str += '<option>북극곰</option>';
+	  				str += '<option>북극</option>';
 	  				count_bear +=1;
 	  			}
 	  		}	
@@ -476,7 +488,7 @@ background:#000;color:#fff;
         			 $('#comment_content').val("");
         			 $("#dname_select option:selected").remove();
         			 if( $("#dname_select option").size() == 0) {
-        				 $('#dname_select').remove();
+        				 $('#select_dname').remove();
         				 $('#comment_table').css("display", "none");
         			 }
         			 total_comment++;
@@ -501,7 +513,7 @@ background:#000;color:#fff;
         
         $('#comment_content').keyup(function (e){
 	  	    var content = $(this).val();
-	  	    $('#counter').html("("+content.length+" / 최대 200자)");    //글자수 실시간 카운팅
+	  	    $('#counter').html("("+content.length+" / 최대 200자)");
 
 	  	    if (content.length > 200){
 	  	        alert("최대 200자까지 입력 가능합니다.");
@@ -550,28 +562,33 @@ background:#000;color:#fff;
             		 }
             		 str +='<p class="cheboard_content">'+obj[i].cheb_content+'</p>';	
             		 str += '<div id="cheboard_date">'+obj[i].cheb_date.substring(0,16)+'</div>';
-            		 str += '<div class="id_id"><Strong><span class="cheboard_user">'+obj[i].cheb_name+' 님</span></Strong</div>'
+            		 str += '<div class="id_id"><Strong><span class="cheboard_user">'+obj[i].cheb_name+' 님</span></Strong></div>'
             		 str += '<div>'
+            		 str += '<div class="like_comment_div">'
             		<c:choose>
             		 <c:when test="${!empty like_check_num}">
-            		 <c:set var="doneLoop" value="false"/>
             			 <c:forEach items="${like_check_num}" var="item" varStatus="status">
             			 
-         	 			if("${like_check_num[status.index]}" == obj[i].cheb_num) {
-         	 				<c:set var="doneLoop" value="true"/>
-         	 				 str +='<a class="comment_like" idx="'+i+'" data_num="'+obj[i].cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/like.png"></a>'
-         	 				check = 1;
-         	 			}
-         	 			
-         	 			</c:forEach>
+	         	 			if("${like_check_num[status.index]}" == obj[i].cheb_num) {
+	         	 				
+	         	 				 str +='<a class="comment_like" idx="'+i+'" data_num="'+obj[i].cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/like.png"></a>'
+	         	 				check = 1;
+	         	 			}
+         
+         	 			 </c:forEach>
             		 </c:when>
+            		 
             		 <c:when test="${empty like_check_num}">
             		 	str +='<a class="comment_like" idx="'+i+'" data_num="'+obj[i].cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/NOT_like.png"></a>'
-            		 </c:when> 	
+            		 	check =1;
+            		 </c:when>
+            		 	
             		</c:choose>
+            		
             		if(check == 0) {
             			str +='<a class="comment_like" idx="'+i+'" data_num="'+obj[i].cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/NOT_like.png"></a>'
             		}
+
           			 str +='<span class="like_total">'+obj[i].cheb_comment_like_total+'</span></div>'
             		 str +='</div>'
             		 	 str += '</td>'
@@ -654,10 +671,14 @@ background:#000;color:#fff;
                			success : function(obj) {
                				this_comment.next().html(obj);
                				$(this_comment.children('.like_icon')).attr("src","/resources/cheBoard/NOT_like.png");
-               			}
+               			},
+                        error : function(error){
+                            console.log(error);
+                        }
                 	})
             	}
             });
+            
            $(".menu>a").click(function() {
         	   
         	  var idx_table = $(this).next("ul").attr('idx');
@@ -669,8 +690,12 @@ background:#000;color:#fff;
         	  else {  $(".deleteComment"+idx_table).hide(); 
         	  	}
            })
-    	}
+    	},
+        error : function(error){
+            console.log(error);
+        }
 	});
 	}
+    
 </script>
 </html>
