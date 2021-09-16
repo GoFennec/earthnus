@@ -36,7 +36,7 @@ public class AdMemberController {
 	@RequestMapping(value="/adMember/detail")
 	public String getMemberDetail(@RequestParam("mem_id") String mem_id, Model model) {
 		
-		List<MemberBean> memberListDetail = adMemberService.memberListDetail(mem_id);
+		MemberBean memberListDetail = adMemberService.memberListDetail(mem_id);
 		String payCount = Integer.toString(adMemberService.payCount(mem_id));
 		String payTotal = Integer.toString(adMemberService.payTotal(mem_id));
 		String cheerCount = Integer.toString(adMemberService.cheerCount(mem_id));

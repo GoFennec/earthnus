@@ -10,8 +10,9 @@
 <style>
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #388E3C; border-bottom: 3px solid #388E3C;}
-	tbody th {width: 150px; padding: 10px; font-weight: bold; vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
-	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
+	tbody th {width: 200px; padding: 10px; font-weight: bold; text-align: center; 
+			vertical-align: center; border-bottom: 1px solid #ccc; background: #f3f6f7;}
+	td {padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 	td .exGoodsImg {text-align: center; margin: auto; padding: 1px;}
 	.exButton{text-align: center;}
 </style>
@@ -26,25 +27,31 @@
 		<thead>
 			<tr><th scope="col" colspan="3">교환 상세 정보</th></tr>
 		</thead>
-		<tr><td colspan="2"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td></tr>
-		<tr><th scope="col">교환 날짜</th><td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td></tr>
-		<tr><th scope="col">선택 상품</th><td>${goods.goods_name}</td></tr>
+		<tbody>
+			<tr><td colspan="2"><p class="exGoodsImg"><img src="${goods.goods_img}" width="250" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"/></p></td></tr>
+			<tr><th scope="col">교환 날짜</th><td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td></tr>
+			<tr><th scope="col">선택 상품</th><td>${goods.goods_name}</td></tr>
+		</tbody>
 	</table><br/>
 	<table class="exGoods">
 		<thead>
 			<tr><th scope="col" colspan="3">교환 포인트 정보</th></tr>
 		</thead>
-		<tr><th scope="col">사용한 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td></tr>
-		<tr><th scope="col">잔여 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${member.mem_point}"/> point</td></tr>
+		</tbody>
+			<tr><th scope="col">사용한 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td></tr>
+			<tr><th scope="col">잔여 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${member.mem_point}"/> point</td></tr>
+		</tbody>
 	</table><br/>
 	<table class="exGoods">
 		<thead>
 			<tr><th scope="col" colspan="3">배송지 정보</th></tr>
 		</thead>
-		<tr><th scope="col">수령인</th><td>${exGoods.exg_name}</td></tr>
-		<tr><th scope="col">연락처</th><td>${member.mem_tel}</td></tr>
-		<tr><th scope="col">배송지</th><td id="addr"></td></tr>
-		<tr><th scope="col">요청사항</th><td>${exGoods.exg_message}</td></tr>
+		</tbody>
+			<tr><th scope="col">수령인</th><td>${exGoods.exg_name}</td></tr>
+			<tr><th scope="col">연락처</th><td>${member.mem_tel}</td></tr>
+			<tr><th scope="col">배송지</th><td id="addr"></td></tr>
+			<tr><th scope="col">요청사항</th><td>${exGoods.exg_message}</td></tr>
+		</tbody>
 	</table><br/>
 	
 	<div class="exButton">

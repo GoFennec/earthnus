@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,27 +106,30 @@
                 <div class="card-body">
                     <div class="form-group">
                       <label for="exampleInputEmail1">아이디</label>
-                      <input type="text" class="form-control" id="mem_id" value="${memberListDetail[0].mem_id}" readonly>
+                      		<c:if test="${memberListDetail.mem_api eq \"NAVER\" }"><input type="text" class="form-control" id="mem_id" value="네이버 로그인 회원" readonly></c:if>
+                      		<c:if test="${memberListDetail.mem_api eq \"KAKAO\" }"><input type="text" class="form-control" id="mem_id" value="카카오 로그인 회원" readonly></c:if>
+                      		<c:if test="${memberListDetail.mem_api eq \"NULL\" }"><input type="text" class="form-control" id="mem_id" value="${memberListDetail.mem_id}" readonly></c:if>
+                      		<c:if test="${memberListDetail.mem_api eq null }"><input type="text" class="form-control" id="mem_id" value="${memberListDetail.mem_id}" readonly></c:if>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">이메일</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail[0].mem_email}" readonly>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail.mem_email}" readonly>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">전화번호</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail[0].mem_tel}" readonly>
+                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail.mem_tel}" readonly>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">주소</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail[0].mem_addr}" readonly>
+                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail.mem_addr}" readonly>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">성별</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail[0].mem_gender}" readonly>
+                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail.mem_gender}" readonly>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">생일</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail[0].mem_birth}" readonly>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail.mem_birth}" readonly>
                     </div>
                 </div>
               </div>
@@ -136,11 +140,11 @@
                 <div class="card-body">
                     <div class="form-group">
                       <label for="exampleInputPassword1">이름</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail[0].mem_name}" readonly>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail.mem_name}" readonly>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">가입 날짜</label>
-                      <fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${memberListDetail[0].mem_date}" var="formatdate"/>
+                      <fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${memberListDetail.mem_date}" var="formatdate"/>
                       <input type="text" class="form-control" id="exampleInputPassword1" value="${formatdate}" readonly>
                     </div>
                     <div class="form-group">
@@ -157,7 +161,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">포인트</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail[0].mem_point}" readonly>
+                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail.mem_point}" readonly>
                     </div>
                 </div>
               </div>
@@ -171,7 +175,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">${memberListDetail[0].mem_id} 회원을 삭제합니다.</h5>
+                  <h5 class="modal-title" id="exampleModalLabelLogout">${memberListDetail.mem_id} 회원을 삭제합니다.</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>

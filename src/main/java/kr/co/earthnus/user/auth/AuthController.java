@@ -3,12 +3,15 @@ package kr.co.earthnus.user.auth;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import kr.co.earthnus.admin.goods.AdGoodsService;
 import kr.co.earthnus.user.camBoard.camBoardBean;
 import kr.co.earthnus.user.cheBoard.CheBoardBean;
 
@@ -34,6 +38,7 @@ public class AuthController {
 
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
+	private static final Log LOG = LogFactory.getLog(AuthController.class);
 	
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -42,7 +47,7 @@ public class AuthController {
 
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String getIndex(Model model) {
+	public String getIndex(Model model) throws java.text.ParseException {
 		String total_pay = service.getTotal_pay();
 		String endCam = service.getEndCam();
 		String total_f = service.getTotal_f();
@@ -51,6 +56,11 @@ public class AuthController {
 		String total_p = service.getTotal_p();
 		List<camBoardBean> list = service.getCb_list();
 		List<CheBoardBean> ch_list = service.getCh_list();
+		
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		for(int i = 0; i < ch_list.size(); i++) {
+			ch_list.get(i).setCheb_time(fm.parse(ch_list.get(i).getCheb_date()));
+		}
 		
 		model.addAttribute("getTotal_pay",total_pay);
 		model.addAttribute("getEndCam",endCam);
@@ -129,7 +139,7 @@ public class AuthController {
 				session.setAttribute("auth", aBean);
 				 String redirectUrl = (String) session.getAttribute("url_prior_login");
 				 if(redirectUrl != null) {
-					 String str = redirectUrl.substring(23);
+					 String str = redirectUrl.substring(19);
 					 if(str.equals("/goods/exGoods")) {
 						 return "redirect:" + str;
 					 }else if(str.contains("donation")) {
@@ -169,6 +179,7 @@ public class AuthController {
 			 String redirectUrl = (String) session.getAttribute("url_prior_login");
 			 if(redirectUrl != null) {
 				 String str = redirectUrl.substring(23);
+				 LOG.error("============>/auth/login" + str);
 				 if(str.equals("/goods/exGoods")) {
 					 return "redirect:" + str;
 				 }else if(str.contains("donation")) {
@@ -235,6 +246,7 @@ public class AuthController {
 				 String redirectUrl = (String) session.getAttribute("url_prior_login");
 				 if(redirectUrl != null) {
 					 String str = redirectUrl.substring(23);
+					 LOG.error("============>/kakaoLogin" + str);
 					 if(str.equals("/goods/exGoods")) {
 						 return "redirect:" + str;
 					 }else if(str.contains("donation")) {
