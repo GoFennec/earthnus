@@ -66,13 +66,10 @@ public class AdAuthController {
 	public String adLoginch(@RequestParam("auth_pw") String auth_pw,
 			AdAuthBean aBean, HttpSession session, Model model) throws NoSuchAlgorithmException {
 		model.addAttribute("auth_id", aBean.getAuth_id());
-		System.out.println("adauth_id check" + aBean.getAuth_id());
-		System.out.println("adauth_pw check" + auth_pw);
 		aBean = Service.adLogin(aBean.getAuth_id(), auth_pw);
 		
 		if(aBean != null) {
 			session.setAttribute("adauth", aBean);
-			System.out.println("session test");
 			return "redirect:/adIndex";
 		} else {
 			return "auth/adLogin";

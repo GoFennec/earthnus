@@ -1,6 +1,8 @@
 package kr.co.earthnus.admin.cheBoard;
 
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,5 +53,34 @@ public class AdCheBoardController {
 			map.put("error", false);
 		}
 		return map;
+	}
+	
+	@RequestMapping(value="/adCheBoard/delete1", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteGoods(@RequestParam("deletePW") String deletePW, @RequestParam(value="cheb_num") String cheb_num) throws NoSuchAlgorithmException {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		int delete = adMemberService.deletePW(deletePW);
+		
+		if(delete > 0) {
+			adCheBoardService.deleteCheBoard(cheb_num);
+			map.put("error", true);
+		}else {
+			map.put("error", false);
+		}
+		return map;
+	}
+	
+	@RequestMapping(value="/adCheBoard/detail")
+	public String getCamBoardDetail(@RequestParam("CHEB_NUM") String num, Model model) throws ParseException {
+		
+		CheBoardBean cheBoardList =  adCheBoardService.getCheBoardDetail(num);
+		
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		cheBoardList.setCheb_time(fm.parse(cheBoardList.getCheb_date()));
+		
+		model.addAttribute("cheBoardDetail",cheBoardList);
+		
+		return "cheBoard/adCheBoardDetail";
 	}
 }

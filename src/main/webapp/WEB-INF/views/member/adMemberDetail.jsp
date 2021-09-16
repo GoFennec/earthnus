@@ -17,6 +17,12 @@
   <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="/resources/assets/css/ruang-admin.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  
+  <style type="text/css">
+  	.form-control{
+  		font-size:1.5rem;
+  	}
+  </style>
 </head>
 
 <body id="page-top">

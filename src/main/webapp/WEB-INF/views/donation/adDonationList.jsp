@@ -291,7 +291,12 @@
 							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${point}"/>p</td>
 							<td>${donation.pay_pdate}</td>
 							<td>${donation.pay_cdate}</td>
-							<td>${donation.pay_state}</td>
+							<c:if test="${donation.pay_state eq '결제취소'}">
+								<td class="text-danger">${donation.pay_state}</td>
+							</c:if>
+							<c:if test="${donation.pay_state ne '결제취소'}">
+								<td>${donation.pay_state}</td>
+							</c:if>
 							<c:if test="${donation.pay_state eq '결제승인' and donation.pay_pstate eq '적립예정'}">
 							<td><form action="/adDonation/pointUpdate" method="POST">
 								<input type="hidden" name="pay_id" value="${donation.pay_id}"/>
@@ -299,9 +304,8 @@
 								<input type="hidden" name="pay_point" value="${donation.pay_point}"/>
 								<input type="submit" class="btn btn-sm btn-primary" value="승인"/></form></td>
 							</c:if>
-				
 							<c:if test="${donation.pay_pstate eq '적립완료' or donation.pay_state eq '결제취소'}">
-							<td>${donation.pay_pstate}</td>
+								<td style="color:#66bb6a;">${donation.pay_pstate}</td>
 							</c:if>
 						</tr>
 						</c:forEach>
@@ -349,7 +353,7 @@
 							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${point}"/>p</td>
 							<td>${donation.pay_pdate}</td>
 							<td>${donation.pay_cdate}</td>
-							<td>${donation.pay_state}</td>
+							<td class="text-danger">${donation.pay_state}</td>
 							<c:if test="${donation.pay_state eq '결제승인' and donation.pay_pstate eq '적립예정'}">
 							<td><form action="/adDonation/pointUpdate" method="POST">
 								<input type="hidden" name="pay_id" value="${donation.pay_id}"/>

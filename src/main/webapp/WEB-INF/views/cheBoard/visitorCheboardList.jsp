@@ -29,7 +29,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     padding: 0;
     list-style: none;
 }
-
 #select_dname > span {
 	float: left;
     text-align: center;
@@ -38,12 +37,10 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     margin-right: 10px;
 }
 }
-
 #id_date {
 	padding-left: 70px;
 	padding-right: 23px;
 }
-
 .left-info{
 	padding:0 0 0 8px;
 	position:relative;
@@ -74,7 +71,6 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 #mainpage, #pagemain {
 	padding:7px;
 }
-
 .id_profile {
 	float: left;
     position: relative;
@@ -186,7 +182,6 @@ background:#000;color:#fff;
 .deleteComment>li:hover {
 	background-color:#e5e5e5;
 }
-
 #comment_content{
 	position: relative;
     display: block;
@@ -230,14 +225,11 @@ background:#000;color:#fff;
     cursor: pointer;
 }
 .post-slider .post-wrapper{
-
   width:50%;
   margin:auto;
   overflow: hidden;
   padding:10px 0px 10px 0px;
 }
-
-
 .post-slider .post-wrapper .post .slider-image{
   width: 100%;
   height: 100%;
@@ -392,10 +384,11 @@ background:#000;color:#fff;
      
     	
     </div>
-   
+    <c:if test="${total_comment ge 10}">
 	<div class="btn_moreview">
-       
+        <a href="#none" id="addBtn" title="comment more">댓글 더보기 </a>
     </div>
+	</c:if>
   </div>
 
 
@@ -412,83 +405,22 @@ background:#000;color:#fff;
 <script type="text/javascript">
 	var startNum = 0;
 	var step = 10;
+	var insert_commet = 0;
 	var All_dname = [];
+	var total_comment = ${total_comment};
+	var first_comming = 0;
   $(document).ready(function (){
 		  
-		  <c:forEach items="${payCheck}" var="row">
-		    All_dname.push("${row.pay_dname}");
-		  </c:forEach>
-			  
-		  <c:if test="${!empty payCheck}">
-		  	 	select_dname();
-	 	  </c:if>
-	 	 
+		  
 	 	 	
-	 	 login_init();
-	  	function select_dname() {
-	  		
-	  		var count_tree = 0;
-	  		var count_sea = 0;
-	  		var count_pla = 0;
-	  		var count_bear = 0;
-	  		var str = '<select id="dname_select">'
-	  		for(var i=0; i < All_dname.length; i++) {
-	  			
-	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") ) {
-	  				str += '<option>바다</option>';
-	  				count_sea += 1;
-	  				
-	  			}
-		
-	  			if((count_tree <= 0 ) && (All_dname[i] == "새싹" || All_dname[i] == "묘목" || All_dname[i] == "나무" || All_dname[i] == "숲") ) {
-	  				str += '<option>나무</option>';
-	  				count_tree += 1;
-	  				
-	  			}
-	  			
-	  			if((count_pla <= 0) && (All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경")) {
-	  				str += '<option>플라스틱</option>';
-	  				count_pla += 1;
-	  			}
-	  			if( (count_bear <= 0) && (All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "북극곰")) {
-	  				str += '<option>북극</option>';
-	  				count_bear +=1;
-	  			}
-	  		}	
-	  		str += '</select>';
-	  		$('#select_dname').append(str);
-	  	}
-	   	
-        $('#replyInsert').on('click',function() {
-          	
-        	  var text = $('#comment_content').val().replace(/(?:\r\n|\r|\n)/g,'<br/>');
-        	  var id = "${auth.auth_id}";
-  	      	  var name = "${auth.auth_name}";
-        	  var dnum = $("#dname_select option:selected").val();
-        	  var senData = {"cheb_id":id, "cheb_name":name, "cheb_dname":dnum, "cheb_content": text,}
-        	  if(text.trim().length==0) {
-        		  alert("내용을 작성해주세요");
-        		  $('#replyInsert').focus();
-        		  return;
-        	  }
-        	 $.ajax({
-        		 url : "comment_insert",
-        		 type : "POST",
-        		 data :	JSON.stringify(senData),
-        		 contentType : "application/json; charset=utf-8",
-        		 success : function(){
-        			 $('#comment_content').val("");
-        			 $("#dname_select option:selected").remove();
-        			 if( $("#dname_select option").size() == 0) {
-        				 $('#select_dname').remove();
-        				 $('#comment_table').css("display", "none");
-        			 }
-        			
-        			 login_init();
-        	} 
-          });	 
-        });
+	  	 	init();
+       
         
+        $('#addBtn').on('click',function() {
+        	
+        		step += step;
+            	init();
+        });
         $('.post-wrapper').slick({
 	    	slidesToShow: 1,
 	    	  slidesToScroll: 1,
@@ -497,89 +429,48 @@ background:#000;color:#fff;
 	    	  nextArrow:$('.next'),
 	    	  prevArrow:$('.prev')
 	    	});
-        
-        $('#comment_content').keyup(function (e){
-	  	    var content = $(this).val();
-	  	    $('#counter').html("("+content.length+" / 최대 200자)");
-
-	  	    if (content.length > 200){
-	  	        alert("최대 200자까지 입력 가능합니다.");
-	  	        $(this).val(content.substring(0, 200));
-	  	        $('#counter').html("(200 / 최대 200자)");
-	  	    }
-	  	}); 
-  });  
+  });
+ 
   
-  	function login_init(){
+  
+  
+  
+  //list
+  	function init(){
   	
+  		
   		$.ajax({
-	        url : "user_select_all",
+	        url : "visitor_comment_list",
 	        type : "GET",
 	        data :{
 	        	"startnum" : startNum,
 	        	"comment_step" : step
             }, 
-	        success :function(data){
-	        	var check = 0;
-	        	var table_index = 0;
-	        	var auth_id = "${auth.auth_id}";
+	        success :function(obj){
+	        
 	        	if(startNum < 10) {
 	        	var str= '<table id="listDiv">'
 	        	}
-	        	 if(typeof data.CheBoardList != 'undefined') {
-	        	$.each(data.CheBoardList, function(key, value) {
-		        	
+	        	 for(var i=0; i<obj.length;i++) {
+	        		
             		str += '<tr>';
             		str += '<td class="left-info">'
- 	            	str += '<div class="id_profile"><img alt="profile" id="img_profile" src="'+value.d_img +'"></div>';
+ 	            	str += '<div class="id_profile"><img alt="profile" id="img_profile" src="'+obj[i].d_img +'"></div>';
  	            	str +='<div id="id_date">'
-	            	 if(auth_id == value.cheb_id) { 
-	            		str +='<div class="delete">'
-	            		str +='<div class="menu">'
-	            		str +='<a title="delete icon"><img alt="delete icon image" class="deleteicon"src="/resources/cheBoard/deleteicon.png"></a>'	;	
-	            		str +='<ul id="deletehide" idx="'+table_index+'" >'
-	            		str +='<div><a title="comment delete" class="deleteComment deleteComment'+table_index+'" data_num="'+value.cheb_num+'"><li>삭제</li><a></div>'
-	            		str +='</ul>'
-	            		str +='</div>'
-	            		str +='</div>'
-            		 }
-            		 str +='<p class="cheboard_content">'+value.cheb_content+'</p>';	
-            		 str += '<div id="cheboard_date">'+value.cheb_date.substring(0,16)+'</div>';
-            		 str += '<div class="id_id"><Strong><span class="cheboard_user">'+value.cheb_name+' 님</span></Strong></div>'
+            		 str +='<p class="cheboard_content">'+obj[i].cheb_content+'</p>';	
+            		 str += '<div id="cheboard_date">'+obj[i].cheb_date.substring(0,16)+'</div>';
+            		 str += '<div class="id_id"><Strong><span class="cheboard_user">'+obj[i].cheb_name+' 님</span></Strong></div>'
             		 str += '<div>'
             		 str += '<div class="like_comment_div">'
-            		 
-            		 if(typeof data.like_check_num != 'undefined') {
-            			
-            		  $.each(data.like_check_num, function(key, like_check) {
-            			  
-                   		 if(like_check == value.cheb_num) {
-                   			str +='<a class="comment_like" data_num="'+value.cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/like.png"></a>'
-                   			check =1;
-                   		 }
-                   		
-            			});
-            		 }
-
-            		 if(check == 0) {
-             			str +='<a class="comment_like" data_num="'+value.cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/NOT_like.png"></a>'
-             		}
-          			 str +='<span class="like_total">'+value.cheb_comment_like_total+'</span></div>'
+            		 str +='<a class="comment_like" idx="'+i+'" data_num="'+obj[i].cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/NOT_like.png"></a>'
+            		
+          			 str +='<span class="like_total">'+obj[i].cheb_comment_like_total+'</span></div>'
             		 str +='</div>'
             		 	 str += '</td>'
 	            		 str += '</tr>';
 	            		
-	            		check = 0;
-	            		table_index++;
-	        	});
-	        	}
+                }
 	        	 str += '</table>'
-	        
-	        		 if(typeof data.CheBoardList === 'undefined') {
-	        			 var str = '<div style="text-align: center; margin-top:5px">댓글이 없습니다</div>';
-	        			 $('#list').html(str);
-	        		 }
-	        		 else {
 	        	if(startNum < 10) {
 	        		
 	        		 $('#list').html(str);
@@ -588,101 +479,25 @@ background:#000;color:#fff;
 	        		 $('#listDiv').append(str);
 	        	}
 	        	
-	        	if(data.comment_total > step) {
-	        		var str = '<a href="#none" id="addBtn" title="comment more">댓글 더보기 </a>'	
-	        		$('.btn_moreview').html(str);
-	        	}
-	        	
-	        	if(data.comment_total <= step) {
+	        	if(total_comment <= step) {
 	        		$("#addBtn").remove();
 	        	}
+	        	     
+	        	 $('.comment_like').on('click', function(){
+	             	
+	             	<c:if test="${auth.auth_id == null}">
+	       		  		alert("로그인 을 해주세요");
+	       		  		location.replace('/auth/login');
+	       	  		</c:if>
+	       		  		})
 	        	
-	       }	        	 
-	        	 
-	        	 
-            $('.deleteComment').on('click', function(){
-                var reply_num = $(this).attr('data_num'); 
-               
-                
-                $.ajax({
-                    
-                    url : "comment_delete",
-                    type : "POST",
-                        
-                    data :{
-                    	"reply_id" : reply_num
-                    },
-                    success : function(){
-                    	login_init();
-                    },
-                    error : function(error){
-                        console.log(error);
-                    }
-                    
-                });
-            
-            });
-            
-            $('.comment_like').on('click', function(){
-            	var reply_num = $(this).attr('data_num');
-            	var like_idx = $(this).attr('idx');
-            	var senData = {"comment_user_id":auth_id, "comment_num": reply_num}
-            	var src = $($(this).children('.like_icon')).attr("src");
-            	var this_comment = $(this);
-            	
-            	if(src == "/resources/cheBoard/NOT_like.png") {
-            		
-            		$.ajax({
-                		url: "comment_like",
-                		type : "POST",
-                		data :	JSON.stringify(senData),
-               		 	contentType : "application/json; charset=utf-8",
-               			success : function(obj) {
-               				
-               				this_comment.next().html(obj);
-               				$(this_comment.children('.like_icon')).attr("src","/resources/cheBoard/like.png");
-               			}
-                	})
-            	}
-            	else {
-            		$.ajax({
-                		url: "comment_like_cancle",
-                		type : "POST",
-                		data :	JSON.stringify(senData),
-               		 	contentType : "application/json; charset=utf-8",
-               			success : function(obj) {
-               				this_comment.next().html(obj);
-               				$(this_comment.children('.like_icon')).attr("src","/resources/cheBoard/NOT_like.png");
-               			},
-                        error : function(error){
-                            console.log(error);
-                        }
-                	})
-            	}
-            });
-            
-           $(".menu>a").click(function() {
-        	   
-        	  var idx_table = $(this).next("ul").attr('idx');
-        	  if ( $(".deleteComment"+idx_table).css('display') === 'none' ) { 
-        		  $(".deleteComment").hide();
-        		  $(".deleteComment"+idx_table).show();
-        		  } 
-        	  else {  $(".deleteComment"+idx_table).hide(); 
-        	  	}
-           })
-           
-           $('#addBtn').on('click',function() {
-           	
-       		step += 10;
-       		login_init();
-       		});
+	        	
     	},
         error : function(error){
             console.log(error);
         }
 	});
-	}
+}
     
 </script>
 </html>

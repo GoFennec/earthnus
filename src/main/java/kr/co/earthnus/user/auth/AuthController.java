@@ -139,7 +139,8 @@ public class AuthController {
 				session.setAttribute("auth", aBean);
 				 String redirectUrl = (String) session.getAttribute("url_prior_login");
 				 if(redirectUrl != null) {
-					 String str = redirectUrl.substring(19);
+					 String str = redirectUrl.substring(24);
+					 LOG.error("============>/auth/callback" + str);
 					 if(str.equals("/goods/exGoods")) {
 						 return "redirect:" + str;
 					 }else if(str.contains("donation")) {
@@ -178,9 +179,9 @@ public class AuthController {
 			session.setAttribute("auth", aBean);
 			 String redirectUrl = (String) session.getAttribute("url_prior_login");
 			 if(redirectUrl != null) {
-				 String str = redirectUrl.substring(23);
+				 String str = redirectUrl.substring(24);
 				 LOG.error("============>/auth/login" + str);
-				 if(str.equals("/goods/exGoods")) {
+				 if(str.contains("/goods/exGoods")) {
 					 return "redirect:" + str;
 				 }else if(str.contains("donation")) {
 					 return "redirect:" + str;
@@ -245,7 +246,7 @@ public class AuthController {
 				session.setAttribute("auth", aBean);
 				 String redirectUrl = (String) session.getAttribute("url_prior_login");
 				 if(redirectUrl != null) {
-					 String str = redirectUrl.substring(23);
+					 String str = redirectUrl.substring(24);
 					 LOG.error("============>/kakaoLogin" + str);
 					 if(str.equals("/goods/exGoods")) {
 						 return "redirect:" + str;

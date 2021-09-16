@@ -33,11 +33,9 @@ public class AdAuthService {
 		if (mBean == null) {
 			aBean = null;
 		} else {
-			System.out.println(mBean.getAd_pw() + " ad디비에 있는 비밀번호");
 			if (mBean.getAd_pw().equals(auth_pw) && mBean.getAd_id().equals(auth_id)) {
 				aBean.setAuth_id(mBean.getAd_id());
 				aBean.setAuth_name(mBean.getAd_name());
-				System.out.println(aBean.getAuth_id() + " 서비스");
 			} else {
 				aBean = null;
 			}

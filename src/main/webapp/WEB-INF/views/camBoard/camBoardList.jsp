@@ -123,6 +123,9 @@ i {cursor: pointer; color: #388E3C;}
 	font-size: 10px;
 }
 
+.result-null{
+	text-align: center;
+}
 </style>
 
 <title>EARTH & US</title>
@@ -147,7 +150,7 @@ i {cursor: pointer; color: #388E3C;}
 			    	</td>
 			    	<td id="search-text">
 			    		<div class="search-block">
-			    			<input type="text" id="search" name="search" placeholder="검색 . . .">
+			    			<input type="text" id="search" name="search" onkeyup="enterkey()" placeholder="검색 . . .">
 			    		</div>
 			    	</td>
 			    	<td class="search-imoji">
@@ -160,11 +163,10 @@ i {cursor: pointer; color: #388E3C;}
 		<ul id="nav">
 			<li class="sub-nav type"><button class="filter">주제</button>
 				<ul class="sub-type">
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" title="해양보호 캠페인"><i class="type fas fa-globe">&nbsp;&nbsp;해양</i></a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" title="플라스틱 재활용 캠페인"><i class="type fas fa-recycle">&nbsp;&nbsp;플라스틱</i></a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" title="산림 지킴이 캠페인"><i class="type fas fa-tree">&nbsp;&nbsp;산림</i></a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" title="북극곰 집 지키기 캠페인"><i class="type fas fa-snowflake">&nbsp;&nbsp;극지방</i></a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=all" title="기타"><i class="type fas fa-globe">&nbsp;&nbsp;기타</i></a><br></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" title="해양보호 캠페인"><i class="type fas fa-tint"></i>&nbsp;&nbsp;해양</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" title="플라스틱 재활용 캠페인"><i class="type fas fa-sync-alt"></i>&nbsp;&nbsp;플라스틱</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" title="산림 지킴이 캠페인"><i class="type fas fa-tree"></i>&nbsp;&nbsp;산림</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" title="북극곰 집 지키기 캠페인"><i class="type fas fa-snowflake"></i>&nbsp;&nbsp;극지방</a></li>
 				</ul>
 			</li>
 			<li class="sub-nav history"><button class="filter">이력</button>
@@ -203,6 +205,11 @@ i {cursor: pointer; color: #388E3C;}
       </div>
    </section>
    </c:if>
+   <c:if test="${page.totalcount eq 0}">
+   	<div class="result-null">
+   		<h1>검색결과가 없습니다.</h1>
+   	</div>
+   </c:if>
 </div>
 
 <div class="container">
@@ -220,7 +227,12 @@ i {cursor: pointer; color: #388E3C;}
 	         </c:if>
 	         <c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">   
 	            <li class="page-item">
-	               <a class="page-link" title="${idx}페이지" id="${idx}" onclick="paging('${idx}')">${idx}</a>
+	            	<c:if test="${page.currentPage eq idx}">
+	            		<a class="page-link" title="${idx}페이지" id="${idx}" style="cursor: default; background-color: #66BB6A; color: #fff;">${idx}</a>
+	            	</c:if>
+	            	<c:if test="${page.currentPage ne idx}">
+	            		<a class="page-link" title="${idx}페이지" id="${idx}" onclick="paging('${idx}')">${idx}</a>
+	            	</c:if>
 	            </li>
 	         </c:forEach>
 	         <c:if test="${page.next}">
@@ -247,6 +259,25 @@ i {cursor: pointer; color: #388E3C;}
 	$(document).ready(function(){
 		$("#nav ul").hide();
 	});
+	
+	function enterkey() {
+		var search = document.getElementById("search").value; 
+		var search_type = $("#search_type option:selected").val();
+		
+        if (window.event.keyCode == 13) {
+             searchCamBoard();
+        }
+	}
+
+	function CheckPageFocus() {
+		  var info = document.getElementById("message");
+
+		  if ( document.hasFocus() ) {
+				console.log("포커스 잡힘");
+		  } else {
+				console.log("포커스 안잡힘");
+		  }
+		}
 	
 	$('#${page.currentPage}').off('click');
 	
