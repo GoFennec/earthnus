@@ -26,8 +26,8 @@ public class GoodsController {
 		return "goods/goodsList";
 	}
 	@RequestMapping("/goods/exGoods")
-	public String getGoodsAndMemOne(@ModelAttribute GoodsBean gBean, HttpSession session, Model model) {
-		model.addAttribute("goods", goodsService.getGoods(gBean, model));
+	public String getGoodsAndMemOne(@RequestParam("goods_num") String goods_num, HttpSession session, Model model) {
+		model.addAttribute("goods", goodsService.getGoods(goods_num, model));
 		AuthBean auth = (AuthBean)session.getAttribute("auth");
 		if (auth != null) {
 			model.addAttribute("member", goodsService.getMember(auth));

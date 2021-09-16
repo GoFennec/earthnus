@@ -19,9 +19,6 @@ public class AdMemberService {
 	public List<MemberBean> memberList() {
 		AdMemberMybatis dao = mybatis.getMapper(AdMemberMybatis.class);
 		List<MemberBean> memberList = dao.getMemberList();
-		for(int i = 0; i < memberList.size(); i++) {
-			System.out.println(memberList.get(i).getMem_api());
-		}
 		return memberList;
 	}
 	

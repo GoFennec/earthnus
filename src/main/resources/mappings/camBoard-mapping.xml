@@ -50,7 +50,11 @@
 				<when test='arr.equals("exp")'>${orderBy} ${order} </when>
 				<when test='arr.equals("end")'>${orderBy} ${order} </when>
 			</choose>
+			<if test='contentnum != -1'>
 			LIMIT #{contentnum} OFFSET #{pagenum}
+			</if>
+			<if test='contentnum == -1'></if>
+			
 	</select>
 	
 	<select id="getAdBoardList" resultMap="camBoardResult">

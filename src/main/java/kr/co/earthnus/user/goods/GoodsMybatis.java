@@ -11,7 +11,7 @@ public interface GoodsMybatis {
 	public List<GoodsBean> getGoodsList(PagingBean pBean);
 	public List<GoodsBean> getGoodsKindsList(PagingBean pBean);
 	public List<GoodsBean> getGoodsCategory();
-	public GoodsBean getGoods(GoodsBean gBean);
+	public GoodsBean getGoods(String goods_num);
 	public MemberBean getMember(AuthBean abean);
 	public int insertExGoods(ExGoodsBean eBean);
 	public String newExGoods(ExGoodsBean eBean);

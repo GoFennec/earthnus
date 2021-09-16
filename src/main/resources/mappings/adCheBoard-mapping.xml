@@ -27,12 +27,23 @@
     	</foreach>
 	</delete>
 	
+	<delete id="deleteCheBoard1" parameterType="String">
+		DELETE FROM CHEBOARD
+		WHERE
+		CHEB_NUM =
+		#{cheb_num}
+	</delete>
+	
 	<select id="getCheTotal" resultType="int">
 		SELECT COUNT(*) FROM CHEBOARD
 	</select>
 	
 	<select id="getCheToday" resultType="int">
 		SELECT COUNT(*) FROM CHEBOARD where date_format(cheb_date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+	</select>
+	
+	<select id="getCheBoardDetail" parameterType="String" resultType="cheBoard">
+		SELECT * FROM CHEBOARD WHERE CHEB_NUM = #{num}
 	</select>
 
 </mapper>

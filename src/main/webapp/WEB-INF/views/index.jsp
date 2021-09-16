@@ -340,16 +340,17 @@ h3{
 				<div class="left-content">
 					<!-- section tittle -->
 					<div class="section-tittle section-tittle2 mb-30">
-						<span>당신의 후원이 변화를 만듭니다</span>
 						<h2>우리의 지구를 <br> 함께 지켜주세요</h2>
+						<span>당신의 후원이 변화를 만듭니다</span>
 					</div>
 					<div class="support-caption" style="padding-right: 100px;">
-						<p class="pera-top" style="font-size: 20px;">지구는 동시다발적인 환경문제로 심각한 위기에 처해있습니다. 하지만 우리에게는
+						<p class="pera-top" style="font-size: 20px;">&nbsp;지구는 동시다발적인 환경문제로 심각한 위기에 처해있습니다. 하지만 우리에게는
 							아직 기회가 있습니다. 지구를 지키는 가장 쉬운 방법 EARTH & US와 함께 하세요!<br>
-							EARTH & US는 기후변화, 해양 생태계 파괴와 산림 파괴, 유해
+							&nbsp;EARTH & US는 기후변화, 해양 생태계 파괴와 산림 파괴, 유해
 							화학물질로부터 우리의 소중한 지구를 지키기 위해 쉼없이 달려왔습니다. 환경문제 해결을 위해서는 한시라도 빨리 행동해야
 							합니다. 여러분의 후원으로 EARTH & US는 환경 문제를 조사하고, 경각심을 불러 일으키는 보고서를 발표하고, 창의적인
-							캠페인과 직접 행동을 펼칠 수 있습니다. <br>미래 세대가 깨끗한 세상에서 살 수 있도록, 지구를 위한 변화를 EARTH & US와
+							캠페인과 직접 행동을 펼칠 수 있습니다.<br>
+							&nbsp;미래 세대가 깨끗한 세상에서 살 수 있도록, 지구를 위한 변화를 EARTH & US와
 							함께 만들어주세요!</p>
 						<a href="/donation/list" class="border-btn">후원하기</a>
 					</div>

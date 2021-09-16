@@ -1,7 +1,6 @@
 package kr.co.earthnus.admin.camBoard;
 
 import java.io.File;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -11,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.earthnus.admin.member.AdMemberMybatis;
 import kr.co.earthnus.user.camBoard.CamBoardMybatis;
 import kr.co.earthnus.user.camBoard.camBoardBean;
-import kr.co.earthnus.util.SHA256;
 
 @Service
 public class AdCamBoardService {

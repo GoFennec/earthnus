@@ -49,7 +49,7 @@
 	<div class="row">
 		<c:forEach items="${goodsList}" var="goods" begin="0" end="3">
 			<div class="col-12 col-sm-6 col-lg-3 goodsBox">
-				<form action="/goods/exGoods" method="POST" id="GF_${goods.goods_num}">
+				<form action="/goods/exGoods?goods_num=${goods.goods_num}" method="GET" id="GF_${goods.goods_num}">
 					<div class="selectGoods" style="cursor: pointer;" id="${goods.goods_num}">
 						<input type="hidden" name="goods_num" value="${goods.goods_num}" />
 						<div class="goodsImg">
@@ -97,7 +97,12 @@
 			</c:if>
 			<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">	
 				<li class="page-item">
-					<a href="?pagenum=${idx}" class="page-link">${idx}</a>
+					<c:if test="${(page.pagenum/8 + 1) eq idx}">
+	            		<a class="page-link" title="${idx}페이지" style="cursor: default; background-color: #66BB6A; color: #fff;">${idx}</a>
+	            	</c:if>
+	            	<c:if test="${(page.pagenum/8 + 1) ne idx}">
+	            		<a href="?pagenum=${idx}" class="page-link" title="${idx}페이지">${idx}</a>
+	            	</c:if>
 				</li>
 			</c:forEach>
 			<c:if test="${page.next}">

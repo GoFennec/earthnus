@@ -56,9 +56,9 @@ public class GoodsService {
 		List<GoodsBean> goodsCategory = goodsDAO.getGoodsCategory();
 		return goodsCategory;
 	}
-	public GoodsBean getGoods(GoodsBean gBean, Model model) {
+	public GoodsBean getGoods(String goods_num, Model model) {
 		GoodsMybatis goodsDAO = mybatis.getMapper(GoodsMybatis.class);
-		GoodsBean goodsBean = goodsDAO.getGoods(gBean);
+		GoodsBean goodsBean = goodsDAO.getGoods(goods_num);
 		String[] goodsInfo = goodsBean.getGoods_info().split("&");
 		model.addAttribute("goodsInfo", goodsInfo);
 		return goodsBean;
