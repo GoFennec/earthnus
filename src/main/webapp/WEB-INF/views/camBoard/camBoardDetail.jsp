@@ -27,10 +27,18 @@
 	text-align: center !important;
 }
 .main-img{
+<<<<<<< HEAD
 	border: 1px solid;
 	text-align: center;
 	margin-bottom: 50px;
 }
+=======
+	padding: 4%;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+>>>>>>> origin/kim
 </style>
 
 <title>EARTH & US</title>
@@ -44,7 +52,7 @@
    <div class="container">
     <div class="row">
     <div class="col-1"></div>
-     <div class="col-10 posts-list">
+     <div class="col-10 posts-list">	
       <div class="single-post">
       <div class="blog_details">
         <h2 style="color: #2d2d2d;">${camBoard.CAMB_NAME}</h2>

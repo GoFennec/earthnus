@@ -14,7 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style>
-table {border-collapse: collapse;}
+table {border-collapse: collapse; width: 100%;}
 table tr {border-bottom: 2px solid #388E3C;}
 
 div #selectView {text-align: right;}
@@ -25,6 +25,7 @@ div #selectView {text-align: right;}
 	width:100%; 
 	border: none; 
 	font-weight: 500;
+	font-size: 1.2em;
 }
 
 .blog_item_date {text-align: center;}
@@ -44,9 +45,10 @@ i {cursor: pointer; color: #388E3C;}
 
 #search_type {
 	display: block !important;
+	font-size: 1.2em;
 	text-align: center;
-	width: 70px;
-	height: 28px;
+	width: 110px;
+	height: 40px;
 	border: none;
 	background: none;
 	color: #388E3C;
@@ -86,11 +88,18 @@ i {cursor: pointer; color: #388E3C;}
 	top:2px; 
 }
 
+#nav{
+	font-size: 1.1em;
+}
+
 #nav li{
 	float: right;
 	position: relative;
-	margin: 0px 4%;
 	padding: 0;
+}
+
+#nav .type{
+	margin: 0px 6% 0px 3%;
 }
 
 #nav li a {
@@ -126,6 +135,18 @@ i {cursor: pointer; color: #388E3C;}
 .result-null{
 	text-align: center;
 }
+<<<<<<< HEAD
+=======
+
+.result-null{
+	font-weight: 600;
+}
+
+.result-null .changesearch:hover{
+	color: #388E3C !important;
+	cursor: pointer;
+}
+>>>>>>> origin/kim
 </style>
 
 <title>EARTH & US</title>
@@ -135,9 +156,9 @@ i {cursor: pointer; color: #388E3C;}
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 <br><br><br><br>
-
 <div class="container">
 <div class="row">
+<<<<<<< HEAD
 	<div class="col-sm-6 col-md-7">
 		<table>
 			    <tr>
@@ -160,6 +181,9 @@ i {cursor: pointer; color: #388E3C;}
 		 </table>
 	</div>
 	<div class="col-sm-6 col-md-5" id="selectView">
+=======
+	<div class="col-sm-12" id="selectView">
+>>>>>>> origin/kim
 		<ul id="nav">
 			<li class="sub-nav type"><button class="filter">주제</button>
 				<ul class="sub-type">
@@ -182,7 +206,7 @@ i {cursor: pointer; color: #388E3C;}
    <hr>
 </div>
 <% int index = 0; %>
-<div id="camBoardListDiv">
+<div id="camBoardListDiv" class="m-4">
    <c:if test="${page.totalcount ne 0}">
    <section class="blog_area">
       <div class="container">
@@ -202,18 +226,55 @@ i {cursor: pointer; color: #388E3C;}
                </div>
          </c:forEach>
          </div>
+	   <hr>
       </div>
    </section>
    </c:if>
    <c:if test="${page.totalcount eq 0}">
    	<div class="result-null">
+<<<<<<< HEAD
    		<h1>검색결과가 없습니다.</h1>
+=======
+   		<br><br><br><br><h1>검색결과가 없습니다.</h1>
+   		<c:if test="${!empty RecommandWord}">
+   			<br><br>이 검색어는 어때요?&nbsp;&nbsp;&nbsp;"<a class="changesearch" title="${RecommandWord} 검색하기" onclick="changesearch()">${RecommandWord}</a>"<br><br><br><br><hr>
+   		</c:if>
+   		<c:if test="${empty auth}"></c:if>
+   		<c:if test="${!empty auth}">
+   			<br><br>이 검색어는 어때요?&nbsp;&nbsp;&nbsp;"<a class="changesearch" title="${RecommandWord} 검색하기" onclick="changesearch()">${RecommandWord}</a>"<br><br><br><br><hr>
+   		</c:if>
+   		<br><br>
+>>>>>>> origin/kim
    	</div>
    </c:if>
 </div>
 
 <div class="container">
-	<div class="row">
+	<div class="row m-4">
+	<div class="col-sm-2 col-lg-4"></div>
+	<div class="col-sm-8 col-lg-4">
+			<table>
+			    <tr>
+			    	<td>
+			    		<select id="search_type">
+				            <option selected="selected">전체</option>
+				            <option>제목</option>
+				            <option>내용</option>
+				         </select>
+			    	</td>
+			    	<td id="search-text">
+			    		<div class="search-block">
+			    			<input type="text" id="search" name="search" onkeyup="enterkey()" placeholder="검색 . . .">
+			    		</div>
+			    	</td>
+			    	<td class="search-imoji">
+				    	<i class="fas fa-search" onclick="searchCamBoard()"></i>
+			    	</td>
+			    </tr>
+		 </table>
+	</div>
+	<div class="col-sm-2 col-lg-4"></div>
+	
 	<div class="col-sm-2 col-lg-4"></div>
 	<div class="col-sm-8 col-lg-4">
 		<nav class="blog-pagination justify-content-center d-flex">
@@ -319,6 +380,13 @@ i {cursor: pointer; color: #388E3C;}
       }else{
          location.href="/camBoard/list/search?search_type=" + search_type + "&search=" + search;   
       }
+   }
+   
+   function changesearch(){
+	   var search = "${RecommandWord}";
+	   var search_type = $("#search_type option:selected").val();
+	   
+	   location.href="/camBoard/list/search?search_type=" + search_type + "&search=" + search;
    }
    
    function paging(page){
