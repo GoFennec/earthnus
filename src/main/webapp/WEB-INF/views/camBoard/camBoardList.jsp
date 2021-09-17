@@ -181,9 +181,9 @@ i {cursor: pointer; color: #388E3C;}
 		 </table>
 	</div>
 	<div class="col-sm-6 col-md-5" id="selectView">
-=======
+
 	<div class="col-sm-12" id="selectView">
->>>>>>> origin/kim
+
 		<ul id="nav">
 			<li class="sub-nav type"><button class="filter">주제</button>
 				<ul class="sub-type">
