@@ -1,8 +1,11 @@
 package kr.co.earthnus.admin.auth;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +67,7 @@ public class AdAuthController {
 	
 	@RequestMapping(value = "/auth/adLogin", method = RequestMethod.POST)
 	public String adLoginch(@RequestParam("auth_pw") String auth_pw,
-			AdAuthBean aBean, HttpSession session, Model model) throws NoSuchAlgorithmException {
+			AdAuthBean aBean,HttpServletResponse response, HttpSession session, Model model) throws NoSuchAlgorithmException, IOException {
 		model.addAttribute("auth_id", aBean.getAuth_id());
 		aBean = Service.adLogin(aBean.getAuth_id(), auth_pw);
 		
@@ -72,8 +75,12 @@ public class AdAuthController {
 			session.setAttribute("adauth", aBean);
 			return "redirect:/adIndex";
 		} else {
-			return "auth/adLogin";
-		}
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.');location.href=\"/auth/adLogin\"</script>");
+			out.close();
+		}	
+		return "auth/adLogin";
 	}
 	
 	@RequestMapping("/adLogout")
