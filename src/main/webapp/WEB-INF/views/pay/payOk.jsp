@@ -52,7 +52,7 @@ td {
 
 <div class="container">
 	
-	<section>
+	<section class="m-4">
 	<img src="/resources/pay/earth.png" title="지구사진" alt="밝아진 지구사진" />
 	<h1>따뜻한 마음으로 후원에 참여해주셔서 감사합니다.</h1>
 	<p>지금 응원 릴레이에 참여하여 다른분들의 후원을 응원해주세요!</p>

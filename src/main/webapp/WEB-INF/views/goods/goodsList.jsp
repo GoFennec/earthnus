@@ -9,7 +9,6 @@
 	table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.5;}
 	thead th {padding: 10px; font-size: 1.5em; font-weight: bold; vertical-align: middle; color: #388E3C; border-bottom: 3px solid #388E3C;}
 	thead td {padding: 3px; vertical-align: middle; color: #444; border-bottom: 3px solid #388E3C;}
-	#selectTd {width: 30%}
 	.goodsBox {padding: 10px;}
 	.goodsImg {text-align: center; margin: auto; padding: 1px; width: 100%;}
 	.goodsImg img {width: 200px; height: 200px; background-size: contain;}
@@ -19,33 +18,30 @@
 				white-space: normal; line-height: 1.42; height: 4.26em; text-align: left; word-wrap: break-word; display: -webkit-box;
 				-webkit-line-clamp: 3; -webkit-box-orient: vertical;}
 	.paging {text-align: center;}
+
 </style>
 <title>EARTH & US</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<br><br><br><br>
-<div class="container"><br>
+<br><br><br>
+<div class="container">
 	<form action="/goods/list" id="kindsSearch" method="post">
-	<table class="goodsTitle">
-		<thead>
-			<tr>
-				<th scope="col">지구마켓</th>
-				<td id="selectTd"><select name="goodsKinds" id="selectBox" onchange="goodsChange(this);">
-					<option value="">전체보기</option>
-					<c:forEach var="category" items="${goodsCategory}">
-						<c:if test="${goodsKinds eq category.goods_category}">
-							<option value="${category.goods_category}" selected>${category.goods_category}</option>
-						</c:if>
-						<c:if test="${goodsKinds ne category.goods_category}">
-							<option value="${category.goods_category}">${category.goods_category}</option>
-						</c:if>	
-					</c:forEach>
-				</select></td>
-			</tr>
-		</thead>
-	</table>
-	</form><br>
+		<div class="selectBox" style="text-align: right;">
+		<select name="goodsKinds" id="selectBox" onchange="goodsChange(this);">
+			<option value="">전체보기</option>
+				<c:forEach var="category" items="${goodsCategory}">
+					<c:if test="${goodsKinds eq category.goods_category}">
+					<option value="${category.goods_category}" selected>${category.goods_category}</option>
+					</c:if>
+					<c:if test="${goodsKinds ne category.goods_category}">
+					<option value="${category.goods_category}">${category.goods_category}</option>
+					</c:if>	
+				</c:forEach>
+		</select>
+		</div>
+	</form><hr>
+	
 	<div class="row">
 		<c:forEach items="${goodsList}" var="goods" begin="0" end="3">
 			<div class="col-12 col-sm-6 col-lg-3 goodsBox">

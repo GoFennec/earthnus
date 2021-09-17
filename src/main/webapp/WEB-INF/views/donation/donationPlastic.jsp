@@ -57,8 +57,9 @@
     </div>
 </div>
 
-<div class="service-area section-padding30">
+<div class="service-area">
 <div class="container">
+<br><br>
 	<div class="row">
 	 	<c:forEach items="${plastic}" var="donation" begin="0" end="2">
 			<div class="item col-md-3 col-6">
@@ -94,6 +95,7 @@
 			</div>
 		</c:forEach>
 	</div>
+<br><br><br>
 </div>
 </div>
 
