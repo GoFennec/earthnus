@@ -97,7 +97,12 @@
 			</c:if>
 			<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">	
 				<li class="page-item">
-					<a href="?pagenum=${idx}" class="page-link">${idx}</a>
+					<c:if test="${(page.pagenum/8 + 1) eq idx}">
+	            		<a class="page-link" title="${idx}페이지" style="cursor: default; background-color: #66BB6A; color: #fff;">${idx}</a>
+	            	</c:if>
+	            	<c:if test="${(page.pagenum/8 + 1) ne idx}">
+	            		<a href="?pagenum=${idx}" class="page-link" title="${idx}페이지">${idx}</a>
+	            	</c:if>
 				</li>
 			</c:forEach>
 			<c:if test="${page.next}">

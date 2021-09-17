@@ -16,6 +16,7 @@ public class PagingBean {
     private String order;	
     private String orderBy;	
 	private String search_type;
+	private String search_user;
 	private int CAMB_NUM;
 	private int CAMB_INDEX;
 	private int limit;
@@ -44,6 +45,12 @@ public class PagingBean {
         return totalpage;
     }
     
+	public String getSearch_user() {
+		return search_user;
+	}
+	public void setSearch_user(String search_user) {
+		this.search_user = search_user;
+	}
 	public int getLimit() {
 		return limit;
 	}

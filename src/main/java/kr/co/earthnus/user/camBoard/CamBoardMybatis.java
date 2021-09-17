@@ -13,4 +13,6 @@ public interface CamBoardMybatis {
 	public void camBoardUpdate(camBoardBean cBean);
 	public void camBoardDelete(int CAMB_NUM);
 	public int deletePW(String deletePW);
+	public void searchInsert(PagingBean pBean);
+	public List<String> searchWord(PagingBean pBean);
 }

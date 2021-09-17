@@ -14,7 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style>
-table {border-collapse: collapse;}
+table {border-collapse: collapse; width: 100%;}
 table tr {border-bottom: 2px solid #388E3C;}
 
 div #selectView {text-align: right;}
@@ -25,6 +25,7 @@ div #selectView {text-align: right;}
 	width:100%; 
 	border: none; 
 	font-weight: 500;
+	font-size: 1.2em;
 }
 
 .blog_item_date {text-align: center;}
@@ -44,9 +45,10 @@ i {cursor: pointer; color: #388E3C;}
 
 #search_type {
 	display: block !important;
+	font-size: 1.2em;
 	text-align: center;
-	width: 70px;
-	height: 28px;
+	width: 110px;
+	height: 40px;
 	border: none;
 	background: none;
 	color: #388E3C;
@@ -86,11 +88,18 @@ i {cursor: pointer; color: #388E3C;}
 	top:2px; 
 }
 
+#nav{
+	font-size: 1.1em;
+}
+
 #nav li{
 	float: right;
 	position: relative;
-	margin: 0px 4%;
 	padding: 0;
+}
+
+#nav .type{
+	margin: 0px 6% 0px 3%;
 }
 
 #nav li a {
@@ -123,6 +132,18 @@ i {cursor: pointer; color: #388E3C;}
 	font-size: 10px;
 }
 
+.result-null{
+	text-align: center;
+}
+
+.result-null{
+	font-weight: 600;
+}
+
+.result-null .changesearch:hover{
+	color: #388E3C !important;
+	cursor: pointer;
+}
 </style>
 
 <title>EARTH & US</title>
@@ -132,39 +153,16 @@ i {cursor: pointer; color: #388E3C;}
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 <br><br><br><br>
-
 <div class="container">
 <div class="row">
-	<div class="col-sm-6 col-md-7">
-		<table>
-			    <tr>
-			    	<td>
-			    		<select id="search_type">
-				            <option selected="selected">전체</option>
-				            <option>제목</option>
-				            <option>내용</option>
-				         </select>
-			    	</td>
-			    	<td id="search-text">
-			    		<div class="search-block">
-			    			<input type="text" id="search" name="search" placeholder="검색 . . .">
-			    		</div>
-			    	</td>
-			    	<td class="search-imoji">
-				    	<i class="fas fa-search" onclick="searchCamBoard()"></i>
-			    	</td>
-			    </tr>
-		 </table>
-	</div>
-	<div class="col-sm-6 col-md-5" id="selectView">
+	<div class="col-sm-12" id="selectView">
 		<ul id="nav">
 			<li class="sub-nav type"><button class="filter">주제</button>
 				<ul class="sub-type">
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" title="해양보호 캠페인"><i class="type fas fa-globe">&nbsp;&nbsp;해양</i></a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" title="플라스틱 재활용 캠페인"><i class="type fas fa-recycle">&nbsp;&nbsp;플라스틱</i></a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" title="산림 지킴이 캠페인"><i class="type fas fa-tree">&nbsp;&nbsp;산림</i></a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" title="북극곰 집 지키기 캠페인"><i class="type fas fa-snowflake">&nbsp;&nbsp;극지방</i></a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=all" title="기타"><i class="type fas fa-globe">&nbsp;&nbsp;기타</i></a><br></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" title="해양보호 캠페인"><i class="type fas fa-tint"></i>&nbsp;&nbsp;해양</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" title="플라스틱 재활용 캠페인"><i class="type fas fa-sync-alt"></i>&nbsp;&nbsp;플라스틱</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" title="산림 지킴이 캠페인"><i class="type fas fa-tree"></i>&nbsp;&nbsp;산림</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" title="북극곰 집 지키기 캠페인"><i class="type fas fa-snowflake"></i>&nbsp;&nbsp;극지방</a></li>
 				</ul>
 			</li>
 			<li class="sub-nav history"><button class="filter">이력</button>
@@ -180,7 +178,7 @@ i {cursor: pointer; color: #388E3C;}
    <hr>
 </div>
 <% int index = 0; %>
-<div id="camBoardListDiv">
+<div id="camBoardListDiv" class="m-4">
    <c:if test="${page.totalcount ne 0}">
    <section class="blog_area">
       <div class="container">
@@ -200,13 +198,51 @@ i {cursor: pointer; color: #388E3C;}
                </div>
          </c:forEach>
          </div>
+	   <hr>
       </div>
    </section>
+   </c:if>
+   <c:if test="${page.totalcount eq 0}">
+   	<div class="result-null">
+   		<br><br><br><br><h1>검색결과가 없습니다.</h1>
+   		<c:if test="${!empty RecommandWord}">
+   			<br><br>이 검색어는 어때요?&nbsp;&nbsp;&nbsp;"<a class="changesearch" title="${RecommandWord} 검색하기" onclick="changesearch()">${RecommandWord}</a>"<br><br><br><br><hr>
+   		</c:if>
+   		<c:if test="${empty auth}"></c:if>
+   		<c:if test="${!empty auth}">
+   			<br><br>이 검색어는 어때요?&nbsp;&nbsp;&nbsp;"<a class="changesearch" title="${RecommandWord} 검색하기" onclick="changesearch()">${RecommandWord}</a>"<br><br><br><br><hr>
+   		</c:if>
+   		<br><br>
+   	</div>
    </c:if>
 </div>
 
 <div class="container">
-	<div class="row">
+	<div class="row m-4">
+	<div class="col-sm-2 col-lg-4"></div>
+	<div class="col-sm-8 col-lg-4">
+			<table>
+			    <tr>
+			    	<td>
+			    		<select id="search_type">
+				            <option selected="selected">전체</option>
+				            <option>제목</option>
+				            <option>내용</option>
+				         </select>
+			    	</td>
+			    	<td id="search-text">
+			    		<div class="search-block">
+			    			<input type="text" id="search" name="search" onkeyup="enterkey()" placeholder="검색 . . .">
+			    		</div>
+			    	</td>
+			    	<td class="search-imoji">
+				    	<i class="fas fa-search" onclick="searchCamBoard()"></i>
+			    	</td>
+			    </tr>
+		 </table>
+	</div>
+	<div class="col-sm-2 col-lg-4"></div>
+	
 	<div class="col-sm-2 col-lg-4"></div>
 	<div class="col-sm-8 col-lg-4">
 		<nav class="blog-pagination justify-content-center d-flex">
@@ -220,7 +256,12 @@ i {cursor: pointer; color: #388E3C;}
 	         </c:if>
 	         <c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">   
 	            <li class="page-item">
-	               <a class="page-link" title="${idx}페이지" id="${idx}" onclick="paging('${idx}')">${idx}</a>
+	            	<c:if test="${page.currentPage eq idx}">
+	            		<a class="page-link" title="${idx}페이지" id="${idx}" style="cursor: default; background-color: #66BB6A; color: #fff;">${idx}</a>
+	            	</c:if>
+	            	<c:if test="${page.currentPage ne idx}">
+	            		<a class="page-link" title="${idx}페이지" id="${idx}" onclick="paging('${idx}')">${idx}</a>
+	            	</c:if>
 	            </li>
 	         </c:forEach>
 	         <c:if test="${page.next}">
@@ -247,6 +288,25 @@ i {cursor: pointer; color: #388E3C;}
 	$(document).ready(function(){
 		$("#nav ul").hide();
 	});
+	
+	function enterkey() {
+		var search = document.getElementById("search").value; 
+		var search_type = $("#search_type option:selected").val();
+		
+        if (window.event.keyCode == 13) {
+             searchCamBoard();
+        }
+	}
+
+	function CheckPageFocus() {
+		  var info = document.getElementById("message");
+
+		  if ( document.hasFocus() ) {
+				console.log("포커스 잡힘");
+		  } else {
+				console.log("포커스 안잡힘");
+		  }
+		}
 	
 	$('#${page.currentPage}').off('click');
 	
@@ -288,6 +348,13 @@ i {cursor: pointer; color: #388E3C;}
       }else{
          location.href="/camBoard/list/search?search_type=" + search_type + "&search=" + search;   
       }
+   }
+   
+   function changesearch(){
+	   var search = "${RecommandWord}";
+	   var search_type = $("#search_type option:selected").val();
+	   
+	   location.href="/camBoard/list/search?search_type=" + search_type + "&search=" + search;
    }
    
    function paging(page){

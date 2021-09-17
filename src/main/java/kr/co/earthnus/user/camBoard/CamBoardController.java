@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import kr.co.earthnus.user.auth.AuthBean;
 
 @Controller
 public class CamBoardController{	
@@ -24,29 +28,35 @@ public class CamBoardController{
 		String orderBy = "CAMB_NUM";
 		String order = "DESC";
 		
-		camBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
+		camBoardService.getBoardList(search, search_type, "", arr, orderBy, order, contentnum, pagenum, model);
 		
 		return "camBoard/camBoardList";
 	}
 	
 	@RequestMapping("/camBoard/list/search")
-	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "占쏙옙체") String search_type, 
+	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "전체") String search_type, 
 			@RequestParam(defaultValue = "1") String pagenum, @RequestParam(defaultValue = "6") String contentnum, 
 			@RequestParam( value = "search", required=false) String search , @RequestParam(defaultValue = "desc") String order, 
-			camBoardBean bean, Model model) {
+			HttpSession session, camBoardBean bean, Model model) {
+		String search_user = "";
+		AuthBean auth = (AuthBean)session.getAttribute("auth");
+		
+		if(auth != null) {
+			search_user = auth.getAuth_id();
+		}
+		
 		if(search_type.equals("제목")) {
 			search_type = "CAMB_NAME";
 		}else if(search_type.equals("내용")) {
 			search_type = "CAMB_CONTENT";
-		}else if(search_type.equals("CAMB_SUBJECT")){
-			
+		}else if(search_type.equals("CAMB_SUBJECT") || search_type.equals("주제")){
+			search_type = "CAMB_SUBJECT";
 		}else {
 			search_type = "CAMB_ENTIRE";
 		}
-		
 		String orderBy = "CAMB_NUM";
 		
-		camBoardService.getBoardList(search, search_type, arr, orderBy, order, contentnum, pagenum, model);
+		camBoardService.getBoardList(search, search_type,search_user, arr, orderBy, order, contentnum, pagenum, model);
 		
 		return "camBoard/camBoardList";
 	}
@@ -54,15 +64,15 @@ public class CamBoardController{
 	@RequestMapping(value="/camBoard/detail")
 	public String getCamBoardDetail(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
 			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "占쏙옙체") String search_type, 
-			@RequestParam(defaultValue = "desc") String order, 
-			camBoardBean bean, @RequestParam("CAMB_NUM") String cambnum, @RequestParam(defaultValue = "1") String p, 
-			@RequestParam("CAMB_NAME") String cambname, Model model) {
+			@RequestParam(defaultValue = "desc") String order, camBoardBean bean, @RequestParam("CAMB_NUM") String cambnum, 
+			@RequestParam(defaultValue = "1") String p, @RequestParam("CAMB_NAME") String cambname, Model model) {
+		
 		if(search_type.equals("제목")) {
 			search_type = "CAMB_NAME";
 		}else if(search_type.equals("내용")) {
 			search_type = "CAMB_CONTENT";
-		}else if(search_type.equals("CAMB_SUBJECT")){
-			
+		}else if(search_type.equals("CAMB_SUBJECT") || search_type.equals("주제")){
+			search_type = "CAMB_SUBJECT";
 		}else {
 			search_type = "CAMB_ENTIRE";
 		}

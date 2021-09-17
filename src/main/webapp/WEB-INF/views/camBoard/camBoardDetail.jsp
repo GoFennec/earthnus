@@ -26,6 +26,11 @@
 .list{
 	text-align: center !important;
 }
+.main-img{
+	padding: 4%;
+	text-align: center;
+	margin-bottom: 50px;
+}
 
 </style>
 
@@ -40,7 +45,7 @@
    <div class="container">
     <div class="row">
     <div class="col-1"></div>
-     <div class="col-10 posts-list">
+     <div class="col-10 posts-list">	
       <div class="single-post">
       <div class="blog_details">
         <h2 style="color: #2d2d2d;">${camBoard.CAMB_NAME}</h2>
@@ -142,19 +147,16 @@
 		
 		var subjecthtml = '';
 		if("${camBoard.CAMB_SUBJECT}" === "해양"){
-			subjecthtml += '<i class="fas fa-water"></i>';
+			subjecthtml += '<i class="fas fa-tint text-primary"></i>';
 			$('#subject_icon').prepend(subjecthtml);
 		}else if("${camBoard.CAMB_SUBJECT}" === "플라스틱"){
-			subjecthtml += '<i class="fas fa-recycle"></i>';
+			subjecthtml += '<i class="fas fa-sync-alt text-secondary"></i>';
 			$('#subject_icon').prepend(subjecthtml);
 		}else if("${camBoard.CAMB_SUBJECT}" === "산림"){
-			subjecthtml += '<i class="fas fa-tree"></i>';
+			subjecthtml += '<i class="fas fa-tree text-success"></i>';
 			$('#subject_icon').prepend(subjecthtml);
 		}else if("${camBoard.CAMB_SUBJECT}" === "극지방"){
-			subjecthtml += '<i class="fas fa-snowflake"></i>';
-			$('#subject_icon').prepend(subjecthtml);
-		}else if("${camBoard.CAMB_SUBJECT}" === "기타"){
-			subjecthtml += '<i class="fas fa-globe"></i>';
+			subjecthtml += '<i class="fas fa-snowflake text-warning"></i>';
 			$('#subject_icon').prepend(subjecthtml);
 		}
 		if(!'${preBoard.CAMB_NUM}'){
