@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<html class="" lang="">
+<html  style="overflow-x: hidden">
 <head>
 <meta charset="utf-8">
 <title>EARTH & US</title>

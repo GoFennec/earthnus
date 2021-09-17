@@ -512,7 +512,7 @@ h3{
                     <div class="card-img">
                         <img src="${camBoard.CAMB_FILE}" height="400px" title="최신캠페인이미지" alt="최신캠페인이미지">
                     </div>
-                    <div class="card-desc">
+                    <div class="card-desc" style="margin-bottom: 10%;">
                         <h3 id="camTitle">${camBoard.CAMB_NAME}</h3>
                         <div id="camBtn"><a href="/camBoard/detail?CAMB_NAME=${camBoard.CAMB_NAME}&CAMB_NUM=${camBoard.CAMB_NUM}" class="btn-card">자세히보기</a></div>   
                     </div>
@@ -534,16 +534,18 @@ h3{
 <div class="row justify-content-center">
 					<div class="col-xl-8 col-lg-9 col-md-11">
 						<div class="section-tittle text-center mb-30" >
+						<div class="m-4">
 							<h2>최근 응원 릴레이</h2>
 							<p>후원에 참여한 많은분들이 응원 메시지를 보내주고 있습니다. 
 							<br>함께 응원해 주세요!</p>
+							</div>
 						</div>
 					</div>
 				</div>
 			<div class="container">	
 	<div class="row">
         <c:forEach items="${getCh_list}" var="cheBoard">
-        <div class="col-sm-6">
+        <div class="col-sm-6" style="padding-right:25px;">
             <div id="tb-testimonial" class="testimonial testimonial-success">
                
                 
