@@ -61,9 +61,9 @@ button {
 
 <div class="container">
 	
-	<section>
+	<section class="m-4">
 	<h1>당신의 후원이 지구를 낫게합니다.</h1>
-	<p>EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
+	<p >EARTH & US에서는 가상의 상품을 구매함으로서 기부(후원)에 동참하게 됩니다.</p>
 	</section><br>
 	<hr><br><br>
 	

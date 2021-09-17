@@ -304,11 +304,6 @@ background:#000;color:#fff;
 	
 	
 	<div class="container"><br>
-	<table class="exGoods" style="margin-bottom: 10px">
-		<thead>
-			<tr><th scope="col">응원 게시판</th></tr>
-		</thead>
-	</table>
 	
     <div class="page-wrapper" style="position:relative;">
       <!--page slider -->
