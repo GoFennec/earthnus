@@ -158,7 +158,6 @@ i {cursor: pointer; color: #388E3C;}
 <br><br><br><br>
 <div class="container">
 <div class="row">
-<<<<<<< HEAD
 	<div class="col-sm-6 col-md-7">
 		<table>
 			    <tr>
@@ -181,9 +180,7 @@ i {cursor: pointer; color: #388E3C;}
 		 </table>
 	</div>
 	<div class="col-sm-6 col-md-5" id="selectView">
-
 	<div class="col-sm-12" id="selectView">
-
 		<ul id="nav">
 			<li class="sub-nav type"><button class="filter">주제</button>
 				<ul class="sub-type">
@@ -232,9 +229,7 @@ i {cursor: pointer; color: #388E3C;}
    </c:if>
    <c:if test="${page.totalcount eq 0}">
    	<div class="result-null">
-<<<<<<< HEAD
    		<h1>검색결과가 없습니다.</h1>
-=======
    		<br><br><br><br><h1>검색결과가 없습니다.</h1>
    		<c:if test="${!empty RecommandWord}">
    			<br><br>이 검색어는 어때요?&nbsp;&nbsp;&nbsp;"<a class="changesearch" title="${RecommandWord} 검색하기" onclick="changesearch()">${RecommandWord}</a>"<br><br><br><br><hr>
@@ -244,7 +239,6 @@ i {cursor: pointer; color: #388E3C;}
    			<br><br>이 검색어는 어때요?&nbsp;&nbsp;&nbsp;"<a class="changesearch" title="${RecommandWord} 검색하기" onclick="changesearch()">${RecommandWord}</a>"<br><br><br><br><hr>
    		</c:if>
    		<br><br>
->>>>>>> origin/kim
    	</div>
    </c:if>
 </div>
