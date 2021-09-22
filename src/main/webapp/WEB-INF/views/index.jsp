@@ -266,27 +266,7 @@ h3{
 		<!-- slider Area Start-->
 		<div class="slider-area position-relative">
 			<div class="slider-active dot-style">
-				<!-- Single Slider -->
-				<div class="single-slider hero-overly slider-height slider-bg1 d-flex align-items-center" style="height:600px;">
-					<div class="container">
-						<div class="row">
-							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
-								<div class="hero__caption">
-									<h1 data-animation="fadeInUp" data-delay=".2s">EARTH & US</h1>
-									<P data-animation="fadeInUp" data-delay=".4s">
-										하나뿐인 우리 지구<br> EARTH & US와 함께 지켜주세요
-									</P>
-									<!-- Hero-btn -->
-									<div class="hero__btn">
-										<a href="member/join" class="hero-btn mb-10"
-											data-animation="fadeInUp" data-delay=".8s">함께하기</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Single Slider -->
+							<!-- Single Slider -->
 				<div class="single-slider hero-overly slider-height slider-bg2 d-flex align-items-center" style="height:600px;">
 					<div class="container">
 						<div class="row">
@@ -321,6 +301,26 @@ h3{
 									<div class="hero__btn">
 										<a href="camBoard/list" class="hero-btn mb-10"
 											data-animation="fadeInUp" data-delay=".8s">보러가기</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Single Slider -->
+				<div class="single-slider hero-overly slider-height slider-bg1 d-flex align-items-center" style="height:600px;">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
+								<div class="hero__caption">
+									<h1 data-animation="fadeInUp" data-delay=".2s">EARTH & US</h1>
+									<P data-animation="fadeInUp" data-delay=".4s">
+										하나뿐인 우리 지구<br> EARTH & US와 함께 지켜주세요
+									</P>
+									<!-- Hero-btn -->
+									<div class="hero__btn">
+										<a href="member/join" class="hero-btn mb-10"
+											data-animation="fadeInUp" data-delay=".8s">함께하기</a>
 									</div>
 								</div>
 							</div>
@@ -545,10 +545,8 @@ h3{
 			<div class="container">	
 	<div class="row">
         <c:forEach items="${getCh_list}" var="cheBoard">
-        <div class="col-sm-6" style="padding-right:25px;">
+        <div class="col-sm-12 col-md-12 col-lg-6" style="padding-right:25px;">
             <div id="tb-testimonial" class="testimonial testimonial-success">
-               
-                
                 <div class="testimonial-desc">
                     <div class="testimonial-writer" style="width:100%">
                     	

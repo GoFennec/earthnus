@@ -28,7 +28,7 @@
 	.sysBtn {text-align: center;}
 	#ccSelect {width: 100px;}
 	label {vertical-align: middle;}
-	.updateForm{padding-top:100px;}
+	.updateForm{padding-top:80px;}
   </style>
 </head>
 
@@ -83,7 +83,7 @@
           <i class="fas fa-shopping-cart"></i>
           <span>지구마켓 주문 관리</span>
         </a>
-        <div id="collapseForm" class="collapse show" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="/adExGoods/oList">주문 목록</a>
             <a class="collapse-item" href="/adExGoods/dList">배송 처리 목록</a>

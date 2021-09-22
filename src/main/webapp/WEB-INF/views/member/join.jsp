@@ -88,7 +88,7 @@
       <div style="font-size:40px; padding-top:20px">회원가입</div>
     </div>
 
-    <div class="col-md-6 col-lg-12">
+    <div class="col-md-12 col-lg-12">
       <div class="">
         <form class="needs-validation" action="/member/join" method="post" onsubmit="return check()" novalidate>
           <div class="row g-3">

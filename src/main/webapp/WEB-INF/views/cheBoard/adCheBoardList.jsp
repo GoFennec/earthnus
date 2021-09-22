@@ -211,7 +211,7 @@
         			checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
     			});
 				if(checkArr.length == 0){
-					alert('삭제할 상품을 체크해주세요.');
+					alert('삭제할 응원을 체크해주세요.');
 					return;
 				}else{
 					$("#cancelModal").modal('show');
