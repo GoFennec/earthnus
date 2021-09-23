@@ -149,6 +149,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<form id="login-form" action="/auth/findPass" method="post" style="display: block;" novalidate>
+									<br>
 									<div class="col-12" id="mem_id_div">
               							<label for="username" class="form-label">아이디</label>
               							<input type="text" class="form-control" id="mem_id" name="mem_id" placeholder="" required>
@@ -156,6 +157,7 @@
                								 필수 입력사항입니다.
               							</div>
             						</div>
+            						<br>
 									<div class="col-12" id="mail_customer_div">
               							<label for="username" class="form-label">이름</label>
               							<input type="text" class="form-control" id="mail_customer" name="mail_customer" placeholder="" required>
@@ -163,6 +165,7 @@
                								 필수 입력사항입니다.
               							</div>
             						</div>
+            						<br>
             						<div class="col-12" id="mail_receiver_div">
               							<label for="username" class="form-label">이메일 주소</label>
               							<input type="email" class="form-control" id="mail_receiver" name="mail_receiver" placeholder="" required>
@@ -170,6 +173,7 @@
                								 필수 입력사항입니다.
               							</div>
             						</div>
+            						<br>
             						<div class="form-group" id="login-submit-div">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3" id="button">
@@ -232,6 +236,7 @@
 									});
     								</script>
 								</form>
+								<br>
 							</div>
 						</div>
 					</div>
@@ -239,7 +244,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
 	
 </body>
