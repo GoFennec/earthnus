@@ -148,7 +148,24 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
   width: 200px; 
   float:left;
   }
-  
+ #dname_option {
+   background-color: #fff;
+  border-radius: 5px;
+  border: solid 1px #e8e8e8;
+  box-sizing: border-box;
+  display: block;
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: normal;
+  height: 50px;
+  line-height: 40px;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 30px;
+  position: relative;
+  width: 200px; 
+  float:left;	
+ }
 .btn_moreview {
 position:relative;width:100%;display:inline-block;*display:inline;text-align:center;margin:20px 0 0 0;
 }
@@ -334,9 +351,10 @@ background:#000;color:#fff;
     
     <c:if test="${auth.auth_id != null and !empty payCheck}">
     
-    	<table id="select_dname">
-    			
-    	</table>
+    	<div>
+    			<div id="select_dname"></div>
+    			<div id="select_dnameAll"></div>
+    	</div>
     
     		<table id="comment_table">
     		<tr>
@@ -407,13 +425,14 @@ background:#000;color:#fff;
 	 	  </c:if>
 
 	 	 login_init();
-	  	function select_dname() {
+function select_dname() {
 	  		
 	  		var count_tree = 0;
 	  		var count_sea = 0;
 	  		var count_pla = 0;
 	  		var count_bear = 0;
-	  		var str = '<select id="dname_select"><span>-<span>'
+	  		var str = '<select id="dname_select">'
+	  		  str +='<option selected disabled hidden>카테고리</option>'
 	  		for(var i=0; i < All_dname.length; i++) {
 	  			
 	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") ) {
@@ -442,14 +461,13 @@ background:#000;color:#fff;
 	  			
 	  		$('#select_dname').append(str);
 	  		
-	  	}
-	   	
+	  	}	   	
         $('#replyInsert').on('click',function() {
           	
         	  var text = $('#comment_content').val().replace(/(?:\r\n|\r|\n)/g,'<br/>');
         	  var id = "${auth.auth_id}";
   	      	  var name = "${auth.auth_name}";
-        	  var dnum = $("#dname_select option:selected").val();
+        	  var dnum = $("#dname_option option:selected").val();
         	  var senData = {"cheb_id":id, "cheb_name":name, "cheb_dname":dnum, "cheb_content": text,}
         	  if(text.trim().length==0) {
         		  alert("내용을 작성해주세요");
@@ -463,8 +481,12 @@ background:#000;color:#fff;
         		 contentType : "application/json; charset=utf-8",
         		 success : function(){
         			 $('#comment_content').val("");
-        			 $("#dname_select option:selected").remove();
-        			 if( $("#dname_select option").size() == 0) {
+        			 $("#dname_option option:selected").remove();
+        			 if( $("#dname_option option").size() == 0) {
+        				 $('#dname_option').remove();
+        				 $("#dname_select option:selected").remove();
+        			 }
+        			 if( $("#dname_select option").size() == 1) {
         				 $('#select_dname').remove();
         				 $('#comment_table').css("display", "none");
         			 }
@@ -483,6 +505,44 @@ background:#000;color:#fff;
 	    	  prevArrow:$('.prev')
 	    	  
 	    	});
+        
+        $("#dname_select").change(function() {
+       	 var str1 = "";
+       	 var d_name =null;
+       	  d_name= $("#dname_select option:selected").val();
+       	  str1 += '<select id="dname_option">'
+       		
+           	for(var i=0; i < All_dname.length; i++) {
+           		 if(d_name == "북극") {
+					if(All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "북극곰") {
+           				str1 +='<option>'+All_dname[i]+'</option>'
+           			}
+           		   
+           		}
+           		else if(d_name == "플라스틱") {
+					if(All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경") {
+						str1 +='<option>'+All_dname[i]+'</option>'
+						
+           			}
+           		}
+           		else if(d_name ==="나무") {
+					if(All_dname[i] == "새싹" || All_dname[i] == "묘목" || All_dname[i] == "나무" || All_dname[i] == "숲") {
+						str1 +='<option>'+All_dname[i]+'</option>'
+						
+           			}
+           		}
+           		else if(d_name === "바다") {
+           			if(All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") {
+           				str1 +='<option>'+All_dname[i]+'</option>'
+           			
+           			}
+           		}
+           	}
+       		str1 +='</select>';
+           	$('#select_dnameAll').html(str1);
+           	
+      });
+        
         
         $('#comment_content').keyup(function (e){
 	  	    var content = $(this).val();

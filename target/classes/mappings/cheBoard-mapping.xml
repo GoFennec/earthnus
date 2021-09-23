@@ -82,37 +82,12 @@
        </update>
    
       <update id="pay_comment_update" parameterType ="cheBoard">
-      			<choose>
-      				<when test='cheb_dname == "바다"'>
+      			
       					<![CDATA[
 	       				 UPDATE PAY
 				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '조개' or pay_dname ='바다거북' or pay_dname ='고래' or pay_dname ='바다');
+				       	 WHERE pay_id = #{cheb_id} and pay_dname = #{cheb_dname}
 				       	 ]]>
-      				</when>
-      				<when test='cheb_dname == "나무"'>
-      					<![CDATA[
-	       				 UPDATE PAY
-				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '새싹' or pay_dname ='묘목' or pay_dname ='나무' or pay_dname ='숲');
-				       	 ]]>
-      				</when>
-      				
-      				<when test='cheb_dname == "플라스틱"'>
-      					<![CDATA[
-	       				 UPDATE PAY
-				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '플라스틱 줄이기' or pay_dname ='해양 청소' or pay_dname ='대지 청소' or pay_dname ='친환경');
-				       	 ]]>
-      				</when>
-      				<otherwise>
-      					<![CDATA[
-	       				 UPDATE PAY
-				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '작은 얼음' or pay_dname ='큰 얼음' or pay_dname ='빙하 조각' or pay_dname ='북극곰');
-				       	 ]]>
-      				</otherwise>
-      			</choose>
       </update>
  
       <delete id="Comment_like_candle"  parameterType ="like_bean">
