@@ -26,9 +26,10 @@
                                <div class="footer-copy-right text-center">
 								   <div style="text-align:right;"><p style="margin:0px 20px"><a href="/auth/adLogin" title="관리자 바로가기"><i class="fas fa-cogs"></i>&nbsp;&nbsp;바로가기</a></p></div>
                                    <div><img src="/resources/assets/img/logo/logo2_footer.png"></div>
-                                   <p>Copyright &copy;Team <script>document.write(new Date().getFullYear());</script> All rights reserved. 
-                                 <br> Member: 고현성 윤영경 강유경 김정빈 백인엽 유인길<br>
-                                 </p>
+                                   <p>Member: 고현성 윤영경 강유경 김정빈 백인엽 유인길<br>
+                                      Copyright &copy;Team <script>document.write(new Date().getFullYear());</script> All rights reserved. <br>
+                                  	  <br>참고: www.flaticon.com | www.unsplash.com
+                                  </p><br>
                                   </div>
                               </div>
                           </div>
