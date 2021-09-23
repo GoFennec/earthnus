@@ -531,7 +531,6 @@ function select_dname() {
         				 $("#dname_select option:selected").remove();
         				 if( $("#dname_select option").size() > 1) {
         					  $('#dname_select').innerHTML = $("#dname_select").val("0");
-        					  console.log($("#dname_select").val("0"));
         				 }
         			 }
         			 if( $("#dname_select option").size() == 1) {
@@ -545,9 +544,7 @@ function select_dname() {
         	} 
           });	 
         });
-   function myfuntion() {
-   }
-        
+
         
         
         $('.post-wrapper').slick({
