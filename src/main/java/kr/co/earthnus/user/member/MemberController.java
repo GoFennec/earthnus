@@ -34,9 +34,15 @@ public class MemberController {
 	
 	//회원가입
 	@RequestMapping(value="/member/join", method=RequestMethod.POST)
-	public String memberJoin2(MemberBean memberBean) throws NoSuchAlgorithmException {
+	public String memberJoin2(HttpServletResponse response, MemberBean memberBean) throws NoSuchAlgorithmException, IOException {
 		memberService.insertMember(memberBean);
-		return "redirect:/auth/login";
+		 response.setContentType("text/html;charset=UTF-8");
+         PrintWriter out = response.getWriter();
+         out.println("<script>alert('EARTH & US에 오신 것을 환영합니다!');");
+         out.println("location.href='/auth/login'");
+         out.println("</script>");
+         out.close();
+		return null;
 	}
 
 			

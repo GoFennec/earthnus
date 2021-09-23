@@ -155,8 +155,8 @@ td{
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-							<c:if test="${empty findID}">
 								<form id="login-form" action="/auth/findID" method="post" style="display: block;" novalidate>
+									<br>
 									<div class="col-12">
               							<label for="username" class="form-label">이름</label>
               							<input type="text" class="form-control" id="mail_customer" name="mail_customer" placeholder="" required>
@@ -164,6 +164,7 @@ td{
                								 필수 입력사항입니다.
               							</div>
             						</div>
+            						<br>
             						<div class="col-12">
               							<label for="username" class="form-label">이메일 주소</label>
               							<input type="email" class="form-control" id="mail_receiver" name="mail_receiver" placeholder="" required>
@@ -178,50 +179,6 @@ td{
 											</div>
 										</div>
 									</div>
-									
-									<script type="text/javascript">
-									
-									function find(){
-										var mail_customer = $("#mail_customer").val();
-										var mail_receiver = $("#mail_receiver").val();
-										
-										if(mail_customer == ""){
-											alert("이름를 입력해주세요.");
-											return;
-										}else if(mail_receiver == ""){
-											alert("인증번호를 전송할 이메일 주소를 입력해주세요.");
-											return;
-										}
-							
-										$.ajax({
-								   			type: "POST", //요청 메소드 방식
-								  			 url:"/auth/find",
-								   			data: {"findName":mail_customer, "findEmail":mail_receiver},
-								   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-								   			success : function(result){
-									   
-								      			if(result.error === true){
-								      				alert('입력하신 이메일로 회원가입 인증번호를 발송했습니다. \n인증번호가 오지 않으면 입력하신 이메일을 다시 확인해주세요.');
-								      				$("#login-submit").hide();
-								      				$("#emailCheck").show();
-													$("#login-submit2").show();
-								      			}else if(result.error === false){
-								    	  			alert('이름과 이메일을 다시 확인해주세요.');
-								      			}
-								   			},
-								   		 error:function(request,status,error){
-								   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-								   	        alert("통신 오류");
-								      			//통신 실패시 발생하는 함수(콜백)
-								   				}
-											});
-									}
-									
-									$(function(){
-										$("#emailCheck").hide();
-										$("#login-submit2").hide();
-									});
-    								</script>
 									
             						<div class="col-12" id="emailCheck">
               							<label for="username" class="form-label">이메일 인증번호</label>
@@ -238,7 +195,6 @@ td{
 										</div>
 									</div>
 								</form>
-								</c:if>
 								<c:if test="${!empty findID}">
 									<div class="col-12" id="ID">
 										<table>
@@ -246,6 +202,7 @@ td{
 												<tr>
 													<c:if test="${findID1.mem_api eq \"NAVER\" }"><td>아이디 :&nbsp;&nbsp; <b>네이버 로그인 회원</b></td></c:if>
                       								<c:if test="${findID1.mem_api eq \"KAKAO\" }"><td>아이디 :&nbsp;&nbsp; <b>카카오 로그인 회원</b></td></c:if>
+                      								<c:if test="${findID1.mem_api eq \"NULL\" }"><td>아이디 :&nbsp;&nbsp; <b>${findID1.mem_id}</b></td></c:if>
                       								<c:if test="${findID1.mem_api eq null }"><td>아이디 :&nbsp;&nbsp; <b>${findID1.mem_id}</b></td></c:if>
 													<td>가입 날짜 :&nbsp;&nbsp; <b><fmt:formatDate pattern="yyyy년 MM월 dd일 " value="${findID1.mem_date}" /></b></td>
 												</tr>
@@ -267,8 +224,50 @@ td{
 			</div>
 		</div>
 	</div>
-
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
+		
+	<script type="text/javascript">
+		function find(){
+			var mail_customer = $("#mail_customer").val();
+			var mail_receiver = $("#mail_receiver").val();
+										
+			if(mail_customer == ""){
+				alert("이름를 입력해주세요.");
+				return;
+			}else if(mail_receiver == ""){
+				alert("인증번호를 전송할 이메일 주소를 입력해주세요.");
+				return;
+			}
+							
+			$.ajax({
+				type: "POST", //요청 메소드 방식
+				url:"/auth/find",
+				data: {"findName":mail_customer, "findEmail":mail_receiver},
+				dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+				success : function(result){
+									   
+					if(result.error === true){
+						alert('입력하신 이메일로 회원가입 인증번호를 발송했습니다. \n인증번호가 오지 않으면 입력하신 이메일을 다시 확인해주세요.');
+						$("#login-submit").hide();
+						$("#emailCheck").show();
+						$("#login-submit2").show();
+					}else if(result.error === false){
+						alert('이름과 이메일을 다시 확인해주세요.');
+					}
+				},
+				error:function(request,status,error){
+					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+					alert("통신 오류");
+				}
+			});
+		}
+									
+		$(function(){
+			$("#emailCheck").hide();
+			$("#login-submit2").hide();
+		});
+
+    </script>
 	
 </body>
 </html>

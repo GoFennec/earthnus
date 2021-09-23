@@ -31,6 +31,8 @@
 		<id property="exg_num" column="EXG_NUM"/>
 		<result property="exg_id" column="EXG_ID"/>
 		<result property="exg_name" column="EXG_NAME"/>
+		<result property="exg_recipient" column="EXG_RECIPIENT"/>
+		<result property="exg_tel" column="EXG_TEL"/>
 		<result property="exg_addr" column="EXG_ADDR"/>
 		<result property="exg_message" column="EXG_MESSAGE"/>
 		<result property="exg_state" column="EXG_STATE"/>
@@ -91,9 +93,9 @@
 	
 	<insert id="insertExGoods">
 		<![CDATA[
-			INSERT INTO EXGOODS (EXG_NUM,EXG_ID,EXG_NAME,EXG_ADDR,EXG_MESSAGE,EXG_GNUM,EXG_GNAME,EXG_POINT,EXG_IMG) 
+			INSERT INTO EXGOODS (EXG_NUM,EXG_ID,EXG_NAME,EXG_RECIPIENT,EXG_TEL,EXG_ADDR,EXG_MESSAGE,EXG_GNUM,EXG_GNAME,EXG_POINT,EXG_IMG) 
 			VALUES (CONCAT(DATE_FORMAT(NOW(),'%Y%m%d%H%i%s'),LEFT(#{exg_id},4)),
-			#{exg_id},#{exg_name},#{exg_addr},#{exg_message},#{exg_gnum},#{exg_gname},#{exg_point},#{exg_img})
+			#{exg_id},#{exg_name},#{exg_recipient},#{exg_tel},#{exg_addr},#{exg_message},#{exg_gnum},#{exg_gname},#{exg_point},#{exg_img})
 		]]>
 	</insert>
 	

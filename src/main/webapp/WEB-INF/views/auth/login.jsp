@@ -36,12 +36,11 @@ body {
 .login-form {
 	width: 350px;
 	margin: 0 auto;
-	padding: 30px 0;
+	padding: 30px 0px 0px 0px;
 }
-.login-form form {
+.login-form form{
 	color: #434343;
 	border-radius: 1px;
-	margin-bottom: 15px;
 	background: #fff;
 	border: 1px solid #f3f3f3;
 	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -97,6 +96,10 @@ body {
 }
 .login-form .forgot-link {
 	float: right;
+}
+#underBtn{
+	color:#425140;
+	padding-bottom:10px;
 }
 .login-form .small {
 	font-size: 13px;
@@ -159,13 +162,8 @@ height:46px;
  %>
 
    <a href="<%=apiURL%>"><img id="naver" src="/resources/Auth/btnG.png" alt="네이버로그인버튼" title="로그인버튼" /></a>
-           
-      
-       
-         <a href="/auth/find" class="forgot-link" title="아이디/비밀번호찾기" >아이디/비밀번호찾기</a>  
-        <a href="/member/join" class="forgot-link" title="회원가입" style="margin-right:73px" >회원가입</a> 
-        
-				
+   <a href="/auth/find" class="forgot-link" id="underBtn" title="아이디/비밀번호찾기" >아이디/비밀번호찾기</a>  
+   <a href="/member/join" class="forgot-link" id="underBtn" title="회원가입" style="margin-right:73px" >회원가입</a> 
     </form>			
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
