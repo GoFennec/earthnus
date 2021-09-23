@@ -1,6 +1,8 @@
 package kr.co.earthnus.user.camBoard;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +20,12 @@ public class CamBoardService {
 	public void getBoardList(String search, String search_type, String search_user, String arr, String orderBy, String order, 
 			String contentnum, String pagenum, Model model) {
 		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
-		
 		ConvertEntoKo cek = new ConvertEntoKo();
+		int camBoardListCount = 0;
 		
 		PagingBean pBean = new PagingBean();
 		List<camBoardBean> CamBoardList = null;
-		
+		List<camBoardBean> tempList = new ArrayList<camBoardBean>();
 		
 		if(search.equals("ocean")) {
 			search = "해양";
@@ -42,7 +44,6 @@ public class CamBoardService {
 		}else if(search == null || search.equals("")) {
 			search = "%%";
 		}
-		
 		
         int cPagenum = Integer.parseInt(pagenum);
         int cContentnum = Integer.parseInt(contentnum);
@@ -66,18 +67,15 @@ public class CamBoardService {
         if(cContentnum == 6){
         	pBean.setPagenum(pBean.getPagenum()*6);
         	CamBoardList = CamBoardDAO.getBoardList(pBean);
+        	camBoardListCount = CamBoardList.size();
         }
         
         pBean.setTotalcount(CamBoardDAO.getBoardListCount(pBean));
         pBean.setSearch(search.substring(1, search.length()-1));
         
-        model.addAttribute("CamBoardList", CamBoardList);
         pBean.setSearch_user(search_user);
         
-        if(search_user != null && !search_user.equals("") && !CamBoardList.isEmpty()) {
-        	CamBoardDAO.searchInsert(pBean);
-        }
-        
+        // 검색어 영한 보정
         String search_test = search.replace("%", "");
         int ascii = 0;
         int asciiAVG = 0;
@@ -92,8 +90,9 @@ public class CamBoardService {
 			}else if((ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122)) {
 				EnKoCheck--;
 			}
-		}// 한글 아스키 코드 범위 < 44032 ~ 55203 > 단자음, 단모음 아스키코드 범위 < 12592 ~ 12687 >  ||||| 영어 아스키 코드 범위 (대문자) < 65 ~ 90 > < 97 ~ 122 > 
+		}// 한글 아스키 코드 범위 < 44032 ~ 55203 >  단자음, 단모음 아스키코드 범위 < 12592 ~ 12687 >  영어 아스키 코드 범위 (대문자) < 65 ~ 90 > (소문자) < 97 ~ 122 > 
 		
+		// 보정된 검색어 추천
 		if(search_test.length() != 0) {
 			if(Math.abs(EnKoCheck) == search_test.length()) {
 				if(EnKoCheck > 0) {
@@ -107,26 +106,45 @@ public class CamBoardService {
 						if(!CamBoardList.isEmpty()) {
 							model.addAttribute("RecommandWord", transSearch.replace("%", ""));
 						}
-						//System.out.println(search.replace("%", "") + " ========> " + transSearch.replace("%", ""));
 					}
 				}
-			}else {
-				
 			}
 		}
 		
-		if(search_user != null && CamBoardList.isEmpty()) {
-			List<String> searchList = new ArrayList<String>();
+		// 검색어 빈도수 체크  && 검색대상 다듬기 && 검색결과 우선순위 정하기
+		String searchReplace = search.replace("%", "");
+		
+		if(!searchReplace.equals("")) {
+			SearchCorrelation sc = new SearchCorrelation();
+			CamBoardList = sc.searchResult(searchReplace, CamBoardList, pBean);
+			System.out.println("검색어 : " + searchReplace + ", 검색어 길이 : " + searchReplace.length());
 			
-			searchList = CamBoardDAO.searchWord(pBean);
+		}else if(searchReplace.equals("")) {
+			int printCount = 0;
+			int printIndex = (pBean.getCurrentPage()-1) * 6 + 1;
+			
+			if((CamBoardList.size() - (pBean.getCurrentPage()-1) * 6) > 6) {
+				printCount = 6;
+			}else if((CamBoardList.size() - (pBean.getCurrentPage()-1) * 6) <= 6 && (CamBoardList.size() - (pBean.getCurrentPage()-1) * 6) > 0){
+				printCount = (CamBoardList.size() - (pBean.getCurrentPage()-1) * 6);
+			}
+			
+			for(int i = 0; i < printCount; i++) {
+				tempList.add(CamBoardList.get(printIndex - 1 + i));
+			}
+			CamBoardList = tempList;
+		}
+		
+		System.out.println("CamBoardList길이 : " + CamBoardList.size());
+		
+		if(CamBoardList.isEmpty()) {
+			List<String> searchList = new ArrayList<String>();
 			
 			pBean.setSearch("%%");
 			pBean.setContentnum(-1);
 			search = search.replace("%", "");
 			int test = 0;
 			int word_length = 0;
-			
-			
 			
 			for(int i = 0; i < searchList.size(); i++) {
 				int test1 = 0;
@@ -142,10 +160,11 @@ public class CamBoardService {
 					}
 				}
 			}
-			
-			model.addAttribute("RecommandWord", search);
-			
+			if(!searchList.isEmpty() || searchList.size() > camBoardListCount) {
+				model.addAttribute("RecommandWord", search);
+			}
 		}
+		model.addAttribute("CamBoardList", CamBoardList);
         model.addAttribute("page", pBean);
 	}
 	
@@ -220,8 +239,6 @@ public class CamBoardService {
 	
 	public camBoardBean getCamBoard(int cambnum, String cambname) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
-		camBoardBean cBean = new camBoardBean();
-		cBean.setCAMB_NUM(cambnum);
 		
 		return camBoardDAO.getCamBoard(cambname);
 	}
@@ -255,35 +272,36 @@ public class CamBoardService {
         }
 		return list;
 	}
-	/*public MemberBean getMember(MemberBean mBean) {
-		return CamBoardDAO.getMember(mBean);
-	}*/
 	
+	// 검색어 유사도 체크
 	private int getDistance(String s1, String s2) {
 		  int longStrLen = s1.length() + 1;
-		  int shortStrLen = s2.length() + 1; // 긴 단어 만큼 크기가 나올 것이므로, 가장 긴단어 에 맞춰 Cost를 계산
+		  int shortStrLen = s2.length() + 1;
 		  int[] cost = new int[longStrLen];
-		  int[] newcost = new int[longStrLen]; // 초기 비용을 가장 긴 배열에 맞춰서 초기화 시킨다.
-		  for (int i = 0; i < longStrLen; i++) { cost[i] = i; } // 짧은 배열을 한바퀴 돈다.
+		  int[] newcost = new int[longStrLen];
+		  for (int i = 0; i < longStrLen; i++) { cost[i] = i; }
 		  for (int j = 1; j < shortStrLen; j++) {
-		    // 초기 Cost는 1, 2, 3, 4...
-		    newcost[0] = j; // 긴 배열을 한바퀴 돈다.
+			  
+		    newcost[0] = j;
 		    for (int i = 1; i < longStrLen; i++) {
-		      // 원소가 같으면 0, 아니면 1
+		    	
 		      int match = 0;
 		      if (s1.charAt(i - 1) != s2.charAt(j - 1)) { match = 1; }
-		      // 대체, 삽입, 삭제의 비용을 계산한다.
+
 		      int replace = cost[i - 1] + match;
 		      int insert = cost[i] + 1;
 		      int delete = newcost[i - 1] + 1;
-		      // 가장 작은 값을 비용에 넣는다.
+
 		      newcost[i] = Math.min(Math.min(insert, delete), replace);
-		    } // 기존 코스트 & 새 코스트 스위칭 
+		    }
 		    int[] temp = cost; 
 		    cost = newcost; 
 		    newcost = temp;
 		  }
-		  // 가장 마지막값 리턴
+		  
 		  return cost[longStrLen - 1];
 		}
+	
+	
+	
 }

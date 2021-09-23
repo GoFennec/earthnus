@@ -27,18 +27,32 @@
 	text-align: center !important;
 }
 .main-img{
-<<<<<<< HEAD
-	border: 1px solid;
-	text-align: center;
-	margin-bottom: 50px;
-}
-=======
 	padding: 4%;
 	text-align: center;
 	margin-bottom: 50px;
 }
+#SNSshare{
+	margin-right: 23%;
+}
+#shareList {
+    display: none;
+    text-align: center;
+    width: 303px;
+    height: 109px;
+    padding: 20px 60px;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    border-radius: 15px;
+}
 
->>>>>>> origin/kim
+#shareList .modal_close_btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.modal_close_btn:hover {
+	 background-color: #66BB6A; color: #388E3C;
+}
 </style>
 
 <title>EARTH & US</title>
@@ -58,17 +72,12 @@
         <h2 style="color: #2d2d2d;">${camBoard.CAMB_NAME}</h2>
 		<div id="subject_icon">
 			<span style="display: inline-block;">
-			<p><a id="subject" href="/camBoard/list/search?search=${camBoard.CAMB_SUBJECT}&search_type=CAMB_SUBJECT" title="${camBoard.CAMB_SUBJECT} 캠페인">${camBoard.CAMB_SUBJECT}&nbsp;&nbsp;</a>
+			<p><a id="subject" href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=${camBoard.CAMB_SUBJECT}" title="${camBoard.CAMB_SUBJECT} 캠페인">${camBoard.CAMB_SUBJECT}&nbsp;&nbsp;</a>
 			|&nbsp;&nbsp;진행 기간 <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_STARTDATE}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${camBoard.CAMB_FINDATE}"/></p>
 			</span>
 		</div>
 		<hr><br>
 		<div>
-		<div class="main-img">
-			<img class="img-fluid" src="${camBoard.CAMB_FILE}" title="${camBoard.CAMB_NAME}" width="70%">
-			<p style="text-align: center;">여긴 썸네일 사진</p>
-		</div>
-		
 		<p class="excert">
 		${camBoard.CAMB_CONTENT}
 		</p>
@@ -79,25 +88,24 @@
  	 
 	 <div class="navigation-top col-12">
 	    <div class="d-sm-flex justify-content-between" style="margin: 30px;">
-	     <div>
-	     <ul class="social-icons">
-	     	<li style="float: left"><p style="font-size: 0.8em;">SNS공유하기&nbsp;&nbsp;</p></li>
-		    <li style="float: left"><a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
-		 		<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="25px"></a></li>
-			<li style="float: left"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="25px" class="twitter" onclick="shareTwitter()"></li>
-		 	<li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="25px" class="naverblog" onclick="shareNaverBlog()"></li>
-			<li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="25px" class="kakaotalk" onclick="shareKakao()"></li>
-			<li style="float: left;"><i class="clipboard fas fa-copy" style="font-size: 24px" onclick="shareURL()"></i></li>
-	     </ul>
-	     </div>
-	     <div>
-		   	<button type="button" class="btn btn-primary" onclick="donate()">후원 바로가기</button>
-		 </div>
+	    	<button type="button" class="btn btn-primary" id="SNSshare">SNS 공유하기</button>
+		     <div id="shareList">
+		     	<ul class="social-icons">
+		     		<li style="float: left"><a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
+				 		<img src="/resources/camBoard/facebook.png" alt="페이스북 공유" class="facebook" width="25px"></a></li>
+					<li style="float: left"><img src="/resources/camBoard/twitter.png" alt="트위터 공유" width="25px" class="twitter" onclick="shareTwitter()"></li>
+				 	<li style="float: left"><img src="/resources/camBoard/naverblog.png" alt="네이버블로그 공유" width="25px" class="naverblog" onclick="shareNaverBlog()"></li>
+					<li style="float: left"><img src="/resources/camBoard/kakaotalk.png" alt="카카오톡 공유" width="25px" class="kakaotalk" onclick="shareKakao()"></li>
+					<li style="float: left;"><i class="clipboard fas fa-copy" style="font-size: 24px" onclick="shareURL()"></i></li>
+		     	</ul><br><br>
+		     	<button class="modal_close_btn">닫기</button>
+		     </div>
+			<button type="button" class="btn btn-primary" onclick="donate()">후원 바로가기</button>
 	    </div>
 	   
-		<div class="navigation-area">
+		<div class="navigation-area m-4">
 		  <div class="row">
-		   <div id="preBoard" class="col-lg-4 col-md-4 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+		   <div id="preBoard" class="col-sm-4 nav-left flex-row d-flex justify-content-start align-items-center">
 			   <div style="cursor: pointer;" onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
 				   	<div class="thumb">
 						<img class="img-fluid" src="${preBoard.CAMB_FILE}" title="${preBoard.CAMB_NAME}" alt="${preBoard.CAMB_NAME}">
@@ -114,11 +122,11 @@
 			   </div>
 		   </div>
 
-		  <div class="list col-lg-4 col-md-4 col-12 ">
+		  <div class="list col-sm-4">
 		  	<a class="btn header-btn" onclick="camBoard()" style="color: white;">목록으로</a>
 		  </div>
 		
-			<div id="nextBoard" class="col-lg-4 col-md-4 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+			<div id="nextBoard" class="col-sm-4 nav-right flex-row d-flex justify-content-end align-items-center">
 				<div style="cursor: pointer;" onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}', 'next')">
 				   <div class="thumb">
 				  		<img class="img-fluid" src="${nextBoard.CAMB_FILE}" title="${nextBoard.CAMB_NAME}" alt="${nextBoard.CAMB_NAME}">
@@ -270,6 +278,59 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
 			location.href="/donation/ice";
 		}
 	}
+	
+	function modal(id) {
+        var zIndex = 9999;
+        var modal = document.getElementById(id);
+
+        // 모달 div 뒤에 희끄무레한 레이어
+        var bg = document.createElement('div');
+        bg.setStyle({
+            position: 'fixed',
+            zIndex: zIndex,
+            left: '0px',
+            top: '0px',
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            // 레이어 색갈은 여기서 바꾸면 됨
+            backgroundColor: 'rgba(0,0,0,0.4)'
+        });
+        document.body.append(bg);
+
+        // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+        modal.querySelector('.modal_close_btn').addEventListener('click', function() {
+            bg.remove();
+            modal.style.display = 'none';
+        });
+
+        modal.setStyle({
+            position: 'fixed',
+            display: 'block',
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+            // 시꺼먼 레이어 보다 한칸 위에 보이기
+            zIndex: zIndex + 1,
+
+            // div center 정렬
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            msTransform: 'translate(-50%, -50%)',
+            webkitTransform: 'translate(-50%, -50%)'
+        });
+    }
+	
+	// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+    Element.prototype.setStyle = function(styles) {
+        for (var k in styles) this.style[k] = styles[k];
+        return this;
+    };
+
+    document.getElementById('SNSshare').addEventListener('click', function() {
+        // 모달창 띄우기
+        modal('shareList');
+    });
 	
 	function shareURL() {
 		var url = '';

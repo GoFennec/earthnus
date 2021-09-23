@@ -21,8 +21,7 @@
 	</resultMap>
 	
 	<select id="getBoardList" resultMap="camBoardResult">
-			<![CDATA[SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT,
-			SUBSTRING_INDEX(SUBSTRING_INDEX(CAMB_CONTENT, '</', 1), '>', -1) AS CAMB_CONTENT, CAMB_FILE, 
+			<![CDATA[SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_FILE, 
 			CAMB_STARTDATE, CAMB_FINDATE, CAMB_DATE, 
 			IF(floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100)>=0,
 			floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100),-1) AS "CAMB_ABLEDATE" ]]>
@@ -50,10 +49,6 @@
 				<when test='arr.equals("exp")'>${orderBy} ${order} </when>
 				<when test='arr.equals("end")'>${orderBy} ${order} </when>
 			</choose>
-			<if test='contentnum != -1'>
-			LIMIT #{contentnum} OFFSET #{pagenum}
-			</if>
-			<if test='contentnum == -1'></if>
 			
 	</select>
 	
@@ -186,13 +181,7 @@
 			SELECT * FROM CAMBOARD WHERE CAMB_NAME=#{cambname}
 		]]>
 	</select>
-	
-	<select id="searchWord" resultType="String">
-		<![CDATA[
-			SELECT SEARCH_WORD FROM SEARCH WHERE SEARCH_USER=#{search_user}
-		]]>
-	</select>
-	
+
 	<update id="camBoardUpdate">
 		<![CDATA[
 			UPDATE CAMBOARD SET CAMB_NAME = #{CAMB_NAME}, CAMB_SUBJECT = #{CAMB_SUBJECT}, CAMB_CONTENT = #{CAMB_CONTENT}, 
@@ -204,13 +193,6 @@
 		<![CDATA[
 			INSERT INTO CAMBOARD (CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_FILE, CAMB_STARTDATE, CAMB_FINDATE) 
 			VALUES(#{CAMB_NAME}, #{CAMB_SUBJECT}, #{CAMB_CONTENT}, #{CAMB_FILE}, #{CAMB_STARTDATE}, #{CAMB_FINDATE})
-		]]>
-	</insert>
-	
-	<insert id="searchInsert">
-		<![CDATA[
-			INSERT INTO SEARCH (SEARCH_USER, SEARCH_WORD, SEARCH_TYPE) 
-			VALUES(#{search_user}, #{search}, #{search_type})
 		]]>
 	</insert>
 	
