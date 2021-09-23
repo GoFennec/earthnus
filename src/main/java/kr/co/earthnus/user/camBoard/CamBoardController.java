@@ -37,7 +37,6 @@ public class CamBoardController{
 	public String searchCamBoardList(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "전체") String search_type, 
 			@RequestParam(defaultValue = "1") String pagenum, @RequestParam(defaultValue = "6") String contentnum, 
 			@RequestParam( value = "search", required=false) String search , @RequestParam(defaultValue = "desc") String order, 
-
 			HttpSession session, camBoardBean bean, Model model) {
 		String search_user = "";
 		AuthBean auth = (AuthBean)session.getAttribute("auth");
@@ -45,6 +44,7 @@ public class CamBoardController{
 		if(auth != null) {
 			search_user = auth.getAuth_id();
 		}
+		
 		if(search_type.equals("제목")) {
 			search_type = "CAMB_NAME";
 		}else if(search_type.equals("내용")) {

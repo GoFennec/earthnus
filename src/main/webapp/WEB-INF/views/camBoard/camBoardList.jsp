@@ -14,8 +14,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <style>
-table {border-collapse: collapse; width: 100%;}
-table tr {border-bottom: 2px solid #388E3C;}
+.search-box table {
+	border-collapse: collapse; 
+	border-radius: 20px;
+	width: 100%; 
+	box-shadow: 0px 7px 10px 0px rgb(0 0 0 / 5%) !important;
+}
+
+.search-box table:hover{
+	border-collapse: collapse; 
+	border-radius: 20px;
+	width: 100%; 
+	box-shadow: 0px 7px 10px 0px rgb(0 0 0 / 20%) !important;
+}
+
+td i {
+	margin-right: 10px;
+}
+
 
 div #selectView {text-align: right;}
 #selectView a {font-weight: bold; color: #388E3C; font-size: 0.8em;}
@@ -31,7 +47,17 @@ div #selectView {text-align: right;}
 .blog_item_date {text-align: center;}
 .blog_details {cursor: pointer;}
 .search-div {text-align: center;}
-article {cursor: pointer;}
+
+article {
+	box-shadow: 0px 7px 10px 0px rgb(0 0 0 / 5%) !important;
+	border-radius: 15px !important;
+	cursor: pointer;
+}
+
+article:hover {
+	box-shadow: 0px 7px 10px 0px rgb(0 0 0 / 20%) !important;
+	border-radius: 15px !important;
+}
 
 #cancelButton {border-radius: 10px; border: none; background-color: #388E3C; color: white;}
 i {cursor: pointer; color: #388E3C;}
@@ -135,8 +161,6 @@ i {cursor: pointer; color: #388E3C;}
 .result-null{
 	text-align: center;
 }
-<<<<<<< HEAD
-=======
 
 .result-null{
 	font-weight: 600;
@@ -146,7 +170,10 @@ i {cursor: pointer; color: #388E3C;}
 	color: #388E3C !important;
 	cursor: pointer;
 }
->>>>>>> origin/kim
+.campaign img{
+	border-top-left-radius: 15px !important;
+	border-top-right-radius: 15px !important;
+}
 </style>
 
 <title>EARTH & US</title>
@@ -158,36 +185,14 @@ i {cursor: pointer; color: #388E3C;}
 <br><br><br><br>
 <div class="container">
 <div class="row">
-	<div class="col-sm-6 col-md-7">
-		<table>
-			    <tr>
-			    	<td>
-			    		<select id="search_type">
-				            <option selected="selected">전체</option>
-				            <option>제목</option>
-				            <option>내용</option>
-				         </select>
-			    	</td>
-			    	<td id="search-text">
-			    		<div class="search-block">
-			    			<input type="text" id="search" name="search" onkeyup="enterkey()" placeholder="검색 . . .">
-			    		</div>
-			    	</td>
-			    	<td class="search-imoji">
-				    	<i class="fas fa-search" onclick="searchCamBoard()"></i>
-			    	</td>
-			    </tr>
-		 </table>
-	</div>
-	<div class="col-sm-6 col-md-5" id="selectView">
 	<div class="col-sm-12" id="selectView">
 		<ul id="nav">
 			<li class="sub-nav type"><button class="filter">주제</button>
 				<ul class="sub-type">
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ocean" title="해양보호 캠페인"><i class="type fas fa-tint"></i>&nbsp;&nbsp;해양</a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=plastic" title="플라스틱 재활용 캠페인"><i class="type fas fa-sync-alt"></i>&nbsp;&nbsp;플라스틱</a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=forest" title="산림 지킴이 캠페인"><i class="type fas fa-tree"></i>&nbsp;&nbsp;산림</a></li>
-					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=ice" title="북극곰 집 지키기 캠페인"><i class="type fas fa-snowflake"></i>&nbsp;&nbsp;극지방</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=해양" title="해양보호 캠페인"><i class="type fas fa-tint"></i>&nbsp;&nbsp;해양</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=플라스틱" title="플라스틱 재활용 캠페인"><i class="type fas fa-sync-alt"></i>&nbsp;&nbsp;플라스틱</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=산림" title="산림 지킴이 캠페인"><i class="type fas fa-tree"></i>&nbsp;&nbsp;산림</a></li>
+					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=극지방" title="북극곰 집 지키기 캠페인"><i class="type fas fa-snowflake"></i>&nbsp;&nbsp;극지방</a></li>
 				</ul>
 			</li>
 			<li class="sub-nav history"><button class="filter">이력</button>
@@ -211,11 +216,11 @@ i {cursor: pointer; color: #388E3C;}
            <c:forEach items="${CamBoardList}" var="list" begin="0" end="5">
            <% index++; %>
               <div class="col-sm-12 col-md-6 col-lg-4">
-                   <article class="blog_item" onclick="detailUrl('${list.CAMB_NAME}', '<%= index %>')">
+                   <article class="blog_item campaign" onclick="detailUrl('${list.CAMB_NAME}', '<%= index %>')">
                        <div class="blog_item_img">
                          <img class="card-img rounded-0" src="${list.CAMB_FILE}" title="${list.CAMB_NAME}" alt="${list.CAMB_NAME} 사진" height="200px;">
                   		</div>
-                       <div class="blog_details" style="height: 200px;">
+                       <div class="blog_details detail" style="height: 200px;">
                           <p style="font-size: 0.8em;">진행 기간 <fmt:formatDate pattern="yyyy-MM-dd" value="${list.CAMB_STARTDATE}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${list.CAMB_FINDATE}"/></p>
                            <h3 class="blog-head">${list.CAMB_NAME}</h3>
                        </div>
@@ -229,7 +234,6 @@ i {cursor: pointer; color: #388E3C;}
    </c:if>
    <c:if test="${page.totalcount eq 0}">
    	<div class="result-null">
-   		<h1>검색결과가 없습니다.</h1>
    		<br><br><br><br><h1>검색결과가 없습니다.</h1>
    		<c:if test="${!empty RecommandWord}">
    			<br><br>이 검색어는 어때요?&nbsp;&nbsp;&nbsp;"<a class="changesearch" title="${RecommandWord} 검색하기" onclick="changesearch()">${RecommandWord}</a>"<br><br><br><br><hr>
@@ -245,8 +249,8 @@ i {cursor: pointer; color: #388E3C;}
 
 <div class="container">
 	<div class="row m-4">
-	<div class="col-sm-2 col-lg-4"></div>
-	<div class="col-sm-8 col-lg-4">
+	<div class="col-sm-2 col-lg-3"></div>
+	<div class="col-sm-8 col-lg-6 search-box">
 			<table>
 			    <tr>
 			    	<td>
@@ -267,7 +271,7 @@ i {cursor: pointer; color: #388E3C;}
 			    </tr>
 		 </table>
 	</div>
-	<div class="col-sm-2 col-lg-4"></div>
+	<div class="col-sm-2 col-lg-3"></div>
 	
 	<div class="col-sm-2 col-lg-4"></div>
 	<div class="col-sm-8 col-lg-4">
@@ -301,8 +305,7 @@ i {cursor: pointer; color: #388E3C;}
 	   </nav>
 	</div>
 	<div class="col-sm-2 col-lg-4"></div>
-	</div>
-	
+</div>
 </div>
 
 <jsp:include page="/WEB-INF/views/footer.jsp"/>

@@ -186,4 +186,15 @@ public class PagingBean {
             this.lastblock++;
         }
     }
+	@Override
+	public String toString() {
+		return "PagingBean [totalcount=" + totalcount + ", pagenum=" + pagenum + ", currentPage=" + currentPage
+				+ ", contentnum=" + contentnum + ", startPage=" + startPage + ", endPage=" + endPage + ", prev=" + prev
+				+ ", next=" + next + ", currentblock=" + currentblock + ", lastblock=" + lastblock + ", arr=" + arr
+				+ ", search=" + search + ", order=" + order + ", orderBy=" + orderBy + ", search_type=" + search_type
+				+ ", search_user=" + search_user + ", CAMB_NUM=" + CAMB_NUM + ", CAMB_INDEX=" + CAMB_INDEX + ", limit="
+				+ limit + ", offset=" + offset + "]";
+	}
+    
+    
 }
