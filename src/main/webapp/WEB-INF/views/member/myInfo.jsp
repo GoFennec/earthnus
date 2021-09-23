@@ -670,7 +670,7 @@ body {
                   <form class="form-horizontal" id="form" method="post"  action="/updateMyInfo">
                      <fieldset class="fieldset">
          <div class="form-group">
-          <c:if test="${MemberBean.mem_api eq 'NULL'}" >
+          				<c:if test="${MemberBean.mem_api eq \"NULL\" || MemberBean.mem_api eq NULL}" >
                         <div class="col-12">
                            <label for="username" class="form-label">아이디</label> <input
                               type="text" name="mem_id" class="form-control" id="mem_id"
@@ -698,7 +698,7 @@ body {
                               value="${MemberBean.mem_name  }" readonly>
                         </div>
                         
-                           <c:if test="${MemberBean.mem_api eq 'NULL'}" >
+                           <c:if test="${MemberBean.mem_api eq \"NULL\" || MemberBean.mem_api eq NULL}" >
                         <div class="col-12">
                            <label for="username" class="form-label">비밀번호</label>
                         </div>

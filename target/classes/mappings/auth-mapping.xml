@@ -44,7 +44,9 @@
 		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('작은 얼음','큰 얼음','빙하 조각','북극곰')
 	</select>
 	<select id="getCb_list" resultType="camBoard" parameterType="String">
-		SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_FILE FROM CAMBOARD ORDER BY CAMB_NUM DESC LIMIT 2
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE CAMB_STARTDATE <= now() and now() <= CAMB_FINDATE ORDER BY CAMB_NUM DESC LIMIT 2
+		]]>
 	</select>
 	<select id="getCh_list" resultType="cheBoard" parameterType="String">
 		SELECT * FROM CHEBOARD ORDER BY CHEB_DATE DESC limit 4
