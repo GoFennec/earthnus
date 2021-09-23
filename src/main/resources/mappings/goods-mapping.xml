@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.earthnus.user.goods.GoodsMybatis">
+
+	<resultMap id="goodsResult" type="goods">
+		<id property="goods_num" column="GOODS_NUM"/>
+		<result property="goods_name" column="GOODS_NAME"/>
+		<result property="goods_category" column="GOODS_CATEGORY"/>
+		<result property="goods_point" column="GOODS_POINT"/>
+		<result property="goods_info" column="GOODS_INFO"/>
+		<result property="goods_desc" column="GOODS_DESC"/>
+		<result property="goods_img" column="GOODS_IMG"/>
+	</resultMap>
+	
+	<resultMap id="memberResult" type="member">
+		<id property="mem_id" column="MEM_ID"/>
+		<result property="mem_pw" column="MEM_PW"/>
+		<result property="mem_name" column="MEM_NAME"/>
+		<result property="mem_addr" column="MEM_ADDR"/>
+		<result property="mem_tel" column="MEM_TEL"/>
+		<result property="mem_birth" column="MEM_BIRTH"/>
+		<result property="mem_gender" column="MEM_GENDER"/>
+		<result property="mem_email" column="MEM_EMAIL"/>
+		<result property="mem_date" column="MEM_DATE"/>
+		<result property="mem_point" column="MEM_POINT"/>
+	</resultMap>
+	
+	<resultMap id="exGoodsResult" type="exGoods">
+		<id property="exg_num" column="EXG_NUM"/>
+		<result property="exg_id" column="EXG_ID"/>
+		<result property="exg_name" column="EXG_NAME"/>
+		<result property="exg_addr" column="EXG_ADDR"/>
+		<result property="exg_message" column="EXG_MESSAGE"/>
+		<result property="exg_state" column="EXG_STATE"/>
+		<result property="exg_cc" column="EXG_CC"/>
+		<result property="exg_waybill" column="EXG_WAYBILL"/>
+		<result property="exg_gnum" column="EXG_GNUM"/>
+		<result property="exg_gname" column="EXG_GNAME"/>
+		<result property="exg_point" column="EXG_POINT"/>
+		<result property="exg_img" column="EXG_IMG"/>
+		<result property="exg_pdate" column="EXG_PDATE"/>
+		<result property="exg_ddate" column="EXG_DDATE"/>
+		<result property="exg_cdate" column="EXG_CDATE"/>
+		<result property="exg_cancle" column="EXG_CANCLE"/>
+	</resultMap>
+	
+	
+	<select id="goodsCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM GOODS
+		]]>
+	</select>
+	
+	<select id="goodsKindsCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM GOODS WHERE GOODS_CATEGORY=#{goodsKinds}
+		]]>
+	</select>
+	
+	<select id="getGoodsCategory" resultMap="goodsResult">
+		<![CDATA[
+			SELECT DISTINCT GOODS_CATEGORY FROM GOODS;
+		]]>
+	</select>
+	
+	<select id="getGoodsList" resultMap="goodsResult">
+		<![CDATA[
+			SELECT * FROM GOODS ORDER BY GOODS_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+	
+	<select id="getGoodsKindsList" resultMap="goodsResult">
+		<![CDATA[
+			SELECT * FROM GOODS WHERE GOODS_CATEGORY=#{goodsKinds} ORDER BY GOODS_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+		]]>
+	</select>
+	
+	<select id="getGoods" resultType="goods">
+		<![CDATA[
+			SELECT * FROM GOODS WHERE GOODS_NUM=#{goods_num}
+		]]>
+	</select>
+	
+	<select id="getMember" resultType="member">
+		<![CDATA[
+			SELECT * FROM MEMBER WHERE MEM_ID=#{auth_id}
+		]]>
+	</select>
+	
+	<insert id="insertExGoods">
+		<![CDATA[
+			INSERT INTO EXGOODS (EXG_NUM,EXG_ID,EXG_NAME,EXG_ADDR,EXG_MESSAGE,EXG_GNUM,EXG_GNAME,EXG_POINT,EXG_IMG) 
+			VALUES (CONCAT(DATE_FORMAT(NOW(),'%Y%m%d%H%i%s'),LEFT(#{exg_id},4)),
+			#{exg_id},#{exg_name},#{exg_addr},#{exg_message},#{exg_gnum},#{exg_gname},#{exg_point},#{exg_img})
+		]]>
+	</insert>
+	
+	<select id="newExGoods" resultType="string">
+		<![CDATA[
+			SELECT EXG_NUM FROM EXGOODS WHERE EXG_ID=#{exg_id} ORDER BY EXG_PDATE DESC LIMIT 1
+		]]>
+	</select>
+	
+	<update id="updatePoint">
+		<![CDATA[
+			UPDATE MEMBER SET MEM_POINT=MEM_POINT-#{exg_point} WHERE MEM_ID=#{exg_id}
+		]]>
+	</update>
+	
+	<select id="exMemberPoint" resultType="member">
+		<![CDATA[
+			SELECT * FROM MEMBER WHERE MEM_ID=#{exg_id}
+		]]>
+	</select>
+	
+	<select id="getExGoods" resultType="exGoods">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_NUM=#{exg_num}
+		]]>
+	</select>
+	
+</mapper>

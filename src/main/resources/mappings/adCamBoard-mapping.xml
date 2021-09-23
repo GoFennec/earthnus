@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.earthnus.admin.camBoard.AdCamBoardMybatis">
+	
+	<resultMap id="camBoardResult" type="camBoard">
+		<id property="CAMB_NUM" column="CAMB_NUM"/>
+		<result property="CAMB_NAME" column="CAMB_NAME"/>
+		<result property="CAMB_SUBJECT" column="CAMB_SUBJECT"/>
+		<result property="CAMB_CONTENT" column="CAMB_CONTENT"/>
+		<result property="CAMB_FILE" column="CAMB_FILE"/>
+		<result property="CAMB_DATE" column="CAMB_DATE"/>
+	</resultMap>
+	
+	<select id="getAdBoardList" resultMap="camBoardResult">
+			SELECT * FROM CAMBOARD 
+	</select>
+	
+	<select id="getAdBoardIngList" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE CAMB_STARTDATE <= now() and now() <= CAMB_FINDATE
+		]]>
+	</select>
+	
+	<select id="getAdBoardFinishList" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE CAMB_FINDATE < NOW()
+		]]>
+	</select>
+	
+	<select id="getCamTotal" resultType="int">
+			SELECT COUNT(*) FROM CAMBOARD 
+	</select>
+	
+	<select id="getCamIng" resultType="int">
+		<![CDATA[	
+			SELECT COUNT(*) FROM CAMBOARD WHERE CAMB_STARTDATE <= now() and now() <= CAMB_FINDATE
+		]]>
+	</select>
+	
+	<select id="getCamFinish" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM CAMBOARD WHERE CAMB_FINDATE < NOW()
+		]]>
+	</select>
+
+</mapper>

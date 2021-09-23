@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.earthnus.admin.goods.AdGoodsMybatis">
+
+	<resultMap id="goodsResult" type="goods">
+		<id property="goods_num" column="GOODS_NUM"/>
+		<result property="goods_name" column="GOODS_NAME"/>
+		<result property="goods_category" column="GOODS_CATEGORY"/>
+		<result property="goods_point" column="GOODS_POINT"/>
+		<result property="goods_info" column="GOODS_INFO"/>
+		<result property="goods_desc" column="GOODS_DESC"/>
+		<result property="goods_img" column="GOODS_IMG"/>
+	</resultMap>
+	
+	<select id="getAdGoodsCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM GOODS
+		]]>
+	</select>
+	
+	<select id="getAdGoodsList" resultMap="goodsResult">
+		<![CDATA[
+			SELECT * FROM GOODS
+		]]>
+	</select>
+	
+	<select id="getNewGoodsNum" resultType="string">
+		<![CDATA[
+			SELECT GOODS_NUM FROM GOODS ORDER BY GOODS_NUM DESC LIMIT 1
+		]]>
+	</select>
+	
+	<select id="getGoodsCategory" resultMap="goodsResult">
+		<![CDATA[
+			SELECT DISTINCT GOODS_CATEGORY FROM GOODS;
+		]]>
+	</select>
+	
+	<insert id="isertGoodsOk">
+		<![CDATA[
+			INSERT INTO GOODS (GOODS_NUM,GOODS_NAME,GOODS_CATEGORY,GOODS_POINT,GOODS_INFO,GOODS_DESC,GOODS_IMG) 
+			VALUES (#{goods_num},#{goods_name},#{goods_category},#{goods_point},#{goods_info},#{goods_desc},#{goods_img})
+		]]>
+	</insert>
+	
+	<select id="getGoodsU" resultType="goods" parameterType="string">
+		<![CDATA[
+			SELECT * FROM GOODS WHERE GOODS_NUM=#{goodsNumU}
+		]]>
+	</select>
+	
+	<update id="updateGoodsOk">
+		<![CDATA[
+			UPDATE GOODS SET GOODS_NAME=#{goods_name},GOODS_CATEGORY=#{goods_category},GOODS_POINT=#{goods_point},
+			GOODS_INFO=#{goods_info},GOODS_DESC=#{goods_desc},GOODS_IMG=#{goods_img} 
+			WHERE GOODS_NUM=#{goods_num}
+		]]>
+	</update>
+	
+	<delete id="deleteGoods" parameterType="List">
+		DELETE FROM GOODS
+		WHERE
+		GOODS_NUM IN
+    	<foreach collection="list" item="checkArr" index="i" open="(" separator="," close=")">
+      		#{checkArr}
+    	</foreach>
+	</delete>
+	
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.user.pay.PayMybatis">
+	
+	<select id="getMemberInfo" parameterType="auth" resultType="member">
+		SELECT * FROM MEMBER WHERE MEM_ID = #{auth_id}
+	</select>
+	
+	<insert id="insertPay" parameterType="pay">
+		INSERT INTO PAY (pay_num, pay_id, pay_name, pay_dname, pay_price, pay_point, pay_pdate)
+		VALUES (#{pay_num},#{pay_id},#{pay_name},#{pay_dname},#{pay_price},#{pay_point},#{pay_pdate})
+	</insert>
+	
+	<select id="getPayInfo" parameterType="String" resultType="pay">
+		SELECT * FROM PAY WHERE PAY_NUM = #{value}
+	</select>
+</mapper>

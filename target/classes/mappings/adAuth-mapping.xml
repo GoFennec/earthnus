@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.admin.auth.AdAuthMybatis">
+
+	<resultMap id="adAuthResult" type="adAuth">
+		<id property="auth_id" column="AUTH_ID"/>
+		<result property="auth_name" column="AUTH_NAME"/>
+	</resultMap>
+
+	<resultMap id="adMemberResult" type="adMember">
+		<id property="ad_id" column="AD_ID"/>
+		<result property="ad_pw" column="AD_PW"/>
+		<result property="ad_name" column="AD_NAME"/>
+		<result property="ad_addr" column="AD_ADDR"/>
+		<result property="ad_tel" column="AD_TEL"/>
+		<result property="ad_birth" column="AD_BIRTH"/>
+		<result property="ad_gender" column="AD_GENDER"/>
+		<result property="ad_email" column="AD_EMAIL"/>
+		<result property="ad_date" column="AD_DATE"/>
+		<result property="ad_role" column="AD_ROLE"/>
+	</resultMap>
+	
+	<select id="getSelectByAdId" resultType="adMember" parameterType="String">
+		SELECT * FROM ADMEMBER WHERE AD_ID=#{auth_id}
+	</select>
+	
+	<select id="getAdPay" resultType="pay">
+		select PAY_NO, PAY_ID, PAY_DNAME, PAY_PRICE, PAY_PDATE from pay where pay_pstate = '적립예정' order by pay_pdate desc limit 5
+	</select>
+	
+	<select id="getAdGoods" resultType="exGoods">
+		SELECT EXG_NUM, EXG_ID, EXG_GNAME, EXG_PDATE FROM EXGOODS WHERE EXG_STATE = '결제완료' ORDER BY EXG_NUM DESC LIMIT 5
+	</select>
+	
+	<select id="getAdCamboard" resultType="camBoard">
+		<![CDATA[
+		SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_STARTDATE, CAMB_FINDATE FROM CAMBOARD 
+		WHERE CAMB_STARTDATE <= now() and now() <= CAMB_FINDATE ORDER BY CAMB_NUM DESC LIMIT 5
+		]]>
+	</select>
+	
+	<select id="getAdCheboard" resultType="cheBoard">
+		select * from cheboard order by cheb_num desc limit 5
+	</select>
+	
+	<select id="getSumPay" resultType="String">
+		select sum(pay_price) from pay where date_format(pay_pdate,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+	</select>
+	
+	<select id="getCountMember" resultType="int">
+		select count(*) from member where date_format(mem_date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+	</select>
+	
+	<select id="getOrderExGoods" resultType="int">
+		select count(*) from exgoods where date_format(exg_pdate,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+	</select>
+	
+	<select id="getTodayVisitor" resultType="int">
+		select count(*) from visitor where  date_format(visit_time,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+	</select>
+	
+	<insert id="insertVisitor" parameterType="visit">
+            INSERT
+            INTO VISITOR
+            (
+                VISIT_IP,
+                VISIT_TIME,
+                VISIT_AGENT
+            )
+            VALUES
+            (
+                #{visit_ip},
+                now(),
+                #{visit_agent}
+            )
+     </insert>
+	
+</mapper>

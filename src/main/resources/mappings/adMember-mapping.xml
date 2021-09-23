@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.admin.member.AdMemberMybatis">
+
+	<resultMap id="member" type="member">
+		<id property="mem_id" column="MEM_ID"/>
+		<result property="mem_pw" column="MEM_PW"/>
+		<result property="mem_name" column="MEM_NAME"/>
+		<result property="mem_addr" column="MEM_ADDR"/>
+		<result property="mem_tel" column="MEM_TEL"/>
+		<result property="mem_birth" column="MEM_BIRTH"/>
+		<result property="mem_gender" column="MEM_GENDER"/>
+		<result property="mem_email" column="MEM_EMAIL"/>
+		<result property="mem_date" column="MEM_DATE"/>
+		<result property="mem_point" column="MEM_POINT"/>
+	</resultMap>
+
+	<select id="getMemberList" resultMap="member">
+		select * from member where mem_name != '삭제된회원'
+	</select>
+	
+	<select id="getMemberListDetail" parameterType="String" resultType="member">
+		select * from member where mem_id = #{mem_id}
+	</select>
+	
+	<select id="getPayCount" parameterType="String" resultType="int">
+		select count(*) from pay where pay_id = #{mem_id}
+	</select>
+	
+	<select id="getPayTotal" parameterType="String" resultType="Integer">
+		select sum(pay_price) from pay where pay_id = #{mem_id}
+	</select>
+	
+	<select id="getCheerCount" parameterType="String" resultType="int">
+		select count(*) from CHEBOARD where cheb_id = #{mem_id}
+	</select>
+	
+	<select id="getCheckExgoods" parameterType="String" resultType="int">
+		select count(*) from exgoods where exg_id = #{deleteMember} and exg_state = '결제완료' or exg_state = '배송처리'
+	</select>
+	
+	<select id="getDeletePW" parameterType="String" resultType="int">
+		select count(*) from ADMEMBER where AD_PW = #{deletePW}
+	</select>
+	
+	<update id="adDeleteMember" parameterType="String">UPDATE MEMBER SET
+		MEM_PW="NOTAMEMBER", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원",
+		MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
+		MEM_POINT="0" WHERE MEM_ID=#{deleteMember}
+	</update>	
+	
+	<select id="getMemberTotal" resultType="int">
+		select count(*) from member where mem_name != '삭제된회원'
+	</select>
+			
+</mapper>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.earthnus.user.camBoard.CamBoardMybatis">
+	
+	<resultMap id="camBoardResult" type="camBoard">
+		<id property="CAMB_NUM" column="CAMB_NUM"/>
+		<result property="CAMB_NAME" column="CAMB_NAME"/>
+		<result property="CAMB_SUBJECT" column="CAMB_SUBJECT"/>
+		<result property="CAMB_CONTENT" column="CAMB_CONTENT"/>
+		<result property="CAMB_FILE" column="CAMB_FILE"/>
+		<result property="CAMB_STARTDATE" column="CAMB_STARTDATE"/>
+		<result property="CAMB_FINDATE" column="CAMB_FINDATE"/>
+		<result property="CAMB_DATE" column="CAMB_DATE"/>
+		<result property="CAMB_ABLEDATE" column="CAMB_ABLEDATE"/>
+	</resultMap>
+	
+	<resultMap id="statResult" type="statBoard">
+		<result property="CAMB_ABLEDATE" column="CAMB_ABLEDATE"/>
+	</resultMap>
+	
+	<select id="getBoardList" resultMap="camBoardResult">
+			<![CDATA[SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT,
+			SUBSTRING_INDEX(SUBSTRING_INDEX(CAMB_CONTENT, '</', 1), '>', -1) AS CAMB_CONTENT, CAMB_FILE, 
+			CAMB_STARTDATE, CAMB_FINDATE, CAMB_DATE, 
+			IF(floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100)>=0,
+			floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100),-1) AS "CAMB_ABLEDATE" ]]>
+			FROM CAMBOARD 
+			WHERE (
+			<choose>
+				<when test='search_type.equals("CAMB_ENTIRE")'>
+				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+				</when>
+				<when test='search_type.equals("CAMB_NAME")'>CAMB_NAME LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_SUBJECT")'>CAMB_SUBJECT LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_CONTENT")'>CAMB_CONTENT LIKE #{search} </when>
+			</choose>
+			AND 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE())) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE())) ]]></when>
+				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
+			</choose>
+			ORDER BY 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order}, CAMB_NUM ${order} ]]></when>
+				<when test='arr.equals("doing")'>${orderBy} ${order} </when>
+				<when test='arr.equals("exp")'>${orderBy} ${order} </when>
+				<when test='arr.equals("end")'>${orderBy} ${order} </when>
+			</choose>
+			LIMIT #{contentnum} OFFSET #{pagenum}
+	</select>
+	
+	<select id="getAdBoardList" resultMap="camBoardResult">
+		SELECT * 
+		FROM CAMBOARD 
+		WHERE (
+		<choose>
+			<when test='search_type.equals("CAMB_ENTIRE")'>
+			(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+			</when>
+			<when test='search_type.equals("CAMB_NAME")'>CAMB_NAME LIKE #{search} </when>
+			<when test='search_type.equals("CAMB_SUBJECT")'>CAMB_SUBJECT LIKE #{search} </when>
+			<when test='search_type.equals("CAMB_CONTENT")'>CAMB_CONTENT LIKE #{search} </when>
+		</choose>
+		AND 
+		<choose>
+			<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE())) ]]></when>
+			<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE())) ]]></when>
+			<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
+			<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
+		</choose>
+	</select>
+	
+	<select id="getStatList" resultMap="statResult">
+		<![CDATA[SELECT IF(floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100)>=0,
+    	floor(datediff(camb_findate, sysdate())/datediff(camb_findate, camb_startdate)*100),-1) AS "CAMB_ABLEDATE"]]>
+		FROM CAMBOARD 
+			WHERE (
+			<choose>
+				<when test='search_type.equals("CAMB_ENTIRE")'>
+				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+				</when>
+				<when test='search_type.equals("CAMB_NAME")'>CAMB_NAME LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_SUBJECT")'>CAMB_SUBJECT LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_CONTENT")'>CAMB_CONTENT LIKE #{search} </when>
+			</choose>
+			AND 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE())) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE())) ]]></when>
+				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
+			</choose>
+			ORDER BY ${orderBy} ${order} LIMIT #{contentnum} OFFSET #{pagenum}
+	</select>
+	
+	<select id="getBoardListCount" resultType="int">
+			SELECT COUNT(*) 
+			FROM CAMBOARD 
+			WHERE (
+			<choose>
+				<when test='search_type.equals("CAMB_ENTIRE")'>
+				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+				</when>
+				<when test='search_type.equals("CAMB_NAME")'>CAMB_NAME LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_SUBJECT")'>CAMB_SUBJECT LIKE #{search} </when>
+				<when test='search_type.equals("CAMB_CONTENT")'>CAMB_CONTENT LIKE #{search} </when>
+			</choose>
+			AND 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE())) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE())) ]]></when>
+				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE()) ]]></when>
+			</choose>
+	</select>
+	
+	<select id="getBoardIndex" resultType="int">
+		select  
+		<choose>
+			<when test='CAMB_NUM.equals(-1)'>COUNT(row) </when>
+			<when test='!CAMB_NUM.equals(-1)'>row </when>
+		</choose>
+		<![CDATA[from (select @rownum:=@rownum+1 row, a.* from `camboard` a, (select @rownum:=0) r ]]>
+		WHERE  
+		<choose>
+				<when test='search_type.equals("CAMB_ENTIRE")'>
+				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+				</when>
+				<when test='search_type.equals("CAMB_NAME")'>(CAMB_NAME LIKE #{search}) </when>
+				<when test='search_type.equals("CAMB_SUBJECT")'>(CAMB_SUBJECT LIKE #{search}) </when>
+				<when test='search_type.equals("CAMB_CONTENT")'>(CAMB_CONTENT LIKE #{search}) </when>
+			</choose>
+			AND 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE()) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE() ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE() ]]></when>
+			</choose>
+			ORDER BY ${orderBy} ${order}) as post_with_rows
+			<choose>
+				<when test='CAMB_NUM.equals(-1)'></when>
+				<when test='!CAMB_NUM.equals(-1)'> where CAMB_NUM = #{CAMB_NUM}</when>
+			</choose>		
+	</select>
+	
+	<select id="getOtherBoard" resultMap="camBoardResult">
+		SELECT * 
+		FROM CAMBOARD 
+		WHERE 
+		<choose>
+				<when test='search_type.equals("CAMB_ENTIRE")'>
+				(CAMB_NAME LIKE #{search} OR CAMB_SUBJECT LIKE #{search} OR CAMB_CONTENT LIKE #{search})
+				</when>
+				<when test='search_type.equals("CAMB_NAME")'>(CAMB_NAME LIKE #{search}) </when>
+				<when test='search_type.equals("CAMB_SUBJECT")'>(CAMB_SUBJECT LIKE #{search}) </when>
+				<when test='search_type.equals("CAMB_CONTENT")'>(CAMB_CONTENT LIKE #{search}) </when>
+			</choose>
+			AND 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(CAMB_STARTDATE>SYSDATE() OR CAMB_STARTDATE<SYSDATE()) ]]></when>
+				<when test='arr.equals("doing")'><![CDATA[(CAMB_STARTDATE<SYSDATE() AND CAMB_FINDATE>SYSDATE()) ]]></when>
+				<when test='arr.equals("exp")'><![CDATA[CAMB_STARTDATE>SYSDATE() ]]></when>
+				<when test='arr.equals("end")'><![CDATA[CAMB_FINDATE<SYSDATE() ]]></when>
+			</choose>
+			ORDER BY 
+			<choose>
+				<when test='arr.equals("entire")'><![CDATA[(SELECT CAMB_FINDATE > SYSDATE() AND CAMB_STARTDATE < SYSDATE()) ${order}, CAMB_NUM ${order} ]]></when>
+				<when test='arr.equals("doing")'>${orderBy} ${order} </when>
+				<when test='arr.equals("exp")'>${orderBy} ${order} </when>
+				<when test='arr.equals("end")'>${orderBy} ${order} </when>
+			</choose>
+			limit ${limit} offset ${offset}			
+	</select>
+	
+	<select id="getCamBoard" resultMap="camBoardResult">
+		<![CDATA[
+			SELECT * FROM CAMBOARD WHERE CAMB_NAME=#{cambname}
+		]]>
+	</select>
+	
+	<update id="camBoardUpdate">
+		<![CDATA[
+			UPDATE CAMBOARD SET CAMB_NAME = #{CAMB_NAME}, CAMB_SUBJECT = #{CAMB_SUBJECT}, CAMB_CONTENT = #{CAMB_CONTENT}, 
+			CAMB_FILE = #{CAMB_FILE}, CAMB_STARTDATE = #{CAMB_STARTDATE}, CAMB_FINDATE = #{CAMB_FINDATE} WHERE CAMB_NUM = #{CAMB_NUM}
+		]]>
+	</update>
+	
+	<insert id="camBoardInsert">
+		<![CDATA[
+			INSERT INTO CAMBOARD (CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_FILE, CAMB_STARTDATE, CAMB_FINDATE) 
+			VALUES(#{CAMB_NAME}, #{CAMB_SUBJECT}, #{CAMB_CONTENT}, #{CAMB_FILE}, #{CAMB_STARTDATE}, #{CAMB_FINDATE})
+		]]>
+	</insert>
+	
+	<select id="deletePW" parameterType="String" resultType="int">
+		select count(*) from ADMEMBER where AD_PW = #{deletePW}
+	</select>
+	
+	<delete id="camBoardDelete">
+		<![CDATA[
+			DELETE FROM CAMBOARD WHERE CAMB_NUM = #{CAMB_NUM}
+		]]>
+	</delete>
+</mapper>

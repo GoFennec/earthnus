@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.admin.donation.AdDonationMybatis">
+
+	<resultMap id="donationResult" type="pay">
+		<id property="pay_no" column="PAY_NO" />
+		<result property="pay_num" column="PAY_NUM" />
+		<result property="pay_id" column="PAY_ID" />
+		<result property="pay_name" column="PAY_NAME" />
+		<result property="pay_dnum" column="PAY_DNUM" />
+		<result property="pay_price" column="PAY_PRICE" />
+		<result property="pay_point" column="PAY_POINT" />
+		<result property="pay_date" column="PAY_DATE" />
+	</resultMap>
+	
+	<select id="getDonationCount" resultType="int">
+		SELECT COUNT(*) FROM PAY
+	</select>
+	
+	<select id="getAdDonationList" resultMap="donationResult">
+		SELECT * FROM PAY ORDER BY PAY_NO DESC
+	</select>
+	
+	<select id="getWaiting" resultMap="donationResult">
+		select * from pay where pay_pstate = '적립예정'
+	</select>
+	
+	<select id="getCancel" resultMap="donationResult">
+		select * from pay where pay_state = '결제취소'
+	</select>
+	
+	<update id="updatePay" parameterType="pay">
+		UPDATE PAY SET PAY_CDATE = #{pay_cdate}, PAY_STATE = '결제취소', PAY_PSTATE = '-'
+		WHERE PAY_NO = #{pay_no}
+	</update>
+
+ 	<update id="updatePoint">
+ 		UPDATE MEMBER A INNER JOIN PAY B
+ 		ON A.MEM_ID = B.PAY_ID
+ 		SET A.MEM_POINT = MEM_POINT + #{pay_point}, B.PAY_PSTATE = '적립완료'
+ 		WHERE B.PAY_NO = #{pay_no}
+	</update>
+	
+	<select id="getPayTotal" resultType="String">
+		select sum(pay_price) from pay where pay_state != '결제취소'
+	</select>
+	
+	<select id="getPayMonthly" resultType="String">
+		select sum(pay_price) from pay where DATE_FORMAT(pay_pdate,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+	</select>
+	
+	<select id="getPayWaiting" resultType="int">
+		select count(*) from pay where pay_pstate = '적립예정'
+	</select>
+	
+	<select id="getPayTotalPoint" resultType="String">
+		select sum(pay_point) from pay where pay_pstate = '적립완료'
+	</select>
+	
+	<select id="getPayPlastic" resultType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='플라스틱 줄이기' OR PAY_DNAME='해양 청소' OR PAY_DNAME='대지 청소' OR PAY_DNAME='친환경'
+	</select>
+	
+	<select id="getPayForest" resultType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='새싹' OR PAY_DNAME='묘목' OR PAY_DNAME='나무' OR PAY_DNAME='숲'
+	</select>
+	
+	<select id="gatPayIce" resultType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='작은 얼음' OR PAY_DNAME='큰 얼음' OR PAY_DNAME='빙하 조각' OR PAY_DNAME='북극곰'
+	</select>
+	
+	<select id="getPayOcean" resultType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME='조개' OR PAY_DNAME='바다거북' OR PAY_DNAME='고래' OR PAY_DNAME='바다'
+	</select>
+
+</mapper>

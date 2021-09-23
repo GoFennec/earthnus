@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.earthnus.admin.exGoods.AdExGoodsMybatis">
+
+	<resultMap id="exGoodsResult" type="exGoods">
+		<id property="exg_num" column="EXG_NUM"/>
+		<result property="exg_id" column="EXG_ID"/>
+		<result property="exg_name" column="EXG_NAME"/>
+		<result property="exg_addr" column="EXG_ADDR"/>
+		<result property="exg_message" column="EXG_MESSAGE"/>
+		<result property="exg_state" column="EXG_STATE"/>
+		<result property="exg_cc" column="EXG_CC"/>
+		<result property="exg_waybill" column="EXG_WAYBILL"/>
+		<result property="exg_gnum" column="EXG_GNUM"/>
+		<result property="exg_gname" column="EXG_GNAME"/>
+		<result property="exg_point" column="EXG_POINT"/>
+		<result property="exg_img" column="EXG_IMG"/>
+		<result property="exg_pdate" column="EXG_PDATE"/>
+		<result property="exg_ddate" column="EXG_DDATE"/>
+		<result property="exg_cdate" column="EXG_CDATE"/>
+		<result property="exg_cancle" column="EXG_CANCLE"/>
+	</resultMap>
+	
+	<select id="getAdExGoodsOrderCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="결제완료"
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsDeliveryCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="배송처리"
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsApproveCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE NOT EXG_STATE="결제취소"
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsCancleCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="결제취소"
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsOrderList" resultMap="exGoodsResult">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_STATE="결제완료" ORDER BY EXG_NUM DESC
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsDeliveryList" resultMap="exGoodsResult">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_STATE="배송처리" ORDER BY EXG_NUM DESC
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsApproveList" resultMap="exGoodsResult">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE NOT EXG_STATE="결제취소" ORDER BY EXG_NUM DESC
+		]]>
+	</select>
+	
+	<select id="getAdExGoodsCancleList" resultMap="exGoodsResult">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_STATE="결제취소" ORDER BY EXG_NUM DESC
+		]]>
+	</select>
+	
+	<select id="getExGoods" resultType="exGoods" parameterType="string">
+		<![CDATA[
+			SELECT * FROM EXGOODS WHERE EXG_NUM=#{exGoodsNumU}
+		]]>
+	</select>
+	
+	<update id="updateDeliveryOk">
+		<![CDATA[
+			UPDATE EXGOODS SET EXG_STATE="배송처리",EXG_CC=#{exg_cc},EXG_WAYBILL=#{exg_waybill},EXG_DDATE=NOW() WHERE EXG_NUM=#{exg_num}
+		]]>
+	</update>
+	
+	<delete id="cancleExGoods">
+		<![CDATA[
+			UPDATE EXGOODS SET EXG_STATE="결제취소",EXG_CDATE=NOW(),EXG_CANCLE=#{exg_cancle} WHERE EXG_NUM=#{exg_num}
+		]]>
+	</delete>
+	
+	<update id="updatePoint">
+		<![CDATA[
+			UPDATE MEMBER SET MEM_POINT=MEM_POINT+#{exg_point} WHERE MEM_ID=#{exg_id}
+		]]>
+	</update>
+	
+	<select id="getCountMonthly" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE DATE_FORMAT(EXG_PDATE,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m')
+		]]>
+	</select>
+	
+	<select id="getCountTotal" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS
+		]]>
+	</select>
+	
+	<select id="getCountWaiting" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM EXGOODS WHERE EXG_STATE="결제완료"
+		]]>
+	</select>
+	
+	<select id="getCountLanking" resultType="exGoods">
+		<![CDATA[
+			select exg_gname, count(*) count from exgoods where DATE_FORMAT(EXG_PDATE,'%Y-%m') = DATE_FORMAT(NOW(),'%Y-%m') and exg_state != '결제취소' group by exg_gname order by count(*) desc limit 3
+		]]>
+	</select>
+	
+</mapper>

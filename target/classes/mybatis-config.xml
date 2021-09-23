@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+							   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="auth" type="kr.co.earthnus.user.auth.AuthBean"/>
+		<typeAlias alias="member" type="kr.co.earthnus.user.member.MemberBean"/>
+		<typeAlias alias="donation" type="kr.co.earthnus.user.donation.DonationBean"/>
+		<typeAlias alias="pay" type="kr.co.earthnus.user.pay.PayBean"/>
+		<typeAlias alias="goods" type="kr.co.earthnus.user.goods.GoodsBean"/>
+		<typeAlias alias="exGoods" type="kr.co.earthnus.user.goods.ExGoodsBean"/>
+		<typeAlias alias="camBoard" type="kr.co.earthnus.user.camBoard.camBoardBean"/>
+		<typeAlias alias="statBoard" type="kr.co.earthnus.user.camBoard.CamBoardStatBean"/>
+		<typeAlias alias="cheBoard" type="kr.co.earthnus.user.cheBoard.CheBoardBean"/>
+		<typeAlias alias="like_bean" type="kr.co.earthnus.user.cheBoard.like_Bean"/>
+		<typeAlias alias="mail" type="kr.co.earthnus.util.MailBean"/>
+		<typeAlias alias="adAuth" type="kr.co.earthnus.admin.auth.AdAuthBean"/>
+		<typeAlias alias="adMember" type="kr.co.earthnus.admin.member.AdMemberBean"/>
+		<typeAlias alias="visit" type="kr.co.earthnus.admin.auth.VisitCountBean"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappings/auth-mapping.xml"/>
+		<mapper resource="mappings/adAuth-mapping.xml"/>
+		<mapper resource="mappings/adDonation-mapping.xml"/>
+    	<mapper resource="mappings/member-mapping.xml"/>
+    	<mapper resource="mappings/donation-mapping.xml"/>
+    	<mapper resource="mappings/pay-mapping.xml"/>
+    	<mapper resource="mappings/goods-mapping.xml"/>
+    	<mapper resource="mappings/adGoods-mapping.xml"/>
+    	<mapper resource="mappings/adExGoods-mapping.xml"/>
+		<mapper resource="mappings/cheBoard-mapping.xml"/>
+		<mapper resource="mappings/adCheBoard-mapping.xml"/>
+		<mapper resource="mappings/camBoard-mapping.xml"/>
+		<mapper resource="mappings/adCamBoard-mapping.xml"/>
+		<mapper resource="mappings/mail-mapping.xml"/>
+		<mapper resource="mappings/adMember-mapping.xml"/>
+		<mapper resource="mappings/adCheBoard-mapping.xml"/>
+		<mapper resource="mappings/adChart-mapping.xml"/>
+	</mappers>
+
+</configuration>

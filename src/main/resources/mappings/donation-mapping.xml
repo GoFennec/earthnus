@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.user.donation.DonationMybatis">
+
+	<resultMap id="donationResult" type="donation">
+		<id property="d_num" column="D_NUM" />
+		<result property="d_name" column="D_NAME" />
+		<result property="d_price" column="D_PRICE" />
+	</resultMap>
+
+	<select id="getOcean" resultMap="donationResult">
+		SELECT * FROM DONATION WHERE D_NUM LIKE CONCAT('O','%')
+	</select>
+
+	<select id="getForest" resultMap="donationResult">
+		SELECT * FROM DONATION WHERE D_NUM LIKE CONCAT('F','%')
+	</select>
+
+	<select id="getPlastic" resultMap="donationResult">
+		SELECT * FROM DONATION WHERE D_NUM LIKE CONCAT('P','%')
+	</select>	
+
+	<select id="getIce" resultMap="donationResult">
+		SELECT * FROM DONATION WHERE D_NUM LIKE CONCAT('I','%')
+	</select>
+</mapper>

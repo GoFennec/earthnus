@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.user.member.MemberMybatis">
+
+	<resultMap id="mailcheck" type="mail">
+		<id property="mail_num" column="MAIL_NUM"/>
+		<result property="mail_title" column="MAIL_TITLE"/>
+		<result property="mail_content" column="MAIL_CONTENT"/>
+		<result property="mail_pw" column="MAIL_PW"/>
+		<result property="mail_date" column="MAIL_DATE"/>
+		<result property="mail_sender" column="MAIL_SENDER"/>
+		<result property="mail_receiver" column="MAIL_RECEIVER"/>
+		<result property="mail_customer" column="MAIL_CUSTOMER"/>
+	</resultMap>
+
+	<insert id="insertMail" parameterType="mail">
+		insert into MAILCHECK(MAIL_TITLE, MAIL_CONTENT, MAIL_PW, MAIL_DATE, MAIL_SENDER, MAIL_RECEIVER, MAIL_CUSTOMER)
+		values(#{mail_title},#{mail_content},#{mail_pw},now(),#{mail_sender},#{mail_receiver},#{mail_customer})
+	</insert>
+	
+	<select id="getSelectMail" parameterType="String" resultType="mail">
+		SELECT * FROM MAILCHECK WHERE MAIL_CUSTOMER = #{name} AND MAIL_RECEIVER = #{email} ORDER BY MAIL_NUM DESC LIMIT 1
+	</select>
+	
+	<select id="getFindID" resultMap="member">
+		select mem_id, mem_date, mem_api from member where mem_name = #{findName} and mem_email = #{mail_receiver}
+	</select>
+	
+	<update id="changePW" parameterType="String">
+		UPDATE MEMBER SET MEM_PW = #{changeNum} WHERE MEM_EMAIL = #{email} AND MEM_NAME = #{name}
+	</update>
+	
+</mapper>

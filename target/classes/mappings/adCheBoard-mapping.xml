@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.admin.cheBoard.AdCheBoardMybatis">
+
+	<resultMap id="cheBoardResult" type="cheBoard">
+		<id property="cheb_num" column="CHEB_NUM" />
+		<result property="cheb_id" column="CHEB_ID" />
+		<result property="cheb_name" column="CHEB_NAME" />
+		<result property="cheb_dnum" column="CHEB_DNUM" />
+		<result property="cheb_content" column="CHEB_CONTENT" />
+		<result property="cheb_date" column="CHEB_DATE" />
+	</resultMap>
+	
+	<select id="getAdCheBoardList" resultMap="cheBoardResult">
+		SELECT * FROM CHEBOARD
+	</select>
+	
+	<delete id="deleteCheBoard" parameterType="List">
+		DELETE FROM CHEBOARD
+		WHERE
+		CHEB_NUM IN
+    	<foreach collection="list" item="checkArr" index="i" open="(" separator="," close=")">
+      		#{checkArr}
+    	</foreach>
+	</delete>
+	
+	<select id="getCheTotal" resultType="int">
+		SELECT COUNT(*) FROM CHEBOARD
+	</select>
+	
+	<select id="getCheToday" resultType="int">
+		SELECT COUNT(*) FROM CHEBOARD where date_format(cheb_date,'%Y-%m-%d') = date_format(now(),'%Y-%m-%d')
+	</select>
+
+</mapper>

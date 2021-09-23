@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.user.auth.AuthMybatis">
+
+	<resultMap id="authResult" type="auth">
+		<id property="auth_id" column="AUTH_ID" />
+		<result property="auth_name" column="AUTH_NAME" />
+	</resultMap>
+
+	<resultMap id="memberResult" type="member">
+		<id property="mem_id" column="MEM_ID" />
+		<result property="mem_pw" column="MEM_PW" />
+		<result property="mem_name" column="MEM_NAME" />
+		<result property="mem_addr" column="MEM_ADDR" />
+		<result property="mem_tel" column="MEM_TEL" />
+		<result property="mem_birth" column="MEM_BIRTH" />
+		<result property="mem_gender" column="MEM_GENDER" />
+		<result property="mem_email" column="MEM_EMAIL" />
+		<result property="mem_date" column="MEM_DATE" />
+		<result property="mem_point" column="MEM_POINT" />
+		<result property="mem_api" column="MEM_API" />
+	</resultMap>
+
+	<select id="getSelectById" resultType="member"
+		parameterType="string">
+		SELECT * FROM MEMBER WHERE MEM_ID=#{auth_id}
+	</select>
+	<select id="getTotal_pay" resultType="String" parameterType="String">
+		SELECT Count(*) FROM PAY WHERE PAY_STATE="결제승인" 
+	</select>
+	<select id="getTotal_f" resultType="String" parameterType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('묘목','새싹','나무','숲')
+	</select>
+	<select id="getTotal_o" resultType="String" parameterType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('조개','바다거북','고래','바다')
+	</select>
+	<select id="getTotal_p" resultType="String" parameterType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('플라스틱 줄이기','해양 청소','대지 청소','친환경')
+	</select>
+	<select id="getTotal_i" resultType="String" parameterType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_DNAME IN ('작은 얼음','큰 얼음','빙하 조각','북극곰')
+	</select>
+	<select id="getCb_list" resultType="camBoard" parameterType="String">
+		SELECT CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_FILE FROM CAMBOARD ORDER BY CAMB_NUM DESC LIMIT 2
+	</select>
+	<select id="getCh_list" resultType="cheBoard" parameterType="String">
+		SELECT * FROM CHEBOARD ORDER BY CHEB_DATE DESC limit 4
+	</select>
+	<select id="getD_img" resultType="cheBoard" parameterType="String">
+		SELECT D_IMG FROM DONATION WHERE D_NAME=#{d_name}
+	</select>
+		<select id="getEndCam" resultType="String" parameterType="String">
+		<![CDATA[
+			SELECT COUNT(*) FROM CAMBOARD WHERE CAMB_FINDATE < NOW()
+		]]>
+	</select>
+	
+</mapper>

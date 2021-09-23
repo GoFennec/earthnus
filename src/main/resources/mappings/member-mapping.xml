@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.earthnus.user.member.MemberMybatis">
+
+	<resultMap id="member" type="member">
+		<id property="mem_id" column="MEM_ID"/>
+		<result property="mem_pw" column="MEM_PW"/>
+		<result property="mem_name" column="MEM_NAME"/>
+		<result property="mem_addr" column="MEM_ADDR"/>
+		<result property="mem_tel" column="MEM_TEL"/>
+		<result property="mem_birth" column="MEM_BIRTH"/>
+		<result property="mem_gender" column="MEM_GENDER"/>
+		<result property="mem_email" column="MEM_EMAIL"/>
+		<result property="mem_date" column="MEM_DATE"/>
+		<result property="mem_point" column="MEM_POINT"/>
+		<result property="mem_api" column="MEM_API"/>
+	</resultMap>
+	<resultMap id="exGoodsResult" type="exGoods">
+		<id property="exg_num" column="EXG_NUM"/>
+		<result property="exg_id" column="EXG_ID"/>
+		<result property="exg_name" column="EXG_NAME"/>
+		<result property="exg_addr" column="EXG_ADDR"/>
+		<result property="exg_message" column="EXG_MESSAGE"/>
+		<result property="exg_state" column="EXG_STATE"/>
+		<result property="exg_cc" column="EXG_CC"/>
+		<result property="exg_waybill" column="EXG_WAYBILL"/>
+		<result property="exg_gnum" column="EXG_GNUM"/>
+		<result property="exg_gname" column="EXG_GNAME"/>
+		<result property="exg_point" column="EXG_POINT"/>
+		<result property="exg_img" column="EXG_IMG"/>
+		<result property="exg_pdate" column="EXG_PDATE"/>
+		<result property="exg_ddate" column="EXG_DDATE"/>
+		<result property="exg_cdate" column="EXG_CDATE"/>
+		<result property="exg_cancle" column="EXG_CANCLE"/>
+	</resultMap>
+	
+	 <resultMap id="CheBoardResult" type="cheBoard">
+		<id property="cheb_num" column="CHEB_NUM"/>
+		<result property="cheb_id" column="CHEB_ID"/>
+		<result property="cheb_name" column="CHEB_NAME"/>
+		<result property="cheb_dname" column="CHEB_DNAME"/>
+		<result property="cheb_content" column="CHEB_CONTENT"/>
+		<result property="cheb_date" column="CHEB_DATE"/>
+	
+	</resultMap>
+	
+	<insert id="insertMember" parameterType="member">
+		insert into member(MEM_ID, MEM_PW, MEM_NAME, MEM_ADDR, MEM_TEL, MEM_BIRTH, MEM_GENDER, MEM_EMAIL, MEM_DATE)
+		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_addr},#{mem_tel},#{mem_birth},#{mem_gender},#{mem_email},now())
+	</insert>
+	
+	<insert id="insertMember_kakao" parameterType="member">
+		insert into member(MEM_ID, MEM_NAME, MEM_GENDER, MEM_EMAIL, MEM_API)
+		values(#{mem_id},#{mem_name},#{mem_gender},#{mem_email},"KAKAO")
+	</insert>
+	<insert id="insertMember_naver" parameterType="member">
+		insert into member(MEM_ID, MEM_NAME, MEM_TEL, MEM_GENDER, MEM_EMAIL, MEM_BIRTH, MEM_API)
+		values(#{mem_id},#{mem_name},#{mem_tel},#{mem_gender},#{mem_email}, #{mem_birth}, "NAVER")
+	</insert>
+	
+	
+	<select id="getMyPoint" resultType="String">SELECT MEM_POINT FROM MEMBER
+		WHERE MEM_ID=#{mem_id}
+	</select>
+
+	<select id="getMyDonation" resultType="String">SELECT SUM(PAY_PRICE) FROM
+		PAY WHERE PAY_ID=#{mem_id}
+	</select>
+
+<select id="getMyDonation_f" resultType="String" parameterType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('묘목','새싹','나무','숲')
+	</select>
+	<select id="getMyDonation_o" resultType="String" parameterType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('조개','바다거북','고래','바다')
+	</select>
+	<select id="getMyDonation_i" resultType="String" parameterType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('작은 얼음','큰 얼음','빙하 조각','북극곰')
+	</select>
+	<select id="getMyDonation_p" resultType="String" parameterType="String">
+		SELECT SUM(PAY_PRICE) FROM PAY WHERE PAY_ID=#{mem_id} AND PAY_DNAME IN ('플라스틱 줄이기','해양 청소','대지 청소','친환경')
+	</select>
+	<select id="getMyPay" resultType="pay">
+	SELECT PAY_DNAME, PAY_PRICE, PAY_PDATE, PAY_STATE, PAY_PSTATE, PAY_COMMENT FROM PAY WHERE PAY_ID=#{mem_id} ORDER BY PAY_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}    
+	</select>
+	<!-- SELECT DONATION.D_IMG, PAY.PAY_DNAME, PAY.PAY_PRICE, PAY.PAY_PDATE, PAY.PAY_STATE, PAY.PAY_PSTATE, PAY.PAY_COMMENT FROM DONATION JOIN PAY ON DONATION.D_NAME=PAY.PAY_DNAME WHERE PAY_ID=#{mem_id} ORDER BY PAY_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}    
+	 -->
+	<select id="getMyPayCount" parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM PAY WHERE PAY_ID=#{mem_id}
+	</select>
+
+	<select id="getPwCheck" parameterType="String" resultType="String">
+	SELECT MEM_PW FROM MEMBER WHERE MEM_ID = #{mem_id}
+	</select>
+	
+
+	<select id="getMyInfo" resultType="member">
+		SELECT * FROM MEMBER WHERE
+		MEM_ID=#{mem_id}
+	</select>
+
+	<update id="updateMyInfo" parameterType="member">
+		UPDATE MEMBER SET
+		MEM_ADDR=#{mem_addr}, MEM_TEL=#{mem_tel},
+		MEM_BIRTH=#{mem_birth}
+		WHERE MEM_ID=#{mem_id}
+	</update>
+		<update id="updatePw" parameterType="hashmap">
+		UPDATE MEMBER SET
+		MEM_PW=#{mem_pw}
+		WHERE MEM_ID=#{mem_id}
+	</update>
+	
+	<update id="updateEmail" parameterType="hashmap">
+		UPDATE MEMBER SET
+		MEM_EMAIL=#{mem_email}
+		WHERE MEM_ID=#{mem_id}
+	</update>
+
+<select id="getMyOrder"  resultType="exGoods">
+	SELECT * FROM EXGOODS WHERE EXG_ID=#{mem_id} ORDER BY EXG_PDATE DESC LIMIT #{contentnum} OFFSET #{pagenum}   
+	</select>
+	<select id="getMyOrderCount"  parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM EXGOODS WHERE EXG_ID=#{mem_id} 
+	</select>
+	
+	
+	<select id="getMyMessage"  resultType="cheBoard">
+	SELECT CHEB_NUM, CHEB_DNAME, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id} ORDER BY CHEB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+	</select>
+	
+	
+	 <delete id="myMessageDelete" parameterType="int">
+      		DELETE FROM CHEBOARD WHERE CHEB_NUM=#{cheb_num}
+      </delete>
+   <!--    <update id="update_pay_comment" parameterType="String">
+		UPDATE PAY SET
+		PAY_COMMENT="N"
+		WHERE PAY_ID=#{mem_id}
+	</update>
+       -->
+      
+      
+	<select id="getMyMessageCount"  parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM CHEBOARD WHERE CHEB_ID=#{mem_id}
+	</select>
+<select id="getCheckExgoods" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM EXGOODS WHERE EXG_ID = #{mem_id} and (exg_state = '결제완료' or exg_state = '배송처리')
+	</select>
+
+	<update id="deleteMember" parameterType="member">UPDATE MEMBER SET
+      MEM_PW="NOTAMEMBER", MEM_NAME="삭제된회원", MEM_ADDR="삭제된회원",
+      MEM_TEL="0000-0000",MEM_BIRTH="0000-00-00", MEM_EMAIL="삭제된회원",
+      MEM_POINT="0", MEM_LDATE=NOW() WHERE MEM_ID=#{mem_id}
+    </update>
+    
+    <select id="getFind" parameterType="String" resultType="int">
+    	SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail} 
+    </select>
+
+	<select id="getFindpw" parameterType="String" resultType="int">
+		SELECT count(*) FROM MEMBER WHERE MEM_NAME = #{findName} AND MEM_EMAIL = #{findEmail} AND MEM_ID = #{mem_id} 
+	</select>
+
+	<select id="getIdCheck" parameterType="String" resultType="int">
+		select count(*) from member where mem_id = #{mem_id} 
+	</select>
+	
+</mapper>
