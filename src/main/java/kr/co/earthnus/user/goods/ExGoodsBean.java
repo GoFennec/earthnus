@@ -7,6 +7,8 @@ public class ExGoodsBean {
 	private String exg_realnum;
 	private String exg_id;
 	private String exg_name;
+	private String exg_recipient;
+	private String exg_tel;
 	private String exg_addr;
 	private String exg_message;
 	private String exg_state;
@@ -45,6 +47,18 @@ public class ExGoodsBean {
 	}
 	public void setExg_name(String exg_name) {
 		this.exg_name = exg_name;
+	}
+	public String getExg_recipient() {
+		return exg_recipient;
+	}
+	public void setExg_recipient(String exg_recipient) {
+		this.exg_recipient = exg_recipient;
+	}
+	public String getExg_tel() {
+		return exg_tel;
+	}
+	public void setExg_tel(String exg_tel) {
+		this.exg_tel = exg_tel;
 	}
 	public String getExg_addr() {
 		return exg_addr;
