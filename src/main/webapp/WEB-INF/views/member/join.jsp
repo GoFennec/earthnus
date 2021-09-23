@@ -217,7 +217,7 @@
               </div>
             </div>
             <div class="col-md-3 col-3" style="margin-top:5px;">
-              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:3px; font-size:13px" onclick="mailCheck()" id="testBtn2">인증번호 확인</button>
+              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:3px; font-size:12px" onclick="mailCheck()" id="testBtn2">인증번호 확인</button>
             </div>
             
             <div class="col-md-12">

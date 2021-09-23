@@ -211,7 +211,7 @@ background:#000;color:#fff;
 .post-slider .next{
   position:absolute;
   top:50%;
-  right:20%;
+  right:15%;
   font-size:2em;
   color:gray;
   cursor: pointer;
@@ -219,7 +219,7 @@ background:#000;color:#fff;
 .post-slider .prev{
   position:absolute;
   top:50%;
-  left:20%;
+  left:15%;
   font-size:2em;
   color:gray;
     cursor: pointer;
@@ -237,6 +237,10 @@ background:#000;color:#fff;
   border-top-right-radius:5px;
   margin: auto;
 }
+.post-wrapper .slick-list {
+	height: auto;
+}
+
 .slick-dots {
 	display: flex;
 	justify-content: center;

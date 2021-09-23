@@ -189,11 +189,11 @@
                     </thead>
 					<tbody>
                     	<c:forEach items="${CheBoard}" var="list">
-                      	<tr class="cheInfo" id="${list.cheb_num}" onclick="location.href='/adCheBoard/detail?CHEB_NUM=${list.cheb_num}'">
+                      	<tr class="cheInfo" id="${list.cheb_num}">
                       		<td>${list.cheb_num} <br> <input type="checkbox" id="test_check" value="${list.cheb_num}"></td>
-                      		<td>${list.cheb_id}</td>
-                      		<td>${list.cheb_name}</td>
-                      		<td>${list.cheb_dname}</td>
+                      		<td onclick="location.href='/adCheBoard/detail?CHEB_NUM=${list.cheb_num}'">${list.cheb_id}</td>
+                      		<td onclick="location.href='/adCheBoard/detail?CHEB_NUM=${list.cheb_num}'">${list.cheb_name}</td>
+                      		<td onclick="location.href='/adCheBoard/detail?CHEB_NUM=${list.cheb_num}'">${list.cheb_dname}</td>
                         	<td class="inline-block text-truncate" style="max-width: 150px;">${list.cheb_content}</td>
                       	</tr>
                      	</c:forEach>

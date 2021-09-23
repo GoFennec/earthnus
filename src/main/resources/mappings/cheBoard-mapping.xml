@@ -10,10 +10,50 @@
 		<result property="cheb_content" column="CHEB_CONTENT"/>
 		<result property="cheb_comment_like_total" column="CHEB_COMMENT_LIKE_TOTAL"/>
 		<result property="cheb_date" column="CHEB_DATE"/>
-		
 	</resultMap>
+     
+       <select id="get_CheBoardList" resultMap="CheBoardResult">
+        <![CDATA[
+            SELECT G.CHEB_NUM, G.CHEB_ID, G.CHEB_NAME, G.CHEB_DNAME, G.CHEB_CONTENT, G.CHEB_DATE, G.CHEB_COMMENT_LIKE_TOTAL, S.D_IMG  FROM CHEBOARD AS G 
+            LEFT JOIN DONATION AS S ON G.CHEB_DNAME = S.D_NAME
+             ORDER BY CHEB_NUM DESC 
+             LIMIT #{startnum}, #{comment_step}
+        ]]>
+     </select>
       
-		<insert id ="replyInsert" parameterType = "cheBoard">
+     <select id="get_select_total_like" parameterType ="like_bean" resultType="int">
+      	<![CDATA[
+			select cheb_comment_like_total from cheboard where cheb_num=#{comment_num};
+		]]>
+     </select>
+       
+     <select id="get_like_num" parameterType ="String" resultType="_integer">
+      	<![CDATA[
+			select comment_num from comment_like where comment_user_id=#{user_id};
+		]]>
+     </select>
+      
+     <select id="get_select_dname"  parameterType="String" resultType="pay">
+      	<![CDATA[
+			select * from pay where PAY_COMMENT='N' and pay_id=#{user_id}
+		]]>
+     </select>
+      
+      <select id="get_total_comment" resultType="int">
+      	<![CDATA[
+			select count(*) from cheboard;
+		]]>
+      </select>
+      
+      
+      <insert id ="Comment_like" parameterType ="like_bean">
+			<![CDATA[
+	       		 INSERT INTO COMMENT_LIKE VALUES( #{comment_num}, #{comment_user_id});
+	       		 
+	        ]]>
+	  </insert>
+	 
+	  <insert id ="replyInsert" parameterType = "cheBoard">
 			<![CDATA[
 	        INSERT INTO CHEBOARD (CHEB_ID,CHEB_NAME,cheb_dname,cheb_content)
 	        VALUES
@@ -24,20 +64,10 @@
 		        #{cheb_content}
 	        )
 	        ]]>
-		</insert>
-      
-      <insert id ="Comment_like" parameterType ="like_bean">
-			<![CDATA[
-	       		 INSERT INTO COMMENT_LIKE VALUES( #{comment_num}, #{comment_user_id});
-	       		 
-	        ]]>
-		</insert>
+	  </insert>
+	 
 		
-	   <delete id="Comment_like_candle"  parameterType ="like_bean">
-	  		 <![CDATA[
-      		DELETE FROM comment_like WHERE comment_user_id=#{comment_user_id} AND comment_num=#{comment_num}
-      		 ]]>
-      </delete>
+	   
       
        <update id="like_countdelete" parameterType ="like_bean">
        		 <![CDATA[
@@ -50,81 +80,30 @@
       		 	update cheboard set cheb_comment_like_total=cheb_comment_like_total+1 where cheb_num =#{comment_num}
       		 ]]>
        </update>
-       
-       <select id="get_select_total_like" parameterType ="like_bean" resultType="int">
-      	<![CDATA[
-			select cheb_comment_like_total from cheboard where cheb_num=#{comment_num};
-		]]>
-      </select>
-     
-      
-       <select id="get_like_num" parameterType ="String" resultType="_integer">
-      	<![CDATA[
-			select comment_num from comment_like where comment_user_id=#{user_id};
-		]]>
-      </select>
-      
-      
-      <select id="get_total_comment" resultType="int">
-      	<![CDATA[
-			select count(*) from cheboard;
-		]]>
-      </select>
-      
-      <select id="get_select_dname"  parameterType="String" resultType="pay">
-      	<![CDATA[
-			select * from pay where PAY_COMMENT='N' and pay_id=#{user_id}
-		]]>
-      </select>
-      
-     <select id="get_CheBoardList" resultMap="CheBoardResult">
-        <![CDATA[
-            SELECT G.CHEB_NUM, G.CHEB_ID, G.CHEB_NAME, G.CHEB_DNAME, G.CHEB_CONTENT, G.CHEB_DATE, G.CHEB_COMMENT_LIKE_TOTAL, S.D_IMG  FROM CHEBOARD AS G 
-            LEFT JOIN DONATION AS S ON G.CHEB_DNAME = S.D_NAME
-             ORDER BY CHEB_NUM DESC 
-             LIMIT #{startnum}, #{comment_step}
-        ]]>
-     </select>
+   
+      <update id="pay_comment_update" parameterType ="cheBoard">
+      			
+      					<![CDATA[
+	       				 UPDATE PAY
+				         SET PAY_COMMENT ='Y'
+				       	 WHERE pay_id = #{cheb_id} and pay_dname = #{cheb_dname}
+				       	 ]]>
+      </update>
+ 
+      <delete id="Comment_like_candle"  parameterType ="like_bean">
+	  		 <![CDATA[
+      		DELETE FROM comment_like WHERE comment_user_id=#{comment_user_id} AND comment_num=#{comment_num}
+      		 ]]>
+      </delete>
       
       <delete id="replyDelete" parameterType="int">
       		DELETE FROM CHEBOARD WHERE CHEB_NUM=#{reply_id}
       </delete>
+    
+    
       
       
-       <update id="pay_comment_update" parameterType ="cheBoard">
-      			<choose>
-      				<when test='cheb_dname == "바다"'>
-      					<![CDATA[
-	       				 UPDATE PAY
-				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '조개' or pay_dname ='바다거북' or pay_dname ='고래' or pay_dname ='바다');
-				       	 ]]>
-      				</when>
-      				<when test='cheb_dname == "숲"'>
-      					<![CDATA[
-	       				 UPDATE PAY
-				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '새싹' or pay_dname ='묘목' or pay_dname ='나무' or pay_dname ='숲');
-				       	 ]]>
-      				</when>
-      				
-      				<when test='cheb_dname == "친환경"'>
-      					<![CDATA[
-	       				 UPDATE PAY
-				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '플라스틱 줄이기' or pay_dname ='해양 청소' or pay_dname ='대지 청소' or pay_dname ='친환경');
-				       	 ]]>
-      				</when>
-      				<otherwise>
-      					<![CDATA[
-	       				 UPDATE PAY
-				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and (pay_dname = '작은 얼음' or pay_dname ='큰 얼음' or pay_dname ='빙하 조각' or pay_dname ='북극곰');
-				       	 ]]>
-      				</otherwise>
-      			</choose>
-      </update>
-      
+
       
       
       

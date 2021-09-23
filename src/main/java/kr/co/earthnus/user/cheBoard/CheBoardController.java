@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.earthnus.user.auth.AuthBean;
@@ -52,7 +53,7 @@ public class CheBoardController {
   
   @ResponseBody
   @RequestMapping({"/cheBoard/user_select_all"})
-  public JSONObject login_user_list(String startnum, HttpSession session, String comment_step) {
+  public JSONObject login_user_list(HttpSession session, String startnum, String comment_step) {
 	  AuthBean user = (AuthBean)session.getAttribute("auth");
 	  JSONObject json = new JSONObject();
 	  String user_id = user.getAuth_id();
