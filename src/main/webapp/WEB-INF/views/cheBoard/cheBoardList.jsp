@@ -433,7 +433,7 @@ function select_dname() {
 	  		var count_pla = 0;
 	  		var count_bear = 0;
 	  		var str = '<select id="dname_select">'
-	  		  str +='<option selected disabled hidden>카테고리</option>'
+	  		  str +='<option value="0" selected disabled hidden>카테고리</option>'
 	  		for(var i=0; i < All_dname.length; i++) {
 	  			
 	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") ) {
@@ -462,7 +462,50 @@ function select_dname() {
 	  			
 	  		$('#select_dname').append(str);
 	  		
-	  	}	   	
+	  	}
+
+
+		$("#dname_select").change(function() {
+		  	 var str1 = "";
+		  	 var d_name =null;
+		  	  d_name= $("#dname_select option:selected").val();
+		  	  str1 += '<select id="dname_option">'
+  		
+	      	for(var i=0; i < All_dname.length; i++) {
+	      		 if(d_name == "북극") {
+					if(All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "북극곰") {
+	      				str1 +='<option>'+All_dname[i]+'</option>'
+	      			}
+      		   
+      		}
+      		else if(d_name == "플라스틱") {
+				if(All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경") {
+					str1 +='<option>'+All_dname[i]+'</option>'
+					
+      			}
+      		}
+      		else if(d_name ==="나무") {
+				if(All_dname[i] == "새싹" || All_dname[i] == "묘목" || All_dname[i] == "나무" || All_dname[i] == "숲") {
+					str1 +='<option>'+All_dname[i]+'</option>'
+					
+      			}
+      		}
+      		else if(d_name === "바다") {
+      			if(All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") {
+      				str1 +='<option>'+All_dname[i]+'</option>'
+      			
+      			}
+      		}
+      	}
+  		str1 +='</select>';
+      	$('#select_dnameAll').html(str1);
+      	
+ });
+
+
+
+
+
         $('#replyInsert').on('click',function() {
           	
         	  var text = $('#comment_content').val().replace(/(?:\r\n|\r|\n)/g,'<br/>');
@@ -486,16 +529,26 @@ function select_dname() {
         			 if( $("#dname_option option").size() == 0) {
         				 $('#dname_option').remove();
         				 $("#dname_select option:selected").remove();
+        				 if( $("#dname_select option").size() > 1) {
+        					  $('#dname_select').innerHTML = $("#dname_select").val("0");
+        					  console.log($("#dname_select").val("0"));
+        				 }
         			 }
         			 if( $("#dname_select option").size() == 1) {
         				 $('#select_dname').remove();
         				 $('#comment_table').css("display", "none");
+        				 
         			 }
         			 content = 0;
+        			 
         			 login_init();
         	} 
           });	 
         });
+   function myfuntion() {
+   }
+        
+        
         
         $('.post-wrapper').slick({
 	    	slidesToShow: 1,
@@ -507,42 +560,6 @@ function select_dname() {
 	    	  
 	    	});
         
-        $("#dname_select").change(function() {
-       	 var str1 = "";
-       	 var d_name =null;
-       	  d_name= $("#dname_select option:selected").val();
-       	  str1 += '<select id="dname_option">'
-       		
-           	for(var i=0; i < All_dname.length; i++) {
-           		 if(d_name == "북극") {
-					if(All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "북극곰") {
-           				str1 +='<option>'+All_dname[i]+'</option>'
-           			}
-           		   
-           		}
-           		else if(d_name == "플라스틱") {
-					if(All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경") {
-						str1 +='<option>'+All_dname[i]+'</option>'
-						
-           			}
-           		}
-           		else if(d_name ==="나무") {
-					if(All_dname[i] == "새싹" || All_dname[i] == "묘목" || All_dname[i] == "나무" || All_dname[i] == "숲") {
-						str1 +='<option>'+All_dname[i]+'</option>'
-						
-           			}
-           		}
-           		else if(d_name === "바다") {
-           			if(All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") {
-           				str1 +='<option>'+All_dname[i]+'</option>'
-           			
-           			}
-           		}
-           	}
-       		str1 +='</select>';
-           	$('#select_dnameAll').html(str1);
-           	
-      });
         
         
         $('#comment_content').keyup(function (e){
