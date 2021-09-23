@@ -413,6 +413,7 @@ background:#000;color:#fff;
 	var startNum = 0;
 	var step = 10;
 	var All_dname = [];
+	var content = 0;
   $(document).ready(function (){
 		  
 		  <c:forEach items="${payCheck}" var="row">
@@ -490,7 +491,7 @@ function select_dname() {
         				 $('#select_dname').remove();
         				 $('#comment_table').css("display", "none");
         			 }
-        			
+        			 content = 0;
         			 login_init();
         	} 
           });	 
@@ -545,7 +546,7 @@ function select_dname() {
         
         
         $('#comment_content').keyup(function (e){
-	  	    var content = $(this).val();
+	  	    content = $(this).val();
 	  	    $('#counter').html("("+content.length+" / 최대 200자)");
 
 	  	    if (content.length > 200){
