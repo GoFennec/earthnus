@@ -105,13 +105,6 @@
               <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:12px" id="testBtn">중복확인</button>
             </div>
             
-            <script>
-				$('#testBtn').click(function(e){
-					e.preventDefault();
-					$('#testModal').modal("show");
-				});
-			</script>
-			
 			<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content" style="width:500px; align-items:center;">
@@ -124,51 +117,13 @@
 						<br>
 						<input type="text" class="form-control" style="width:400px" id="mem_idcheck" placeholder="아이디를 입력하세요." >
 						<br>
-						<div class="modal-footer" style="width:100%;align-items:center;">
+						<div class="modal-footer">
 							<button type="button" class="btn btn-primary btn-lg" id="modalY" onclick="idcheck()">중복확인</button>
 						</div>
 					</div>
 				</div>
 			</div>
             
-            <script type="text/javascript">
-				function idcheck(){
-					var id = $("#mem_id").val();
-					var idcheck = $("#mem_idcheck").val();
-					var match = /^[A-Za-z0-9_-]{5,15}$/;
-					if(idcheck === ""){
-						alert("아이디를 입력해주세요.");
-					}else if(!match.test(idcheck)){
-						alert("5~15자의 영문 대문자, 소문자와 특수문자[ _ ],[ - ]로 회원가입 할 수 있습니다.");
-						return;
-					}
-		
-					$.ajax({
-			   			type: "POST", //요청 메소드 방식
-			  			 url:"/member/idcheck",
-			   			data: {"mem_id":idcheck},
-			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-			   			
-			   			success : function(result){
-			      			if(result.error == true && idcheck != ""){
-			    	  			var yesno = confirm('사용 가능한 아이디입니다. \n사용하시겠습니까?');
-			    	  			if(yesno){
-			    	  				$("#mem_id").val(idcheck);
-			    	  				$("#mem_id").attr("readonly",true);
-			    	  				$("#testModal").modal("hide");
-			    	  				
-			    	  			}
-			      			}else if(result.error === false){
-			    	  			alert('이미 존재하는 아이디입니다.');
-			      			}
-			   			},
-			   		 error:function(request,status,error){
-			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			      			//통신 실패시 발생하는 함수(콜백)
-			   				}
-						});
-				}
-			</script>
 
             <div class="col-12">
               <label for="username" class="form-label">비밀번호</label>
@@ -189,47 +144,6 @@
               </div>
             </div>
             
-           <script type="text/javascript">
-				$(function(){
-					$("#invalid-pw2").hide();
-					
-					$("input").keyup(function(){
-						var match = /^[A-Za-z0-9]{8,20}$/;
-						var pwd = $("#Password").val();
-						if(pwd != ""){
-							if(match.test(pwd)){
-								$("#invalid-pw2").hide();
-							}else if(!match.test(pwd)){
-								$("#invalid-pw2").show();
-							}
-						}else{
-							$("#invalid-pw2").hide();
-						}
-					});
-					
-					$("#alert-success").hide(); 
-					$("#alert-danger").hide(); 
-					$("input").keyup(function(){ 
-						var pwd1=$("#Password").val(); 
-						var pwd2=$("#PasswordCheck").val(); 
-					if(pwd1 != "" && pwd2 != ""){ 
-							if(pwd1 == pwd2){ 
-								$("#alert-success").show(); 
-								$("#alert-danger").hide(); 
-								$("#submit").removeAttr("disabled"); 
-							}else{ 
-								$("#alert-success").hide(); 
-								$("#alert-danger").show();
-								$("#submit").attr("disabled", "disabled"); 
-						}
-	 	 			} 
-	 	  			if(pwd1 == "" && pwd2 == ""){ 
-							$("#alert-success").hide(); 
-							$("#alert-danger").hide(); 
-						} 
-					});
-	  			});
-			</script>
 			<div class="col-12"><div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div></div>
 			<div class="col-12"><div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div></div>
             
@@ -245,26 +159,6 @@
               </div>
             </div>
             
-            <script type="text/javascript">
-            $(function(){
-				$("#invalid-name2").hide();
-				
-				$("input").keyup(function(){
-					var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
-					var name = $("#mem_name").val();
-					if(name != ""){
-						if(!match.test(name)){
-							$("#invalid-name2").show();
-						}else{
-							$("#invalid-name2").hide();
-						}
-					}else if(name == ""){
-						$("#invalid-name2").hide();
-					}
-				});
-            });
-            </script>
-            
             <div class="col-12">
               <label for="username" class="form-label">생년월일 </label>
               <input type="date" name="mem_birth" class="form-control" id="birth" placeholder="" required>
@@ -277,7 +171,7 @@
             <label for="username" class="form-label">성별 </label>
             </div>
             <div class="col-12">
-            <select name="mem_gender" required>
+            <select name="mem_gender"  class="form-control" required>
     			<option value="male">남자</option>
     			<option value="female">여자</option>
     			<option value="non">선택 안함</option>
@@ -304,14 +198,6 @@
 			<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 			</div>
 			
-			<script>
-				function call_addr(){
- 					if(document.getElementById("postcode").value && document.getElementById("address").value && document.getElementById("detailAddress").value){
-  					document.getElementById('address_all').value = document.getElementById('postcode').value + '&' + document.getElementById('address').value + '&' + document.getElementById('detailAddress').value;
- 					}
-				}
-			</script>
-          
             <div class="col-md-9 col-9" style="padding-right:0px">
               <label for="cc-name" class="form-label">이메일</label>
               <input type="email" name="mem_email" class="form-control" id="mem_email" placeholder="ex)EARTHNUS@email.com">
@@ -324,46 +210,6 @@
               <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:3px; font-size:12px" onclick="mail()" id="testBtn1">인증번호 받기</button>
             </div>
             
-            <script type="text/javascript">
-            	$(function(){ 
-            		$('#testBtn2').hide();
-            	});
-				function mail(){
-					var mail = $("#mem_email").val();
-					var name = $("#mem_name").val();
-					if(mail === ""){
-						alert("이메일을 입력해주세요.");
-						return;
-					}else if(!mail.includes('@')){
-						alert("올바르지 않은 이메일 형식입니다.");
-						return;
-					}else if(name === ""){
-						alert("이름을 먼저 입력해주세요.");
-						return;
-					}else{
-					$.ajax({
-			   			type: "POST", //요청 메소드 방식
-			  			 url:"/member/mail",
-			   			data: {"mem_email":mail, "mem_name":name},
-			   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-			   			success : function(result){
-			      			if(result.error == true){
-			    	  			alert('입력하신 이메일로 회원가입 인증번호를 발송했습니다. \n인증번호가 오지 않는다면 입력하신 이메일을 다시 확인해주세요.');
-			    	  			$('#testBtn1').hide();
-			    	  			$('#testBtn2').show();
-			      			}else if(result.error == false){
-			    	  			alert('인증번호 발송에 실패했습니다.');
-			      			}
-			   			},
-			   		 error:function(request,status,error){
-			   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			      			//통신 실패시 발생하는 함수(콜백)
-			   				}
-						});
-					}
-				}
-			</script>
-            
             <div class="col-md-9 col-9" style="padding-right:0px">
               <input type="text" name="mailCheck" class="form-control" id="mailCheck" placeholder="이메일 인증번호" required>
               <div class="invalid-feedback" id="invalid-emailCheck">
@@ -371,41 +217,9 @@
               </div>
             </div>
             <div class="col-md-3 col-3" style="margin-top:5px;">
-              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:9px; font-size:13px" onclick="mailCheck()" id="testBtn2">인증번호 확인</button>
+              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:3px; font-size:13px" onclick="mailCheck()" id="testBtn2">인증번호 확인</button>
             </div>
             
-            <script type="text/javascript">
-			$('#testBtn2').click(function(){
-				var mailCheck = $("#mailCheck").val();
-				var name = $('#mem_name').val();
-				var email = $('#mem_email').val();
-				if(mailCheck === ""){
-					alert("이메일 인증번호를 입력해주세요.");
-					return;
-				}
-				$.ajax({
-		   			type: "POST", //요청 메소드 방식
-		  			 url:"/member/mailCheck",
-		   			data: {"mailCheck":mailCheck, "name":name, "email":email},
-		   			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
-		   			success : function(result){
-			   
-		      			if(result.error == true){
-		    	  			alert('회원가입 이메일 인증이 완료되었습니다.');
-		    	  			$("#mem_email").attr("readonly",true);
-		    	  			$("#mailCheck").attr("disabled",true);
-		      			}else if(result.error == false){
-		    	  			alert('이메일 인증번호가 일치하지 않습니다. \n이메일을 다시 한 번 확인해주세요.');
-		      			}
-		   			},
-		   		 error:function(request,status,error){
-		   	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-		      			//통신 실패시 발생하는 함수(콜백)
-		   				}
-					});
-			});
-			</script>
-			 
             <div class="col-md-12">
               <label for="cc-expiration" class="form-label">전화번호</label>
               <input type="text" name="mem_tel" class="form-control" id="mem_tel" placeholder="" maxlength='11' required>
@@ -416,67 +230,12 @@
                 	숫자만 입력해주세요.
               </div>
             </div>
-            
-            <script>
-            	$(function(){
-					$("#invalid-phone").hide();
-					
-					$("input").keyup(function(){
-						var match = /[^0-9]/g;
-						var tel = $("#mem_tel").val();
-						if(tel != ""){
-							if(match.test(tel)){
-								$("#invalid-phone").show();
-							}else{
-								$("#invalid-phone").hide();
-							}
-						}else if(tel == ""){
-							$("#invalid-phone").hide();
-						}
-					});
-            	});
-            </script>
-
           </div>
 
           <hr class="my-4">
 
           <button class="w-100 btn btn-primary btn-lg" type="submit">회원가입</button>
           <div style="text-align:center; padding-top:20px"><a href="/auth/login"><span>로그인</span></a></div>
-          
-          <script type="text/javascript">
-				function check(){
-					var id = $("#mem_id").val();
-					if(id == ""){
-						$('#invalid-id').show();
-						return false;
-					}else if(!$("#mailCheck").attr("disabled")){
-						alert('이메일 인증을 완료해주세요.');
-						return false;
-					}else if($('#invalid-pw2').is(':visible')){
-						alert('입력하신 정보를 다시 확인해주세요.');
-						return false;
-					}else if($('#alert-danger').is(':visible')){
-						alert('입력하신 정보를 다시 확인해주세요.');
-						return false;
-					}else if($('#invalid-name2').is(':visible')){
-						alert('입력하신 정보를 다시 확인해주세요.');
-						return false;
-					}else if($('#invalid-phone').is(':visible')){
-						alert('입력하신 정보를 다시 확인해주세요.');
-						return false;
-					}
-						var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
-						var name = $("#mem_name").val();
-						if(name != ""){
-							if(!match.test(name)){
-								alert('이름을 올바르게 입력해주세요.');
-								return false;
-							}
-						}
-				}
-			</script>
-          
         </form>
       </div>
     </div>
@@ -525,6 +284,229 @@ function execDaumPostcode() {
             document.getElementById("detailAddress").focus();
         }
     }).open();
+}
+
+$('#testBtn').click(function(e){
+	e.preventDefault();
+	$('#testModal').modal("show");
+});
+
+function idcheck(){
+	var id = $("#mem_id").val();
+	var idcheck = $("#mem_idcheck").val();
+	var match = /^[A-Za-z0-9_-]{5,15}$/;
+	if(idcheck === ""){
+		alert("아이디를 입력해주세요.");
+	}else if(!match.test(idcheck)){
+		alert("5~15자의 영문 대문자, 소문자와 특수문자[ _ ],[ - ]로 회원가입 할 수 있습니다.");
+		return;
+	}
+
+	$.ajax({
+			type: "POST", //요청 메소드 방식
+			 url:"/member/idcheck",
+			data: {"mem_id":idcheck},
+			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			
+			success : function(result){
+  			if(result.error == true && idcheck != ""){
+	  			var yesno = confirm('사용 가능한 아이디입니다. \n사용하시겠습니까?');
+	  			if(yesno){
+	  				$("#mem_id").val(idcheck);
+	  				$("#mem_id").attr("readonly",true);
+	  				$("#testModal").modal("hide");
+	  				
+	  			}
+  			}else if(result.error === false){
+	  			alert('이미 존재하는 아이디입니다.');
+  			}
+			},
+		 error:function(request,status,error){
+	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+  			//통신 실패시 발생하는 함수(콜백)
+				}
+		});
+}
+
+$(function(){
+	$("#invalid-pw2").hide();
+	
+	$("input").keyup(function(){
+		var match = /^[A-Za-z0-9]{8,20}$/;
+		var pwd = $("#Password").val();
+		if(pwd != ""){
+			if(match.test(pwd)){
+				$("#invalid-pw2").hide();
+			}else if(!match.test(pwd)){
+				$("#invalid-pw2").show();
+			}
+		}else{
+			$("#invalid-pw2").hide();
+		}
+	});
+	
+	$("#alert-success").hide(); 
+	$("#alert-danger").hide(); 
+	$("input").keyup(function(){ 
+		var pwd1=$("#Password").val(); 
+		var pwd2=$("#PasswordCheck").val(); 
+	if(pwd1 != "" && pwd2 != ""){ 
+			if(pwd1 == pwd2){ 
+				$("#alert-success").show(); 
+				$("#alert-danger").hide(); 
+				$("#submit").removeAttr("disabled"); 
+			}else{ 
+				$("#alert-success").hide(); 
+				$("#alert-danger").show();
+				$("#submit").attr("disabled", "disabled"); 
+		}
+		} 
+		if(pwd1 == "" && pwd2 == ""){ 
+			$("#alert-success").hide(); 
+			$("#alert-danger").hide(); 
+		} 
+	});
+	});
+	
+$(function(){
+	$("#invalid-name2").hide();
+	
+	$("input").keyup(function(){
+		var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
+		var name = $("#mem_name").val();
+		if(name != ""){
+			if(!match.test(name)){
+				$("#invalid-name2").show();
+			}else{
+				$("#invalid-name2").hide();
+			}
+		}else if(name == ""){
+			$("#invalid-name2").hide();
+		}
+	});
+});
+
+function call_addr(){
+	 if(document.getElementById("postcode").value && document.getElementById("address").value && document.getElementById("detailAddress").value){
+	 document.getElementById('address_all').value = document.getElementById('postcode').value + '&' + document.getElementById('address').value + '&' + document.getElementById('detailAddress').value;
+	 }
+}
+
+$(function(){ 
+	$('#testBtn2').hide();
+});
+function mail(){
+	var mail = $("#mem_email").val();
+	var name = $("#mem_name").val();
+	if(mail === ""){
+		alert("이메일을 입력해주세요.");
+		return;
+	}else if(!mail.includes('@')){
+		alert("올바르지 않은 이메일 형식입니다.");
+		return;
+	}else if(name === ""){
+		alert("이름을 먼저 입력해주세요.");
+		return;
+	}else{
+	$.ajax({
+			type: "POST", //요청 메소드 방식
+			 url:"/member/mail",
+			data: {"mem_email":mail, "mem_name":name},
+			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			success : function(result){
+  			if(result.error == true){
+	  			alert('입력하신 이메일로 회원가입 인증번호를 발송했습니다. \n인증번호가 오지 않는다면 입력하신 이메일을 다시 확인해주세요.');
+	  			$('#testBtn1').hide();
+	  			$('#testBtn2').show();
+  			}else if(result.error == false){
+	  			alert('인증번호 발송에 실패했습니다.');
+  			}
+			},
+		 error:function(request,status,error){
+	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+  			//통신 실패시 발생하는 함수(콜백)
+				}
+		});
+	}
+}
+
+$('#testBtn2').click(function(){
+	var mailCheck = $("#mailCheck").val();
+	var name = $('#mem_name').val();
+	var email = $('#mem_email').val();
+	if(mailCheck === ""){
+		alert("이메일 인증번호를 입력해주세요.");
+		return;
+	}
+	$.ajax({
+			type: "POST", //요청 메소드 방식
+			 url:"/member/mailCheck",
+			data: {"mailCheck":mailCheck, "name":name, "email":email},
+			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
+			success : function(result){
+   
+  			if(result.error == true){
+	  			alert('회원가입 이메일 인증이 완료되었습니다.');
+	  			$("#mem_email").attr("readonly",true);
+	  			$("#mailCheck").attr("disabled",true);
+  			}else if(result.error == false){
+	  			alert('이메일 인증번호가 일치하지 않습니다. \n이메일을 다시 한 번 확인해주세요.');
+  			}
+			},
+		 error:function(request,status,error){
+	        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+  			//통신 실패시 발생하는 함수(콜백)
+				}
+		});
+});
+
+$(function(){
+	$("#invalid-phone").hide();
+	
+	$("input").keyup(function(){
+		var match = /[^0-9]/g;
+		var tel = $("#mem_tel").val();
+		if(tel != ""){
+			if(match.test(tel)){
+				$("#invalid-phone").show();
+			}else{
+				$("#invalid-phone").hide();
+			}
+		}else if(tel == ""){
+			$("#invalid-phone").hide();
+		}
+	});
+});
+
+function check(){
+	var id = $("#mem_id").val();
+	if(id == ""){
+		$('#invalid-id').show();
+		return false;
+	}else if(!$("#mailCheck").attr("disabled")){
+		alert('이메일 인증을 완료해주세요.');
+		return false;
+	}else if($('#invalid-pw2').is(':visible')){
+		alert('입력하신 정보를 다시 확인해주세요.');
+		return false;
+	}else if($('#alert-danger').is(':visible')){
+		alert('입력하신 정보를 다시 확인해주세요.');
+		return false;
+	}else if($('#invalid-name2').is(':visible')){
+		alert('입력하신 정보를 다시 확인해주세요.');
+		return false;
+	}else if($('#invalid-phone').is(':visible')){
+		alert('입력하신 정보를 다시 확인해주세요.');
+		return false;
+	}
+		var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
+		var name = $("#mem_name").val();
+		if(name != ""){
+			if(!match.test(name)){
+				alert('이름을 올바르게 입력해주세요.');
+				return false;
+			}
+		}
 }
 </script>
 
