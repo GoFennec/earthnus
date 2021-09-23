@@ -19,7 +19,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<br><br><br><br>
+<br><br><br>
 <div class="container">
 
 <form action="/goods/exGoodsOk" method="POST" onsubmit="return exCheck()">
@@ -35,7 +35,7 @@
 				<tr><th scope="col">필요 포인트</th><td colspan="2"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
 				<tr><td colspan="3" align="center"><strong>교환은 로그인 후 가능합니다.</strong></td></tr>
 			</tbody>
-		</table><br>
+		</table><br><br>
 	</c:if>
 	
 	<c:if test="${!empty auth}">
@@ -49,14 +49,15 @@
 				<tr><th scope="col">상품 정보</th><td colspan="2">${goods.goods_desc}</td></tr>
 				<tr><th scope="col">필요 포인트</th><td colspan="2"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
 			</tbody>
-		</table><br>
+		</table><br><br>
 		<table class="exGoods">
 			<thead>
 				<tr><th scope="col" colspan="3">배송지 정보</th></tr>
 			</thead>
 			<tbody>
 				<tr><th scope="col">주문자</th><td colspan="2">${member.mem_name}</td></tr>
-				<tr><th scope="col">전화번호</th><td colspan="2">${member.mem_tel}</td></tr>
+				<tr><th scope="col">수취인</th><td colspan="2"><input type="text" name="exg_recipient" value="${member.mem_name}" style="width:160px;" maxlength="7"></td></tr>
+				<tr><th scope="col">전화번호</th><td colspan="2"><input type="text" name="exg_tel" value="${member.mem_tel}" style="width:160px;" maxlength="11">&nbsp;&nbsp;<p style="font-size: 0.8em; display: inline;">* 숫자만 입력해주세요.</p></td></tr>
 				<tr><th scope="col">배송지 정보</th>
 				<td colspan="2"><input type="text" id="postcode" required placeholder="우편번호" style="width:160px;" maxlength="5" pattern="^[0-9]+$">
 				<input type="button" onclick="execDaumPostcode()" value="주소수정"><br>
@@ -68,7 +69,7 @@
 				<tr><th scope="col">필요 포인트</th><td colspan="2"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.goods_point}"/> point</td></tr>
 				<tr><th scope="col">잔여 포인트</th><td colspan="2"><fmt:formatNumber type="number" maxFractionDigits="3" value="${member.mem_point - goods.goods_point}"/> point</td></tr>
 			</tbody>
-		</table><br>
+		</table><br><br>
 		<table class="goodsInfo">
 			<thead>
 				<tr><th scope="col" colspan="3">상품 정보</th></tr>
@@ -84,7 +85,7 @@
 			</tbody>
 		</table>
 	</c:if>
-	<br>
+	<br><br>
 	
 	<input type="hidden" name="goods_name" value="${goods.goods_name}">
 	<input type="hidden" name="goods_img" value="${goods.goods_img}">

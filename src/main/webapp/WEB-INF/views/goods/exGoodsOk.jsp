@@ -20,7 +20,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<br><br><br><br>
+<br><br><br>
 <div class="container">
 
 	<table class="exGoods">
@@ -32,7 +32,7 @@
 			<tr><th scope="col">교환 날짜</th><td><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}"/></td></tr>
 			<tr><th scope="col">선택 상품</th><td>${goods.goods_name}</td></tr>
 		</tbody>
-	</table><br/>
+	</table><br/><br>
 	<table class="exGoods">
 		<thead>
 			<tr><th scope="col" colspan="3">교환 포인트 정보</th></tr>
@@ -41,18 +41,18 @@
 			<tr><th scope="col">사용한 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td></tr>
 			<tr><th scope="col">잔여 포인트</th><td><fmt:formatNumber type="number" maxFractionDigits="3" value="${member.mem_point}"/> point</td></tr>
 		</tbody>
-	</table><br/>
+	</table><br/><br>
 	<table class="exGoods">
 		<thead>
 			<tr><th scope="col" colspan="3">배송지 정보</th></tr>
 		</thead>
 		</tbody>
-			<tr><th scope="col">수령인</th><td>${exGoods.exg_name}</td></tr>
-			<tr><th scope="col">연락처</th><td>${member.mem_tel}</td></tr>
+			<tr><th scope="col">수취인</th><td>${exGoods.exg_recipient}</td></tr>
+			<tr><th scope="col">연락처</th><td>${exGoods.exg_tel}</td></tr>
 			<tr><th scope="col">배송지</th><td id="addr"></td></tr>
 			<tr><th scope="col">요청사항</th><td>${exGoods.exg_message}</td></tr>
 		</tbody>
-	</table><br/>
+	</table><br/><br>
 	
 	<div class="exButton">
 	<button type="button" class="btn" onclick="location.href='/'">메인으로</button>&nbsp;&nbsp;&nbsp;
