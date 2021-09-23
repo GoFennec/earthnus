@@ -764,7 +764,6 @@ width: 28px;
 	</nav>
               </c:otherwise>
               </c:choose>
-                    </form>
                 </div>
             </div>
         </section>
@@ -772,6 +771,6 @@ width: 28px;
 </div>
 
   <jsp:include page="/WEB-INF/views/footer.jsp"/>
-
+<br><br><br><br>
 </body>
 </html>
