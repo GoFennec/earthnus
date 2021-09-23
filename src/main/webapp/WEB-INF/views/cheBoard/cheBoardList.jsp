@@ -81,7 +81,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     overflow: hidden;
     width: 50px;
     height: 50px;
-    
+    margin-right: 7px;
 }
 .id_id{
 	padding: 9px 0 0 50px;
@@ -131,24 +131,37 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     margin-left: 10px;
 }
 #dname_select {
-  background-color: #fff;
-  border-radius: 5px;
-  border: solid 1px #e8e8e8;
-  box-sizing: border-box;
-  display: block;
-  font-family: inherit;
-  font-size: 2rem;
-  font-weight: normal;
-  height: 50px;
-  line-height: 40px;
-  outline: none;
-  padding-left: 18px;
-  padding-right: 30px;
-  position: relative;
-  width: 200px; 
-  float:left;
+ display: inline-block;
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #e8e8e8;
+    box-sizing: border-box;
+    display: block;
+    font-family: inherit;
+    font-size: 2rem;
+    font-weight: normal;
+    height: 50px;
+    line-height: 40px;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 30px;
+    margin-right: 5px;
   }
-  
+ #dname_option {
+      background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #e8e8e8;
+    box-sizing: border-box;
+    display: block;
+    font-family: inherit;
+    font-size: 2rem;
+    font-weight: normal;
+    height: 50px;
+    line-height: 40px;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 30px
+ }
 .btn_moreview {
 position:relative;width:100%;display:inline-block;*display:inline;text-align:center;margin:20px 0 0 0;
 }
@@ -211,12 +224,12 @@ background:#000;color:#fff;
 .post-slider{
   width:100%;
   margin: auto;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 .post-slider .next{
   position:absolute;
   top:50%;
-  right:20%;
+  right:15%;
   font-size:2em;
   color:gray;
   cursor: pointer;
@@ -224,7 +237,7 @@ background:#000;color:#fff;
 .post-slider .prev{
   position:absolute;
   top:50%;
-  left:20%;
+  left:15%;
   font-size:2em;
   color:gray;
     cursor: pointer;
@@ -244,6 +257,9 @@ background:#000;color:#fff;
   border-top-left-radius:5px;
   border-top-right-radius:5px;
   margin: auto;
+}
+.post-wrapper .slick-list {
+	height: auto;
 }
 .slick-dots {
 	display: flex;
@@ -284,7 +300,6 @@ background:#000;color:#fff;
 		    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
 		    box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
 		}
-	
 </style>
 
 <title>EARTH & US</title>
@@ -295,15 +310,13 @@ background:#000;color:#fff;
 </head>
 <body>    
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
-	
-	
-	
-		
-	
-	
-	
-	
+	<br><br><br><br> 
 	<div class="container"><br>
+	<table class="exGoods" style="margin-bottom: 10px">
+		<thead>
+			<tr><th scope="col">응원 게시판</th></tr>
+		</thead>
+	</table>
 	
     <div class="page-wrapper" style="position:relative;">
       <!--page slider -->
@@ -329,28 +342,16 @@ background:#000;color:#fff;
     </div>
    
         
+   
+	
     
-	
-	
-	
-	
-	
-	 	<c:if test="${auth.auth_id != null}">
-    	<c:choose>
-    		
-    		<c:when test="${!empty payCheck}">
-    		
-    			<div id="select_dname">
-    			<span>카테고리:</span>
-    			</div>
-    				
-    		
-    	
-    		</c:when>
-    	</c:choose>
-    	</c:if>
-	
     <c:if test="${auth.auth_id != null and !empty payCheck}">
+    
+    	<div style="display: inline-block;">
+    			<span id="select_dname" style="display: inline-block;"></span>
+    			<span id="select_dnameAll" style="display: inline-block;"></span>
+    	</div>
+    
     		<table id="comment_table">
     		<tr>
 	    	 <td style="width: 90%; position:relative">
@@ -408,25 +409,28 @@ background:#000;color:#fff;
 	var startNum = 0;
 	var step = 10;
 	var All_dname = [];
+	var content = 0;
   $(document).ready(function (){
 		  
 		  <c:forEach items="${payCheck}" var="row">
 		    All_dname.push("${row.pay_dname}");
+		   All_dname = Array.from(new Set(All_dname));
 		  </c:forEach>
 			  
 		  <c:if test="${!empty payCheck}">
 		  	 	select_dname();
 	 	  </c:if>
-	 	 
-	 	 	
+
 	 	 login_init();
-	  	function select_dname() {
+	 	 
+function select_dname() {
 	  		
 	  		var count_tree = 0;
 	  		var count_sea = 0;
 	  		var count_pla = 0;
 	  		var count_bear = 0;
 	  		var str = '<select id="dname_select">'
+	  		  str +='<option value="0" selected disabled hidden>카테고리</option>'
 	  		for(var i=0; i < All_dname.length; i++) {
 	  			
 	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") ) {
@@ -451,19 +455,68 @@ background:#000;color:#fff;
 	  			}
 	  		}	
 	  		str += '</select>';
+	  		
+	  			
 	  		$('#select_dname').append(str);
+	  		
 	  	}
-	   	
+
+
+		$("#dname_select").change(function() {
+		  	 var str1 = "";
+		  	 var d_name =null;
+		  	  d_name= $("#dname_select option:selected").val();
+		  	  str1 += '<select id="dname_option">'
+  		
+	      	for(var i=0; i < All_dname.length; i++) {
+	      		 if(d_name == "북극") {
+					if(All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "북극곰") {
+	      				str1 +='<option>'+All_dname[i]+'</option>'
+	      			}
+      		   
+      		}
+      		else if(d_name == "플라스틱") {
+				if(All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경") {
+					str1 +='<option>'+All_dname[i]+'</option>'
+					
+      			}
+      		}
+      		else if(d_name ==="나무") {
+				if(All_dname[i] == "새싹" || All_dname[i] == "묘목" || All_dname[i] == "나무" || All_dname[i] == "숲") {
+					str1 +='<option>'+All_dname[i]+'</option>'
+					
+      			}
+      		}
+      		else if(d_name === "바다") {
+      			if(All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") {
+      				str1 +='<option>'+All_dname[i]+'</option>'
+      			
+      			}
+      		}
+      	}
+  		str1 +='</select>';
+      	$('#select_dnameAll').html(str1);
+      	
+ });
+
+
+
+
+
         $('#replyInsert').on('click',function() {
           	
         	  var text = $('#comment_content').val().replace(/(?:\r\n|\r|\n)/g,'<br/>');
         	  var id = "${auth.auth_id}";
   	      	  var name = "${auth.auth_name}";
-        	  var dnum = $("#dname_select option:selected").val();
+        	  var dnum = $("#dname_option option:selected").val();
         	  var senData = {"cheb_id":id, "cheb_name":name, "cheb_dname":dnum, "cheb_content": text,}
         	  if(text.trim().length==0) {
         		  alert("내용을 작성해주세요");
         		  $('#replyInsert').focus();
+        		  return;
+        	  }
+        	  if($("#dname_select option:selected").val() == 0) {
+        		  alert("카테고리를 선택해주세요");
         		  return;
         	  }
         	 $.ajax({
@@ -473,16 +526,27 @@ background:#000;color:#fff;
         		 contentType : "application/json; charset=utf-8",
         		 success : function(){
         			 $('#comment_content').val("");
-        			 $("#dname_select option:selected").remove();
-        			 if( $("#dname_select option").size() == 0) {
+        			 $("#dname_option option:selected").remove();
+        			 if( $("#dname_option option").size() == 0) {
+        				 $('#dname_option').remove();
+        				 $("#dname_select option:selected").remove();
+        				 if( $("#dname_select option").size() > 1) {
+        					  $('#dname_select').innerHTML = $("#dname_select").val("0");
+        				 }
+        			 }
+        			 if( $("#dname_select option").size() == 1) {
         				 $('#select_dname').remove();
         				 $('#comment_table').css("display", "none");
+        				 
         			 }
-        			
+        			 content = 0;
+        			 
         			 login_init();
         	} 
           });	 
         });
+
+        
         
         $('.post-wrapper').slick({
 	    	slidesToShow: 1,
@@ -491,10 +555,13 @@ background:#000;color:#fff;
 	    	  autoplaySpeed: 5000,
 	    	  nextArrow:$('.next'),
 	    	  prevArrow:$('.prev')
+	    	  
 	    	});
         
+        
+        
         $('#comment_content').keyup(function (e){
-	  	    var content = $(this).val();
+	  	    content = $(this).val();
 	  	    $('#counter').html("("+content.length+" / 최대 200자)");
 
 	  	    if (content.length > 200){
