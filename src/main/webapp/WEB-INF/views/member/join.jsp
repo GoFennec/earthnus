@@ -95,34 +95,18 @@
           
             <div class="col-md-9 col-9" style="padding-right:0px">
               <label for="firstName" class="form-label">아이디</label>
-              <input type="text" name="mem_id" class="form-control" id="mem_id" placeholder="중복확인 버튼을 누르세요." readonly>
+              <input type="text" name="mem_id" class="form-control" id="mem_id">
               <div class="invalid-feedback" id="invalid-id">
                	 필수 입력사항입니다.
               </div>
             </div>
             
             <div class="col-md-3 col-3" style="margin-top:50px;">
-              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:12px" id="testBtn">중복확인</button>
+              <button type="button" class="w-100 btn btn-primary btn-lg" style="padding-left:12px" id="testBtn"  onclick="idcheck()">중복확인</button>
             </div>
-            
-			<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content" style="width:500px; align-items:center;">
-						<div class="modal-header" style="width:100%; text-align:center;">
-							<h3 class="modal-title" id="exampleModalLabel" style="margin-left:175px">아이디 중복확인</h3>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-                  			</button>
-						</div>
-						<br>
-						<input type="text" class="form-control" style="width:400px" id="mem_idcheck" placeholder="아이디를 입력하세요." >
-						<br>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary btn-lg" id="modalY" onclick="idcheck()">중복확인</button>
-						</div>
-					</div>
-				</div>
-			</div>
+            <div class="invalid-feedback" class="col-md-12 col-12" id="invalid-id2" style="padding-left:15px;">
+                	5~15자의 숫자, 영문 대문자, 소문자와 특수문자[ _ ],[ - ]로 <br>회원가입 할 수 있습니다.
+            </div>
             
 
             <div class="col-12">
@@ -286,37 +270,28 @@ function execDaumPostcode() {
     }).open();
 }
 
-$('#testBtn').click(function(e){
-	e.preventDefault();
-	$('#testModal').modal("show");
-});
-
 function idcheck(){
 	var id = $("#mem_id").val();
-	var idcheck = $("#mem_idcheck").val();
-	var match = /^[A-Za-z0-9_-]{5,15}$/;
-	if(idcheck === ""){
-		alert("아이디를 입력해주세요.");
-	}else if(!match.test(idcheck)){
-		alert("5~15자의 영문 대문자, 소문자와 특수문자[ _ ],[ - ]로 회원가입 할 수 있습니다.");
+	if(id == ""){
+		$("#invalid-id").show();
+		return;
+	}else if(id != ""){
+		$("#invalid-id").hide();
+	}
+	if($('#invalid-id2').is(':visible')){
 		return;
 	}
 
 	$.ajax({
 			type: "POST", //요청 메소드 방식
 			 url:"/member/idcheck",
-			data: {"mem_id":idcheck},
+			data: {"mem_id":id},
 			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 			
 			success : function(result){
   			if(result.error == true && idcheck != ""){
-	  			var yesno = confirm('사용 가능한 아이디입니다. \n사용하시겠습니까?');
-	  			if(yesno){
-	  				$("#mem_id").val(idcheck);
-	  				$("#mem_id").attr("readonly",true);
-	  				$("#testModal").modal("hide");
-	  				
-	  			}
+	  			alert('사용 가능한 아이디입니다.');
+	  			
   			}else if(result.error === false){
 	  			alert('이미 존재하는 아이디입니다.');
   			}
@@ -366,14 +341,31 @@ $(function(){
 			$("#alert-danger").hide(); 
 		} 
 	});
-	});
+});
 	
 $(function(){
 	$("#invalid-name2").hide();
+	$("#invalid-id2").hide();
 	
 	$("input").keyup(function(){
 		var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
 		var name = $("#mem_name").val();
+		
+		var id = $("#mem_id").val();
+		var match = /^[A-Z|a-z|0-9|_|-|]{5,15}$/;
+		if(id != ""){
+			$("#invalid-id").hide();
+			if(!match.test(id)){
+				$("#invalid-id2").show();
+				return;
+			}else{
+				$("#invalid-id2").hide();
+			}
+		}else if(id == ""){
+			$("#invalid-id2").hide();
+		}
+		
+		
 		if(name != ""){
 			if(!match.test(name)){
 				$("#invalid-name2").show();
@@ -496,6 +488,9 @@ function check(){
 		alert('입력하신 정보를 다시 확인해주세요.');
 		return false;
 	}else if($('#invalid-phone').is(':visible')){
+		alert('입력하신 정보를 다시 확인해주세요.');
+		return false;
+	}else if($('#invalid-id2').is(':visible')){
 		alert('입력하신 정보를 다시 확인해주세요.');
 		return false;
 	}
