@@ -63,8 +63,8 @@ public class CamBoardController{
 	
 	@RequestMapping(value="/camBoard/detail")
 	public String getCamBoardDetail(@RequestParam(defaultValue = "entire") String arr, @RequestParam(defaultValue = "1") String pagenum, 
-			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "占쏙옙체") String search_type, 
-			@RequestParam(defaultValue = "desc") String order, camBoardBean bean, @RequestParam("CAMB_NUM") String cambnum, 
+			@RequestParam(defaultValue = "") String search, @RequestParam(defaultValue = "전체") String search_type, 
+			@RequestParam(defaultValue = "desc") String order, camBoardBean bean, @RequestParam("CAMB_NUM") String cambnum, @RequestParam("INDEX") String index, 
 			@RequestParam(defaultValue = "1") String p, @RequestParam("CAMB_NAME") String cambname, Model model) {
 		
 		if(search_type.equals("제목")) {
@@ -95,30 +95,35 @@ public class CamBoardController{
 		
 		String orderBy = "CAMB_NUM";
 		
-		int num = Integer.parseInt(cambnum);
+		int INDEX = Integer.parseInt(index);
 		
 		int limit = 1;
 		int offset = 0;
 		
-		if(cambnum.equals(list.get("totalIndex"))) {
-			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, num, limit, offset, CamBoardList, list, model);
-		} else if(cambnum.equals("1")) {
+		camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, INDEX, limit, offset, CamBoardList, list, model);		// 전체 인덱스 뽑아오기
+		
+		if(index.equals(list.get("totalIndex"))) {
+			System.out.println("test1");
+			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, INDEX, limit, offset, CamBoardList, list, model);
+		} else if(index.equals("1")) {
+			System.out.println("test2");
 			limit = 2;
-			offset = num - 1;
-			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, num, limit, offset, CamBoardList, list, model);
+			offset = INDEX - 1;
+			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, INDEX, limit, offset, CamBoardList, list, model);
 		} else {
+			System.out.println("test3");
 			limit = 3;
-			offset = num - 2;
-			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, num, limit, offset, CamBoardList, list, model);
+			offset = INDEX - 2;
+			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, INDEX, limit, offset, CamBoardList, list, model);
 		}
 		
 		model.addAttribute("totalIndex", list.get("totalIndex"));
-		model.addAttribute("index", num);
+		model.addAttribute("index", INDEX);
 		
 		model.addAttribute("nextBoard", (camBoardBean)list.get("nextBoard"));
 		model.addAttribute("preBoard", (camBoardBean)list.get("preBoard"));
 		model.addAttribute("camBoard", camBoardService.getCamBoard(Integer.parseInt(cambnum), cambname));
-		model.addAttribute("currentIndex", Integer.parseInt(cambnum));
+		model.addAttribute("currentIndex", INDEX);
 		model.addAttribute("page", Integer.parseInt(p));
 		
 		return "camBoard/camBoardDetail";

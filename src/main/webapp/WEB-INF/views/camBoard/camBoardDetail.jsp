@@ -188,6 +188,7 @@
 	
 function detailUrl(CAMB_NAME, CAMB_NUM, type){
 		var currentIndex = 0;
+		
 		if(type === "prev"){
 			num = (${index}-1)/6;
 			currentIndex = ${currentIndex} - 1;
@@ -203,15 +204,15 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
 					query = query.substr(0, subquery.indexOf("pagenum")-2);
 				}
 				if(pagenum !== 1){
-					URL += pathname + "?" + query + "&pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
+					URL += pathname + "?" + query + "&pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM + "&INDEX=" + currentIndex;
 				}else{
-					URL += pathname + "?" + query + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
+					URL += pathname + "?" + query + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM + "&INDEX=" + currentIndex;
 				}
 			}else{
 				if(pagenum !== 1){
-					URL += pathname + "?pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
+					URL += pathname + "?pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM + "&INDEX=" + currentIndex;
 				}else{
-					URL += pathname + "?CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
+					URL += pathname + "?CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM + "&INDEX=" + currentIndex;
 				}
 			}
 			
@@ -309,7 +310,7 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
             modal.style.display = 'none';
         });
         
-        modal.querySelector('.social-icons .clipboard').addEventListener('click', function() {
+        modal.querySelector('.kakaotalk').addEventListener('click', function() {
             bg.remove();
             modal.style.display = 'none';
         });
@@ -336,7 +337,7 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
         for (var k in styles) this.style[k] = styles[k];
         return this;
     };
-
+	
     document.getElementById('SNSshare').addEventListener('click', function() {
         // 모달창 띄우기
         modal('shareList');

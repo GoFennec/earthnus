@@ -135,8 +135,6 @@ public class CamBoardService {
 			CamBoardList = tempList;
 		}
 		
-		System.out.println("CamBoardList길이 : " + CamBoardList.size());
-		
 		if(CamBoardList.isEmpty()) {
 			List<String> searchList = new ArrayList<String>();
 			
