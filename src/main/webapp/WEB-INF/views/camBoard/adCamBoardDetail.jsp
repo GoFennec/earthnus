@@ -184,10 +184,10 @@
 				</tr>
 			</table>
 			<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
-			
+			<input type="hidden" name="CAMB_NUM" value="${CAMB_NUM}">
 			<div class="sysBtn">
-				
-				<input type="button" class="btn-dark editbutton" value="삭제"  data-toggle="modal" data-target="#deleteModal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" class="btn-dark editbutton" value="수정">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" class="btn-dark editbutton" value="삭제" data-toggle="modal" data-target="#deleteModal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="button" class="btn-dark editbutton" value="목록" onclick="location.href='/adCamBoard/list'"/>
 			</div>
 			
@@ -261,6 +261,12 @@
 
   <!-- Page level custom scripts -->
 <script type="text/javascript">
+	function jbSubmit() {
+	    var pw1 = document.getElementById( 'pw1' ).value;
+	    var pw2 = document.getElementById( 'pw2' ).value;
+	    alert( pw1 + ' vs ' + pw2 );
+	}	
+
     $(document).ready(function () {
       $('#dataTable').DataTable(); // ID From dataTable 
       $('#dataTableHover').DataTable(); // ID From dataTable with Hover
@@ -306,6 +312,7 @@
 	        this.enabled = false
 	        reader.onload = (function (e) {
 	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="100%" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
+	            alert(e.target.result);
 	        });
 	        reader.readAsDataURL(input.files[0]);
 	    }
