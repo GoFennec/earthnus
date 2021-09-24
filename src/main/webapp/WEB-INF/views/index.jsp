@@ -328,8 +328,6 @@ h3{
 					</div>
 				</div>
 			</div>
-
-
 		</div>
 		<!-- slider Area End-->
 
