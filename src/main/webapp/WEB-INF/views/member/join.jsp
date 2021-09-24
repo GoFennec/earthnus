@@ -348,9 +348,6 @@ $(function(){
 	$("#invalid-id2").hide();
 	
 	$("input").keyup(function(){
-		var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
-		var name = $("#mem_name").val();
-		
 		var id = $("#mem_id").val();
 		var match = /^[A-Z|a-z|0-9|_|-|]{5,15}$/;
 		if(id != ""){
@@ -364,10 +361,13 @@ $(function(){
 		}else if(id == ""){
 			$("#invalid-id2").hide();
 		}
-		
-		
+	});
+	var mem_name = $("#mem_name");
+	mem_name.blur(function(){
+		var matchn = /^[|가-힣|a-z|A-Z|]+$/;
+		var name = $("#mem_name").val();
 		if(name != ""){
-			if(!match.test(name)){
+			if(!matchn.test(name)){
 				$("#invalid-name2").show();
 			}else{
 				$("#invalid-name2").hide();
@@ -375,8 +375,11 @@ $(function(){
 		}else if(name == ""){
 			$("#invalid-name2").hide();
 		}
+		    
 	});
 });
+
+
 
 function call_addr(){
 	 if(document.getElementById("postcode").value && document.getElementById("address").value && document.getElementById("detailAddress").value){

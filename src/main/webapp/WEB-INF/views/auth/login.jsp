@@ -128,6 +128,8 @@ height:46px;
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
 <br><br><br><br>
+
+<div class="wrap">
 <div class="login-form">    
     <form method="post" class="form" action="/auth/login">
     	<h4 class="modal-title">로그인</h4>
@@ -167,7 +169,7 @@ height:46px;
     </form>			
 </div>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
-
+</div>
 
 </body>
 </html>

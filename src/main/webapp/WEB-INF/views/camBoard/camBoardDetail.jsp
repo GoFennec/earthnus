@@ -32,7 +32,6 @@
    margin-bottom: 50px;
 }
 #SNSshare{
-   margin-right: 23%;
 }
 #shareList {
     display: none;
@@ -87,8 +86,8 @@
      </div><br><br>
      
     <div class="navigation-top col-12">
-       <div class="d-sm-flex justify-content-between" style="margin: 30px;">
-          <button type="button" class="btn btn-primary" id="SNSshare">SNS 공유하기</button>
+       <div class="d-sm-flex" style="margin: 30px;">
+          <div class="list col-6 col-sm-6" style="text-align:right;"><i class="fas fa-comments"></i><a type="button" id="SNSshare" style="cursor: pointer;">&nbsp;&nbsp;SNS 공유하기</a></div>
            <div id="shareList">
               <ul class="social-icons">
                  <li style="float: left"><a id="facebookshare" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnaver.com%2F%2F%2F&amp;src=sdkpreparse" class="fb-share-button fb-xfbml-parse-ignore" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large">
@@ -100,51 +99,51 @@
               </ul><br><br>
               <button class="modal_close_btn">닫기</button>
            </div>
-         <button type="button" class="btn btn-primary" onclick="donate()">후원 바로가기</button>
+         <div class="list col-6 col-sm-6"><i class="fab fa-gratipay"></i><a type="button" style="cursor: pointer;" onclick="donate()">&nbsp;&nbsp;후원 바로가기</a></div>
        </div>
       
       <div class="navigation-area m-4">
         <div class="row">
-         <div id="preBoard" class="col-sm-4 nav-left flex-row d-flex justify-content-start align-items-center">
+         <div id="preBoard" class="col-6 col-sm-6" style="text-align:right;">
             <div style="cursor: pointer;" onclick="detailUrl('${preBoard.CAMB_NAME}', '${preBoard.CAMB_NUM}', 'prev')">
-                  <div class="thumb">
+                  <div class="thumb" style="margin-right:0px;">
                   <img class="img-fluid" src="${preBoard.CAMB_FILE}" title="${preBoard.CAMB_NAME}" alt="${preBoard.CAMB_NAME}">
                </div>
-                    
                <div class="arrow">
                     <span class="lnr text-white ti-arrow-left"></span>
                </div>
-            
-                  <div class="detials">
-                    <p>이전</p>
-                  <p style="font-size: 0.8em;">${preBoard.CAMB_NAME}</p>
-               </div>
+                  <div class="detials" style="text-align:right;">
+                    <p style="font-size: 0.8em;">${preBoard.CAMB_NAME}</p>
+                    <span><i class="fas fa-angle-left"></i>이전</span>
+               	  </div>
             </div>
          </div>
 
-        <div class="list col-sm-4">
-           <a class="btn header-btn" onclick="camBoard()" style="color: white;">목록으로</a>
-        </div>
+		           
+
       
-         <div id="nextBoard" class="col-sm-4 nav-right flex-row d-flex justify-content-end align-items-center">
+         <div id="nextBoard" class="col-6 col-sm-6">
             <div style="cursor: pointer;" onclick="detailUrl('${nextBoard.CAMB_NAME}', '${nextBoard.CAMB_NUM}', 'next')">
-               <div class="thumb">
+               <div class="thumb" style="margin-left:0px;">
                     <img class="img-fluid" src="${nextBoard.CAMB_FILE}" title="${nextBoard.CAMB_NAME}" alt="${nextBoard.CAMB_NAME}">
                </div>
-               <div class="detials">
-                <p>다음</p>
+               <div class="detials"  style="text-align:left;">
                 <p style="font-size: 0.8em;">${nextBoard.CAMB_NAME}</p>
+                <span>다음<i class="fas fa-angle-right"></i></span>
                </div>
-         
                <div class="arrow">
                      <span class="lnr text-white ti-arrow-right"></span>
                </div>
             </div>
           </div>
+          
+        <div class="list col-12 col-sm-12" style="cursor: pointer; padding-top:30px;">
+           <i class="fas fa-list-ul"></i>&nbsp;&nbsp;<a onclick="camBoard()" style="color: #425140;">목록으로</a>
+        </div>
+          
         </div>
       </div>
      </div>
-   <div class="col-1"></div>
    </div>
   </div>
 </section>
