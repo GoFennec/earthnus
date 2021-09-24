@@ -86,7 +86,6 @@ public class AdCamBoardService {
 		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		camBoardBean cBean = new camBoardBean();
 		
-		cBean.setCAMB_NUM(Integer.parseInt(CAMB_NUM));
 		cBean.setCAMB_NAME(CAMB_NAME);
 		cBean.setCAMB_CONTENT(CAMB_CONTENT);
 		cBean.setCAMB_SUBJECT(CAMB_SUBJECT);	

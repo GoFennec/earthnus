@@ -186,99 +186,100 @@
    }
    
 function detailUrl(CAMB_NAME, CAMB_NUM, type){
-      var currentIndex = 0;
-      if(type === "prev"){
-         num = (${index}-1)/6;
-         currentIndex = ${currentIndex} - 1;
-      }else if(type === "next"){
-         num = (${index}+1)/6;
-         currentIndex = ${currentIndex} + 1;
-      }
-      pagenum = Math.ceil(num);
-      
-      if(name || num){
-         if(query){
-            if(query.lastIndexOf(substring) !== -1){
-               query = query.substr(0, subquery.indexOf("pagenum")-2);
-            }
-            if(pagenum !== 1){
-               URL += pathname + "?" + query + "&pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
-            }else{
-               URL += pathname + "?" + query + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
-            }
-         }else{
-            if(pagenum !== 1){
-               URL += pathname + "?pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
-            }else{
-               URL += pathname + "?CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + currentIndex;
-            }
-         }
-         
-         location.href = URL;
-         
-      } else if(!num && type === "prev"){
-         
-         
-      } else if(!num && type === "next"){
-         
-         
-      }
-      
-      
-   }
-   
-   function camBoard(){
-      
-      substring = "pagenum";
-      var pagenum = parseInt(${totalIndex}/6 + 1) - parseInt(${index}/6 + 1);
-      if(${totalIndex} <= 6){
-         pagenum = 1;
-      }
-      if(query){
-         if(query.lastIndexOf("search") !== -1){
-            query = "/search?" + query;
-            URL += "/camBoard/list" + query;
-         }
-         if(query.lastIndexOf(substring) !== -1){
-            query = query.substr(0, subquery.indexOf("pagenum")-2);
-            URL += "/camBoard/list?" + query;
-         }
-         if(pagenum !== 1){
-            URL += "&pagenum=" + pagenum;
-         }
-      }else{
-         if(pagenum !== 1){
-            URL += "/camBoard/list?pagenum=" + pagenum;
-         }else{
-            URL += "/camBoard/list"
-         }
-      }
-      
-      location.href = URL;
-   }
-   
-   var linkUrl = window.location.href;
-   
-   function resize(obj) {
-     obj.style.height = "1px";
-     obj.style.height = (12+obj.scrollHeight)+"px";
-   }
-   
-   function donate(){
-      var type = "${camBoard.CAMB_SUBJECT}";
-      
-      if(type === "해양"){
-         location.href="/donation/ocean";
-      }else if(type === "플라스틱"){
-         location.href="/donation/plastic";
-      }else if(type === "산림"){
-         location.href="/donation/forest";
-      }else if(type === "극지방"){
-         location.href="/donation/ice";
-      }
-   }
-   
-   function modal(id) {
+		var currentIndex = 0;
+		
+		if(type === "prev"){
+			num = (${index}-1)/6;
+			currentIndex = ${currentIndex} - 1;
+		}else if(type === "next"){
+			num = (${index}+1)/6;
+			currentIndex = ${currentIndex} + 1;
+		}
+		pagenum = Math.ceil(num);
+		
+		if(name || num){
+			if(query){
+				if(query.lastIndexOf(substring) !== -1){
+					query = query.substr(0, subquery.indexOf("pagenum")-2);
+				}
+				if(pagenum !== 1){
+					URL += pathname + "?" + query + "&pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM + "&INDEX=" + currentIndex;
+				}else{
+					URL += pathname + "?" + query + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM + "&INDEX=" + currentIndex;
+				}
+			}else{
+				if(pagenum !== 1){
+					URL += pathname + "?pagenum=" + pagenum + "&CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM + "&INDEX=" + currentIndex;
+				}else{
+					URL += pathname + "?CAMB_NAME=" + CAMB_NAME + "&CAMB_NUM=" + CAMB_NUM + "&INDEX=" + currentIndex;
+				}
+			}
+			
+			location.href = URL;
+			
+		} else if(!num && type === "prev"){
+			
+			
+		} else if(!num && type === "next"){
+			
+			
+		}
+		
+		
+	}
+	
+	function camBoard(){
+		
+		substring = "pagenum";
+		var pagenum = parseInt(${totalIndex}/6 + 1) - parseInt(${index}/6 + 1);
+		if(${totalIndex} <= 6){
+			pagenum = 1;
+		}
+		if(query){
+			if(query.lastIndexOf("search") !== -1){
+				query = "/search?" + query;
+				URL += "/camBoard/list" + query;
+			}
+			if(query.lastIndexOf(substring) !== -1){
+				query = query.substr(0, subquery.indexOf("pagenum")-2);
+				URL += "/camBoard/list?" + query;
+			}
+			if(pagenum !== 1){
+				URL += "&pagenum=" + pagenum;
+			}
+		}else{
+			if(pagenum !== 1){
+				URL += "/camBoard/list?pagenum=" + pagenum;
+			}else{
+				URL += "/camBoard/list"
+			}
+		}
+		
+		location.href = URL;
+	}
+	
+	var linkUrl = window.location.href;
+	
+	function resize(obj) {
+	  obj.style.height = "1px";
+	  obj.style.height = (12+obj.scrollHeight)+"px";
+	}
+	
+	function donate(){
+		var type = "${camBoard.CAMB_SUBJECT}";
+		
+		if(type === "해양"){
+			location.href="/donation/ocean";
+		}else if(type === "플라스틱"){
+			location.href="/donation/plastic";
+		}else if(type === "산림"){
+			location.href="/donation/forest";
+		}else if(type === "극지방"){
+			location.href="/donation/ice";
+		}
+	}
+	
+	function modal(id) {
         var zIndex = 9999;
         var modal = document.getElementById(id);
 
@@ -335,7 +336,7 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
         for (var k in styles) this.style[k] = styles[k];
         return this;
     };
-
+	
     document.getElementById('SNSshare').addEventListener('click', function() {
         // 모달창 띄우기
         modal('shareList');

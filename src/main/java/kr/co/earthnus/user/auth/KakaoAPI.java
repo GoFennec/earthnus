@@ -27,11 +27,11 @@ public class KakaoAPI {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             
-            //    POST 요청을 위해 기본값이 false인 setDoOutput을 true로
+            //    POST �슂泥��쓣 �쐞�빐 湲곕낯媛믪씠 false�씤 setDoOutput�쓣 true濡�
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
             
-            //    POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+            //    POST �슂泥��뿉 �븘�슂濡� �슂援ы븯�뒗 �뙆�씪誘명꽣 �뒪�듃由쇱쓣 �넻�빐 �쟾�넚
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
@@ -41,11 +41,11 @@ public class KakaoAPI {
             bw.write(sb.toString());
             bw.flush();
             
-            //    결과 코드가 200이라면 성공
+            //    寃곌낵 肄붾뱶媛� 200�씠�씪硫� �꽦怨�
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
  
-            //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+            //    �슂泥��쓣 �넻�빐 �뼸�� JSON���엯�쓽 Response 硫붿꽭吏� �씫�뼱�삤湲�
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
             String result = "";
@@ -55,7 +55,7 @@ public class KakaoAPI {
             }
             System.out.println("response body : " + result);
             
-            //    Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+            //    Gson �씪�씠釉뚮윭由ъ뿉 �룷�븿�맂 �겢�옒�뒪濡� JSON�뙆�떛 媛앹껜 �깮�꽦
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
             
@@ -77,7 +77,7 @@ public class KakaoAPI {
     
   public HashMap<String, Object> getUserInfo (String access_Token) {
         
-        //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+        //    �슂泥��븯�뒗 �겢�씪�씠�뼵�듃留덈떎 媛�吏� �젙蹂닿� �떎瑜� �닔 �엳湲곗뿉 HashMap���엯�쑝濡� �꽑�뼵
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         try {
@@ -85,7 +85,7 @@ public class KakaoAPI {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             
-            //    요청에 필요한 Header에 포함될 내용
+            //    �슂泥��뿉 �븘�슂�븳 Header�뿉 �룷�븿�맆 �궡�슜
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
             
             int responseCode = conn.getResponseCode();
@@ -109,7 +109,7 @@ public class KakaoAPI {
             
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
             String email = kakao_account.getAsJsonObject().get("email").getAsString();
-           String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
+            String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
             
             userInfo.put("nickname", nickname);
             userInfo.put("email", email);

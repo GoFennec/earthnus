@@ -75,7 +75,7 @@
       <li class="nav-item">
         <a class="nav-link" href="/adDonation/list">
         <i class="fas fa-hand-holding-heart"></i>
-          <span>기부 관리</span>
+          <span>후원 관리</span>
         </a>
       </li>
       <li class="nav-item">
@@ -135,9 +135,10 @@
 								<input type="file" name="CAMB_UPLOADFILE" id="file" class="upload-box upload-plus" accept="image/*" style="display: none;">
 									<div id="preview"></div>
 									<input type="hidden" name="goods_img" value="${goods.goods_img}">
+								<br>
 								<div style="text-align: center;" class="file-edit-icon">
-									<a class="preview-edit imgedit">사진 수정</a>
-								</div>
+									<input type="button" class="btn-dark editbutton preview-edit imgedit" value="썸네일 사진 수정">
+								</div><br><br><br><br>
 						</div>
 											
 						<input type="file" id="CAMB_FILE" name="CAMB_FILE" style="display:none;">
@@ -145,9 +146,16 @@
 				</tr>
 				
 				<tr>
-					<td><b>제목</b></td>
+					<th>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
 					<td class="update"><input type="text" id="CAMB_NAME" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
-					<td><b>주제</b></td> 
+					<td><b>시&nbsp;&nbsp;작&nbsp;&nbsp;일</b></td>
+					<td class="update">
+					<input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE" value="${CAMB_STARTDATE}" onchange="findate()">
+					</td>
+				</tr>
+				
+				<tr>
+					<th>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제</th>
 					<td class="update">
 						<select id="CAMB_SUBJECT" name="CAMB_SUBJECT" onchange="showUpdateButton()" required>
 						<option value="해양">해양</option>
@@ -156,22 +164,12 @@
 						<option value="극지방">극지방</option>
 					</select>
 					</td>
-				</tr>
-				
-				<tr>
-					<td><b>시작일</b></td>
+					<td><b>종&nbsp;&nbsp;료&nbsp;&nbsp;일</b></td>
 					<td class="update">
-					<input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE" value="${CAMB_STARTDATE}" onchange="findate()">
-					</td>
-					<td><b>종료일</b></td>
-					<td class="update">
-						<input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" value="${CAMB_FINDATE}">
+						<input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" value="${CAMB_FINDATE}"><br><br><br>
 					</td>
 				</tr>
-				
-				<tr style="text-align: center;">
-					<td colspan="4"><b>캠페인 내용</b></td>
-				</tr>
+
 				<tr class="update" style="text-align: center;">
 					<td colspan="4">
 						<textarea id ="CAMB_CONTENT" name ="CAMB_CONTENT" cols="80" rows="10">
@@ -182,13 +180,14 @@
 						</script>
 					</td>
 				</tr>
-			</table>
+			</table><br><br>
 			<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
 			<input type="hidden" name="CAMB_NUM" value="${CAMB_NUM}">
 			<div class="sysBtn">
-				<input type="submit" class="btn-dark editbutton" value="수정">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="button" class="btn-dark editbutton" value="삭제" data-toggle="modal" data-target="#deleteModal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" class="btn-dark editbutton" value="수정" onsubmit="testSubmit()">&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" class="btn-dark editbutton" value="삭제" data-toggle="modal" data-target="#deleteModal">&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="button" class="btn-dark editbutton" value="목록" onclick="location.href='/adCamBoard/list'"/>
+				<br><br><br><br>
 			</div>
 			
 			<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
@@ -261,10 +260,10 @@
 
   <!-- Page level custom scripts -->
 <script type="text/javascript">
-	function jbSubmit() {
-	    var pw1 = document.getElementById( 'pw1' ).value;
-	    var pw2 = document.getElementById( 'pw2' ).value;
-	    alert( pw1 + ' vs ' + pw2 );
+	function testSubmit() {
+	    var test = document.getElementById( 'CAMB_UPLOADFILE' ).value;
+	    alert(test);
+	    return false;
 	}	
 
     $(document).ready(function () {
@@ -276,7 +275,7 @@
 		
 		var date = "${camBoard.CAMB_STARTDATE}";
 		
-		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="100%" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_NAME}"/>'].join(''))
+		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="80%" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_NAME}"/>'].join(''))
 		
 		$('#CAMB_SUBJECT').val('플라스틱').prop("selected", true);
 			
@@ -311,8 +310,7 @@
 	        var reader = new FileReader();
 	        this.enabled = false
 	        reader.onload = (function (e) {
-	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="100%" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
-	            alert(e.target.result);
+	            $("#preview").html(['<img src="', e.target.result, '" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="80%" alt="캠페인" onchange="showUpdateButton()" title="', escape(e.name), '"/>'].join(''))
 	        });
 	        reader.readAsDataURL(input.files[0]);
 	    }

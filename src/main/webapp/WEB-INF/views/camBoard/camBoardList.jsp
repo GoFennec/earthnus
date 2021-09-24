@@ -216,7 +216,7 @@ i {cursor: pointer; color: #388E3C;}
            <c:forEach items="${CamBoardList}" var="list" begin="0" end="5">
            <% index++; %>
               <div class="col-sm-12 col-md-6 col-lg-4">
-                   <article class="blog_item campaign" onclick="detailUrl('${list.CAMB_NAME}', '<%= index %>')">
+                   <article class="blog_item campaign" onclick="detailUrl('${list.CAMB_NAME}', '${list.CAMB_NUM}', '<%= index %>')">
                        <div class="blog_item_img">
                          <img class="card-img rounded-0" src="${list.CAMB_FILE}" title="${list.CAMB_NAME}" alt="${list.CAMB_NAME} 사진" height="200px;">
                   		</div>
@@ -397,12 +397,12 @@ i {cursor: pointer; color: #388E3C;}
       }
    }
    
-   function detailUrl(name, num){
-	  var index = ((${page.currentPage}-1) * 6 + num * 1);
+   function detailUrl(name, num, index){
+	  var indexnum = ((${page.currentPage}-1) * 6 + index * 1);
 	  if(!subquery){
-         location.href="/camBoard/detail?CAMB_NAME=" + name + "&CAMB_NUM=" + index;
+         location.href="/camBoard/detail?CAMB_NAME=" + name + "&CAMB_NUM=" + num + "&INDEX=" + indexnum;
       }else{
-         location.href="/camBoard/detail" + subquery +"&CAMB_NAME=" + name + "&CAMB_NUM=" + index;
+         location.href="/camBoard/detail" + subquery +"&CAMB_NAME=" + name + "&CAMB_NUM=" + num + "&INDEX=" + indexnum;
       }
    }
    
