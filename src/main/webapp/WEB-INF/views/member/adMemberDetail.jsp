@@ -22,6 +22,9 @@
   	.form-control{
   		font-size:1.5rem;
   	}
+  	label{
+  		margin-top:1rem;
+  	}
   </style>
 </head>
 
@@ -29,7 +32,7 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adIndex" title="관리자 메인화면 바로가기">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adLogout2" title="관리자 메인화면 바로가기">
         <div class="sidebar-brand-icon">
           <img src="/resources/assets/img/logo/logo2_footer.png" alt="관리자 메인화면 바로가기">
         </div>
@@ -112,30 +115,40 @@
                 <div class="card-body">
                     <div class="form-group">
                       <label for="exampleInputEmail1">아이디</label>
-                      		<c:if test="${memberListDetail.mem_api eq \"NAVER\" }"><input type="text" class="form-control" id="mem_id" value="네이버 로그인 회원" readonly></c:if>
-                      		<c:if test="${memberListDetail.mem_api eq \"KAKAO\" }"><input type="text" class="form-control" id="mem_id" value="카카오 로그인 회원" readonly></c:if>
-                      		<c:if test="${memberListDetail.mem_api eq \"NULL\" }"><input type="text" class="form-control" id="mem_id" value="${memberListDetail.mem_id}" readonly></c:if>
-                      		<c:if test="${memberListDetail.mem_api eq null }"><input type="text" class="form-control" id="mem_id" value="${memberListDetail.mem_id}" readonly></c:if>
+                      		<c:if test="${memberListDetail.mem_api eq \"NAVER\" }"><p>네이버 로그인 회원"</p></c:if>
+                      		<c:if test="${memberListDetail.mem_api eq \"KAKAO\" }"><p>카카오 로그인 회원"</p></c:if>
+                      		<c:if test="${memberListDetail.mem_api eq \"NULL\" }"><p>${memberListDetail.mem_id}</p></c:if>
+                      		<c:if test="${memberListDetail.mem_api eq null }"><p>${memberListDetail.mem_id}</p></c:if>
                     </div>
+                    <hr>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">이름</label>
+                      <p>${memberListDetail.mem_name}</p>
+                    </div>
+                    <hr>
                     <div class="form-group">
                       <label for="exampleInputPassword1">이메일</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail.mem_email}" readonly>
+                      <p>${memberListDetail.mem_email}</p>
                     </div>
+                    <hr>
                     <div class="form-group">
                       <label for="exampleInputEmail1">전화번호</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail.mem_tel}" readonly>
+                      <p>${memberListDetail.mem_tel}</p>
                     </div>
+                    <hr>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">주소</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail.mem_addr}" readonly>
+                      <label for="exampleInputEmail1" id="address">주소</label>
+                      <div id="addr"></div>
                     </div>
+                    <hr>
                     <div class="form-group">
                       <label for="exampleInputEmail1">성별</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" value="${memberListDetail.mem_gender}" readonly>
+                      <p>${memberListDetail.mem_gender}</p>
                     </div>
+                    <hr>
                     <div class="form-group">
                       <label for="exampleInputPassword1">생일</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail.mem_birth}" readonly>
+                      <p>${memberListDetail.mem_birth}</p>
                     </div>
                 </div>
               </div>
@@ -144,10 +157,6 @@
             <div class="col-lg-6">
               <div class="card mb-4">
                 <div class="card-body">
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">이름</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail.mem_name}" readonly>
-                    </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">가입 날짜</label>
                       <fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${memberListDetail.mem_date}" var="formatdate"/>
@@ -234,6 +243,12 @@
 			   				}
 						});
 				}
+				
+				window.onload=function(){
+					var address = '${memberListDetail.mem_addr}'
+					var replaced_str = address.replaceAll('&', ' ');
+					$("#addr").text(replaced_str);
+				};
 			</script>
   <!-- Scroll to top -->
   <a class="scroll-to-top rounded" href="#page-top">
