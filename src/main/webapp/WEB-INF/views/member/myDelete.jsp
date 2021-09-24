@@ -707,7 +707,7 @@ font-family: "Montserrat",sans-serif;
                 </label>
             </div>
             
-            <c:if test="${getMyInfo.mem_api eq \'NULL\' || getMyInfo.mem_api eq NULL}" >
+ <c:if test="${getMyInfo.mem_api eq \'NULL\' || getMyInfo.mem_api eq NULL}" >
            <label class="col-md-6 col-sm-8 col-xs-12 control-label" >비밀번호</label>
               <div class="col-md-4 col-sm-4 col-xs-12">
               <input id="Password" type="password" class="form-control" name ="mem_pw" required>
@@ -715,7 +715,7 @@ font-family: "Montserrat",sans-serif;
             <button type="button" class="btn btn-default" onclick="agree();">탈퇴하기</button>
 </c:if>
 
-<c:if test="${getMyInfo.mem_api eq \'NULL\' || getMyInfo.mem_api eq NULL}" >
+<c:if test="${getMyInfo.mem_api eq 'KAKAO' || getMyInfo.mem_api eq 'NAVER'}" >
             <button type="button" class="btn btn-default" onclick="agree2();">탈퇴하기</button>
 </c:if>
     </div>

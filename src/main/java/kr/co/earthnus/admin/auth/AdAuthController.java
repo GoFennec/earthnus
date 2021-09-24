@@ -88,4 +88,10 @@ public class AdAuthController {
 		session.invalidate();
 		return "redirect:/auth/adLogin";	
 	}
+	
+	@RequestMapping("/adLogout2")
+	public String adLogout2(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";	
+	}
 }
