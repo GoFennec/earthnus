@@ -303,6 +303,16 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
             bg.remove();
             modal.style.display = 'none';
         });
+        
+        modal.querySelector('.social-icons img').addEventListener('click', function() {
+            bg.remove();
+            modal.style.display = 'none';
+        });
+        
+        modal.querySelector('.social-icons .clipboard').addEventListener('click', function() {
+            bg.remove();
+            modal.style.display = 'none';
+        });
 
         modal.setStyle({
             position: 'fixed',
