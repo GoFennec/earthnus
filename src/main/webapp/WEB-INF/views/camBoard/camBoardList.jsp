@@ -182,7 +182,7 @@ i {cursor: pointer; color: #388E3C;}
 
 <body>
 <jsp:include page="/WEB-INF/views/header.jsp"/>
-<br><br><br><br>
+<br><br><br>
 <div class="container">
 <div class="row">
 	<div class="col-sm-12" id="selectView">
@@ -195,7 +195,7 @@ i {cursor: pointer; color: #388E3C;}
 					<li><a href="/camBoard/list/search?search_type=CAMB_SUBJECT&search=극지방" title="북극곰 집 지키기 캠페인"><i class="type fas fa-snowflake"></i>&nbsp;&nbsp;극지방</a></li>
 				</ul>
 			</li>
-			<li class="sub-nav history"><button class="filter">이력</button>
+			<li class="sub-nav history"><button class="filter">정렬</button>
 				<ul class="sub-history">
 					<li><a href="/camBoard/list?arr=entire" id="entire" title="전체보기">전체보기</a></li>
 					<li><a href="/camBoard/list?arr=doing" id="doing" title="진행중인 캠페인">진행중인 캠페인</a></li>

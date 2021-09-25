@@ -512,7 +512,7 @@ h3{
                     </div>
                     <div class="card-desc" style="margin-bottom: 10%;">
                         <h3 id="camTitle">${camBoard.CAMB_NAME}</h3>
-                        <div id="camBtn"><a href="/camBoard/detail?CAMB_NAME=${camBoard.CAMB_NAME}&CAMB_NUM=${camBoard.CAMB_NUM}" class="btn-card">자세히보기</a></div>   
+                        <div id="camBtn"><a href="/camBoard/detail?CAMB_NAME=${camBoard.CAMB_NAME}&CAMB_NUM=${camBoard.CAMB_NUM}&INDEX=${camBoard.INDEX}" class="btn-card">자세히보기</a></div>   
                     </div>
                 </div>
             </div>

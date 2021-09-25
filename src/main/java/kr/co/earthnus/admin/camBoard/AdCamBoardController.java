@@ -143,8 +143,7 @@ public class AdCamBoardController {
 			@RequestParam(value="CAMB_NUM") String CAMB_NUM, @RequestParam("CAMB_STARTDATE") Date CAMB_STARTDATE, 
 			@RequestParam("CAMB_FINDATE") Date CAMB_FINDATE, Model model) {
 		
-		adCamBoardService.updateCamBoard(CAMB_NUM, CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE, CAMB_STARTDATE, CAMB_FINDATE);
-		System.out.println("updateCamBoardOk");
+		adCamBoardService.updateCamBoard(Integer.parseInt(CAMB_NUM), CAMB_NAME, CAMB_SUBJECT, CAMB_CONTENT, CAMB_UPLOADFILE, CAMB_STARTDATE, CAMB_FINDATE);
 		
 		return "redirect:/adCamBoard/list";
 	}
