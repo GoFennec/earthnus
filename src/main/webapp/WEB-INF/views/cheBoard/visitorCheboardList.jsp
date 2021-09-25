@@ -276,7 +276,7 @@ background:#000;color:#fff;
 }
 
 .post-slider .post-wrapper{
-  width:80%;
+  width:65%;
   margin:auto;
   overflow: hidden;
   padding:10px 0px 10px 0px;
@@ -355,15 +355,15 @@ background:#000;color:#fff;
         
         <div class="post-wrapper">
           	<div class="post">
-            <img src="/resources/cheBoard/PLASTIC 10.jpg" class="slider-image">
+            <img src="/resources/cheBoard/CAMB_PLASTIC 10.jpg" class="slider-image">
              <a href="/camBoard/detail?CAMB_NAME=플라스틱%20ZERO&CAMB_NUM=10&INDEX=1" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
             </div>
             <div class="post">
-            <img src="/resources/cheBoard/OCEAN 03.png" class="slider-image">
+            <img src="/resources/cheBoard/CAMB_OCEAN 03.png" class="slider-image">
              <a href="/camBoard/detail?CAMB_NAME=흐르는%20북극곰&CAMB_NUM=8&INDEX=2" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
             </div>
             <div class="post">
-            <img src="/resources/cheBoard/FOREST 01.png" class="slider-image">
+            <img src="/resources/cheBoard/CAMB_FOREST 01.png" class="slider-image">
             <a href="/camBoard/detail?CAMB_NAME=숨을%20위한%20숲&CAMB_NUM=7&INDEX=3" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
             </div>
             <div class="post">
@@ -378,7 +378,7 @@ background:#000;color:#fff;
     </div>
    
         
-    
+    <br>
     <div>
     	<table id="addList">
     	<thead>
