@@ -127,7 +127,7 @@
 
             <!-- DataTable with Hover -->
             <div class="container col-sm-12 col-lg-8" style="text-align: center;">
-			<form action="/adCamBoard/updateOk" method="POST" enctype="multipart/form-data">
+			<form action="/adCamBoard/updateOk?CAMB_NUM=${camBoard.CAMB_NUM}" method="POST" enctype="multipart/form-data">
 			<table class="goodsTable">
 				<tr>
 					<td colspan = "4">
@@ -182,7 +182,6 @@
 				</tr>
 			</table><br><br>
 			<script src="${pageContext.request.contextPath}/resources/common/js/ckeditor.js"></script>
-			<input type="hidden" name="CAMB_NUM" value="${CAMB_NUM}">
 			<div class="sysBtn">
 				<input type="submit" class="btn-dark editbutton" value="수정" onsubmit="testSubmit()">&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="button" class="btn-dark editbutton" value="삭제" data-toggle="modal" data-target="#deleteModal">&nbsp;&nbsp;&nbsp;&nbsp;

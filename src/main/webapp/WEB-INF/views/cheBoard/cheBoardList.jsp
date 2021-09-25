@@ -84,11 +84,12 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     margin-right: 7px;
 }
 .id_id{
-	padding: 9px 0 0 50px;
+	padding: 9px 0 0 53px;
 }
 #cheboard_date {
 	float: none;
     padding-top: 10px;
+    padding-right: 3px;
 }
 .cheboard_content {
 	height: auto;
@@ -99,6 +100,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     letter-spacing: 0;
     word-break: break-all;
     margin: 0;
+    padding-right: 3px;
 }
 #counter {
 	position: absolute;
@@ -113,10 +115,11 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	right : 0;
 }
 .deleteicon {
-	width : 30px;
-	position: absolute;
+	width: 20px;
+    position: absolute;
     top: 0;
-    right: 0;
+    right: 7px;
+    margin-top: 6px;
 }
 #replyInsert {
 	border: none;
@@ -221,6 +224,23 @@ background:#000;color:#fff;
     position: relative;
     bottom: -2px;
 }
+.post {
+	position:relative;
+}
+.post .camboard_click {
+	border: 2px solid #fff;
+    color: #fff;
+    background: none;
+    border-radius: 30px;
+    text-transform: capitalize;
+    padding: 16px 27px;
+    position: absolute;
+    bottom: 6%;
+    right: 4%;
+    z-index: 1;
+    overflow: hidden;
+    margin: 0;
+}
 .post-slider{
   width:100%;
   margin: auto;
@@ -229,7 +249,7 @@ background:#000;color:#fff;
 .post-slider .next{
   position:absolute;
   top:50%;
-  right:15%;
+  right:5%;
   font-size:2em;
   color:gray;
   cursor: pointer;
@@ -237,19 +257,30 @@ background:#000;color:#fff;
 .post-slider .prev{
   position:absolute;
   top:50%;
-  left:15%;
+  left:5%;
   font-size:2em;
   color:gray;
     cursor: pointer;
 }
-.post-slider .post-wrapper{
 
-  width:50%;
+@media (max-width: 575px) {
+  .post-slider .prev{
+  	display:none;
+  }
+  .post-slider .next{
+   display:none;
+  }
+  .contain .container {
+	margin: 0 5px 0 5px;
+}
+}
+
+.post-slider .post-wrapper{
+  width:80%;
   margin:auto;
   overflow: hidden;
   padding:10px 0px 10px 0px;
 }
-
 
 .post-slider .post-wrapper .post .slider-image{
   width: 100%;
@@ -310,32 +341,37 @@ background:#000;color:#fff;
 </head>
 <body>    
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
-	<br><br><br><br> 
+	<br><br>
+	
+	<div class="contain">
 	<div class="container"><br>
-	<table class="exGoods" style="margin-bottom: 10px">
-		<thead>
-			<tr><th scope="col">응원 게시판</th></tr>
-		</thead>
-	</table>
+	
 	
     <div class="page-wrapper" style="position:relative;">
       <!--page slider -->
       <div class="post-slider">
         <i class="fas fa-chevron-left prev"></i> 
         <i class="fas fa-chevron-right next"></i>
+        
         <div class="post-wrapper">
-          <div class="post">
-            <img src="/resources/cheBoard/animal.jpg" class="slider-image">
-          </div>
-          <div class="post">
-            <img src="/resources/cheBoard/bear.jpg" class="slider-image">
-          </div>
-          <div class="post">
-            <img src="/resources/cheBoard/plastics.jpg" class="slider-image">
-          </div>
-          <div class="post">
-            <img src="/resources/cheBoard/tree.jpg" class="slider-image">
-          </div>
+          	<div class="post">
+            <img src="/resources/cheBoard/PLASTIC 10.jpg" class="slider-image">
+             <a href="/camBoard/detail?CAMB_NAME=플라스틱%20ZERO&CAMB_NUM=10&INDEX=1" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            </div>
+            <div class="post">
+            <img src="/resources/cheBoard/OCEAN 03.png" class="slider-image">
+             <a href="/camBoard/detail?CAMB_NAME=흐르는%20북극곰&CAMB_NUM=8&INDEX=2" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            </div>
+            <div class="post">
+            <img src="/resources/cheBoard/FOREST 01.png" class="slider-image">
+            <a href="/camBoard/detail?CAMB_NAME=숨을%20위한%20숲&CAMB_NUM=7&INDEX=3" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            </div>
+            <div class="post">
+            <img src="/resources/cheBoard/CAMB_ICE 07.jpg" class="slider-image">
+            <a href="/camBoard/detail?CAMB_NAME=보이지%20않는%20무서움,%20해양%20미세플라스틱&CAMB_NUM=3&INDEX=5" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            </div>
+            
+
         </div>
       </div>
       <!--post slider-->
@@ -349,7 +385,8 @@ background:#000;color:#fff;
     
     	<div style="display: inline-block;">
     			<span id="select_dname" style="display: inline-block;"></span>
-    			<span id="select_dnameAll" style="display: inline-block;"></span>
+    			
+
     	</div>
     
     		<table id="comment_table">
@@ -357,7 +394,7 @@ background:#000;color:#fff;
 	    	 <td style="width: 90%; position:relative">
 	    	 		<span style="color:#aaa;" id="counter">(0 / 최대 200자)</span>
 		         <div class="comment-txt" style="width: 100%">
-		         <textarea id="comment_content" name="comment_content" wrap="hard" rows="4" cols="100" maxlength='300' placeholder="환경을 위해 한마디  해주세요"></textarea>
+		         <textarea id="comment_content" name="comment_content" wrap="hard" rows="4" cols="100" maxlength='300' placeholder="지구에게 따듯한 말 한마디를 남겨주세요."></textarea>
 		         </div>
 	         </td>
 	         <td style="padding-top: 21px;">
@@ -370,11 +407,12 @@ background:#000;color:#fff;
 	  </c:if>
     
     
+    <br>
     <div>
     	<table id="addList">
     	<thead>
        		<tr>
-            	<th>환경을 위해 한마디</th>
+            	<th>지구를 위한 따듯한 말</th>
             </tr>
           </thead>
         </table>
@@ -393,7 +431,7 @@ background:#000;color:#fff;
        
     </div>
   </div>
-
+	</div>
 
 
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
@@ -408,96 +446,49 @@ background:#000;color:#fff;
 <script type="text/javascript">
 	var startNum = 0;
 	var step = 10;
-	var All_dname = [];
+	var All_pay = [];
 	var content = 0;
   $(document).ready(function (){
 		  
 		  <c:forEach items="${payCheck}" var="row">
-		    All_dname.push("${row.pay_dname}");
-		   All_dname = Array.from(new Set(All_dname));
+		 		 All_pay.push({dname:"${row.pay_dname}",paydate:"${row.pay_pdate}",pay_no:"${row.pay_no}"
+		    });
 		  </c:forEach>
-			  
-		  <c:if test="${!empty payCheck}">
-		  	 	select_dname();
-	 	  </c:if>
-
+	 	 
 	 	 login_init();
 	 	 
-function select_dname() {
-	  		
-	  		var count_tree = 0;
-	  		var count_sea = 0;
-	  		var count_pla = 0;
-	  		var count_bear = 0;
-	  		var str = '<select id="dname_select">'
-	  		  str +='<option value="0" selected disabled hidden>카테고리</option>'
-	  		for(var i=0; i < All_dname.length; i++) {
-	  			
-	  			if((count_sea <= 0) && (All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") ) {
-	  				str += '<option>바다</option>';
-	  				count_sea += 1;
-	  				
-	  			}
-		
-	  			if((count_tree <= 0 ) && (All_dname[i] == "새싹" || All_dname[i] == "묘목" || All_dname[i] == "나무" || All_dname[i] == "숲") ) {
-	  				str += '<option>나무</option>';
-	  				count_tree += 1;
-	  				
-	  			}
-	  			
-	  			if((count_pla <= 0) && (All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경")) {
-	  				str += '<option>플라스틱</option>';
-	  				count_pla += 1;
-	  			}
-	  			if( (count_bear <= 0) && (All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "북극곰")) {
-	  				str += '<option>북극</option>';
-	  				count_bear +=1;
-	  			}
-	  		}	
-	  		str += '</select>';
-	  		
-	  			
-	  		$('#select_dname').append(str);
-	  		
-	  	}
+	 	 <c:if test="${!empty payCheck}">
+	  	 	select_dname();
+	 	 </c:if>
+		function select_dname() {
+			  	
+			var str = '<select id="dname_select">'
+			    str +='<option value="0" selected disabled hidden>내 후원내역</option>'
+			      	for(var i=0; i < All_pay.length; i++) {
+			      		
+			      		if(All_pay[i].dname == "조개" || All_pay[i].dname == "바다거북" || All_pay[i].dname == "고래" || All_pay[i].dname == "바다") {
+			  				str += '<option>바다 '+ All_pay[i].paydate.substring(0,10) + '</option>';
+			  				
+			  			}
+				
+			  			if(All_pay[i].dname == "새싹" || All_pay[i].dname == "묘목" || All_pay[i].dname == "나무" || All_pay[i].dname == "숲") {
+			  				str += '<option>나무 ' + All_pay[i].paydate.substring(0,10) + '</option>';
+			  			}
+			  			
+			  			if(All_pay[i].dname == "플라스틱 줄이기" || All_pay[i].dname == "해양 청소" || All_pay[i].dname == "대지 청소" || All_pay[i].dname == "친환경") {
+			  				str += '<option>플라스틱  '+ All_pay[i].paydate.substring(0,10) + '</option>';
+			  				
+			  			}
+			  			if(All_pay[i].dname == "작은 얼음" || All_pay[i].dname == "큰 얼음" || All_pay[i].dname == "빙하 조각" || All_pay[i].dname == "북극곰") {
+			  				str += '<option>북극 ' + All_pay[i].paydate.substring(0,10) +'</option>';
+			  				
+			  			}
+		      	
+		      				}
+		  		str +='</select>';
+		      	$('#select_dname').html(str);
+		}   	
 
-
-		$("#dname_select").change(function() {
-		  	 var str1 = "";
-		  	 var d_name =null;
-		  	  d_name= $("#dname_select option:selected").val();
-		  	  str1 += '<select id="dname_option">'
-  		
-	      	for(var i=0; i < All_dname.length; i++) {
-	      		 if(d_name == "북극") {
-					if(All_dname[i] == "작은 얼음" || All_dname[i] == "큰 얼음" || All_dname[i] == "빙하 조각" || All_dname[i] == "북극곰") {
-	      				str1 +='<option>'+All_dname[i]+'</option>'
-	      			}
-      		   
-      		}
-      		else if(d_name == "플라스틱") {
-				if(All_dname[i] == "플라스틱 줄이기" || All_dname[i] == "해양 청소" || All_dname[i] == "대지 청소" || All_dname[i] == "친환경") {
-					str1 +='<option>'+All_dname[i]+'</option>'
-					
-      			}
-      		}
-      		else if(d_name ==="나무") {
-				if(All_dname[i] == "새싹" || All_dname[i] == "묘목" || All_dname[i] == "나무" || All_dname[i] == "숲") {
-					str1 +='<option>'+All_dname[i]+'</option>'
-					
-      			}
-      		}
-      		else if(d_name === "바다") {
-      			if(All_dname[i] == "조개" || All_dname[i] == "바다거북" || All_dname[i] == "고래" || All_dname[i] == "바다") {
-      				str1 +='<option>'+All_dname[i]+'</option>'
-      			
-      			}
-      		}
-      	}
-  		str1 +='</select>';
-      	$('#select_dnameAll').html(str1);
-      	
- });
 
 
 
@@ -505,20 +496,25 @@ function select_dname() {
 
         $('#replyInsert').on('click',function() {
           	
-        	  var text = $('#comment_content').val().replace(/(?:\r\n|\r|\n)/g,'<br/>');
-        	  var id = "${auth.auth_id}";
-  	      	  var name = "${auth.auth_name}";
-        	  var dnum = $("#dname_option option:selected").val();
-        	  var senData = {"cheb_id":id, "cheb_name":name, "cheb_dname":dnum, "cheb_content": text,}
+        	 var text = $('#comment_content').val().replace(/(?:\r\n|\r|\n)/g,'<br/>');
         	  if(text.trim().length==0) {
         		  alert("내용을 작성해주세요");
         		  $('#replyInsert').focus();
         		  return;
         	  }
+        	  
         	  if($("#dname_select option:selected").val() == 0) {
         		  alert("카테고리를 선택해주세요");
         		  return;
         	  }
+        	 console.log($("#dname_select option:selected").val());
+        	  var id = "${auth.auth_id}";
+  	      	  var name = "${auth.auth_name}";
+        	  var dnum = $("#dname_select option:selected").val().replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F]/gi,"");
+        	  var index = $("#dname_select option").index($("#dname_select option:selected"));
+        	  var pay_no = All_pay[index-1].pay_no;
+        	  var senData= {"cheb_id":id, "cheb_name":name, "cheb_dname":dnum, "cheb_content": text, "pay_no": pay_no}
+        	
         	 $.ajax({
         		 url : "comment_insert",
         		 type : "POST",
@@ -549,13 +545,23 @@ function select_dname() {
         
         
         $('.post-wrapper').slick({
-	    	slidesToShow: 1,
+	    	  slidesToShow: 1,
 	    	  slidesToScroll: 1,
 	    	  autoplay: true,
 	    	  autoplaySpeed: 5000,
 	    	  nextArrow:$('.next'),
-	    	  prevArrow:$('.prev')
+	    	  prevArrow:$('.prev'),
 	    	  
+	    	  
+	    	  responsive: [ // 반응형 웹 구현 옵션
+					{  
+						breakpoint: 570, //화면 사이즈 960px
+						settings: {
+							nextArrow:false,
+							  prevArrow:false
+						} 
+					}
+        	]
 	    	});
         
         
@@ -588,12 +594,13 @@ function select_dname() {
 	        	if(startNum < 10) {
 	        	var str= '<table id="listDiv">'
 	        	}
+	        	
 	        	 if(typeof data.CheBoardList != 'undefined') {
 	        	$.each(data.CheBoardList, function(key, value) {
 		        	
             		str += '<tr>';
             		str += '<td class="left-info">'
- 	            	str += '<div class="id_profile"><img alt="profile" id="img_profile" src="'+value.d_img +'"></div>';
+ 	            	str += '<div class="id_profile"><img alt="profile" id="img_profile" src="'+value.cheb_profile +'"></div>';
  	            	str +='<div id="id_date">'
 	            	 if(auth_id == value.cheb_id) { 
 	            		str +='<div class="delete">'
@@ -605,9 +612,9 @@ function select_dname() {
 	            		str +='</div>'
 	            		str +='</div>'
             		 }
-            		 str +='<p class="cheboard_content">'+value.cheb_content+'</p>';	
+            		 str +='<p class="cheboard_content"><Strong>'+value.cheb_content+'</Strong></p>';	
             		 str += '<div id="cheboard_date">'+value.cheb_date.substring(0,16)+'</div>';
-            		 str += '<div class="id_id"><Strong><span class="cheboard_user">'+value.cheb_name+' 님</span></Strong></div>'
+            		 str += '<div class="id_id"><span class="cheboard_user">'+value.cheb_name+' 님</span></div>'
             		 str += '<div>'
             		 str += '<div class="like_comment_div">'
             		 

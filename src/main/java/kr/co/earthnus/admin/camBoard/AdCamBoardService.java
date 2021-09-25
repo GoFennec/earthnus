@@ -81,32 +81,31 @@ public class AdCamBoardService {
 		CamBoardDAO.camBoardInsert(cBean);
 	}
 	
-	public void updateCamBoard(String CAMB_NUM, String CAMB_NAME, String CAMB_SUBJECT, String CAMB_CONTENT, 
+	public void updateCamBoard(int CAMB_NUM, String CAMB_NAME, String CAMB_SUBJECT, String CAMB_CONTENT, 
 			MultipartFile CAMB_UPLOADFILE, Date CAMB_STARTDATE, Date CAMB_FINDATE) {
 		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		camBoardBean cBean = new camBoardBean();
-		
+		cBean.setCAMB_NUM(CAMB_NUM);
 		cBean.setCAMB_NAME(CAMB_NAME);
 		cBean.setCAMB_CONTENT(CAMB_CONTENT);
 		cBean.setCAMB_SUBJECT(CAMB_SUBJECT);	
 		cBean.setCAMB_UPLOADFILE(CAMB_UPLOADFILE);
 		cBean.setCAMB_STARTDATE(CAMB_STARTDATE);
 		cBean.setCAMB_FINDATE(CAMB_FINDATE);
-		
+		System.out.println(CAMB_UPLOADFILE.isEmpty());
 		MultipartFile uploadFile = cBean.getCAMB_UPLOADFILE();
 		if (!uploadFile.isEmpty()) {
 			String fileName = uploadFile.getOriginalFilename();
 			try {
 				uploadFile.transferTo(new File("/var/lib/tomcat9/webapps/upload/" + fileName));
-				System.out.println("service filename : " + fileName);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println("service filename : " + fileName);
 			cBean.setCAMB_FILE("/upload/" + fileName);
-		} else {
+		} else if(uploadFile.isEmpty()){
 			cBean.setCAMB_FILE("/resources/camBoard/imgDefault.png");
 		}
+		System.out.println(cBean.getCAMB_NUM() + ", " + cBean.getCAMB_NAME() + ", " + cBean.getCAMB_SUBJECT());
 		CamBoardDAO.camBoardUpdate(cBean);
 	}
 	

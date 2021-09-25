@@ -27,8 +27,9 @@ public class CamBoardController{
 		String search_type = "CAMB_ENTIRE";
 		String orderBy = "CAMB_NUM";
 		String order = "DESC";
+		List<camBoardBean> list = null;
 		
-		camBoardService.getBoardList(search, search_type, "", arr, orderBy, order, contentnum, pagenum, model);
+		camBoardService.getBoardList(search, search_type, "", arr, orderBy, order, contentnum, pagenum, list, model);
 		
 		return "camBoard/camBoardList";
 	}
@@ -40,6 +41,7 @@ public class CamBoardController{
 			HttpSession session, camBoardBean bean, Model model) {
 		String search_user = "";
 		AuthBean auth = (AuthBean)session.getAttribute("auth");
+		List<camBoardBean> list = null;
 		
 		if(auth != null) {
 			search_user = auth.getAuth_id();
@@ -56,7 +58,7 @@ public class CamBoardController{
 		}
 		String orderBy = "CAMB_NUM";
 		
-		camBoardService.getBoardList(search, search_type,search_user, arr, orderBy, order, contentnum, pagenum, model);
+		camBoardService.getBoardList(search, search_type,search_user, arr, orderBy, order, contentnum, pagenum, list, model);
 		
 		return "camBoard/camBoardList";
 	}
@@ -103,15 +105,12 @@ public class CamBoardController{
 		camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, INDEX, limit, offset, CamBoardList, list, model);		// 전체 인덱스 뽑아오기
 		
 		if(index.equals(list.get("totalIndex"))) {
-			System.out.println("test1");
 			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, INDEX, limit, offset, CamBoardList, list, model);
 		} else if(index.equals("1")) {
-			System.out.println("test2");
 			limit = 2;
 			offset = INDEX - 1;
 			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, INDEX, limit, offset, CamBoardList, list, model);
 		} else {
-			System.out.println("test3");
 			limit = 3;
 			offset = INDEX - 2;
 			camBoardService.getBoardIndex(search, search_type, arr, orderBy, order, INDEX, limit, offset, CamBoardList, list, model);

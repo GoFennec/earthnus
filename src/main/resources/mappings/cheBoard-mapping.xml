@@ -10,12 +10,12 @@
 		<result property="cheb_content" column="CHEB_CONTENT"/>
 		<result property="cheb_comment_like_total" column="CHEB_COMMENT_LIKE_TOTAL"/>
 		<result property="cheb_date" column="CHEB_DATE"/>
+		<result property="cheb_profile" column="CHEB_PROFILE"/>
 	</resultMap>
      
        <select id="get_CheBoardList" resultMap="CheBoardResult">
         <![CDATA[
-            SELECT G.CHEB_NUM, G.CHEB_ID, G.CHEB_NAME, G.CHEB_DNAME, G.CHEB_CONTENT, G.CHEB_DATE, G.CHEB_COMMENT_LIKE_TOTAL, S.D_IMG  FROM CHEBOARD AS G 
-            LEFT JOIN DONATION AS S ON G.CHEB_DNAME = S.D_NAME
+            SELECT CHEB_NUM, CHEB_ID, CHEB_NAME, CHEB_DNAME, CHEB_CONTENT, CHEB_DATE, CHEB_COMMENT_LIKE_TOTAL, CHEB_PROFILE  FROM CHEBOARD 
              ORDER BY CHEB_NUM DESC 
              LIMIT #{startnum}, #{comment_step}
         ]]>
@@ -54,16 +54,65 @@
 	  </insert>
 	 
 	  <insert id ="replyInsert" parameterType = "cheBoard">
+	  
+	  	<choose>
+
+  		  <when test="cheb_dname == '플라스틱' ">
 			<![CDATA[
-	        INSERT INTO CHEBOARD (CHEB_ID,CHEB_NAME,cheb_dname,cheb_content)
+	        INSERT INTO CHEBOARD (CHEB_ID,CHEB_NAME,cheb_dname,cheb_content,CHEB_PROFILE)
 	        VALUES
 	        (
 		        #{cheb_id},
 		        #{cheb_name},
 		        #{cheb_dname},
-		        #{cheb_content}
+		        #{cheb_content},
+		        '/resources/donation/plastic04.png'
 	        )
 	        ]]>
+	    </when>
+	    
+	    <when test="cheb_dname == '바다' ">
+			<![CDATA[
+	        INSERT INTO CHEBOARD (CHEB_ID,CHEB_NAME,cheb_dname,cheb_content,CHEB_PROFILE)
+	        VALUES
+	        (
+		        #{cheb_id},
+		        #{cheb_name},
+		        #{cheb_dname},
+		        #{cheb_content},
+		        '/resources/donation/ocean04.png'
+	        )
+	        ]]>
+	    </when>
+	    
+	    <when test="cheb_dname == '북극' ">
+			<![CDATA[
+	        INSERT INTO CHEBOARD (CHEB_ID,CHEB_NAME,cheb_dname,cheb_content,CHEB_PROFILE)
+	        VALUES
+	        (
+		        #{cheb_id},
+		        #{cheb_name},
+		        #{cheb_dname},
+		        #{cheb_content},
+		        ' /resources/donation/ice04.png'
+	        )
+	        ]]>
+	    </when>
+	    
+	    <when test="cheb_dname == '나무'">
+			<![CDATA[
+	        INSERT INTO CHEBOARD (CHEB_ID,CHEB_NAME,cheb_dname,cheb_content,CHEB_PROFILE)
+	        VALUES
+	        (
+		        #{cheb_id},
+		        #{cheb_name},
+		        #{cheb_dname},
+		        #{cheb_content},
+		        '/resources/donation/forest04.png'
+	        )
+	        ]]>
+	    </when>
+	    </choose>
 	  </insert>
 	 
 		
@@ -86,7 +135,7 @@
       					<![CDATA[
 	       				 UPDATE PAY
 				         SET PAY_COMMENT ='Y'
-				       	 WHERE pay_id = #{cheb_id} and pay_dname = #{cheb_dname}
+				       	 WHERE pay_id = #{cheb_id} and pay_no = #{pay_no}
 				       	 ]]>
       </update>
  
