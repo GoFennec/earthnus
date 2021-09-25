@@ -18,7 +18,7 @@ public class CamBoardService {
 	private SqlSessionTemplate mybatis;
 
 	public void getBoardList(String search, String search_type, String search_user, String arr, String orderBy, String order, 
-			String contentnum, String pagenum, Model model) {
+			String contentnum, String pagenum, List<camBoardBean> list, Model model) {
 		CamBoardMybatis CamBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		ConvertEntoKo cek = new ConvertEntoKo();
 		int camBoardListCount = 0;
@@ -117,7 +117,6 @@ public class CamBoardService {
 		if(!searchReplace.equals("")) {
 			SearchCorrelation sc = new SearchCorrelation();
 			CamBoardList = sc.searchResult(searchReplace, CamBoardList, pBean);
-			System.out.println("검색어 : " + searchReplace + ", 검색어 길이 : " + searchReplace.length());
 			
 		}else if(searchReplace.equals("")) {
 			int printCount = 0;
@@ -161,6 +160,17 @@ public class CamBoardService {
 			if(!searchList.isEmpty() || searchList.size() > camBoardListCount) {
 				model.addAttribute("RecommandWord", search);
 			}
+		}
+		if(search_user.equals("인덱스조회") && !list.isEmpty()) {
+			for(int i = 0; i < list.size(); i++) {
+				for(int j = 0; j < CamBoardList.size(); j++) {
+					if(list.get(i).getCAMB_NAME().equals(CamBoardList.get(j).getCAMB_NAME())) {
+						list.get(i).setINDEX(j + 1);
+						break;
+					}
+				}
+			}
+			model.addAttribute("getCb_list", list);
 		}
 		model.addAttribute("CamBoardList", CamBoardList);
         model.addAttribute("page", pBean);

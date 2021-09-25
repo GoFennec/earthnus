@@ -3,6 +3,8 @@ package kr.co.earthnus.user.cheBoard;
 import java.util.Date;
 
 public class CheBoardBean {
+	private int pay_no;
+	private String cheb_profile;
 	private int cheb_num;
 	private String cheb_id;
 	private String cheb_name;
@@ -13,6 +15,20 @@ public class CheBoardBean {
 	private String d_img;
 	private Date cheb_time;
 	
+	
+	public String getCheb_profile() {
+		return cheb_profile;
+	}
+	public void setCheb_profile(String cheb_profile) {
+		this.cheb_profile = cheb_profile;
+	}
+	
+	public int getPay_no() {
+		return pay_no;
+	}
+	public void setPay_no(int pay_no) {
+		this.pay_no = pay_no;
+	}
 	public int getCheb_num() {
 		return cheb_num;
 	}

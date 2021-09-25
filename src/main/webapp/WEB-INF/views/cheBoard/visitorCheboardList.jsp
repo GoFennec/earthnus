@@ -29,6 +29,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     padding: 0;
     list-style: none;
 }
+
 #select_dname > span {
 	float: left;
     text-align: center;
@@ -37,10 +38,12 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     margin-right: 10px;
 }
 }
+
 #id_date {
 	padding-left: 70px;
 	padding-right: 23px;
 }
+
 .left-info{
 	padding:0 0 0 8px;
 	position:relative;
@@ -71,20 +74,22 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 #mainpage, #pagemain {
 	padding:7px;
 }
+
 .id_profile {
 	float: left;
     position: relative;
     overflow: hidden;
     width: 50px;
     height: 50px;
-    
+    margin-right: 7px;
 }
 .id_id{
-	padding: 9px 0 0 50px;
+	padding: 9px 0 0 53px;
 }
 #cheboard_date {
 	float: none;
     padding-top: 10px;
+    padding-right: 3px;
 }
 .cheboard_content {
 	height: auto;
@@ -95,6 +100,7 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     letter-spacing: 0;
     word-break: break-all;
     margin: 0;
+    padding-right: 3px;
 }
 #counter {
 	position: absolute;
@@ -109,10 +115,11 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
 	right : 0;
 }
 .deleteicon {
-	width : 30px;
-	position: absolute;
+	width: 20px;
+    position: absolute;
     top: 0;
-    right: 0;
+    right: 7px;
+    margin-top: 6px;
 }
 #replyInsert {
 	border: none;
@@ -127,24 +134,37 @@ table {width: 100%; border-collapse: collapse; text-align: left; line-height: 1.
     margin-left: 10px;
 }
 #dname_select {
-  background-color: #fff;
-  border-radius: 5px;
-  border: solid 1px #e8e8e8;
-  box-sizing: border-box;
-  display: block;
-  font-family: inherit;
-  font-size: 2rem;
-  font-weight: normal;
-  height: 50px;
-  line-height: 40px;
-  outline: none;
-  padding-left: 18px;
-  padding-right: 30px;
-  position: relative;
-  width: 200px; 
-  float:left;
+ display: inline-block;
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #e8e8e8;
+    box-sizing: border-box;
+    display: block;
+    font-family: inherit;
+    font-size: 2rem;
+    font-weight: normal;
+    height: 50px;
+    line-height: 40px;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 30px;
+    margin-right: 5px;
   }
-  
+ #dname_option {
+      background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #e8e8e8;
+    box-sizing: border-box;
+    display: block;
+    font-family: inherit;
+    font-size: 2rem;
+    font-weight: normal;
+    height: 50px;
+    line-height: 40px;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 30px
+ }
 .btn_moreview {
 position:relative;width:100%;display:inline-block;*display:inline;text-align:center;margin:20px 0 0 0;
 }
@@ -182,6 +202,7 @@ background:#000;color:#fff;
 .deleteComment>li:hover {
 	background-color:#e5e5e5;
 }
+
 #comment_content{
 	position: relative;
     display: block;
@@ -203,15 +224,32 @@ background:#000;color:#fff;
     position: relative;
     bottom: -2px;
 }
+.post {
+	position:relative;
+}
+.post .camboard_click {
+	border: 2px solid #fff;
+    color: #fff;
+    background: none;
+    border-radius: 30px;
+    text-transform: capitalize;
+    padding: 16px 27px;
+    position: absolute;
+    bottom: 6%;
+    right: 4%;
+    z-index: 1;
+    overflow: hidden;
+    margin: 0;
+}
 .post-slider{
   width:100%;
   margin: auto;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 .post-slider .next{
   position:absolute;
   top:50%;
-  right:15%;
+  right:5%;
   font-size:2em;
   color:gray;
   cursor: pointer;
@@ -219,17 +257,31 @@ background:#000;color:#fff;
 .post-slider .prev{
   position:absolute;
   top:50%;
-  left:15%;
+  left:5%;
   font-size:2em;
   color:gray;
     cursor: pointer;
 }
+
+@media (max-width: 575px) {
+  .post-slider .prev{
+  	display:none;
+  }
+  .post-slider .next{
+   display:none;
+  }
+  .contain .container {
+	margin: 0 5px 0 5px;
+}
+}
+
 .post-slider .post-wrapper{
-  width:50%;
+  width:80%;
   margin:auto;
   overflow: hidden;
   padding:10px 0px 10px 0px;
 }
+
 .post-slider .post-wrapper .post .slider-image{
   width: 100%;
   height: 100%;
@@ -240,7 +292,6 @@ background:#000;color:#fff;
 .post-wrapper .slick-list {
 	height: auto;
 }
-
 .slick-dots {
 	display: flex;
 	justify-content: center;
@@ -280,7 +331,6 @@ background:#000;color:#fff;
 		    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
 		    box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
 		}
-	
 </style>
 
 <title>EARTH & US</title>
@@ -291,39 +341,37 @@ background:#000;color:#fff;
 </head>
 <body>    
 	<jsp:include page="/WEB-INF/views/header.jsp"/>
+	<br><br>
 	
-	
-	
-		
-	
-	
-	
-	
+	<div class="contain">
 	<div class="container"><br>
-	<table class="exGoods" style="margin-bottom: 10px">
-		<thead>
-			<tr><th scope="col">응원 게시판</th></tr>
-		</thead>
-	</table>
+	
 	
     <div class="page-wrapper" style="position:relative;">
       <!--page slider -->
       <div class="post-slider">
         <i class="fas fa-chevron-left prev"></i> 
         <i class="fas fa-chevron-right next"></i>
+        
         <div class="post-wrapper">
-          <div class="post">
-            <img src="/resources/cheBoard/animal.jpg" class="slider-image">
-          </div>
-          <div class="post">
-            <img src="/resources/cheBoard/bear.jpg" class="slider-image">
-          </div>
-          <div class="post">
-            <img src="/resources/cheBoard/plastics.jpg" class="slider-image">
-          </div>
-          <div class="post">
-            <img src="/resources/cheBoard/tree.jpg" class="slider-image">
-          </div>
+          	<div class="post">
+            <img src="/resources/cheBoard/PLASTIC 10.jpg" class="slider-image">
+             <a href="/camBoard/detail?CAMB_NAME=플라스틱%20ZERO&CAMB_NUM=10&INDEX=1" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            </div>
+            <div class="post">
+            <img src="/resources/cheBoard/OCEAN 03.png" class="slider-image">
+             <a href="/camBoard/detail?CAMB_NAME=흐르는%20북극곰&CAMB_NUM=8&INDEX=2" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            </div>
+            <div class="post">
+            <img src="/resources/cheBoard/FOREST 01.png" class="slider-image">
+            <a href="/camBoard/detail?CAMB_NAME=숨을%20위한%20숲&CAMB_NUM=7&INDEX=3" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            </div>
+            <div class="post">
+            <img src="/resources/cheBoard/CAMB_ICE 07.jpg" class="slider-image">
+            <a href="/camBoard/detail?CAMB_NAME=보이지%20않는%20무서움,%20해양%20미세플라스틱&CAMB_NUM=3&INDEX=5" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            </div>
+            
+
         </div>
       </div>
       <!--post slider-->
@@ -331,50 +379,11 @@ background:#000;color:#fff;
    
         
     
-	
-	
-	
-	
-	
-	 	<c:if test="${auth.auth_id != null}">
-    	<c:choose>
-    		
-    		<c:when test="${!empty payCheck}">
-    		
-    			<div id="select_dname">
-    			<span>카테고리:</span>
-    			</div>
-    				
-    		
-    	
-    		</c:when>
-    	</c:choose>
-    	</c:if>
-	
-    <c:if test="${auth.auth_id != null and !empty payCheck}">
-    		<table id="comment_table">
-    		<tr>
-	    	 <td style="width: 90%; position:relative">
-	    	 		<span style="color:#aaa;" id="counter">(0 / 최대 200자)</span>
-		         <div class="comment-txt" style="width: 100%">
-		         <textarea id="comment_content" name="comment_content" wrap="hard" rows="4" cols="100" maxlength='300' placeholder="환경을 위해 한마디  해주세요"></textarea>
-		         </div>
-	         </td>
-	         <td style="padding-top: 21px;">
-	         	<div class="comment-button"><input type="button" id="replyInsert" value="응원하기"></div>
-	         </td>
-	 
-	      
-	        </tr>
-		</table>
-	  </c:if>
-    
-    
     <div>
     	<table id="addList">
     	<thead>
        		<tr>
-            	<th>환경을 위해 한마디</th>
+            	<th>지구를 위한 따듯한 말</th>
             </tr>
           </thead>
         </table>
@@ -426,13 +435,25 @@ background:#000;color:#fff;
             	init();
         });
         $('.post-wrapper').slick({
-	    	slidesToShow: 1,
+	    	  slidesToShow: 1,
 	    	  slidesToScroll: 1,
 	    	  autoplay: true,
 	    	  autoplaySpeed: 5000,
 	    	  nextArrow:$('.next'),
-	    	  prevArrow:$('.prev')
+	    	  prevArrow:$('.prev'),
+	    	  
+	    	  
+	    	  responsive: [ // 반응형 웹 구현 옵션
+					{  
+						breakpoint: 570, //화면 사이즈 960px
+						settings: {
+							nextArrow:false,
+							  prevArrow:false
+						} 
+					}
+      	]
 	    	});
+      
   });
  
   
@@ -459,13 +480,13 @@ background:#000;color:#fff;
 	        		
             		str += '<tr>';
             		str += '<td class="left-info">'
- 	            	str += '<div class="id_profile"><img alt="profile" id="img_profile" src="'+obj[i].d_img +'"></div>';
+ 	            	str += '<div class="id_profile"><img alt="profile" id="img_profile" src="'+obj[i].cheb_profile +'"></div>';
  	            	str +='<div id="id_date">'
-            		 str +='<p class="cheboard_content">'+obj[i].cheb_content+'</p>';	
-            		 str += '<div id="cheboard_date">'+obj[i].cheb_date.substring(0,16)+'</div>';
-            		 str += '<div class="id_id"><Strong><span class="cheboard_user">'+obj[i].cheb_name+' 님</span></Strong></div>'
-            		 str += '<div>'
-            		 str += '<div class="like_comment_div">'
+ 	            	str +='<p class="cheboard_content"><Strong>'+obj[i].cheb_content+'</Strong></p>';	
+	           		 str += '<div id="cheboard_date">'+obj[i].cheb_date.substring(0,16)+'</div>';
+	           		 str += '<div class="id_id"><span class="cheboard_user">'+obj[i].cheb_name+' 님</span></div>'
+	           		 str += '<div>'
+	           		 str += '<div class="like_comment_div">'
             		 str +='<a class="comment_like" idx="'+i+'" data_num="'+obj[i].cheb_num+'"><img class="like_icon" alt="comment_like" src="/resources/cheBoard/NOT_like.png"></a>'
             		
           			 str +='<span class="like_total">'+obj[i].cheb_comment_like_total+'</span></div>'
