@@ -114,7 +114,7 @@
               <div class="card mb-4">
                 <div class="card-body">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">아이디</label>
+                      <label for="exampleInputEmail1"><b>아이디</b></label>
                       		<c:if test="${memberListDetail.mem_api eq \"NAVER\" }"><p>네이버 로그인 회원"</p></c:if>
                       		<c:if test="${memberListDetail.mem_api eq \"KAKAO\" }"><p>카카오 로그인 회원"</p></c:if>
                       		<c:if test="${memberListDetail.mem_api eq \"NULL\" }"><p>${memberListDetail.mem_id}</p></c:if>
@@ -122,32 +122,27 @@
                     </div>
                     <hr>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">이름</label>
+                      <label for="exampleInputPassword1"><b>이름</b></label>
                       <p>${memberListDetail.mem_name}</p>
                     </div>
                     <hr>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">이메일</label>
+                      <label for="exampleInputPassword1"><b>이메일</b></label>
                       <p>${memberListDetail.mem_email}</p>
                     </div>
                     <hr>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">전화번호</label>
+                      <label for="exampleInputEmail1"><b>전화번호</b></label>
                       <p>${memberListDetail.mem_tel}</p>
                     </div>
                     <hr>
                     <div class="form-group">
-                      <label for="exampleInputEmail1" id="address">주소</label>
-                      <div id="addr"></div>
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">성별</label>
+                      <label for="exampleInputEmail1"><b>성별</b></label>
                       <p>${memberListDetail.mem_gender}</p>
                     </div>
                     <hr>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">생일</label>
+                      <label for="exampleInputPassword1"><b>생년월일</b></label>
                       <p>${memberListDetail.mem_birth}</p>
                     </div>
                 </div>
@@ -157,26 +152,35 @@
             <div class="col-lg-6">
               <div class="card mb-4">
                 <div class="card-body">
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">가입 날짜</label>
+                	<div class="form-group">
+                      <label for="exampleInputPassword1"><b>가입 날짜</b></label>
                       <fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${memberListDetail.mem_date}" var="formatdate"/>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${formatdate}" readonly>
+                      <p>${formatdate}</p>
                     </div>
+                    <hr>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">기부 횟수</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" value="${payCount}" readonly>
+                      <label for="exampleInputEmail1" id="address"><b>주소</b></label>
+                      <div id="addr"></div>
                     </div>
+                    <hr>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">기부 금액</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${payTotal}" readonly>
+                      <label for="exampleInputEmail1"><b>기부 횟수</b></label>
+                      <p>${payCount} 회</p>
                     </div>
+                    <hr>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">작성한 응원릴레이</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${cheerCount}"readonly>
+                      <label for="exampleInputPassword1"><b>기부 금액</b></label>
+                      <p><fmt:formatNumber type="number" maxFractionDigits="3" value="${payTotal}"/> 원</p>
                     </div>
+                    <hr>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">포인트</label>
-                      <input type="text" class="form-control" id="exampleInputPassword1" value="${memberListDetail.mem_point}" readonly>
+                      <label for="exampleInputPassword1"><b>작성한 응원릴레이</b></label>
+                      <p>${cheerCount} 회</p>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1"><b>포인트</b></label>
+                      <p><fmt:formatNumber type="number" maxFractionDigits="3" value="${memberListDetail.mem_point}"/> 포인트</p>
                     </div>
                 </div>
               </div>
