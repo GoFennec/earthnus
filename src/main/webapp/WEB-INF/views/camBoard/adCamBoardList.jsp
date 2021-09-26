@@ -183,7 +183,7 @@
 					<tbody>
 					<c:if test="${not empty CamBoardList}">
                     	<c:forEach items="${CamBoardList}" var="list">
-                      	<tr onclick="location.href='/adCamBoard/detail?CAMB_NAME=${list.CAMB_NAME}'">
+                      	<tr onclick="location.href='/adCamBoard/detail?CAMB_NUM=${list.CAMB_NUM}&CAMB_NAME=${list.CAMB_NAME}'">
                         	<td>${list.CAMB_NUM}</td>
                         	<td>${list.CAMB_NAME}</td>
                         	<td>${list.CAMB_SUBJECT}</td>
@@ -195,7 +195,7 @@
                      </c:if>
                      <c:if test="${not empty CamBoardIngList}">
                     	<c:forEach items="${CamBoardIngList}" var="list">
-                      	<tr onclick="location.href='/adCamBoard/detail?CAMB_NAME=${list.CAMB_NAME}'">
+                      	<tr onclick="location.href='/adCamBoard/detail?CAMB_NUM=${list.CAMB_NUM}&CAMB_NAME=${list.CAMB_NAME}'">
                         	<td>${list.CAMB_NUM}</td>
                         	<td>${list.CAMB_NAME}</td>
                         	<td>${list.CAMB_SUBJECT}</td>
@@ -207,7 +207,7 @@
                      </c:if>
                      <c:if test="${not empty CamBoardFinishList}">
                     	<c:forEach items="${CamBoardFinishList}" var="list">
-                      	<tr onclick="location.href='/adCamBoard/detail?CAMB_NAME=${list.CAMB_NAME}'">
+                      	<tr onclick="location.href='/adCamBoard/detail?CAMB_NUM=${list.CAMB_NUM}&CAMB_NAME=${list.CAMB_NAME}'">
                         	<td>${list.CAMB_NUM}</td>
                         	<td>${list.CAMB_NAME}</td>
                         	<td>${list.CAMB_SUBJECT}</td>

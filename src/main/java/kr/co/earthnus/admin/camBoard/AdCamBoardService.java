@@ -115,16 +115,17 @@ public class AdCamBoardService {
 		camBoardDAO.camBoardDelete(CAMB_NUM);
 	}
 	
-	public camBoardBean getCamBoard(String cambname) {
+	public camBoardBean getCamBoard(int cambnum, String cambname) {
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
-		
-		
 		camBoardBean cBean = new camBoardBean();
 		
-		cBean = camBoardDAO.getCamBoard(cambname);
+		cBean.setCAMB_NUM(cambnum);
+		cBean.setCAMB_NAME(cambname);
+		
+		cBean = camBoardDAO.getCamBoard(cBean);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
-		return camBoardDAO.getCamBoard(cambname);
+		return camBoardDAO.getCamBoard(cBean);
 	}
 	/*public MemberBean getMember(MemberBean mBean) {
 		return CamBoardDAO.getMember(mBean);

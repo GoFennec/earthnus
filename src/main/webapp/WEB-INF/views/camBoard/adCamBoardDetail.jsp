@@ -274,7 +274,7 @@
 		
 		var date = "${camBoard.CAMB_STARTDATE}";
 		
-		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="80%" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_NAME}"/>'].join(''))
+		$("#preview").html(['<img src="${camBoard.CAMB_FILE}" id="CAMB_UPLOADFILE" name="CAMB_UPLOADFILE" width="60%" alt="캠페인" onchange="showUpdateButton()" title="${camBoard.CAMB_NAME}"/>'].join(''))
 		
 		$('#CAMB_SUBJECT').val('플라스틱').prop("selected", true);
 			

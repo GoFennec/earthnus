@@ -98,14 +98,14 @@ public class AdCamBoardController {
 	}
 	
 	@RequestMapping(value="/adCamBoard/detail")
-	public String getCamBoardDetail(@RequestParam("CAMB_NAME") String name, Model model) {
+	public String getCamBoardDetail(@RequestParam("CAMB_NUM") String cambnum, @RequestParam("CAMB_NAME") String name, Model model) {
 		
-		model.addAttribute("camBoard", adCamBoardService.getCamBoard(name));
+		model.addAttribute("camBoard", adCamBoardService.getCamBoard(Integer.parseInt(cambnum), name));
 		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
-		String CAMB_STARTDATE = simpleDateFormat.format(adCamBoardService.getCamBoard(name).getCAMB_STARTDATE());
-		String CAMB_FINDATE = simpleDateFormat.format(adCamBoardService.getCamBoard(name).getCAMB_FINDATE());
+		String CAMB_STARTDATE = simpleDateFormat.format(adCamBoardService.getCamBoard(Integer.parseInt(cambnum), name).getCAMB_STARTDATE());
+		String CAMB_FINDATE = simpleDateFormat.format(adCamBoardService.getCamBoard(Integer.parseInt(cambnum), name).getCAMB_FINDATE());
 		model.addAttribute("CAMB_STARTDATE", CAMB_STARTDATE);
 		model.addAttribute("CAMB_FINDATE", CAMB_FINDATE);
 		return "camBoard/adCamBoardDetail";

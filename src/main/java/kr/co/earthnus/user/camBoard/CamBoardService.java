@@ -1,8 +1,6 @@
 package kr.co.earthnus.user.camBoard;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +57,6 @@ public class CamBoardService {
         pBean.setContentnum(cContentnum);
         pBean.setCurrentblock(cPagenum);
         pBean.setLastblock(pBean.getTotalcount());
-
         pBean.prevnext(cPagenum);
         pBean.setStartPage(pBean.getCurrentblock());
         pBean.setEndPage(pBean.getLastblock(),pBean.getCurrentblock());
@@ -246,9 +243,12 @@ public class CamBoardService {
 	}
 	
 	public camBoardBean getCamBoard(int cambnum, String cambname) {
+		camBoardBean cBean = new camBoardBean();
+		cBean.setCAMB_NUM(cambnum);
+		cBean.setCAMB_NAME(cambname);
 		CamBoardMybatis camBoardDAO = mybatis.getMapper(CamBoardMybatis.class);
 		
-		return camBoardDAO.getCamBoard(cambname);
+		return camBoardDAO.getCamBoard(cBean);
 	}
 	
 	public Map<String, Object> getBoardIndex(String search, String search_type, String arr, String orderBy, String order, 

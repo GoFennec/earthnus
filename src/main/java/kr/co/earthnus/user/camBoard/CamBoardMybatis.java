@@ -5,7 +5,7 @@ import java.util.List;
 public interface CamBoardMybatis {
 	public List<camBoardBean> getBoardList(PagingBean pBean);
 	public List<CamBoardStatBean> getStatList(PagingBean pBean);
-	public camBoardBean getCamBoard(String cambname);
+	public camBoardBean getCamBoard(camBoardBean cBean);
 	public int getBoardListCount(PagingBean pBean);
 	public int getBoardIndex(PagingBean pBean);
 	public camBoardBean getOtherBoard(PagingBean pBean);

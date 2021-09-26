@@ -178,7 +178,7 @@
 	
 	<select id="getCamBoard" resultMap="camBoardResult">
 		<![CDATA[
-			SELECT * FROM CAMBOARD WHERE CAMB_NAME=#{cambname}
+			SELECT * FROM CAMBOARD WHERE CAMB_NAME=#{CAMB_NAME} AND CAMB_NUM=#{CAMB_NUM}
 		]]>
 	</select>
 
