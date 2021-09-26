@@ -158,7 +158,7 @@
 					</td>
 					<td><b>종&nbsp;&nbsp;료&nbsp;&nbsp;일</b></td>
 					<td class="update">
-						<input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" value="${CAMB_FINDATE}"><br><br><br>
+						<input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" value="${CAMB_FINDATE}" style="margin-top:50px;"><br><br><br>
 					</td>
 				</tr>
 
