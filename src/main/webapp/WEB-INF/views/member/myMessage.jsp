@@ -616,9 +616,6 @@ color: #a2a6af
         text-align: left;
         vertical-align: middle;
 	}	   
-table {table-layout:fixed; width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
-thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
-td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 .btn_comment{
 background-position: left;
     text-decoration: none;
@@ -682,10 +679,10 @@ width: 28px;
                 </div>
              
                 <div class="content-panel">
-                    <h2 class="title">내가 작성한 글</h2>
+                    <h2 class="title" style="color: #388E3C;">내가 작성한 글</h2>
 					<hr>
                   
-                         <table class="table" style="table-layout:fixed;">
+                        <table class="table" style="table-layout:fixed; text-align: center;">
                 <thead>
                   <tr>
                     <th>기부 내역</th>
@@ -696,22 +693,9 @@ width: 28px;
                 </thead>
                 <tbody>
                 <c:forEach items="${getMyMessage}" var="cheBoard">
-               
                   <tr>
-                   
-                 <td class="text-truncate">
-                   <c:if test="${cheBoard.cheb_dname eq '숲'}">
-                    <img src="/resources/donation/forest04.png" id="symbol" alt="숲" title="숲일러스트"/>
-                    </c:if>
-                     <c:if test="${cheBoard.cheb_dname eq '바다'}">
-                    <img src="/resources/donation/ocean04.png" id="symbol" alt="바다" title="바다일러스트"/>
-                    </c:if>
-                     <c:if test="${cheBoard.cheb_dname eq '북극곰'}">
-                    <img src="/resources/donation/ice04.png" id="symbol" alt="북극곰" title="북극곰일러스트"/>
-                    </c:if>
-                     <c:if test="${cheBoard.cheb_dname eq '친환경'}">
-                    <img src="/resources/donation/plastic04.png" id="symbol" alt="친환경" title="친환경일러스트"/>
-                    </c:if>${cheBoard.cheb_dname}
+                 <td class="text-truncate" width=20%; >
+                   	<img src="${cheBoard.cheb_profile}"  alt="후원내역이미지" title="후원내역이미지일러스트" style="width:20%;" />
                   </td>
                     <td class="text-truncate">${cheBoard.cheb_content}</td>
                     <td class="text-truncate">${cheBoard.cheb_date}</td>
@@ -719,7 +703,7 @@ width: 28px;
                       <form class="form-horizontal" id="messageDelete" method="post" action="/delete_c" >
                      <div>
                      <input type="hidden" class="form-control" name="cheb_num" id="cheb_num" value="${cheBoard.cheb_num}"/>
-                     <button type="submit" class="btn_comment" >삭제하기</button>
+                     <button type="submit" class="btn" style="font-size: 15px; padding: 13px 15px; line-height: 0.7;">삭제하기</button>
                      </div>
                      </form>
                     </td>
@@ -749,8 +733,13 @@ width: 28px;
 				</li>
 			</c:if>
 			<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">	
-				<li class="page-item">
-					<a href="?pagenum=${idx}" class="page-link">${idx}</a>
+			<li class="page-item">
+					<c:if test="${(page.pagenum/10 + 1) eq idx}">
+					<a href="?pagenum=${idx}" class="page-link" title="${idx}페이지" style="cursor: default; background-color: #66BB6A; color: #fff;">${idx}</a>
+				</c:if>
+				<c:if test="${(page.pagenum/10 + 1) ne idx}">
+	            		<a href="?pagenum=${idx}" class="page-link" title="${idx}페이지">${idx}</a>
+	            	</c:if>
 				</li>
 			</c:forEach>
 			<c:if test="${page.next}">

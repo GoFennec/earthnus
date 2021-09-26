@@ -331,6 +331,7 @@ background:#000;color:#fff;
 		    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
 		    box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 0px;
 		}
+		
 </style>
 
 <title>EARTH & US</title>
@@ -355,16 +356,16 @@ background:#000;color:#fff;
         
         <div class="post-wrapper">
           	<div class="post">
-            <img src="/resources/cheBoard/CAMB_PLASTIC 10.jpg" class="slider-image">
-             <a href="/camBoard/detail?CAMB_NAME=플라스틱%20ZERO&CAMB_NUM=10&INDEX=1" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            	<img src="/resources/cheBoard/CAMB_PLASTIC 10.jpg" class="slider-image">
+             	<a href="/camBoard/detail?CAMB_NAME=플라스틱%20ZERO&CAMB_NUM=10&INDEX=1" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
             </div>
             <div class="post">
             <img src="/resources/cheBoard/CAMB_OCEAN 03.png" class="slider-image">
             <a href="/camBoard/detail?CAMB_NAME=보이지%20않는%20무서움,%20해양%20미세플라스틱&CAMB_NUM=3&INDEX=5" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
             </div>
             <div class="post">
-            <img src="/resources/cheBoard/CAMB_FOREST 01.png" class="slider-image">
-            <a href="/camBoard/detail?CAMB_NAME=숨을%20위한%20숲&CAMB_NUM=7&INDEX=3" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            	<img src="/resources/cheBoard/CAMB_FOREST 01.png" class="slider-image">
+            	<a href="/camBoard/detail?CAMB_NAME=숨을%20위한%20숲&CAMB_NUM=7&INDEX=3" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
             </div>
             <div class="post">
             <img src="/resources/cheBoard/CAMB_ICE 07.jpg" class="slider-image">
@@ -465,20 +466,20 @@ background:#000;color:#fff;
 			      	for(var i=0; i < All_pay.length; i++) {
 			      		
 			      		if(All_pay[i].dname == "조개" || All_pay[i].dname == "바다거북" || All_pay[i].dname == "고래" || All_pay[i].dname == "바다") {
-			  				str += '<option>바다 '+ All_pay[i].paydate.substring(0,10) + '</option>';
+			  				str += '<option>바다 후원 ('+ All_pay[i].paydate.substring(0,10) + ')</option>';
 			  				
 			  			}
 				
 			  			if(All_pay[i].dname == "새싹" || All_pay[i].dname == "묘목" || All_pay[i].dname == "나무" || All_pay[i].dname == "숲") {
-			  				str += '<option>나무 ' + All_pay[i].paydate.substring(0,10) + '</option>';
+			  				str += '<option>나무 후원 (' + All_pay[i].paydate.substring(0,10) + ')</option>';
 			  			}
 			  			
 			  			if(All_pay[i].dname == "플라스틱 줄이기" || All_pay[i].dname == "해양 청소" || All_pay[i].dname == "대지 청소" || All_pay[i].dname == "친환경") {
-			  				str += '<option>플라스틱  '+ All_pay[i].paydate.substring(0,10) + '</option>';
+			  				str += '<option>플라스틱 후원 ('+ All_pay[i].paydate.substring(0,10) + ')</option>';
 			  				
 			  			}
 			  			if(All_pay[i].dname == "작은 얼음" || All_pay[i].dname == "큰 얼음" || All_pay[i].dname == "빙하 조각" || All_pay[i].dname == "북극곰") {
-			  				str += '<option>북극 ' + All_pay[i].paydate.substring(0,10) +'</option>';
+			  				str += '<option>북극 후원 (' + All_pay[i].paydate.substring(0,10) +')</option>';
 			  				
 			  			}
 		      	

@@ -550,18 +550,7 @@ h3{
                     	
                     	<div class="testimonial-section" id="chContent" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" onclick="location.href='/cheBoard/list'" >
                 			<div style="width:20%;float:left">
-                				<c:if test="${cheBoard.cheb_dname eq '숲'}">
-                    				<img src="/resources/donation/forest04.png"  alt="숲" title="숲일러스트"/>
-                    			</c:if>
-                     			<c:if test="${cheBoard.cheb_dname eq '바다'}">
-                    				<img src="/resources/donation/ocean04.png"  alt="바다" title="바다일러스트"/>
-                    			</c:if>
-                     			<c:if test="${cheBoard.cheb_dname eq '북극곰'}">
-                    				<img src="/resources/donation/ice04.png"  alt="북극곰" title="북극곰일러스트"/>
-                    			</c:if>
-                     			<c:if test="${cheBoard.cheb_dname eq '친환경'}">
-                    				<img src="/resources/donation/plastic04.png"  alt="친환경" title="친환경일러스트"/>
-                    			</c:if>
+                			<img src="${cheBoard.cheb_profile}"  alt="후원내역이미지" title="후원내역이미지일러스트"/>
                 			</div>
                 			<div style="width:80%;float:left">
                 				<div class="testimonial-writer-name"> ${cheBoard.cheb_id}</div>
