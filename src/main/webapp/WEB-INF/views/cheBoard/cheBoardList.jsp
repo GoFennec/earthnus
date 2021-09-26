@@ -466,20 +466,20 @@ background:#000;color:#fff;
 			      	for(var i=0; i < All_pay.length; i++) {
 			      		
 			      		if(All_pay[i].dname == "조개" || All_pay[i].dname == "바다거북" || All_pay[i].dname == "고래" || All_pay[i].dname == "바다") {
-			  				str += '<option>바다 후원 ('+ All_pay[i].paydate.substring(0,10) + ')</option>';
+			  				str += '<option>바다 '+ All_pay[i].paydate.substring(0,10) + '</option>';
 			  				
 			  			}
 				
 			  			if(All_pay[i].dname == "새싹" || All_pay[i].dname == "묘목" || All_pay[i].dname == "나무" || All_pay[i].dname == "숲") {
-			  				str += '<option>나무 후원 (' + All_pay[i].paydate.substring(0,10) + ')</option>';
+			  				str += '<option>나무 ' + All_pay[i].paydate.substring(0,10) + '</option>';
 			  			}
 			  			
 			  			if(All_pay[i].dname == "플라스틱 줄이기" || All_pay[i].dname == "해양 청소" || All_pay[i].dname == "대지 청소" || All_pay[i].dname == "친환경") {
-			  				str += '<option>플라스틱 후원 ('+ All_pay[i].paydate.substring(0,10) + ')</option>';
+			  				str += '<option>플라스틱 '+ All_pay[i].paydate.substring(0,10) + '</option>';
 			  				
 			  			}
 			  			if(All_pay[i].dname == "작은 얼음" || All_pay[i].dname == "큰 얼음" || All_pay[i].dname == "빙하 조각" || All_pay[i].dname == "북극곰") {
-			  				str += '<option>북극 후원 (' + All_pay[i].paydate.substring(0,10) +')</option>';
+			  				str += '<option>북극 ' + All_pay[i].paydate.substring(0,10) +'</option>';
 			  				
 			  			}
 		      	
