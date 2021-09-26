@@ -49,7 +49,7 @@
 		]]>
 	</select>
 	<select id="getCh_list" resultType="cheBoard" parameterType="String">
-		SELECT * FROM CHEBOARD ORDER BY CHEB_DATE DESC limit 4
+		SELECT * FROM CHEBOARD ORDER BY CHEB_NUM DESC limit 4
 	</select>
 	<select id="getD_img" resultType="cheBoard" parameterType="String">
 		SELECT D_IMG FROM DONATION WHERE D_NAME=#{d_name}

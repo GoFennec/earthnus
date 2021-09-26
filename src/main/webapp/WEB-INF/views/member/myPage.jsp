@@ -513,24 +513,7 @@ color: #a2a6af
     width: 40px;
     display: inline-block
 }
-.btn_comment{
-background-position: left;
-    text-decoration: none;
-border: none;
-text-transform: capitalize;
-    border-radius: 30px;
-display: inline-block;
-    font-size: 15px;
-  color: #fff;
-    transition: 0.6s;
-    box-shadow: 0px 7px 21px 0px rgb(0 0 0 / 12%);
-    background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE);
-background-size: 200%;
-margin-bottom: 5px;
-}
-table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
-	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
-	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
+
 #nocontent{
 text-align:center;
 margin-top: 20px;
@@ -578,7 +561,7 @@ width: 28px;
              
                 <div class="content-panel">
                 <form class="form-horizontal" method="post" action="/myPage" >
-                    <h2 class="title">마이페이지</h2>
+                    <h2 class="title" style="color: #388E3C;">마이페이지</h2>
 					<hr>
                     
                         <fieldset class="fieldset">
@@ -603,7 +586,7 @@ width: 28px;
                     
                         <div>
                         <br><br>
-                        <h3>내가 구한 지구</h3>
+                        <h3 style="color: #388E3C;">내가 구한 지구</h3>
                          <hr>
 			<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="card">
@@ -680,9 +663,9 @@ width: 28px;
 	
                     <div class="col-md-12 col-sm-12 col-xs-12">
                     <br><br>
-					<h3>내가 구한 지구 상세 내역</h3>
+					<h3 style="color: #388E3C;">내가 구한 지구 상세 내역</h3>
 					<hr>
-                 <table class="table">
+                 <table class="table" style="text-align: center; table-layout:fixed;">
                 <thead>
                   <tr>
                   	<th></th>
@@ -695,18 +678,18 @@ width: 28px;
                 <tbody>
                 <c:forEach items="${getMyPay}" var="pay">
                   <tr>
-                  <td class="text-truncate" "style=width:10%;">
+                  <td class="text-truncate" width=10%; >
                   <c:if test="${pay.pay_dname == '숲' || pay.pay_dname == '새싹' || pay.pay_dname ==  '묘목' || pay.pay_dname ==  '나무' }">
-                    <img src="/resources/donation/forest04.png" id="symbol" alt="숲" title="숲일러스트"/>
+                    <img src="/resources/donation/forest04.png" id="symbol" alt="숲" title="숲일러스트" style="width:20%;"/>
                     </c:if>
                      <c:if test="${pay.pay_dname == '바다' || pay.pay_dname ==  '조개' ||pay.pay_dname ==  '바다거북' || pay.pay_dname ==  '고래' }">
-                    <img src="/resources/donation/ocean04.png" id="symbol" alt="바다" title="바다일러스트"/>
+                    <img src="/resources/donation/ocean04.png" id="symbol" alt="바다" title="바다일러스트" style="width:20%;"/>
                     </c:if>
                      <c:if test="${pay.pay_dname == '북극곰' || pay.pay_dname == '작은 얼음' || pay.pay_dname == '큰 얼음' || pay.pay_dname == '빙하 조각' }">
-                    <img src="/resources/donation/ice04.png" id="symbol" alt="북극곰" title="북극곰일러스트"/>
+                    <img src="/resources/donation/ice04.png" id="symbol" alt="북극곰" title="북극곰일러스트" style="width:20%;"/>
                     </c:if>
                      <c:if test="${pay.pay_dname == '친환경' || pay.pay_dname == '플라스틱 줄이기' || pay.pay_dname ==  '해양 청소' || pay.pay_dname == '대지 청소' }">
-                    <img src="/resources/donation/plastic04.png" id="symbol" alt="친환경" title="친환경일러스트"/>
+                    <img src="/resources/donation/plastic04.png" id="symbol" alt="친환경" title="친환경일러스트" style="width:20%;"/>
                     </c:if>
                   </td>
                     <td class="text-truncate"> 
@@ -715,7 +698,7 @@ width: 28px;
                     <td class="text-truncate">${pay.pay_pdate}</td>
               	<c:if test="${pay.pay_comment eq 'N'}" >
                     <td class="text-truncate"><button type="button" 
-                    class="btn_comment" onclick="comment()">응원글 작성</button></td>
+                    class="btn" style="font-size: 13px; padding: 13px 10px; line-height: 0.7;" onclick="comment()">응원글 작성</button></td>
          		 </c:if>
          		 <c:if test="${pay.pay_comment eq 'Y'}" >
                     <td class="text-truncate"></td>
@@ -740,7 +723,12 @@ width: 28px;
 			</c:if>
 			<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">	
 				<li class="page-item">
-					<a href="?pagenum=${idx}" class="page-link">${idx}</a>
+					<c:if test="${(page.pagenum/5 + 1) eq idx}">
+					<a href="?pagenum=${idx}" class="page-link" title="${idx}페이지" style="cursor: default; background-color: #66BB6A; color: #fff;">${idx}</a>
+				</c:if>
+				<c:if test="${(page.pagenum/5 + 1) ne idx}">
+	            		<a href="?pagenum=${idx}" class="page-link" title="${idx}페이지">${idx}</a>
+	            	</c:if>
 				</li>
 			</c:forEach>
 			<c:if test="${page.next}">

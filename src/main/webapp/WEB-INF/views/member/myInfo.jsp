@@ -666,7 +666,7 @@ body {
                   </nav>
                </div>
                <div class="content-panel">
-                  <h2 class="title">내 정보</h2>
+                  <h2 class="title" style="color: #388E3C;">내 정보</h2>
                   <form class="form-horizontal" id="form" method="post"  action="/updateMyInfo">
                      <fieldset class="fieldset">
          <div class="form-group">

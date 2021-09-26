@@ -596,9 +596,6 @@ color: #a2a6af
     width: 40px;
     display: inline-block
 }
-table {width: 100%; border-collapse: collapse; text-align: center; line-height: 1.5; width:10%;}
-	thead th {padding: 10px; font-weight: bold; vertical-align: top; color: #425140; border-bottom: 3px solid #425140;}
-	td {width: 350px; padding: 10px; vertical-align: center; border-bottom: 1px solid #ccc;}
 
 #nocontent{
 text-align:center;
@@ -636,10 +633,10 @@ margin-top: 20px;
                 </div>
              
                 <div class="content-panel">
-                    <h2 class="title">굿즈 교환 현황</h2>
+                    <h2 class="title" style="color: #388E3C;">굿즈 교환 현황</h2>
 					<hr>
 					
-                        <table class="table" style="table-layout:fixed;">
+                        <table class="table" style="table-layout:fixed; text-align: center; vertical-align: top;">
                 <thead>
                   <tr>
                     <th>굿즈 사진</th>
@@ -653,13 +650,13 @@ margin-top: 20px;
                 <tbody>
                 <c:forEach items="${getMyOrder}" var="exGoods">
                   <tr>
-                    <td class="text-truncate"><img src="${exGoods.exg_img}" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"  width="50%"/></td>
-                    <td class="text-truncate">${exGoods.exg_gname}</td>
-                    <td class="text-truncate"><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
-                    <td class="text-truncate"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}" /></td>
+                    <td class="text-truncate" style="vertical-align: middle;"><img src="${exGoods.exg_img}" alt="환경을 생각하는 친환경 제품" title="지구마켓 상품"  width="50%"/></td>
+                    <td class="text-truncate" style="vertical-align: middle;">${exGoods.exg_gname}</td>
+                    <td class="text-truncate" style="vertical-align: middle;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${exGoods.exg_point}"/> point</td>
+                    <td class="text-truncate" style="vertical-align: middle;"><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${exGoods.exg_pdate}" /></td>
                     <c:choose>
                     	<c:when test="${exGoods.exg_state eq '결제완료'}">
-                    		<td class="text-truncate">배송대기중</td>
+                    		<td class="text-truncate" style="vertical-align: middle;">배송대기중</td>
                     	</c:when>
                     	<c:when test="${exGoods.exg_state eq '배송처리'}">
                     		<td class="text-truncate">
@@ -673,15 +670,15 @@ margin-top: 20px;
 					            <div class="form-group">
 					            	<input type="hidden" class="form-control" name="t_invoice" id="t_invoice" value="${exGoods.exg_waybill}"/>
 					            </div>
-					            <button type="submit" formtarget="_blank">조회하기</button>
+					            <button class=btn style="font-size: 15px; padding: 13px 15px; line-height: 0.7;" type="submit" formtarget="_blank">조회하기</button>
 					        	</form>
                     		</td>
                     	</c:when>
                     	<c:when test="${exGoods.exg_state eq '배송완료'}">
-                    		<td class="text-truncate">배송완료</td>
+                    		<td class="text-truncate" style="vertical-align: middle;">배송완료</td>
                     	</c:when>
                     	<c:when test="${exGoods.exg_state eq '결제취소'}">
-                    		<td class="text-truncate">결제취소</td>
+                    		<td class="text-truncate" style="vertical-align: middle;">결제취소</td>
                     	</c:when>
                     </c:choose>
          		 </tr>
@@ -704,7 +701,12 @@ margin-top: 20px;
 			</c:if>
 			<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">	
 				<li class="page-item">
-					<a href="?pagenum=${idx}" class="page-link">${idx}</a>
+					<c:if test="${(page.pagenum/5 + 1) eq idx}">
+					<a href="?pagenum=${idx}" class="page-link" title="${idx}페이지" style="cursor: default; background-color: #66BB6A; color: #fff;">${idx}</a>
+				</c:if>
+				<c:if test="${(page.pagenum/5 + 1) ne idx}">
+	            		<a href="?pagenum=${idx}" class="page-link" title="${idx}페이지">${idx}</a>
+	            	</c:if>
 				</li>
 			</c:forEach>
 			<c:if test="${page.next}">
