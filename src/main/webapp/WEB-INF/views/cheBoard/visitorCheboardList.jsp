@@ -360,7 +360,7 @@ background:#000;color:#fff;
             </div>
             <div class="post">
             <img src="/resources/cheBoard/CAMB_OCEAN 03.png" class="slider-image">
-             <a href="/camBoard/detail?CAMB_NAME=흐르는%20북극곰&CAMB_NUM=8&INDEX=2" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            <a href="/camBoard/detail?CAMB_NAME=보이지%20않는%20무서움,%20해양%20미세플라스틱&CAMB_NUM=3&INDEX=5" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
             </div>
             <div class="post">
             <img src="/resources/cheBoard/CAMB_FOREST 01.png" class="slider-image">
@@ -368,7 +368,7 @@ background:#000;color:#fff;
             </div>
             <div class="post">
             <img src="/resources/cheBoard/CAMB_ICE 07.jpg" class="slider-image">
-            <a href="/camBoard/detail?CAMB_NAME=보이지%20않는%20무서움,%20해양%20미세플라스틱&CAMB_NUM=3&INDEX=5" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
+            <a href="/camBoard/detail?CAMB_NAME=흐르는%20북극곰&CAMB_NUM=8&INDEX=2" class="hero-btn mb-10 camboard_click">캠페인 보러가기</a>
             </div>
             
 

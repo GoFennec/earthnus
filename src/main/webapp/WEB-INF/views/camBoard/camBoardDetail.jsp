@@ -231,7 +231,7 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
 	function camBoard(){
 		
 		substring = "pagenum";
-		var pagenum = parseInt(${totalIndex}/6 + 1) - parseInt(${index}/6 + 1);
+		var pagenum = parseInt((${index}-1)/6 + 1);
 		if(${totalIndex} <= 6){
 			pagenum = 1;
 		}
@@ -245,7 +245,7 @@ function detailUrl(CAMB_NAME, CAMB_NUM, type){
 				URL += "/camBoard/list?" + query;
 			}
 			if(pagenum !== 1){
-				URL += "&pagenum=" + pagenum;
+				URL += "pagenum=" + pagenum;
 			}
 		}else{
 			if(pagenum !== 1){
