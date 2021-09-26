@@ -85,7 +85,8 @@ public class AuthController {
 	   }
 	
 
-	//�꽕�씠踰� 濡쒓렇�씤
+
+	//네이버 로그인
 		@RequestMapping(value = "/auth/callback", method = RequestMethod.GET)
 		public String callback(Model model, @RequestParam String code, @RequestParam String state, 
 				HttpSession session, AuthBean aBean) throws IOException, ParseException{
@@ -93,20 +94,20 @@ public class AuthController {
 			OAuth2AccessToken oauthToken;
 			
 	        oauthToken = naverLoginBO.getAccessToken(session, code, state);
-	        //1. 濡쒓렇�씤 �궗�슜�옄 �젙蹂대�� �씫�뼱�삩�떎.
-			apiResult = naverLoginBO.getUserProfile(oauthToken);  //String�삎�떇�쓽 json�뜲�씠�꽣
+	        //1. 로그인 사용자 정보를 읽어온다.
+			apiResult = naverLoginBO.getUserProfile(oauthToken);  //String형식의 json데이터
 			
 		
 			
-			//2. String�삎�떇�씤 apiResult瑜� json�삎�깭濡� 諛붽퓞
+			//2. String형식인 apiResult를 json형태로 바꿈
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(apiResult);
 			JSONObject jsonObj = (JSONObject) obj;
 			
-			//3. �뜲�씠�꽣 �뙆�떛 
-			//Top�젅踰� �떒怨� _response �뙆�떛
+			//3. 데이터 파싱 
+			//Top레벨 단계 _response 파싱
 			JSONObject response_obj = (JSONObject)jsonObj.get("response");
-			//response�쓽 nickname媛� �뙆�떛
+			//response의 nickname값 파싱
 			String id = (String)response_obj.get("id");
 			String name = (String) response_obj.get("name");
 			String email = (String) response_obj.get("email");
@@ -118,8 +119,8 @@ public class AuthController {
 			
 			mobile = mobile.replace("-","");
 			if(response_obj.get("id") != null) {
-			//4.�뙆�떛 �땳�꽕�엫 �꽭�뀡�쑝濡� ���옣
-			session.setAttribute("mem_id",id); //�꽭�뀡 �깮�꽦
+			//4.파싱 닉네임 세션으로 저장
+			session.setAttribute("mem_id",id); //세션 생성
 			session.setAttribute("mem_name", name);
 			session.setAttribute("mem_email", email);
 			session.setAttribute("mem_tel", mobile);
@@ -162,7 +163,7 @@ public class AuthController {
 
 		
 		
-//濡쒓렇�븘�썐
+//로그아웃
 	@RequestMapping(value = "/naverLogout")
 	public String naverLogout(HttpSession session)throws IOException {
 				session.removeAttribute(apiResult);
@@ -194,9 +195,10 @@ public class AuthController {
 				 return "redirect:/";
 			 }
 		}else {
+			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇媛� �씪移섑븯吏� �븡�뒿�땲�떎.');location.href=\"/auth/login\"</script>");
+			out.println("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.');location.href=\"/auth/login\"</script>");
 			out.close();
 		}
 		return "auth/login";
@@ -219,7 +221,7 @@ public class AuthController {
 		return "/auth/findPW";
 	}
 
-	// 移댁뭅�삤濡쒓렇�씤
+	// 카카오로그인
 
 	@RequestMapping(value = "/kakaoLogin")
 	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, Model model, AuthBean aBean) {
@@ -266,7 +268,7 @@ public class AuthController {
 		} return "/auth/login";
 	}
 
-//移댁뭅�삤 濡쒓렇�븘�썐
+//카카오 로그아웃
 	@RequestMapping(value = "/kakaoLogout")
 	public String logout(HttpSession session) {
 		kakao.kakaoLogout((String) session.getAttribute("access_Token"));

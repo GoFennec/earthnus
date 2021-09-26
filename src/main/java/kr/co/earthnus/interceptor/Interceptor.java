@@ -21,6 +21,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
       // AuthBean aBean= (AuthBean)session.getAttribute("aBean");
 
       if (session.getAttribute("auth") == null) {
+    	response.setCharacterEncoding("UTF-8");
          response.setContentType("text/html;charset=UTF-8");
          PrintWriter out = response.getWriter();
          out.println("<script>alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.'); location.href=\"/auth/login\"</script>");
