@@ -659,7 +659,7 @@ font-family: "Montserrat",sans-serif;
         			</nav>
                 </div>
                 <div class="content-panel">
-                    <h2 class="title">탈퇴하기</h2>
+                    <h2 class="title" style="color: #388E3C;">탈퇴하기</h2>
                     <hr>
               <div class="panel-body">
                 <form id="form" class="form-horizontal" method="post" action="/pwCheck" >

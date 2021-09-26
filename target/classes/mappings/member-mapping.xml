@@ -43,7 +43,9 @@
 		<result property="cheb_name" column="CHEB_NAME"/>
 		<result property="cheb_dname" column="CHEB_DNAME"/>
 		<result property="cheb_content" column="CHEB_CONTENT"/>
+		<result property="cheb_comment_like_total" column="CHEB_COMMENT_LIKE_TOTAL"/>
 		<result property="cheb_date" column="CHEB_DATE"/>
+		<result property="cheb_profile" column="CHEB_PROFILE"/>
 	
 	</resultMap>
 	
@@ -126,7 +128,7 @@
 	
 	
 	<select id="getMyMessage"  resultType="cheBoard">
-	SELECT CHEB_NUM, CHEB_DNAME, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id} ORDER BY CHEB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
+	SELECT CHEB_NUM, CHEB_PROFILE, CHEB_DNAME, CHEB_CONTENT, CHEB_DATE FROM CHEBOARD WHERE CHEB_ID=#{mem_id} ORDER BY CHEB_NUM DESC LIMIT #{contentnum} OFFSET #{pagenum} 
 	</select>
 	
 	
