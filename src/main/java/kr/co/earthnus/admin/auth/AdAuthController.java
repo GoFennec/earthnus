@@ -75,6 +75,7 @@ public class AdAuthController {
 			session.setAttribute("adauth", aBean);
 			return "redirect:/adIndex";
 		} else {
+			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.');location.href=\"/auth/adLogin\"</script>");
