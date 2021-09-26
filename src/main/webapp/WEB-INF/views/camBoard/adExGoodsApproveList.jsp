@@ -36,7 +36,7 @@
   <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adLogout2">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/adLogout2" title="회원 메인화면 바로가기">
         <div class="sidebar-brand-icon">
           <img src="/resources/assets/img/logo/logo2_footer.png">
         </div>
