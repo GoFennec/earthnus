@@ -23,7 +23,7 @@ public class adInterceptor extends HandlerInterceptorAdapter {
 				//response.sendRedirect("/auth/adLogin");
 				 response.setContentType("text/html;charset=UTF-8");
 		         PrintWriter out = response.getWriter();
-		         out.println("<script>alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.'); location.href=\"/auth/adLogin\"</script>");
+		         out.println("<script>alert('관리자 로그인이 필요한 서비스입니다. 관리자 로그인 페이지로 이동합니다.'); location.href=\"/auth/adLogin\"</script>");
 		         out.close();
 				return false;
 			}
