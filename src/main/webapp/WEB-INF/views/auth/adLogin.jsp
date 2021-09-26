@@ -38,7 +38,7 @@
   <div class="container-login">
     <div class="row justify-content-center">
       <div class="col-xl-6 col-lg-12 col-md-9" id="loginDiv">
-      <div id="logo"><img src="/resources/assets/img/logo/logo.png"  onclick="location.href='/adLogout2'" style="cursor:pointer;" alt="로고이미지"><a onclick="location.href='/'"></a></div>
+      <div id="logo"><a href="/"><img src="/resources/assets/img/logo/logo.png" style="cursor:pointer;" alt="로고이미지"></a></div>
         <div class="card shadow-sm my-5">
           <div class="card-body p-0">
             <div class="row">

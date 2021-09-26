@@ -697,8 +697,7 @@ width: 28px;
                     <td class="text-truncate"><fmt:formatNumber type="number" maxFractionDigits="3" value="${pay.pay_price}" />원</td>
                     <td class="text-truncate">${pay.pay_pdate}</td>
               	<c:if test="${pay.pay_comment eq 'N'}" >
-                    <td class="text-truncate"><button type="button" 
-                    class="btn" style="font-size: 13px; padding: 13px 10px; line-height: 0.7;" onclick="comment()">응원글 작성</button></td>
+                    <td><button type="button" class="btn" style="font-size: 13px; padding: 13px 10px; line-height: 0.7;" onclick="comment()">응원글 작성</button></td>
          		 </c:if>
          		 <c:if test="${pay.pay_comment eq 'Y'}" >
                     <td class="text-truncate"></td>
