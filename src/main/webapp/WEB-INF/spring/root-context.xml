@@ -16,7 +16,7 @@
 		destroy-method="close">
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
 		<property name="url" value="jdbc:mariadb://localhost:3306/enu"/>
-		<property name="username" value="teamenu"/>
+		<property name="username" value="root"/>
 		<property name="password" value="m1234"/>
 	</bean>
 	

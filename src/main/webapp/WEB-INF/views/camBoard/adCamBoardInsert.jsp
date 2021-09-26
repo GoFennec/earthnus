@@ -129,7 +129,7 @@
 									<div id="preview" style="width: 100%; height: 100%; text-align: center;"><p style="margin-top: 25%; margin-bottom: 25%;">사진을 추가해 주세요.</p></div>
 									<input type="hidden" name="goods_img" value="${goods.goods_img}">
 								<div class="file-edit-icon" id="file-edit" style="text-align: center;">
-									<a href="#" class="preview-edit">사진 추가</a>
+									<input type="button" class="btn-dark editbutton preview-edit imgedit" value="썸네일 사진 추가"><br><br><br><br>
 								</div>
 						</div>
 											
@@ -137,32 +137,41 @@
 					</td>
 				</tr>
 			
-			<tr><td colspan="2" class="td_left"><label for="CAMB_NAME"><b>캠&nbsp;페&nbsp;인&nbsp;&nbsp;제&nbsp;목&nbsp;</b></label></td>
-				<td colspan="2" class="td_right"><input type="text" id="CAMB_NAME" name="CAMB_NAME" placeholder="캠페인 제목" required></td></tr>
-			<tr><td colspan="2" class="td_left"><label for="CAMB_SUBJECT"><b>캠&nbsp;페&nbsp;인&nbsp;&nbsp;주&nbsp;제&nbsp;</b></label></td>
-				<td colspan="2" class="td_right">
-					<select name="CAMB_SUBJECT" id="CAMB_SUBJECT" required>
-						<option selected>해양</option>
-						<option>플라스틱</option>
-						<option>산림</option>
-						<option>극지방</option>
-						<option>기타</option>
+			<tr>
+					<th>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+					<td class="update"><input type="text" id="CAMB_NAME" name="CAMB_NAME" value="${camBoard.CAMB_NAME}" onchange="showUpdateButton()" required></td>
+					<td><b>시&nbsp;&nbsp;작&nbsp;&nbsp;일</b></td>
+					<td class="update">
+					<input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE" value="${CAMB_STARTDATE}" onchange="findate()">
+					</td>
+				</tr>
+				
+				<tr>
+					<th>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제</th>
+					<td class="update">
+						<select id="CAMB_SUBJECT" name="CAMB_SUBJECT" onchange="showUpdateButton()" required>
+						<option value="해양">해양</option>
+						<option value="플라스틱">플라스틱</option>
+						<option value="산림">산림</option>
+						<option value="극지방">극지방</option>
 					</select>
-				</td></tr>
-			<tr><td colspan="4"><b>캠페인 기간</b></td></tr>
-			<tr><td class="td_left"><label for="CAMB_NAME"><b>시작날짜</b></label></td>
-				<td class="td_right"><input type="date" id="CAMB_STARTDATE" name="CAMB_STARTDATE" onchange="findate()" required="required"></td>
-				<td class="td_left"><label for="CAMB_NAME"><b>종료날짜</b></label></td>
-				<td class="td_right"><input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" onclick="checkStartDate()" required></td></tr>
-			<tr><td colspan="4" class="td_center"><label for="CAMB_CONTENT"><b>캠&nbsp;페&nbsp;인&nbsp;&nbsp;내&nbsp;용&nbsp;</b></label></td></tr>
-			<tr class="update" style="text-align: center;">
-				<td colspan="4">
-					<textarea id = "CAMB_CONTENT" name = "CAMB_CONTENT" cols="80" rows="10" placeholder="캠페인 내용을 입력해주세요."></textarea> 
-					<script>
-						CKEDITOR.replace('CAMB_CONTENT',{filebrowserUploadUrl:'/ckupload/imgUpload'});
-					</script>
-				</td>
-			</tr>
+					</td>
+					<td><b>종&nbsp;&nbsp;료&nbsp;&nbsp;일</b></td>
+					<td class="update">
+						<input type="date" id="CAMB_FINDATE" name="CAMB_FINDATE" value="${CAMB_FINDATE}"><br><br><br>
+					</td>
+				</tr>
+
+				<tr class="update" style="text-align: center;">
+					<td colspan="4">
+						<textarea id ="CAMB_CONTENT" name ="CAMB_CONTENT" cols="80" rows="10">
+						${camBoard.CAMB_CONTENT}
+						</textarea> 
+						<script>
+							CKEDITOR.replace('CAMB_CONTENT',{filebrowserUploadUrl:'/adCamBoard/insert/imgUpload'});
+						</script>
+					</td>
+				</tr>
 		</table><br>
 		<div class="sysBtn">
 			<input type="submit" class="btn-dark" value="캠페인 추가"/>&nbsp;&nbsp;&nbsp;

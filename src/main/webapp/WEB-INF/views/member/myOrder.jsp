@@ -726,7 +726,7 @@ margin-top: 20px;
     </div>
 </div>
 
-<br><br><br><br>
+<br><br><br>
 <jsp:include page="/WEB-INF/views/footer.jsp"/>
 
 </body>
