@@ -566,12 +566,11 @@ width: 28px;
                     
                         <fieldset class="fieldset">
                         
-                            <div class="form-group">
+                               <div class="form-group">
                                 <label class="col-md-2 col-sm-3 col-xs-12 control-label">나의 후원금액</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                   
-                                    <input type="text" class="form-control" name ="pay_price" readonly value=<fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation }" />원 >
-                               
+                                   <p style="text-decoration:underline; text-underline-position: under; font-size: 20px; margin-top:25px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyDonation}" />원</p>
+                           
                                 </div>
                             </div>
         
@@ -579,8 +578,7 @@ width: 28px;
                               <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">포인트</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                
-                                    <input type="text" readonly class="form-control" name ="mem_point" value=<fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyPoint }" />점 >
+                                 <p style="text-decoration:underline; text-underline-position: under; font-size: 20px; margin-top:25px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${getMyPoint }" />점</p>
                                 </div>
                             </div>
                     
