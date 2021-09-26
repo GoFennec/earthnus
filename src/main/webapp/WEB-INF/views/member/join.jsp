@@ -289,8 +289,11 @@ function idcheck(){
 			dataType: 'json', //서버가 요청 URL을 통해서 응답하는 내용의 타입
 			
 			success : function(result){
-  			if(result.error == true && idcheck != ""){
-	  			alert('사용 가능한 아이디입니다.');
+  			if(result.error == true && id != ""){
+	  			var yes = confirm('사용 가능한 아이디입니다.\n사용하시겠습니까?');
+	  			if(yes){
+	  				$('#mem_id').attr('readonly', true);
+	  			}
 	  			
   			}else if(result.error === false){
 	  			alert('이미 존재하는 아이디입니다.');
@@ -495,6 +498,9 @@ function check(){
 		return false;
 	}else if($('#invalid-id2').is(':visible')){
 		alert('입력하신 정보를 다시 확인해주세요.');
+		return false;
+	}else if(!$("#mem_id").attr("readonly")){
+		alert('아이디 중복체크를 해주세요.');
 		return false;
 	}
 		var match = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/;
