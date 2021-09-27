@@ -52,6 +52,9 @@
   	h6{
   		margin-top:10px;
   	}
+  	#select_startDate{
+  		width:180px;
+  	}
   </style>
 </head>
 
@@ -525,6 +528,15 @@
   }
   $("#select_lastDate").val(dateString[6]);
   dateString = dateString.reverse();
+  
+  window.onload = function(){
+  var td = new Date();
+  var dd = ('0' + (td.getDate())).slice(-2);
+  var m = ('0' + (td.getMonth() + 1)).slice(-2);
+  var y = td.getFullYear();
+  td = y+'-'+m+'-'+dd;
+  document.getElementById("select_startDate").setAttribute("max", td);
+  };
   
   var myAreaChart;
   var myBarChart;
